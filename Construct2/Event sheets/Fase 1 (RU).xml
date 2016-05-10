@@ -1,0 +1,540 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>Fase 1 (RU)</name>
+    <events>
+        <variable constant="0" name="controleDicas" sid="6825223180070958" static="0" type="number">0</variable>
+        <variable constant="0" name="dicas" sid="8653320409829527" static="0" type="number">0</variable>
+        <variable constant="0" name="pontos" sid="2102700230222047" static="0" type="number">10000</variable>
+        <event-block sid="5908177177675529">
+            <conditions>
+                <condition id="-2" name="On start of layout" sid="5340975223950603" type="System" />
+            </conditions>
+            <actions>
+                <action id="-4" name="Set position to another object" sid="1705287340971909" type="playerAnim">
+                    <param id="0" name="Object">player</param>
+                    <param id="1" name="Image point (optional)">0</param>
+                </action>
+                <action behavior="Pin" id="0" name="Pin to object" sid="9727435460929873" type="playerAnim">
+                    <param id="0" name="Pin to">player</param>
+                    <param id="1" name="Mode">0</param>
+                </action>
+                <action id="-3" name="Set position" sid="1796080186304031" type="dica">
+                    <param id="0" name="X">1130</param>
+                    <param id="1" name="Y">765</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="4282430955803191" type="dica">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="8473694948698988" type="dicaTexto">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-4" name="Set position to another object" sid="3969490449312781" type="dicaTexto">
+                    <param id="0" name="Object">dica</param>
+                    <param id="1" name="Image point (optional)">0</param>
+                </action>
+                <action behavior="Pin" id="0" name="Pin to object" sid="1723416053545542" type="dicaTexto">
+                    <param id="0" name="Pin to">dica</param>
+                    <param id="1" name="Mode">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="9075073250954897" type="System">
+                    <param id="0" name="Variable">dicas</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="4257532844545502" type="System">
+                    <param id="0" name="Variable">controleDicas</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="1803219930561824" type="System">
+                    <param id="0" name="Group name">&quot;PopupDica&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+                <action id="0" name="Set spraying" sid="1939410256425779" type="Particles">
+                    <param id="0" name="State">0</param>
+                </action>
+            </actions>
+            <sub-events>
+                <event-block sid="6855667607918199">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="8137623527486514" type="Particles">
+                            <param id="0" name="Unique ID">42</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set speed" sid="7898260905058874" type="Particles">
+                            <param id="0" name="Speed">80</param>
+                        </action>
+                        <action id="1" name="Set rate" sid="222832057625876" type="Particles">
+                            <param id="0" name="Rate">300</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="9933367222396551">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="4784129718752889" type="Particles">
+                            <param id="0" name="Unique ID">43</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set speed" sid="1663651886105445" type="Particles">
+                            <param id="0" name="Speed">150</param>
+                        </action>
+                        <action id="1" name="Set rate" sid="54834545915631" type="Particles">
+                            <param id="0" name="Rate">300</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="3934782651542332">
+            <conditions>
+                <condition id="-1" name="Every tick" sid="6978431651260231" type="System" />
+            </conditions>
+            <actions>
+                <action id="-6" name="Set height" sid="8170362401313694" type="personagens">
+                    <param id="0" name="Height">(1-((720-personagens.Y)*0.000375))*173</param>
+                </action>
+                <action id="-5" name="Set width" sid="954839438272563" type="personagens">
+                    <param id="0" name="Width">(1-((720-personagens.Y)*0.000375))*80</param>
+                </action>
+                <action id="-6" name="Set height" sid="6894979801595582" type="player">
+                    <param id="0" name="Height">(1-((720-Player.Y)*0.000375))*165</param>
+                </action>
+                <action id="-5" name="Set width" sid="8494823441308352" type="player">
+                    <param id="0" name="Width">(1-((720-Player.Y)*0.000375))*80</param>
+                </action>
+                <action id="-6" name="Set height" sid="4809045221727767" type="playerAnim">
+                    <param id="0" name="Height">(1-((720-playerAnim.Y)*0.000375))*165</param>
+                </action>
+                <action id="-5" name="Set width" sid="6276321541632608" type="playerAnim">
+                    <param id="0" name="Width">(1-((720-playerAnim.Y)*0.000375))*80</param>
+                </action>
+                <action id="0" name="Set text" sid="1522946036565718" type="pontuacao">
+                    <param id="0" name="Text">&quot;Pontuação: &quot; &amp; pontos</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="1476661805065444">
+            <conditions>
+                <condition id="-14" name="Compare variable" sid="9914169383475974" type="System">
+                    <param id="0" name="Variable">dicas</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Value">0</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="0" name="Set text" sid="933195292471577" type="dicaTexto">
+                    <param id="0" name="Text">&quot;Use as teclas WASD para se movimentar.&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="3902333537086028">
+            <conditions>
+                <condition id="-14" name="Compare variable" sid="5038656307991435" type="System">
+                    <param id="0" name="Variable">dicas</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Value">1</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="0" name="Set text" sid="5080537947707891" type="dicaTexto">
+                    <param id="0" name="Text">&quot;Use a tecla E para ação e para interar com objetos.&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="2858598597159321">
+            <conditions>
+                <condition id="-15" inverted="1" name="Is group active" sid="887528745278623" type="System">
+                    <param id="0" name="Group name">&quot;PopupDica&quot;</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-3" name="Set position" sid="5418641278262351" type="dica">
+                    <param id="0" name="X">1130</param>
+                    <param id="1" name="Y">765</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="7075146453189413" type="dica">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="9727654700196805" type="dicaTexto">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="3221134601426658" type="System">
+                    <param id="0" name="Variable">controleDicas</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="5654392263946632">
+            <conditions>
+                <condition id="1" name="Is overlapping another object" sid="694930446003187" type="player">
+                    <param id="0" name="Object">areaSelecao</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="9314407747770924">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="7692609125360001" type="areaSelecao">
+                            <param id="0" name="Unique ID">40</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="6588280546282949">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="1011657348522198" type="Particles">
+                                    <param id="0" name="Unique ID">42</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Set spraying" sid="6255770894201731" type="Particles">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="3994514912430594">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="370909883356197" type="areaSelecao">
+                            <param id="0" name="Unique ID">41</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="861846149952091">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="370792203272538" type="Particles">
+                                    <param id="0" name="Unique ID">43</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Set spraying" sid="4108247680730505" type="Particles">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="5855417150437815">
+            <conditions>
+                <condition id="-22" name="Else" sid="7584915272648562" type="System" />
+            </conditions>
+            <actions>
+                <action id="0" name="Set spraying" sid="7134270592868849" type="Particles">
+                    <param id="0" name="State">0</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="1865411383374137">
+            <conditions>
+                <condition id="0" name="On collision with another object" sid="5368173342921554" type="player">
+                    <param id="0" name="Object">areaSelecao</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="306548589914296">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="8170595245952188" type="System">
+                            <param id="0" name="Variable">dicas</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="5839918096574873" type="System">
+                            <param id="0" name="Group name">&quot;PopupDica&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-group description="" inactive="1" sid="1994250370825968" title="PopupDica">
+            <sub-events>
+                <event-block sid="2062123702299957">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="2329172324008881" type="System">
+                            <param id="0" name="Variable">dicas</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block any="1" sid="639960922645773">
+                            <conditions>
+                                <condition behavior="8Direction" id="0" name="Is moving" sid="9363326238809721" type="player" />
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Wait" sid="8117527559272747" type="System">
+                                    <param id="0" name="Seconds">0.5</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="4256427431179328" type="System">
+                                    <param id="0" name="Variable">controleDicas</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="8635831414766929">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="3432250465563677" type="System">
+                            <param id="0" name="Variable">dicas</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="3543373379187742">
+                            <conditions>
+                                <condition id="0" name="On key pressed" sid="4151500624217401" type="Keyboard">
+                                    <param id="0" name="Key">69 (E)</param>
+                                </condition>
+                                <condition id="1" name="Is overlapping another object" sid="1259285589046204" type="player">
+                                    <param id="0" name="Object">areaSelecao</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Wait" sid="5707774661546176" type="System">
+                                    <param id="0" name="Seconds">0.5</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="8240536693166995" type="System">
+                                    <param id="0" name="Variable">controleDicas</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="5642736740533863">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="4732565997026561" type="System">
+                            <param id="0" name="Variable">controleDicas</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="8716795919057509">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="3100938817679992" type="System" />
+                                <condition id="-10" name="Compare opacity" sid="1620296425105772" type="dica">
+                                    <param id="0" name="Comparison">2</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="445947601721047" type="dica">
+                                    <param id="0" name="Opacity">dica.Opacity + 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="2158995520724898" type="dicaTexto">
+                                    <param id="0" name="Opacity">dicaTexto.Opacity + 2.5</param>
+                                </action>
+                                <action id="-2" name="Set Y" sid="6988442288436979" type="dica">
+                                    <param id="0" name="Y">dica.Y - 2.5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="381129959281316">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="8406654255379939" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Wait" sid="6734629801389351" type="System">
+                                    <param id="0" name="Seconds">4</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="4142755368498875" type="System">
+                                    <param id="0" name="Variable">controleDicas</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="6195692869319168">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="4725330262378105" type="System">
+                            <param id="0" name="Variable">controleDicas</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="2983871994063689">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="601407725030369" type="dica">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="9387580580178528" type="dica">
+                                    <param id="0" name="Opacity">dica.Opacity - 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="8271235718424259" type="dicaTexto">
+                                    <param id="0" name="Opacity">dicaTexto.Opacity - 2.5</param>
+                                </action>
+                                <action id="-2" name="Set Y" sid="346310454303666" type="dica">
+                                    <param id="0" name="Y">dica.Y + 2.5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="2097630743105434">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="958606164458292" type="dica">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="3790848728304766" type="System">
+                                    <param id="0" name="Variable">dicas</param>
+                                    <param id="1" name="Value">dicas+1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="4886283987898199" type="System">
+                                    <param id="0" name="Group name">&quot;PopupDica&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="5896488708617775" title="playerMove">
+            <sub-events>
+                <event-block any="1" sid="886051769818349">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="4233850284084363" type="Keyboard">
+                            <param id="0" name="Key">87 (W)</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="3568718889827623" type="Keyboard">
+                            <param id="0" name="Key">38 (Up arrow)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Set mirrored" sid="9822145559487989" type="playerAnim">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action behavior="8Direction" id="7" name="Simulate control" sid="1878340586013107" type="player">
+                            <param id="0" name="Control">2</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="7995322854083129" type="playerAnim">
+                            <param id="0" name="Animation">&quot;Costas&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="1073648718502332">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="6327347040317284" type="Keyboard">
+                            <param id="0" name="Key">65 (A)</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="4373097420356784" type="Keyboard">
+                            <param id="0" name="Key">37 (Left arrow)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Set mirrored" sid="8762379555871606" type="playerAnim">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action behavior="8Direction" id="7" name="Simulate control" sid="746543489705338" type="player">
+                            <param id="0" name="Control">0</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="9737196518982497" type="playerAnim">
+                            <param id="0" name="Animation">&quot;Andando&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="5000545949328359">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="4713277322495039" type="Keyboard">
+                            <param id="0" name="Key">68 (D)</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="4173237016401887" type="Keyboard">
+                            <param id="0" name="Key">39 (Right arrow)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Set mirrored" sid="7087562587891989" type="playerAnim">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action behavior="8Direction" id="7" name="Simulate control" sid="2271784283006511" type="player">
+                            <param id="0" name="Control">1</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="6254485882063354" type="playerAnim">
+                            <param id="0" name="Animation">&quot;Andando&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="4734652613660711">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="5835748217046764" type="Keyboard">
+                            <param id="0" name="Key">83 (S)</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="4026095754677331" type="Keyboard">
+                            <param id="0" name="Key">40 (Down arrow)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Set mirrored" sid="5879645745347407" type="playerAnim">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action behavior="8Direction" id="7" name="Simulate control" sid="5104997928814582" type="player">
+                            <param id="0" name="Control">3</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="9788879231222867" type="playerAnim">
+                            <param id="0" name="Animation">&quot;Frente&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="6062271813322311">
+                    <conditions>
+                        <condition id="2" inverted="1" name="Key is down" sid="3074572944056861" type="Keyboard">
+                            <param id="0" name="Key">87 (W)</param>
+                        </condition>
+                        <condition id="2" inverted="1" name="Key is down" sid="1537172611480235" type="Keyboard">
+                            <param id="0" name="Key">38 (Up arrow)</param>
+                        </condition>
+                        <condition id="2" inverted="1" name="Key is down" sid="8592409861759569" type="Keyboard">
+                            <param id="0" name="Key">65 (A)</param>
+                        </condition>
+                        <condition id="2" inverted="1" name="Key is down" sid="6743299981185339" type="Keyboard">
+                            <param id="0" name="Key">37 (Left arrow)</param>
+                        </condition>
+                        <condition id="2" inverted="1" name="Key is down" sid="4201371690930086" type="Keyboard">
+                            <param id="0" name="Key">68 (D)</param>
+                        </condition>
+                        <condition id="2" inverted="1" name="Key is down" sid="4988190638044172" type="Keyboard">
+                            <param id="0" name="Key">39 (Right arrow)</param>
+                        </condition>
+                        <condition id="2" inverted="1" name="Key is down" sid="5431582663461051" type="Keyboard">
+                            <param id="0" name="Key">83 (S)</param>
+                        </condition>
+                        <condition id="2" inverted="1" name="Key is down" sid="3039710350154668" type="Keyboard">
+                            <param id="0" name="Key">40 (Down arrow)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="4283361901681274" type="playerAnim">
+                            <param id="0" name="Animation">&quot;Frente&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+    </events>
+</c2eventsheet>
