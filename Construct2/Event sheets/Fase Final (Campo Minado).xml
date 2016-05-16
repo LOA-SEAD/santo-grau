@@ -3,6 +3,8 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase Final (Campo Minado)</name>
     <events>
+        <variable constant="0" name="ativarMensagem" sid="4430145120925736" static="0" type="number">0</variable>
+        <comment>Inicializações</comment>
         <event-block sid="1021034089245405">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="7886015498018205" type="System" />
@@ -15,6 +17,35 @@
                 <action behavior="Pin" id="0" name="Pin to object" sid="7544430648703068" type="playerAnim">
                     <param id="0" name="Pin to">player</param>
                     <param id="1" name="Mode">0</param>
+                </action>
+                <action id="-3" name="Set position" sid="6659776942470111" type="dica">
+                    <param id="0" name="X">100</param>
+                    <param id="1" name="Y">252</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="1073848925336383" type="dica">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="4915111777509375" type="dicaTexto">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-4" name="Set position to another object" sid="3783085385568122" type="dicaTexto">
+                    <param id="0" name="Object">dica</param>
+                    <param id="1" name="Image point (optional)">0</param>
+                </action>
+                <action behavior="Pin" id="0" name="Pin to object" sid="5230089200716325" type="dicaTexto">
+                    <param id="0" name="Pin to">dica</param>
+                    <param id="1" name="Mode">0</param>
+                </action>
+                <action id="0" name="Set text" sid="698316012474817" type="dicaTexto">
+                    <param id="0" name="Text">&quot;Use a ponte que corresponde à alternativa correta&quot;</param>
+                </action>
+                <action id="-9" name="Set value" sid="2571006327603191" type="System">
+                    <param id="0" name="Variable">ativarMensagem</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="2522996676987606" type="System">
+                    <param id="0" name="Group name">&quot;inicioPerguntas&quot;</param>
+                    <param id="1" name="State">0</param>
                 </action>
             </actions>
         </event-block>
@@ -37,6 +68,109 @@
                 </action>
             </actions>
         </event-block>
+        <event-block sid="1796382605937501">
+            <conditions>
+                <condition id="0" name="On collision with another object" sid="1472209286094125" type="player">
+                    <param id="0" name="Object">areaSelecao</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-12" name="Set group active" sid="8457528594384352" type="System">
+                    <param id="0" name="Group name">&quot;inicioPerguntas&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+            </actions>
+        </event-block>
+        <comment>Dispara o evento das perguntas</comment>
+        <event-group description="" sid="4244391054732678" title="inicioPerguntas">
+            <sub-events>
+                <event-block sid="787653532845912">
+                    <conditions>
+                        <condition id="-8" name="Compare two values" sid="319334900856754" type="System">
+                            <param id="0" name="First value">ativarMensagem</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="2017806174376222">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="4279341872577148" type="System" />
+                                <condition id="-10" name="Compare opacity" sid="4357519986735623" type="dica">
+                                    <param id="0" name="Comparison">2</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="183630442535597" type="dica">
+                                    <param id="0" name="Opacity">dica.Opacity + 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="6713115631052406" type="dicaTexto">
+                                    <param id="0" name="Opacity">dicaTexto.Opacity + 2.5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="8892113253957282">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="4342174003825532" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Wait" sid="8705143470537192" type="System">
+                                    <param id="0" name="Seconds">3</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="5863623531309378" type="System">
+                                    <param id="0" name="Variable">ativarMensagem</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="212212301612577">
+                    <conditions>
+                        <condition id="-8" name="Compare two values" sid="7810027041907391" type="System">
+                            <param id="0" name="First value">ativarMensagem</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="7382911176402355">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="4355721413253794" type="dica">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="4231603698800934" type="dica">
+                                    <param id="0" name="Opacity">dica.Opacity - 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="8137375200718545" type="dicaTexto">
+                                    <param id="0" name="Opacity">dicaTexto.Opacity - 2.5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="6225393588208291">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="5828800969498553" type="dica">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="4990599517824196" type="System">
+                                    <param id="0" name="Group name">&quot;inicioPerguntas&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
         <event-group description="" sid="3051353231765246" title="playerMoveFFCM">
             <sub-events>
                 <event-block any="1" sid="1345382645207561">
@@ -163,5 +297,9 @@
                 </event-block>
             </sub-events>
         </event-group>
+        <event-block sid="8727655202374635">
+            <conditions />
+            <actions />
+        </event-block>
     </events>
 </c2eventsheet>
