@@ -3,6 +3,7 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase Final (Campo Minado)</name>
     <events>
+        <variable constant="0" name="pergunta" sid="1829014671371773" static="0" type="number">1</variable>
         <variable constant="0" name="ativarMensagem" sid="4430145120925736" static="0" type="number">0</variable>
         <comment>Inicializações</comment>
         <event-block sid="1021034089245405">
@@ -39,13 +40,32 @@
                 <action id="0" name="Set text" sid="698316012474817" type="dicaTexto">
                     <param id="0" name="Text">&quot;Use a ponte que corresponde à alternativa correta&quot;</param>
                 </action>
-                <action id="-9" name="Set value" sid="2571006327603191" type="System">
-                    <param id="0" name="Variable">ativarMensagem</param>
-                    <param id="1" name="Value">0</param>
-                </action>
                 <action id="-12" name="Set group active" sid="2522996676987606" type="System">
                     <param id="0" name="Group name">&quot;inicioPerguntas&quot;</param>
                     <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="83030780279298" type="System">
+                    <param id="0" name="Group name">&quot;gerarPerguntasJSON&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="0" name="Load JSON" sid="7983903385541236" type="LoadJSONCM" />
+                <action id="-3" name="Set position" sid="5394856871931604" type="perguntas">
+                    <param id="0" name="X">644</param>
+                    <param id="1" name="Y">67</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="6391318132146658" type="perguntas">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="251087772017551" type="textoPerguntas">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-4" name="Set position to another object" sid="1881137760152876" type="textoPerguntas">
+                    <param id="0" name="Object">perguntas</param>
+                    <param id="1" name="Image point (optional)">0</param>
+                </action>
+                <action behavior="Pin" id="0" name="Pin to object" sid="6359763731283495" type="textoPerguntas">
+                    <param id="0" name="Pin to">perguntas</param>
+                    <param id="1" name="Mode">0</param>
                 </action>
             </actions>
         </event-block>
@@ -164,6 +184,44 @@
                                 <action id="-12" name="Set group active" sid="4990599517824196" type="System">
                                     <param id="0" name="Group name">&quot;inicioPerguntas&quot;</param>
                                     <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="2212985376924694" type="System">
+                                    <param id="0" name="Group name">&quot;gerarPerguntasJSON&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <comment>Importa as perguntas que estiverem em um arquivo .json</comment>
+        <event-group description="" inactive="1" sid="6902794132699773" title="gerarPerguntasJSON">
+            <sub-events>
+                <event-block sid="4018207027143204">
+                    <conditions>
+                        <condition id="-8" name="Compare two values" sid="5626822018945053" type="System">
+                            <param id="0" name="First value">pergunta</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="7200979576573295">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="4001226634938008" type="System" />
+                                <condition id="-10" name="Compare opacity" sid="5134028502010924" type="perguntas">
+                                    <param id="0" name="Comparison">2</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="4071529960501384" type="perguntas">
+                                    <param id="0" name="Opacity">perguntas.Opacity + 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="8468324499048207" type="textoPerguntas">
+                                    <param id="0" name="Opacity">textoPerguntas.Opacity + 2.5</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -297,9 +355,5 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <event-block sid="8727655202374635">
-            <conditions />
-            <actions />
-        </event-block>
     </events>
 </c2eventsheet>
