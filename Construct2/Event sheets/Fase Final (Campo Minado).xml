@@ -3,8 +3,18 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase Final (Campo Minado)</name>
     <events>
-        <variable constant="0" name="pergunta" sid="1829014671371773" static="0" type="number">1</variable>
+        <comment>Para disparar o inicio do evento das perguntas</comment>
         <variable constant="0" name="ativarMensagem" sid="4430145120925736" static="0" type="number">0</variable>
+        <comment>Para organização do número da pergunta que está atualmente</comment>
+        <variable constant="0" name="pergunta" sid="1829014671371773" static="0" type="number">1</variable>
+        <comment>Indica quando o jogador passou por uma área de seleção de alguma alternativa, impedindo que ele selecione outra alternativa na mesma pergunta</comment>
+        <variable constant="0" name="selecao" sid="2755298308954631" static="0" type="number">0</variable>
+        <comment>Criado para não se necessário repetir a parte de carregar as alternativas na ponte</comment>
+        <variable constant="0" name="carregarAlternativa" sid="6220902629296053" static="0" type="number">0</variable>
+        <comment>Criado para não se necessário repetir a parte de descarregar as alternativas na ponte</comment>
+        <variable constant="0" name="descarregarAlternativa" sid="9854460331464779" static="0" type="number">0</variable>
+        <comment>Criado para controlar quando alterar a posição das letras na ponte</comment>
+        <variable constant="0" name="carregarTextos" sid="3555043611031616" static="0" type="number">0</variable>
         <comment>Inicializações</comment>
         <event-block sid="1021034089245405">
             <conditions>
@@ -67,6 +77,21 @@
                     <param id="0" name="Pin to">perguntas</param>
                     <param id="1" name="Mode">0</param>
                 </action>
+                <action id="-16" name="Set opacity" sid="2714883232320638" type="alternativaA">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="2949128366568103" type="alternativaB">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="6287546218742279" type="alternativaC">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="7511746639879663" type="alternativaD">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="8209660778244445" type="alternativaE">
+                    <param id="0" name="Opacity">0</param>
+                </action>
             </actions>
         </event-block>
         <event-block sid="5316582533687613">
@@ -106,10 +131,10 @@
             <sub-events>
                 <event-block sid="787653532845912">
                     <conditions>
-                        <condition id="-8" name="Compare two values" sid="319334900856754" type="System">
-                            <param id="0" name="First value">ativarMensagem</param>
+                        <condition id="-14" name="Compare variable" sid="319334900856754" type="System">
+                            <param id="0" name="Variable">ativarMensagem</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Second value">0</param>
+                            <param id="2" name="Value">0</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -149,16 +174,17 @@
                 </event-block>
                 <event-block sid="212212301612577">
                     <conditions>
-                        <condition id="-8" name="Compare two values" sid="7810027041907391" type="System">
-                            <param id="0" name="First value">ativarMensagem</param>
+                        <condition id="-14" name="Compare variable" sid="7810027041907391" type="System">
+                            <param id="0" name="Variable">ativarMensagem</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Second value">1</param>
+                            <param id="2" name="Value">1</param>
                         </condition>
                     </conditions>
                     <actions />
                     <sub-events>
                         <event-block sid="7382911176402355">
                             <conditions>
+                                <condition id="-1" name="Every tick" sid="3109596791824175" type="System" />
                                 <condition id="-10" name="Compare opacity" sid="4355721413253794" type="dica">
                                     <param id="0" name="Comparison">4</param>
                                     <param id="1" name="Opacity">0</param>
@@ -171,23 +197,30 @@
                                 <action id="-16" name="Set opacity" sid="8137375200718545" type="dicaTexto">
                                     <param id="0" name="Opacity">dicaTexto.Opacity - 2.5</param>
                                 </action>
+                                <action id="-16" name="Set opacity" sid="4071529960501384" type="perguntas">
+                                    <param id="0" name="Opacity">perguntas.Opacity + 2.5</param>
+                                </action>
                             </actions>
                         </event-block>
-                        <event-block sid="6225393588208291">
+                        <event-block sid="6642067292261509">
                             <conditions>
-                                <condition id="-10" name="Compare opacity" sid="5828800969498553" type="dica">
+                                <condition id="-10" name="Compare opacity" sid="5116825019949717" type="perguntas">
                                     <param id="0" name="Comparison">0</param>
-                                    <param id="1" name="Opacity">0</param>
+                                    <param id="1" name="Opacity">100</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-12" name="Set group active" sid="4990599517824196" type="System">
+                                <action id="-12" name="Set group active" sid="6458411981725022" type="System">
                                     <param id="0" name="Group name">&quot;inicioPerguntas&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
-                                <action id="-12" name="Set group active" sid="2212985376924694" type="System">
+                                <action id="-12" name="Set group active" sid="3508108117374403" type="System">
                                     <param id="0" name="Group name">&quot;gerarPerguntasJSON&quot;</param>
                                     <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="1141528837744819" type="System">
+                                    <param id="0" name="Variable">carregarTextos</param>
+                                    <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -198,30 +231,171 @@
         <comment>Importa as perguntas que estiverem em um arquivo .json</comment>
         <event-group description="" inactive="1" sid="6902794132699773" title="gerarPerguntasJSON">
             <sub-events>
+                <comment>Carrega a posição onde estará as letras da alternativa e o texto da pergunta</comment>
                 <event-block sid="4018207027143204">
                     <conditions>
-                        <condition id="-8" name="Compare two values" sid="5626822018945053" type="System">
-                            <param id="0" name="First value">pergunta</param>
+                        <condition id="-14" name="Compare variable" sid="5626822018945053" type="System">
+                            <param id="0" name="Variable">carregarTextos</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Second value">1</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Set position" sid="2728695989749834" type="alternativaA">
+                            <param id="0" name="X">37 + (pergunta * 276)</param>
+                            <param id="1" name="Y">127</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="8124950644794943" type="alternativaB">
+                            <param id="0" name="X">37 + (pergunta * 276)</param>
+                            <param id="1" name="Y">239</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="8945162868175161" type="alternativaC">
+                            <param id="0" name="X">37 + (pergunta * 276)</param>
+                            <param id="1" name="Y">351</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="2907357673786021" type="alternativaD">
+                            <param id="0" name="X">37 + (pergunta * 276)</param>
+                            <param id="1" name="Y">463</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="6432310914950599" type="alternativaE">
+                            <param id="0" name="X">37 + (pergunta * 276)</param>
+                            <param id="1" name="Y">575</param>
+                        </action>
+                        <action disabled="1" id="0" name="Set text" sid="9922866634395319" type="textoPerguntas">
+                            <param id="0" name="Text">LoadJSONCM.GetData(&quot;questoes&quot;, 0)</param>
+                        </action>
+                        <action id="0" name="Set text" sid="918859528342287" type="textoPerguntas">
+                            <param id="0" name="Text">&quot;1&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="9384548464053497" type="System">
+                            <param id="0" name="Variable">carregarAlternativa</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="7566127033317842" type="System">
+                            <param id="0" name="Variable">carregarTextos</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action disabled="1" id="0" name="Set text" sid="5587077053662406" type="respostaCerta">
+                            <param id="0" name="Text">LoadJSONCM.GetData(&quot;questoes&quot;,1)</param>
+                        </action>
+                        <action id="0" name="Set text" sid="2732102949261408" type="respostaCerta">
+                            <param id="0" name="Text">&quot;D&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Carrega na tela o texto da pergunta e as alternativas na ponte</comment>
+                <event-block sid="5286753458580869">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="2025878918700423" type="System">
+                            <param id="0" name="Variable">carregarAlternativa</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
                         </condition>
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="7200979576573295">
+                        <event-block sid="7877580689674407">
                             <conditions>
-                                <condition id="-1" name="Every tick" sid="4001226634938008" type="System" />
-                                <condition id="-10" name="Compare opacity" sid="5134028502010924" type="perguntas">
+                                <condition id="-1" name="Every tick" sid="3150852197761893" type="System" />
+                                <condition id="-10" name="Compare opacity" sid="3877667792493302" type="alternativaE">
                                     <param id="0" name="Comparison">2</param>
                                     <param id="1" name="Opacity">100</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-16" name="Set opacity" sid="4071529960501384" type="perguntas">
-                                    <param id="0" name="Opacity">perguntas.Opacity + 2.5</param>
-                                </action>
                                 <action id="-16" name="Set opacity" sid="8468324499048207" type="textoPerguntas">
                                     <param id="0" name="Opacity">textoPerguntas.Opacity + 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="6735538020932375" type="alternativaA">
+                                    <param id="0" name="Opacity">alternativaA.Opacity + 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="9564026841581636" type="alternativaB">
+                                    <param id="0" name="Opacity">alternativaB.Opacity + 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="7838829726060261" type="alternativaC">
+                                    <param id="0" name="Opacity">alternativaC.Opacity + 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="3552629745491113" type="alternativaD">
+                                    <param id="0" name="Opacity">alternativaD.Opacity + 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="5007030082555815" type="alternativaE">
+                                    <param id="0" name="Opacity">alternativaE.Opacity + 2.5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="2551488609303346">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="7931251448544622" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Set position" sid="4602353345904137" type="parede">
+                                    <param id="0" name="X">557</param>
+                                    <param id="1" name="Y">353</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="5351694586913291" type="System">
+                                    <param id="0" name="Variable">carregarAlternativa</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Descarrega na tela o texto da pergunta e as alternativas na ponte</comment>
+                <event-block sid="6077847565891277">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="9585350852058588" type="System">
+                            <param id="0" name="Variable">descarregarAlternativa</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="1398330881798207">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="1608470790348047" type="System" />
+                                <condition id="-10" name="Compare opacity" sid="8376013678332283" type="alternativaE">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="1369236565179046" type="alternativaA">
+                                    <param id="0" name="Opacity">alternativaA.Opacity - 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="4465186891035044" type="alternativaB">
+                                    <param id="0" name="Opacity">alternativaB.Opacity - 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="4052274998022696" type="alternativaC">
+                                    <param id="0" name="Opacity">alternativaC.Opacity - 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="9428316805725024" type="alternativaD">
+                                    <param id="0" name="Opacity">alternativaD.Opacity - 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="1231232786081991" type="alternativaE">
+                                    <param id="0" name="Opacity">alternativaE.Opacity - 2.5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="106161790845075">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="7180917525376069" type="alternativaE">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Add to" sid="2458228193922595" type="System">
+                                    <param id="0" name="Variable">pergunta</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="2542760056326775" type="System">
+                                    <param id="0" name="Variable">carregarTextos</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="4693757343293364" type="System">
+                                    <param id="0" name="Variable">descarregarAlternativa</param>
+                                    <param id="1" name="Value">0</param>
                                 </action>
                             </actions>
                         </event-block>
