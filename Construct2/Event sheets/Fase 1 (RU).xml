@@ -3,8 +3,8 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase 1 (RU)</name>
     <events>
-        <variable constant="0" name="controleDicas" sid="6825223180070958" static="0" type="number">0</variable>
-        <variable constant="0" name="dicas" sid="8653320409829527" static="0" type="number">0</variable>
+        <variable constant="0" name="controleDica2" sid="3835474185996537" static="0" type="number">0</variable>
+        <variable constant="0" name="controleDica" sid="9200675717542735" static="0" type="number">0</variable>
         <variable constant="0" name="pontos" sid="2102700230222047" static="0" type="number">10000</variable>
         <event-block sid="5908177177675529">
             <conditions>
@@ -19,35 +19,17 @@
                     <param id="0" name="Pin to">player</param>
                     <param id="1" name="Mode">0</param>
                 </action>
-                <action id="-3" name="Set position" sid="1796080186304031" type="dica">
-                    <param id="0" name="X">1130</param>
-                    <param id="1" name="Y">765</param>
-                </action>
-                <action id="-16" name="Set opacity" sid="4282430955803191" type="dica">
-                    <param id="0" name="Opacity">0</param>
-                </action>
-                <action id="-16" name="Set opacity" sid="8473694948698988" type="dicaTexto">
-                    <param id="0" name="Opacity">0</param>
-                </action>
-                <action id="-4" name="Set position to another object" sid="3969490449312781" type="dicaTexto">
-                    <param id="0" name="Object">dica</param>
-                    <param id="1" name="Image point (optional)">0</param>
-                </action>
                 <action behavior="Pin" id="0" name="Pin to object" sid="1723416053545542" type="dicaTexto">
                     <param id="0" name="Pin to">dica</param>
                     <param id="1" name="Mode">0</param>
                 </action>
-                <action id="-9" name="Set value" sid="9075073250954897" type="System">
-                    <param id="0" name="Variable">dicas</param>
+                <action id="-9" name="Set value" sid="9443338212964294" type="System">
+                    <param id="0" name="Variable">controleDica</param>
                     <param id="1" name="Value">0</param>
                 </action>
-                <action id="-9" name="Set value" sid="4257532844545502" type="System">
-                    <param id="0" name="Variable">controleDicas</param>
+                <action id="-9" name="Set value" sid="3499478101587157" type="System">
+                    <param id="0" name="Variable">controleDica2</param>
                     <param id="1" name="Value">0</param>
-                </action>
-                <action id="-12" name="Set group active" sid="1803219930561824" type="System">
-                    <param id="0" name="Group name">&quot;PopupDica&quot;</param>
-                    <param id="1" name="State">1</param>
                 </action>
                 <action id="0" name="Set spraying" sid="1939410256425779" type="Particles">
                     <param id="0" name="State">0</param>
@@ -84,6 +66,30 @@
                         </action>
                     </actions>
                 </event-block>
+                <event-block sid="2789770175948273">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="304736481771697" type="dicaTexto">
+                            <param id="0" name="Unique ID">20</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set text" sid="5040096606073724" type="dicaTexto">
+                            <param id="0" name="Text">&quot;Use as teclas WASD para se movimentar.&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="1096431618440437">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="7327122493571541" type="dicaTexto">
+                            <param id="0" name="Unique ID">106</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set text" sid="9255666500028729" type="dicaTexto">
+                            <param id="0" name="Text">&quot;Use a tecla E para ação e interação com objetos.&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
             </sub-events>
         </event-block>
         <event-block sid="3934782651542332">
@@ -109,61 +115,43 @@
                 <action id="-5" name="Set width" sid="6276321541632608" type="playerAnim">
                     <param id="0" name="Width">(1-((720-playerAnim.Y)*0.000555))*70</param>
                 </action>
-                <action id="0" name="Set text" sid="1522946036565718" type="pontuacao">
-                    <param id="0" name="Text">&quot;Pontuação: &quot; &amp; pontos</param>
+                <action id="0" name="Set text" sid="8194749865892192" type="pontuacao">
+                    <param id="0" name="Text">&quot;Rendimento acadêmico: &quot; &amp; pontos</param>
                 </action>
             </actions>
         </event-block>
-        <event-block sid="1476661805065444">
+        <event-block sid="6255624896033366">
             <conditions>
-                <condition id="-14" name="Compare variable" sid="9914169383475974" type="System">
-                    <param id="0" name="Variable">dicas</param>
-                    <param id="1" name="Comparison">0</param>
-                    <param id="2" name="Value">0</param>
+                <condition id="3" name="Compare frame" sid="1366925973803852" type="personagens">
+                    <param id="0" name="Comparison">0</param>
+                    <param id="1" name="Number">0</param>
                 </condition>
             </conditions>
-            <actions>
-                <action id="0" name="Set text" sid="933195292471577" type="dicaTexto">
-                    <param id="0" name="Text">&quot;Use as teclas WASD para se movimentar.&quot;</param>
-                </action>
-            </actions>
-        </event-block>
-        <event-block sid="3902333537086028">
-            <conditions>
-                <condition id="-14" name="Compare variable" sid="5038656307991435" type="System">
-                    <param id="0" name="Variable">dicas</param>
-                    <param id="1" name="Comparison">0</param>
-                    <param id="2" name="Value">1</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="0" name="Set text" sid="5080537947707891" type="dicaTexto">
-                    <param id="0" name="Text">&quot;Use a tecla E para ação e para interar com objetos.&quot;</param>
-                </action>
-            </actions>
-        </event-block>
-        <event-block sid="2858598597159321">
-            <conditions>
-                <condition id="-15" inverted="1" name="Is group active" sid="887528745278623" type="System">
-                    <param id="0" name="Group name">&quot;PopupDica&quot;</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="-3" name="Set position" sid="5418641278262351" type="dica">
-                    <param id="0" name="X">1130</param>
-                    <param id="1" name="Y">765</param>
-                </action>
-                <action id="-16" name="Set opacity" sid="7075146453189413" type="dica">
-                    <param id="0" name="Opacity">0</param>
-                </action>
-                <action id="-16" name="Set opacity" sid="9727654700196805" type="dicaTexto">
-                    <param id="0" name="Opacity">0</param>
-                </action>
-                <action id="-9" name="Set value" sid="3221134601426658" type="System">
-                    <param id="0" name="Variable">controleDicas</param>
-                    <param id="1" name="Value">0</param>
-                </action>
-            </actions>
+            <actions />
+            <sub-events>
+                <event-block sid="4356462379157572">
+                    <conditions />
+                    <actions>
+                        <action id="7" name="Set mirrored" sid="1075008186941038" type="personagens">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="5355547754834101" type="System">
+                            <param id="0" name="Seconds">1.0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="6895188061085438">
+                    <conditions />
+                    <actions>
+                        <action id="7" name="Set mirrored" sid="4332852434765016" type="personagens">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="1125751643081176" type="System">
+                            <param id="0" name="Seconds">1.0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
         </event-block>
         <event-block sid="5654392263946632">
             <conditions>
@@ -228,31 +216,6 @@
                     <param id="0" name="State">0</param>
                 </action>
             </actions>
-        </event-block>
-        <event-block sid="1865411383374137">
-            <conditions>
-                <condition id="0" name="On collision with another object" sid="5368173342921554" type="player">
-                    <param id="0" name="Object">areaSelecao</param>
-                </condition>
-            </conditions>
-            <actions />
-            <sub-events>
-                <event-block sid="306548589914296">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="8170595245952188" type="System">
-                            <param id="0" name="Variable">dicas</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">1</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-12" name="Set group active" sid="5839918096574873" type="System">
-                            <param id="0" name="Group name">&quot;PopupDica&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                    </actions>
-                </event-block>
-            </sub-events>
         </event-block>
         <event-group description="" sid="8414928393622616" title="SolidezPersonagens">
             <sub-events>
@@ -402,157 +365,337 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <event-group description="" inactive="1" sid="1994250370825968" title="PopupDica">
+        <event-group description="" sid="1994250370825968" title="PopupDica">
             <sub-events>
-                <event-block sid="2062123702299957">
+                <event-block sid="4444661614832459">
                     <conditions>
-                        <condition id="-14" name="Compare variable" sid="2329172324008881" type="System">
-                            <param id="0" name="Variable">dicas</param>
+                        <condition id="-14" name="Compare variable" sid="8457064018439787" type="System">
+                            <param id="0" name="Variable">controleDica</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">0</param>
                         </condition>
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block any="1" sid="639960922645773">
+                        <event-block sid="316841801580002">
                             <conditions>
-                                <condition behavior="8Direction" id="0" name="Is moving" sid="9363326238809721" type="player" />
+                                <condition id="-14" name="Pick by unique ID" sid="2595960008873842" type="dica">
+                                    <param id="0" name="Unique ID">105</param>
+                                </condition>
                             </conditions>
-                            <actions>
-                                <action id="-16" name="Wait" sid="8117527559272747" type="System">
-                                    <param id="0" name="Seconds">0.5</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="4256427431179328" type="System">
-                                    <param id="0" name="Variable">controleDicas</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                            </actions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="9786937821081647">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="4190827331442667" type="dica">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">775</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="3608536188196888" type="dica">
+                                            <param id="0" name="Y">dica.Y-2.75</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="684755936703777">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="428504794757877" type="dica">
+                                    <param id="0" name="Unique ID">19</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="3414950365358161">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="4006758857009683" type="dica">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">665</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="1715640549041515" type="dica">
+                                            <param id="0" name="Y">dica.Y-2.75</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="4406114596613033">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="2562097559598636" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Wait" sid="1580894891844168" type="System">
+                                            <param id="0" name="Seconds">4</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="6509121553106764" type="System">
+                                            <param id="0" name="Variable">controleDica</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
-                <event-block sid="8635831414766929">
+                <event-block sid="6618487715930654">
                     <conditions>
-                        <condition id="-14" name="Compare variable" sid="3432250465563677" type="System">
-                            <param id="0" name="Variable">dicas</param>
+                        <condition id="-14" name="Compare variable" sid="4558761282282609" type="System">
+                            <param id="0" name="Variable">controleDica</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">1</param>
                         </condition>
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="3543373379187742">
+                        <event-block sid="4605850714362811">
                             <conditions>
-                                <condition id="0" name="On key pressed" sid="4151500624217401" type="Keyboard">
-                                    <param id="0" name="Key">69 (E)</param>
-                                </condition>
-                                <condition id="1" name="Is overlapping another object" sid="1259285589046204" type="player">
-                                    <param id="0" name="Object">areaSelecao</param>
+                                <condition id="-14" name="Pick by unique ID" sid="7127631105330826" type="dica">
+                                    <param id="0" name="Unique ID">19</param>
                                 </condition>
                             </conditions>
-                            <actions>
-                                <action id="-16" name="Wait" sid="5707774661546176" type="System">
-                                    <param id="0" name="Seconds">0.5</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="8240536693166995" type="System">
-                                    <param id="0" name="Variable">controleDicas</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                            </actions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="2943479734082574">
+                                    <conditions>
+                                        <condition id="-10" name="Compare opacity" sid="3882247087078085" type="dica">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Opacity">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Set opacity" sid="8596719593474415" type="dica">
+                                            <param id="0" name="Opacity">dica.Opacity - 2.5</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="9257724162153162">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="8044115799982688" type="dicaTexto">
+                                    <param id="0" name="Unique ID">20</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="9798472563005559">
+                                    <conditions>
+                                        <condition id="-10" name="Compare opacity" sid="1507016535324602" type="dicaTexto">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Opacity">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Set opacity" sid="7178835893923279" type="dicaTexto">
+                                            <param id="0" name="Opacity">dicaTexto.Opacity - 2.5</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
-                <event-block sid="5642736740533863">
+                <event-block sid="537161131122754">
                     <conditions>
-                        <condition id="-14" name="Compare variable" sid="4732565997026561" type="System">
-                            <param id="0" name="Variable">controleDicas</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">0</param>
+                        <condition id="1" name="Is overlapping another object" sid="1866135290791391" type="player">
+                            <param id="0" name="Object">areaSelecao</param>
                         </condition>
                     </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block sid="8716795919057509">
-                            <conditions>
-                                <condition id="-1" name="Every tick" sid="3100938817679992" type="System" />
-                                <condition id="-10" name="Compare opacity" sid="1620296425105772" type="dica">
-                                    <param id="0" name="Comparison">2</param>
-                                    <param id="1" name="Opacity">100</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-16" name="Set opacity" sid="445947601721047" type="dica">
-                                    <param id="0" name="Opacity">dica.Opacity + 2.5</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="2158995520724898" type="dicaTexto">
-                                    <param id="0" name="Opacity">dicaTexto.Opacity + 2.5</param>
-                                </action>
-                                <action id="-2" name="Set Y" sid="6988442288436979" type="dica">
-                                    <param id="0" name="Y">dica.Y - 2.5</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="381129959281316">
-                            <conditions>
-                                <condition id="-22" name="Else" sid="8406654255379939" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="-16" name="Wait" sid="6734629801389351" type="System">
-                                    <param id="0" name="Seconds">4</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="4142755368498875" type="System">
-                                    <param id="0" name="Variable">controleDicas</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
+                    <actions>
+                        <action id="-9" name="Set value" sid="1054193897711543" type="System">
+                            <param id="0" name="Variable">controleDica2</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
                 </event-block>
-                <event-block sid="6195692869319168">
+                <event-block sid="3558777389426841">
                     <conditions>
-                        <condition id="-14" name="Compare variable" sid="4725330262378105" type="System">
-                            <param id="0" name="Variable">controleDicas</param>
+                        <condition id="-14" name="Compare variable" sid="2527716291764478" type="System">
+                            <param id="0" name="Variable">controleDica2</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">1</param>
                         </condition>
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="2983871994063689">
+                        <event-block sid="1730977148244092">
                             <conditions>
-                                <condition id="-10" name="Compare opacity" sid="601407725030369" type="dica">
-                                    <param id="0" name="Comparison">4</param>
-                                    <param id="1" name="Opacity">0</param>
+                                <condition id="-14" name="Pick by unique ID" sid="6737894008043108" type="dica">
+                                    <param id="0" name="Unique ID">19</param>
                                 </condition>
                             </conditions>
-                            <actions>
-                                <action id="-16" name="Set opacity" sid="9387580580178528" type="dica">
-                                    <param id="0" name="Opacity">dica.Opacity - 2.5</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="8271235718424259" type="dicaTexto">
-                                    <param id="0" name="Opacity">dicaTexto.Opacity - 2.5</param>
-                                </action>
-                                <action id="-2" name="Set Y" sid="346310454303666" type="dica">
-                                    <param id="0" name="Y">dica.Y + 2.5</param>
-                                </action>
-                            </actions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="7609605504646275">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="3246089053388936" type="dica">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">555</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="6377345485910635" type="dica">
+                                            <param id="0" name="Y">dica.Y-2.75</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
-                        <event-block sid="2097630743105434">
+                        <event-block sid="2961944065196876">
                             <conditions>
-                                <condition id="-10" name="Compare opacity" sid="958606164458292" type="dica">
-                                    <param id="0" name="Comparison">0</param>
-                                    <param id="1" name="Opacity">0</param>
+                                <condition id="-14" name="Pick by unique ID" sid="6137772798046683" type="dica">
+                                    <param id="0" name="Unique ID">105</param>
                                 </condition>
                             </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="3790848728304766" type="System">
-                                    <param id="0" name="Variable">dicas</param>
-                                    <param id="1" name="Value">dicas+1</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="4886283987898199" type="System">
-                                    <param id="0" name="Group name">&quot;PopupDica&quot;</param>
-                                    <param id="1" name="State">0</param>
-                                </action>
-                            </actions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="4384582458893387">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="12711602795483" type="dica">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">665</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="1481899077376993" type="dica">
+                                            <param id="0" name="Y">dica.Y-2.75</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="5981764657340584">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="7147430113770262" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Wait" sid="2156095075634245" type="System">
+                                            <param id="0" name="Seconds">4</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="8742257479579397" type="System">
+                                            <param id="0" name="Variable">controleDica</param>
+                                            <param id="1" name="Value">3</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="8625454851065402">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="163079300748763" type="System">
+                            <param id="0" name="Variable">controleDica</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">3</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="7643132318312302">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="9756339212023954" type="dica">
+                                    <param id="0" name="Unique ID">19</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="5236394807008287">
+                                    <conditions>
+                                        <condition id="-10" name="Compare opacity" sid="506863139579116" type="dica">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Opacity">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Set opacity" sid="5235610533043794" type="dica">
+                                            <param id="0" name="Opacity">dica.Opacity - 2.5</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="6767272515603527">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="9360051029557632" type="dicaTexto">
+                                    <param id="0" name="Unique ID">20</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="9714255832168161">
+                                    <conditions>
+                                        <condition id="-10" name="Compare opacity" sid="8512000946662346" type="dicaTexto">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Opacity">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Set opacity" sid="4528404017494546" type="dicaTexto">
+                                            <param id="0" name="Opacity">dicaTexto.Opacity - 2.5</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="7877382323821513">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="4354941343709796" type="dica">
+                                    <param id="0" name="Unique ID">105</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="5254931254025141">
+                                    <conditions>
+                                        <condition id="-10" name="Compare opacity" sid="6330898997418144" type="dica">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Opacity">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Set opacity" sid="4717587040683016" type="dica">
+                                            <param id="0" name="Opacity">dica.Opacity - 2.5</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="6935131143865839">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="3328028894179846" type="dicaTexto">
+                                    <param id="0" name="Unique ID">106</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="2653678383105506">
+                                    <conditions>
+                                        <condition id="-10" name="Compare opacity" sid="8993476175408844" type="dicaTexto">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Opacity">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Set opacity" sid="5669950906556405" type="dicaTexto">
+                                            <param id="0" name="Opacity">dicaTexto.Opacity - 2.5</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="7908307218559925">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="3941954596899896" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Destroy" sid="3918684595991456" type="dica" />
+                                        <action id="-9" name="Destroy" sid="1714643343603165" type="dicaTexto" />
+                                        <action id="-12" name="Set group active" sid="1395557272016304" type="System">
+                                            <param id="0" name="Group name">&quot;PopupDica&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
