@@ -3,6 +3,8 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase Final (Campo Minado)</name>
     <events>
+        <comment>Pontuação jogador</comment>
+        <variable constant="0" name="pontosCM" sid="595652796244883" static="0" type="number">10000</variable>
         <comment>Para disparar o inicio do evento das perguntas</comment>
         <variable constant="0" name="ativarMensagem" sid="4430145120925736" static="0" type="number">0</variable>
         <comment>Para organização do número da pergunta que está atualmente</comment>
@@ -15,6 +17,14 @@
         <variable constant="0" name="descarregarAlternativa" sid="9854460331464779" static="0" type="number">0</variable>
         <comment>Criado para controlar quando alterar a posição das letras na ponte</comment>
         <variable constant="0" name="carregarTextos" sid="3555043611031616" static="0" type="number">0</variable>
+        <comment>Verificar colisão com algum sprite de seleção de alternativa</comment>
+        <variable constant="0" name="obterAlternativa" sid="2693535395009795" static="0" type="number">1</variable>
+        <comment>Para conferir a alternativa</comment>
+        <variable constant="0" name="verificarAlternativa" sid="7069139797341193" static="0" type="number">0</variable>
+        <comment>Ponte escolhida pelo jogador</comment>
+        <variable constant="0" name="alternativa" sid="7593771871950864" static="0" type="text"></variable>
+        <comment>Resposta correta importada do .json</comment>
+        <variable constant="0" name="respostaCerta" sid="7634110463548163" static="0" type="text"></variable>
         <comment>Inicializações</comment>
         <event-block sid="1021034089245405">
             <conditions>
@@ -110,6 +120,9 @@
                 </action>
                 <action id="-5" name="Set width" sid="6344279765783119" type="playerAnim">
                     <param id="0" name="Width">(1-((720-playerAnim.Y)*0.000555))*70</param>
+                </action>
+                <action id="0" name="Set text" sid="901025095795257" type="pontuacao">
+                    <param id="0" name="Text">&quot;Rendimento acadêmico: &quot; &amp; pontosCM</param>
                 </action>
             </actions>
         </event-block>
@@ -262,10 +275,18 @@
                             <param id="1" name="Y">575</param>
                         </action>
                         <action disabled="1" id="0" name="Set text" sid="9922866634395319" type="textoPerguntas">
-                            <param id="0" name="Text">LoadJSONCM.GetData(&quot;questoes&quot;, 0)</param>
+                            <param id="0" name="Text">LoadJSONCM.GetData(&quot;questoes.pergunta&quot;, 0)</param>
                         </action>
                         <action id="0" name="Set text" sid="918859528342287" type="textoPerguntas">
                             <param id="0" name="Text">&quot;1&quot;</param>
+                        </action>
+                        <action disabled="1" id="-9" name="Set value" sid="4416427829563817" type="System">
+                            <param id="0" name="Variable">respostaCerta</param>
+                            <param id="1" name="Value">LoadJSONCM.GetData(&quot;questoes.pergunta&quot;,1)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="260218745168379" type="System">
+                            <param id="0" name="Variable">respostaCerta</param>
+                            <param id="1" name="Value">&quot;D&quot;</param>
                         </action>
                         <action id="-9" name="Set value" sid="9384548464053497" type="System">
                             <param id="0" name="Variable">carregarAlternativa</param>
@@ -275,13 +296,40 @@
                             <param id="0" name="Variable">carregarTextos</param>
                             <param id="1" name="Value">0</param>
                         </action>
-                        <action disabled="1" id="0" name="Set text" sid="5587077053662406" type="respostaCerta">
-                            <param id="0" name="Text">LoadJSONCM.GetData(&quot;questoes&quot;,1)</param>
-                        </action>
-                        <action id="0" name="Set text" sid="2732102949261408" type="respostaCerta">
-                            <param id="0" name="Text">&quot;D&quot;</param>
-                        </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="1298658919118216">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="296313942021086" type="System">
+                                    <param id="0" name="Variable">pergunta</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">4</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Set position" sid="4250409529621376" type="alternativaA">
+                                    <param id="0" name="X">1049</param>
+                                    <param id="1" name="Y">127</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="1808195865506675" type="alternativaB">
+                                    <param id="0" name="X">1049</param>
+                                    <param id="1" name="Y">239</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="9155634548235956" type="alternativaC">
+                                    <param id="0" name="X">1049</param>
+                                    <param id="1" name="Y">351</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="9396936770333293" type="alternativaD">
+                                    <param id="0" name="X">1049</param>
+                                    <param id="1" name="Y">463</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="8389005184232734" type="alternativaE">
+                                    <param id="0" name="X">1049</param>
+                                    <param id="1" name="Y">575</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <comment>Carrega na tela o texto da pergunta e as alternativas na ponte</comment>
                 <event-block sid="5286753458580869">
@@ -328,15 +376,91 @@
                                 <condition id="-22" name="Else" sid="7931251448544622" type="System" />
                             </conditions>
                             <actions>
+                                <action id="-3" name="Set position" sid="7337643474997453" type="selAlternativaA">
+                                    <param id="0" name="X">361 + (pergunta - 1) * 276</param>
+                                    <param id="1" name="Y">140</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="5931436844741072" type="selAlternativaB">
+                                    <param id="0" name="X">341 + (pergunta - 1) * 276</param>
+                                    <param id="1" name="Y">252</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="1193258432929034" type="selAlternativaC">
+                                    <param id="0" name="X">321 + (pergunta - 1) * 276</param>
+                                    <param id="1" name="Y">364</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="8921102965776504" type="selAlternativaD">
+                                    <param id="0" name="X">301 + (pergunta - 1) * 276</param>
+                                    <param id="1" name="Y">476</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="2920773291074478" type="selAlternativaE">
+                                    <param id="0" name="X">281 + (pergunta - 1) * 276</param>
+                                    <param id="1" name="Y">588</param>
+                                </action>
                                 <action id="-3" name="Set position" sid="4602353345904137" type="parede">
-                                    <param id="0" name="X">557</param>
+                                    <param id="0" name="X">281 + pergunta * 276</param>
                                     <param id="1" name="Y">353</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="6739928304742202" type="System">
+                                    <param id="0" name="Variable">obterAlternativa</param>
+                                    <param id="1" name="Value">1</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="5351694586913291" type="System">
                                     <param id="0" name="Variable">carregarAlternativa</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="9140199304361447">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="2447433586546292" type="System">
+                                            <param id="0" name="Variable">pergunta</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">3</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="2171805390154107" type="parede">
+                                            <param id="0" name="X">1017</param>
+                                            <param id="1" name="Y">353</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="3821367277406875">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="6596987142669554" type="System">
+                                            <param id="0" name="Variable">pergunta</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">4</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="5286936339297295" type="selAlternativaA">
+                                            <param id="0" name="X">1097</param>
+                                            <param id="1" name="Y">140</param>
+                                        </action>
+                                        <action id="-3" name="Set position" sid="7225652743341751" type="selAlternativaB">
+                                            <param id="0" name="X">1077</param>
+                                            <param id="1" name="Y">252</param>
+                                        </action>
+                                        <action id="-3" name="Set position" sid="3234958413539137" type="selAlternativaC">
+                                            <param id="0" name="X">1057</param>
+                                            <param id="1" name="Y">364</param>
+                                        </action>
+                                        <action id="-3" name="Set position" sid="876795579493659" type="selAlternativaD">
+                                            <param id="0" name="X">1037</param>
+                                            <param id="1" name="Y">476</param>
+                                        </action>
+                                        <action id="-3" name="Set position" sid="5820714451411586" type="selAlternativaE">
+                                            <param id="0" name="X">1017</param>
+                                            <param id="1" name="Y">588</param>
+                                        </action>
+                                        <action id="-3" name="Set position" sid="1840674861829503" type="parede">
+                                            <param id="0" name="X">0</param>
+                                            <param id="1" name="Y">353</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -385,10 +509,6 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-10" name="Add to" sid="2458228193922595" type="System">
-                                    <param id="0" name="Variable">pergunta</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
                                 <action id="-9" name="Set value" sid="2542760056326775" type="System">
                                     <param id="0" name="Variable">carregarTextos</param>
                                     <param id="1" name="Value">1</param>
@@ -396,6 +516,190 @@
                                 <action id="-9" name="Set value" sid="4693757343293364" type="System">
                                     <param id="0" name="Variable">descarregarAlternativa</param>
                                     <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Atribuir a alternativa referente a ponte que o jogador passou</comment>
+                <event-block sid="9902191356516214">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="9796846576128038" type="System">
+                            <param id="0" name="Variable">obterAlternativa</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="4890820320037027">
+                            <conditions>
+                                <condition id="0" name="On collision with another object" sid="3231101167725144" type="player">
+                                    <param id="0" name="Object">selAlternativaA</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="7440977417694313" type="System">
+                                    <param id="0" name="Variable">alternativa</param>
+                                    <param id="1" name="Value">&quot;A&quot;</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="3146369873476225" type="System">
+                                    <param id="0" name="Variable">obterAlternativa</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="4736846504762534" type="System">
+                                    <param id="0" name="Variable">verificarAlternativa</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="8139290530583717">
+                            <conditions>
+                                <condition id="0" name="On collision with another object" sid="5726463813688786" type="player">
+                                    <param id="0" name="Object">selAlternativaB</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="1313713559648508" type="System">
+                                    <param id="0" name="Variable">alternativa</param>
+                                    <param id="1" name="Value">&quot;B&quot;</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="5072599539545931" type="System">
+                                    <param id="0" name="Variable">obterAlternativa</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="9746197899929007" type="System">
+                                    <param id="0" name="Variable">verificarAlternativa</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="8860658689697719">
+                            <conditions>
+                                <condition id="0" name="On collision with another object" sid="5028381221980981" type="player">
+                                    <param id="0" name="Object">selAlternativaC</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="3123274219022313" type="System">
+                                    <param id="0" name="Variable">alternativa</param>
+                                    <param id="1" name="Value">&quot;C&quot;</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="265940840006912" type="System">
+                                    <param id="0" name="Variable">obterAlternativa</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="4432068837491562" type="System">
+                                    <param id="0" name="Variable">verificarAlternativa</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="9233931703728528">
+                            <conditions>
+                                <condition id="0" name="On collision with another object" sid="7999197560030927" type="player">
+                                    <param id="0" name="Object">selAlternativaD</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="1646891201530048" type="System">
+                                    <param id="0" name="Variable">alternativa</param>
+                                    <param id="1" name="Value">&quot;D&quot;</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="5044785974691181" type="System">
+                                    <param id="0" name="Variable">obterAlternativa</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="1283022481269889" type="System">
+                                    <param id="0" name="Variable">verificarAlternativa</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="488663325968357">
+                            <conditions>
+                                <condition id="0" name="On collision with another object" sid="9270387870490897" type="player">
+                                    <param id="0" name="Object">selAlternativaE</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="688492345598077" type="System">
+                                    <param id="0" name="Variable">alternativa</param>
+                                    <param id="1" name="Value">&quot;E&quot;</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="7870302818532774" type="System">
+                                    <param id="0" name="Variable">obterAlternativa</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="9117767645676359" type="System">
+                                    <param id="0" name="Variable">verificarAlternativa</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Em caso de erro o jogador volta pra primeira questão outra vez</comment>
+                <event-block sid="5716842043748232">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="5379804951983282" type="System">
+                            <param id="0" name="Variable">verificarAlternativa</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="5793724562251928">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="3237814420960202" type="System">
+                                    <param id="0" name="First value">alternativa</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">respostaCerta</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Add to" sid="692655055517221" type="System">
+                                    <param id="0" name="Variable">pergunta</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-10" name="Add to" sid="3125939558383115" type="System">
+                                    <param id="0" name="Variable">pontosCM</param>
+                                    <param id="1" name="Value">100</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="8816027619610096">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="3013058512679844" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="2729149254388748" type="System">
+                                    <param id="0" name="Variable">pergunta</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="2638783148028285" type="player">
+                                    <param id="0" name="X">51</param>
+                                    <param id="1" name="Y">265</param>
+                                </action>
+                                <action id="-10" name="Add to" sid="1397937927894916" type="System">
+                                    <param id="0" name="Variable">pontosCM</param>
+                                    <param id="1" name="Value">-100</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="9921088284773163">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="9784561846871037" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="7310104937253358" type="System">
+                                    <param id="0" name="Variable">verificarAlternativa</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="2602810595519853" type="System">
+                                    <param id="0" name="Variable">descarregarAlternativa</param>
+                                    <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
                         </event-block>
