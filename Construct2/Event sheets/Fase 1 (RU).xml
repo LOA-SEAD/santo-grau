@@ -3,6 +3,9 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase 1 (RU)</name>
     <events>
+        <variable constant="0" name="comidaTempo" sid="6511055850249189" static="0" type="number">1</variable>
+        <variable constant="0" name="ControleAcao" sid="4245554707584408" static="0" type="number">0</variable>
+        <variable constant="0" name="comidas" sid="1598748723269433" static="0" type="number">0</variable>
         <variable constant="0" name="controleDica2" sid="3835474185996537" static="0" type="number">0</variable>
         <variable constant="0" name="controleDica" sid="9200675717542735" static="0" type="number">0</variable>
         <variable constant="0" name="pontos" sid="2102700230222047" static="0" type="number">10000</variable>
@@ -23,6 +26,9 @@
                     <param id="0" name="Pin to">dica</param>
                     <param id="1" name="Mode">0</param>
                 </action>
+                <action id="0" name="Set spraying" sid="1939410256425779" type="Particles">
+                    <param id="0" name="State">0</param>
+                </action>
                 <action id="-9" name="Set value" sid="9443338212964294" type="System">
                     <param id="0" name="Variable">controleDica</param>
                     <param id="1" name="Value">0</param>
@@ -31,8 +37,17 @@
                     <param id="0" name="Variable">controleDica2</param>
                     <param id="1" name="Value">0</param>
                 </action>
-                <action id="0" name="Set spraying" sid="1939410256425779" type="Particles">
-                    <param id="0" name="State">0</param>
+                <action id="-9" name="Set value" sid="9165671569927214" type="System">
+                    <param id="0" name="Variable">comidas</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="4615735274443887" type="System">
+                    <param id="0" name="Variable">ControleAcao</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="7015238634826444" type="System">
+                    <param id="0" name="Variable">comidaTempo</param>
+                    <param id="1" name="Value">1</param>
                 </action>
             </actions>
             <sub-events>
@@ -97,269 +112,196 @@
                 <condition id="-1" name="Every tick" sid="6978431651260231" type="System" />
             </conditions>
             <actions>
-                <action id="-6" name="Set height" sid="8170362401313694" type="personagens">
-                    <param id="0" name="Height">(1-((720-personagens.Y)*0.000555))*151</param>
-                </action>
-                <action id="-5" name="Set width" sid="954839438272563" type="personagens">
+                <action id="-7" name="Set size" sid="5056594746740774" type="personagens">
                     <param id="0" name="Width">(1-((720-personagens.Y)*0.000555))*70</param>
+                    <param id="1" name="Height">(1-((720-personagens.Y)*0.000555))*151</param>
                 </action>
-                <action id="-6" name="Set height" sid="6894979801595582" type="player">
-                    <param id="0" name="Height">(1-((720-Player.Y)*0.000555))*144</param>
-                </action>
-                <action id="-5" name="Set width" sid="8494823441308352" type="player">
+                <action id="-7" name="Set size" sid="2587431462532145" type="player">
                     <param id="0" name="Width">(1-((720-Player.Y)*0.000555))*70</param>
+                    <param id="1" name="Height">(1-((720-Player.Y)*0.000555))*144</param>
                 </action>
-                <action id="-6" name="Set height" sid="4809045221727767" type="playerAnim">
-                    <param id="0" name="Height">(1-((720-playerAnim.Y)*0.000555))*144</param>
-                </action>
-                <action id="-5" name="Set width" sid="6276321541632608" type="playerAnim">
+                <action id="-7" name="Set size" sid="2812076395189886" type="playerAnim">
                     <param id="0" name="Width">(1-((720-playerAnim.Y)*0.000555))*70</param>
+                    <param id="1" name="Height">(1-((720-playerAnim.Y)*0.000555))*144</param>
                 </action>
                 <action id="0" name="Set text" sid="8194749865892192" type="pontuacao">
                     <param id="0" name="Text">&quot;Rendimento acadêmico: &quot; &amp; pontos</param>
                 </action>
             </actions>
         </event-block>
-        <event-block sid="6255624896033366">
+        <event-block sid="8775816185347957">
             <conditions>
-                <condition id="3" name="Compare frame" sid="1366925973803852" type="personagens">
-                    <param id="0" name="Comparison">0</param>
-                    <param id="1" name="Number">0</param>
+                <condition id="0" name="On key pressed" sid="7194074014765671" type="Keyboard">
+                    <param id="0" name="Key">69 (E)</param>
                 </condition>
-            </conditions>
-            <actions />
-            <sub-events>
-                <event-block sid="4356462379157572">
-                    <conditions />
-                    <actions>
-                        <action id="7" name="Set mirrored" sid="1075008186941038" type="personagens">
-                            <param id="0" name="State">0</param>
-                        </action>
-                        <action id="-16" name="Wait" sid="5355547754834101" type="System">
-                            <param id="0" name="Seconds">1.0</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="6895188061085438">
-                    <conditions />
-                    <actions>
-                        <action id="7" name="Set mirrored" sid="4332852434765016" type="personagens">
-                            <param id="0" name="State">1</param>
-                        </action>
-                        <action id="-16" name="Wait" sid="1125751643081176" type="System">
-                            <param id="0" name="Seconds">1.0</param>
-                        </action>
-                    </actions>
-                </event-block>
-            </sub-events>
-        </event-block>
-        <event-block sid="5654392263946632">
-            <conditions>
-                <condition id="1" name="Is overlapping another object" sid="694930446003187" type="player">
+                <condition id="1" name="Is overlapping another object" sid="3347717200536958" type="player">
                     <param id="0" name="Object">areaSelecao</param>
                 </condition>
             </conditions>
-            <actions />
+            <actions>
+                <action id="-9" name="Set value" sid="7376859936204801" type="System">
+                    <param id="0" name="Variable">ControleAcao</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+            </actions>
             <sub-events>
-                <event-block sid="9314407747770924">
+                <event-block sid="7327004889935838">
                     <conditions>
-                        <condition id="-14" name="Pick by unique ID" sid="7692609125360001" type="areaSelecao">
+                        <condition id="-14" name="Pick by unique ID" sid="3209261583321341" type="areaSelecao">
                             <param id="0" name="Unique ID">40</param>
                         </condition>
+                        <condition id="-14" name="Pick by unique ID" sid="9926190480772025" type="Particles">
+                            <param id="0" name="Unique ID">42</param>
+                        </condition>
+                        <condition id="-4" inverted="1" name="Is outside layout" sid="4159315523573828" type="lasanha" />
                     </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block sid="6588280546282949">
-                            <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="1011657348522198" type="Particles">
-                                    <param id="0" name="Unique ID">42</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Set spraying" sid="6255770894201731" type="Particles">
-                                    <param id="0" name="State">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="9385721673488793" type="System">
+                            <param id="0" name="Group name">&quot;AcaoLasanha&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
                 </event-block>
-                <event-block sid="3994514912430594">
+                <event-block sid="1130265586956355">
                     <conditions>
-                        <condition id="-14" name="Pick by unique ID" sid="370909883356197" type="areaSelecao">
+                        <condition id="-14" name="Pick by unique ID" sid="4124958953378846" type="areaSelecao">
                             <param id="0" name="Unique ID">41</param>
                         </condition>
+                        <condition id="-14" name="Pick by unique ID" sid="5662266614566403" type="Particles">
+                            <param id="0" name="Unique ID">43</param>
+                        </condition>
+                        <condition id="-4" inverted="1" name="Is outside layout" sid="5790202092250641" type="cafe" />
                     </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block sid="861846149952091">
-                            <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="370792203272538" type="Particles">
-                                    <param id="0" name="Unique ID">43</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Set spraying" sid="4108247680730505" type="Particles">
-                                    <param id="0" name="State">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="8096284232204449" type="System">
+                            <param id="0" name="Group name">&quot;AcaoCafe&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
                 </event-block>
             </sub-events>
         </event-block>
-        <event-block sid="5855417150437815">
-            <conditions>
-                <condition id="-22" name="Else" sid="7584915272648562" type="System" />
-            </conditions>
-            <actions>
-                <action id="0" name="Set spraying" sid="7134270592868849" type="Particles">
-                    <param id="0" name="State">0</param>
-                </action>
-            </actions>
-        </event-block>
-        <event-group description="" sid="8414928393622616" title="SolidezPersonagens">
+        <event-group description="" sid="5896488708617775" title="playerMove">
             <sub-events>
-                <event-block any="1" sid="8558704803782616">
+                <event-block any="1" sid="886051769818349">
                     <conditions>
-                        <condition id="-14" name="Pick by unique ID" sid="6832948135534254" type="personagens">
-                            <param id="0" name="Unique ID">26</param>
+                        <condition id="2" name="Key is down" sid="4233850284084363" type="Keyboard">
+                            <param id="0" name="Key">87 (W)</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="3568718889827623" type="Keyboard">
+                            <param id="0" name="Key">38 (Up arrow)</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action behavior="Solid" id="0" name="Set enabled" sid="5644260774880789" type="personagens">
+                        <action id="7" name="Set mirrored" sid="9822145559487989" type="playerAnim">
                             <param id="0" name="State">1</param>
+                        </action>
+                        <action behavior="8Direction" id="7" name="Simulate control" sid="1878340586013107" type="player">
+                            <param id="0" name="Control">2</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="7995322854083129" type="playerAnim">
+                            <param id="0" name="Animation">&quot;Costas&quot;</param>
+                            <param id="1" name="From">1</param>
                         </action>
                     </actions>
                 </event-block>
-                <event-block any="1" sid="1369379081463333">
+                <event-block any="1" sid="1073648718502332">
                     <conditions>
-                        <condition id="-14" name="Pick by unique ID" sid="3131128916289027" type="personagens">
-                            <param id="0" name="Unique ID">27</param>
+                        <condition id="2" name="Key is down" sid="6327347040317284" type="Keyboard">
+                            <param id="0" name="Key">65 (A)</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="4373097420356784" type="Keyboard">
+                            <param id="0" name="Key">37 (Left arrow)</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action behavior="Solid" id="0" name="Set enabled" sid="9463849676544531" type="personagens">
-                            <param id="0" name="State">1</param>
+                        <action id="7" name="Set mirrored" sid="8762379555871606" type="playerAnim">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action behavior="8Direction" id="7" name="Simulate control" sid="746543489705338" type="player">
+                            <param id="0" name="Control">0</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="9737196518982497" type="playerAnim">
+                            <param id="0" name="Animation">&quot;Andando&quot;</param>
+                            <param id="1" name="From">1</param>
                         </action>
                     </actions>
                 </event-block>
-                <event-block any="1" sid="9176944856057114">
+                <event-block any="1" sid="5000545949328359">
                     <conditions>
-                        <condition id="-14" name="Pick by unique ID" sid="5430376717027159" type="personagens">
-                            <param id="0" name="Unique ID">28</param>
+                        <condition id="2" name="Key is down" sid="4713277322495039" type="Keyboard">
+                            <param id="0" name="Key">68 (D)</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="4173237016401887" type="Keyboard">
+                            <param id="0" name="Key">39 (Right arrow)</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action behavior="Solid" id="0" name="Set enabled" sid="2740474598577423" type="personagens">
+                        <action id="7" name="Set mirrored" sid="7087562587891989" type="playerAnim">
                             <param id="0" name="State">1</param>
+                        </action>
+                        <action behavior="8Direction" id="7" name="Simulate control" sid="2271784283006511" type="player">
+                            <param id="0" name="Control">1</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="6254485882063354" type="playerAnim">
+                            <param id="0" name="Animation">&quot;Andando&quot;</param>
+                            <param id="1" name="From">1</param>
                         </action>
                     </actions>
                 </event-block>
-                <event-block any="1" sid="6809821615824368">
+                <event-block any="1" sid="4734652613660711">
                     <conditions>
-                        <condition id="-14" name="Pick by unique ID" sid="1714554222811456" type="personagens">
-                            <param id="0" name="Unique ID">29</param>
+                        <condition id="2" name="Key is down" sid="5835748217046764" type="Keyboard">
+                            <param id="0" name="Key">83 (S)</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="4026095754677331" type="Keyboard">
+                            <param id="0" name="Key">40 (Down arrow)</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action behavior="Solid" id="0" name="Set enabled" sid="4635388446368236" type="personagens">
+                        <action id="7" name="Set mirrored" sid="5879645745347407" type="playerAnim">
                             <param id="0" name="State">1</param>
+                        </action>
+                        <action behavior="8Direction" id="7" name="Simulate control" sid="5104997928814582" type="player">
+                            <param id="0" name="Control">3</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="9788879231222867" type="playerAnim">
+                            <param id="0" name="Animation">&quot;Frente&quot;</param>
+                            <param id="1" name="From">1</param>
                         </action>
                     </actions>
                 </event-block>
-                <event-block any="1" sid="8851428573518049">
+                <event-block sid="6062271813322311">
                     <conditions>
-                        <condition id="-14" name="Pick by unique ID" sid="9510738267761339" type="personagens">
-                            <param id="0" name="Unique ID">30</param>
+                        <condition id="2" inverted="1" name="Key is down" sid="3074572944056861" type="Keyboard">
+                            <param id="0" name="Key">87 (W)</param>
+                        </condition>
+                        <condition id="2" inverted="1" name="Key is down" sid="1537172611480235" type="Keyboard">
+                            <param id="0" name="Key">38 (Up arrow)</param>
+                        </condition>
+                        <condition id="2" inverted="1" name="Key is down" sid="8592409861759569" type="Keyboard">
+                            <param id="0" name="Key">65 (A)</param>
+                        </condition>
+                        <condition id="2" inverted="1" name="Key is down" sid="6743299981185339" type="Keyboard">
+                            <param id="0" name="Key">37 (Left arrow)</param>
+                        </condition>
+                        <condition id="2" inverted="1" name="Key is down" sid="4201371690930086" type="Keyboard">
+                            <param id="0" name="Key">68 (D)</param>
+                        </condition>
+                        <condition id="2" inverted="1" name="Key is down" sid="4988190638044172" type="Keyboard">
+                            <param id="0" name="Key">39 (Right arrow)</param>
+                        </condition>
+                        <condition id="2" inverted="1" name="Key is down" sid="5431582663461051" type="Keyboard">
+                            <param id="0" name="Key">83 (S)</param>
+                        </condition>
+                        <condition id="2" inverted="1" name="Key is down" sid="3039710350154668" type="Keyboard">
+                            <param id="0" name="Key">40 (Down arrow)</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action behavior="Solid" id="0" name="Set enabled" sid="3888461200476161" type="personagens">
-                            <param id="0" name="State">1</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block any="1" sid="7302759826345667">
-                    <conditions>
-                        <condition id="-14" name="Pick by unique ID" sid="11670707501164" type="personagens">
-                            <param id="0" name="Unique ID">31</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action behavior="Solid" id="0" name="Set enabled" sid="7216419373935772" type="personagens">
-                            <param id="0" name="State">1</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block any="1" sid="9321872424646206">
-                    <conditions>
-                        <condition id="-14" name="Pick by unique ID" sid="2710589441594998" type="personagens">
-                            <param id="0" name="Unique ID">32</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action behavior="Solid" id="0" name="Set enabled" sid="8832049210260069" type="personagens">
-                            <param id="0" name="State">1</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block any="1" sid="74948105716407">
-                    <conditions>
-                        <condition id="-14" name="Pick by unique ID" sid="8455044500090627" type="personagens">
-                            <param id="0" name="Unique ID">33</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action behavior="Solid" id="0" name="Set enabled" sid="3596766809295319" type="personagens">
-                            <param id="0" name="State">1</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block any="1" sid="5473805810451685">
-                    <conditions>
-                        <condition id="-14" name="Pick by unique ID" sid="5607532863720376" type="personagens">
-                            <param id="0" name="Unique ID">34</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action behavior="Solid" id="0" name="Set enabled" sid="6691864606546669" type="personagens">
-                            <param id="0" name="State">1</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block any="1" sid="2565345459846578">
-                    <conditions>
-                        <condition id="-14" name="Pick by unique ID" sid="1783229759903263" type="personagens">
-                            <param id="0" name="Unique ID">45</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action behavior="Solid" id="0" name="Set enabled" sid="6179541837697439" type="personagens">
-                            <param id="0" name="State">1</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block any="1" sid="7307457810656329">
-                    <conditions>
-                        <condition id="-14" name="Pick by unique ID" sid="65410810878488" type="personagens">
-                            <param id="0" name="Unique ID">46</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action behavior="Solid" id="0" name="Set enabled" sid="6219650851458431" type="personagens">
-                            <param id="0" name="State">1</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block any="1" sid="2897485803419579">
-                    <conditions>
-                        <condition id="-14" name="Pick by unique ID" sid="9211986200403053" type="personagens">
-                            <param id="0" name="Unique ID">47</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action behavior="Solid" id="0" name="Set enabled" sid="8519104226575233" type="personagens">
-                            <param id="0" name="State">1</param>
+                        <action id="4" name="Set animation" sid="4283361901681274" type="playerAnim">
+                            <param id="0" name="Animation">&quot;Frente&quot;</param>
+                            <param id="1" name="From">1</param>
                         </action>
                     </actions>
                 </event-block>
@@ -701,129 +643,520 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <event-group description="" sid="5896488708617775" title="playerMove">
+        <event-group description="" sid="8414928393622616" title="PersonagensCenario">
             <sub-events>
-                <event-block any="1" sid="886051769818349">
+                <event-block sid="6255624896033366">
                     <conditions>
-                        <condition id="2" name="Key is down" sid="4233850284084363" type="Keyboard">
-                            <param id="0" name="Key">87 (W)</param>
+                        <condition id="3" name="Compare frame" sid="1366925973803852" type="personagens">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Number">0</param>
                         </condition>
-                        <condition id="2" name="Key is down" sid="3568718889827623" type="Keyboard">
-                            <param id="0" name="Key">38 (Up arrow)</param>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="4356462379157572">
+                            <conditions />
+                            <actions>
+                                <action id="7" name="Set mirrored" sid="1075008186941038" type="personagens">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="5355547754834101" type="System">
+                                    <param id="0" name="Seconds">1.0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="6895188061085438">
+                            <conditions />
+                            <actions>
+                                <action id="7" name="Set mirrored" sid="4332852434765016" type="personagens">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="1125751643081176" type="System">
+                                    <param id="0" name="Seconds">1.0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block any="1" sid="8558704803782616">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="6832948135534254" type="personagens">
+                            <param id="0" name="Unique ID">26</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="7" name="Set mirrored" sid="9822145559487989" type="playerAnim">
+                        <action behavior="Solid" id="0" name="Set enabled" sid="5644260774880789" type="personagens">
                             <param id="0" name="State">1</param>
-                        </action>
-                        <action behavior="8Direction" id="7" name="Simulate control" sid="1878340586013107" type="player">
-                            <param id="0" name="Control">2</param>
-                        </action>
-                        <action id="4" name="Set animation" sid="7995322854083129" type="playerAnim">
-                            <param id="0" name="Animation">&quot;Costas&quot;</param>
-                            <param id="1" name="From">1</param>
                         </action>
                     </actions>
                 </event-block>
-                <event-block any="1" sid="1073648718502332">
+                <event-block any="1" sid="1369379081463333">
                     <conditions>
-                        <condition id="2" name="Key is down" sid="6327347040317284" type="Keyboard">
-                            <param id="0" name="Key">65 (A)</param>
-                        </condition>
-                        <condition id="2" name="Key is down" sid="4373097420356784" type="Keyboard">
-                            <param id="0" name="Key">37 (Left arrow)</param>
+                        <condition id="-14" name="Pick by unique ID" sid="3131128916289027" type="personagens">
+                            <param id="0" name="Unique ID">27</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="7" name="Set mirrored" sid="8762379555871606" type="playerAnim">
+                        <action behavior="Solid" id="0" name="Set enabled" sid="9463849676544531" type="personagens">
+                            <param id="0" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="9176944856057114">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="5430376717027159" type="personagens">
+                            <param id="0" name="Unique ID">28</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="2740474598577423" type="personagens">
+                            <param id="0" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="6809821615824368">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="1714554222811456" type="personagens">
+                            <param id="0" name="Unique ID">29</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="4635388446368236" type="personagens">
+                            <param id="0" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="8851428573518049">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="9510738267761339" type="personagens">
+                            <param id="0" name="Unique ID">30</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="3888461200476161" type="personagens">
+                            <param id="0" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="7302759826345667">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="11670707501164" type="personagens">
+                            <param id="0" name="Unique ID">31</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="7216419373935772" type="personagens">
+                            <param id="0" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="9321872424646206">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="2710589441594998" type="personagens">
+                            <param id="0" name="Unique ID">32</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="8832049210260069" type="personagens">
+                            <param id="0" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="74948105716407">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="8455044500090627" type="personagens">
+                            <param id="0" name="Unique ID">33</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="3596766809295319" type="personagens">
+                            <param id="0" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="5473805810451685">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="5607532863720376" type="personagens">
+                            <param id="0" name="Unique ID">34</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="6691864606546669" type="personagens">
+                            <param id="0" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="2565345459846578">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="1783229759903263" type="personagens">
+                            <param id="0" name="Unique ID">45</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="6179541837697439" type="personagens">
+                            <param id="0" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="7307457810656329">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="65410810878488" type="personagens">
+                            <param id="0" name="Unique ID">46</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="6219650851458431" type="personagens">
+                            <param id="0" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="2897485803419579">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="9211986200403053" type="personagens">
+                            <param id="0" name="Unique ID">47</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="8519104226575233" type="personagens">
+                            <param id="0" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="8764001208082885" title="Particulas">
+            <sub-events>
+                <event-block sid="4746207908742625">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="4277936229857957" type="System">
+                            <param id="0" name="Interval (seconds)">comidaTempo</param>
+                        </condition>
+                        <condition id="-11" name="For Each" sid="3812168187218473" type="System">
+                            <param id="0" name="Object">ComidaSpawn</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Create object" sid="2691183686100914" type="System">
+                            <param id="0" name="Object to create">Comida</param>
+                            <param id="1" name="Layer">2</param>
+                            <param id="2" name="X">ComidaSpawn.X</param>
+                            <param id="3" name="Y">ComidaSpawn.Y</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="9967245428058085">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="6097818628636902" type="ComidaSpawn">
+                                    <param id="0" name="Unique ID">107</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="5" name="Set frame" sid="6292583826543962" type="Comida">
+                                    <param id="0" name="Frame number">round(random(0,5))</param>
+                                </action>
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="3467704659112098" type="Comida">
+                                    <param id="0" name="Angle">270</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="4923801629322177">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="5401779606019134" type="ComidaSpawn">
+                                    <param id="0" name="Unique ID">108</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="5" name="Set frame" sid="7575876343723192" type="Comida">
+                                    <param id="0" name="Frame number">round(random(0,5))</param>
+                                </action>
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="3056674960543383" type="Comida">
+                                    <param id="0" name="Angle">90</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="2070714146756838">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="8849029271154854" type="ComidaSpawn">
+                                    <param id="0" name="Unique ID">109</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="5" name="Set frame" sid="4539830730451729" type="Comida">
+                                    <param id="0" name="Frame number">round(random(0,5))</param>
+                                </action>
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="7516385377310893" type="Comida">
+                                    <param id="0" name="Angle">270</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="6475258998791323">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="1534228427905346" type="ComidaSpawn">
+                                    <param id="0" name="Unique ID">110</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="5" name="Set frame" sid="38974268235544" type="Comida">
+                                    <param id="0" name="Frame number">round(random(0,5))</param>
+                                </action>
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="495819871056796" type="Comida">
+                                    <param id="0" name="Angle">90</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="6593768214597671">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="7001500012801245" type="ComidaSpawn">
+                                    <param id="0" name="Unique ID">111</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="5" name="Set frame" sid="6206557925356861" type="Comida">
+                                    <param id="0" name="Frame number">round(random(0,5))</param>
+                                </action>
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="3633218531177702" type="Comida">
+                                    <param id="0" name="Angle">270</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="4597004410768199">
+                    <conditions>
+                        <condition id="-1" name="Every tick" sid="3800887942894011" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-7" name="Set size" sid="3629607617912632" type="Comida">
+                            <param id="0" name="Width">(0.6+0.0018182*Comida.Bullet.Speed)*30</param>
+                            <param id="1" name="Height">(0.6+0.0018182*Comida.Bullet.Speed)*30</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="8467824383506697">
+                    <conditions>
+                        <condition behavior="Bullet" id="0" name="Compare speed" sid="9846855246003645" type="Comida">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Speed">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="8581751920904298" type="Comida" />
+                    </actions>
+                </event-block>
+                <event-block sid="6713220065453886">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="9020696017692122" type="Comida">
+                            <param id="0" name="Object">playerAnim</param>
+                        </condition>
+                        <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="1964539719987914" type="playerAnim" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="3402406013807364" type="Comida" />
+                        <action behavior="Flash" id="0" name="Flash" sid="4946729375131296" type="playerAnim">
+                            <param id="0" name="&apos;On&apos; time">0.1</param>
+                            <param id="1" name="&apos;Off&apos; time">0.1</param>
+                            <param id="2" name="Duration">1.2</param>
+                        </action>
+                        <action id="-11" name="Subtract from" sid="9747149067734361" type="System">
+                            <param id="0" name="Variable">pontos</param>
+                            <param id="1" name="Value">50</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="5654392263946632">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="694930446003187" type="player">
+                            <param id="0" name="Object">areaSelecao</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="9314407747770924">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="7692609125360001" type="areaSelecao">
+                                    <param id="0" name="Unique ID">40</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="6588280546282949">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="1011657348522198" type="Particles">
+                                            <param id="0" name="Unique ID">42</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Set spraying" sid="6255770894201731" type="Particles">
+                                            <param id="0" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="3994514912430594">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="370909883356197" type="areaSelecao">
+                                    <param id="0" name="Unique ID">41</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="861846149952091">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="370792203272538" type="Particles">
+                                            <param id="0" name="Unique ID">43</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Set spraying" sid="4108247680730505" type="Particles">
+                                            <param id="0" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="5855417150437815">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="7584915272648562" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set spraying" sid="7134270592868849" type="Particles">
                             <param id="0" name="State">0</param>
                         </action>
-                        <action behavior="8Direction" id="7" name="Simulate control" sid="746543489705338" type="player">
-                            <param id="0" name="Control">0</param>
-                        </action>
-                        <action id="4" name="Set animation" sid="9737196518982497" type="playerAnim">
-                            <param id="0" name="Animation">&quot;Andando&quot;</param>
-                            <param id="1" name="From">1</param>
-                        </action>
                     </actions>
                 </event-block>
-                <event-block any="1" sid="5000545949328359">
+            </sub-events>
+        </event-group>
+        <event-group description="" inactive="1" sid="6437350838852733" title="AcaoLasanha">
+            <sub-events>
+                <event-block sid="2744372960152981">
                     <conditions>
-                        <condition id="2" name="Key is down" sid="4713277322495039" type="Keyboard">
-                            <param id="0" name="Key">68 (D)</param>
-                        </condition>
-                        <condition id="2" name="Key is down" sid="4173237016401887" type="Keyboard">
-                            <param id="0" name="Key">39 (Right arrow)</param>
+                        <condition id="-14" name="Compare variable" sid="4514034819280045" type="System">
+                            <param id="0" name="Variable">ControleAcao</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="7" name="Set mirrored" sid="7087562587891989" type="playerAnim">
-                            <param id="0" name="State">1</param>
+                        <action behavior="Bullet" id="0" name="Set speed" sid="3149695615093565" type="Comida">
+                            <param id="0" name="Speed">50</param>
                         </action>
-                        <action behavior="8Direction" id="7" name="Simulate control" sid="2271784283006511" type="player">
-                            <param id="0" name="Control">1</param>
+                        <action behavior="Bullet" id="1" name="Set acceleration" sid="1157545109683415" type="Comida">
+                            <param id="0" name="Acceleration">-120</param>
                         </action>
-                        <action id="4" name="Set animation" sid="6254485882063354" type="playerAnim">
-                            <param id="0" name="Animation">&quot;Andando&quot;</param>
-                            <param id="1" name="From">1</param>
+                        <action id="-9" name="Set value" sid="1614198912489644" type="System">
+                            <param id="0" name="Variable">comidaTempo</param>
+                            <param id="1" name="Value">2</param>
                         </action>
-                    </actions>
-                </event-block>
-                <event-block any="1" sid="4734652613660711">
-                    <conditions>
-                        <condition id="2" name="Key is down" sid="5835748217046764" type="Keyboard">
-                            <param id="0" name="Key">83 (S)</param>
-                        </condition>
-                        <condition id="2" name="Key is down" sid="4026095754677331" type="Keyboard">
-                            <param id="0" name="Key">40 (Down arrow)</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="7" name="Set mirrored" sid="5879645745347407" type="playerAnim">
-                            <param id="0" name="State">1</param>
+                        <action id="-15" name="Set visible" sid="6115199366773255" type="Particles">
+                            <param id="0" name="Visibility">0</param>
                         </action>
-                        <action behavior="8Direction" id="7" name="Simulate control" sid="5104997928814582" type="player">
-                            <param id="0" name="Control">3</param>
+                        <action id="-1" name="Set X" sid="8081555409896562" type="lasanha">
+                            <param id="0" name="X">-150</param>
                         </action>
-                        <action id="4" name="Set animation" sid="9788879231222867" type="playerAnim">
-                            <param id="0" name="Animation">&quot;Frente&quot;</param>
-                            <param id="1" name="From">1</param>
+                        <action id="-16" name="Wait" sid="6096674081381072" type="System">
+                            <param id="0" name="Seconds">10</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="4012884224953307" type="System">
+                            <param id="0" name="Variable">ControleAcao</param>
+                            <param id="1" name="Value">1</param>
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="6062271813322311">
+                <event-block sid="3230930242166557">
                     <conditions>
-                        <condition id="2" inverted="1" name="Key is down" sid="3074572944056861" type="Keyboard">
-                            <param id="0" name="Key">87 (W)</param>
-                        </condition>
-                        <condition id="2" inverted="1" name="Key is down" sid="1537172611480235" type="Keyboard">
-                            <param id="0" name="Key">38 (Up arrow)</param>
-                        </condition>
-                        <condition id="2" inverted="1" name="Key is down" sid="8592409861759569" type="Keyboard">
-                            <param id="0" name="Key">65 (A)</param>
-                        </condition>
-                        <condition id="2" inverted="1" name="Key is down" sid="6743299981185339" type="Keyboard">
-                            <param id="0" name="Key">37 (Left arrow)</param>
-                        </condition>
-                        <condition id="2" inverted="1" name="Key is down" sid="4201371690930086" type="Keyboard">
-                            <param id="0" name="Key">68 (D)</param>
-                        </condition>
-                        <condition id="2" inverted="1" name="Key is down" sid="4988190638044172" type="Keyboard">
-                            <param id="0" name="Key">39 (Right arrow)</param>
-                        </condition>
-                        <condition id="2" inverted="1" name="Key is down" sid="5431582663461051" type="Keyboard">
-                            <param id="0" name="Key">83 (S)</param>
-                        </condition>
-                        <condition id="2" inverted="1" name="Key is down" sid="3039710350154668" type="Keyboard">
-                            <param id="0" name="Key">40 (Down arrow)</param>
+                        <condition id="-14" name="Compare variable" sid="5327114179521768" type="System">
+                            <param id="0" name="Variable">ControleAcao</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="4" name="Set animation" sid="4283361901681274" type="playerAnim">
-                            <param id="0" name="Animation">&quot;Frente&quot;</param>
-                            <param id="1" name="From">1</param>
+                        <action behavior="Bullet" id="0" name="Set speed" sid="8341358147953639" type="Comida">
+                            <param id="0" name="Speed">220</param>
+                        </action>
+                        <action behavior="Bullet" id="1" name="Set acceleration" sid="5070746513165954" type="Comida">
+                            <param id="0" name="Acceleration">-120</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="9932448779668011" type="System">
+                            <param id="0" name="Variable">comidaTempo</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="4116109020464596" type="lasanha">
+                            <param id="0" name="X">56</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="876819827784369" type="Particles">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="8777406037977724" type="System">
+                            <param id="0" name="Group name">&quot;AcaoLasanha&quot;</param>
+                            <param id="1" name="State">0</param>
                         </action>
                     </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" inactive="1" sid="5586257231674358" title="AcaoCafe">
+            <sub-events>
+                <event-block sid="183156698936983">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="2119260680943501" type="System">
+                            <param id="0" name="Variable">ControleAcao</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="2524188109902663" type="cafe">
+                            <param id="0" name="X">-150</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="5420653295972064" type="Particles">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="8948625377249731" type="System">
+                            <param id="0" name="Seconds">10</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="3171124250578716" type="System">
+                            <param id="0" name="Variable">ControleAcao</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="1849706020575391">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="1646027539186146" type="System">
+                            <param id="0" name="Variable">ControleAcao</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="134324470505415">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="337377124148954" type="areaSelecao">
+                                    <param id="0" name="Unique ID">41</param>
+                                </condition>
+                                <condition id="-14" name="Pick by unique ID" sid="1975536122710284" type="Particles">
+                                    <param id="0" name="Unique ID">43</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-1" name="Set X" sid="5581197877093016" type="cafe">
+                                    <param id="0" name="X">1224</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="1987843886411802" type="Particles">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="2110363265740459" type="System">
+                                    <param id="0" name="Group name">&quot;AcaoCafe&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
