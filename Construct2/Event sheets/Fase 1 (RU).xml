@@ -3,9 +3,7 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase 1 (RU)</name>
     <events>
-        <variable constant="0" name="comidaTempo" sid="6511055850249189" static="0" type="number">1</variable>
         <variable constant="0" name="ControleAcao" sid="4245554707584408" static="0" type="number">0</variable>
-        <variable constant="0" name="comidas" sid="1598748723269433" static="0" type="number">0</variable>
         <variable constant="0" name="controleDica2" sid="3835474185996537" static="0" type="number">0</variable>
         <variable constant="0" name="controleDica" sid="9200675717542735" static="0" type="number">0</variable>
         <variable constant="0" name="pontos" sid="2102700230222047" static="0" type="number">10000</variable>
@@ -37,17 +35,9 @@
                     <param id="0" name="Variable">controleDica2</param>
                     <param id="1" name="Value">0</param>
                 </action>
-                <action id="-9" name="Set value" sid="9165671569927214" type="System">
-                    <param id="0" name="Variable">comidas</param>
-                    <param id="1" name="Value">0</param>
-                </action>
                 <action id="-9" name="Set value" sid="4615735274443887" type="System">
                     <param id="0" name="Variable">ControleAcao</param>
                     <param id="1" name="Value">0</param>
-                </action>
-                <action id="-9" name="Set value" sid="7015238634826444" type="System">
-                    <param id="0" name="Variable">comidaTempo</param>
-                    <param id="1" name="Value">1</param>
                 </action>
             </actions>
             <sub-events>
@@ -645,39 +635,6 @@
         </event-group>
         <event-group description="" sid="8414928393622616" title="PersonagensCenario">
             <sub-events>
-                <event-block sid="6255624896033366">
-                    <conditions>
-                        <condition id="3" name="Compare frame" sid="1366925973803852" type="personagens">
-                            <param id="0" name="Comparison">0</param>
-                            <param id="1" name="Number">0</param>
-                        </condition>
-                    </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block sid="4356462379157572">
-                            <conditions />
-                            <actions>
-                                <action id="7" name="Set mirrored" sid="1075008186941038" type="personagens">
-                                    <param id="0" name="State">0</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="5355547754834101" type="System">
-                                    <param id="0" name="Seconds">1.0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="6895188061085438">
-                            <conditions />
-                            <actions>
-                                <action id="7" name="Set mirrored" sid="4332852434765016" type="personagens">
-                                    <param id="0" name="State">1</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="1125751643081176" type="System">
-                                    <param id="0" name="Seconds">1.0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
                 <event-block any="1" sid="8558704803782616">
                     <conditions>
                         <condition id="-14" name="Pick by unique ID" sid="6832948135534254" type="personagens">
@@ -826,271 +783,522 @@
         </event-group>
         <event-group description="" sid="8764001208082885" title="Particulas">
             <sub-events>
-                <event-block sid="4746207908742625">
-                    <conditions>
-                        <condition id="-6" name="Every X seconds" sid="4277936229857957" type="System">
-                            <param id="0" name="Interval (seconds)">comidaTempo</param>
-                        </condition>
-                        <condition id="-11" name="For Each" sid="3812168187218473" type="System">
-                            <param id="0" name="Object">ComidaSpawn</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-3" name="Create object" sid="2691183686100914" type="System">
-                            <param id="0" name="Object to create">Comida</param>
-                            <param id="1" name="Layer">2</param>
-                            <param id="2" name="X">ComidaSpawn.X</param>
-                            <param id="3" name="Y">ComidaSpawn.Y</param>
-                        </action>
-                    </actions>
+                <event-group description="" sid="9306705539730324" title="GuerraComida">
                     <sub-events>
-                        <event-block sid="9967245428058085">
+                        <event-block sid="8467824383506697">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="6097818628636902" type="ComidaSpawn">
-                                    <param id="0" name="Unique ID">107</param>
+                                <condition behavior="Bullet" id="0" name="Compare speed" sid="9846855246003645" type="Comida">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Speed">0</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="5" name="Set frame" sid="6292583826543962" type="Comida">
-                                    <param id="0" name="Frame number">round(random(0,5))</param>
-                                </action>
-                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="3467704659112098" type="Comida">
-                                    <param id="0" name="Angle">270</param>
-                                </action>
+                                <action id="-9" name="Destroy" sid="8581751920904298" type="Comida" />
                             </actions>
                         </event-block>
-                        <event-block sid="4923801629322177">
+                        <event-block sid="6713220065453886">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="5401779606019134" type="ComidaSpawn">
-                                    <param id="0" name="Unique ID">108</param>
+                                <condition id="0" name="On collision with another object" sid="9020696017692122" type="Comida">
+                                    <param id="0" name="Object">playerAnim</param>
                                 </condition>
+                                <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="1964539719987914" type="playerAnim" />
                             </conditions>
                             <actions>
-                                <action id="5" name="Set frame" sid="7575876343723192" type="Comida">
-                                    <param id="0" name="Frame number">round(random(0,5))</param>
+                                <action id="-9" name="Destroy" sid="3402406013807364" type="Comida" />
+                                <action id="-3" name="Set position" sid="693635713680786" type="player">
+                                    <param id="0" name="X">290</param>
+                                    <param id="1" name="Y">648</param>
                                 </action>
-                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="3056674960543383" type="Comida">
-                                    <param id="0" name="Angle">90</param>
+                                <action behavior="Flash" id="0" name="Flash" sid="4946729375131296" type="playerAnim">
+                                    <param id="0" name="&apos;On&apos; time">0.1</param>
+                                    <param id="1" name="&apos;Off&apos; time">0.1</param>
+                                    <param id="2" name="Duration">1.2</param>
                                 </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="2070714146756838">
-                            <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="8849029271154854" type="ComidaSpawn">
-                                    <param id="0" name="Unique ID">109</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="5" name="Set frame" sid="4539830730451729" type="Comida">
-                                    <param id="0" name="Frame number">round(random(0,5))</param>
-                                </action>
-                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="7516385377310893" type="Comida">
-                                    <param id="0" name="Angle">270</param>
+                                <action id="-11" name="Subtract from" sid="9747149067734361" type="System">
+                                    <param id="0" name="Variable">pontos</param>
+                                    <param id="1" name="Value">50</param>
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="6475258998791323">
-                            <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="1534228427905346" type="ComidaSpawn">
-                                    <param id="0" name="Unique ID">110</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="5" name="Set frame" sid="38974268235544" type="Comida">
-                                    <param id="0" name="Frame number">round(random(0,5))</param>
-                                </action>
-                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="495819871056796" type="Comida">
-                                    <param id="0" name="Angle">90</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="6593768214597671">
-                            <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="7001500012801245" type="ComidaSpawn">
-                                    <param id="0" name="Unique ID">111</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="5" name="Set frame" sid="6206557925356861" type="Comida">
-                                    <param id="0" name="Frame number">round(random(0,5))</param>
-                                </action>
-                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="3633218531177702" type="Comida">
-                                    <param id="0" name="Angle">270</param>
-                                </action>
-                            </actions>
-                        </event-block>
+                        <event-group description="Curso normal do disparo de comidas durante o jogo - sem efeito de slow da lasanha." sid="4021719370794999" title="GuerraNormal">
+                            <sub-events>
+                                <event-block sid="4597004410768199">
+                                    <conditions>
+                                        <condition id="-1" name="Every tick" sid="3800887942894011" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-7" name="Set size" sid="3629607617912632" type="Comida">
+                                            <param id="0" name="Width">(0.6+0.0018182*Comida.Bullet.Speed)*30</param>
+                                            <param id="1" name="Height">(0.6+0.0018182*Comida.Bullet.Speed)*30</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="5852298267838282">
+                                    <conditions>
+                                        <condition id="-18" name="On created" sid="4081590291226507" type="Comida" />
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Bullet" id="0" name="Set speed" sid="5914931808672928" type="Comida">
+                                            <param id="0" name="Speed">220</param>
+                                        </action>
+                                        <action behavior="Bullet" id="1" name="Set acceleration" sid="74613954688983" type="Comida">
+                                            <param id="0" name="Acceleration">-120</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="8655241394062165">
+                                    <conditions>
+                                        <condition id="-6" name="Every X seconds" sid="8833155333380719" type="System">
+                                            <param id="0" name="Interval (seconds)">random(0.3,1.3)</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="9967245428058085">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="6097818628636902" type="ComidaSpawn">
+                                                    <param id="0" name="Unique ID">107</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-3" name="Create object" sid="2619632554487815" type="System">
+                                                    <param id="0" name="Object to create">Comida</param>
+                                                    <param id="1" name="Layer">2</param>
+                                                    <param id="2" name="X">ComidaSpawn.X</param>
+                                                    <param id="3" name="Y">ComidaSpawn.Y</param>
+                                                </action>
+                                                <action id="5" name="Set frame" sid="6292583826543962" type="Comida">
+                                                    <param id="0" name="Frame number">round(random(0,5))</param>
+                                                </action>
+                                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="3467704659112098" type="Comida">
+                                                    <param id="0" name="Angle">270</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="5610362656726671">
+                                    <conditions>
+                                        <condition id="-6" name="Every X seconds" sid="9363465284563076" type="System">
+                                            <param id="0" name="Interval (seconds)">random(0.3,1.3)</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="4923801629322177">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="5401779606019134" type="ComidaSpawn">
+                                                    <param id="0" name="Unique ID">108</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-3" name="Create object" sid="5828291015501068" type="System">
+                                                    <param id="0" name="Object to create">Comida</param>
+                                                    <param id="1" name="Layer">2</param>
+                                                    <param id="2" name="X">ComidaSpawn.X</param>
+                                                    <param id="3" name="Y">ComidaSpawn.Y</param>
+                                                </action>
+                                                <action id="5" name="Set frame" sid="7575876343723192" type="Comida">
+                                                    <param id="0" name="Frame number">round(random(0,5))</param>
+                                                </action>
+                                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="3056674960543383" type="Comida">
+                                                    <param id="0" name="Angle">90</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="3347194031216822">
+                                    <conditions>
+                                        <condition id="-6" name="Every X seconds" sid="8459890271311633" type="System">
+                                            <param id="0" name="Interval (seconds)">random(0.3,1.3)</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="2070714146756838">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="8849029271154854" type="ComidaSpawn">
+                                                    <param id="0" name="Unique ID">109</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-3" name="Create object" sid="6843010121812504" type="System">
+                                                    <param id="0" name="Object to create">Comida</param>
+                                                    <param id="1" name="Layer">2</param>
+                                                    <param id="2" name="X">ComidaSpawn.X</param>
+                                                    <param id="3" name="Y">ComidaSpawn.Y</param>
+                                                </action>
+                                                <action id="5" name="Set frame" sid="4539830730451729" type="Comida">
+                                                    <param id="0" name="Frame number">round(random(0,5))</param>
+                                                </action>
+                                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="7516385377310893" type="Comida">
+                                                    <param id="0" name="Angle">270</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="1068166659904541">
+                                    <conditions>
+                                        <condition id="-6" name="Every X seconds" sid="3401835841341769" type="System">
+                                            <param id="0" name="Interval (seconds)">random(0.3,1.3)</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="6475258998791323">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="1534228427905346" type="ComidaSpawn">
+                                                    <param id="0" name="Unique ID">110</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-3" name="Create object" sid="5442936788617339" type="System">
+                                                    <param id="0" name="Object to create">Comida</param>
+                                                    <param id="1" name="Layer">2</param>
+                                                    <param id="2" name="X">ComidaSpawn.X</param>
+                                                    <param id="3" name="Y">ComidaSpawn.Y</param>
+                                                </action>
+                                                <action id="5" name="Set frame" sid="38974268235544" type="Comida">
+                                                    <param id="0" name="Frame number">round(random(0,5))</param>
+                                                </action>
+                                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="495819871056796" type="Comida">
+                                                    <param id="0" name="Angle">90</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="2842368692119686">
+                                    <conditions>
+                                        <condition id="-6" name="Every X seconds" sid="8159116329555054" type="System">
+                                            <param id="0" name="Interval (seconds)">random(0.3,1.3)</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="6593768214597671">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="7001500012801245" type="ComidaSpawn">
+                                                    <param id="0" name="Unique ID">111</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-3" name="Create object" sid="9309087784503998" type="System">
+                                                    <param id="0" name="Object to create">Comida</param>
+                                                    <param id="1" name="Layer">2</param>
+                                                    <param id="2" name="X">ComidaSpawn.X</param>
+                                                    <param id="3" name="Y">ComidaSpawn.Y</param>
+                                                </action>
+                                                <action id="5" name="Set frame" sid="6206557925356861" type="Comida">
+                                                    <param id="0" name="Frame number">round(random(0,5))</param>
+                                                </action>
+                                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="3633218531177702" type="Comida">
+                                                    <param id="0" name="Angle">270</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-group>
+                        <event-group description="Curso alterado de disparo de comidas durante o jogo - com efeito de slow da lasanha." inactive="1" sid="480055375357962" title="GuerraLasanha">
+                            <sub-events>
+                                <event-block sid="4499236096160211">
+                                    <conditions>
+                                        <condition id="-1" name="Every tick" sid="5750829611376408" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-7" name="Set size" sid="4257202015967624" type="Comida">
+                                            <param id="0" name="Width">(0.6+0.008*Comida.Bullet.Speed)*30</param>
+                                            <param id="1" name="Height">(0.6+0.008*Comida.Bullet.Speed)*30</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="5676046325780109">
+                                    <conditions>
+                                        <condition id="-18" name="On created" sid="3825435046021487" type="Comida" />
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Bullet" id="0" name="Set speed" sid="3460180207269124" type="Comida">
+                                            <param id="0" name="Speed">50</param>
+                                        </action>
+                                        <action behavior="Bullet" id="1" name="Set acceleration" sid="4908066029357327" type="Comida">
+                                            <param id="0" name="Acceleration">-6.4</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="8655241394062165">
+                                    <conditions>
+                                        <condition id="-6" name="Every X seconds" sid="8833155333380719" type="System">
+                                            <param id="0" name="Interval (seconds)">random(6,9)</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="9967245428058085">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="6097818628636902" type="ComidaSpawn">
+                                                    <param id="0" name="Unique ID">107</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-3" name="Create object" sid="2619632554487815" type="System">
+                                                    <param id="0" name="Object to create">Comida</param>
+                                                    <param id="1" name="Layer">2</param>
+                                                    <param id="2" name="X">ComidaSpawn.X</param>
+                                                    <param id="3" name="Y">ComidaSpawn.Y</param>
+                                                </action>
+                                                <action id="5" name="Set frame" sid="6292583826543962" type="Comida">
+                                                    <param id="0" name="Frame number">round(random(0,5))</param>
+                                                </action>
+                                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="3467704659112098" type="Comida">
+                                                    <param id="0" name="Angle">270</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="5610362656726671">
+                                    <conditions>
+                                        <condition id="-6" name="Every X seconds" sid="9363465284563076" type="System">
+                                            <param id="0" name="Interval (seconds)">random(6,9)</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="4923801629322177">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="5401779606019134" type="ComidaSpawn">
+                                                    <param id="0" name="Unique ID">108</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-3" name="Create object" sid="5828291015501068" type="System">
+                                                    <param id="0" name="Object to create">Comida</param>
+                                                    <param id="1" name="Layer">2</param>
+                                                    <param id="2" name="X">ComidaSpawn.X</param>
+                                                    <param id="3" name="Y">ComidaSpawn.Y</param>
+                                                </action>
+                                                <action id="5" name="Set frame" sid="7575876343723192" type="Comida">
+                                                    <param id="0" name="Frame number">round(random(0,5))</param>
+                                                </action>
+                                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="3056674960543383" type="Comida">
+                                                    <param id="0" name="Angle">90</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="3347194031216822">
+                                    <conditions>
+                                        <condition id="-6" name="Every X seconds" sid="8459890271311633" type="System">
+                                            <param id="0" name="Interval (seconds)">random(6,9)</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="2070714146756838">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="8849029271154854" type="ComidaSpawn">
+                                                    <param id="0" name="Unique ID">109</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-3" name="Create object" sid="6843010121812504" type="System">
+                                                    <param id="0" name="Object to create">Comida</param>
+                                                    <param id="1" name="Layer">2</param>
+                                                    <param id="2" name="X">ComidaSpawn.X</param>
+                                                    <param id="3" name="Y">ComidaSpawn.Y</param>
+                                                </action>
+                                                <action id="5" name="Set frame" sid="4539830730451729" type="Comida">
+                                                    <param id="0" name="Frame number">round(random(0,5))</param>
+                                                </action>
+                                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="7516385377310893" type="Comida">
+                                                    <param id="0" name="Angle">270</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="1068166659904541">
+                                    <conditions>
+                                        <condition id="-6" name="Every X seconds" sid="3401835841341769" type="System">
+                                            <param id="0" name="Interval (seconds)">random(6,9)</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="6475258998791323">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="1534228427905346" type="ComidaSpawn">
+                                                    <param id="0" name="Unique ID">110</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-3" name="Create object" sid="5442936788617339" type="System">
+                                                    <param id="0" name="Object to create">Comida</param>
+                                                    <param id="1" name="Layer">2</param>
+                                                    <param id="2" name="X">ComidaSpawn.X</param>
+                                                    <param id="3" name="Y">ComidaSpawn.Y</param>
+                                                </action>
+                                                <action id="5" name="Set frame" sid="38974268235544" type="Comida">
+                                                    <param id="0" name="Frame number">round(random(0,5))</param>
+                                                </action>
+                                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="495819871056796" type="Comida">
+                                                    <param id="0" name="Angle">90</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="2842368692119686">
+                                    <conditions>
+                                        <condition id="-6" name="Every X seconds" sid="8159116329555054" type="System">
+                                            <param id="0" name="Interval (seconds)">random(6,9)</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="6593768214597671">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="7001500012801245" type="ComidaSpawn">
+                                                    <param id="0" name="Unique ID">111</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-3" name="Create object" sid="9309087784503998" type="System">
+                                                    <param id="0" name="Object to create">Comida</param>
+                                                    <param id="1" name="Layer">2</param>
+                                                    <param id="2" name="X">ComidaSpawn.X</param>
+                                                    <param id="3" name="Y">ComidaSpawn.Y</param>
+                                                </action>
+                                                <action id="5" name="Set frame" sid="6206557925356861" type="Comida">
+                                                    <param id="0" name="Frame number">round(random(0,5))</param>
+                                                </action>
+                                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="3633218531177702" type="Comida">
+                                                    <param id="0" name="Angle">270</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-group>
                     </sub-events>
-                </event-block>
-                <event-block sid="4597004410768199">
-                    <conditions>
-                        <condition id="-1" name="Every tick" sid="3800887942894011" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-7" name="Set size" sid="3629607617912632" type="Comida">
-                            <param id="0" name="Width">(0.6+0.0018182*Comida.Bullet.Speed)*30</param>
-                            <param id="1" name="Height">(0.6+0.0018182*Comida.Bullet.Speed)*30</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="8467824383506697">
-                    <conditions>
-                        <condition behavior="Bullet" id="0" name="Compare speed" sid="9846855246003645" type="Comida">
-                            <param id="0" name="Comparison">0</param>
-                            <param id="1" name="Speed">0</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-9" name="Destroy" sid="8581751920904298" type="Comida" />
-                    </actions>
-                </event-block>
-                <event-block sid="6713220065453886">
-                    <conditions>
-                        <condition id="0" name="On collision with another object" sid="9020696017692122" type="Comida">
-                            <param id="0" name="Object">playerAnim</param>
-                        </condition>
-                        <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="1964539719987914" type="playerAnim" />
-                    </conditions>
-                    <actions>
-                        <action id="-9" name="Destroy" sid="3402406013807364" type="Comida" />
-                        <action behavior="Flash" id="0" name="Flash" sid="4946729375131296" type="playerAnim">
-                            <param id="0" name="&apos;On&apos; time">0.1</param>
-                            <param id="1" name="&apos;Off&apos; time">0.1</param>
-                            <param id="2" name="Duration">1.2</param>
-                        </action>
-                        <action id="-11" name="Subtract from" sid="9747149067734361" type="System">
-                            <param id="0" name="Variable">pontos</param>
-                            <param id="1" name="Value">50</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="5654392263946632">
-                    <conditions>
-                        <condition id="1" name="Is overlapping another object" sid="694930446003187" type="player">
-                            <param id="0" name="Object">areaSelecao</param>
-                        </condition>
-                    </conditions>
-                    <actions />
+                </event-group>
+                <event-group description="" sid="381763454345382" title="SelecaoPowerUp">
                     <sub-events>
-                        <event-block sid="9314407747770924">
+                        <event-block sid="5654392263946632">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="7692609125360001" type="areaSelecao">
-                                    <param id="0" name="Unique ID">40</param>
+                                <condition id="1" name="Is overlapping another object" sid="694930446003187" type="player">
+                                    <param id="0" name="Object">areaSelecao</param>
                                 </condition>
                             </conditions>
                             <actions />
                             <sub-events>
-                                <event-block sid="6588280546282949">
+                                <event-block sid="9314407747770924">
                                     <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="1011657348522198" type="Particles">
-                                            <param id="0" name="Unique ID">42</param>
+                                        <condition id="-14" name="Pick by unique ID" sid="7692609125360001" type="areaSelecao">
+                                            <param id="0" name="Unique ID">40</param>
                                         </condition>
                                     </conditions>
-                                    <actions>
-                                        <action id="0" name="Set spraying" sid="6255770894201731" type="Particles">
-                                            <param id="0" name="State">1</param>
-                                        </action>
-                                    </actions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="6588280546282949">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="1011657348522198" type="Particles">
+                                                    <param id="0" name="Unique ID">42</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Set spraying" sid="6255770894201731" type="Particles">
+                                                    <param id="0" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="3994514912430594">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="370909883356197" type="areaSelecao">
+                                            <param id="0" name="Unique ID">41</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="861846149952091">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="370792203272538" type="Particles">
+                                                    <param id="0" name="Unique ID">43</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Set spraying" sid="4108247680730505" type="Particles">
+                                                    <param id="0" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
-                        <event-block sid="3994514912430594">
+                        <event-block sid="5855417150437815">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="370909883356197" type="areaSelecao">
-                                    <param id="0" name="Unique ID">41</param>
-                                </condition>
+                                <condition id="-22" name="Else" sid="7584915272648562" type="System" />
                             </conditions>
-                            <actions />
-                            <sub-events>
-                                <event-block sid="861846149952091">
-                                    <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="370792203272538" type="Particles">
-                                            <param id="0" name="Unique ID">43</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="0" name="Set spraying" sid="4108247680730505" type="Particles">
-                                            <param id="0" name="State">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
+                            <actions>
+                                <action id="0" name="Set spraying" sid="7134270592868849" type="Particles">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                            </actions>
                         </event-block>
                     </sub-events>
-                </event-block>
-                <event-block sid="5855417150437815">
-                    <conditions>
-                        <condition id="-22" name="Else" sid="7584915272648562" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Set spraying" sid="7134270592868849" type="Particles">
-                            <param id="0" name="State">0</param>
-                        </action>
-                    </actions>
-                </event-block>
+                </event-group>
             </sub-events>
         </event-group>
         <event-group description="" inactive="1" sid="6437350838852733" title="AcaoLasanha">
             <sub-events>
                 <event-block sid="2744372960152981">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="4514034819280045" type="System">
-                            <param id="0" name="Variable">ControleAcao</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
-                    </conditions>
+                    <conditions />
                     <actions>
-                        <action behavior="Bullet" id="0" name="Set speed" sid="3149695615093565" type="Comida">
-                            <param id="0" name="Speed">50</param>
-                        </action>
-                        <action behavior="Bullet" id="1" name="Set acceleration" sid="1157545109683415" type="Comida">
-                            <param id="0" name="Acceleration">-120</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="1614198912489644" type="System">
-                            <param id="0" name="Variable">comidaTempo</param>
-                            <param id="1" name="Value">2</param>
-                        </action>
                         <action id="-15" name="Set visible" sid="6115199366773255" type="Particles">
                             <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="381433817613847" type="System">
+                            <param id="0" name="Group name">&quot;GuerraNormal&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="4935214100459983" type="System">
+                            <param id="0" name="Group name">&quot;GuerraLasanha&quot;</param>
+                            <param id="1" name="State">1</param>
                         </action>
                         <action id="-1" name="Set X" sid="8081555409896562" type="lasanha">
                             <param id="0" name="X">-150</param>
                         </action>
                         <action id="-16" name="Wait" sid="6096674081381072" type="System">
-                            <param id="0" name="Seconds">10</param>
+                            <param id="0" name="Seconds">15</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="907385546215412" type="System">
+                            <param id="0" name="Group name">&quot;GuerraNormal&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="3495164835901155" type="System">
+                            <param id="0" name="Group name">&quot;GuerraLasanha&quot;</param>
+                            <param id="1" name="State">0</param>
                         </action>
                         <action id="-9" name="Set value" sid="4012884224953307" type="System">
                             <param id="0" name="Variable">ControleAcao</param>
                             <param id="1" name="Value">1</param>
                         </action>
-                    </actions>
-                </event-block>
-                <event-block sid="3230930242166557">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="5327114179521768" type="System">
-                            <param id="0" name="Variable">ControleAcao</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">1</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action behavior="Bullet" id="0" name="Set speed" sid="8341358147953639" type="Comida">
-                            <param id="0" name="Speed">220</param>
-                        </action>
-                        <action behavior="Bullet" id="1" name="Set acceleration" sid="5070746513165954" type="Comida">
-                            <param id="0" name="Acceleration">-120</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="9932448779668011" type="System">
-                            <param id="0" name="Variable">comidaTempo</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                        <action id="-1" name="Set X" sid="4116109020464596" type="lasanha">
+                        <action id="-1" name="Set X" sid="8254760202127933" type="lasanha">
                             <param id="0" name="X">56</param>
                         </action>
-                        <action id="-15" name="Set visible" sid="876819827784369" type="Particles">
+                        <action id="-15" name="Set visible" sid="4525547752234703" type="Particles">
                             <param id="0" name="Visibility">1</param>
                         </action>
-                        <action id="-12" name="Set group active" sid="8777406037977724" type="System">
+                        <action id="-12" name="Set group active" sid="7246822978679595" type="System">
                             <param id="0" name="Group name">&quot;AcaoLasanha&quot;</param>
                             <param id="1" name="State">0</param>
                         </action>
