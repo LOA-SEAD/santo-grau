@@ -79,13 +79,16 @@
                 <action id="-16" name="Set opacity" sid="251087772017551" type="textoPerguntas">
                     <param id="0" name="Opacity">0</param>
                 </action>
-                <action id="-4" name="Set position to another object" sid="1881137760152876" type="textoPerguntas">
-                    <param id="0" name="Object">perguntas</param>
-                    <param id="1" name="Image point (optional)">0</param>
+                <action id="-3" name="Set position" sid="1881137760152876" type="textoPerguntas">
+                    <param id="0" name="X">126</param>
+                    <param id="1" name="Y">44</param>
                 </action>
-                <action behavior="Pin" id="0" name="Pin to object" sid="6359763731283495" type="textoPerguntas">
-                    <param id="0" name="Pin to">perguntas</param>
-                    <param id="1" name="Mode">0</param>
+                <action id="-16" name="Set opacity" sid="4592278714346477" type="textoRespostas">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-3" name="Set position" sid="7997627525455116" type="textoRespostas">
+                    <param id="0" name="X">126</param>
+                    <param id="1" name="Y">66</param>
                 </action>
                 <action id="-16" name="Set opacity" sid="2714883232320638" type="alternativaA">
                     <param id="0" name="Opacity">0</param>
@@ -244,7 +247,7 @@
         <comment>Importa as perguntas que estiverem em um arquivo .json</comment>
         <event-group description="" inactive="1" sid="6902794132699773" title="gerarPerguntasJSON">
             <sub-events>
-                <comment>Carrega a posição onde estará as letras da alternativa e o texto da pergunta</comment>
+                <comment>Carrega a posição onde estará as letras da alternativa e o texto da pergunta. Não é possível centralizar o texto pois não dá para obter o tamanho do texto localizado no arquivo .json</comment>
                 <event-block sid="4018207027143204">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="5626822018945053" type="System">
@@ -274,19 +277,21 @@
                             <param id="0" name="X">37 + (pergunta * 276)</param>
                             <param id="1" name="Y">575</param>
                         </action>
-                        <action disabled="1" id="0" name="Set text" sid="9922866634395319" type="textoPerguntas">
-                            <param id="0" name="Text">LoadJSONCM.GetData(&quot;questoes.pergunta&quot;, 0)</param>
+                        <action id="0" name="Set text" sid="9922866634395319" type="textoPerguntas">
+                            <param id="0" name="Text">pergunta &amp; &quot;- &quot; &amp; LoadJSONCM.GetData(pergunta, 0)</param>
                         </action>
-                        <action id="0" name="Set text" sid="918859528342287" type="textoPerguntas">
-                            <param id="0" name="Text">&quot;1&quot;</param>
+                        <action disabled="1" id="-1" name="Set X" sid="918859528342287" type="textoPerguntas">
+                            <param id="0" name="X">(perguntas.Width - textoPerguntas.TextWidth + 252)/2</param>
                         </action>
-                        <action disabled="1" id="-9" name="Set value" sid="4416427829563817" type="System">
+                        <action id="0" name="Set text" sid="6125302347176068" type="textoRespostas">
+                            <param id="0" name="Text">&quot;A- &quot; &amp; LoadJSONCM.GetData(pergunta, 1) &amp; &quot;  B- &quot; &amp; LoadJSONCM.GetData(pergunta, 2) &amp; &quot;  C- &quot; &amp; LoadJSONCM.GetData(pergunta, 3) &amp; &quot;  D- &quot; &amp; LoadJSONCM.GetData(pergunta, 4) &amp; &quot;  E- &quot; &amp; LoadJSONCM.GetData(pergunta, 5)</param>
+                        </action>
+                        <action disabled="1" id="-1" name="Set X" sid="9523141288566661" type="textoRespostas">
+                            <param id="0" name="X">(perguntas.Width - textoRespostas.TextWidth + 252) / 2</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="4416427829563817" type="System">
                             <param id="0" name="Variable">respostaCerta</param>
-                            <param id="1" name="Value">LoadJSONCM.GetData(&quot;questoes.pergunta&quot;,1)</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="260218745168379" type="System">
-                            <param id="0" name="Variable">respostaCerta</param>
-                            <param id="1" name="Value">&quot;D&quot;</param>
+                            <param id="1" name="Value">LoadJSONCM.GetData(pergunta,6)</param>
                         </action>
                         <action id="-9" name="Set value" sid="9384548464053497" type="System">
                             <param id="0" name="Variable">carregarAlternativa</param>
@@ -353,6 +358,9 @@
                             <actions>
                                 <action id="-16" name="Set opacity" sid="8468324499048207" type="textoPerguntas">
                                     <param id="0" name="Opacity">textoPerguntas.Opacity + 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="1706482227902222" type="textoRespostas">
+                                    <param id="0" name="Opacity">textoRespostas.Opacity + 2.5</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="6735538020932375" type="alternativaA">
                                     <param id="0" name="Opacity">alternativaA.Opacity + 2.5</param>
@@ -501,6 +509,52 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <event-block sid="7237328396531625">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="8679197913316561" type="System">
+                                    <param id="0" name="Variable">pergunta</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">5</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="3541730841016648">
+                                    <conditions>
+                                        <condition id="-1" name="Every tick" sid="2228007809843689" type="System" />
+                                        <condition id="-10" name="Compare opacity" sid="2641554874971768" type="textoPerguntas">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Opacity">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Set opacity" sid="5728424369138617" type="perguntas">
+                                            <param id="0" name="Opacity">perguntas.Opacity - 2.5</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="3862851381531316" type="textoPerguntas">
+                                            <param id="0" name="Opacity">textoPerguntas.Opacity - 2.5</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="4593752862348622" type="textoRespostas">
+                                            <param id="0" name="Opacity">textoRespostas.Opacity - 2.5</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="5008714877110425">
+                                    <conditions>
+                                        <condition id="-10" name="Compare opacity" sid="9475024979464372" type="textoPerguntas">
+                                            <param id="0" name="Comparison">0</param>
+                                            <param id="1" name="Opacity">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="8424982893702807" type="System">
+                                            <param id="0" name="Group name">&quot;gerarPerguntasJSON&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
                         <event-block sid="106161790845075">
                             <conditions>
                                 <condition id="-10" name="Compare opacity" sid="7180917525376069" type="alternativaE">
@@ -532,6 +586,7 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <comment>Eu até quis utilizar o Every tick para não repetir as atribuições no obterAlternativa e verificarAlternativa, mas não deu certo</comment>
                         <event-block sid="4890820320037027">
                             <conditions>
                                 <condition id="0" name="On collision with another object" sid="3231101167725144" type="player">
@@ -685,6 +740,11 @@
                                 <action id="-10" name="Add to" sid="1397937927894916" type="System">
                                     <param id="0" name="Variable">pontosCM</param>
                                     <param id="1" name="Value">-100</param>
+                                </action>
+                                <action behavior="Flash" id="0" name="Flash" sid="8359306057322136" type="playerAnim">
+                                    <param id="0" name="&apos;On&apos; time">0.1</param>
+                                    <param id="1" name="&apos;Off&apos; time">0.1</param>
+                                    <param id="2" name="Duration">1.2</param>
                                 </action>
                             </actions>
                         </event-block>
