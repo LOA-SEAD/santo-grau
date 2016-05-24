@@ -3,7 +3,6 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase 1 (RU)</name>
     <events>
-        <variable constant="0" name="ControleAcao" sid="4245554707584408" static="0" type="number">0</variable>
         <variable constant="0" name="controleDica2" sid="3835474185996537" static="0" type="number">0</variable>
         <variable constant="0" name="controleDica" sid="9200675717542735" static="0" type="number">0</variable>
         <variable constant="0" name="pontos" sid="2102700230222047" static="0" type="number">10000</variable>
@@ -33,10 +32,6 @@
                 </action>
                 <action id="-9" name="Set value" sid="3499478101587157" type="System">
                     <param id="0" name="Variable">controleDica2</param>
-                    <param id="1" name="Value">0</param>
-                </action>
-                <action id="-9" name="Set value" sid="4615735274443887" type="System">
-                    <param id="0" name="Variable">ControleAcao</param>
                     <param id="1" name="Value">0</param>
                 </action>
             </actions>
@@ -114,6 +109,10 @@
                     <param id="0" name="Width">(1-((720-playerAnim.Y)*0.000555))*70</param>
                     <param id="1" name="Height">(1-((720-playerAnim.Y)*0.000555))*144</param>
                 </action>
+                <action id="-7" name="Set size" sid="5892437407261658" type="Comida">
+                    <param id="0" name="Width">(1-((579-Comida.Y)*0.0019512))*30</param>
+                    <param id="1" name="Height">(1-((579-Comida.Y)*0.0019512))*30</param>
+                </action>
                 <action id="0" name="Set text" sid="8194749865892192" type="pontuacao">
                     <param id="0" name="Text">&quot;Rendimento acadêmico: &quot; &amp; pontos</param>
                 </action>
@@ -128,27 +127,49 @@
                     <param id="0" name="Object">areaSelecao</param>
                 </condition>
             </conditions>
-            <actions>
-                <action id="-9" name="Set value" sid="7376859936204801" type="System">
-                    <param id="0" name="Variable">ControleAcao</param>
-                    <param id="1" name="Value">0</param>
-                </action>
-            </actions>
+            <actions />
             <sub-events>
                 <event-block sid="7327004889935838">
                     <conditions>
                         <condition id="-14" name="Pick by unique ID" sid="3209261583321341" type="areaSelecao">
                             <param id="0" name="Unique ID">40</param>
                         </condition>
-                        <condition id="-14" name="Pick by unique ID" sid="9926190480772025" type="Particles">
+                        <condition id="-14" name="Pick by unique ID" sid="7580698900510329" type="Particles">
                             <param id="0" name="Unique ID">42</param>
                         </condition>
                         <condition id="-4" inverted="1" name="Is outside layout" sid="4159315523573828" type="lasanha" />
                     </conditions>
                     <actions>
-                        <action id="-12" name="Set group active" sid="9385721673488793" type="System">
-                            <param id="0" name="Group name">&quot;AcaoLasanha&quot;</param>
+                        <action id="-15" name="Set visible" sid="7618283073330489" type="Particles">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="9210067738235574" type="System">
+                            <param id="0" name="Group name">&quot;GuerraNormal&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="6793975452686342" type="System">
+                            <param id="0" name="Group name">&quot;GuerraLasanha&quot;</param>
                             <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="1317404183412115" type="lasanha">
+                            <param id="0" name="X">-150</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="3280209690643987" type="System">
+                            <param id="0" name="Seconds">20</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="614637343632496" type="System">
+                            <param id="0" name="Group name">&quot;GuerraLasanha&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="4299922584672189" type="System">
+                            <param id="0" name="Group name">&quot;GuerraNormal&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="6411056026251607" type="lasanha">
+                            <param id="0" name="X">56</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="4222356517567407" type="Particles">
+                            <param id="0" name="Visibility">1</param>
                         </action>
                     </actions>
                 </event-block>
@@ -157,7 +178,7 @@
                         <condition id="-14" name="Pick by unique ID" sid="4124958953378846" type="areaSelecao">
                             <param id="0" name="Unique ID">41</param>
                         </condition>
-                        <condition id="-14" name="Pick by unique ID" sid="5662266614566403" type="Particles">
+                        <condition id="-14" name="Pick by unique ID" sid="7854363010962278" type="Particles">
                             <param id="0" name="Unique ID">43</param>
                         </condition>
                         <condition id="-4" inverted="1" name="Is outside layout" sid="5790202092250641" type="cafe" />
@@ -822,17 +843,6 @@
                         </event-block>
                         <event-group description="Curso normal do disparo de comidas durante o jogo - sem efeito de slow da lasanha." sid="4021719370794999" title="GuerraNormal">
                             <sub-events>
-                                <event-block sid="4597004410768199">
-                                    <conditions>
-                                        <condition id="-1" name="Every tick" sid="3800887942894011" type="System" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="-7" name="Set size" sid="3629607617912632" type="Comida">
-                                            <param id="0" name="Width">(0.6+0.0018182*Comida.Bullet.Speed)*30</param>
-                                            <param id="1" name="Height">(0.6+0.0018182*Comida.Bullet.Speed)*30</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
                                 <event-block sid="5852298267838282">
                                     <conditions>
                                         <condition id="-18" name="On created" sid="4081590291226507" type="Comida" />
@@ -1005,34 +1015,23 @@
                         </event-group>
                         <event-group description="Curso alterado de disparo de comidas durante o jogo - com efeito de slow da lasanha." inactive="1" sid="480055375357962" title="GuerraLasanha">
                             <sub-events>
-                                <event-block sid="4499236096160211">
-                                    <conditions>
-                                        <condition id="-1" name="Every tick" sid="5750829611376408" type="System" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="-7" name="Set size" sid="4257202015967624" type="Comida">
-                                            <param id="0" name="Width">(0.6+0.008*Comida.Bullet.Speed)*30</param>
-                                            <param id="1" name="Height">(0.6+0.008*Comida.Bullet.Speed)*30</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
                                 <event-block sid="5676046325780109">
                                     <conditions>
                                         <condition id="-18" name="On created" sid="3825435046021487" type="Comida" />
                                     </conditions>
                                     <actions>
                                         <action behavior="Bullet" id="0" name="Set speed" sid="3460180207269124" type="Comida">
-                                            <param id="0" name="Speed">50</param>
+                                            <param id="0" name="Speed">40</param>
                                         </action>
                                         <action behavior="Bullet" id="1" name="Set acceleration" sid="4908066029357327" type="Comida">
-                                            <param id="0" name="Acceleration">-6.4</param>
+                                            <param id="0" name="Acceleration">-4</param>
                                         </action>
                                     </actions>
                                 </event-block>
                                 <event-block sid="8655241394062165">
                                     <conditions>
                                         <condition id="-6" name="Every X seconds" sid="8833155333380719" type="System">
-                                            <param id="0" name="Interval (seconds)">random(6,9)</param>
+                                            <param id="0" name="Interval (seconds)">random(2,10)</param>
                                         </condition>
                                     </conditions>
                                     <actions />
@@ -1063,7 +1062,7 @@
                                 <event-block sid="5610362656726671">
                                     <conditions>
                                         <condition id="-6" name="Every X seconds" sid="9363465284563076" type="System">
-                                            <param id="0" name="Interval (seconds)">random(6,9)</param>
+                                            <param id="0" name="Interval (seconds)">random(2,10)</param>
                                         </condition>
                                     </conditions>
                                     <actions />
@@ -1094,7 +1093,7 @@
                                 <event-block sid="3347194031216822">
                                     <conditions>
                                         <condition id="-6" name="Every X seconds" sid="8459890271311633" type="System">
-                                            <param id="0" name="Interval (seconds)">random(6,9)</param>
+                                            <param id="0" name="Interval (seconds)">random(2,10)</param>
                                         </condition>
                                     </conditions>
                                     <actions />
@@ -1125,7 +1124,7 @@
                                 <event-block sid="1068166659904541">
                                     <conditions>
                                         <condition id="-6" name="Every X seconds" sid="3401835841341769" type="System">
-                                            <param id="0" name="Interval (seconds)">random(6,9)</param>
+                                            <param id="0" name="Interval (seconds)">random(2,10)</param>
                                         </condition>
                                     </conditions>
                                     <actions />
@@ -1156,7 +1155,7 @@
                                 <event-block sid="2842368692119686">
                                     <conditions>
                                         <condition id="-6" name="Every X seconds" sid="8159116329555054" type="System">
-                                            <param id="0" name="Interval (seconds)">random(6,9)</param>
+                                            <param id="0" name="Interval (seconds)">random(2,10)</param>
                                         </condition>
                                     </conditions>
                                     <actions />
@@ -1258,88 +1257,32 @@
                 </event-group>
             </sub-events>
         </event-group>
-        <event-group description="" inactive="1" sid="6437350838852733" title="AcaoLasanha">
-            <sub-events>
-                <event-block sid="2744372960152981">
-                    <conditions />
-                    <actions>
-                        <action id="-15" name="Set visible" sid="6115199366773255" type="Particles">
-                            <param id="0" name="Visibility">0</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="381433817613847" type="System">
-                            <param id="0" name="Group name">&quot;GuerraNormal&quot;</param>
-                            <param id="1" name="State">0</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="4935214100459983" type="System">
-                            <param id="0" name="Group name">&quot;GuerraLasanha&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                        <action id="-1" name="Set X" sid="8081555409896562" type="lasanha">
-                            <param id="0" name="X">-150</param>
-                        </action>
-                        <action id="-16" name="Wait" sid="6096674081381072" type="System">
-                            <param id="0" name="Seconds">15</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="907385546215412" type="System">
-                            <param id="0" name="Group name">&quot;GuerraNormal&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="3495164835901155" type="System">
-                            <param id="0" name="Group name">&quot;GuerraLasanha&quot;</param>
-                            <param id="1" name="State">0</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="4012884224953307" type="System">
-                            <param id="0" name="Variable">ControleAcao</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                        <action id="-1" name="Set X" sid="8254760202127933" type="lasanha">
-                            <param id="0" name="X">56</param>
-                        </action>
-                        <action id="-15" name="Set visible" sid="4525547752234703" type="Particles">
-                            <param id="0" name="Visibility">1</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="7246822978679595" type="System">
-                            <param id="0" name="Group name">&quot;AcaoLasanha&quot;</param>
-                            <param id="1" name="State">0</param>
-                        </action>
-                    </actions>
-                </event-block>
-            </sub-events>
-        </event-group>
         <event-group description="" inactive="1" sid="5586257231674358" title="AcaoCafe">
             <sub-events>
                 <event-block sid="183156698936983">
                     <conditions>
-                        <condition id="-14" name="Compare variable" sid="2119260680943501" type="System">
-                            <param id="0" name="Variable">ControleAcao</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">0</param>
+                        <condition id="-14" name="Pick by unique ID" sid="448927584550244" type="Particles">
+                            <param id="0" name="Unique ID">43</param>
                         </condition>
                     </conditions>
                     <actions>
+                        <action id="-12" name="Set group active" sid="8393050972754075" type="System">
+                            <param id="0" name="Group name">&quot;AcaoLasanha&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
                         <action id="-1" name="Set X" sid="2524188109902663" type="cafe">
                             <param id="0" name="X">-150</param>
-                        </action>
-                        <action id="-15" name="Set visible" sid="5420653295972064" type="Particles">
-                            <param id="0" name="Visibility">0</param>
                         </action>
                         <action id="-16" name="Wait" sid="8948625377249731" type="System">
                             <param id="0" name="Seconds">10</param>
                         </action>
-                        <action id="-9" name="Set value" sid="3171124250578716" type="System">
-                            <param id="0" name="Variable">ControleAcao</param>
-                            <param id="1" name="Value">1</param>
+                        <action id="-15" name="Set visible" sid="5420653295972064" type="Particles">
+                            <param id="0" name="Visibility">0</param>
                         </action>
                     </actions>
                 </event-block>
                 <event-block sid="1849706020575391">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="1646027539186146" type="System">
-                            <param id="0" name="Variable">ControleAcao</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">1</param>
-                        </condition>
-                    </conditions>
+                    <conditions />
                     <actions />
                     <sub-events>
                         <event-block sid="134324470505415">
