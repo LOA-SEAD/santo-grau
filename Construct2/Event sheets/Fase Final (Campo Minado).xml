@@ -16,15 +16,15 @@
         <comment>Criado para não se necessário repetir a parte de descarregar as alternativas na ponte</comment>
         <variable constant="0" name="descarregarAlternativa" sid="9854460331464779" static="0" type="number">0</variable>
         <comment>Criado para controlar quando alterar a posição das letras na ponte</comment>
-        <variable constant="0" name="carregarTextos" sid="3555043611031616" static="0" type="number">0</variable>
+        <variable constant="0" name="carregarTextosCM" sid="3555043611031616" static="0" type="number">0</variable>
         <comment>Verificar colisão com algum sprite de seleção de alternativa</comment>
-        <variable constant="0" name="obterAlternativa" sid="2693535395009795" static="0" type="number">1</variable>
+        <variable constant="0" name="obterAlternativaCM" sid="2693535395009795" static="0" type="number">1</variable>
         <comment>Para conferir a alternativa</comment>
-        <variable constant="0" name="verificarAlternativa" sid="7069139797341193" static="0" type="number">0</variable>
+        <variable constant="0" name="verificarAlternativaCM" sid="7069139797341193" static="0" type="number">0</variable>
         <comment>Ponte escolhida pelo jogador</comment>
-        <variable constant="0" name="alternativa" sid="7593771871950864" static="0" type="text"></variable>
+        <variable constant="0" name="alternativaCM" sid="7593771871950864" static="0" type="text"></variable>
         <comment>Resposta correta importada do .json</comment>
-        <variable constant="0" name="respostaCerta" sid="7634110463548163" static="0" type="text"></variable>
+        <variable constant="0" name="respostaCertaCM" sid="7634110463548163" static="0" type="text"></variable>
         <comment>Inicializações</comment>
         <event-block sid="1021034089245405">
             <conditions>
@@ -247,7 +247,7 @@
                                     <param id="1" name="State">1</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="280347929717904" type="System">
-                                    <param id="0" name="Variable">carregarTextos</param>
+                                    <param id="0" name="Variable">carregarTextosCM</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
@@ -263,7 +263,7 @@
                 <event-block sid="4018207027143204">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="5626822018945053" type="System">
-                            <param id="0" name="Variable">carregarTextos</param>
+                            <param id="0" name="Variable">carregarTextosCM</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">1</param>
                         </condition>
@@ -302,7 +302,7 @@
                             <param id="0" name="X">(perguntas.Width - textoRespostas.TextWidth + 252) / 2</param>
                         </action>
                         <action id="-9" name="Set value" sid="4416427829563817" type="System">
-                            <param id="0" name="Variable">respostaCerta</param>
+                            <param id="0" name="Variable">respostaCertaCM</param>
                             <param id="1" name="Value">LoadJSONCM.GetData(perguntaCM,6)</param>
                         </action>
                         <action id="-9" name="Set value" sid="9384548464053497" type="System">
@@ -310,7 +310,7 @@
                             <param id="1" name="Value">1</param>
                         </action>
                         <action id="-9" name="Set value" sid="7566127033317842" type="System">
-                            <param id="0" name="Variable">carregarTextos</param>
+                            <param id="0" name="Variable">carregarTextosCM</param>
                             <param id="1" name="Value">0</param>
                         </action>
                     </actions>
@@ -421,7 +421,7 @@
                                     <param id="1" name="Y">353</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="6739928304742202" type="System">
-                                    <param id="0" name="Variable">obterAlternativa</param>
+                                    <param id="0" name="Variable">obterAlternativaCM</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="5351694586913291" type="System">
@@ -504,6 +504,12 @@
                                 </condition>
                             </conditions>
                             <actions>
+                                <action id="-16" name="Set opacity" sid="3767536613095061" type="textoPerguntas">
+                                    <param id="0" name="Opacity">textoPerguntas.Opacity - 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="9055473113853928" type="textoRespostas">
+                                    <param id="0" name="Opacity">textoRespostas.Opacity - 2.5</param>
+                                </action>
                                 <action id="-16" name="Set opacity" sid="1369236565179046" type="alternativaA">
                                     <param id="0" name="Opacity">alternativaA.Opacity - 2.5</param>
                                 </action>
@@ -534,7 +540,7 @@
                                 <event-block sid="3541730841016648">
                                     <conditions>
                                         <condition id="-1" name="Every tick" sid="2228007809843689" type="System" />
-                                        <condition id="-10" name="Compare opacity" sid="2641554874971768" type="textoPerguntas">
+                                        <condition id="-10" name="Compare opacity" sid="2641554874971768" type="perguntas">
                                             <param id="0" name="Comparison">4</param>
                                             <param id="1" name="Opacity">0</param>
                                         </condition>
@@ -543,17 +549,11 @@
                                         <action id="-16" name="Set opacity" sid="5728424369138617" type="perguntas">
                                             <param id="0" name="Opacity">perguntas.Opacity - 2.5</param>
                                         </action>
-                                        <action id="-16" name="Set opacity" sid="3862851381531316" type="textoPerguntas">
-                                            <param id="0" name="Opacity">textoPerguntas.Opacity - 2.5</param>
-                                        </action>
-                                        <action id="-16" name="Set opacity" sid="4593752862348622" type="textoRespostas">
-                                            <param id="0" name="Opacity">textoRespostas.Opacity - 2.5</param>
-                                        </action>
                                     </actions>
                                 </event-block>
                                 <event-block sid="5008714877110425">
                                     <conditions>
-                                        <condition id="-10" name="Compare opacity" sid="9475024979464372" type="textoPerguntas">
+                                        <condition id="-10" name="Compare opacity" sid="9475024979464372" type="perguntas">
                                             <param id="0" name="Comparison">0</param>
                                             <param id="1" name="Opacity">0</param>
                                         </condition>
@@ -576,7 +576,7 @@
                             </conditions>
                             <actions>
                                 <action id="-9" name="Set value" sid="2542760056326775" type="System">
-                                    <param id="0" name="Variable">carregarTextos</param>
+                                    <param id="0" name="Variable">carregarTextosCM</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="4693757343293364" type="System">
@@ -591,7 +591,7 @@
                 <event-block sid="9902191356516214">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="9796846576128038" type="System">
-                            <param id="0" name="Variable">obterAlternativa</param>
+                            <param id="0" name="Variable">obterAlternativaCM</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">1</param>
                         </condition>
@@ -607,15 +607,15 @@
                             </conditions>
                             <actions>
                                 <action id="-9" name="Set value" sid="7440977417694313" type="System">
-                                    <param id="0" name="Variable">alternativa</param>
+                                    <param id="0" name="Variable">alternativaCM</param>
                                     <param id="1" name="Value">&quot;A&quot;</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="3146369873476225" type="System">
-                                    <param id="0" name="Variable">obterAlternativa</param>
+                                    <param id="0" name="Variable">obterAlternativaCM</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="4736846504762534" type="System">
-                                    <param id="0" name="Variable">verificarAlternativa</param>
+                                    <param id="0" name="Variable">verificarAlternativaCM</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
@@ -628,15 +628,15 @@
                             </conditions>
                             <actions>
                                 <action id="-9" name="Set value" sid="1313713559648508" type="System">
-                                    <param id="0" name="Variable">alternativa</param>
+                                    <param id="0" name="Variable">alternativaCM</param>
                                     <param id="1" name="Value">&quot;B&quot;</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="5072599539545931" type="System">
-                                    <param id="0" name="Variable">obterAlternativa</param>
+                                    <param id="0" name="Variable">obterAlternativaCM</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="9746197899929007" type="System">
-                                    <param id="0" name="Variable">verificarAlternativa</param>
+                                    <param id="0" name="Variable">verificarAlternativaCM</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
@@ -649,15 +649,15 @@
                             </conditions>
                             <actions>
                                 <action id="-9" name="Set value" sid="3123274219022313" type="System">
-                                    <param id="0" name="Variable">alternativa</param>
+                                    <param id="0" name="Variable">alternativaCM</param>
                                     <param id="1" name="Value">&quot;C&quot;</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="265940840006912" type="System">
-                                    <param id="0" name="Variable">obterAlternativa</param>
+                                    <param id="0" name="Variable">obterAlternativaCM</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="4432068837491562" type="System">
-                                    <param id="0" name="Variable">verificarAlternativa</param>
+                                    <param id="0" name="Variable">verificarAlternativaCM</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
@@ -670,15 +670,15 @@
                             </conditions>
                             <actions>
                                 <action id="-9" name="Set value" sid="1646891201530048" type="System">
-                                    <param id="0" name="Variable">alternativa</param>
+                                    <param id="0" name="Variable">alternativaCM</param>
                                     <param id="1" name="Value">&quot;D&quot;</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="5044785974691181" type="System">
-                                    <param id="0" name="Variable">obterAlternativa</param>
+                                    <param id="0" name="Variable">obterAlternativaCM</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="1283022481269889" type="System">
-                                    <param id="0" name="Variable">verificarAlternativa</param>
+                                    <param id="0" name="Variable">verificarAlternativaCM</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
@@ -691,15 +691,15 @@
                             </conditions>
                             <actions>
                                 <action id="-9" name="Set value" sid="688492345598077" type="System">
-                                    <param id="0" name="Variable">alternativa</param>
+                                    <param id="0" name="Variable">alternativaCM</param>
                                     <param id="1" name="Value">&quot;E&quot;</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="7870302818532774" type="System">
-                                    <param id="0" name="Variable">obterAlternativa</param>
+                                    <param id="0" name="Variable">obterAlternativaCM</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="9117767645676359" type="System">
-                                    <param id="0" name="Variable">verificarAlternativa</param>
+                                    <param id="0" name="Variable">verificarAlternativaCM</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
@@ -710,7 +710,7 @@
                 <event-block sid="5716842043748232">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="5379804951983282" type="System">
-                            <param id="0" name="Variable">verificarAlternativa</param>
+                            <param id="0" name="Variable">verificarAlternativaCM</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">1</param>
                         </condition>
@@ -720,9 +720,9 @@
                         <event-block sid="5793724562251928">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="3237814420960202" type="System">
-                                    <param id="0" name="First value">alternativa</param>
+                                    <param id="0" name="First value">alternativaCM</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">respostaCerta</param>
+                                    <param id="2" name="Second value">respostaCertaCM</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -766,7 +766,7 @@
                             </conditions>
                             <actions>
                                 <action id="-9" name="Set value" sid="7310104937253358" type="System">
-                                    <param id="0" name="Variable">verificarAlternativa</param>
+                                    <param id="0" name="Variable">verificarAlternativaCM</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="2602810595519853" type="System">
