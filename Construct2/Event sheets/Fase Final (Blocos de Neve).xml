@@ -156,6 +156,10 @@
                     <param id="0" name="Variable">esconderTextosBN</param>
                     <param id="1" name="Value">1</param>
                 </action>
+                <action disabled="1" id="-9" name="Set value" sid="2756989514796917" type="System">
+                    <param id="0" name="Variable">obterAlternativaBN</param>
+                    <param id="1" name="Value">1</param>
+                </action>
                 <action behavior="8Direction" id="0" name="Stop" sid="1133296498198728" type="player" />
                 <action id="-3" name="Set position" sid="8089959064857848" type="player">
                     <param id="0" name="X">51</param>
@@ -171,6 +175,37 @@
                     <param id="2" name="Duration">1.2</param>
                 </action>
             </actions>
+            <sub-events>
+                <comment>Apenas para o caso dos blocos já estarem em movimento</comment>
+                <event-block sid="9008059881064161">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="4337835055638638" type="System">
+                            <param id="0" name="Variable">inicializarBlocos</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="6850049541114735" type="System">
+                            <param id="0" name="Variable">perguntaBN</param>
+                            <param id="1" name="Comparison">2</param>
+                            <param id="2" name="Value">4</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Bullet" id="0" name="Set speed" sid="769557493071203" type="selAlternativa1">
+                            <param id="0" name="Speed">200 * perguntaBN</param>
+                        </action>
+                        <action behavior="Bullet" id="0" name="Set speed" sid="7786540349414388" type="selAlternativa2">
+                            <param id="0" name="Speed">200 * perguntaBN</param>
+                        </action>
+                        <action behavior="Bullet" id="0" name="Set speed" sid="4615971618499549" type="selAlternativa3">
+                            <param id="0" name="Speed">200 * perguntaBN</param>
+                        </action>
+                        <action behavior="8Direction" id="4" name="Set max speed" sid="8077082690646635" type="player">
+                            <param id="0" name="Max Speed">selAlternativa1.Bullet.Speed</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
         </event-block>
         <comment>Dispara o evento das perguntas</comment>
         <event-group description="" sid="4227888007887412" title="inicioPerguntasFFBN">
@@ -393,6 +428,24 @@
                                     <param id="0" name="Opacity">textoRespostas.Opacity - 2.5</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <comment>Esta comparação é devido a um bug caso ocorra uma colisão de blocos mais rápido que o texto sendo limpo</comment>
+                                <event-block sid="4819770265729227">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="3747558466715741" type="System">
+                                            <param id="0" name="Variable">mostrarTextosBN</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="4941972431296888" type="System">
+                                            <param id="0" name="Variable">mostrarTextosBN</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <event-block sid="5825978499420671">
                             <conditions>
@@ -477,19 +530,19 @@
                     </conditions>
                     <actions>
                         <action behavior="Bullet" id="0" name="Set speed" sid="7517365251823076" type="selAlternativa1">
-                            <param id="0" name="Speed">300</param>
+                            <param id="0" name="Speed">200</param>
                         </action>
                         <action behavior="Bullet" id="3" name="Set angle of motion" sid="7104024393077178" type="selAlternativa1">
                             <param id="0" name="Angle">round(random(0, 181)) - 90</param>
                         </action>
                         <action behavior="Bullet" id="0" name="Set speed" sid="6618715215376376" type="selAlternativa2">
-                            <param id="0" name="Speed">300</param>
+                            <param id="0" name="Speed">200</param>
                         </action>
                         <action behavior="Bullet" id="3" name="Set angle of motion" sid="6037159667694608" type="selAlternativa2">
                             <param id="0" name="Angle">round(random(0, 181)) - 90</param>
                         </action>
                         <action behavior="Bullet" id="0" name="Set speed" sid="7496132847158" type="selAlternativa3">
-                            <param id="0" name="Speed">300</param>
+                            <param id="0" name="Speed">200</param>
                         </action>
                         <action behavior="Bullet" id="3" name="Set angle of motion" sid="3593767782248981" type="selAlternativa3">
                             <param id="0" name="Angle">round(random(0, 181)) - 90</param>
