@@ -31,6 +31,19 @@
                     <param id="0" name="Variable">controleDica2</param>
                     <param id="1" name="Value">0</param>
                 </action>
+                <action id="4" name="Set animation" sid="4703017717438322" type="playerAnim">
+                    <param id="0" name="Animation">&quot;Default&quot;</param>
+                    <param id="1" name="From">1</param>
+                </action>
+                <action behavior="8Direction" id="4" name="Set max speed" sid="5648909255447158" type="player">
+                    <param id="0" name="Max Speed">200</param>
+                </action>
+                <action behavior="8Direction" id="5" name="Set acceleration" sid="6001289081134929" type="player">
+                    <param id="0" name="Acceleration">600</param>
+                </action>
+                <action behavior="8Direction" id="6" name="Set deceleration" sid="8912001004636667" type="player">
+                    <param id="0" name="Deceleration">1000</param>
+                </action>
             </actions>
             <sub-events>
                 <event-block sid="2789770175948273">
@@ -89,18 +102,22 @@
             </conditions>
             <actions>
                 <action id="-7" name="Set size" sid="5056594746740774" type="personagens">
-                    <param id="0" name="Width">(1-((720-personagens.Y)*0.000555))*70</param>
-                    <param id="1" name="Height">(1-((720-personagens.Y)*0.000555))*151</param>
+                    <param id="0" name="Width">(1-((720-personagens.Y)*0.000555))*81</param>
+                    <param id="1" name="Height">(1-((720-personagens.Y)*0.000555))*150</param>
+                </action>
+                <action id="-7" name="Set size" sid="1755842828526025" type="pessoasBloqueio">
+                    <param id="0" name="Width">(1-((720-personagens.Y)*0.000555))*81</param>
+                    <param id="1" name="Height">(1-((720-personagens.Y)*0.000555))*150</param>
                 </action>
                 <action id="-7" name="Set size" sid="2587431462532145" type="player">
-                    <param id="0" name="Width">(1-((720-Player.Y)*0.000555))*70</param>
+                    <param id="0" name="Width">(1-((720-Player.Y)*0.000555))*82</param>
                     <param id="1" name="Height">(1-((720-Player.Y)*0.000555))*144</param>
                 </action>
                 <action id="-7" name="Set size" sid="2812076395189886" type="playerAnim">
-                    <param id="0" name="Width">(1-((720-playerAnim.Y)*0.000555))*70</param>
+                    <param id="0" name="Width">(1-((720-playerAnim.Y)*0.000555))*82</param>
                     <param id="1" name="Height">(1-((720-playerAnim.Y)*0.000555))*144</param>
                 </action>
-                <action id="-7" name="Set size" sid="5892437407261658" type="Comida">
+                <action id="-7" name="Set size" sid="5892437407261658" type="comida">
                     <param id="0" name="Width">(1-((579-Comida.Y)*0.0019512))*30</param>
                     <param id="1" name="Height">(1-((579-Comida.Y)*0.0019512))*30</param>
                 </action>
@@ -108,6 +125,36 @@
                     <param id="0" name="Text">&quot;Rendimento acadêmico: &quot; &amp; pontos</param>
                 </action>
             </actions>
+            <sub-events>
+                <event-block sid="7239634039038255">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="5267715632841863" type="personagens">
+                            <param id="0" name="Instance variable">mirror</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Set mirrored" sid="6940434130620837" type="personagens">
+                            <param id="0" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="9638896929172725">
+                    <conditions>
+                        <condition id="-7" name="Compare instance variable" sid="9257706624587253" type="personagens">
+                            <param id="0" name="Instance variable">mirror</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Set mirrored" sid="2275177258209963" type="personagens">
+                            <param id="0" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
         </event-block>
         <event-block sid="7023767148830803">
             <conditions>
@@ -170,6 +217,9 @@
                                 <action id="-12" name="Set group active" sid="9210067738235574" type="System">
                                     <param id="0" name="Group name">&quot;GuerraNormal&quot;</param>
                                     <param id="1" name="State">0</param>
+                                </action>
+                                <action behavior="Bullet" id="5" name="Set enabled" sid="9811662298860724" type="comida">
+                                    <param id="0" name="State">0</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="6793975452686342" type="System">
                                     <param id="0" name="Group name">&quot;GuerraLasanha&quot;</param>
@@ -246,7 +296,7 @@
                             <param id="0" name="Control">2</param>
                         </action>
                         <action id="4" name="Set animation" sid="7995322854083129" type="playerAnim">
-                            <param id="0" name="Animation">&quot;Costas&quot;</param>
+                            <param id="0" name="Animation">&quot;TrasAndando&quot;</param>
                             <param id="1" name="From">1</param>
                         </action>
                     </actions>
@@ -268,7 +318,7 @@
                             <param id="0" name="Control">0</param>
                         </action>
                         <action id="4" name="Set animation" sid="9737196518982497" type="playerAnim">
-                            <param id="0" name="Animation">&quot;Andando&quot;</param>
+                            <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
                             <param id="1" name="From">1</param>
                         </action>
                     </actions>
@@ -290,7 +340,7 @@
                             <param id="0" name="Control">1</param>
                         </action>
                         <action id="4" name="Set animation" sid="6254485882063354" type="playerAnim">
-                            <param id="0" name="Animation">&quot;Andando&quot;</param>
+                            <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
                             <param id="1" name="From">1</param>
                         </action>
                     </actions>
@@ -312,41 +362,71 @@
                             <param id="0" name="Control">3</param>
                         </action>
                         <action id="4" name="Set animation" sid="9788879231222867" type="playerAnim">
-                            <param id="0" name="Animation">&quot;Frente&quot;</param>
+                            <param id="0" name="Animation">&quot;FrenteAndando&quot;</param>
                             <param id="1" name="From">1</param>
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="6062271813322311">
+                <event-block any="1" sid="2497647089710823">
                     <conditions>
-                        <condition id="2" inverted="1" name="Key is down" sid="3074572944056861" type="Keyboard">
+                        <condition id="3" name="On key released" sid="8156389818220177" type="Keyboard">
                             <param id="0" name="Key">87 (W)</param>
                         </condition>
-                        <condition id="2" inverted="1" name="Key is down" sid="1537172611480235" type="Keyboard">
+                        <condition id="3" name="On key released" sid="329258926285736" type="Keyboard">
                             <param id="0" name="Key">38 (Up arrow)</param>
                         </condition>
-                        <condition id="2" inverted="1" name="Key is down" sid="8592409861759569" type="Keyboard">
-                            <param id="0" name="Key">65 (A)</param>
-                        </condition>
-                        <condition id="2" inverted="1" name="Key is down" sid="6743299981185339" type="Keyboard">
-                            <param id="0" name="Key">37 (Left arrow)</param>
-                        </condition>
-                        <condition id="2" inverted="1" name="Key is down" sid="4201371690930086" type="Keyboard">
-                            <param id="0" name="Key">68 (D)</param>
-                        </condition>
-                        <condition id="2" inverted="1" name="Key is down" sid="4988190638044172" type="Keyboard">
-                            <param id="0" name="Key">39 (Right arrow)</param>
-                        </condition>
-                        <condition id="2" inverted="1" name="Key is down" sid="5431582663461051" type="Keyboard">
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="9666531456892784" type="playerAnim">
+                            <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="9847582645370134">
+                    <conditions>
+                        <condition id="3" name="On key released" sid="1253503439780213" type="Keyboard">
                             <param id="0" name="Key">83 (S)</param>
                         </condition>
-                        <condition id="2" inverted="1" name="Key is down" sid="3039710350154668" type="Keyboard">
+                        <condition id="3" name="On key released" sid="6154322833894684" type="Keyboard">
                             <param id="0" name="Key">40 (Down arrow)</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="4" name="Set animation" sid="4283361901681274" type="playerAnim">
-                            <param id="0" name="Animation">&quot;Frente&quot;</param>
+                        <action id="4" name="Set animation" sid="1341736241962883" type="playerAnim">
+                            <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="3107837508438596">
+                    <conditions>
+                        <condition id="3" name="On key released" sid="809485099373934" type="Keyboard">
+                            <param id="0" name="Key">65 (A)</param>
+                        </condition>
+                        <condition id="3" name="On key released" sid="6685311050567999" type="Keyboard">
+                            <param id="0" name="Key">37 (Left arrow)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="1133648629542988" type="playerAnim">
+                            <param id="0" name="Animation">&quot;EsquerdaParado&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="7843945116692368">
+                    <conditions>
+                        <condition id="3" name="On key released" sid="4531612205850931" type="Keyboard">
+                            <param id="0" name="Key">68 (D)</param>
+                        </condition>
+                        <condition id="3" name="On key released" sid="1169216120938816" type="Keyboard">
+                            <param id="0" name="Key">39 (Right arrow)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="8640380066224353" type="playerAnim">
+                            <param id="0" name="Animation">&quot;DireitaParado&quot;</param>
                             <param id="1" name="From">1</param>
                         </action>
                     </actions>
@@ -691,6 +771,589 @@
         </event-group>
         <event-group description="" sid="8414928393622616" title="PersonagensCenario">
             <sub-events>
+                <event-block sid="3356763402657639">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="8331543637135652" type="System">
+                            <param id="0" name="Interval (seconds)">random(1,4)</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="3428658991815074">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="3228572161724203" type="personagens">
+                                    <param id="0" name="Unique ID">26</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="7720260113540628">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="1161387689681454" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Wait" sid="4676703276607247" type="System">
+                                            <param id="0" name="Seconds">0.0001</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="7404892934042588" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="2305927395031547">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="9999804300058559" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Set value" sid="7975812306149873" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="489532793401698">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="6641520088512578" type="System">
+                            <param id="0" name="Interval (seconds)">random(1,4)</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="5773093574098922">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="6533626831548784" type="personagens">
+                                    <param id="0" name="Unique ID">27</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="992908100206297">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="776112345936847" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Wait" sid="2765071331693076" type="System">
+                                            <param id="0" name="Seconds">0.0001</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="6889527147806478" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="7739258851794106">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="684101056436962" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Set value" sid="9433616384074048" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="1517279028521751">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="4884815755937727" type="System">
+                            <param id="0" name="Interval (seconds)">random(1,4)</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="1940511202165082">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="3719916256047086" type="personagens">
+                                    <param id="0" name="Unique ID">28</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="2309886989287898">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="5399873728202867" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Wait" sid="6196144161425638" type="System">
+                                            <param id="0" name="Seconds">0.0001</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="2554390123411224" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="2997238623627489">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="748820864440831" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Set value" sid="9880897239396556" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="2528680463303997">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="4450562147920782" type="System">
+                            <param id="0" name="Interval (seconds)">random(1,4)</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="8103756403759333">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="2000670874116379" type="personagens">
+                                    <param id="0" name="Unique ID">29</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="5713836646138271">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="2753534617673887" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Wait" sid="3698528838263426" type="System">
+                                            <param id="0" name="Seconds">0.0001</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="7486461100533028" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="1947361039860532">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="5944444811795161" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Set value" sid="2772158026846025" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="6623649436680131">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="5996302676980244" type="System">
+                            <param id="0" name="Interval (seconds)">random(1,4)</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="7209904163092693">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="3168808948641996" type="personagens">
+                                    <param id="0" name="Unique ID">30</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="5482526496478018">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="5625129286868407" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Wait" sid="21612646763648" type="System">
+                                            <param id="0" name="Seconds">0.0001</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="358261129036015" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="8828633887340858">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="4517451761959622" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Set value" sid="9165136379051818" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="440662282645798">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="2698544953126055" type="System">
+                            <param id="0" name="Interval (seconds)">random(1,4)</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="7047981607577017">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="5994845645944016" type="personagens">
+                                    <param id="0" name="Unique ID">31</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="3619501128323092">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="8530689406315392" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Wait" sid="796162567648312" type="System">
+                                            <param id="0" name="Seconds">0.0001</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="8807203393968181" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="1150973442852427">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="3175184663181847" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Set value" sid="7743232025900369" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="2926615432489191">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="7890576832724698" type="System">
+                            <param id="0" name="Interval (seconds)">random(1,4)</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="2633709114792312">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="7164145649913424" type="personagens">
+                                    <param id="0" name="Unique ID">32</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="4640599864765503">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="2224637633863686" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Wait" sid="7640353389205758" type="System">
+                                            <param id="0" name="Seconds">0.0001</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="255731262121354" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="8859342917440438">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="5399308575721845" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Set value" sid="5505545520008291" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="5058671447952763">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="8357367884218836" type="System">
+                            <param id="0" name="Interval (seconds)">random(1,4)</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="7071596792143571">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="8337583194810667" type="personagens">
+                                    <param id="0" name="Unique ID">33</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="3740354803146946">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="657916589192741" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Wait" sid="8924358228689799" type="System">
+                                            <param id="0" name="Seconds">0.0001</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="8693062199826313" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="1499108095330786">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="4373816075068335" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Set value" sid="9255368356658698" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="3553206964711778">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="1119425480498127" type="System">
+                            <param id="0" name="Interval (seconds)">random(1,4)</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="1628517560773099">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="9467163312219509" type="personagens">
+                                    <param id="0" name="Unique ID">34</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="3486835713074114">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="7035451735208262" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Wait" sid="2700126044162324" type="System">
+                                            <param id="0" name="Seconds">0.0001</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="20946451632716" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="3762972488099891">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="4978975406901704" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Set value" sid="1875082170201005" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="1777592501989644">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="4391799073435837" type="System">
+                            <param id="0" name="Interval (seconds)">random(1,4)</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="6623481600921822">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="2728126657264002" type="personagens">
+                                    <param id="0" name="Unique ID">46</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="2724660768798071">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="8998530133518864" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Wait" sid="6770706306845163" type="System">
+                                            <param id="0" name="Seconds">0.0001</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="8587585979783488" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="5428073360012467">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="6829453088950105" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Set value" sid="5515625770844566" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="9140879619657177">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="8787228671716571" type="System">
+                            <param id="0" name="Interval (seconds)">random(1,4)</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="3298087402273273">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="9644699490245435" type="personagens">
+                                    <param id="0" name="Unique ID">47</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="3830285286648541">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="9086987569586391" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Wait" sid="7123912363680849" type="System">
+                                            <param id="0" name="Seconds">0.0001</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="7711360785010562" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="5346424915919428">
+                                    <conditions>
+                                        <condition id="-7" name="Compare instance variable" sid="2308034138167533" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Set value" sid="535078929039971" type="personagens">
+                                            <param id="0" name="Instance variable">mirror</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
                 <event-block any="1" sid="8558704803782616">
                     <conditions>
                         <condition id="-14" name="Pick by unique ID" sid="6832948135534254" type="personagens">
@@ -841,129 +1504,129 @@
             <sub-events>
                 <event-group description="Curso normal do disparo de comidas durante o jogo - sem efeito de slow da lasanha." sid="4021719370794999" title="GuerraNormal">
                     <sub-events>
-                        <event-block sid="5852298267838282">
+                        <event-block sid="5583694232797223">
                             <conditions>
-                                <condition id="-18" name="On created" sid="4081590291226507" type="Comida" />
+                                <condition id="-18" name="On created" sid="1788030101696068" type="comida" />
                             </conditions>
                             <actions>
-                                <action behavior="Bullet" id="0" name="Set speed" sid="5914931808672928" type="Comida">
-                                    <param id="0" name="Speed">245</param>
+                                <action behavior="Bullet" id="0" name="Set speed" sid="3517595210601898" type="comida">
+                                    <param id="0" name="Speed">260</param>
                                 </action>
-                                <action behavior="Bullet" id="1" name="Set acceleration" sid="74613954688983" type="Comida">
-                                    <param id="0" name="Acceleration">-120</param>
+                                <action behavior="Bullet" id="1" name="Set acceleration" sid="4621322644704031" type="comida">
+                                    <param id="0" name="Acceleration">-110</param>
                                 </action>
                             </actions>
                         </event-block>
                         <event-block sid="8655241394062165">
                             <conditions>
                                 <condition id="-6" name="Every X seconds" sid="8833155333380719" type="System">
-                                    <param id="0" name="Interval (seconds)">1</param>
+                                    <param id="0" name="Interval (seconds)">0.6</param>
                                 </condition>
                             </conditions>
                             <actions />
                             <sub-events>
                                 <event-block sid="9967245428058085">
                                     <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="6097818628636902" type="ComidaSpawn">
+                                        <condition id="-14" name="Pick by unique ID" sid="6097818628636902" type="comidaSpawn">
                                             <param id="0" name="Unique ID">107</param>
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="-16" name="Wait" sid="1479524356374762" type="System">
+                                        <action id="-16" name="Wait" sid="4780419612421806" type="System">
                                             <param id="0" name="Seconds">0.001</param>
                                         </action>
                                         <action id="-3" name="Create object" sid="2619632554487815" type="System">
-                                            <param id="0" name="Object to create">Comida</param>
+                                            <param id="0" name="Object to create">comida</param>
                                             <param id="1" name="Layer">2</param>
                                             <param id="2" name="X">ComidaSpawn.X</param>
                                             <param id="3" name="Y">ComidaSpawn.Y</param>
                                         </action>
-                                        <action id="5" name="Set frame" sid="6292583826543962" type="Comida">
-                                            <param id="0" name="Frame number">round(random(0,5))</param>
+                                        <action id="5" name="Set frame" sid="6292583826543962" type="comida">
+                                            <param id="0" name="Frame number">round(random(0,10))</param>
                                         </action>
                                     </actions>
                                 </event-block>
                                 <event-block sid="7986883104949273">
                                     <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="6257769297786923" type="ComidaSpawn">
+                                        <condition id="-14" name="Pick by unique ID" sid="6257769297786923" type="comidaSpawn">
                                             <param id="0" name="Unique ID">108</param>
                                         </condition>
                                     </conditions>
                                     <actions>
                                         <action id="-16" name="Wait" sid="7252257833289821" type="System">
-                                            <param id="0" name="Seconds">0.2</param>
+                                            <param id="0" name="Seconds">0.13</param>
                                         </action>
                                         <action id="-3" name="Create object" sid="5330478796621983" type="System">
-                                            <param id="0" name="Object to create">Comida</param>
+                                            <param id="0" name="Object to create">comida</param>
                                             <param id="1" name="Layer">2</param>
                                             <param id="2" name="X">ComidaSpawn.X</param>
                                             <param id="3" name="Y">ComidaSpawn.Y</param>
                                         </action>
-                                        <action id="5" name="Set frame" sid="2474118449406905" type="Comida">
-                                            <param id="0" name="Frame number">round(random(0,5))</param>
+                                        <action id="5" name="Set frame" sid="2474118449406905" type="comida">
+                                            <param id="0" name="Frame number">round(random(0,10))</param>
                                         </action>
                                     </actions>
                                 </event-block>
                                 <event-block sid="6539534245403078">
                                     <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="3493463584865175" type="ComidaSpawn">
+                                        <condition id="-14" name="Pick by unique ID" sid="3493463584865175" type="comidaSpawn">
                                             <param id="0" name="Unique ID">109</param>
                                         </condition>
                                     </conditions>
                                     <actions>
                                         <action id="-16" name="Wait" sid="9520748998268812" type="System">
-                                            <param id="0" name="Seconds">0.4</param>
+                                            <param id="0" name="Seconds">0.26</param>
                                         </action>
                                         <action id="-3" name="Create object" sid="3815715668900845" type="System">
-                                            <param id="0" name="Object to create">Comida</param>
+                                            <param id="0" name="Object to create">comida</param>
                                             <param id="1" name="Layer">2</param>
                                             <param id="2" name="X">ComidaSpawn.X</param>
                                             <param id="3" name="Y">ComidaSpawn.Y</param>
                                         </action>
-                                        <action id="5" name="Set frame" sid="4333052152838913" type="Comida">
-                                            <param id="0" name="Frame number">round(random(0,5))</param>
+                                        <action id="5" name="Set frame" sid="4333052152838913" type="comida">
+                                            <param id="0" name="Frame number">round(random(0,10))</param>
                                         </action>
                                     </actions>
                                 </event-block>
                                 <event-block sid="6323134913845128">
                                     <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="7931197408320873" type="ComidaSpawn">
+                                        <condition id="-14" name="Pick by unique ID" sid="7931197408320873" type="comidaSpawn">
                                             <param id="0" name="Unique ID">110</param>
                                         </condition>
                                     </conditions>
                                     <actions>
                                         <action id="-16" name="Wait" sid="4571209925108368" type="System">
-                                            <param id="0" name="Seconds">0.6</param>
+                                            <param id="0" name="Seconds">0.4</param>
                                         </action>
                                         <action id="-3" name="Create object" sid="4402956849984038" type="System">
-                                            <param id="0" name="Object to create">Comida</param>
+                                            <param id="0" name="Object to create">comida</param>
                                             <param id="1" name="Layer">2</param>
                                             <param id="2" name="X">ComidaSpawn.X</param>
                                             <param id="3" name="Y">ComidaSpawn.Y</param>
                                         </action>
-                                        <action id="5" name="Set frame" sid="9316914487953936" type="Comida">
-                                            <param id="0" name="Frame number">round(random(0,5))</param>
+                                        <action id="5" name="Set frame" sid="9316914487953936" type="comida">
+                                            <param id="0" name="Frame number">round(random(0,10))</param>
                                         </action>
                                     </actions>
                                 </event-block>
                                 <event-block sid="3956435427199335">
                                     <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="3152655510839456" type="ComidaSpawn">
+                                        <condition id="-14" name="Pick by unique ID" sid="3152655510839456" type="comidaSpawn">
                                             <param id="0" name="Unique ID">111</param>
                                         </condition>
                                     </conditions>
                                     <actions>
                                         <action id="-16" name="Wait" sid="9651281931168721" type="System">
-                                            <param id="0" name="Seconds">0.8</param>
+                                            <param id="0" name="Seconds">0.53</param>
                                         </action>
                                         <action id="-3" name="Create object" sid="9716382248227796" type="System">
-                                            <param id="0" name="Object to create">Comida</param>
+                                            <param id="0" name="Object to create">comida</param>
                                             <param id="1" name="Layer">2</param>
                                             <param id="2" name="X">ComidaSpawn.X</param>
                                             <param id="3" name="Y">ComidaSpawn.Y</param>
                                         </action>
-                                        <action id="5" name="Set frame" sid="811470496871544" type="Comida">
-                                            <param id="0" name="Frame number">round(random(0,5))</param>
+                                        <action id="5" name="Set frame" sid="811470496871544" type="comida">
+                                            <param id="0" name="Frame number">round(random(0,10))</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -973,114 +1636,116 @@
                 </event-group>
                 <event-group description="Curso alterado de disparo de comidas durante o jogo - com efeito de slow da lasanha." inactive="1" sid="480055375357962" title="GuerraLasanha">
                     <sub-events>
-                        <event-block sid="5676046325780109">
-                            <conditions>
-                                <condition id="-18" name="On created" sid="3825435046021487" type="Comida" />
-                            </conditions>
-                            <actions>
-                                <action behavior="Bullet" id="0" name="Set speed" sid="3460180207269124" type="Comida">
-                                    <param id="0" name="Speed">40</param>
-                                </action>
-                                <action behavior="Bullet" id="1" name="Set acceleration" sid="4908066029357327" type="Comida">
-                                    <param id="0" name="Acceleration">-4</param>
-                                </action>
-                            </actions>
-                        </event-block>
                         <event-block sid="8655241394062165">
                             <conditions>
                                 <condition id="-6" name="Every X seconds" sid="8833155333380719" type="System">
-                                    <param id="0" name="Interval (seconds)">4</param>
+                                    <param id="0" name="Interval (seconds)">10</param>
                                 </condition>
                             </conditions>
                             <actions />
                             <sub-events>
                                 <event-block sid="9967245428058085">
                                     <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="6097818628636902" type="ComidaSpawn">
+                                        <condition id="-14" name="Pick by unique ID" sid="6097818628636902" type="comidaSpawn">
                                             <param id="0" name="Unique ID">107</param>
                                         </condition>
                                     </conditions>
                                     <actions>
+                                        <action id="-16" name="Wait" sid="1388827716734828" type="System">
+                                            <param id="0" name="Seconds">0.001</param>
+                                        </action>
                                         <action id="-3" name="Create object" sid="2619632554487815" type="System">
-                                            <param id="0" name="Object to create">Comida</param>
+                                            <param id="0" name="Object to create">comida</param>
                                             <param id="1" name="Layer">2</param>
                                             <param id="2" name="X">ComidaSpawn.X</param>
                                             <param id="3" name="Y">ComidaSpawn.Y</param>
                                         </action>
-                                        <action id="5" name="Set frame" sid="6292583826543962" type="Comida">
-                                            <param id="0" name="Frame number">round(random(0,5))</param>
+                                        <action id="5" name="Set frame" sid="6292583826543962" type="comida">
+                                            <param id="0" name="Frame number">round(random(0,10))</param>
                                         </action>
                                     </actions>
                                 </event-block>
                                 <event-block sid="4923801629322177">
                                     <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="5401779606019134" type="ComidaSpawn">
+                                        <condition id="-14" name="Pick by unique ID" sid="5401779606019134" type="comidaSpawn">
                                             <param id="0" name="Unique ID">108</param>
                                         </condition>
                                     </conditions>
                                     <actions>
+                                        <action id="-16" name="Wait" sid="1802933731229213" type="System">
+                                            <param id="0" name="Seconds">1</param>
+                                        </action>
                                         <action id="-3" name="Create object" sid="5828291015501068" type="System">
-                                            <param id="0" name="Object to create">Comida</param>
+                                            <param id="0" name="Object to create">comida</param>
                                             <param id="1" name="Layer">2</param>
                                             <param id="2" name="X">ComidaSpawn.X</param>
                                             <param id="3" name="Y">ComidaSpawn.Y</param>
                                         </action>
-                                        <action id="5" name="Set frame" sid="7575876343723192" type="Comida">
-                                            <param id="0" name="Frame number">round(random(0,5))</param>
+                                        <action id="5" name="Set frame" sid="7575876343723192" type="comida">
+                                            <param id="0" name="Frame number">round(random(0,10))</param>
                                         </action>
                                     </actions>
                                 </event-block>
                                 <event-block sid="2070714146756838">
                                     <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="8849029271154854" type="ComidaSpawn">
+                                        <condition id="-14" name="Pick by unique ID" sid="8849029271154854" type="comidaSpawn">
                                             <param id="0" name="Unique ID">109</param>
                                         </condition>
                                     </conditions>
                                     <actions>
+                                        <action id="-16" name="Wait" sid="2539209876465976" type="System">
+                                            <param id="0" name="Seconds">2</param>
+                                        </action>
                                         <action id="-3" name="Create object" sid="6843010121812504" type="System">
-                                            <param id="0" name="Object to create">Comida</param>
+                                            <param id="0" name="Object to create">comida</param>
                                             <param id="1" name="Layer">2</param>
                                             <param id="2" name="X">ComidaSpawn.X</param>
                                             <param id="3" name="Y">ComidaSpawn.Y</param>
                                         </action>
-                                        <action id="5" name="Set frame" sid="4539830730451729" type="Comida">
-                                            <param id="0" name="Frame number">round(random(0,5))</param>
+                                        <action id="5" name="Set frame" sid="4539830730451729" type="comida">
+                                            <param id="0" name="Frame number">round(random(0,10))</param>
                                         </action>
                                     </actions>
                                 </event-block>
                                 <event-block sid="6475258998791323">
                                     <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="1534228427905346" type="ComidaSpawn">
+                                        <condition id="-14" name="Pick by unique ID" sid="1534228427905346" type="comidaSpawn">
                                             <param id="0" name="Unique ID">110</param>
                                         </condition>
                                     </conditions>
                                     <actions>
+                                        <action id="-16" name="Wait" sid="7426198041513316" type="System">
+                                            <param id="0" name="Seconds">3</param>
+                                        </action>
                                         <action id="-3" name="Create object" sid="5442936788617339" type="System">
-                                            <param id="0" name="Object to create">Comida</param>
+                                            <param id="0" name="Object to create">comida</param>
                                             <param id="1" name="Layer">2</param>
                                             <param id="2" name="X">ComidaSpawn.X</param>
                                             <param id="3" name="Y">ComidaSpawn.Y</param>
                                         </action>
-                                        <action id="5" name="Set frame" sid="38974268235544" type="Comida">
-                                            <param id="0" name="Frame number">round(random(0,5))</param>
+                                        <action id="5" name="Set frame" sid="38974268235544" type="comida">
+                                            <param id="0" name="Frame number">round(random(0,10))</param>
                                         </action>
                                     </actions>
                                 </event-block>
                                 <event-block sid="6593768214597671">
                                     <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="7001500012801245" type="ComidaSpawn">
+                                        <condition id="-14" name="Pick by unique ID" sid="7001500012801245" type="comidaSpawn">
                                             <param id="0" name="Unique ID">111</param>
                                         </condition>
                                     </conditions>
                                     <actions>
+                                        <action id="-16" name="Wait" sid="2375392632623844" type="System">
+                                            <param id="0" name="Seconds">4</param>
+                                        </action>
                                         <action id="-3" name="Create object" sid="9309087784503998" type="System">
-                                            <param id="0" name="Object to create">Comida</param>
+                                            <param id="0" name="Object to create">comida</param>
                                             <param id="1" name="Layer">2</param>
                                             <param id="2" name="X">ComidaSpawn.X</param>
                                             <param id="3" name="Y">ComidaSpawn.Y</param>
                                         </action>
-                                        <action id="5" name="Set frame" sid="6206557925356861" type="Comida">
-                                            <param id="0" name="Frame number">round(random(0,5))</param>
+                                        <action id="5" name="Set frame" sid="6206557925356861" type="comida">
+                                            <param id="0" name="Frame number">round(random(0,10))</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1090,24 +1755,24 @@
                 </event-group>
                 <event-block sid="8467824383506697">
                     <conditions>
-                        <condition behavior="Bullet" id="0" name="Compare speed" sid="9846855246003645" type="Comida">
+                        <condition behavior="Bullet" id="0" name="Compare speed" sid="9846855246003645" type="comida">
                             <param id="0" name="Comparison">0</param>
                             <param id="1" name="Speed">0</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-9" name="Destroy" sid="8581751920904298" type="Comida" />
+                        <action id="-9" name="Destroy" sid="8581751920904298" type="comida" />
                     </actions>
                 </event-block>
                 <event-block sid="6713220065453886">
                     <conditions>
-                        <condition id="0" name="On collision with another object" sid="9020696017692122" type="Comida">
+                        <condition id="0" name="On collision with another object" sid="9020696017692122" type="comida">
                             <param id="0" name="Object">playerAnim</param>
                         </condition>
                         <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="1964539719987914" type="playerAnim" />
                     </conditions>
                     <actions>
-                        <action id="-9" name="Destroy" sid="3402406013807364" type="Comida" />
+                        <action id="-9" name="Destroy" sid="3402406013807364" type="comida" />
                         <action id="-3" name="Set position" sid="693635713680786" type="player">
                             <param id="0" name="X">290</param>
                             <param id="1" name="Y">648</param>
@@ -1164,6 +1829,112 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+            </sub-events>
+        </event-group>
+        <event-block sid="2591529069161432">
+            <conditions>
+                <condition id="0" name="On collision with another object" sid="2231277320746022" type="playerAnim">
+                    <param id="0" name="Object">saida</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-2" name="Go to layout" sid="19950044888835" type="System">
+                    <param id="0" name="Layout">Fase 2 (Tecnologia)</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-group description="" sid="9773762003433993" title="FluxoPessoas">
+            <sub-events>
+                <event-block sid="7512048755972766">
+                    <conditions>
+                        <condition id="-4" name="Is outside layout" sid="5451193722503403" type="pessoasBloqueio" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="7959036742861892" type="pessoasBloqueio" />
+                    </actions>
+                </event-block>
+                <event-block sid="827323649786304">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="505663164616586" type="pessoasBloqueio">
+                            <param id="0" name="Object">playerAnim</param>
+                        </condition>
+                        <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="6040296660669112" type="playerAnim" />
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Set position" sid="3656986712288264" type="player">
+                            <param id="0" name="X">944</param>
+                            <param id="1" name="Y">419</param>
+                        </action>
+                        <action behavior="Flash" id="0" name="Flash" sid="9024310644293903" type="playerAnim">
+                            <param id="0" name="&apos;On&apos; time">0.1</param>
+                            <param id="1" name="&apos;Off&apos; time">0.1</param>
+                            <param id="2" name="Duration">1.2</param>
+                        </action>
+                        <action id="-11" name="Subtract from" sid="8288736638402611" type="System">
+                            <param id="0" name="Variable">pontos</param>
+                            <param id="1" name="Value">50</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-group description="" sid="2562512228970299" title="FluxoNormal">
+                    <sub-events>
+                        <event-block sid="6938667913742299">
+                            <conditions>
+                                <condition id="-18" name="On created" sid="362016569252374" type="pessoasBloqueio" />
+                            </conditions>
+                            <actions>
+                                <action behavior="Bullet" id="0" name="Set speed" sid="7656068437441917" type="pessoasBloqueio">
+                                    <param id="0" name="Speed">300</param>
+                                </action>
+                                <action behavior="Bullet" id="1" name="Set acceleration" sid="5504062775844257" type="pessoasBloqueio">
+                                    <param id="0" name="Acceleration">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="9379405776808353">
+                            <conditions>
+                                <condition id="-6" name="Every X seconds" sid="2377784695445465" type="System">
+                                    <param id="0" name="Interval (seconds)">0.5</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="2272516080031218" type="System">
+                                    <param id="0" name="Object to create">pessoasBloqueio</param>
+                                    <param id="1" name="Layer">3</param>
+                                    <param id="2" name="X">pessoasSpawn.X</param>
+                                    <param id="3" name="Y">pessoasSpawn.Y</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="7786102647702851" type="pessoasBloqueio">
+                                    <param id="0" name="Animation">&quot;Pers&quot; &amp; round(random(1,6))</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-group>
+                <event-group description="" inactive="1" sid="1347424732564178" title="FluxoCafe">
+                    <sub-events>
+                        <event-block sid="2612381902426673">
+                            <conditions>
+                                <condition behavior="8Direction" id="1" name="Compare speed" sid="2995581716491662" type="player">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Speed">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="8Direction" id="4" name="Set max speed" sid="2032642269066315" type="player">
+                                    <param id="0" name="Max Speed">1500</param>
+                                </action>
+                                <action behavior="8Direction" id="5" name="Set acceleration" sid="7877676441491047" type="player">
+                                    <param id="0" name="Acceleration">4500</param>
+                                </action>
+                                <action behavior="8Direction" id="6" name="Set deceleration" sid="7359997982610143" type="player">
+                                    <param id="0" name="Deceleration">6000</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-group>
             </sub-events>
         </event-group>
     </events>
