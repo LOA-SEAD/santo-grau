@@ -218,9 +218,6 @@
                                     <param id="0" name="Group name">&quot;GuerraNormal&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
-                                <action behavior="Bullet" id="5" name="Set enabled" sid="9811662298860724" type="comida">
-                                    <param id="0" name="State">0</param>
-                                </action>
                                 <action id="-12" name="Set group active" sid="6793975452686342" type="System">
                                     <param id="0" name="Group name">&quot;GuerraLasanha&quot;</param>
                                     <param id="1" name="State">1</param>
@@ -240,7 +237,7 @@
                                     <param id="1" name="State">1</param>
                                 </action>
                                 <action id="-1" name="Set X" sid="6411056026251607" type="lasanha">
-                                    <param id="0" name="X">56</param>
+                                    <param id="0" name="X">120</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -363,6 +360,38 @@
                         </action>
                         <action id="4" name="Set animation" sid="9788879231222867" type="playerAnim">
                             <param id="0" name="Animation">&quot;FrenteAndando&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="1935797903608292">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="1672522179624092" type="Keyboard">
+                            <param id="0" name="Key">87 (W)</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="8201284978751178" type="Keyboard">
+                            <param id="0" name="Key">83 (S)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="4834246602144922" type="playerAnim">
+                            <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="8354452275402989">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="6220732666230287" type="Keyboard">
+                            <param id="0" name="Key">65 (A)</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="2475085317191314" type="Keyboard">
+                            <param id="0" name="Key">68 (D)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="2232296361856226" type="playerAnim">
+                            <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
                             <param id="1" name="From">1</param>
                         </action>
                     </actions>
@@ -1520,7 +1549,7 @@
                         <event-block sid="8655241394062165">
                             <conditions>
                                 <condition id="-6" name="Every X seconds" sid="8833155333380719" type="System">
-                                    <param id="0" name="Interval (seconds)">0.6</param>
+                                    <param id="0" name="Interval (seconds)">0.8</param>
                                 </condition>
                             </conditions>
                             <actions />
@@ -1554,7 +1583,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-16" name="Wait" sid="7252257833289821" type="System">
-                                            <param id="0" name="Seconds">0.13</param>
+                                            <param id="0" name="Seconds">0.16</param>
                                         </action>
                                         <action id="-3" name="Create object" sid="5330478796621983" type="System">
                                             <param id="0" name="Object to create">comida</param>
@@ -1575,7 +1604,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-16" name="Wait" sid="9520748998268812" type="System">
-                                            <param id="0" name="Seconds">0.26</param>
+                                            <param id="0" name="Seconds">0.32</param>
                                         </action>
                                         <action id="-3" name="Create object" sid="3815715668900845" type="System">
                                             <param id="0" name="Object to create">comida</param>
@@ -1596,7 +1625,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-16" name="Wait" sid="4571209925108368" type="System">
-                                            <param id="0" name="Seconds">0.4</param>
+                                            <param id="0" name="Seconds">0.48</param>
                                         </action>
                                         <action id="-3" name="Create object" sid="4402956849984038" type="System">
                                             <param id="0" name="Object to create">comida</param>
@@ -1617,7 +1646,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-16" name="Wait" sid="9651281931168721" type="System">
-                                            <param id="0" name="Seconds">0.53</param>
+                                            <param id="0" name="Seconds">0.64</param>
                                         </action>
                                         <action id="-3" name="Create object" sid="9716382248227796" type="System">
                                             <param id="0" name="Object to create">comida</param>
@@ -1636,6 +1665,19 @@
                 </event-group>
                 <event-group description="Curso alterado de disparo de comidas durante o jogo - com efeito de slow da lasanha." inactive="1" sid="480055375357962" title="GuerraLasanha">
                     <sub-events>
+                        <event-block sid="8198415583666935">
+                            <conditions>
+                                <condition id="-18" name="On created" sid="4717823225938854" type="comida" />
+                            </conditions>
+                            <actions>
+                                <action behavior="Bullet" id="0" name="Set speed" sid="7682754458833593" type="comida">
+                                    <param id="0" name="Speed">100</param>
+                                </action>
+                                <action behavior="Bullet" id="1" name="Set acceleration" sid="645685327148204" type="comida">
+                                    <param id="0" name="Acceleration">-50</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <event-block sid="8655241394062165">
                             <conditions>
                                 <condition id="-6" name="Every X seconds" sid="8833155333380719" type="System">
