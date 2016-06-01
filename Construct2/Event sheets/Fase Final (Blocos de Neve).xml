@@ -124,7 +124,7 @@
                     <param id="1" name="Height">(1-((720-playerAnim.Y)*0.000555))*144</param>
                 </action>
                 <action id="0" name="Set text" sid="8662155839572914" type="pontuacao">
-                    <param id="0" name="Text">&quot;Rendimento acadêmico: &quot; &amp; pontosCM</param>
+                    <param id="0" name="Text">&quot;Rendimento acadêmico: &quot; &amp; pontos</param>
                 </action>
             </actions>
         </event-block>
@@ -148,25 +148,13 @@
                 </condition>
             </conditions>
             <actions>
-                <action id="-9" name="Set value" sid="9672460678999434" type="System">
-                    <param id="0" name="Variable">perguntaBN</param>
-                    <param id="1" name="Value">1</param>
-                </action>
-                <action id="-9" name="Set value" sid="9988373258061136" type="System">
-                    <param id="0" name="Variable">esconderTextosBN</param>
-                    <param id="1" name="Value">1</param>
-                </action>
-                <action disabled="1" id="-9" name="Set value" sid="2756989514796917" type="System">
-                    <param id="0" name="Variable">obterAlternativaBN</param>
-                    <param id="1" name="Value">1</param>
-                </action>
                 <action behavior="8Direction" id="0" name="Stop" sid="1133296498198728" type="player" />
                 <action id="-3" name="Set position" sid="8089959064857848" type="player">
                     <param id="0" name="X">51</param>
                     <param id="1" name="Y">265</param>
                 </action>
                 <action id="-10" name="Add to" sid="1260592435381286" type="System">
-                    <param id="0" name="Variable">pontosCM</param>
+                    <param id="0" name="Variable">pontos</param>
                     <param id="1" name="Value">-50</param>
                 </action>
                 <action behavior="Flash" id="0" name="Flash" sid="6936698516906039" type="playerAnim">
@@ -186,11 +174,19 @@
                         </condition>
                         <condition id="-14" name="Compare variable" sid="6850049541114735" type="System">
                             <param id="0" name="Variable">perguntaBN</param>
-                            <param id="1" name="Comparison">2</param>
+                            <param id="1" name="Comparison">1</param>
                             <param id="2" name="Value">4</param>
                         </condition>
                     </conditions>
                     <actions>
+                        <action id="-9" name="Set value" sid="9672460678999434" type="System">
+                            <param id="0" name="Variable">perguntaBN</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="9988373258061136" type="System">
+                            <param id="0" name="Variable">esconderTextosBN</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
                         <action behavior="Bullet" id="0" name="Set speed" sid="769557493071203" type="selAlternativa1">
                             <param id="0" name="Speed">200 * perguntaBN</param>
                         </action>
@@ -206,6 +202,23 @@
                     </actions>
                 </event-block>
             </sub-events>
+        </event-block>
+        <event-block sid="8940978710968183">
+            <conditions>
+                <condition id="1" name="Is overlapping another object" sid="6457049873023777" type="player">
+                    <param id="0" name="Object">FimFase</param>
+                </condition>
+                <condition id="-14" name="Compare variable" sid="8458748516462008" type="System">
+                    <param id="0" name="Variable">perguntaBN</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Value">4</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-2" name="Go to layout" sid="4111735116296527" type="System">
+                    <param id="0" name="Layout">Fase Final (Forme-se se for Capaz)</param>
+                </action>
+            </actions>
         </event-block>
         <comment>Dispara o evento das perguntas</comment>
         <event-group description="" sid="4227888007887412" title="inicioPerguntasFFBN">
@@ -831,7 +844,7 @@
                         <event-block sid="1699590853007916">
                             <conditions>
                                 <condition id="0" name="On collision with another object" sid="3214732951497474" type="player">
-                                    <param id="0" name="Object">selAlternativa1</param>
+                                    <param id="0" name="Object">Bloco1</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -852,7 +865,7 @@
                         <event-block sid="7120762420533665">
                             <conditions>
                                 <condition id="0" name="On collision with another object" sid="9155256091253734" type="player">
-                                    <param id="0" name="Object">selAlternativa2</param>
+                                    <param id="0" name="Object">Bloco2</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -873,7 +886,7 @@
                         <event-block sid="2870282095673449">
                             <conditions>
                                 <condition id="0" name="On collision with another object" sid="8310600895650243" type="player">
-                                    <param id="0" name="Object">selAlternativa3</param>
+                                    <param id="0" name="Object">Bloco3</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -920,7 +933,7 @@
                             <param id="1" name="Value">1</param>
                         </action>
                         <action id="-10" name="Add to" sid="4368475574908269" type="System">
-                            <param id="0" name="Variable">pontosCM</param>
+                            <param id="0" name="Variable">pontos</param>
                             <param id="1" name="Value">100</param>
                         </action>
                     </actions>
@@ -940,7 +953,7 @@
                         </action>
                         <action behavior="8Direction" id="0" name="Stop" sid="3921811517886007" type="player" />
                         <action id="-10" name="Add to" sid="7028332991897701" type="System">
-                            <param id="0" name="Variable">pontosCM</param>
+                            <param id="0" name="Variable">pontos</param>
                             <param id="1" name="Value">-100</param>
                         </action>
                         <action behavior="Flash" id="0" name="Flash" sid="8290457757993452" type="playerAnim">

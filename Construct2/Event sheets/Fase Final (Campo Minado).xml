@@ -3,14 +3,10 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase Final (Campo Minado)</name>
     <events>
-        <comment>Pontuação jogador</comment>
-        <variable constant="0" name="pontosCM" sid="595652796244883" static="0" type="number">10000</variable>
         <comment>Para disparar o inicio do evento das perguntas</comment>
         <variable constant="0" name="ativarMensagemCM" sid="4430145120925736" static="0" type="number">0</variable>
         <comment>Para organização do número da pergunta que está atualmente</comment>
         <variable constant="0" name="perguntaCM" sid="1829014671371773" static="0" type="number">1</variable>
-        <comment>Indica quando o jogador passou por uma área de seleção de alguma alternativa, impedindo que ele selecione outra alternativa na mesma pergunta</comment>
-        <variable constant="0" name="selecao" sid="2755298308954631" static="0" type="number">0</variable>
         <comment>Criado para não se necessário repetir a parte de carregar as alternativas na ponte</comment>
         <variable constant="0" name="carregarAlternativa" sid="6220902629296053" static="0" type="number">0</variable>
         <comment>Criado para não se necessário repetir a parte de descarregar as alternativas na ponte</comment>
@@ -125,7 +121,7 @@
                     <param id="1" name="Height">(1-((720-playerAnim.Y)*0.000555))*144</param>
                 </action>
                 <action id="0" name="Set text" sid="901025095795257" type="pontuacao">
-                    <param id="0" name="Text">&quot;Rendimento acadêmico: &quot; &amp; pontosCM</param>
+                    <param id="0" name="Text">&quot;Rendimento acadêmico: &quot; &amp; pontos</param>
                 </action>
             </actions>
         </event-block>
@@ -526,6 +522,24 @@
                                     <param id="0" name="Opacity">alternativaE.Opacity - 2.5</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <comment>Esta comparação é devido a um bug caso ocorra uma escolha de alternativa mais rápida do que o texto sendo limpo</comment>
+                                <event-block sid="7231355149086325">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="8662733787154967" type="System">
+                                            <param id="0" name="Variable">carregarAlternativa</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="8481203326007977" type="System">
+                                            <param id="0" name="Variable">carregarAlternativa</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <event-block sid="7237328396531625">
                             <conditions>
@@ -731,7 +745,7 @@
                                     <param id="1" name="Value">1</param>
                                 </action>
                                 <action id="-10" name="Add to" sid="3125939558383115" type="System">
-                                    <param id="0" name="Variable">pontosCM</param>
+                                    <param id="0" name="Variable">pontos</param>
                                     <param id="1" name="Value">100</param>
                                 </action>
                             </actions>
@@ -750,7 +764,7 @@
                                     <param id="1" name="Y">265</param>
                                 </action>
                                 <action id="-10" name="Add to" sid="1397937927894916" type="System">
-                                    <param id="0" name="Variable">pontosCM</param>
+                                    <param id="0" name="Variable">pontos</param>
                                     <param id="1" name="Value">-100</param>
                                 </action>
                                 <action behavior="Flash" id="0" name="Flash" sid="8359306057322136" type="playerAnim">
