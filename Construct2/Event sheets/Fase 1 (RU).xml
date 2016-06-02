@@ -45,7 +45,7 @@
                     </conditions>
                     <actions>
                         <action id="0" name="Set text" sid="5040096606073724" type="dicaTexto">
-                            <param id="0" name="Text">&quot;Use as teclas WASD para se movimentar.&quot;</param>
+                            <param id="0" name="Text">&quot;Use as teclas WASD ou direcionais para mover a personagem.&quot;</param>
                         </action>
                     </actions>
                 </event-block>
@@ -168,7 +168,7 @@
                     <param id="0" name="Width">(1-((720-personagens.Y)*0.000555))*81</param>
                     <param id="1" name="Height">(1-((720-personagens.Y)*0.000555))*150</param>
                 </action>
-                <action id="-7" name="Set size" sid="1755842828526025" type="pessoasBloqueio">
+                <action id="-7" name="Set size" sid="1755842828526025" type="pessoasBlock">
                     <param id="0" name="Width">(1-((720-personagens.Y)*0.000555))*81</param>
                     <param id="1" name="Height">(1-((720-personagens.Y)*0.000555))*150</param>
                 </action>
@@ -312,8 +312,12 @@
                                 <condition id="-4" inverted="1" name="Is outside layout" sid="5790202092250641" type="cafe" />
                             </conditions>
                             <actions>
-                                <action id="-12" name="Set group active" sid="8096284232204449" type="System">
-                                    <param id="0" name="Group name">&quot;AcaoCafe&quot;</param>
+                                <action id="-12" name="Set group active" sid="2241781989472492" type="System">
+                                    <param id="0" name="Group name">&quot;GuerraLasanha&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="8179876173789795" type="System">
+                                    <param id="0" name="Group name">&quot;GuerraNormal&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="5340213419735003" type="System">
@@ -1579,9 +1583,6 @@
                                 <action behavior="Bullet" id="0" name="Set speed" sid="3517595210601898" type="comida">
                                     <param id="0" name="Speed">260</param>
                                 </action>
-                                <action behavior="Bullet" id="1" name="Set acceleration" sid="4621322644704031" type="comida">
-                                    <param id="0" name="Acceleration">-110</param>
-                                </action>
                             </actions>
                         </event-block>
                         <event-block sid="8655241394062165">
@@ -1722,17 +1723,14 @@
                             <conditions />
                             <actions>
                                 <action behavior="Bullet" id="0" name="Set speed" sid="7682754458833593" type="comida">
-                                    <param id="0" name="Speed">50</param>
-                                </action>
-                                <action behavior="Bullet" id="1" name="Set acceleration" sid="645685327148204" type="comida">
-                                    <param id="0" name="Acceleration">-4.1</param>
+                                    <param id="0" name="Speed">40</param>
                                 </action>
                             </actions>
                         </event-block>
                         <event-block sid="8655241394062165">
                             <conditions>
                                 <condition id="-6" name="Every X seconds" sid="8833155333380719" type="System">
-                                    <param id="0" name="Interval (seconds)">7</param>
+                                    <param id="0" name="Interval (seconds)">6</param>
                                 </condition>
                             </conditions>
                             <actions />
@@ -1769,7 +1767,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-16" name="Wait" sid="1802933731229213" type="System">
-                                            <param id="0" name="Seconds">1.6</param>
+                                            <param id="0" name="Seconds">1.2</param>
                                         </action>
                                         <action id="-3" name="Create object" sid="5828291015501068" type="System">
                                             <param id="0" name="Object to create">comida</param>
@@ -1793,7 +1791,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-16" name="Wait" sid="2539209876465976" type="System">
-                                            <param id="0" name="Seconds">3.2</param>
+                                            <param id="0" name="Seconds">2.4</param>
                                         </action>
                                         <action id="-3" name="Create object" sid="6843010121812504" type="System">
                                             <param id="0" name="Object to create">comida</param>
@@ -1817,7 +1815,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-16" name="Wait" sid="7426198041513316" type="System">
-                                            <param id="0" name="Seconds">4.8</param>
+                                            <param id="0" name="Seconds">3.6</param>
                                         </action>
                                         <action id="-3" name="Create object" sid="5442936788617339" type="System">
                                             <param id="0" name="Object to create">comida</param>
@@ -1841,7 +1839,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-16" name="Wait" sid="2375392632623844" type="System">
-                                            <param id="0" name="Seconds">6.4</param>
+                                            <param id="0" name="Seconds">4.8</param>
                                         </action>
                                         <action id="-3" name="Create object" sid="9309087784503998" type="System">
                                             <param id="0" name="Object to create">comida</param>
@@ -1863,9 +1861,8 @@
                 </event-group>
                 <event-block sid="8467824383506697">
                     <conditions>
-                        <condition behavior="Bullet" id="0" name="Compare speed" sid="9846855246003645" type="comida">
-                            <param id="0" name="Comparison">0</param>
-                            <param id="1" name="Speed">0</param>
+                        <condition id="1" name="Is overlapping another object" sid="9887848052053933" type="comida">
+                            <param id="0" name="Object">comidaBlock</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -1908,12 +1905,12 @@
                     </conditions>
                     <actions>
                         <action id="-3" name="Create object" sid="2272516080031218" type="System">
-                            <param id="0" name="Object to create">pessoasBloqueio</param>
+                            <param id="0" name="Object to create">pessoasBlock</param>
                             <param id="1" name="Layer">4</param>
                             <param id="2" name="X">pessoasSpawn.X</param>
                             <param id="3" name="Y">pessoasSpawn.Y</param>
                         </action>
-                        <action id="4" name="Set animation" sid="7786102647702851" type="pessoasBloqueio">
+                        <action id="4" name="Set animation" sid="7786102647702851" type="pessoasBlock">
                             <param id="0" name="Animation">&quot;Pers&quot; &amp; round(random(1,6))</param>
                             <param id="1" name="From">1</param>
                         </action>
@@ -1921,28 +1918,25 @@
                 </event-block>
                 <event-block sid="6938667913742299">
                     <conditions>
-                        <condition id="-18" name="On created" sid="362016569252374" type="pessoasBloqueio" />
+                        <condition id="-18" name="On created" sid="362016569252374" type="pessoasBlock" />
                     </conditions>
                     <actions>
-                        <action behavior="Bullet" id="0" name="Set speed" sid="7656068437441917" type="pessoasBloqueio">
+                        <action behavior="Bullet" id="0" name="Set speed" sid="7656068437441917" type="pessoasBlock">
                             <param id="0" name="Speed">300</param>
-                        </action>
-                        <action behavior="Bullet" id="1" name="Set acceleration" sid="5504062775844257" type="pessoasBloqueio">
-                            <param id="0" name="Acceleration">0</param>
                         </action>
                     </actions>
                 </event-block>
                 <event-block sid="7512048755972766">
                     <conditions>
-                        <condition id="-4" name="Is outside layout" sid="5451193722503403" type="pessoasBloqueio" />
+                        <condition id="-4" name="Is outside layout" sid="5451193722503403" type="pessoasBlock" />
                     </conditions>
                     <actions>
-                        <action id="-9" name="Destroy" sid="7959036742861892" type="pessoasBloqueio" />
+                        <action id="-9" name="Destroy" sid="7959036742861892" type="pessoasBlock" />
                     </actions>
                 </event-block>
                 <event-block sid="827323649786304">
                     <conditions>
-                        <condition id="0" name="On collision with another object" sid="505663164616586" type="pessoasBloqueio">
+                        <condition id="0" name="On collision with another object" sid="505663164616586" type="pessoasBlock">
                             <param id="0" name="Object">playerAnim</param>
                         </condition>
                         <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="6040296660669112" type="playerAnim" />
@@ -1987,13 +1981,13 @@
                             <conditions />
                             <actions>
                                 <action behavior="8Direction" id="4" name="Set max speed" sid="2032642269066315" type="player">
-                                    <param id="0" name="Max Speed">1500</param>
+                                    <param id="0" name="Max Speed">900</param>
                                 </action>
                                 <action behavior="8Direction" id="5" name="Set acceleration" sid="7877676441491047" type="player">
-                                    <param id="0" name="Acceleration">4500</param>
+                                    <param id="0" name="Acceleration">999999999999999</param>
                                 </action>
                                 <action behavior="8Direction" id="6" name="Set deceleration" sid="7359997982610143" type="player">
-                                    <param id="0" name="Deceleration">6000</param>
+                                    <param id="0" name="Deceleration">999999999999999</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2006,6 +2000,7 @@
                 <condition id="0" name="On collision with another object" sid="2231277320746022" type="playerAnim">
                     <param id="0" name="Object">saida</param>
                 </condition>
+                <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="104244155379227" type="playerAnim" />
             </conditions>
             <actions>
                 <action id="-2" name="Go to layout" sid="19950044888835" type="System">
