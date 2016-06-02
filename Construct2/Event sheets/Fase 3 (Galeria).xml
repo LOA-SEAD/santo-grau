@@ -1,46 +1,166 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <c2eventsheet>
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
-    <name>Fase Final (Forme-se se for Capaz)</name>
+    <name>Fase 3 (Galeria)</name>
     <events>
-        <event-block sid="9765162608650695">
+        <variable constant="0" name="FinalizarAnimacao" sid="4166087937899186" static="0" type="number">0</variable>
+        <variable constant="0" name="IniciarAnimacao" sid="9293790244686083" static="0" type="number">0</variable>
+        <event-block sid="5554538898794456">
             <conditions>
-                <condition id="-2" name="On start of layout" sid="7057668097993137" type="System" />
+                <condition id="-2" name="On start of layout" sid="3689958973850941" type="System" />
             </conditions>
             <actions>
-                <action id="-4" name="Set position to another object" sid="6921429280797062" type="playerAnim">
+                <action id="-4" name="Set position to another object" sid="3595203182699471" type="playerAnim">
                     <param id="0" name="Object">player</param>
                     <param id="1" name="Image point (optional)">0</param>
                 </action>
-                <action behavior="Pin" id="0" name="Pin to object" sid="2949230539204769" type="playerAnim">
+                <action behavior="Pin" id="0" name="Pin to object" sid="1670710335122893" type="playerAnim">
                     <param id="0" name="Pin to">player</param>
                     <param id="1" name="Mode">0</param>
                 </action>
-                <action id="4" name="Set animation" sid="7649074634257544" type="playerAnim">
+                <action id="4" name="Set animation" sid="9872902098286598" type="playerAnim">
                     <param id="0" name="Animation">&quot;Default&quot;</param>
                     <param id="1" name="From">1</param>
                 </action>
+                <action id="-16" name="Set opacity" sid="7682274721188121" type="QuadrosTeste">
+                    <param id="0" name="Opacity">0</param>
+                </action>
             </actions>
         </event-block>
-        <event-block sid="8935176459426232">
+        <event-block sid="7879974350802997">
             <conditions>
-                <condition id="-1" name="Every tick" sid="4589126109928491" type="System" />
+                <condition id="-1" name="Every tick" sid="8510141545562972" type="System" />
             </conditions>
             <actions>
-                <action id="-7" name="Set size" sid="673742081610903" type="player">
+                <action id="-7" name="Set size" sid="7552339479943774" type="player">
                     <param id="0" name="Width">(1-((720-Player.Y)*0.000555))*82</param>
                     <param id="1" name="Height">(1-((720-Player.Y)*0.000555))*144</param>
                 </action>
-                <action id="-7" name="Set size" sid="3009900728805443" type="playerAnim">
+                <action id="-7" name="Set size" sid="8338529462188043" type="playerAnim">
                     <param id="0" name="Width">(1-((720-playerAnim.Y)*0.000555))*82</param>
                     <param id="1" name="Height">(1-((720-playerAnim.Y)*0.000555))*144</param>
                 </action>
-                <action id="0" name="Set text" sid="9341638240819411" type="pontuacao">
+                <action id="0" name="Set text" sid="8336012008819834" type="pontuacao">
                     <param id="0" name="Text">&quot;Rendimento acadêmico: &quot; &amp; pontos</param>
                 </action>
             </actions>
         </event-block>
-        <event-group description="" sid="6751052447410165" title="playerMoveFFFS">
+        <event-block sid="8184022603915785">
+            <conditions>
+                <condition id="2" name="Key is down" sid="4592936867441972" type="Keyboard">
+                    <param id="0" name="Key">69 (E)</param>
+                </condition>
+                <condition id="1" name="Is overlapping another object" sid="3876750697826487" type="player">
+                    <param id="0" name="Object">areaSelecao</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-9" name="Set value" sid="429080087630228" type="System">
+                    <param id="0" name="Variable">IniciarAnimacao</param>
+                    <param id="1" name="Value">1</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="3988945501635567">
+            <conditions>
+                <condition id="-14" name="Compare variable" sid="8399356402495472" type="System">
+                    <param id="0" name="Variable">IniciarAnimacao</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Value">1</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="536095591584953">
+                    <conditions>
+                        <condition id="-1" name="Every tick" sid="4858459743707592" type="System" />
+                        <condition id="-10" name="Compare opacity" sid="697956556261024" type="QuadrosTeste">
+                            <param id="0" name="Comparison">2</param>
+                            <param id="1" name="Opacity">100</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Set opacity" sid="2076384807695057" type="QuadrosTeste">
+                            <param id="0" name="Opacity">QuadrosTeste.Opacity + 2.5</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="9590722395535614">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="777040374093621" type="QuadrosTeste">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Opacity">100</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="8491817895597313" type="System">
+                            <param id="0" name="Variable">IniciarAnimacao</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="1985184831597969">
+            <conditions>
+                <condition id="6" name="On object clicked" sid="4752721050209126" type="Mouse">
+                    <param id="0" name="Mouse button">0</param>
+                    <param id="1" name="Click type">0</param>
+                    <param id="2" name="Object clicked">areaSelecao</param>
+                </condition>
+                <condition id="-10" name="Compare opacity" sid="9244725577974001" type="QuadrosTeste">
+                    <param id="0" name="Comparison">0</param>
+                    <param id="1" name="Opacity">100</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-9" name="Set value" sid="7833411403449488" type="System">
+                    <param id="0" name="Variable">FinalizarAnimacao</param>
+                    <param id="1" name="Value">1</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="2909495655769617">
+            <conditions>
+                <condition id="-14" name="Compare variable" sid="3418735951163016" type="System">
+                    <param id="0" name="Variable">FinalizarAnimacao</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Value">1</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="9111195368472245">
+                    <conditions>
+                        <condition id="-1" name="Every tick" sid="3837281148603076" type="System" />
+                        <condition id="-10" name="Compare opacity" sid="4080625836939906" type="QuadrosTeste">
+                            <param id="0" name="Comparison">4</param>
+                            <param id="1" name="Opacity">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Set opacity" sid="3897813820729303" type="QuadrosTeste">
+                            <param id="0" name="Opacity">QuadrosTeste.Opacity - 2.5</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="5152413625063937">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="6145115409282713" type="QuadrosTeste">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Opacity">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="9860826632281608" type="System">
+                            <param id="0" name="Variable">FinalizarAnimacao</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-group description="" sid="9167526691083547" title="playerMove3">
             <sub-events>
                 <event-block any="1" sid="2583311756782099">
                     <conditions>
