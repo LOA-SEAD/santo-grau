@@ -3,7 +3,9 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase 3 (Galeria)</name>
     <events>
+        <comment>Utilizada para controlar a animação de desaparecer o zoom nas imagens</comment>
         <variable constant="0" name="FinalizarAnimacao" sid="4166087937899186" static="0" type="number">0</variable>
+        <comment>Utilizada para controlar a animação de aparecer o zoom nas imagens</comment>
         <variable constant="0" name="IniciarAnimacao" sid="9293790244686083" static="0" type="number">0</variable>
         <event-block sid="5554538898794456">
             <conditions>
@@ -24,6 +26,14 @@
                 </action>
                 <action id="-16" name="Set opacity" sid="7682274721188121" type="QuadrosTeste">
                     <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="9221966531166957" type="System">
+                    <param id="0" name="Group name">&quot;visualizarImagens&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="4231480475943771" type="System">
+                    <param id="0" name="Group name">&quot;esconderImagens&quot;</param>
+                    <param id="1" name="State">0</param>
                 </action>
             </actions>
         </event-block>
@@ -97,6 +107,10 @@
                             <param id="0" name="Variable">IniciarAnimacao</param>
                             <param id="1" name="Value">0</param>
                         </action>
+                        <action id="-12" name="Set group active" sid="6395472186335182" type="System">
+                            <param id="0" name="Group name">&quot;visualizarImagens&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
                     </actions>
                 </event-block>
             </sub-events>
@@ -117,6 +131,10 @@
                 <action id="-9" name="Set value" sid="7833411403449488" type="System">
                     <param id="0" name="Variable">FinalizarAnimacao</param>
                     <param id="1" name="Value">1</param>
+                </action>
+                <action id="-12" name="Set group active" sid="587882631574705" type="System">
+                    <param id="0" name="Group name">&quot;esconderImagens&quot;</param>
+                    <param id="1" name="State">1</param>
                 </action>
             </actions>
         </event-block>
@@ -375,6 +393,154 @@
                         <action id="4" name="Set animation" sid="8585015241693119" type="playerAnim">
                             <param id="0" name="Animation">&quot;DireitaParado&quot;</param>
                             <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <comment>Usada no início da execução para tentar carregar os arquivos com estes nomes.&#x0D;&#x0A;Eu até pensei em usar 10 instâncias de um mesmo sprite, mas como a unica maneira de customizá-los seria criar 10 animações e o professor colocar cada quadro em uma animação eu achei melhor 10 sprites diferentes mesmo</comment>
+        <event-group description="" sid="1077548239582358" title="carregarImagens">
+            <sub-events>
+                <event-block sid="9104870988701179">
+                    <conditions>
+                        <condition id="-1" name="Every tick" sid="4484471508274438" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="10" name="Load image from URL" sid="7835569480276269" type="Quadro1">
+                            <param id="0" name="URI">&quot;1.png&quot;</param>
+                            <param id="1" name="Size">1</param>
+                        </action>
+                        <action id="10" name="Load image from URL" sid="6444456088018076" type="Quadro2">
+                            <param id="0" name="URI">&quot;2.png&quot;</param>
+                            <param id="1" name="Size">1</param>
+                        </action>
+                        <action id="10" name="Load image from URL" sid="7972336346271187" type="Quadro3">
+                            <param id="0" name="URI">&quot;3.png&quot;</param>
+                            <param id="1" name="Size">1</param>
+                        </action>
+                        <action id="10" name="Load image from URL" sid="7101799292182306" type="Quadro4">
+                            <param id="0" name="URI">&quot;4.png&quot;</param>
+                            <param id="1" name="Size">1</param>
+                        </action>
+                        <action id="10" name="Load image from URL" sid="7081643577659467" type="Quadro5">
+                            <param id="0" name="URI">&quot;5.png&quot;</param>
+                            <param id="1" name="Size">1</param>
+                        </action>
+                        <action id="10" name="Load image from URL" sid="7983377885460274" type="Quadro6">
+                            <param id="0" name="URI">&quot;6.png&quot;</param>
+                            <param id="1" name="Size">1</param>
+                        </action>
+                        <action id="10" name="Load image from URL" sid="4159000583021385" type="Quadro7">
+                            <param id="0" name="URI">&quot;7.png&quot;</param>
+                            <param id="1" name="Size">1</param>
+                        </action>
+                        <action id="10" name="Load image from URL" sid="1435478437613302" type="Quadro8">
+                            <param id="0" name="URI">&quot;8.png&quot;</param>
+                            <param id="1" name="Size">1</param>
+                        </action>
+                        <action id="10" name="Load image from URL" sid="1787463409725294" type="Quadro9">
+                            <param id="0" name="URI">&quot;9.png&quot;</param>
+                            <param id="1" name="Size">1</param>
+                        </action>
+                        <action id="10" name="Load image from URL" sid="9386083562808578" type="Quadro10">
+                            <param id="0" name="URI">&quot;10.png&quot;</param>
+                            <param id="1" name="Size">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="8623285727512276" type="System">
+                            <param id="0" name="Group name">&quot;carregarImagens&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <comment>Cada vez que é dado um zoom na parede onde estão os quadros, torna todos eles visíveis</comment>
+        <event-group description="" sid="4439499051293748" title="visualizarImagens">
+            <sub-events>
+                <event-block sid="9104870988701179">
+                    <conditions>
+                        <condition id="-1" name="Every tick" sid="4484471508274438" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-15" name="Set visible" sid="7174172594150248" type="Quadro1">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="1164484613551752" type="Quadro2">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="2626500877084036" type="Quadro3">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="1706391629235616" type="Quadro4">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="9305462959189113" type="Quadro5">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="5033352712522417" type="Quadro6">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="1582201037925507" type="Quadro7">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="3146285490852507" type="Quadro8">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="5012695497788513" type="Quadro9">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="418014872363379" type="Quadro10">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="8623285727512276" type="System">
+                            <param id="0" name="Group name">&quot;visualizarImagens&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <comment>Usado para esconder os quadros quando o zoom na parade onde eles estão é desativado</comment>
+        <event-group description="" sid="9559341389909905" title="esconderImagens">
+            <sub-events>
+                <event-block sid="9104870988701179">
+                    <conditions>
+                        <condition id="-1" name="Every tick" sid="4484471508274438" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-15" name="Set visible" sid="7174172594150248" type="Quadro1">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="229347725834508" type="Quadro2">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="8505982272783691" type="Quadro3">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="3761623636341367" type="Quadro4">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="5532475622667387" type="Quadro5">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="1455944331433326" type="Quadro6">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="6980071645958147" type="Quadro7">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="9291355090444372" type="Quadro8">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="9194434666962005" type="Quadro9">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="8539873830927551" type="Quadro10">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="8623285727512276" type="System">
+                            <param id="0" name="Group name">&quot;esconderImagens&quot;</param>
+                            <param id="1" name="State">0</param>
                         </action>
                     </actions>
                 </event-block>
