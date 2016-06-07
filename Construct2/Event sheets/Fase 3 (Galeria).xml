@@ -3,9 +3,9 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase 3 (Galeria)</name>
     <events>
-        <comment>Utilizada para controlar a animação de desaparecer o zoom nas imagens</comment>
+        <comment>Utilizada para controlar a animação de desaparecer o zoom nos quadros</comment>
         <variable constant="0" name="FinalizarAnimacao" sid="4166087937899186" static="0" type="number">0</variable>
-        <comment>Utilizada para controlar a animação de aparecer o zoom nas imagens</comment>
+        <comment>Utilizada para controlar a animação de aparecer o zoom nos quadros</comment>
         <variable constant="0" name="IniciarAnimacao" sid="9293790244686083" static="0" type="number">0</variable>
         <event-block sid="5554538898794456">
             <conditions>
@@ -28,13 +28,20 @@
                     <param id="0" name="Opacity">0</param>
                 </action>
                 <action id="-12" name="Set group active" sid="9221966531166957" type="System">
-                    <param id="0" name="Group name">&quot;visualizarImagens&quot;</param>
+                    <param id="0" name="Group name">&quot;visualizarQuadros&quot;</param>
                     <param id="1" name="State">0</param>
                 </action>
                 <action id="-12" name="Set group active" sid="4231480475943771" type="System">
-                    <param id="0" name="Group name">&quot;esconderImagens&quot;</param>
+                    <param id="0" name="Group name">&quot;esconderQuadros&quot;</param>
                     <param id="1" name="State">0</param>
                 </action>
+                <action id="-12" name="Set group active" sid="4004591286757459" type="System">
+                    <param id="0" name="Group name">&quot;ordenarQuadros&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="0" name="Clear" sid="6938551618889759" type="QuadrosCarregados" />
+                <action id="0" name="Clear" sid="4748713678993514" type="OrdemAtual" />
+                <action id="0" name="Clear" sid="2529640814484306" type="RespostaOrdemQuadros" />
             </actions>
         </event-block>
         <event-block sid="7879974350802997">
@@ -108,7 +115,7 @@
                             <param id="1" name="Value">0</param>
                         </action>
                         <action id="-12" name="Set group active" sid="6395472186335182" type="System">
-                            <param id="0" name="Group name">&quot;visualizarImagens&quot;</param>
+                            <param id="0" name="Group name">&quot;visualizarQuadros&quot;</param>
                             <param id="1" name="State">1</param>
                         </action>
                     </actions>
@@ -133,7 +140,7 @@
                     <param id="1" name="Value">1</param>
                 </action>
                 <action id="-12" name="Set group active" sid="587882631574705" type="System">
-                    <param id="0" name="Group name">&quot;esconderImagens&quot;</param>
+                    <param id="0" name="Group name">&quot;esconderQuadros&quot;</param>
                     <param id="1" name="State">1</param>
                 </action>
             </actions>
@@ -399,20 +406,20 @@
             </sub-events>
         </event-group>
         <comment>Usada no início da execução para tentar carregar os arquivos com estes nomes.&#x0D;&#x0A;Eu até pensei em usar 10 instâncias de um mesmo sprite, mas como a unica maneira de customizá-los seria criar 10 animações e o professor colocar cada quadro em uma animação eu achei melhor 10 sprites diferentes mesmo</comment>
-        <event-group description="" sid="1077548239582358" title="carregarImagens">
+        <event-group description="" sid="1077548239582358" title="carregarQuadros">
             <sub-events>
-                <event-block sid="9104870988701179">
+                <event-block breakpoint="1" sid="9104870988701179">
                     <conditions>
                         <condition id="-1" name="Every tick" sid="4484471508274438" type="System" />
                     </conditions>
                     <actions>
                         <action id="10" name="Load image from URL" sid="7835569480276269" type="Quadro1">
                             <param id="0" name="URI">&quot;1.png&quot;</param>
-                            <param id="1" name="Size">1</param>
+                            <param id="1" name="Size">0</param>
                         </action>
                         <action id="10" name="Load image from URL" sid="6444456088018076" type="Quadro2">
                             <param id="0" name="URI">&quot;2.png&quot;</param>
-                            <param id="1" name="Size">1</param>
+                            <param id="1" name="Size">0</param>
                         </action>
                         <action id="10" name="Load image from URL" sid="7972336346271187" type="Quadro3">
                             <param id="0" name="URI">&quot;3.png&quot;</param>
@@ -446,8 +453,137 @@
                             <param id="0" name="URI">&quot;10.png&quot;</param>
                             <param id="1" name="Size">1</param>
                         </action>
+                    </actions>
+                </event-block>
+                <event-block sid="1559014751096796">
+                    <conditions>
+                        <condition id="-5" name="Compare width" sid="593050505870113" type="Quadro1">
+                            <param id="0" name="Comparison">1</param>
+                            <param id="1" name="Width">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="2" name="Set at X" sid="7320519018766938" type="QuadrosCarregados">
+                            <param id="0" name="X">0</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="4668929667561976">
+                    <conditions>
+                        <condition id="-5" name="Compare width" sid="664066809685533" type="Quadro2">
+                            <param id="0" name="Comparison">1</param>
+                            <param id="1" name="Width">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="2" name="Set at X" sid="3796509182234977" type="QuadrosCarregados">
+                            <param id="0" name="X">1</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-5" name="Set width" sid="8753182132897143" type="Quadro2">
+                            <param id="0" name="Width">160</param>
+                        </action>
+                        <action id="-6" name="Set height" sid="7784499957627556" type="Quadro2">
+                            <param id="0" name="Height">200</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="4217359908209177">
+                    <conditions>
+                        <condition id="6" name="On frame changed" sid="8359268872274455" type="Quadro3" />
+                    </conditions>
+                    <actions>
+                        <action id="2" name="Set at X" sid="80226174590514" type="QuadrosCarregados">
+                            <param id="0" name="X">2</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="2778397081872331">
+                    <conditions>
+                        <condition id="10" name="On image URL loaded" sid="5795548301787068" type="Quadro4" />
+                    </conditions>
+                    <actions>
+                        <action id="2" name="Set at X" sid="5596878347611448" type="QuadrosCarregados">
+                            <param id="0" name="X">3</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="2786098421364289">
+                    <conditions>
+                        <condition id="10" name="On image URL loaded" sid="3259124666751865" type="Quadro5" />
+                    </conditions>
+                    <actions>
+                        <action id="2" name="Set at X" sid="7967710486057154" type="QuadrosCarregados">
+                            <param id="0" name="X">4</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="4176425374943726">
+                    <conditions>
+                        <condition id="10" name="On image URL loaded" sid="8789162106773789" type="Quadro6" />
+                    </conditions>
+                    <actions>
+                        <action id="2" name="Set at X" sid="6926680318728613" type="QuadrosCarregados">
+                            <param id="0" name="X">5</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="9599002897278107">
+                    <conditions>
+                        <condition id="10" name="On image URL loaded" sid="2978986632915168" type="Quadro7" />
+                    </conditions>
+                    <actions>
+                        <action id="2" name="Set at X" sid="3725925728070381" type="QuadrosCarregados">
+                            <param id="0" name="X">6</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="17708957677705">
+                    <conditions>
+                        <condition id="10" name="On image URL loaded" sid="4036524767080062" type="Quadro8" />
+                    </conditions>
+                    <actions>
+                        <action id="2" name="Set at X" sid="2066714477474553" type="QuadrosCarregados">
+                            <param id="0" name="X">7</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="5106620616131451">
+                    <conditions>
+                        <condition id="10" name="On image URL loaded" sid="7846937300255583" type="Quadro9" />
+                    </conditions>
+                    <actions>
+                        <action id="2" name="Set at X" sid="5328804157356469" type="QuadrosCarregados">
+                            <param id="0" name="X">8</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="5451839620365426">
+                    <conditions>
+                        <condition id="10" name="On image URL loaded" sid="5208621805555188" type="Quadro10" />
+                    </conditions>
+                    <actions>
+                        <action id="2" name="Set at X" sid="8032378882093597" type="QuadrosCarregados">
+                            <param id="0" name="X">9</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="6813286573138316">
+                    <conditions>
+                        <condition id="-1" name="Every tick" sid="5453775780848445" type="System" />
+                    </conditions>
+                    <actions>
                         <action id="-12" name="Set group active" sid="8623285727512276" type="System">
-                            <param id="0" name="Group name">&quot;carregarImagens&quot;</param>
+                            <param id="0" name="Group name">&quot;carregarQuadros&quot;</param>
                             <param id="1" name="State">0</param>
                         </action>
                     </actions>
@@ -455,7 +591,7 @@
             </sub-events>
         </event-group>
         <comment>Cada vez que é dado um zoom na parede onde estão os quadros, torna todos eles visíveis</comment>
-        <event-group description="" sid="4439499051293748" title="visualizarImagens">
+        <event-group description="" sid="4439499051293748" title="visualizarQuadros">
             <sub-events>
                 <event-block sid="9104870988701179">
                     <conditions>
@@ -467,6 +603,12 @@
                         </action>
                         <action id="-15" name="Set visible" sid="1164484613551752" type="Quadro2">
                             <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action behavior="DragDrop" id="0" name="Set enabled" sid="2103479779266066" type="Quadro2">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action behavior="ScrollTo" id="1" name="Set enabled" sid="4069848204449904" type="Quadro2">
+                            <param id="0" name="State">1</param>
                         </action>
                         <action id="-15" name="Set visible" sid="2626500877084036" type="Quadro3">
                             <param id="0" name="Visibility">1</param>
@@ -492,8 +634,12 @@
                         <action id="-15" name="Set visible" sid="418014872363379" type="Quadro10">
                             <param id="0" name="Visibility">1</param>
                         </action>
+                        <action id="-12" name="Set group active" sid="1866284735582084" type="System">
+                            <param id="0" name="Group name">&quot;ordenarQuadros&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
                         <action id="-12" name="Set group active" sid="8623285727512276" type="System">
-                            <param id="0" name="Group name">&quot;visualizarImagens&quot;</param>
+                            <param id="0" name="Group name">&quot;visualizarQuadros&quot;</param>
                             <param id="1" name="State">0</param>
                         </action>
                     </actions>
@@ -501,7 +647,7 @@
             </sub-events>
         </event-group>
         <comment>Usado para esconder os quadros quando o zoom na parade onde eles estão é desativado</comment>
-        <event-group description="" sid="9559341389909905" title="esconderImagens">
+        <event-group description="" sid="9559341389909905" title="esconderQuadros">
             <sub-events>
                 <event-block sid="9104870988701179">
                     <conditions>
@@ -513,6 +659,12 @@
                         </action>
                         <action id="-15" name="Set visible" sid="229347725834508" type="Quadro2">
                             <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action behavior="DragDrop" id="0" name="Set enabled" sid="7859246627770075" type="Quadro2">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action behavior="ScrollTo" id="1" name="Set enabled" sid="3207685873540639" type="Quadro2">
+                            <param id="0" name="State">0</param>
                         </action>
                         <action id="-15" name="Set visible" sid="8505982272783691" type="Quadro3">
                             <param id="0" name="Visibility">0</param>
@@ -539,12 +691,13 @@
                             <param id="0" name="Visibility">0</param>
                         </action>
                         <action id="-12" name="Set group active" sid="8623285727512276" type="System">
-                            <param id="0" name="Group name">&quot;esconderImagens&quot;</param>
+                            <param id="0" name="Group name">&quot;esconderQuadros&quot;</param>
                             <param id="1" name="State">0</param>
                         </action>
                     </actions>
                 </event-block>
             </sub-events>
         </event-group>
+        <event-group description="" sid="1147429554170792" title="ordenarQuadros" />
     </events>
 </c2eventsheet>
