@@ -8,6 +8,10 @@
                 <condition id="-2" name="On start of layout" sid="7461295097562547" type="System" />
             </conditions>
             <actions>
+                <action id="-3" name="Set position" sid="1475743840822415" type="player">
+                    <param id="0" name="X">-73</param>
+                    <param id="1" name="Y">592</param>
+                </action>
                 <action id="-4" name="Set position to another object" sid="2250021542160021" type="playerAnim">
                     <param id="0" name="Object">player</param>
                     <param id="1" name="Image point (optional)">0</param>
@@ -22,5 +26,232 @@
                 </action>
             </actions>
         </event-block>
+        <event-block sid="2449858748110358">
+            <conditions>
+                <condition id="-1" name="Every tick" sid="2351072653815331" type="System" />
+            </conditions>
+            <actions>
+                <action id="-7" name="Set size" sid="6652651228174426" type="player">
+                    <param id="0" name="Width">Player.Width</param>
+                    <param id="1" name="Height">Player.Height</param>
+                </action>
+                <action id="-7" name="Set size" sid="9282016907648452" type="playerAnim">
+                    <param id="0" name="Width">playerAnim.Width</param>
+                    <param id="1" name="Height">playerAnim.Height</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="804127888025055">
+            <conditions>
+                <condition id="-4" name="Is outside layout" sid="6818255354847735" type="Porta" />
+            </conditions>
+            <actions>
+                <action id="-9" name="Destroy" sid="8015333300599499" type="Porta" />
+            </actions>
+        </event-block>
+        <event-block sid="932767707794578">
+            <conditions />
+            <actions />
+            <sub-events>
+                <event-block sid="8283465333687756">
+                    <conditions>
+                        <condition id="-1" name="Every tick" sid="781394778948767" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="7267804972894037" type="Porta">
+                            <param id="0" name="Y">Porta.Y-0.5</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-group description="" sid="3597992769117787" title="playerMove2">
+            <sub-events>
+                <event-block any="1" sid="886051769818349">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="4233850284084363" type="Keyboard">
+                            <param id="0" name="Key">87 (W)</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="3568718889827623" type="Keyboard">
+                            <param id="0" name="Key">38 (Up arrow)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Set mirrored" sid="9822145559487989" type="playerAnim">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action behavior="8Direction" id="7" name="Simulate control" sid="1878340586013107" type="player">
+                            <param id="0" name="Control">2</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="7995322854083129" type="playerAnim">
+                            <param id="0" name="Animation">&quot;TrasAndando&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="1073648718502332">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="6327347040317284" type="Keyboard">
+                            <param id="0" name="Key">65 (A)</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="4373097420356784" type="Keyboard">
+                            <param id="0" name="Key">37 (Left arrow)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Set mirrored" sid="8762379555871606" type="playerAnim">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action behavior="8Direction" id="7" name="Simulate control" sid="746543489705338" type="player">
+                            <param id="0" name="Control">0</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="9737196518982497" type="playerAnim">
+                            <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="5000545949328359">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="4713277322495039" type="Keyboard">
+                            <param id="0" name="Key">68 (D)</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="4173237016401887" type="Keyboard">
+                            <param id="0" name="Key">39 (Right arrow)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Set mirrored" sid="7087562587891989" type="playerAnim">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action behavior="8Direction" id="7" name="Simulate control" sid="2271784283006511" type="player">
+                            <param id="0" name="Control">1</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="6254485882063354" type="playerAnim">
+                            <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="4734652613660711">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="5835748217046764" type="Keyboard">
+                            <param id="0" name="Key">83 (S)</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="4026095754677331" type="Keyboard">
+                            <param id="0" name="Key">40 (Down arrow)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Set mirrored" sid="5879645745347407" type="playerAnim">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action behavior="8Direction" id="7" name="Simulate control" sid="5104997928814582" type="player">
+                            <param id="0" name="Control">3</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="9788879231222867" type="playerAnim">
+                            <param id="0" name="Animation">&quot;FrenteAndando&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="1935797903608292">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="1672522179624092" type="Keyboard">
+                            <param id="0" name="Key">87 (W)</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="8201284978751178" type="Keyboard">
+                            <param id="0" name="Key">83 (S)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="4834246602144922" type="playerAnim">
+                            <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="8354452275402989">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="6220732666230287" type="Keyboard">
+                            <param id="0" name="Key">65 (A)</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="2475085317191314" type="Keyboard">
+                            <param id="0" name="Key">68 (D)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="2232296361856226" type="playerAnim">
+                            <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="2497647089710823">
+                    <conditions>
+                        <condition id="3" name="On key released" sid="8156389818220177" type="Keyboard">
+                            <param id="0" name="Key">87 (W)</param>
+                        </condition>
+                        <condition id="3" name="On key released" sid="329258926285736" type="Keyboard">
+                            <param id="0" name="Key">38 (Up arrow)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="9666531456892784" type="playerAnim">
+                            <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="9847582645370134">
+                    <conditions>
+                        <condition id="3" name="On key released" sid="1253503439780213" type="Keyboard">
+                            <param id="0" name="Key">83 (S)</param>
+                        </condition>
+                        <condition id="3" name="On key released" sid="6154322833894684" type="Keyboard">
+                            <param id="0" name="Key">40 (Down arrow)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="1341736241962883" type="playerAnim">
+                            <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="3107837508438596">
+                    <conditions>
+                        <condition id="3" name="On key released" sid="809485099373934" type="Keyboard">
+                            <param id="0" name="Key">65 (A)</param>
+                        </condition>
+                        <condition id="3" name="On key released" sid="6685311050567999" type="Keyboard">
+                            <param id="0" name="Key">37 (Left arrow)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="1133648629542988" type="playerAnim">
+                            <param id="0" name="Animation">&quot;EsquerdaParado&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="7843945116692368">
+                    <conditions>
+                        <condition id="3" name="On key released" sid="4531612205850931" type="Keyboard">
+                            <param id="0" name="Key">68 (D)</param>
+                        </condition>
+                        <condition id="3" name="On key released" sid="1169216120938816" type="Keyboard">
+                            <param id="0" name="Key">39 (Right arrow)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="8640380066224353" type="playerAnim">
+                            <param id="0" name="Animation">&quot;DireitaParado&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
     </events>
 </c2eventsheet>
