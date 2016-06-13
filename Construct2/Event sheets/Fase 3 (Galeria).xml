@@ -11,6 +11,8 @@
         <variable constant="0" name="numeroQuadros" sid="6183659102926416" static="0" type="number">5</variable>
         <comment>Utilizado para controlar os quadros</comment>
         <variable constant="0" name="Quadro" sid="9484829510491368" static="0" type="number">1</variable>
+        <comment>Serve para verificar quando o jogador colocou todos os quadros na ordem correta</comment>
+        <variable constant="0" name="RespostaCerta" sid="4963452372930093" static="0" type="number">0</variable>
         <event-block sid="5554538898794456">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="3689958973850941" type="System" />
@@ -40,10 +42,12 @@
                     <param id="1" name="State">0</param>
                 </action>
                 <action id="-12" name="Set group active" sid="4004591286757459" type="System">
-                    <param id="0" name="Group name">&quot;ordenarQuadros&quot;</param>
+                    <param id="0" name="Group name">&quot;operacoesQuadros&quot;</param>
                     <param id="1" name="State">0</param>
                 </action>
                 <action id="0" name="Load JSON" sid="6934720499260367" type="QuadrosJSON" />
+                <action id="0" name="Clear" sid="6757824165300672" type="Resposta" />
+                <action id="0" name="Clear" sid="9701182539403744" type="OrdemAtual" />
             </actions>
         </event-block>
         <event-block sid="7879974350802997">
@@ -187,6 +191,29 @@
                 </event-block>
             </sub-events>
         </event-block>
+        <comment>Blocos 11 e 12 servem para que só seja modificado o vetor com a ordem dos quadros quando o jogador soltar o quadro que ele estiver arrastando</comment>
+        <event-block sid="8510538776884853">
+            <conditions>
+                <condition behavior="DragDrop" id="0" name="Is dragging" sid="6326581813458748" type="Quadros" />
+            </conditions>
+            <actions>
+                <action id="-12" name="Set group active" sid="4108876777246292" type="System">
+                    <param id="0" name="Group name">&quot;operacoesQuadros&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="7745757215299397">
+            <conditions>
+                <condition behavior="DragDrop" id="2" name="On drop" sid="9737852282607683" type="Quadros" />
+            </conditions>
+            <actions>
+                <action id="-12" name="Set group active" sid="9301324868269133" type="System">
+                    <param id="0" name="Group name">&quot;operacoesQuadros&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+            </actions>
+        </event-block>
         <comment>Usada no início da execução para carregar aos quadros com estes nomes, sendo que eles devem possuir 160X200, pois o tiledBackground não possui uma maneira de dar zoom in/zoom out na imagem</comment>
         <event-group description="" sid="1077548239582358" title="carregarQuadros">
             <sub-events>
@@ -221,6 +248,14 @@
                             <actions>
                                 <action id="2" name="Load image from URL" sid="3219540313214675" type="Quadros">
                                     <param id="0" name="URI">Quadro&amp;&quot;.png&quot;</param>
+                                </action>
+                                <action id="2" name="Set at X" sid="4129478874464819" type="Resposta">
+                                    <param id="0" name="X">Quadro-1</param>
+                                    <param id="1" name="Value">int(QuadrosJSON.GetData(&quot;resposta&quot;,Quadro-1))</param>
+                                </action>
+                                <action id="2" name="Set at X" sid="6557034466640411" type="OrdemAtual">
+                                    <param id="0" name="X">Quadro-1</param>
+                                    <param id="1" name="Value">Quadro</param>
                                 </action>
                                 <action id="-10" name="Add to" sid="8700776613475758" type="System">
                                     <param id="0" name="Variable">Quadro</param>
@@ -260,8 +295,16 @@
                         <action behavior="ScrollTo" id="1" name="Set enabled" sid="3271296346173611" type="Quadros">
                             <param id="0" name="State">1</param>
                         </action>
+                        <action id="-9" name="Set value" sid="4750985235113909" type="System">
+                            <param id="0" name="Variable">Quadro</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="9292419625035629" type="System">
+                            <param id="0" name="Variable">RespostaCerta</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
                         <action id="-12" name="Set group active" sid="1866284735582084" type="System">
-                            <param id="0" name="Group name">&quot;ordenarQuadros&quot;</param>
+                            <param id="0" name="Group name">&quot;operacoesQuadros&quot;</param>
                             <param id="1" name="State">1</param>
                         </action>
                         <action id="-12" name="Set group active" sid="8623285727512276" type="System">
@@ -289,6 +332,10 @@
                         <action behavior="ScrollTo" id="1" name="Set enabled" sid="7391456113269446" type="Quadros">
                             <param id="0" name="State">0</param>
                         </action>
+                        <action id="-12" name="Set group active" sid="1805457004459601" type="System">
+                            <param id="0" name="Group name">&quot;operacoesQuadros&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
                         <action id="-12" name="Set group active" sid="8623285727512276" type="System">
                             <param id="0" name="Group name">&quot;esconderQuadros&quot;</param>
                             <param id="1" name="State">0</param>
@@ -297,7 +344,288 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <event-group description="" sid="1147429554170792" title="ordenarQuadros" />
+        <comment>Usado para realizar operações com os quadros enquanto o zoom neles está ativo</comment>
+        <event-group description="" sid="1147429554170792" title="operacoesQuadros">
+            <sub-events>
+                <comment>Dos blocos 24-33 é para obter a ordem atual dos quadros, dos blocos 34-41 é para verificar se o jogador já colocou os quadros na ordem correta</comment>
+                <event-block sid="6314231578562101">
+                    <conditions>
+                        <condition id="-1" name="Every tick" sid="1244109718023936" type="System" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="7015617868322553">
+                            <conditions>
+                                <condition id="-15" name="Pick nearest/furthest" sid="30200312459867" type="Quadros">
+                                    <param id="0" name="Which">0</param>
+                                    <param id="1" name="X">192</param>
+                                    <param id="2" name="Y">234</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Set at X" sid="524482643216536" type="OrdemAtual">
+                                    <param id="0" name="X">0</param>
+                                    <param id="1" name="Value">Quadros.UID-175</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="7909486543972121">
+                            <conditions>
+                                <condition id="-15" name="Pick nearest/furthest" sid="5051681976290594" type="Quadros">
+                                    <param id="0" name="Which">0</param>
+                                    <param id="1" name="X">417</param>
+                                    <param id="2" name="Y">234</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Set at X" sid="4221902178715356" type="OrdemAtual">
+                                    <param id="0" name="X">1</param>
+                                    <param id="1" name="Value">Quadros.UID-175</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="5274529995472093">
+                            <conditions>
+                                <condition id="-15" name="Pick nearest/furthest" sid="1929019721270545" type="Quadros">
+                                    <param id="0" name="Which">0</param>
+                                    <param id="1" name="X">642</param>
+                                    <param id="2" name="Y">234</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Set at X" sid="989377206609391" type="OrdemAtual">
+                                    <param id="0" name="X">2</param>
+                                    <param id="1" name="Value">Quadros.UID-175</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="3445942230907965">
+                            <conditions>
+                                <condition id="-15" name="Pick nearest/furthest" sid="2751646724777779" type="Quadros">
+                                    <param id="0" name="Which">0</param>
+                                    <param id="1" name="X">867</param>
+                                    <param id="2" name="Y">234</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Set at X" sid="6924104627436953" type="OrdemAtual">
+                                    <param id="0" name="X">3</param>
+                                    <param id="1" name="Value">Quadros.UID-175</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="672594894931518">
+                            <conditions>
+                                <condition id="-15" name="Pick nearest/furthest" sid="5700878756138722" type="Quadros">
+                                    <param id="0" name="Which">0</param>
+                                    <param id="1" name="X">1092</param>
+                                    <param id="2" name="Y">234</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Set at X" sid="3307858436824764" type="OrdemAtual">
+                                    <param id="0" name="X">4</param>
+                                    <param id="1" name="Value">Quadros.UID-175</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="6395672867343837">
+                            <conditions>
+                                <condition id="-15" name="Pick nearest/furthest" sid="6194744444951365" type="Quadros">
+                                    <param id="0" name="Which">0</param>
+                                    <param id="1" name="X">192</param>
+                                    <param id="2" name="Y">459</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Set at X" sid="8624934973036096" type="OrdemAtual">
+                                    <param id="0" name="X">5</param>
+                                    <param id="1" name="Value">Quadros.UID-175</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="7127394097304743">
+                            <conditions>
+                                <condition id="-15" name="Pick nearest/furthest" sid="2456025274757944" type="Quadros">
+                                    <param id="0" name="Which">0</param>
+                                    <param id="1" name="X">417</param>
+                                    <param id="2" name="Y">459</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Set at X" sid="8191381764329272" type="OrdemAtual">
+                                    <param id="0" name="X">6</param>
+                                    <param id="1" name="Value">Quadros.UID-175</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="6548696962653867">
+                            <conditions>
+                                <condition id="-15" name="Pick nearest/furthest" sid="4093654740575174" type="Quadros">
+                                    <param id="0" name="Which">0</param>
+                                    <param id="1" name="X">642</param>
+                                    <param id="2" name="Y">459</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Set at X" sid="8173936970650893" type="OrdemAtual">
+                                    <param id="0" name="X">7</param>
+                                    <param id="1" name="Value">Quadros.UID-175</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="98791778432185">
+                            <conditions>
+                                <condition id="-15" name="Pick nearest/furthest" sid="6496592417500392" type="Quadros">
+                                    <param id="0" name="Which">0</param>
+                                    <param id="1" name="X">867</param>
+                                    <param id="2" name="Y">459</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Set at X" sid="8992989591848388" type="OrdemAtual">
+                                    <param id="0" name="X">8</param>
+                                    <param id="1" name="Value">Quadros.UID-175</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="9605355688776813">
+                            <conditions>
+                                <condition id="-15" name="Pick nearest/furthest" sid="7319523355351856" type="Quadros">
+                                    <param id="0" name="Which">0</param>
+                                    <param id="1" name="X">1092</param>
+                                    <param id="2" name="Y">459</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Set at X" sid="1607791146700279" type="OrdemAtual">
+                                    <param id="0" name="X">9</param>
+                                    <param id="1" name="Value">Quadros.UID-175</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="9481058079539814">
+                            <conditions>
+                                <condition id="-23" name="While" sid="1495455817386922" type="System" />
+                                <condition id="-14" name="Compare variable" sid="6428938269478798" type="System">
+                                    <param id="0" name="Variable">Quadro</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">numeroQuadros</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="7935180037940814">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="7171724563426901" type="System">
+                                            <param id="0" name="First value">OrdemAtual.At(Quadro-1)</param>
+                                            <param id="1" name="Comparison">1</param>
+                                            <param id="2" name="Second value">Resposta.At(Quadro-1)</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="6582238518056433" type="System">
+                                            <param id="0" name="Variable">Quadro</param>
+                                            <param id="1" name="Value">numeroQuadros + 1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="3525393247056539">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="7895563149112456" type="System">
+                                            <param id="0" name="Variable">Quadro</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">numeroQuadros</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="6444455004539269" type="System">
+                                            <param id="0" name="Variable">RespostaCerta</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="9407613655833625">
+                                    <conditions>
+                                        <condition id="-1" name="Every tick" sid="253745312315403" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="738160342329337" type="System">
+                                            <param id="0" name="Variable">Quadro</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="8097234656603702">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="1444986344672336" type="System">
+                                    <param id="0" name="Variable">RespostaCerta</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Wait" sid="9399743302151576" type="System">
+                                    <param id="0" name="Seconds">1.0</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="6683921056154097" type="areaSelecao" />
+                                <action id="-15" name="Set visible" sid="9030443069814387" type="Quadros">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action behavior="DragDrop" id="0" name="Set enabled" sid="8745449081188446" type="Quadros">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                                <action behavior="ScrollTo" id="1" name="Set enabled" sid="5464480026384696" type="Quadros">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="6085935778562451">
+                                    <conditions>
+                                        <condition id="-1" name="Every tick" sid="8311248685635901" type="System" />
+                                        <condition id="-10" name="Compare opacity" sid="8871323319716001" type="QuadrosTeste">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Opacity">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Set opacity" sid="4208535028306787" type="QuadrosTeste">
+                                            <param id="0" name="Opacity">QuadrosTeste.Opacity - 2.5</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block disabled="1" sid="750325561758365">
+                                    <conditions>
+                                        <condition id="-10" name="Compare opacity" sid="7381590799526875" type="QuadrosTeste">
+                                            <param id="0" name="Comparison">0</param>
+                                            <param id="1" name="Opacity">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Go to layout" sid="4849866285031774" type="System">
+                                            <param id="0" name="Layout">Fase Final (Campo Minado)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="2007500730422509">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="8636901681304806" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="5646937744429254" type="System">
+                                    <param id="0" name="Variable">Quadro</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
         <event-group description="" sid="9167526691083547" title="playerMove3">
             <sub-events>
                 <event-block any="1" sid="2583311756782099">
