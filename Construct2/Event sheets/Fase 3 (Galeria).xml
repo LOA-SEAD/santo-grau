@@ -4,15 +4,29 @@
     <name>Fase 3 (Galeria)</name>
     <events>
         <comment>Utilizada para controlar a animação de desaparecer o zoom nos quadros</comment>
-        <variable constant="0" name="FinalizarAnimacao" sid="4166087937899186" static="0" type="number">0</variable>
+        <variable constant="0" name="finalizarAnimacao" sid="4166087937899186" static="0" type="number">0</variable>
         <comment>Utilizada para controlar a animação de aparecer o zoom nos quadros</comment>
-        <variable constant="0" name="IniciarAnimacao" sid="9293790244686083" static="0" type="number">0</variable>
+        <variable constant="0" name="iniciarAnimacao" sid="9293790244686083" static="0" type="number">0</variable>
         <comment>Carregado de um arquivo .json para obter quantas imagens o professor irá submeter nesta fase</comment>
         <variable constant="0" name="numeroQuadros" sid="6183659102926416" static="0" type="number">5</variable>
         <comment>Utilizado para controlar os quadros</comment>
-        <variable constant="0" name="Quadro" sid="9484829510491368" static="0" type="number">1</variable>
+        <variable constant="0" name="quadro" sid="9484829510491368" static="0" type="number">1</variable>
         <comment>Serve para verificar quando o jogador colocou todos os quadros na ordem correta</comment>
-        <variable constant="0" name="RespostaCerta" sid="4963452372930093" static="0" type="number">0</variable>
+        <variable constant="0" name="respostaCerta" sid="4963452372930093" static="0" type="number">0</variable>
+        <comment>Serve para marcar o tamanho do diálogo que irá ocorrer naquele momento para saber quantas vezes será lido falas no arquivo .json</comment>
+        <variable constant="0" name="tamanhoDialogoGAL" sid="3074215324388088" static="0" type="number">0</variable>
+        <comment>Marca qual é a frase que está sendo mostrada para o jogador</comment>
+        <variable constant="0" name="fraseAtualGAL" sid="5924981274464954" static="0" type="number">0</variable>
+        <comment>Utilizada para controlar o momento em que será carregado o balão de diálogo</comment>
+        <variable constant="0" name="carregarBalaoDialogoGAL" sid="4124652019518869" static="0" type="number">0</variable>
+        <comment>Utilizada para inserir nos objetos text o texto que será mostrado para o jogador</comment>
+        <variable constant="0" name="inserirDialogosGAL" sid="4075976820759151" static="0" type="number">0</variable>
+        <comment>Utilizado para marcar quando se deve carregar as falas do diálogo</comment>
+        <variable constant="0" name="carregarDialogosGAL" sid="6941809969177949" static="0" type="number">0</variable>
+        <comment>Utilizado para marcar quando se deve descarregar as falas do diálogo</comment>
+        <variable constant="0" name="descarregarDialogosGAL" sid="5863083947421018" static="0" type="number">0</variable>
+        <comment>Utilizado para controle do momento em que o jogador pode avançar as falas</comment>
+        <variable constant="0" name="avancarDialogosGAL" sid="2434999407990406" static="0" type="number">0</variable>
         <event-block sid="5554538898794456">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="3689958973850941" type="System" />
@@ -45,9 +59,26 @@
                     <param id="0" name="Group name">&quot;operacoesQuadros&quot;</param>
                     <param id="1" name="State">0</param>
                 </action>
+                <action id="-12" name="Set group active" sid="8320997029302187" type="System">
+                    <param id="0" name="Group name">&quot;dialogoGaleria&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="0" name="Load JSON" sid="4808618138882582" type="DialogosJSON" />
                 <action id="0" name="Load JSON" sid="6934720499260367" type="QuadrosJSON" />
                 <action id="0" name="Clear" sid="6757824165300672" type="Resposta" />
                 <action id="0" name="Clear" sid="9701182539403744" type="OrdemAtual" />
+                <action id="-16" name="Set opacity" sid="1926515396501819" type="Dialogo">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="493891802638083" type="Avancar">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="2045096423416115" type="Personagem">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="8066285981259156" type="Dialogos">
+                    <param id="0" name="Opacity">0</param>
+                </action>
             </actions>
         </event-block>
         <event-block sid="7879974350802997">
@@ -78,16 +109,32 @@
                 </condition>
             </conditions>
             <actions>
-                <action id="-9" name="Set value" sid="429080087630228" type="System">
-                    <param id="0" name="Variable">IniciarAnimacao</param>
+                <action id="-9" name="Set value" sid="3847613789192533" type="System">
+                    <param id="0" name="Variable">tamanhoDialogoGAL</param>
+                    <param id="1" name="Value">4</param>
+                </action>
+                <action id="-9" name="Set value" sid="7926800931931627" type="System">
+                    <param id="0" name="Variable">carregarBalaoDialogoGAL</param>
                     <param id="1" name="Value">1</param>
+                </action>
+                <action behavior="8Direction" disabled="1" id="2" name="Set ignoring input" sid="7328576306855004" type="player">
+                    <param id="0" name="Input">1</param>
+                </action>
+                <action id="2" name="Stop" sid="2950220598687543" type="playerAnim" />
+                <action id="-12" name="Set group active" sid="9391033416436006" type="System">
+                    <param id="0" name="Group name">&quot;playerMoveGAL&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="5040351626937007" type="System">
+                    <param id="0" name="Group name">&quot;dialogoGaleria&quot;</param>
+                    <param id="1" name="State">1</param>
                 </action>
             </actions>
         </event-block>
         <event-block sid="3988945501635567">
             <conditions>
                 <condition id="-14" name="Compare variable" sid="8399356402495472" type="System">
-                    <param id="0" name="Variable">IniciarAnimacao</param>
+                    <param id="0" name="Variable">iniciarAnimacao</param>
                     <param id="1" name="Comparison">0</param>
                     <param id="2" name="Value">1</param>
                 </condition>
@@ -117,7 +164,7 @@
                     </conditions>
                     <actions>
                         <action id="-9" name="Set value" sid="8491817895597313" type="System">
-                            <param id="0" name="Variable">IniciarAnimacao</param>
+                            <param id="0" name="Variable">iniciarAnimacao</param>
                             <param id="1" name="Value">0</param>
                         </action>
                         <action id="-12" name="Set group active" sid="6395472186335182" type="System">
@@ -142,7 +189,7 @@
             </conditions>
             <actions>
                 <action id="-9" name="Set value" sid="7833411403449488" type="System">
-                    <param id="0" name="Variable">FinalizarAnimacao</param>
+                    <param id="0" name="Variable">finalizarAnimacao</param>
                     <param id="1" name="Value">1</param>
                 </action>
                 <action id="-12" name="Set group active" sid="587882631574705" type="System">
@@ -154,7 +201,7 @@
         <event-block sid="2909495655769617">
             <conditions>
                 <condition id="-14" name="Compare variable" sid="3418735951163016" type="System">
-                    <param id="0" name="Variable">FinalizarAnimacao</param>
+                    <param id="0" name="Variable">finalizarAnimacao</param>
                     <param id="1" name="Comparison">0</param>
                     <param id="2" name="Value">1</param>
                 </condition>
@@ -184,7 +231,7 @@
                     </conditions>
                     <actions>
                         <action id="-9" name="Set value" sid="9860826632281608" type="System">
-                            <param id="0" name="Variable">FinalizarAnimacao</param>
+                            <param id="0" name="Variable">finalizarAnimacao</param>
                             <param id="1" name="Value">0</param>
                         </action>
                     </actions>
@@ -232,7 +279,7 @@
                     <conditions>
                         <condition id="-23" name="While" sid="3021253507963165" type="System" />
                         <condition id="-14" name="Compare variable" sid="1482370420548229" type="System">
-                            <param id="0" name="Variable">Quadro</param>
+                            <param id="0" name="Variable">quadro</param>
                             <param id="1" name="Comparison">3</param>
                             <param id="2" name="Value">numeroQuadros</param>
                         </condition>
@@ -258,7 +305,7 @@
                                     <param id="1" name="Value">Quadro</param>
                                 </action>
                                 <action id="-10" name="Add to" sid="8700776613475758" type="System">
-                                    <param id="0" name="Variable">Quadro</param>
+                                    <param id="0" name="Variable">quadro</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
@@ -275,6 +322,380 @@
                             <param id="1" name="State">0</param>
                         </action>
                     </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <comment>Controla os diálogos entre a personagem e Bert. Estes diálogos ficaram em um arquivo .json ou não?</comment>
+        <event-group description="" sid="1573909898037785" title="dialogoGaleria">
+            <sub-events>
+                <event-block sid="7864321511827534">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="6139243193522705" type="System">
+                            <param id="0" name="Variable">carregarBalaoDialogoGAL</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="6947965155873984">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="1153563277756434" type="System" />
+                                <condition id="-10" name="Compare opacity" sid="8122682219136367" type="Dialogo">
+                                    <param id="0" name="Comparison">2</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="913413046183617" type="Avancar">
+                                    <param id="0" name="Opacity">Avancar.Opacity + 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="6391924252284335" type="Dialogo">
+                                    <param id="0" name="Opacity">Dialogo.Opacity + 2.5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="1063766848155857">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="2666635763728809" type="Dialogo">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="7064480727097253" type="System">
+                                    <param id="0" name="Variable">carregarBalaoDialogoGAL</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="3750448601983108" type="System">
+                                    <param id="0" name="Variable">inserirDialogosGAL</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="4212819327572353">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="1978286095861282" type="System">
+                            <param id="0" name="Variable">inserirDialogosGAL</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set text" sid="9850614298075376" type="Personagem">
+                            <param id="0" name="Text">DialogosJSON.GetData(&quot;Galeria&quot; &amp; fraseAtualGAL, 0)</param>
+                        </action>
+                        <action id="0" name="Set text" sid="6097330422489349" type="Dialogos">
+                            <param id="0" name="Text">DialogosJSON.GetData(&quot;Galeria&quot; &amp; fraseAtualGAL, 1)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="5736202123258391" type="System">
+                            <param id="0" name="Variable">carregarDialogosGAL</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="734770583771572" type="System">
+                            <param id="0" name="Variable">inserirDialogosGAL</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="1958240678512671">
+                            <conditions>
+                                <condition disabled="1" id="-14" name="Compare variable" sid="6035896821592691" type="System">
+                                    <param id="0" name="Variable">fraseAtualGAL</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                        <event-block disabled="1" sid="2534127930164677">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="6110592287868426" type="System">
+                                    <param id="0" name="Variable">fraseAtualGAL</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                        <event-block disabled="1" sid="6150872176562381">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="7427591956836169" type="System">
+                                    <param id="0" name="Variable">fraseAtualGAL</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                        <event-block disabled="1" sid="8639570534632045">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="7627999340865364" type="System">
+                                    <param id="0" name="Variable">fraseAtualGAL</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">3</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                        <event-block disabled="1" sid="8363787348218343">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="1702030560726931" type="System">
+                                    <param id="0" name="Variable">fraseAtualGAL</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">4</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                        <event-block disabled="1" sid="9006384246508607">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="1264739221518588" type="System">
+                                    <param id="0" name="Variable">fraseAtualGAL</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">5</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="6562674761415342">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="2057155147115209" type="System">
+                            <param id="0" name="Variable">carregarDialogosGAL</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="3865695801829001">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="4762155467233548" type="System" />
+                                <condition id="-10" name="Compare opacity" sid="1083983620420042" type="Dialogos">
+                                    <param id="0" name="Comparison">2</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="6420037409351896" type="Personagem">
+                                    <param id="0" name="Opacity">Personagem.Opacity + 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="9486876649278532" type="Dialogos">
+                                    <param id="0" name="Opacity">Dialogos.Opacity + 2.5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="128118744092674">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="6676818522652748" type="Dialogos">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="2300360818317934" type="System">
+                                    <param id="0" name="Variable">avancarDialogosGAL</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action breakpoint="1" id="-9" name="Set value" sid="6277415436725126" type="System">
+                                    <param id="0" name="Variable">carregarDialogosGAL</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="6012476314306541">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="993470401340621" type="System">
+                            <param id="0" name="Variable">avancarDialogosGAL</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="967206266723503">
+                            <conditions>
+                                <condition id="6" name="On object clicked" sid="7262807909701723" type="Mouse">
+                                    <param id="0" name="Mouse button">0</param>
+                                    <param id="1" name="Click type">0</param>
+                                    <param id="2" name="Object clicked">selAvancar</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="2835356462809307" type="System">
+                                    <param id="0" name="Variable">descarregarDialogosGAL</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="1151726365250803" type="System">
+                                    <param id="0" name="Variable">avancarDialogosGAL</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="3684460480267711">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="6643990683784331" type="System">
+                            <param id="0" name="Variable">descarregarDialogosGAL</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="9752645512717703">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="8533615797836688" type="System" />
+                                <condition id="-10" name="Compare opacity" sid="2022028121915767" type="Dialogos">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="4004250315959297" type="Personagem">
+                                    <param id="0" name="Opacity">Personagem.Opacity - 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="2982996949466901" type="Dialogos">
+                                    <param id="0" name="Opacity">Dialogos.Opacity - 2.5</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <comment>Esta comparação é devido a um bug caso ocorra uma escolha de alternativa mais rápida do que o texto sendo limpo</comment>
+                                <event-block sid="6235115272108113">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="5468776926063931" type="System">
+                                            <param id="0" name="Variable">carregarDialogosGAL</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="7544727634461249" type="System">
+                                            <param id="0" name="Variable">carregarBalaoDialogoGAL</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="9971774148349686">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="5489908162637236" type="Dialogos">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="1655110943677482">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="8281589974273678" type="System">
+                                            <param id="0" name="First value">fraseAtualGAL</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">tamanhoDialogoGAL</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="8780816480840603">
+                                            <conditions>
+                                                <condition id="-1" name="Every tick" sid="8648319375542872" type="System" />
+                                                <condition id="-10" name="Compare opacity" sid="4855550661841529" type="Dialogo">
+                                                    <param id="0" name="Comparison">4</param>
+                                                    <param id="1" name="Opacity">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Set opacity" sid="7957299445376175" type="Avancar">
+                                                    <param id="0" name="Opacity">Avancar.Opacity - 2.5</param>
+                                                </action>
+                                                <action id="-16" name="Set opacity" sid="8209586396246137" type="Dialogo">
+                                                    <param id="0" name="Opacity">Dialogo.Opacity - 2.5</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <comment>Embora será fechada a caixa de diálogo, adiciona-se um no indice da frase pois podem ter mais diálogos depois</comment>
+                                        <event-block sid="8636057356561711">
+                                            <conditions>
+                                                <condition id="-10" name="Compare opacity" sid="9125666550510349" type="Dialogo">
+                                                    <param id="0" name="Comparison">0</param>
+                                                    <param id="1" name="Opacity">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-10" name="Add to" sid="4270841858966979" type="System">
+                                                    <param id="0" name="Variable">fraseAtualGAL</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="4135822565429336" type="System">
+                                                    <param id="0" name="Variable">descarregarDialogosGAL</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                                <action id="-12" name="Set group active" sid="3130328104406448" type="System">
+                                                    <param id="0" name="Group name">&quot;dialogoGaleria&quot;</param>
+                                                    <param id="1" name="State">0</param>
+                                                </action>
+                                            </actions>
+                                            <sub-events>
+                                                <event-block sid="9943489211213957">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="3765279253707684" type="System">
+                                                            <param id="0" name="Variable">tamanhoDialogoGAL</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">4</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-9" name="Set value" sid="429080087630228" type="System">
+                                                            <param id="0" name="Variable">iniciarAnimacao</param>
+                                                            <param id="1" name="Value">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="6260428200640797">
+                                                    <conditions>
+                                                        <condition id="-22" name="Else" sid="2864854961540279" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-12" name="Set group active" sid="4849866285031774" type="System">
+                                                            <param id="0" name="Group name">&quot;playerMoveGAL&quot;</param>
+                                                            <param id="1" name="State">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="5630013193041494">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="3794480225929178" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="9286553841062039" type="System">
+                                            <param id="0" name="Variable">fraseAtualGAL</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="4555938386400547" type="System">
+                                            <param id="0" name="Variable">inserirDialogosGAL</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="3773442136975277" type="System">
+                                            <param id="0" name="Variable">descarregarDialogosGAL</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
@@ -296,11 +717,11 @@
                             <param id="0" name="State">1</param>
                         </action>
                         <action id="-9" name="Set value" sid="4750985235113909" type="System">
-                            <param id="0" name="Variable">Quadro</param>
+                            <param id="0" name="Variable">quadro</param>
                             <param id="1" name="Value">1</param>
                         </action>
                         <action id="-9" name="Set value" sid="9292419625035629" type="System">
-                            <param id="0" name="Variable">RespostaCerta</param>
+                            <param id="0" name="Variable">respostaCerta</param>
                             <param id="1" name="Value">0</param>
                         </action>
                         <action id="-12" name="Set group active" sid="1866284735582084" type="System">
@@ -347,7 +768,7 @@
         <comment>Usado para realizar operações com os quadros enquanto o zoom neles está ativo</comment>
         <event-group description="" sid="1147429554170792" title="operacoesQuadros">
             <sub-events>
-                <comment>Dos blocos 24-33 é para obter a ordem atual dos quadros, dos blocos 34-41 é para verificar se o jogador já colocou os quadros na ordem correta</comment>
+                <comment>Dos blocos 50-59 é para obter a ordem atual dos quadros, dos blocos 60-67 é para verificar se o jogador já colocou os quadros na ordem correta</comment>
                 <event-block sid="6314231578562101">
                     <conditions>
                         <condition id="-1" name="Every tick" sid="1244109718023936" type="System" />
@@ -508,7 +929,7 @@
                             <conditions>
                                 <condition id="-23" name="While" sid="1495455817386922" type="System" />
                                 <condition id="-14" name="Compare variable" sid="6428938269478798" type="System">
-                                    <param id="0" name="Variable">Quadro</param>
+                                    <param id="0" name="Variable">quadro</param>
                                     <param id="1" name="Comparison">3</param>
                                     <param id="2" name="Value">numeroQuadros</param>
                                 </condition>
@@ -525,7 +946,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-9" name="Set value" sid="6582238518056433" type="System">
-                                            <param id="0" name="Variable">Quadro</param>
+                                            <param id="0" name="Variable">quadro</param>
                                             <param id="1" name="Value">numeroQuadros + 1</param>
                                         </action>
                                     </actions>
@@ -533,14 +954,14 @@
                                 <event-block sid="3525393247056539">
                                     <conditions>
                                         <condition id="-14" name="Compare variable" sid="7895563149112456" type="System">
-                                            <param id="0" name="Variable">Quadro</param>
+                                            <param id="0" name="Variable">quadro</param>
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">numeroQuadros</param>
                                         </condition>
                                     </conditions>
                                     <actions>
                                         <action id="-9" name="Set value" sid="6444455004539269" type="System">
-                                            <param id="0" name="Variable">RespostaCerta</param>
+                                            <param id="0" name="Variable">respostaCerta</param>
                                             <param id="1" name="Value">1</param>
                                         </action>
                                     </actions>
@@ -551,7 +972,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-10" name="Add to" sid="738160342329337" type="System">
-                                            <param id="0" name="Variable">Quadro</param>
+                                            <param id="0" name="Variable">quadro</param>
                                             <param id="1" name="Value">1</param>
                                         </action>
                                     </actions>
@@ -561,7 +982,7 @@
                         <event-block sid="8097234656603702">
                             <conditions>
                                 <condition id="-14" name="Compare variable" sid="1444986344672336" type="System">
-                                    <param id="0" name="Variable">RespostaCerta</param>
+                                    <param id="0" name="Variable">respostaCerta</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">1</param>
                                 </condition>
@@ -596,7 +1017,7 @@
                                         </action>
                                     </actions>
                                 </event-block>
-                                <event-block disabled="1" sid="750325561758365">
+                                <event-block sid="750325561758365">
                                     <conditions>
                                         <condition id="-10" name="Compare opacity" sid="7381590799526875" type="QuadrosTeste">
                                             <param id="0" name="Comparison">0</param>
@@ -604,8 +1025,21 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="-2" name="Go to layout" sid="4849866285031774" type="System">
-                                            <param id="0" name="Layout">Fase Final (Campo Minado)</param>
+                                        <action id="-9" name="Set value" sid="1405052962396852" type="System">
+                                            <param id="0" name="Variable">tamanhoDialogoGAL</param>
+                                            <param id="1" name="Value">5</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="9923358796331521" type="System">
+                                            <param id="0" name="Variable">carregarBalaoDialogoGAL</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="7534728744589873" type="System">
+                                            <param id="0" name="Group name">&quot;operacoesQuadros&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="3702966218392608" type="System">
+                                            <param id="0" name="Group name">&quot;dialogoGaleria&quot;</param>
+                                            <param id="1" name="State">1</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -617,7 +1051,7 @@
                             </conditions>
                             <actions>
                                 <action id="-9" name="Set value" sid="5646937744429254" type="System">
-                                    <param id="0" name="Variable">Quadro</param>
+                                    <param id="0" name="Variable">quadro</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
@@ -626,7 +1060,7 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <event-group description="" sid="9167526691083547" title="playerMove3">
+        <event-group description="" sid="9167526691083547" title="playerMoveGAL">
             <sub-events>
                 <event-block any="1" sid="2583311756782099">
                     <conditions>
