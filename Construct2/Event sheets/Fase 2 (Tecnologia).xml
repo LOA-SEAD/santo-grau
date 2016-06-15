@@ -8,8 +8,8 @@
                 <condition id="-2" name="On start of layout" sid="7461295097562547" type="System" />
             </conditions>
             <actions>
-                <action id="-3" name="Set position" sid="1475743840822415" type="player">
-                    <param id="0" name="X">-73</param>
+                <action disabled="1" id="-3" name="Set position" sid="1475743840822415" type="player">
+                    <param id="0" name="X">73</param>
                     <param id="1" name="Y">592</param>
                 </action>
                 <action id="-4" name="Set position to another object" sid="2250021542160021" type="playerAnim">
@@ -31,40 +31,232 @@
                 <condition id="-1" name="Every tick" sid="2351072653815331" type="System" />
             </conditions>
             <actions>
-                <action id="-7" name="Set size" sid="6652651228174426" type="player">
-                    <param id="0" name="Width">Player.Width</param>
-                    <param id="1" name="Height">Player.Height</param>
+                <action id="-7" name="Set size" sid="2044452179357808" type="player">
+                    <param id="0" name="Width">(1-((592-Player.Y)*0.001151))*145</param>
+                    <param id="1" name="Height">(1-((592-Player.Y)*0.001151))*255</param>
                 </action>
-                <action id="-7" name="Set size" sid="9282016907648452" type="playerAnim">
-                    <param id="0" name="Width">playerAnim.Width</param>
-                    <param id="1" name="Height">playerAnim.Height</param>
+                <action id="-7" name="Set size" sid="8274247485987764" type="playerAnim">
+                    <param id="0" name="Width">(1-((592-Player.Y)*0.001151))*145</param>
+                    <param id="1" name="Height">(1-((592-Player.Y)*0.001151))*255</param>
+                </action>
+                <action id="0" name="Set text" sid="5757129352923526" type="pontuacao">
+                    <param id="0" name="Text">&quot;Rendimento acadêmico: &quot; &amp; pontos</param>
                 </action>
             </actions>
         </event-block>
-        <event-block sid="804127888025055">
-            <conditions>
-                <condition id="-4" name="Is outside layout" sid="6818255354847735" type="Porta" />
-            </conditions>
-            <actions>
-                <action id="-9" name="Destroy" sid="8015333300599499" type="Porta" />
-            </actions>
-        </event-block>
-        <event-block sid="932767707794578">
-            <conditions />
-            <actions />
+        <event-group description="" sid="1249762280384846" title="Efeitos2">
             <sub-events>
-                <event-block sid="8283465333687756">
+                <event-block sid="1096809854280954">
                     <conditions>
-                        <condition id="-1" name="Every tick" sid="781394778948767" type="System" />
+                        <condition id="-2" name="Compare Y" sid="5945472438210038" type="player">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Y co-ordinate">401</param>
+                        </condition>
                     </conditions>
                     <actions>
-                        <action id="-2" name="Set Y" sid="7267804972894037" type="Porta">
-                            <param id="0" name="Y">Porta.Y-0.5</param>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="380036447020041" type="computadores">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="6765197046871539" type="selecaoComputador">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="4723107950213747" type="computadoresCenario">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="9577066224704956">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="8321607030360989" type="System" />
+                    </conditions>
+                    <actions>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="2672781927168349" type="computadores">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="7413220848473115" type="selecaoComputador">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="7534154754717382" type="computadoresCenario">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="7557032660996632">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="9877749835136811" type="player">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Y co-ordinate">131</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-28" name="Set effect parameter" sid="888171723462371" type="playerAnim">
+                            <param id="0" name="Effect">&quot;Brightness&quot;</param>
+                            <param id="1" name="Parameter index">0</param>
+                            <param id="2" name="Value">1.1905*(player.Y-47)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="8535551526638724">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="7394318826794661" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-28" name="Set effect parameter" sid="5801501039502999" type="playerAnim">
+                            <param id="0" name="Effect">&quot;Brightness&quot;</param>
+                            <param id="1" name="Parameter index">0</param>
+                            <param id="2" name="Value">100</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="804127888025055">
+                    <conditions>
+                        <condition id="-4" name="Is outside layout" sid="6818255354847735" type="Porta" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="8015333300599499" type="Porta" />
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="7215253089937078" title="Acoes2">
+            <sub-events>
+                <event-block sid="4844050602414782">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="2049465120280247" type="player">
+                            <param id="0" name="Object">selecaoComputador</param>
+                        </condition>
+                        <condition id="2" name="Is playing" sid="409240367673276" type="playerAnim">
+                            <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="634429020372514">
+                            <conditions>
+                                <condition id="0" name="On key pressed" sid="1105672700563034" type="Keyboard">
+                                    <param id="0" name="Key">69 (E)</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="1824292377531059">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="5861560966085145" type="selecaoComputador">
+                                            <param id="0" name="Unique ID">199</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Set text" sid="2312257587466245" type="debug">
+                                            <param id="0" name="Text">&quot;PC1&quot;</param>
+                                        </action>
+                                        <action disabled="1" id="-12" name="Set group active" sid="5722081634398853" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="8487189829115734" type="System">
+                                            <param id="0" name="Group name">&quot;Computador1&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="3222701955252513">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="7443394009627265" type="selecaoComputador">
+                                            <param id="0" name="Unique ID">200</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Set text" sid="6188441014919816" type="debug">
+                                            <param id="0" name="Text">&quot;PC2&quot;</param>
+                                        </action>
+                                        <action disabled="1" id="-12" name="Set group active" sid="8038717342167432" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="3664612488746282" type="System">
+                                            <param id="0" name="Group name">&quot;Computador2&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="6499904279034364">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="9345687952247033" type="selecaoComputador">
+                                            <param id="0" name="Unique ID">201</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Set text" sid="6476059695180222" type="debug">
+                                            <param id="0" name="Text">&quot;PC3&quot;</param>
+                                        </action>
+                                        <action disabled="1" id="-12" name="Set group active" sid="3275461407636585" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="5685803581100642" type="System">
+                                            <param id="0" name="Group name">&quot;Computador3&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="7528183451961258">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="2943310030689182" type="Keyboard">
+                            <param id="0" name="Key">69 (E)</param>
+                        </condition>
+                        <condition id="1" name="Is overlapping another object" sid="4138714862963231" type="player">
+                            <param id="0" name="Object">selecaoTelao</param>
+                        </condition>
+                        <condition id="2" name="Is playing" sid="3689583454875703" type="playerAnim">
+                            <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set text" sid="2242724781028802" type="debug">
+                            <param id="0" name="Text">&quot;Telão&quot;</param>
+                        </action>
+                        <action disabled="1" id="-12" name="Set group active" sid="224856264284969" type="System">
+                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="1319684117656353" type="System">
+                            <param id="0" name="Group name">&quot;Telao&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="8784221567555369">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="3328888553214424" type="Keyboard">
+                            <param id="0" name="Key">69 (E)</param>
+                        </condition>
+                        <condition id="1" name="Is overlapping another object" sid="4277598487526181" type="player">
+                            <param id="0" name="Object">selecaoRobo</param>
+                        </condition>
+                        <condition id="2" name="Is playing" sid="5798126917212931" type="playerAnim">
+                            <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set text" sid="3513262213650701" type="debug">
+                            <param id="0" name="Text">&quot;Robô&quot;</param>
+                        </action>
+                        <action disabled="1" id="-12" name="Set group active" sid="1287424642404406" type="System">
+                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="8475161316834703" type="System">
+                            <param id="0" name="Group name">&quot;DialogoRobo&quot;</param>
+                            <param id="1" name="State">1</param>
                         </action>
                     </actions>
                 </event-block>
             </sub-events>
-        </event-block>
+        </event-group>
         <event-group description="" sid="3597992769117787" title="playerMove2">
             <sub-events>
                 <event-block any="1" sid="886051769818349">
@@ -248,6 +440,157 @@
                         <action id="4" name="Set animation" sid="8640380066224353" type="playerAnim">
                             <param id="0" name="Animation">&quot;DireitaParado&quot;</param>
                             <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" inactive="1" sid="9474284485684025" title="DialogoRobo" />
+        <event-group description="" inactive="1" sid="1980499974198863" title="Computador1">
+            <sub-events>
+                <event-block sid="9402733510995834">
+                    <conditions />
+                    <actions />
+                </event-block>
+                <event-block sid="897277641330733">
+                    <conditions />
+                    <actions>
+                        <action id="-12" name="Set group active" sid="3798613384081883" type="System">
+                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="6719038861308221" type="System">
+                            <param id="0" name="Group name">&quot;Computador1&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" inactive="1" sid="2004645848307277" title="Computador2">
+            <sub-events>
+                <event-block sid="6956019762127945">
+                    <conditions />
+                    <actions />
+                </event-block>
+                <event-block sid="2218805912438189">
+                    <conditions />
+                    <actions>
+                        <action id="-12" name="Set group active" sid="775630274099293" type="System">
+                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="2559350716973428" type="System">
+                            <param id="0" name="Group name">&quot;Computador2&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" inactive="1" sid="1285505247417339" title="Computador3">
+            <sub-events>
+                <event-block sid="2803875802537632">
+                    <conditions />
+                    <actions />
+                </event-block>
+                <event-block sid="1829572092603316">
+                    <conditions />
+                    <actions>
+                        <action id="-12" name="Set group active" sid="8094292415277" type="System">
+                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="4008153800325144" type="System">
+                            <param id="0" name="Group name">&quot;Computador3&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" inactive="1" sid="991114126919562" title="Telao">
+            <sub-events>
+                <event-block sid="9373310951501311">
+                    <conditions />
+                    <actions>
+                        <action id="0" name="Set visible" sid="1934222737005397" type="telaoHTML">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="5082624184341549" type="sintonia1">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="7678032961174094" type="sintonia2">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="758462754245063">
+                    <conditions />
+                    <actions>
+                        <action id="-12" name="Set group active" sid="3408781378027561" type="System">
+                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="2790353269376155" type="sintonia1">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="7343692704464586" type="sintonia2">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action id="0" name="Set visible" sid="7460795794171744" type="telaoHTML">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="8817205191597076" type="System">
+                            <param id="0" name="Group name">&quot;Computador1&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <comment>MUDAR A CONDIÇÃO DE APERTAR A TECLA P PARA A CONDIÇÃO FINAL QUE DISPARA A PORTA DA SAÍDA E O FINAL DA FASE!</comment>
+        <event-block sid="932767707794578">
+            <conditions>
+                <condition id="0" name="On key pressed" sid="8163276182188839" type="Keyboard">
+                    <param id="0" name="Key">80 (P)</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-12" name="Set group active" sid="9450253076648116" type="System">
+                    <param id="0" name="Group name">&quot;Saida&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-group description="" inactive="1" sid="3726014130864171" title="Saida">
+            <sub-events>
+                <event-block sid="8283465333687756">
+                    <conditions>
+                        <condition id="-1" name="Every tick" sid="781394778948767" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="7267804972894037" type="Porta">
+                            <param id="0" name="Y">Porta.Y-0.5</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="8231951636338543" type="sintonia1">
+                            <param id="0" name="Animation">&quot;Desligando&quot;</param>
+                            <param id="1" name="From">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="8710986623239318" type="sintonia1">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="4142538535288654">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="9496878020223346" type="player">
+                            <param id="0" name="Object">saida2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Go to layout" sid="4741130582769087" type="System">
+                            <param id="0" name="Layout">Fase 3 (Galeria)</param>
                         </action>
                     </actions>
                 </event-block>
