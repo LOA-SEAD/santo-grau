@@ -18,7 +18,7 @@
         <comment>Marca qual é a frase que está sendo mostrada para o jogador</comment>
         <variable constant="0" name="fraseAtualGAL" sid="5924981274464954" static="0" type="number">0</variable>
         <comment>Utilizada para controlar o momento em que será carregado o balão de diálogo</comment>
-        <variable constant="0" name="carregarBalaoDialogoGAL" sid="4124652019518869" static="0" type="number">0</variable>
+        <variable constant="0" name="carregarDialogoChave" sid="4124652019518869" static="0" type="number">0</variable>
         <comment>Utilizada para inserir nos objetos text o texto que será mostrado para o jogador</comment>
         <variable constant="0" name="inserirDialogosGAL" sid="4075976820759151" static="0" type="number">0</variable>
         <comment>Utilizado para marcar quando se deve carregar as falas do diálogo</comment>
@@ -63,6 +63,10 @@
                     <param id="0" name="Group name">&quot;dialogoGaleria&quot;</param>
                     <param id="1" name="State">0</param>
                 </action>
+                <action id="-12" name="Set group active" sid="9369842183637136" type="System">
+                    <param id="0" name="Group name">&quot;localizarChave&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
                 <action id="0" name="Load JSON" sid="4808618138882582" type="DialogosJSON" />
                 <action id="0" name="Load JSON" sid="6934720499260367" type="QuadrosJSON" />
                 <action id="0" name="Clear" sid="6757824165300672" type="Resposta" />
@@ -77,6 +81,12 @@
                     <param id="0" name="Opacity">0</param>
                 </action>
                 <action id="-16" name="Set opacity" sid="8066285981259156" type="Dialogos">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action behavior="Solid" id="0" name="Set enabled" sid="1203173635951509" type="Chave">
+                    <param id="0" name="State">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="6297385735262426" type="Chave">
                     <param id="0" name="Opacity">0</param>
                 </action>
             </actions>
@@ -114,11 +124,8 @@
                     <param id="1" name="Value">4</param>
                 </action>
                 <action id="-9" name="Set value" sid="7926800931931627" type="System">
-                    <param id="0" name="Variable">carregarBalaoDialogoGAL</param>
+                    <param id="0" name="Variable">carregarDialogoChave</param>
                     <param id="1" name="Value">1</param>
-                </action>
-                <action behavior="8Direction" disabled="1" id="2" name="Set ignoring input" sid="7328576306855004" type="player">
-                    <param id="0" name="Input">1</param>
                 </action>
                 <action id="2" name="Stop" sid="2950220598687543" type="playerAnim" />
                 <action id="-12" name="Set group active" sid="9391033416436006" type="System">
@@ -242,6 +249,11 @@
         <event-block sid="8510538776884853">
             <conditions>
                 <condition behavior="DragDrop" id="0" name="Is dragging" sid="6326581813458748" type="Quadros" />
+                <condition id="-14" name="Compare variable" sid="8028017958561686" type="System">
+                    <param id="0" name="Variable">respostaCerta</param>
+                    <param id="1" name="Comparison">1</param>
+                    <param id="2" name="Value">1</param>
+                </condition>
             </conditions>
             <actions>
                 <action id="-12" name="Set group active" sid="4108876777246292" type="System">
@@ -260,6 +272,44 @@
                     <param id="1" name="State">1</param>
                 </action>
             </actions>
+        </event-block>
+        <comment>Para dar o efeito de que aquele quadro pode ser selecionado</comment>
+        <event-block sid="8714694988860868">
+            <conditions>
+                <condition id="7" name="Cursor is over object" sid="1457052431695047" type="Mouse">
+                    <param id="0" name="Object">Quadros</param>
+                </condition>
+                <condition id="-15" name="Is group active" sid="6497959654309785" type="System">
+                    <param id="0" name="Group name">&quot;operacoesQuadros&quot;</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-3" name="Set position" sid="978527522061864" type="selecaoQuadros">
+                    <param id="0" name="X">Quadros.X - 87</param>
+                    <param id="1" name="Y">Quadros.Y - 207</param>
+                </action>
+                <action id="-15" name="Set visible" sid="6809823583346089" type="selecaoQuadros">
+                    <param id="0" name="Visibility">1</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="5285029341809828">
+            <conditions>
+                <condition id="-22" name="Else" sid="1479360089627582" type="System" />
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="3586832671623449">
+                    <conditions>
+                        <condition id="-9" name="Is visible" sid="2896233769926908" type="selecaoQuadros" />
+                    </conditions>
+                    <actions>
+                        <action id="-15" name="Set visible" sid="9854584582412311" type="selecaoQuadros">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
         </event-block>
         <comment>Usada no início da execução para carregar aos quadros com estes nomes, sendo que eles devem possuir 160X200, pois o tiledBackground não possui uma maneira de dar zoom in/zoom out na imagem</comment>
         <event-group description="" sid="1077548239582358" title="carregarQuadros">
@@ -312,6 +362,34 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment>Os quadros que não possuem imagens são destruidos para que eles não sejam selecionados</comment>
+                <event-block sid="2989587972220891">
+                    <conditions>
+                        <condition id="-23" name="While" sid="9559102040038602" type="System" />
+                        <condition id="-14" name="Compare variable" sid="2583548689425198" type="System">
+                            <param id="0" name="Variable">quadro</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">10</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="6296661807721067">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="3867093134526249" type="Quadros">
+                                    <param id="0" name="Unique ID">Quadro + 175</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Destroy" sid="8475899209692568" type="Quadros" />
+                                <action id="-10" name="Add to" sid="4796372680534415" type="System">
+                                    <param id="0" name="Variable">quadro</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
                 <event-block sid="6813286573138316">
                     <conditions>
                         <condition id="-1" name="Every tick" sid="5453775780848445" type="System" />
@@ -331,7 +409,7 @@
                 <event-block sid="7864321511827534">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="6139243193522705" type="System">
-                            <param id="0" name="Variable">carregarBalaoDialogoGAL</param>
+                            <param id="0" name="Variable">carregarDialogoChave</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">1</param>
                         </condition>
@@ -364,7 +442,7 @@
                             </conditions>
                             <actions>
                                 <action id="-9" name="Set value" sid="7064480727097253" type="System">
-                                    <param id="0" name="Variable">carregarBalaoDialogoGAL</param>
+                                    <param id="0" name="Variable">carregarDialogoChave</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="3750448601983108" type="System">
@@ -501,7 +579,7 @@
                                     <param id="0" name="Variable">avancarDialogosGAL</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
-                                <action breakpoint="1" id="-9" name="Set value" sid="6277415436725126" type="System">
+                                <action id="-9" name="Set value" sid="6277415436725126" type="System">
                                     <param id="0" name="Variable">carregarDialogosGAL</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
@@ -578,7 +656,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-9" name="Set value" sid="7544727634461249" type="System">
-                                            <param id="0" name="Variable">carregarBalaoDialogoGAL</param>
+                                            <param id="0" name="Variable">carregarDialogoChave</param>
                                             <param id="1" name="Value">0</param>
                                         </action>
                                     </actions>
@@ -666,6 +744,23 @@
                                                     <actions>
                                                         <action id="-12" name="Set group active" sid="4849866285031774" type="System">
                                                             <param id="0" name="Group name">&quot;playerMoveGAL&quot;</param>
+                                                            <param id="1" name="State">1</param>
+                                                        </action>
+                                                        <action id="-27" name="Set effect enabled" sid="9307080888347143" type="Fundo">
+                                                            <param id="0" name="Mode">1</param>
+                                                            <param id="1" name="Effect">&quot;Brightness&quot;</param>
+                                                        </action>
+                                                        <action id="-28" name="Set effect parameter" sid="8460232976676073" type="Fundo">
+                                                            <param id="0" name="Effect">&quot;Brightness&quot;</param>
+                                                            <param id="1" name="Parameter index">0</param>
+                                                            <param id="2" name="Value">5</param>
+                                                        </action>
+                                                        <action id="-9" name="Set value" sid="5877488027590067" type="System">
+                                                            <param id="0" name="Variable">carregarDialogoChave</param>
+                                                            <param id="1" name="Value">1</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="1792546577323884" type="System">
+                                                            <param id="0" name="Group name">&quot;localizarChave&quot;</param>
                                                             <param id="1" name="State">1</param>
                                                         </action>
                                                     </actions>
@@ -768,7 +863,7 @@
         <comment>Usado para realizar operações com os quadros enquanto o zoom neles está ativo</comment>
         <event-group description="" sid="1147429554170792" title="operacoesQuadros">
             <sub-events>
-                <comment>Dos blocos 50-59 é para obter a ordem atual dos quadros, dos blocos 60-67 é para verificar se o jogador já colocou os quadros na ordem correta</comment>
+                <comment>Dos blocos 55-64 é para obter a ordem atual dos quadros, dos blocos 65-72 é para verificar se o jogador já colocou os quadros na ordem correta</comment>
                 <event-block sid="6314231578562101">
                     <conditions>
                         <condition id="-1" name="Every tick" sid="1244109718023936" type="System" />
@@ -1030,7 +1125,7 @@
                                             <param id="1" name="Value">5</param>
                                         </action>
                                         <action id="-9" name="Set value" sid="9923358796331521" type="System">
-                                            <param id="0" name="Variable">carregarBalaoDialogoGAL</param>
+                                            <param id="0" name="Variable">carregarDialogoChave</param>
                                             <param id="1" name="Value">1</param>
                                         </action>
                                         <action id="-12" name="Set group active" sid="7534728744589873" type="System">
@@ -1057,6 +1152,63 @@
                             </actions>
                         </event-block>
                     </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <comment>Grupo destinado para a parte da fase onde as luzes se apagam e o personagem tem que procurar uma chave na sala</comment>
+        <event-group description="" sid="9157508315894824" title="localizarChave">
+            <sub-events>
+                <event-block sid="1508621012594603">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="1004704244794835" type="System">
+                            <param id="0" name="Variable">carregarDialogoChave</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-27" name="Set effect enabled" sid="1193165217949725" type="ParedeTeste">
+                            <param id="0" name="Mode">1</param>
+                            <param id="1" name="Effect">&quot;Brightness&quot;</param>
+                        </action>
+                        <action id="-28" name="Set effect parameter" sid="5670652435044359" type="ParedeTeste">
+                            <param id="0" name="Effect">&quot;Brightness&quot;</param>
+                            <param id="1" name="Parameter index">0</param>
+                            <param id="2" name="Value">50</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="4087636230400278" type="Chave">
+                            <param id="0" name="X">round(random(100, 1180)) </param>
+                            <param id="1" name="Y">round(random(25, 695)) </param>
+                        </action>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="8480600870703357" type="Chave">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="9801060048479009" type="Chave">
+                            <param id="0" name="Opacity">100</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="4799751577591653" type="selChave">
+                            <param id="0" name="X">Chave.X</param>
+                            <param id="1" name="Y">Chave.Y</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="8125438398634159" type="System">
+                            <param id="0" name="Variable">carregarDialogoChave</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="8178138007196533">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="1968584531883091" type="Keyboard">
+                            <param id="0" name="Key">69 (E)</param>
+                        </condition>
+                        <condition id="1" name="Is overlapping another object" sid="6175167707911985" type="player">
+                            <param id="0" name="Object">selChave</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="2433062249916656" type="Chave" />
+                        <action id="-9" name="Destroy" sid="1765500496901364" type="selChave" />
+                    </actions>
                 </event-block>
             </sub-events>
         </event-group>
