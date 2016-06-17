@@ -3,6 +3,7 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase 1 (RU)</name>
     <events>
+        <variable constant="0" name="velocidadePessoas" sid="3394612400055466" static="0" type="number">400</variable>
         <variable constant="0" name="controleDica2" sid="3835474185996537" static="0" type="number">0</variable>
         <variable constant="0" name="controleDica" sid="9200675717542735" static="0" type="number">0</variable>
         <variable constant="0" name="pontos" sid="2102700230222047" static="0" type="number">10000</variable>
@@ -11,7 +12,7 @@
                 <condition id="-2" name="On start of layout" sid="5340975223950603" type="System" />
             </conditions>
             <actions>
-                <action id="-3" name="Set position" sid="1262157357680325" type="player">
+                <action disabled="1" id="-3" name="Set position" sid="1262157357680325" type="player">
                     <param id="0" name="X">346</param>
                     <param id="1" name="Y">648</param>
                 </action>
@@ -39,8 +40,9 @@
                     <param id="0" name="Variable">controleDica2</param>
                     <param id="1" name="Value">0</param>
                 </action>
-                <action behavior="Solid" id="0" name="Set enabled" sid="1230962520501882" type="player">
-                    <param id="0" name="State">0</param>
+                <action id="-9" name="Set value" sid="5976052754956894" type="System">
+                    <param id="0" name="Variable">velocidadePessoas</param>
+                    <param id="1" name="Value">400</param>
                 </action>
             </actions>
             <sub-events>
@@ -319,14 +321,6 @@
                                 <condition id="-4" inverted="1" name="Is outside layout" sid="5790202092250641" type="cafe" />
                             </conditions>
                             <actions>
-                                <action id="-12" name="Set group active" sid="2241781989472492" type="System">
-                                    <param id="0" name="Group name">&quot;GuerraLasanha&quot;</param>
-                                    <param id="1" name="State">0</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="8179876173789795" type="System">
-                                    <param id="0" name="Group name">&quot;GuerraNormal&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
                                 <action id="-12" name="Set group active" sid="5340213419735003" type="System">
                                     <param id="0" name="Group name">&quot;FluxoNormal&quot;</param>
                                     <param id="1" name="State">0</param>
@@ -370,6 +364,26 @@
                 <action id="4" name="Set animation" sid="8465136528632937" type="lasanha">
                     <param id="0" name="Animation">&quot;Default&quot;</param>
                     <param id="1" name="From">1</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="8819308992293401">
+            <conditions>
+                <condition id="1" name="Is overlapping another object" sid="3794249019165164" type="player">
+                    <param id="0" name="Object">fimLasanha</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-12" name="Set group active" sid="4806460147105571" type="System">
+                    <param id="0" name="Group name">&quot;GuerraLasanha&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="5753043125537775" type="System">
+                    <param id="0" name="Group name">&quot;GuerraNormal&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+                <action id="-1" name="Set X" sid="5572890881213659" type="lasanha">
+                    <param id="0" name="X">157</param>
                 </action>
             </actions>
         </event-block>
@@ -1612,7 +1626,7 @@
                                         </action>
                                         <action id="-3" name="Create object" sid="2619632554487815" type="System">
                                             <param id="0" name="Object to create">comida</param>
-                                            <param id="1" name="Layer">3</param>
+                                            <param id="1" name="Layer">4</param>
                                             <param id="2" name="X">ComidaSpawn.X</param>
                                             <param id="3" name="Y">ComidaSpawn.Y</param>
                                         </action>
@@ -1636,7 +1650,7 @@
                                         </action>
                                         <action id="-3" name="Create object" sid="5330478796621983" type="System">
                                             <param id="0" name="Object to create">comida</param>
-                                            <param id="1" name="Layer">3</param>
+                                            <param id="1" name="Layer">4</param>
                                             <param id="2" name="X">ComidaSpawn.X</param>
                                             <param id="3" name="Y">ComidaSpawn.Y</param>
                                         </action>
@@ -1660,7 +1674,7 @@
                                         </action>
                                         <action id="-3" name="Create object" sid="3815715668900845" type="System">
                                             <param id="0" name="Object to create">comida</param>
-                                            <param id="1" name="Layer">3</param>
+                                            <param id="1" name="Layer">4</param>
                                             <param id="2" name="X">ComidaSpawn.X</param>
                                             <param id="3" name="Y">ComidaSpawn.Y</param>
                                         </action>
@@ -1684,7 +1698,7 @@
                                         </action>
                                         <action id="-3" name="Create object" sid="4402956849984038" type="System">
                                             <param id="0" name="Object to create">comida</param>
-                                            <param id="1" name="Layer">3</param>
+                                            <param id="1" name="Layer">4</param>
                                             <param id="2" name="X">ComidaSpawn.X</param>
                                             <param id="3" name="Y">ComidaSpawn.Y</param>
                                         </action>
@@ -1708,7 +1722,7 @@
                                         </action>
                                         <action id="-3" name="Create object" sid="9716382248227796" type="System">
                                             <param id="0" name="Object to create">comida</param>
-                                            <param id="1" name="Layer">3</param>
+                                            <param id="1" name="Layer">4</param>
                                             <param id="2" name="X">ComidaSpawn.X</param>
                                             <param id="3" name="Y">ComidaSpawn.Y</param>
                                         </action>
@@ -1754,7 +1768,7 @@
                                         </action>
                                         <action id="-3" name="Create object" sid="2619632554487815" type="System">
                                             <param id="0" name="Object to create">comida</param>
-                                            <param id="1" name="Layer">3</param>
+                                            <param id="1" name="Layer">4</param>
                                             <param id="2" name="X">ComidaSpawn.X</param>
                                             <param id="3" name="Y">ComidaSpawn.Y</param>
                                         </action>
@@ -1778,7 +1792,7 @@
                                         </action>
                                         <action id="-3" name="Create object" sid="5828291015501068" type="System">
                                             <param id="0" name="Object to create">comida</param>
-                                            <param id="1" name="Layer">3</param>
+                                            <param id="1" name="Layer">4</param>
                                             <param id="2" name="X">ComidaSpawn.X</param>
                                             <param id="3" name="Y">ComidaSpawn.Y</param>
                                         </action>
@@ -1802,7 +1816,7 @@
                                         </action>
                                         <action id="-3" name="Create object" sid="6843010121812504" type="System">
                                             <param id="0" name="Object to create">comida</param>
-                                            <param id="1" name="Layer">3</param>
+                                            <param id="1" name="Layer">4</param>
                                             <param id="2" name="X">ComidaSpawn.X</param>
                                             <param id="3" name="Y">ComidaSpawn.Y</param>
                                         </action>
@@ -1826,7 +1840,7 @@
                                         </action>
                                         <action id="-3" name="Create object" sid="5442936788617339" type="System">
                                             <param id="0" name="Object to create">comida</param>
-                                            <param id="1" name="Layer">3</param>
+                                            <param id="1" name="Layer">4</param>
                                             <param id="2" name="X">ComidaSpawn.X</param>
                                             <param id="3" name="Y">ComidaSpawn.Y</param>
                                         </action>
@@ -1850,7 +1864,7 @@
                                         </action>
                                         <action id="-3" name="Create object" sid="9309087784503998" type="System">
                                             <param id="0" name="Object to create">comida</param>
-                                            <param id="1" name="Layer">3</param>
+                                            <param id="1" name="Layer">4</param>
                                             <param id="2" name="X">ComidaSpawn.X</param>
                                             <param id="3" name="Y">ComidaSpawn.Y</param>
                                         </action>
