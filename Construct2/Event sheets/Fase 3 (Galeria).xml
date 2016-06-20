@@ -89,6 +89,12 @@
                 <action id="-16" name="Set opacity" sid="6297385735262426" type="Chave">
                     <param id="0" name="Opacity">0</param>
                 </action>
+                <action id="11" name="Set collisions enabled" sid="4217019818019758" type="saidaGAL">
+                    <param id="0" name="Collisions">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="6901387167522475" type="Fantasmas">
+                    <param id="0" name="Opacity">0</param>
+                </action>
             </actions>
         </event-block>
         <event-block sid="7879974350802997">
@@ -104,7 +110,7 @@
                     <param id="0" name="Width">(1-((720-playerAnim.Y)*0.000555))*82</param>
                     <param id="1" name="Height">(1-((720-playerAnim.Y)*0.000555))*144</param>
                 </action>
-                <action id="0" name="Set text" sid="8336012008819834" type="pontuacao">
+                <action id="0" name="Set text" sid="6591496149364015" type="pontuacao">
                     <param id="0" name="Text">&quot;Rendimento acadêmico: &quot; &amp; pontos</param>
                 </action>
             </actions>
@@ -115,7 +121,7 @@
                     <param id="0" name="Key">69 (E)</param>
                 </condition>
                 <condition id="1" name="Is overlapping another object" sid="3876750697826487" type="player">
-                    <param id="0" name="Object">selecaoComida</param>
+                    <param id="0" name="Object">selBibliotecario</param>
                 </condition>
             </conditions>
             <actions>
@@ -137,6 +143,39 @@
                     <param id="1" name="State">1</param>
                 </action>
             </actions>
+        </event-block>
+        <event-block sid="7454483833152009">
+            <conditions>
+                <condition id="1" name="Is overlapping another object" sid="2222609733822314" type="player">
+                    <param id="0" name="Object">selecaoComida</param>
+                </condition>
+                <condition id="2" name="Key is down" sid="6256006701647014" type="Keyboard">
+                    <param id="0" name="Key">69 (E)</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="2760115659530621">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="9032575874006345" type="System">
+                            <param id="0" name="Variable">fraseAtualGAL</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">5</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="429080087630228" type="System">
+                            <param id="0" name="Variable">iniciarAnimacao</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="2" name="Stop" sid="565313019397246" type="playerAnim" />
+                        <action id="-12" name="Set group active" sid="9702621905499418" type="System">
+                            <param id="0" name="Group name">&quot;playerMoveGAL&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
         </event-block>
         <event-block sid="3988945501635567">
             <conditions>
@@ -339,12 +378,16 @@
                         <event-block sid="3822157344920091">
                             <conditions>
                                 <condition id="-14" name="Pick by unique ID" sid="412572813918708" type="Quadros">
-                                    <param id="0" name="Unique ID">Quadro + 175</param>
+                                    <param id="0" name="Unique ID">int(QuadrosJSON.GetData(&quot;ordemInicial&quot;,Quadro-1)) + 175</param>
                                 </condition>
                             </conditions>
                             <actions>
                                 <action id="2" name="Load image from URL" sid="3219540313214675" type="Quadros">
-                                    <param id="0" name="URI">Quadro&amp;&quot;.png&quot;</param>
+                                    <param id="0" name="URI">int(QuadrosJSON.GetData(&quot;ordemInicial&quot;,Quadro-1))&amp;&quot;.png&quot;</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="6920614503469052" type="Quadros">
+                                    <param id="0" name="X">220 + (225 * ((quadro - 1) % 5))</param>
+                                    <param id="1" name="Y">240 + (225 * floor((quadro - 1) / 5))</param>
                                 </action>
                                 <action id="2" name="Set at X" sid="4129478874464819" type="Resposta">
                                     <param id="0" name="X">Quadro-1</param>
@@ -352,7 +395,7 @@
                                 </action>
                                 <action id="2" name="Set at X" sid="6557034466640411" type="OrdemAtual">
                                     <param id="0" name="X">Quadro-1</param>
-                                    <param id="1" name="Value">Quadro</param>
+                                    <param id="1" name="Value">int(QuadrosJSON.GetData(&quot;ordemInicial&quot;,Quadro-1))</param>
                                 </action>
                                 <action id="-10" name="Add to" sid="8700776613475758" type="System">
                                     <param id="0" name="Variable">quadro</param>
@@ -645,7 +688,7 @@
                                 </action>
                             </actions>
                             <sub-events>
-                                <comment>Esta comparação é devido a um bug caso ocorra uma escolha de alternativa mais rápida do que o texto sendo limpo</comment>
+                                <comment>Esta comparação é devido a um bug caso o consiga avançar o texto mais rápido do que o ele sendo limpo</comment>
                                 <event-block sid="6235115272108113">
                                     <conditions>
                                         <condition id="-14" name="Compare variable" sid="5468776926063931" type="System">
@@ -720,6 +763,10 @@
                                                     <param id="0" name="Group name">&quot;dialogoGaleria&quot;</param>
                                                     <param id="1" name="State">0</param>
                                                 </action>
+                                                <action id="-12" name="Set group active" sid="4849866285031774" type="System">
+                                                    <param id="0" name="Group name">&quot;playerMoveGAL&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
                                             </actions>
                                             <sub-events>
                                                 <event-block sid="9943489211213957">
@@ -731,10 +778,7 @@
                                                         </condition>
                                                     </conditions>
                                                     <actions>
-                                                        <action id="-9" name="Set value" sid="429080087630228" type="System">
-                                                            <param id="0" name="Variable">iniciarAnimacao</param>
-                                                            <param id="1" name="Value">1</param>
-                                                        </action>
+                                                        <action id="-9" name="Destroy" sid="5328791875943443" type="selBibliotecario" />
                                                     </actions>
                                                 </event-block>
                                                 <event-block sid="6260428200640797">
@@ -742,11 +786,11 @@
                                                         <condition id="-22" name="Else" sid="2864854961540279" type="System" />
                                                     </conditions>
                                                     <actions>
-                                                        <action id="-12" name="Set group active" sid="4849866285031774" type="System">
-                                                            <param id="0" name="Group name">&quot;playerMoveGAL&quot;</param>
-                                                            <param id="1" name="State">1</param>
-                                                        </action>
                                                         <action id="-27" name="Set effect enabled" sid="9307080888347143" type="Fundo">
+                                                            <param id="0" name="Mode">1</param>
+                                                            <param id="1" name="Effect">&quot;Brightness&quot;</param>
+                                                        </action>
+                                                        <action id="-27" name="Set effect enabled" sid="8095020575078744" type="bibliotecario">
                                                             <param id="0" name="Mode">1</param>
                                                             <param id="1" name="Effect">&quot;Brightness&quot;</param>
                                                         </action>
@@ -755,13 +799,36 @@
                                                             <param id="1" name="Parameter index">0</param>
                                                             <param id="2" name="Value">5</param>
                                                         </action>
+                                                        <action id="-28" name="Set effect parameter" sid="8354630161996512" type="bibliotecario">
+                                                            <param id="0" name="Effect">&quot;Brightness&quot;</param>
+                                                            <param id="1" name="Parameter index">0</param>
+                                                            <param id="2" name="Value">5</param>
+                                                        </action>
+                                                        <action id="4" name="Set font color" sid="3263851953450714" type="pontuacao">
+                                                            <param id="0" name="Color">rgb(255, 255, 255)</param>
+                                                        </action>
                                                         <action id="-9" name="Set value" sid="5877488027590067" type="System">
                                                             <param id="0" name="Variable">carregarDialogoChave</param>
                                                             <param id="1" name="Value">1</param>
                                                         </action>
+                                                        <action id="-3" name="Set position" sid="4601637514477443" type="Chave">
+                                                            <param id="0" name="X">round(random(100, 1180)) </param>
+                                                            <param id="1" name="Y">round(random(25, 695)) </param>
+                                                        </action>
+                                                        <action behavior="Solid" id="0" name="Set enabled" sid="5867548543608923" type="Chave">
+                                                            <param id="0" name="State">1</param>
+                                                        </action>
+                                                        <action id="-3" name="Set position" sid="634130663392524" type="selChave">
+                                                            <param id="0" name="X">Chave.X</param>
+                                                            <param id="1" name="Y">Chave.Y</param>
+                                                        </action>
                                                         <action id="-12" name="Set group active" sid="1792546577323884" type="System">
                                                             <param id="0" name="Group name">&quot;localizarChave&quot;</param>
                                                             <param id="1" name="State">1</param>
+                                                        </action>
+                                                        <action id="-10" name="Add to" sid="2663111965761124" type="System">
+                                                            <param id="0" name="Variable">pontos</param>
+                                                            <param id="1" name="Value">100</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
@@ -863,7 +930,7 @@
         <comment>Usado para realizar operações com os quadros enquanto o zoom neles está ativo</comment>
         <event-group description="" sid="1147429554170792" title="operacoesQuadros">
             <sub-events>
-                <comment>Dos blocos 55-64 é para obter a ordem atual dos quadros, dos blocos 65-72 é para verificar se o jogador já colocou os quadros na ordem correta</comment>
+                <comment>Dos blocos 57-66 é para obter a ordem atual dos quadros, dos blocos 67-74 é para verificar se o jogador já colocou os quadros na ordem correta</comment>
                 <event-block sid="6314231578562101">
                     <conditions>
                         <condition id="-1" name="Every tick" sid="1244109718023936" type="System" />
@@ -1158,34 +1225,50 @@
         <comment>Grupo destinado para a parte da fase onde as luzes se apagam e o personagem tem que procurar uma chave na sala</comment>
         <event-group description="" sid="9157508315894824" title="localizarChave">
             <sub-events>
-                <event-block sid="1508621012594603">
+                <event-block sid="4931555662305528">
                     <conditions>
-                        <condition id="-14" name="Compare variable" sid="1004704244794835" type="System">
+                        <condition id="-14" name="Compare variable" sid="6505574406238149" type="System">
                             <param id="0" name="Variable">carregarDialogoChave</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">1</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="-3" name="Set position" sid="4087636230400278" type="Chave">
-                            <param id="0" name="X">round(random(100, 1180)) </param>
-                            <param id="1" name="Y">round(random(25, 695)) </param>
-                        </action>
-                        <action behavior="Solid" id="0" name="Set enabled" sid="8480600870703357" type="Chave">
-                            <param id="0" name="State">1</param>
-                        </action>
-                        <action id="-16" name="Set opacity" sid="9801060048479009" type="Chave">
-                            <param id="0" name="Opacity">100</param>
-                        </action>
-                        <action id="-3" name="Set position" sid="4799751577591653" type="selChave">
-                            <param id="0" name="X">Chave.X</param>
-                            <param id="1" name="Y">Chave.Y</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="8125438398634159" type="System">
-                            <param id="0" name="Variable">carregarDialogoChave</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <comment>Para o caso da chave estar sobrepondo a parede, no caso de sobrepor o bibliotecário não há problema pela chave ser maior que ele</comment>
+                        <event-block sid="1508621012594603">
+                            <conditions>
+                                <condition id="-23" name="While" sid="1004704244794835" type="System" />
+                                <condition id="1" name="Is overlapping another object" sid="9268322218867604" type="Chave">
+                                    <param id="0" name="Object">ParedeTeste</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Set position" sid="4087636230400278" type="Chave">
+                                    <param id="0" name="X">round(random(100, 1180)) </param>
+                                    <param id="1" name="Y">round(random(25, 695)) </param>
+                                </action>
+                                <action behavior="Solid" id="0" name="Set enabled" sid="8480600870703357" type="Chave">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="4799751577591653" type="selChave">
+                                    <param id="0" name="X">Chave.X</param>
+                                    <param id="1" name="Y">Chave.Y</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="4079328475707087">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="4087871236617563" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="3111414728212227" type="System">
+                                    <param id="0" name="Variable">carregarDialogoChave</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="8178138007196533">
                     <conditions>
@@ -1199,6 +1282,38 @@
                     <actions>
                         <action id="-9" name="Destroy" sid="2433062249916656" type="Chave" />
                         <action id="-9" name="Destroy" sid="1765500496901364" type="selChave" />
+                        <action id="-28" name="Set effect parameter" sid="8725493362394652" type="Fundo">
+                            <param id="0" name="Effect">&quot;Brightness&quot;</param>
+                            <param id="1" name="Parameter index">0</param>
+                            <param id="2" name="Value">100</param>
+                        </action>
+                        <action id="-28" name="Set effect parameter" sid="8543633939733751" type="bibliotecario">
+                            <param id="0" name="Effect">&quot;Brightness&quot;</param>
+                            <param id="1" name="Parameter index">0</param>
+                            <param id="2" name="Value">100</param>
+                        </action>
+                        <action id="4" name="Set font color" sid="4031057697429541" type="pontuacao">
+                            <param id="0" name="Color">rgb(0, 0, 0)</param>
+                        </action>
+                        <action id="11" name="Set collisions enabled" sid="9171524106194535" type="saidaGAL">
+                            <param id="0" name="Collisions">1</param>
+                        </action>
+                        <action id="-10" name="Add to" sid="7453172238563238" type="System">
+                            <param id="0" name="Variable">pontos</param>
+                            <param id="1" name="Value">100</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="5505512525482997">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="3535859703960768" type="player">
+                            <param id="0" name="Object">saidaGAL</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Go to layout" sid="3765018766083828" type="System">
+                            <param id="0" name="Layout">Fase Final (Campo Minado)</param>
+                        </action>
                     </actions>
                 </event-block>
             </sub-events>
