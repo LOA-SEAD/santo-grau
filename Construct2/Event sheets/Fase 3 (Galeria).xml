@@ -95,17 +95,8 @@
                 <action id="-16" name="Set opacity" sid="6901387167522475" type="Fantasmas">
                     <param id="0" name="Opacity">0</param>
                 </action>
-                <action id="-16" name="Set opacity" sid="9012316138157593" type="Fundo">
-                    <param id="0" name="Opacity">0</param>
-                </action>
-                <action id="-16" name="Set opacity" sid="6535053502833433" type="LuzPersonagem">
-                    <param id="0" name="Opacity">0</param>
-                </action>
-                <action id="-16" name="Set opacity" sid="1895237016070892" type="LuzParede">
-                    <param id="0" name="Opacity">0</param>
-                </action>
-                <action id="-16" name="Set opacity" sid="8231608704240509" type="Sprite">
-                    <param id="0" name="Opacity">0</param>
+                <action id="11" name="Set collisions enabled" sid="9567306319963657" type="Fantasmas">
+                    <param id="0" name="Collisions">0</param>
                 </action>
             </actions>
         </event-block>
@@ -793,26 +784,21 @@
                                                         <action id="-9" name="Destroy" sid="5328791875943443" type="selBibliotecario" />
                                                     </actions>
                                                 </event-block>
+                                                <comment>Ativar a parte escura</comment>
                                                 <event-block sid="6260428200640797">
                                                     <conditions>
                                                         <condition id="-22" name="Else" sid="2864854961540279" type="System" />
                                                     </conditions>
                                                     <actions>
-                                                        <action id="-16" name="Set opacity" sid="6834714319207842" type="Fundo">
-                                                            <param id="0" name="Opacity">100</param>
-                                                        </action>
-                                                        <action id="-16" name="Set opacity" sid="5411718306892449" type="LuzPersonagem">
-                                                            <param id="0" name="Opacity">100</param>
-                                                        </action>
-                                                        <action id="-16" name="Set opacity" sid="8776062560557934" type="LuzParede">
-                                                            <param id="0" name="Opacity">100</param>
-                                                        </action>
-                                                        <action id="-16" name="Set opacity" sid="9964330923604971" type="Sprite">
-                                                            <param id="0" name="Opacity">100</param>
-                                                        </action>
                                                         <action id="-4" name="Set layer visible" sid="4660890779684976" type="System">
                                                             <param id="0" name="Layer">3</param>
                                                             <param id="1" name="Visibility">1</param>
+                                                        </action>
+                                                        <action id="-16" name="Set opacity" sid="4973419202493159" type="Fantasmas">
+                                                            <param id="0" name="Opacity">100</param>
+                                                        </action>
+                                                        <action id="11" name="Set collisions enabled" sid="2470085126462598" type="Fantasmas">
+                                                            <param id="0" name="Collisions">1</param>
                                                         </action>
                                                         <action id="4" name="Set font color" sid="3263851953450714" type="pontuacao">
                                                             <param id="0" name="Color">rgb(255, 255, 255)</param>
@@ -1244,11 +1230,70 @@
                             <param id="0" name="X">player.X</param>
                             <param id="1" name="Y">player.Y</param>
                         </action>
-                        <action id="-3" name="Set position" sid="7284650270528119" type="Sprite">
-                            <param id="0" name="X">player.X</param>
-                            <param id="1" name="Y">player.Y</param>
-                        </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="6416742693692373">
+                            <conditions>
+                                <condition id="-6" name="Compare height" sid="7658699743895193" type="LuzPersonagem">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Height">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-7" name="Set size" sid="2001791779069108" type="LuzPersonagem">
+                                    <param id="0" name="Width">LuzPersonagem.Width - 0.5</param>
+                                    <param id="1" name="Height">LuzPersonagem.Height - 0.5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="8281166039904786">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="9973881720330846" type="Fantasmas">
+                                    <param id="0" name="Unique ID">227</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="Pathfinding" id="0" name="Find path" sid="9379159342104627" type="Fantasmas">
+                                    <param id="0" name="X">LuzPersonagem.X - (LuzPersonagem.Width / 2)</param>
+                                    <param id="1" name="Y">LuzPersonagem.Y</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="251700541774072">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="38578378427703" type="Fantasmas">
+                                    <param id="0" name="Unique ID">230</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="Pathfinding" id="0" name="Find path" sid="2828671098504226" type="Fantasmas">
+                                    <param id="0" name="X">LuzPersonagem.X + (LuzPersonagem.Width / 2)</param>
+                                    <param id="1" name="Y">LuzPersonagem.Y</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="2745205762765969">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="2609784192071966" type="Fantasmas">
+                                    <param id="0" name="Unique ID">231</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="Pathfinding" id="0" name="Find path" sid="7717457537410563" type="Fantasmas">
+                                    <param id="0" name="X">LuzPersonagem.X</param>
+                                    <param id="1" name="Y">LuzPersonagem.Y - (LuzPersonagem.Height / 2)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="247457544175849">
+                            <conditions>
+                                <condition behavior="Pathfinding" id="0" name="On path found" sid="6665788328095018" type="Fantasmas" />
+                            </conditions>
+                            <actions>
+                                <action behavior="Pathfinding" id="1" name="Move along path" sid="9647198305914708" type="Fantasmas" />
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="4931555662305528">
                     <conditions>
@@ -1295,6 +1340,39 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <event-block sid="1913622748711554">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="3015024562001286" type="LuzPersonagem">
+                            <param id="0" name="Object">LuzParede</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="7572124251544659">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="9978021081623128" type="System" />
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="7086986734088707">
+                                    <conditions>
+                                        <condition id="-5" name="Compare width" sid="51539698117308" type="LuzPersonagem">
+                                            <param id="0" name="Comparison">3</param>
+                                            <param id="1" name="Width">216</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-7" name="Set size" sid="2192774164712161" type="LuzPersonagem">
+                                            <param id="0" name="Width">LuzPersonagem.Width + 2.5</param>
+                                            <param id="1" name="Height">LuzPersonagem.Height + 2.5</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Desativar a parte escura</comment>
                 <event-block sid="8178138007196533">
                     <conditions>
                         <condition id="0" name="On key pressed" sid="1968584531883091" type="Keyboard">
@@ -1307,18 +1385,7 @@
                     <actions>
                         <action id="-9" name="Destroy" sid="2433062249916656" type="Chave" />
                         <action id="-9" name="Destroy" sid="1765500496901364" type="selChave" />
-                        <action id="-16" name="Set opacity" sid="2900575617791977" type="Fundo">
-                            <param id="0" name="Opacity">0</param>
-                        </action>
-                        <action id="-16" name="Set opacity" sid="7798230084932001" type="LuzPersonagem">
-                            <param id="0" name="Opacity">0</param>
-                        </action>
-                        <action id="-16" name="Set opacity" sid="4314214542184346" type="LuzParede">
-                            <param id="0" name="Opacity">0</param>
-                        </action>
-                        <action id="-16" name="Set opacity" sid="8692735258209877" type="Sprite">
-                            <param id="0" name="Opacity">0</param>
-                        </action>
+                        <action id="-9" name="Destroy" sid="2322279731337848" type="Fantasmas" />
                         <action id="-4" name="Set layer visible" sid="3647425600807111" type="System">
                             <param id="0" name="Layer">3</param>
                             <param id="1" name="Visibility">0</param>
