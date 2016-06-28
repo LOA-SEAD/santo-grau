@@ -4,7 +4,6 @@
     <name>Fase 1 (RU)</name>
     <events>
         <variable constant="0" name="velocidadePessoas" sid="3394612400055466" static="0" type="number">400</variable>
-        <variable constant="0" name="tempoPessoas" sid="9073640312027275" static="0" type="number">0.4</variable>
         <variable constant="0" name="controleDica2" sid="3835474185996537" static="0" type="number">0</variable>
         <variable constant="0" name="controleDica" sid="9200675717542735" static="0" type="number">0</variable>
         <variable constant="0" name="pontos" sid="2102700230222047" static="0" type="number">10000</variable>
@@ -178,13 +177,13 @@
                     <param id="0" name="Width">(1-((720-personagens.Y)*0.000555))*81</param>
                     <param id="1" name="Height">(1-((720-personagens.Y)*0.000555))*150</param>
                 </action>
-                <action id="-7" name="Set size" sid="2587431462532145" type="player">
-                    <param id="0" name="Width">(1-((720-Player.Y)*0.000555))*82</param>
-                    <param id="1" name="Height">(1-((720-Player.Y)*0.000555))*144</param>
-                </action>
                 <action id="-7" name="Set size" sid="2812076395189886" type="playerAnim">
                     <param id="0" name="Width">(1-((720-playerAnim.Y)*0.000555))*82</param>
                     <param id="1" name="Height">(1-((720-playerAnim.Y)*0.000555))*144</param>
+                </action>
+                <action id="-7" name="Set size" sid="2587431462532145" type="player">
+                    <param id="0" name="Width">(1-((720-Player.Y)*0.000555))*82</param>
+                    <param id="1" name="Height">(1-((720-Player.Y)*0.000555))*144</param>
                 </action>
                 <action id="-7" name="Set size" sid="5892437407261658" type="comida">
                     <param id="0" name="Width">(1-((579-Comida.Y)*0.0019512))*30</param>
@@ -295,7 +294,7 @@
                                     <param id="1" name="State">1</param>
                                 </action>
                                 <action id="-16" name="Wait" sid="3280209690643987" type="System">
-                                    <param id="0" name="Seconds">5</param>
+                                    <param id="0" name="Seconds">20</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="614637343632496" type="System">
                                     <param id="0" name="Group name">&quot;GuerraLasanha&quot;</param>
@@ -318,6 +317,9 @@
                                 <condition id="-4" inverted="1" name="Is outside layout" sid="5790202092250641" type="cafe" />
                             </conditions>
                             <actions>
+                                <action id="-1" name="Set X" sid="9465309245220693" type="cafe">
+                                    <param id="0" name="X">1350</param>
+                                </action>
                                 <action id="-12" name="Set group active" sid="5340213419735003" type="System">
                                     <param id="0" name="Group name">&quot;FluxoNormal&quot;</param>
                                     <param id="1" name="State">0</param>
@@ -325,9 +327,6 @@
                                 <action id="-12" name="Set group active" sid="7884856468192074" type="System">
                                     <param id="0" name="Group name">&quot;FluxoCafe&quot;</param>
                                     <param id="1" name="State">1</param>
-                                </action>
-                                <action id="-1" name="Set X" sid="9465309245220693" type="cafe">
-                                    <param id="0" name="X">1350</param>
                                 </action>
                                 <action id="-16" name="Wait" sid="911883777423952" type="System">
                                     <param id="0" name="Seconds">20</param>
@@ -383,6 +382,27 @@
                     <param id="0" name="X">157</param>
                 </action>
             </actions>
+        </event-block>
+        <comment>Ação de pegar o easterEgg1</comment>
+        <event-block sid="227528194553216">
+            <conditions>
+                <condition id="1" name="Is overlapping another object" sid="1560054442567673" type="player">
+                    <param id="0" name="Object">easterEgg1</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="8137806989421508">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="5240621242918209" type="Keyboard">
+                            <param id="0" name="Key">69 (E)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="8959022778019757" type="easterEgg1" />
+                    </actions>
+                </event-block>
+            </sub-events>
         </event-block>
         <event-group description="" sid="5896488708617775" title="playerMove">
             <sub-events>
@@ -1509,12 +1529,27 @@
                                     <param id="0" name="Variable">velocidadePessoas</param>
                                     <param id="1" name="Value">400</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="4435468360234764" type="System">
-                                    <param id="0" name="Variable">tempoPessoas</param>
-                                    <param id="1" name="Value">0.4</param>
-                                </action>
                                 <action id="6" name="Set speed" sid="1959464452714765" type="pessoasBlock">
                                     <param id="0" name="Speed">7</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="661415541736651">
+                            <conditions>
+                                <condition id="-6" name="Every X seconds" sid="8714813705205351" type="System">
+                                    <param id="0" name="Interval (seconds)">0.4</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="23209546159859" type="System">
+                                    <param id="0" name="Object to create">pessoasBlock</param>
+                                    <param id="1" name="Layer">0</param>
+                                    <param id="2" name="X">pessoasSpawn.X</param>
+                                    <param id="3" name="Y">pessoasSpawn.Y</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="3332296502581446" type="pessoasBlock">
+                                    <param id="0" name="Animation">&quot;Pers&quot; &amp; round(random(1,6))</param>
+                                    <param id="1" name="From">1</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1662,12 +1697,27 @@
                                     <param id="0" name="Variable">velocidadePessoas</param>
                                     <param id="1" name="Value">70</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="6232752925356408" type="System">
-                                    <param id="0" name="Variable">tempoPessoas</param>
-                                    <param id="1" name="Value">2.3</param>
-                                </action>
                                 <action id="6" name="Set speed" sid="3717252465917348" type="pessoasBlock">
                                     <param id="0" name="Speed">2</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="6224811047598272">
+                            <conditions>
+                                <condition id="-6" name="Every X seconds" sid="5675488426020399" type="System">
+                                    <param id="0" name="Interval (seconds)">2.3</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="1261488942504889" type="System">
+                                    <param id="0" name="Object to create">pessoasBlock</param>
+                                    <param id="1" name="Layer">0</param>
+                                    <param id="2" name="X">pessoasSpawn.X</param>
+                                    <param id="3" name="Y">pessoasSpawn.Y</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="9224643534338907" type="pessoasBlock">
+                                    <param id="0" name="Animation">&quot;Pers&quot; &amp; round(random(1,6))</param>
+                                    <param id="1" name="From">1</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1841,25 +1891,6 @@
         </event-group>
         <event-group description="" sid="9773762003433993" title="FluxoPessoas">
             <sub-events>
-                <event-block sid="9379405776808353">
-                    <conditions>
-                        <condition id="-6" name="Every X seconds" sid="2377784695445465" type="System">
-                            <param id="0" name="Interval (seconds)">tempoPessoas</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-3" name="Create object" sid="2272516080031218" type="System">
-                            <param id="0" name="Object to create">pessoasBlock</param>
-                            <param id="1" name="Layer">0</param>
-                            <param id="2" name="X">pessoasSpawn.X</param>
-                            <param id="3" name="Y">pessoasSpawn.Y</param>
-                        </action>
-                        <action id="4" name="Set animation" sid="7786102647702851" type="pessoasBlock">
-                            <param id="0" name="Animation">&quot;Pers&quot; &amp; round(random(1,6))</param>
-                            <param id="1" name="From">1</param>
-                        </action>
-                    </actions>
-                </event-block>
                 <event-block sid="6938667913742299">
                     <conditions>
                         <condition id="-18" name="On created" sid="362016569252374" type="pessoasBlock" />
@@ -1869,6 +1900,27 @@
                             <param id="0" name="Speed">velocidadePessoas</param>
                         </action>
                     </actions>
+                </event-block>
+                <event-block sid="2650613414778297">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="894232045916227" type="pessoasBlock">
+                            <param id="0" name="Object">pessoasBlock</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="3775616378490131">
+                            <conditions>
+                                <condition id="-20" name="Pick highest/lowest" sid="7980344622212561" type="pessoasBlock">
+                                    <param id="0" name="Which">0</param>
+                                    <param id="1" name="Instance variable">ID</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Destroy" sid="1506380622323972" type="pessoasBlock" />
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="7512048755972766">
                     <conditions>
