@@ -3,9 +3,10 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase 2 (Tecnologia)</name>
     <events>
-        <variable constant="0" name="palavra1" sid="8925465934116768" static="0" type="text">arroz</variable>
-        <variable constant="0" name="palavra2" sid="2659963504474121" static="0" type="text">feijao</variable>
-        <variable constant="0" name="palavra3" sid="640949609577656" static="0" type="text">farofa</variable>
+        <variable constant="0" name="palavra1" sid="8925465934116768" static="0" type="text"></variable>
+        <variable constant="0" name="palavra2" sid="2659963504474121" static="0" type="text"></variable>
+        <variable constant="0" name="palavra3" sid="640949609577656" static="0" type="text"></variable>
+        <variable constant="0" name="midia" sid="4079815398933129" static="0" type="text"></variable>
         <event-block sid="5819905138494612">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="7461295097562547" type="System" />
@@ -27,28 +28,42 @@
                     <param id="0" name="Animation">&quot;Default&quot;</param>
                     <param id="1" name="From">1</param>
                 </action>
-            </actions>
-        </event-block>
-        <event-block sid="2449858748110358">
-            <conditions>
-                <condition id="-1" name="Every tick" sid="2351072653815331" type="System" />
-            </conditions>
-            <actions>
-                <action id="-7" name="Set size" sid="2044452179357808" type="player">
-                    <param id="0" name="Width">(1-((612-Player.Y)*0.0009263322))*122</param>
-                    <param id="1" name="Height">(1-((612-Player.Y)*0.0009263322))*215</param>
+                <action id="13" name="Set URL" sid="5137872676196242" type="telaoHTML">
+                    <param id="0" name="URL">&quot;telao.html&quot;</param>
                 </action>
-                <action id="-7" name="Set size" sid="8274247485987764" type="playerAnim">
-                    <param id="0" name="Width">(1-((612-Player.Y)*0.0009263322))*122</param>
-                    <param id="1" name="Height">(1-((612-Player.Y)*0.0009263322))*215</param>
+                <action id="0" name="Load JSON" sid="5109230592467949" type="computadoresJSON" />
+                <action id="-9" name="Set value" sid="4155475147694887" type="System">
+                    <param id="0" name="Variable">midia</param>
+                    <param id="1" name="Value">computadoresJSON.GetData(&quot;words&quot;,1)</param>
                 </action>
-                <action id="0" name="Set text" sid="5757129352923526" type="pontuacao">
-                    <param id="0" name="Text">&quot;Rendimento acadêmico: &quot; &amp; pontos</param>
+                <action id="0" name="Set text" sid="8867299511105252" type="debug">
+                    <param id="0" name="Text">midia</param>
                 </action>
             </actions>
         </event-block>
         <event-group description="" sid="1249762280384846" title="Efeitos2">
             <sub-events>
+                <event-block sid="2449858748110358">
+                    <conditions>
+                        <condition id="-1" name="Every tick" sid="2351072653815331" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-7" name="Set size" sid="2044452179357808" type="player">
+                            <param id="0" name="Width">(1-((612-Player.Y)*0.0009263322))*122</param>
+                            <param id="1" name="Height">(1-((612-Player.Y)*0.0009263322))*215</param>
+                        </action>
+                        <action id="-7" name="Set size" sid="8274247485987764" type="playerAnim">
+                            <param id="0" name="Width">(1-((612-Player.Y)*0.0009263322))*122</param>
+                            <param id="1" name="Height">(1-((612-Player.Y)*0.0009263322))*215</param>
+                        </action>
+                        <action id="0" name="Set text" sid="5757129352923526" type="pontuacao">
+                            <param id="0" name="Text">&quot;Rendimento acadêmico: &quot; &amp; pontos</param>
+                        </action>
+                        <action id="0" name="Set text" sid="1369578000193417" type="debug">
+                            <param id="0" name="Text">computadoresJSON.GetData(palavra1,0)</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <event-block sid="1096809854280954">
                     <conditions>
                         <condition id="-2" name="Compare Y" sid="5945472438210038" type="player">
@@ -150,6 +165,12 @@
                                         </condition>
                                     </conditions>
                                     <actions>
+                                        <action id="0" name="Execute" sid="8162025794340874" type="shuffleJS">
+                                            <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; palavra1 &amp; &quot;&apos;)&quot;</param>
+                                        </action>
+                                        <action id="0" name="Set text" sid="5109083877977334" type="debug">
+                                            <param id="0" name="Text">shuffleJS.ReadExecutionReturn</param>
+                                        </action>
                                         <action id="-12" name="Set group active" sid="8487189829115734" type="System">
                                             <param id="0" name="Group name">&quot;Computador1&quot;</param>
                                             <param id="1" name="State">1</param>
@@ -164,6 +185,12 @@
                                         </condition>
                                     </conditions>
                                     <actions>
+                                        <action id="0" name="Execute" sid="8917615234627222" type="shuffleJS">
+                                            <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; palavra2 &amp; &quot;&apos;)&quot;</param>
+                                        </action>
+                                        <action id="0" name="Set text" sid="9065484109046822" type="debug">
+                                            <param id="0" name="Text">shuffleJS.ReadExecutionReturn</param>
+                                        </action>
                                         <action id="-12" name="Set group active" sid="3664612488746282" type="System">
                                             <param id="0" name="Group name">&quot;Computador2&quot;</param>
                                             <param id="1" name="State">1</param>
@@ -178,6 +205,12 @@
                                         </condition>
                                     </conditions>
                                     <actions>
+                                        <action id="0" name="Execute" sid="1276519236781298" type="shuffleJS">
+                                            <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; palavra3 &amp; &quot;&apos;)&quot;</param>
+                                        </action>
+                                        <action id="0" name="Set text" sid="2404400794855668" type="debug">
+                                            <param id="0" name="Text">shuffleJS.ReadExecutionReturn</param>
+                                        </action>
                                         <action id="-12" name="Set group active" sid="5685803581100642" type="System">
                                             <param id="0" name="Group name">&quot;Computador3&quot;</param>
                                             <param id="1" name="State">1</param>
@@ -270,6 +303,18 @@
                             <param id="0" name="Animation">&quot;TrasAndando&quot;</param>
                             <param id="1" name="From">1</param>
                         </action>
+                        <action id="6" name="Set speed" sid="2970509624212334" type="playerAnim">
+                            <param id="0" name="Speed">4</param>
+                        </action>
+                        <action behavior="8Direction" id="4" name="Set max speed" sid="6117041159982306" type="player">
+                            <param id="0" name="Max Speed">180</param>
+                        </action>
+                        <action behavior="8Direction" id="5" name="Set acceleration" sid="9835759424167295" type="player">
+                            <param id="0" name="Acceleration">550</param>
+                        </action>
+                        <action behavior="8Direction" id="6" name="Set deceleration" sid="7369213270105871" type="player">
+                            <param id="0" name="Deceleration">1100</param>
+                        </action>
                     </actions>
                 </event-block>
                 <event-block any="1" sid="1073648718502332">
@@ -291,6 +336,18 @@
                         <action id="4" name="Set animation" sid="9737196518982497" type="playerAnim">
                             <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
                             <param id="1" name="From">1</param>
+                        </action>
+                        <action id="6" name="Set speed" sid="1942638961807371" type="playerAnim">
+                            <param id="0" name="Speed">5</param>
+                        </action>
+                        <action behavior="8Direction" id="4" name="Set max speed" sid="200442324572574" type="player">
+                            <param id="0" name="Max Speed">200</param>
+                        </action>
+                        <action behavior="8Direction" id="5" name="Set acceleration" sid="5989519834445621" type="player">
+                            <param id="0" name="Acceleration">600</param>
+                        </action>
+                        <action behavior="8Direction" id="6" name="Set deceleration" sid="3297449474923373" type="player">
+                            <param id="0" name="Deceleration">1000</param>
                         </action>
                     </actions>
                 </event-block>
@@ -314,6 +371,18 @@
                             <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
                             <param id="1" name="From">1</param>
                         </action>
+                        <action id="6" name="Set speed" sid="8183667686721277" type="playerAnim">
+                            <param id="0" name="Speed">5</param>
+                        </action>
+                        <action behavior="8Direction" id="4" name="Set max speed" sid="5940356570915465" type="player">
+                            <param id="0" name="Max Speed">200</param>
+                        </action>
+                        <action behavior="8Direction" id="5" name="Set acceleration" sid="6755135955773414" type="player">
+                            <param id="0" name="Acceleration">600</param>
+                        </action>
+                        <action behavior="8Direction" id="6" name="Set deceleration" sid="8352887706297475" type="player">
+                            <param id="0" name="Deceleration">1000</param>
+                        </action>
                     </actions>
                 </event-block>
                 <event-block any="1" sid="4734652613660711">
@@ -335,6 +404,18 @@
                         <action id="4" name="Set animation" sid="9788879231222867" type="playerAnim">
                             <param id="0" name="Animation">&quot;FrenteAndando&quot;</param>
                             <param id="1" name="From">1</param>
+                        </action>
+                        <action id="6" name="Set speed" sid="8024828766414996" type="playerAnim">
+                            <param id="0" name="Speed">4</param>
+                        </action>
+                        <action behavior="8Direction" id="4" name="Set max speed" sid="2946142072938787" type="player">
+                            <param id="0" name="Max Speed">180</param>
+                        </action>
+                        <action behavior="8Direction" id="5" name="Set acceleration" sid="1541492921610282" type="player">
+                            <param id="0" name="Acceleration">550</param>
+                        </action>
+                        <action behavior="8Direction" id="6" name="Set deceleration" sid="1684410411149841" type="player">
+                            <param id="0" name="Deceleration">1100</param>
                         </action>
                     </actions>
                 </event-block>
@@ -453,14 +534,7 @@
             <sub-events>
                 <event-block sid="9402733510995834">
                     <conditions />
-                    <actions>
-                        <action id="0" name="Execute" sid="8162025794340874" type="CallJS">
-                            <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; palavra1 &amp; &quot;&apos;)&quot;</param>
-                        </action>
-                        <action id="0" name="Set text" sid="5109083877977334" type="debug">
-                            <param id="0" name="Text">CallJS.ReadExecutionReturn</param>
-                        </action>
-                    </actions>
+                    <actions />
                 </event-block>
                 <event-block disabled="1" sid="897277641330733">
                     <conditions />
@@ -481,14 +555,7 @@
             <sub-events>
                 <event-block sid="6956019762127945">
                     <conditions />
-                    <actions>
-                        <action id="0" name="Execute" sid="5075826498702317" type="CallJS">
-                            <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; palavra2 &amp; &quot;&apos;)&quot;</param>
-                        </action>
-                        <action id="0" name="Set text" sid="9146766347812387" type="debug">
-                            <param id="0" name="Text">CallJS.ReadExecutionReturn</param>
-                        </action>
-                    </actions>
+                    <actions />
                 </event-block>
                 <event-block disabled="1" sid="2218805912438189">
                     <conditions />
@@ -509,14 +576,7 @@
             <sub-events>
                 <event-block sid="2803875802537632">
                     <conditions />
-                    <actions>
-                        <action id="0" name="Execute" sid="8423506072761533" type="CallJS">
-                            <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; palavra3 &amp; &quot;&apos;)&quot;</param>
-                        </action>
-                        <action id="0" name="Set text" sid="1702133743799975" type="debug">
-                            <param id="0" name="Text">CallJS.ReadExecutionReturn</param>
-                        </action>
-                    </actions>
+                    <actions />
                 </event-block>
                 <event-block disabled="1" sid="1829572092603316">
                     <conditions />
@@ -582,7 +642,7 @@
             </conditions>
             <actions>
                 <action id="-12" name="Set group active" sid="9450253076648116" type="System">
-                    <param id="0" name="Group name">&quot;Saida&quot;</param>
+                    <param id="0" name="Group name">&quot;Saida2&quot;</param>
                     <param id="1" name="State">1</param>
                 </action>
                 <action id="-9" name="Destroy" sid="7669583388323185" type="telaoHTML" />
@@ -596,7 +656,7 @@
                 </action>
             </actions>
         </event-block>
-        <event-group description="" inactive="1" sid="3726014130864171" title="Saida">
+        <event-group description="" inactive="1" sid="3726014130864171" title="Saida2">
             <sub-events>
                 <event-block sid="8283465333687756">
                     <conditions>
@@ -622,5 +682,29 @@
                 </event-block>
             </sub-events>
         </event-group>
+        <event-block sid="930356015598639">
+            <conditions>
+                <condition id="0" name="On key pressed" sid="5861937809027961" type="Keyboard">
+                    <param id="0" name="Key">90 (Z)</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-36" name="Save" sid="1954916793954724" type="System">
+                    <param id="0" name="Slot">&quot;save&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="3244393547741866">
+            <conditions>
+                <condition id="0" name="On key pressed" sid="2042427474487274" type="Keyboard">
+                    <param id="0" name="Key">76 (L)</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-37" name="Load" sid="2504906867466325" type="System">
+                    <param id="0" name="Slot">&quot;save&quot;</param>
+                </action>
+            </actions>
+        </event-block>
     </events>
 </c2eventsheet>
