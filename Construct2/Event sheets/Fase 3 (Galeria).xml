@@ -83,9 +83,6 @@
                 <action id="-16" name="Set opacity" sid="8066285981259156" type="Dialogos">
                     <param id="0" name="Opacity">0</param>
                 </action>
-                <action behavior="Solid" id="0" name="Set enabled" sid="1203173635951509" type="Chave">
-                    <param id="0" name="State">0</param>
-                </action>
                 <action id="-16" name="Set opacity" sid="6297385735262426" type="Chave">
                     <param id="0" name="Opacity">0</param>
                 </action>
@@ -98,8 +95,12 @@
                 <action id="11" name="Set collisions enabled" sid="9567306319963657" type="Fantasmas">
                     <param id="0" name="Collisions">0</param>
                 </action>
-                <action behavior="Pathfinding" id="3" name="Set enabled" sid="7666381935130327" type="Fantasmas">
-                    <param id="0" name="Set">0</param>
+                <action behavior="Pin" id="0" name="Pin to object" sid="1213631626711965" type="dicaTexto">
+                    <param id="0" name="Pin to">dicaPopUp</param>
+                    <param id="1" name="Mode">0</param>
+                </action>
+                <action id="0" name="Set text" sid="9426213284247127" type="dicaTexto">
+                    <param id="0" name="Text">&quot;Pressione E para conversar com o bibliotecário&quot;</param>
                 </action>
             </actions>
         </event-block>
@@ -121,13 +122,64 @@
                 </action>
             </actions>
         </event-block>
-        <event-block sid="8184022603915785">
+        <comment>Sobe dica para conversar com o bibliotecário</comment>
+        <event-block any="1" sid="8184022603915785">
             <conditions>
-                <condition id="2" name="Key is down" sid="4592936867441972" type="Keyboard">
-                    <param id="0" name="Key">69 (E)</param>
-                </condition>
                 <condition id="1" name="Is overlapping another object" sid="3876750697826487" type="player">
                     <param id="0" name="Object">selBibliotecario</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="1360049059185404">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="6359714887004335" type="dicaPopUp">
+                            <param id="0" name="Comparison">4</param>
+                            <param id="1" name="Y co-ordinate">660</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="7532999245725414" type="dicaPopUp">
+                            <param id="0" name="Y">dicaPopUp.Y-3</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>Desce dica para conversar com o bibliotecário</comment>
+        <event-block sid="3487361776120188">
+            <conditions>
+                <condition id="-22" name="Else" sid="9143762695555115" type="System" />
+                <condition id="-14" inverted="1" name="Compare variable" sid="3916874377193149" type="System">
+                    <param id="0" name="Variable">fraseAtualGAL</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Value">5</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="5986606297127971">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="87874478947629" type="dicaPopUp">
+                            <param id="0" name="Comparison">2</param>
+                            <param id="1" name="Y co-ordinate">778</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="1110080840340901" type="dicaPopUp">
+                            <param id="0" name="Y">dicaPopUp.Y+3</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="6062525126708422">
+            <conditions>
+                <condition id="1" name="Is overlapping another object" sid="5426140650707876" type="player">
+                    <param id="0" name="Object">selBibliotecario</param>
+                </condition>
+                <condition id="2" name="Key is down" sid="1161521404134509" type="Keyboard">
+                    <param id="0" name="Key">69 (E)</param>
                 </condition>
             </conditions>
             <actions>
@@ -150,6 +202,71 @@
                 </action>
                 <action id="-9" name="Destroy" sid="5328791875943443" type="selBibliotecario" />
             </actions>
+        </event-block>
+        <comment>Sobe dica para ordenar os quadros</comment>
+        <event-block sid="343906429276003">
+            <conditions>
+                <condition id="-14" name="Compare variable" sid="8148930757124867" type="System">
+                    <param id="0" name="Variable">fraseAtualGAL</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Value">5</param>
+                </condition>
+                <condition id="1" name="Is overlapping another object" sid="958589223237896" type="player">
+                    <param id="0" name="Object">selecaoComida</param>
+                </condition>
+                <condition id="-14" inverted="1" name="Compare variable" sid="6399666085739221" type="System">
+                    <param id="0" name="Variable">iniciarAnimacao</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Value">1</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="0" name="Set text" sid="180882659128416" type="dicaTexto">
+                    <param id="0" name="Text">&quot;Pressione E para ordenar os quadros&quot;</param>
+                </action>
+            </actions>
+            <sub-events>
+                <event-block sid="17042616374342">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="7154805784324536" type="dicaPopUp">
+                            <param id="0" name="Comparison">4</param>
+                            <param id="1" name="Y co-ordinate">660</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="9773157708465303" type="dicaPopUp">
+                            <param id="0" name="Y">dicaPopUp.Y-3</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>Desce dica para ordenar os quadros</comment>
+        <event-block sid="1744485609435248">
+            <conditions>
+                <condition id="-22" name="Else" sid="5484987471074017" type="System" />
+                <condition id="-14" name="Compare variable" sid="7848400368038743" type="System">
+                    <param id="0" name="Variable">fraseAtualGAL</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Value">5</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="4533107679195536">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="2936851690228144" type="dicaPopUp">
+                            <param id="0" name="Comparison">2</param>
+                            <param id="1" name="Y co-ordinate">778</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="8221384092365327" type="dicaPopUp">
+                            <param id="0" name="Y">dicaPopUp.Y+3</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
         </event-block>
         <event-block sid="7454483833152009">
             <conditions>
@@ -228,6 +345,8 @@
                             <param id="0" name="Group name">&quot;visualizarQuadros&quot;</param>
                             <param id="1" name="State">1</param>
                         </action>
+                        <action id="-9" name="Destroy" sid="1169394142089471" type="dicaPopUp" />
+                        <action id="-9" name="Destroy" sid="5613323581113454" type="dicaTexto" />
                     </actions>
                 </event-block>
             </sub-events>
@@ -295,7 +414,7 @@
                 </event-block>
             </sub-events>
         </event-block>
-        <comment>Blocos 11 e 12 servem para que só seja modificado o vetor com a ordem dos quadros quando o jogador soltar o quadro que ele estiver arrastando</comment>
+        <comment>Estes dois blocos servem para que só seja modificado o vetor com a ordem dos quadros quando o jogador soltar o quadro que ele estiver arrastando</comment>
         <event-block sid="8510538776884853">
             <conditions>
                 <condition behavior="DragDrop" id="0" name="Is dragging" sid="6326581813458748" type="Quadros" />
@@ -718,16 +837,6 @@
                                                 </action>
                                             </actions>
                                             <sub-events>
-                                                <event-block sid="9943489211213957">
-                                                    <conditions>
-                                                        <condition disabled="1" id="-14" name="Compare variable" sid="3765279253707684" type="System">
-                                                            <param id="0" name="Variable">tamanhoDialogoGAL</param>
-                                                            <param id="1" name="Comparison">0</param>
-                                                            <param id="2" name="Value">4</param>
-                                                        </condition>
-                                                    </conditions>
-                                                    <actions />
-                                                </event-block>
                                                 <comment>Ativar a parte escura</comment>
                                                 <event-block sid="6260428200640797">
                                                     <conditions>
@@ -738,7 +847,7 @@
                                                         </condition>
                                                     </conditions>
                                                     <actions>
-                                                        <action disabled="1" id="-4" name="Set layer visible" sid="4660890779684976" type="System">
+                                                        <action id="-4" name="Set layer visible" sid="4660890779684976" type="System">
                                                             <param id="0" name="Layer">3</param>
                                                             <param id="1" name="Visibility">1</param>
                                                         </action>
@@ -880,7 +989,7 @@
         <comment>Usado para realizar operações com os quadros enquanto o zoom neles está ativo</comment>
         <event-group description="" sid="1147429554170792" title="operacoesQuadros">
             <sub-events>
-                <comment>Dos blocos 57-66 é para obter a ordem atual dos quadros, dos blocos 67-74 é para verificar se o jogador já colocou os quadros na ordem correta</comment>
+                <comment>Dos blocos 58-67 é para obter a ordem atual dos quadros, dos blocos 68-75 é para verificar se o jogador já colocou os quadros na ordem correta</comment>
                 <event-block sid="6314231578562101">
                     <conditions>
                         <condition id="-1" name="Every tick" sid="1244109718023936" type="System" />
@@ -1175,6 +1284,7 @@
         <comment>Grupo destinado para a parte da fase onde as luzes se apagam e o personagem tem que procurar uma chave na sala</comment>
         <event-group description="" sid="9157508315894824" title="localizarChave">
             <sub-events>
+                <comment>Efeito de ir acabando a luz</comment>
                 <event-block sid="2269665524215405">
                     <conditions>
                         <condition id="-1" name="Every tick" sid="612139776512226" type="System" />
@@ -1199,149 +1309,6 @@
                                     <param id="1" name="Height">LuzPersonagem.Height - 0.5</param>
                                 </action>
                             </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="1020391763590602">
-                    <conditions>
-                        <condition behavior="8Direction" id="0" name="Is moving" sid="5593398855836411" type="player" />
-                    </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block sid="8281166039904786">
-                            <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="9973881720330846" type="Fantasmas">
-                                    <param id="0" name="Unique ID">227</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action behavior="Pathfinding" id="0" name="Find path" sid="9379159342104627" type="Fantasmas">
-                                    <param id="0" name="X">LuzPersonagem.X - (LuzPersonagem.Width / 2)</param>
-                                    <param id="1" name="Y">LuzPersonagem.Y</param>
-                                </action>
-                            </actions>
-                            <sub-events>
-                                <event-block disabled="1" sid="3354744362760243">
-                                    <conditions>
-                                        <condition behavior="Pathfinding" id="4" inverted="1" name="Is moving along path" sid="7990099533033058" type="Fantasmas" />
-                                    </conditions>
-                                    <actions>
-                                        <action behavior="Pathfinding" disabled="1" id="3" name="Set enabled" sid="4218865089854994" type="Fantasmas">
-                                            <param id="0" name="Set">0</param>
-                                        </action>
-                                        <action behavior="Pathfinding" disabled="1" id="3" name="Set enabled" sid="2759397091712317" type="Fantasmas">
-                                            <param id="0" name="Set">1</param>
-                                        </action>
-                                        <action behavior="Pathfinding" id="6" name="Clear obstacles" sid="2604369427719145" type="Fantasmas" />
-                                        <action behavior="Pathfinding" id="4" name="Regenerate obstacle map" sid="428744662358738" type="Fantasmas" />
-                                        <action behavior="Pathfinding" id="0" name="Find path" sid="2422466688228586" type="Fantasmas">
-                                            <param id="0" name="X">LuzPersonagem.X - (LuzPersonagem.Width / 2)</param>
-                                            <param id="1" name="Y">LuzPersonagem.Y</param>
-                                        </action>
-                                        <action behavior="Pathfinding" id="15" name="Regenerate region" sid="4746990593472284" type="Fantasmas">
-                                            <param id="0" name="Start X">Fantasmas.X</param>
-                                            <param id="1" name="Start Y">Fantasmas.Y</param>
-                                            <param id="2" name="End X">200</param>
-                                            <param id="3" name="End Y">200</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="247457544175849">
-                                    <conditions>
-                                        <condition behavior="Pathfinding" id="0" name="On path found" sid="6665788328095018" type="Fantasmas" />
-                                    </conditions>
-                                    <actions>
-                                        <action behavior="Pathfinding" id="1" name="Move along path" sid="9647198305914708" type="Fantasmas" />
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <event-block sid="251700541774072">
-                            <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="38578378427703" type="Fantasmas">
-                                    <param id="0" name="Unique ID">230</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action behavior="Pathfinding" id="0" name="Find path" sid="7883069771573158" type="Fantasmas">
-                                    <param id="0" name="X">LuzPersonagem.X + (LuzPersonagem.Width / 2)</param>
-                                    <param id="1" name="Y">LuzPersonagem.Y</param>
-                                </action>
-                            </actions>
-                            <sub-events>
-                                <event-block disabled="1" sid="3679096003509883">
-                                    <conditions>
-                                        <condition behavior="Pathfinding" id="1" name="On failed to find path" sid="162488949165773" type="Fantasmas" />
-                                    </conditions>
-                                    <actions>
-                                        <action behavior="Pathfinding" disabled="1" id="3" name="Set enabled" sid="5865644469493389" type="Fantasmas">
-                                            <param id="0" name="Set">0</param>
-                                        </action>
-                                        <action behavior="Pathfinding" disabled="1" id="3" name="Set enabled" sid="1505610853744936" type="Fantasmas">
-                                            <param id="0" name="Set">1</param>
-                                        </action>
-                                        <action behavior="Pathfinding" id="6" name="Clear obstacles" sid="1713150518822424" type="Fantasmas" />
-                                        <action behavior="Pathfinding" id="0" name="Find path" sid="2828671098504226" type="Fantasmas">
-                                            <param id="0" name="X">LuzPersonagem.X + (LuzPersonagem.Width / 2)</param>
-                                            <param id="1" name="Y">LuzPersonagem.Y</param>
-                                        </action>
-                                        <action behavior="Pathfinding" id="4" name="Regenerate obstacle map" sid="1477685239672303" type="Fantasmas" />
-                                    </actions>
-                                </event-block>
-                                <event-block sid="4151123898273309">
-                                    <conditions>
-                                        <condition behavior="Pathfinding" id="0" name="On path found" sid="1772303298185197" type="Fantasmas" />
-                                    </conditions>
-                                    <actions>
-                                        <action behavior="Pathfinding" id="1" name="Move along path" sid="6313060490510633" type="Fantasmas" />
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <event-block sid="2745205762765969">
-                            <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="2609784192071966" type="Fantasmas">
-                                    <param id="0" name="Unique ID">231</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action behavior="Pathfinding" id="0" name="Find path" sid="7717457537410563" type="Fantasmas">
-                                    <param id="0" name="X">LuzPersonagem.X</param>
-                                    <param id="1" name="Y">LuzPersonagem.Y - (LuzPersonagem.Height / 2)</param>
-                                </action>
-                            </actions>
-                            <sub-events>
-                                <event-block disabled="1" sid="5237183607632302">
-                                    <conditions>
-                                        <condition behavior="Pathfinding" id="2" name="Is cell obstacle" sid="6889991248248686" type="Fantasmas">
-                                            <param id="0" name="Cell X">Fantasmas.X</param>
-                                            <param id="1" name="Cell Y">Fantasmas.Y</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action behavior="Pathfinding" id="3" name="Set enabled" sid="9262846326708675" type="Fantasmas">
-                                            <param id="0" name="Set">0</param>
-                                        </action>
-                                        <action behavior="Pathfinding" id="3" name="Set enabled" sid="4574945604865065" type="Fantasmas">
-                                            <param id="0" name="Set">1</param>
-                                        </action>
-                                        <action behavior="Pathfinding" id="6" name="Clear obstacles" sid="9540872931868654" type="Fantasmas" />
-                                        <action behavior="Pathfinding" id="0" name="Find path" sid="7134558785153579" type="Fantasmas">
-                                            <param id="0" name="X">LuzPersonagem.X</param>
-                                            <param id="1" name="Y">LuzPersonagem.Y - (LuzPersonagem.Height / 2)</param>
-                                        </action>
-                                        <action behavior="Pathfinding" id="4" name="Regenerate obstacle map" sid="3994371767903899" type="Fantasmas" />
-                                    </actions>
-                                </event-block>
-                                <event-block sid="9157258488350692">
-                                    <conditions>
-                                        <condition behavior="Pathfinding" id="0" name="On path found" sid="4654914034611596" type="Fantasmas" />
-                                    </conditions>
-                                    <actions>
-                                        <action behavior="Pathfinding" id="1" name="Move along path" sid="1596609155596878" type="Fantasmas" />
-                                    </actions>
-                                </event-block>
-                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -1377,11 +1344,65 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <comment>Para o caso da chave estar sobrepondo algum dos fantasmas, o que impossibilitaria a locomoção dele</comment>
+                        <event-block sid="3887448093455113">
+                            <conditions>
+                                <condition id="1" name="Is overlapping another object" sid="2687596351576148" type="Fantasmas">
+                                    <param id="0" name="Object">Chave</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="1366578148724708">
+                                    <conditions>
+                                        <condition id="-15" name="Pick nearest/furthest" sid="6304839684686599" type="Fantasmas">
+                                            <param id="0" name="Which">0</param>
+                                            <param id="1" name="X">Chave.X</param>
+                                            <param id="2" name="Y">Chave.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block any="1" sid="4805660359010017">
+                                            <conditions>
+                                                <condition id="-8" name="Compare two values" sid="6805771935073875" type="System">
+                                                    <param id="0" name="First value">Fantasmas.UID</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">227</param>
+                                                </condition>
+                                                <condition id="-8" name="Compare two values" sid="1305517775451969" type="System">
+                                                    <param id="0" name="First value">Fantasmas.UID</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">230</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-2" name="Set Y" sid="8724974385054695" type="Fantasmas">
+                                                    <param id="0" name="Y">Chave.Y - 120</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="3746345805841473">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="774327208240329" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-1" name="Set X" sid="923355706475484" type="Fantasmas">
+                                                    <param id="0" name="X">Chave.X - 160</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
                         <event-block sid="4079328475707087">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="4087871236617563" type="System" />
                             </conditions>
                             <actions>
+                                <action behavior="Pathfinding" id="6" name="Clear obstacles" sid="7141916775994854" type="Fantasmas" />
+                                <action behavior="Pathfinding" id="4" name="Regenerate obstacle map" sid="9915003373179795" type="Fantasmas" />
                                 <action id="-9" name="Set value" sid="3111414728212227" type="System">
                                     <param id="0" name="Variable">carregarDialogoChave</param>
                                     <param id="1" name="Value">0</param>
@@ -1390,6 +1411,40 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment>Atualiza as corrdenadas da personagem</comment>
+                <event-block sid="1020391763590602">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="5593398855836411" type="System">
+                            <param id="0" name="Interval (seconds)">1.2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Pathfinding" id="0" name="Find path" sid="6413171885953054" type="Fantasmas">
+                            <param id="0" name="X">max(LuzPersonagem.X - (LuzPersonagem.Width / 2), 0)</param>
+                            <param id="1" name="Y">max(LuzPersonagem.Y - (LuzPersonagem.Height / 2), 0)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="1684081759591584">
+                    <conditions>
+                        <condition behavior="Pathfinding" id="0" name="On path found" sid="8961779700815689" type="Fantasmas" />
+                    </conditions>
+                    <actions>
+                        <action behavior="Pathfinding" id="1" name="Move along path" sid="7933134944654806" type="Fantasmas" />
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="6309744224812457">
+                    <conditions>
+                        <condition behavior="Pathfinding" id="1" name="On failed to find path" sid="4782682888738586" type="Fantasmas" />
+                        <condition behavior="Pathfinding" id="4" inverted="1" name="Is moving along path" sid="3179335189377997" type="Fantasmas" />
+                    </conditions>
+                    <actions>
+                        <action behavior="Pathfinding" id="3" name="Set enabled" sid="7881681691139694" type="Fantasmas">
+                            <param id="0" name="Set">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Efeito de recarregar a luz</comment>
                 <event-block sid="1913622748711554">
                     <conditions>
                         <condition id="1" name="Is overlapping another object" sid="3015024562001286" type="LuzPersonagem">
@@ -1419,6 +1474,39 @@
                                     </actions>
                                 </event-block>
                             </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Personagem só toma dano se ela estiver sem luz</comment>
+                <event-block sid="504785360010506">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="5599768364846696" type="player">
+                            <param id="0" name="Object">Fantasmas</param>
+                        </condition>
+                        <condition id="-5" name="Compare width" sid="9549609794779692" type="LuzPersonagem">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Width">0</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="7542386756780662">
+                            <conditions>
+                                <condition id="-6" name="Every X seconds" sid="3209135880433327" type="System">
+                                    <param id="0" name="Interval (seconds)">1.2</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="Flash" id="0" name="Flash" sid="1033750386425312" type="playerAnim">
+                                    <param id="0" name="&apos;On&apos; time">0.1</param>
+                                    <param id="1" name="&apos;Off&apos; time">0.1</param>
+                                    <param id="2" name="Duration">1.2</param>
+                                </action>
+                                <action id="-10" name="Add to" sid="5225297808590257" type="System">
+                                    <param id="0" name="Variable">pontos</param>
+                                    <param id="1" name="Value">-50</param>
+                                </action>
+                            </actions>
                         </event-block>
                     </sub-events>
                 </event-block>
