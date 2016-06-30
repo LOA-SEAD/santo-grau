@@ -41,13 +41,6 @@
                     <param id="0" name="Animation">&quot;Default&quot;</param>
                     <param id="1" name="From">1</param>
                 </action>
-                <action id="-3" name="Set position" sid="4182705034602874" type="dicaPopUp">
-                    <param id="0" name="X">100</param>
-                    <param id="1" name="Y">252</param>
-                </action>
-                <action id="-16" name="Set opacity" sid="4697486420826341" type="dicaPopUp">
-                    <param id="0" name="Opacity">0</param>
-                </action>
                 <action id="-16" name="Set opacity" sid="49574672743542" type="dicaTexto">
                     <param id="0" name="Opacity">0</param>
                 </action>
@@ -59,11 +52,8 @@
                     <param id="0" name="Pin to">dicaPopUp</param>
                     <param id="1" name="Mode">0</param>
                 </action>
-                <action id="0" name="Set text" sid="1357049657443647" type="dicaTexto">
-                    <param id="0" name="Text">&quot;Pegue o bloco com o número correspondente à alternativa correta&quot;</param>
-                </action>
                 <action id="-12" name="Set group active" sid="8220233430313393" type="System">
-                    <param id="0" name="Group name">&quot;inicioPerguntasFFBN&quot;</param>
+                    <param id="0" name="Group name">&quot;playerMoveFFBN&quot;</param>
                     <param id="1" name="State">0</param>
                 </action>
                 <action id="-12" name="Set group active" sid="98277044039193" type="System">
@@ -75,36 +65,27 @@
                     <param id="1" name="State">0</param>
                 </action>
                 <action id="0" name="Load JSON" sid="9328277791879841" type="LoadJSONBN" />
-                <action id="-3" name="Set position" sid="2035810292844355" type="perguntas">
-                    <param id="0" name="X">640</param>
-                    <param id="1" name="Y">69</param>
-                </action>
                 <action id="-16" name="Set opacity" sid="2734246546350644" type="perguntas">
                     <param id="0" name="Opacity">0</param>
                 </action>
                 <action id="-16" name="Set opacity" sid="4990066801941534" type="textoPerguntas">
                     <param id="0" name="Opacity">0</param>
                 </action>
-                <action id="-3" name="Set position" sid="7417304408706624" type="textoPerguntas">
-                    <param id="0" name="X">126</param>
-                    <param id="1" name="Y">46</param>
+                <action id="0" name="Set text" sid="1357049657443647" type="textoPerguntas">
+                    <param id="0" name="Text">&quot;Pegue o bloco com o número correspondente à alternativa correta&quot;</param>
                 </action>
                 <action id="-16" name="Set opacity" sid="3793970731779964" type="textoRespostas">
                     <param id="0" name="Opacity">0</param>
                 </action>
-                <action id="-3" name="Set position" sid="837680553998927" type="textoRespostas">
-                    <param id="0" name="X">126</param>
-                    <param id="1" name="Y">68</param>
-                </action>
-                <action behavior="Pin" id="0" name="Pin to object" sid="4620754148626526" type="Bloco1">
+                <action behavior="Pin" id="0" name="Pin to object" sid="4620754148626526" type="Cubo1">
                     <param id="0" name="Pin to">selAlternativa1</param>
                     <param id="1" name="Mode">1</param>
                 </action>
-                <action behavior="Pin" id="0" name="Pin to object" sid="1731869571928136" type="Bloco2">
+                <action behavior="Pin" id="0" name="Pin to object" sid="1731869571928136" type="Cubo2">
                     <param id="0" name="Pin to">selAlternativa2</param>
                     <param id="1" name="Mode">1</param>
                 </action>
-                <action behavior="Pin" id="0" name="Pin to object" sid="6425950051937975" type="Bloco3">
+                <action behavior="Pin" id="0" name="Pin to object" sid="6425950051937975" type="Cubo3">
                     <param id="0" name="Pin to">selAlternativa3</param>
                     <param id="1" name="Mode">1</param>
                 </action>
@@ -128,23 +109,10 @@
                 </action>
             </actions>
         </event-block>
-        <event-block sid="1389538021084929">
-            <conditions>
-                <condition id="1" name="Is overlapping another object" sid="4768785295588166" type="player">
-                    <param id="0" name="Object">selecaoComida</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="-12" name="Set group active" sid="306027733903437" type="System">
-                    <param id="0" name="Group name">&quot;inicioPerguntasFFBN&quot;</param>
-                    <param id="1" name="State">1</param>
-                </action>
-            </actions>
-        </event-block>
-        <event-block sid="9655654399141965">
+        <event-block disabled="1" sid="9655654399141965">
             <conditions>
                 <condition id="1" name="Is overlapping another object" sid="1731258949088634" type="player">
-                    <param id="0" name="Object">ColisaoAgua</param>
+                    <param id="0" name="Object">ParedePersonagem</param>
                 </condition>
             </conditions>
             <actions>
@@ -165,7 +133,7 @@
             </actions>
             <sub-events>
                 <comment>Apenas para o caso dos blocos já estarem em movimento</comment>
-                <event-block sid="9008059881064161">
+                <event-block disabled="1" sid="9008059881064161">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="4337835055638638" type="System">
                             <param id="0" name="Variable">inicializarBlocos</param>
@@ -236,17 +204,17 @@
                         <event-block sid="8653054823314513">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="5967111294233819" type="System" />
-                                <condition id="-10" name="Compare opacity" sid="4224949824636862" type="dicaPopUp">
+                                <condition id="-10" name="Compare opacity" sid="4224949824636862" type="textoPerguntas">
                                     <param id="0" name="Comparison">2</param>
                                     <param id="1" name="Opacity">100</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-16" name="Set opacity" sid="7711815177637349" type="dicaPopUp">
-                                    <param id="0" name="Opacity">dicaPopUp.Opacity + 2.5</param>
+                                <action id="-16" name="Set opacity" sid="7711815177637349" type="perguntas">
+                                    <param id="0" name="Opacity">perguntas.Opacity + 2.5</param>
                                 </action>
-                                <action id="-16" name="Set opacity" sid="2351474900441883" type="dicaTexto">
-                                    <param id="0" name="Opacity">dicaTexto.Opacity + 2.5</param>
+                                <action id="-16" name="Set opacity" sid="2351474900441883" type="textoPerguntas">
+                                    <param id="0" name="Opacity">textoPerguntas.Opacity + 2.5</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -279,31 +247,29 @@
                         <event-block sid="9198417203349628">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="4712200403191154" type="System" />
-                                <condition id="-10" name="Compare opacity" sid="995014419246076" type="dicaPopUp">
+                                <condition id="-10" name="Compare opacity" sid="995014419246076" type="textoPerguntas">
                                     <param id="0" name="Comparison">4</param>
                                     <param id="1" name="Opacity">0</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-16" name="Set opacity" sid="8717349209040751" type="dicaPopUp">
-                                    <param id="0" name="Opacity">dicaPopUp.Opacity - 2.5</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="7655552188169149" type="dicaTexto">
-                                    <param id="0" name="Opacity">dicaTexto.Opacity - 2.5</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="239821918998766" type="perguntas">
-                                    <param id="0" name="Opacity">perguntas.Opacity + 2.5</param>
+                                <action id="-16" name="Set opacity" sid="7655552188169149" type="textoPerguntas">
+                                    <param id="0" name="Opacity">textoPerguntas.Opacity - 2.5</param>
                                 </action>
                             </actions>
                         </event-block>
                         <event-block sid="3321319711070799">
                             <conditions>
-                                <condition id="-10" name="Compare opacity" sid="9230750455600319" type="perguntas">
+                                <condition id="-10" name="Compare opacity" sid="9230750455600319" type="textoPerguntas">
                                     <param id="0" name="Comparison">0</param>
-                                    <param id="1" name="Opacity">100</param>
+                                    <param id="1" name="Opacity">0</param>
                                 </condition>
                             </conditions>
                             <actions>
+                                <action id="-12" name="Set group active" sid="5078862696721144" type="System">
+                                    <param id="0" name="Group name">&quot;playerMoveFFBN&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
                                 <action id="-12" name="Set group active" sid="9078192003164196" type="System">
                                     <param id="0" name="Group name">&quot;inicioPerguntasFFBN&quot;</param>
                                     <param id="1" name="State">0</param>
@@ -560,7 +526,6 @@
                         <action behavior="Bullet" id="3" name="Set angle of motion" sid="3593767782248981" type="selAlternativa3">
                             <param id="0" name="Angle">round(random(0, 181)) - 90</param>
                         </action>
-                        <action id="-9" name="Destroy" sid="9952152960914098" type="parede" />
                         <action id="-9" name="Set value" sid="1952271945166959" type="System">
                             <param id="0" name="Variable">inicializarBlocos</param>
                             <param id="1" name="Value">0</param>
@@ -571,8 +536,8 @@
                 <comment>Tratamento de colisão do bloco 1</comment>
                 <event-block sid="5904751006168151">
                     <conditions>
-                        <condition id="0" name="On collision with another object" sid="9654469845569429" type="Bloco1">
-                            <param id="0" name="Object">AguaTeste</param>
+                        <condition id="0" name="On collision with another object" sid="9654469845569429" type="Cubo1">
+                            <param id="0" name="Object">ParedeBlocos</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -580,7 +545,7 @@
                         <comment>Colisão superior</comment>
                         <event-block sid="6948948006689434">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="6293166847877966" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="6293166847877966" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">116</param>
                                 </condition>
                             </conditions>
@@ -593,13 +558,13 @@
                         <comment>Colisão do lado direito</comment>
                         <event-block any="1" sid="2442185114978764">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="8071629738509614" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="8071629738509614" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">118</param>
                                 </condition>
-                                <condition id="-14" name="Pick by unique ID" sid="2782884081413657" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="2782884081413657" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">119</param>
                                 </condition>
-                                <condition id="-14" name="Pick by unique ID" sid="3218975278615018" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="3218975278615018" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">4</param>
                                 </condition>
                             </conditions>
@@ -612,7 +577,7 @@
                         <comment>Colisão inferior</comment>
                         <event-block sid="2143991914260149">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="4784186634306246" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="4784186634306246" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">120</param>
                                 </condition>
                             </conditions>
@@ -625,13 +590,13 @@
                         <comment>Colisão do lado esquerdo</comment>
                         <event-block any="1" sid="5141518730339229">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="696864581276045" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="696864581276045" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">114</param>
                                 </condition>
-                                <condition id="-14" name="Pick by unique ID" sid="770914432423944" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="770914432423944" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">117</param>
                                 </condition>
-                                <condition id="-14" name="Pick by unique ID" sid="3867259687405484" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="3867259687405484" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">42</param>
                                 </condition>
                             </conditions>
@@ -646,7 +611,7 @@
                 <comment>Não é a melhor solução para a fuga dos blocos, mas por enquanto serve</comment>
                 <event-block sid="8539104098868304">
                     <conditions>
-                        <condition id="-4" name="Is outside layout" sid="1973383685233552" type="Bloco1" />
+                        <condition id="-4" name="Is outside layout" sid="1973383685233552" type="Cubo1" />
                     </conditions>
                     <actions>
                         <action id="-3" name="Set position" sid="2934160891617418" type="selAlternativa1">
@@ -658,8 +623,8 @@
                 <comment>Tratamento de colisão do bloco 2</comment>
                 <event-block sid="7440881682763612">
                     <conditions>
-                        <condition id="0" name="On collision with another object" sid="4230082955329497" type="Bloco2">
-                            <param id="0" name="Object">AguaTeste</param>
+                        <condition id="0" name="On collision with another object" sid="4230082955329497" type="Cubo2">
+                            <param id="0" name="Object">ParedeBlocos</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -667,7 +632,7 @@
                         <comment>Colisão superior</comment>
                         <event-block sid="7807187605207985">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="3809696790833621" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="3809696790833621" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">116</param>
                                 </condition>
                             </conditions>
@@ -680,13 +645,13 @@
                         <comment>Colisão do lado direito</comment>
                         <event-block any="1" sid="6675408471680875">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="9158702428269202" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="9158702428269202" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">118</param>
                                 </condition>
-                                <condition id="-14" name="Pick by unique ID" sid="2887851051845029" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="2887851051845029" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">119</param>
                                 </condition>
-                                <condition id="-14" name="Pick by unique ID" sid="6669806576389537" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="6669806576389537" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">4</param>
                                 </condition>
                             </conditions>
@@ -699,7 +664,7 @@
                         <comment>Colisão inferior</comment>
                         <event-block sid="3468187519370502">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="1397963456649886" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="1397963456649886" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">120</param>
                                 </condition>
                             </conditions>
@@ -712,13 +677,13 @@
                         <comment>Colisão do lado esquerdo</comment>
                         <event-block any="1" sid="5399767737553372">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="2507738077161889" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="2507738077161889" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">114</param>
                                 </condition>
-                                <condition id="-14" name="Pick by unique ID" sid="2094068632241275" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="2094068632241275" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">117</param>
                                 </condition>
-                                <condition id="-14" name="Pick by unique ID" sid="8820584739257106" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="8820584739257106" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">42</param>
                                 </condition>
                             </conditions>
@@ -733,7 +698,7 @@
                 <comment>Não é a melhor solução para a fuga dos blocos, mas por enquanto serve</comment>
                 <event-block sid="2413010268437611">
                     <conditions>
-                        <condition id="-4" name="Is outside layout" sid="4969981169345929" type="Bloco2" />
+                        <condition id="-4" name="Is outside layout" sid="4969981169345929" type="Cubo2" />
                     </conditions>
                     <actions>
                         <action id="-3" name="Set position" sid="470976418681098" type="selAlternativa2">
@@ -745,8 +710,8 @@
                 <comment>Tratamento de colisão do bloco 3</comment>
                 <event-block sid="8667154900382888">
                     <conditions>
-                        <condition id="0" name="On collision with another object" sid="3944076431946953" type="Bloco3">
-                            <param id="0" name="Object">AguaTeste</param>
+                        <condition id="0" name="On collision with another object" sid="3944076431946953" type="Cubo3">
+                            <param id="0" name="Object">ParedeBlocos</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -754,7 +719,7 @@
                         <comment>Colisão superior</comment>
                         <event-block sid="3410514329481345">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="3743971575867528" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="3743971575867528" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">116</param>
                                 </condition>
                             </conditions>
@@ -767,13 +732,13 @@
                         <comment>Colisão do lado direito</comment>
                         <event-block any="1" sid="78317030940163">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="5315674163043789" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="5315674163043789" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">118</param>
                                 </condition>
-                                <condition id="-14" name="Pick by unique ID" sid="1632791023422452" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="1632791023422452" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">119</param>
                                 </condition>
-                                <condition id="-14" name="Pick by unique ID" sid="5811367611148675" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="5811367611148675" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">4</param>
                                 </condition>
                             </conditions>
@@ -786,7 +751,7 @@
                         <comment>Colisão inferior</comment>
                         <event-block sid="2334564556600797">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="6990176931018043" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="6990176931018043" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">120</param>
                                 </condition>
                             </conditions>
@@ -799,13 +764,13 @@
                         <comment>Colisão do lado esquerdo</comment>
                         <event-block any="1" sid="6789717969669764">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="3361536318919347" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="3361536318919347" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">114</param>
                                 </condition>
-                                <condition id="-14" name="Pick by unique ID" sid="3792871978605341" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="3792871978605341" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">117</param>
                                 </condition>
-                                <condition id="-14" name="Pick by unique ID" sid="5885289280492771" type="AguaTeste">
+                                <condition id="-14" name="Pick by unique ID" sid="5885289280492771" type="ParedeBlocos">
                                     <param id="0" name="Unique ID">42</param>
                                 </condition>
                             </conditions>
@@ -820,12 +785,12 @@
                 <comment>Não é a melhor solução para a fuga dos blocos, mas por enquanto serve</comment>
                 <event-block sid="4083806455053146">
                     <conditions>
-                        <condition id="-4" name="Is outside layout" sid="7208483424627963" type="Bloco3" />
+                        <condition id="-4" name="Is outside layout" sid="7208483424627963" type="Cubo3" />
                     </conditions>
                     <actions>
                         <action id="-3" name="Set position" sid="2621808086323504" type="selAlternativa3">
                             <param id="0" name="X">640</param>
-                            <param id="1" name="Y">360</param>
+                            <param id="1" name="Y">456</param>
                         </action>
                     </actions>
                 </event-block>
@@ -844,7 +809,7 @@
                         <event-block sid="1699590853007916">
                             <conditions>
                                 <condition id="0" name="On collision with another object" sid="3214732951497474" type="player">
-                                    <param id="0" name="Object">Bloco1</param>
+                                    <param id="0" name="Object">Cubo1</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -865,7 +830,7 @@
                         <event-block sid="7120762420533665">
                             <conditions>
                                 <condition id="0" name="On collision with another object" sid="9155256091253734" type="player">
-                                    <param id="0" name="Object">Bloco2</param>
+                                    <param id="0" name="Object">Cubo2</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -886,7 +851,7 @@
                         <event-block sid="2870282095673449">
                             <conditions>
                                 <condition id="0" name="On collision with another object" sid="8310600895650243" type="player">
-                                    <param id="0" name="Object">Bloco3</param>
+                                    <param id="0" name="Object">Cubo3</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -948,8 +913,8 @@
                             <param id="1" name="Value">1</param>
                         </action>
                         <action id="-3" name="Set position" sid="3715178578863329" type="player">
-                            <param id="0" name="X">51</param>
-                            <param id="1" name="Y">265</param>
+                            <param id="0" name="X">54</param>
+                            <param id="1" name="Y">404</param>
                         </action>
                         <action behavior="8Direction" id="0" name="Stop" sid="3921811517886007" type="player" />
                         <action id="-10" name="Add to" sid="7028332991897701" type="System">
