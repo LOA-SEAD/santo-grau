@@ -39,29 +39,8 @@
                     <param id="0" name="Animation">&quot;Default&quot;</param>
                     <param id="1" name="From">1</param>
                 </action>
-                <action id="-3" name="Set position" sid="6659776942470111" type="dicaPopUp">
-                    <param id="0" name="X">100</param>
-                    <param id="1" name="Y">252</param>
-                </action>
-                <action id="-16" name="Set opacity" sid="1073848925336383" type="dicaPopUp">
-                    <param id="0" name="Opacity">0</param>
-                </action>
-                <action id="-16" name="Set opacity" sid="4915111777509375" type="dicaTexto">
-                    <param id="0" name="Opacity">0</param>
-                </action>
-                <action id="-4" name="Set position to another object" sid="3783085385568122" type="dicaTexto">
-                    <param id="0" name="Object">dicaPopUp</param>
-                    <param id="1" name="Image point (optional)">0</param>
-                </action>
-                <action behavior="Pin" id="0" name="Pin to object" sid="5230089200716325" type="dicaTexto">
-                    <param id="0" name="Pin to">dicaPopUp</param>
-                    <param id="1" name="Mode">0</param>
-                </action>
-                <action id="0" name="Set text" sid="698316012474817" type="dicaTexto">
-                    <param id="0" name="Text">&quot;Use a ponte que corresponde à alternativa correta&quot;</param>
-                </action>
-                <action id="-12" name="Set group active" sid="2522996676987606" type="System">
-                    <param id="0" name="Group name">&quot;inicioPerguntasFFCM&quot;</param>
+                <action id="-12" name="Set group active" sid="3715829024346107" type="System">
+                    <param id="0" name="Group name">&quot;playerMoveFFCM&quot;</param>
                     <param id="1" name="State">0</param>
                 </action>
                 <action id="-12" name="Set group active" sid="83030780279298" type="System">
@@ -69,26 +48,20 @@
                     <param id="1" name="State">0</param>
                 </action>
                 <action id="0" name="Load JSON" sid="7983903385541236" type="LoadJSONCM" />
-                <action id="-3" name="Set position" sid="5394856871931604" type="perguntas">
-                    <param id="0" name="X">644</param>
-                    <param id="1" name="Y">67</param>
-                </action>
                 <action id="-16" name="Set opacity" sid="6391318132146658" type="perguntas">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="8915975683021082" type="Pontes">
                     <param id="0" name="Opacity">0</param>
                 </action>
                 <action id="-16" name="Set opacity" sid="251087772017551" type="textoPerguntas">
                     <param id="0" name="Opacity">0</param>
                 </action>
-                <action id="-3" name="Set position" sid="1881137760152876" type="textoPerguntas">
-                    <param id="0" name="X">126</param>
-                    <param id="1" name="Y">44</param>
+                <action id="0" name="Set text" sid="698316012474817" type="textoPerguntas">
+                    <param id="0" name="Text">&quot;Use a ponte que corresponde à alternativa correta&quot;</param>
                 </action>
                 <action id="-16" name="Set opacity" sid="4592278714346477" type="textoRespostas">
                     <param id="0" name="Opacity">0</param>
-                </action>
-                <action id="-3" name="Set position" sid="7997627525455116" type="textoRespostas">
-                    <param id="0" name="X">126</param>
-                    <param id="1" name="Y">66</param>
                 </action>
                 <action id="-16" name="Set opacity" sid="2714883232320638" type="alternativaA">
                     <param id="0" name="Opacity">0</param>
@@ -125,19 +98,6 @@
                 </action>
             </actions>
         </event-block>
-        <event-block sid="1796382605937501">
-            <conditions>
-                <condition id="0" name="On collision with another object" sid="1472209286094125" type="player">
-                    <param id="0" name="Object">selecaoComida</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="-12" name="Set group active" sid="8457528594384352" type="System">
-                    <param id="0" name="Group name">&quot;inicioPerguntasFFCM&quot;</param>
-                    <param id="1" name="State">1</param>
-                </action>
-            </actions>
-        </event-block>
         <event-block sid="3585168996900499">
             <conditions>
                 <condition id="1" name="Is overlapping another object" sid="5144265397625053" type="player">
@@ -166,17 +126,17 @@
                         <event-block sid="5212862081759587">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="9853204310813109" type="System" />
-                                <condition id="-10" name="Compare opacity" sid="8748571661573428" type="dicaPopUp">
+                                <condition id="-10" name="Compare opacity" sid="8748571661573428" type="perguntas">
                                     <param id="0" name="Comparison">2</param>
                                     <param id="1" name="Opacity">100</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-16" name="Set opacity" sid="2964417721664187" type="dicaPopUp">
-                                    <param id="0" name="Opacity">dicaPopUp.Opacity + 2.5</param>
+                                <action id="-16" name="Set opacity" sid="5708691047472" type="perguntas">
+                                    <param id="0" name="Opacity">perguntas.Opacity + 2.5</param>
                                 </action>
-                                <action id="-16" name="Set opacity" sid="3322405508724164" type="dicaTexto">
-                                    <param id="0" name="Opacity">dicaTexto.Opacity + 2.5</param>
+                                <action id="-16" name="Set opacity" sid="3322405508724164" type="textoPerguntas">
+                                    <param id="0" name="Opacity">textoPerguntas.Opacity + 2.5</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -206,34 +166,36 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <comment>A ponte é carregada aqui pois se deixá-la aparecendo desde o começo mostra a troca dos frames dela</comment>
                         <event-block sid="4706833434079363">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="852654133826633" type="System" />
-                                <condition id="-10" name="Compare opacity" sid="4243046248419932" type="dicaPopUp">
+                                <condition id="-10" name="Compare opacity" sid="4243046248419932" type="textoPerguntas">
                                     <param id="0" name="Comparison">4</param>
                                     <param id="1" name="Opacity">0</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-16" name="Set opacity" sid="1968807921659424" type="dicaPopUp">
-                                    <param id="0" name="Opacity">dicaPopUp.Opacity - 2.5</param>
+                                <action id="-16" name="Set opacity" sid="5855728949744926" type="textoPerguntas">
+                                    <param id="0" name="Opacity">textoPerguntas.Opacity - 2.5</param>
                                 </action>
-                                <action id="-16" name="Set opacity" sid="5855728949744926" type="dicaTexto">
-                                    <param id="0" name="Opacity">dicaTexto.Opacity - 2.5</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="5708691047472" type="perguntas">
-                                    <param id="0" name="Opacity">perguntas.Opacity + 2.5</param>
+                                <action id="-16" name="Set opacity" sid="1965007785098025" type="Pontes">
+                                    <param id="0" name="Opacity">Pontes.Opacity + 2.5</param>
                                 </action>
                             </actions>
                         </event-block>
                         <event-block sid="109103041236633">
                             <conditions>
-                                <condition id="-10" name="Compare opacity" sid="901697504373977" type="perguntas">
+                                <condition id="-10" name="Compare opacity" sid="901697504373977" type="textoPerguntas">
                                     <param id="0" name="Comparison">0</param>
-                                    <param id="1" name="Opacity">100</param>
+                                    <param id="1" name="Opacity">0</param>
                                 </condition>
                             </conditions>
                             <actions>
+                                <action id="-12" name="Set group active" sid="1674597045146635" type="System">
+                                    <param id="0" name="Group name">&quot;playerMoveFFCM&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
                                 <action id="-12" name="Set group active" sid="7241080248772934" type="System">
                                     <param id="0" name="Group name">&quot;inicioPerguntasFFCM&quot;</param>
                                     <param id="1" name="State">0</param>
@@ -393,28 +355,28 @@
                             </conditions>
                             <actions>
                                 <action id="-3" name="Set position" sid="7337643474997453" type="selAlternativaA">
-                                    <param id="0" name="X">361 + (perguntaCM - 1) * 276</param>
-                                    <param id="1" name="Y">140</param>
+                                    <param id="0" name="X">299 + (perguntaCM - 1) * 276</param>
+                                    <param id="1" name="Y">223</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="5931436844741072" type="selAlternativaB">
-                                    <param id="0" name="X">346 + (perguntaCM - 1) * 276</param>
-                                    <param id="1" name="Y">252</param>
+                                    <param id="0" name="X">279 + (perguntaCM - 1) * 276</param>
+                                    <param id="1" name="Y">330</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="1193258432929034" type="selAlternativaC">
-                                    <param id="0" name="X">331 + (perguntaCM - 1) * 276</param>
-                                    <param id="1" name="Y">364</param>
+                                    <param id="0" name="X">259 + (perguntaCM - 1) * 276</param>
+                                    <param id="1" name="Y">437</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="8921102965776504" type="selAlternativaD">
-                                    <param id="0" name="X">316 + (perguntaCM - 1) * 276</param>
-                                    <param id="1" name="Y">476</param>
+                                    <param id="0" name="X">239 + (perguntaCM - 1) * 276</param>
+                                    <param id="1" name="Y">544</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="2920773291074478" type="selAlternativaE">
-                                    <param id="0" name="X">301 + (perguntaCM - 1) * 276</param>
-                                    <param id="1" name="Y">588</param>
+                                    <param id="0" name="X">219 + (perguntaCM - 1) * 276</param>
+                                    <param id="1" name="Y">651</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="4602353345904137" type="parede">
-                                    <param id="0" name="X">281 + perguntaCM * 276</param>
-                                    <param id="1" name="Y">353</param>
+                                    <param id="0" name="X">171 + perguntaCM * 276</param>
+                                    <param id="1" name="Y">438</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="6739928304742202" type="System">
                                     <param id="0" name="Variable">obterAlternativaCM</param>
@@ -437,7 +399,7 @@
                                     <actions>
                                         <action id="-3" name="Set position" sid="2171805390154107" type="parede">
                                             <param id="0" name="X">1017</param>
-                                            <param id="1" name="Y">353</param>
+                                            <param id="1" name="Y">438</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -452,27 +414,27 @@
                                     <actions>
                                         <action id="-3" name="Set position" sid="5286936339297295" type="selAlternativaA">
                                             <param id="0" name="X">1097</param>
-                                            <param id="1" name="Y">140</param>
+                                            <param id="1" name="Y">223</param>
                                         </action>
                                         <action id="-3" name="Set position" sid="7225652743341751" type="selAlternativaB">
                                             <param id="0" name="X">1082</param>
-                                            <param id="1" name="Y">252</param>
+                                            <param id="1" name="Y">330</param>
                                         </action>
                                         <action id="-3" name="Set position" sid="3234958413539137" type="selAlternativaC">
                                             <param id="0" name="X">1067</param>
-                                            <param id="1" name="Y">364</param>
+                                            <param id="1" name="Y">437</param>
                                         </action>
                                         <action id="-3" name="Set position" sid="876795579493659" type="selAlternativaD">
                                             <param id="0" name="X">1052</param>
-                                            <param id="1" name="Y">476</param>
+                                            <param id="1" name="Y">544</param>
                                         </action>
                                         <action id="-3" name="Set position" sid="5820714451411586" type="selAlternativaE">
                                             <param id="0" name="X">1037</param>
-                                            <param id="1" name="Y">588</param>
+                                            <param id="1" name="Y">651</param>
                                         </action>
                                         <action id="-3" name="Set position" sid="1840674861829503" type="parede">
                                             <param id="0" name="X">0</param>
-                                            <param id="1" name="Y">353</param>
+                                            <param id="1" name="Y">438</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -760,8 +722,8 @@
                                     <param id="1" name="Value">1</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="2638783148028285" type="player">
-                                    <param id="0" name="X">51</param>
-                                    <param id="1" name="Y">265</param>
+                                    <param id="0" name="X">27</param>
+                                    <param id="1" name="Y">449</param>
                                 </action>
                                 <action id="-10" name="Add to" sid="1397937927894916" type="System">
                                     <param id="0" name="Variable">pontos</param>
@@ -773,6 +735,42 @@
                                     <param id="2" name="Duration">1.2</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <comment>É o que &quot;quebra&quot; a ponte </comment>
+                                <event-block sid="5519654705942098">
+                                    <conditions>
+                                        <condition id="-15" name="Pick nearest/furthest" sid="4125381629998808" type="Pontes">
+                                            <param id="0" name="Which">0</param>
+                                            <param id="1" name="X">playerAnim.X</param>
+                                            <param id="2" name="Y">playerAnim.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="5" name="Set frame" sid="9205419503429594" type="Pontes">
+                                            <param id="0" name="Frame number">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="7253765266434292">
+                                    <conditions>
+                                        <condition id="-1" name="Every tick" sid="617636878589296" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="8Direction" id="0" name="Stop" sid="6910246941500801" type="player" />
+                                        <action id="-12" name="Set group active" sid="7388519253866306" type="System">
+                                            <param id="0" name="Group name">&quot;playerMoveFFCM&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="6051899594126989" type="System">
+                                            <param id="0" name="Seconds">0.5</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="7237342069418063" type="System">
+                                            <param id="0" name="Group name">&quot;playerMoveFFCM&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <event-block sid="9921088284773163">
                             <conditions>
