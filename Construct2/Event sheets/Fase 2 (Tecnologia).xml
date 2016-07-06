@@ -6,7 +6,6 @@
         <variable constant="0" name="palavra1" sid="8925465934116768" static="0" type="text"></variable>
         <variable constant="0" name="palavra2" sid="2659963504474121" static="0" type="text"></variable>
         <variable constant="0" name="palavra3" sid="640949609577656" static="0" type="text"></variable>
-        <variable constant="0" name="midia" sid="4079815398933129" static="0" type="text"></variable>
         <event-block sid="5819905138494612">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="7461295097562547" type="System" />
@@ -32,12 +31,27 @@
                     <param id="0" name="URL">&quot;telao.html&quot;</param>
                 </action>
                 <action id="0" name="Load JSON" sid="5109230592467949" type="computadoresJSON" />
-                <action id="-9" name="Set value" sid="4155475147694887" type="System">
-                    <param id="0" name="Variable">midia</param>
+                <action id="-9" name="Set value" sid="4623737854282467" type="System">
+                    <param id="0" name="Variable">palavra1</param>
+                    <param id="1" name="Value">computadoresJSON.GetData(&quot;words&quot;,0)</param>
+                </action>
+                <action id="-9" name="Set value" sid="6941026900358253" type="System">
+                    <param id="0" name="Variable">palavra2</param>
                     <param id="1" name="Value">computadoresJSON.GetData(&quot;words&quot;,1)</param>
                 </action>
-                <action id="0" name="Set text" sid="8867299511105252" type="debug">
-                    <param id="0" name="Text">midia</param>
+                <action id="-9" name="Set value" sid="6961364071927619" type="System">
+                    <param id="0" name="Variable">palavra3</param>
+                    <param id="1" name="Value">computadoresJSON.GetData(&quot;words&quot;,2)</param>
+                </action>
+                <action id="0" name="Execute" sid="1900478576505477" type="shuffleJS">
+                    <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; palavra1 &amp; &quot;&apos;)&quot;</param>
+                </action>
+                <action id="0" name="Set text" sid="3138789527219314" type="debug">
+                    <param id="0" name="Text">palavra1 &amp; palavra2 &amp; palavra3</param>
+                </action>
+                <action id="5" name="Set web font" sid="3611916853205676" type="debug">
+                    <param id="0" name="Family name">&quot;motion.ttf&quot;</param>
+                    <param id="1" name="CSS URL">&quot;http://www.dafont.com/brankovic.font&quot;</param>
                 </action>
             </actions>
         </event-block>
@@ -58,9 +72,6 @@
                         </action>
                         <action id="0" name="Set text" sid="5757129352923526" type="pontuacao">
                             <param id="0" name="Text">&quot;Rendimento acadêmico: &quot; &amp; pontos</param>
-                        </action>
-                        <action id="0" name="Set text" sid="1369578000193417" type="debug">
-                            <param id="0" name="Text">computadoresJSON.GetData(palavra1,0)</param>
                         </action>
                     </actions>
                 </event-block>
@@ -165,10 +176,10 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Execute" sid="8162025794340874" type="shuffleJS">
+                                        <action id="0" name="Execute" sid="1411649928843422" type="shuffleJS">
                                             <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; palavra1 &amp; &quot;&apos;)&quot;</param>
                                         </action>
-                                        <action id="0" name="Set text" sid="5109083877977334" type="debug">
+                                        <action id="0" name="Set text" sid="5710889130060719" type="debug">
                                             <param id="0" name="Text">shuffleJS.ReadExecutionReturn</param>
                                         </action>
                                         <action id="-12" name="Set group active" sid="8487189829115734" type="System">
@@ -216,6 +227,73 @@
                                             <param id="1" name="State">1</param>
                                         </action>
                                     </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="7718177857949965">
+                            <conditions>
+                                <condition id="0" name="On key pressed" sid="4986632569679783" type="Keyboard">
+                                    <param id="0" name="Key">13 (Return)</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="3447223290115638">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="8730561796376211" type="computadoresResp">
+                                            <param id="0" name="Unique ID">70</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="3864909163028518">
+                                            <conditions>
+                                                <condition id="0" name="Compare text" sid="3984609763472922" type="computadoresResp">
+                                                    <param id="0" name="Text">computadoresJSON.GetData(&quot;words&quot;,0)</param>
+                                                    <param id="1" name="Case">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="4981760263031344">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="9228657446902781" type="computadoresResp">
+                                            <param id="0" name="Unique ID">88</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="5095004666509067">
+                                            <conditions>
+                                                <condition id="0" name="Compare text" sid="6165222022762083" type="computadoresResp">
+                                                    <param id="0" name="Text">computadoresJSON.GetData(&quot;words&quot;,1)</param>
+                                                    <param id="1" name="Case">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="9501868351004185">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="8848144053456561" type="computadoresResp">
+                                            <param id="0" name="Unique ID">89</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="7042948248128258">
+                                            <conditions>
+                                                <condition id="0" name="Compare text" sid="2794317839112255" type="computadoresResp">
+                                                    <param id="0" name="Text">computadoresJSON.GetData(&quot;words&quot;,2)</param>
+                                                    <param id="1" name="Case">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
