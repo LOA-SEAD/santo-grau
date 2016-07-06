@@ -23,6 +23,8 @@
         <variable constant="0" name="respostaCertaCM" sid="7634110463548163" static="0" type="text"></variable>
         <comment>Criado para armazenar o UID da ponte que o jogador passou, pois utilizar o método de detecção através da posição do jogador poderia quebrar a ponte errada</comment>
         <variable constant="0" name="PonteUID" sid="1401521525684759" static="0" type="number">0</variable>
+        <comment>Criado para armazenar o UID da alternativa que o jogador passou, pois utilizar o método de detecção através da posição do jogador poderia alterar a alternativa errada</comment>
+        <variable constant="0" name="VariavelUID" sid="5832501744189628" static="0" type="number">0</variable>
         <comment>Inicializações</comment>
         <event-block sid="1021034089245405">
             <conditions>
@@ -65,19 +67,7 @@
                 <action id="-16" name="Set opacity" sid="4592278714346477" type="textoRespostas">
                     <param id="0" name="Opacity">0</param>
                 </action>
-                <action id="-16" name="Set opacity" sid="2714883232320638" type="alternativaA">
-                    <param id="0" name="Opacity">0</param>
-                </action>
-                <action id="-16" name="Set opacity" sid="2949128366568103" type="alternativaB">
-                    <param id="0" name="Opacity">0</param>
-                </action>
-                <action id="-16" name="Set opacity" sid="6287546218742279" type="alternativaC">
-                    <param id="0" name="Opacity">0</param>
-                </action>
-                <action id="-16" name="Set opacity" sid="7511746639879663" type="alternativaD">
-                    <param id="0" name="Opacity">0</param>
-                </action>
-                <action id="-16" name="Set opacity" sid="8209660778244445" type="alternativaE">
+                <action id="-16" name="Set opacity" sid="9776510440884956" type="Alternativas">
                     <param id="0" name="Opacity">0</param>
                 </action>
             </actions>
@@ -142,15 +132,22 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <comment>A ponte é carregada aqui pois se deixá-la aparecendo desde o começo mostra a troca dos frames dela</comment>
                         <event-block sid="548274566649112">
                             <conditions>
                                 <condition id="-22" name="Else" sid="1479525625786961" type="System" />
                             </conditions>
                             <actions>
-                                <action id="-16" name="Wait" sid="3013711704127286" type="System">
-                                    <param id="0" name="Seconds">3</param>
+                                <action id="-16" name="Set opacity" sid="1965007785098025" type="Pontes">
+                                    <param id="0" name="Opacity">Pontes.Opacity + 2.5</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="5259408529124006" type="System">
+                                <action id="-16" name="Set opacity" sid="2397781731843634" type="Alternativas">
+                                    <param id="0" name="Opacity">Alternativas.Opacity + 2.5</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="1646622814369431" type="System">
+                                    <param id="0" name="Seconds">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="3431314040732169" type="System">
                                     <param id="0" name="Variable">ativarMensagemCM</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
@@ -168,7 +165,6 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <comment>A ponte é carregada aqui pois se deixá-la aparecendo desde o começo mostra a troca dos frames dela</comment>
                         <event-block sid="4706833434079363">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="852654133826633" type="System" />
@@ -180,9 +176,6 @@
                             <actions>
                                 <action id="-16" name="Set opacity" sid="5855728949744926" type="textoPerguntas">
                                     <param id="0" name="Opacity">textoPerguntas.Opacity - 2.5</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="1965007785098025" type="Pontes">
-                                    <param id="0" name="Opacity">Pontes.Opacity + 2.5</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -229,26 +222,6 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-3" name="Set position" sid="2728695989749834" type="alternativaA">
-                            <param id="0" name="X">37 + (perguntaCM * 276)</param>
-                            <param id="1" name="Y">127</param>
-                        </action>
-                        <action id="-3" name="Set position" sid="8124950644794943" type="alternativaB">
-                            <param id="0" name="X">37 + (perguntaCM * 276)</param>
-                            <param id="1" name="Y">239</param>
-                        </action>
-                        <action id="-3" name="Set position" sid="8945162868175161" type="alternativaC">
-                            <param id="0" name="X">37 + (perguntaCM * 276)</param>
-                            <param id="1" name="Y">351</param>
-                        </action>
-                        <action id="-3" name="Set position" sid="2907357673786021" type="alternativaD">
-                            <param id="0" name="X">37 + (perguntaCM * 276)</param>
-                            <param id="1" name="Y">463</param>
-                        </action>
-                        <action id="-3" name="Set position" sid="6432310914950599" type="alternativaE">
-                            <param id="0" name="X">37 + (perguntaCM * 276)</param>
-                            <param id="1" name="Y">575</param>
-                        </action>
                         <action id="0" name="Set text" sid="9922866634395319" type="textoPerguntas">
                             <param id="0" name="Text">perguntaCM &amp; &quot;- &quot; &amp; LoadJSONCM.GetData(perguntaCM, 0)</param>
                         </action>
@@ -274,39 +247,6 @@
                             <param id="1" name="Value">0</param>
                         </action>
                     </actions>
-                    <sub-events>
-                        <event-block sid="1298658919118216">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="296313942021086" type="System">
-                                    <param id="0" name="Variable">perguntaCM</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">4</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-3" name="Set position" sid="4250409529621376" type="alternativaA">
-                                    <param id="0" name="X">1049</param>
-                                    <param id="1" name="Y">127</param>
-                                </action>
-                                <action id="-3" name="Set position" sid="1808195865506675" type="alternativaB">
-                                    <param id="0" name="X">1049</param>
-                                    <param id="1" name="Y">239</param>
-                                </action>
-                                <action id="-3" name="Set position" sid="9155634548235956" type="alternativaC">
-                                    <param id="0" name="X">1049</param>
-                                    <param id="1" name="Y">351</param>
-                                </action>
-                                <action id="-3" name="Set position" sid="9396936770333293" type="alternativaD">
-                                    <param id="0" name="X">1049</param>
-                                    <param id="1" name="Y">463</param>
-                                </action>
-                                <action id="-3" name="Set position" sid="8389005184232734" type="alternativaE">
-                                    <param id="0" name="X">1049</param>
-                                    <param id="1" name="Y">575</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
                 <comment>Carrega na tela o texto da pergunta e as alternativas na ponte</comment>
                 <event-block sid="5286753458580869">
@@ -322,7 +262,7 @@
                         <event-block sid="7877580689674407">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="3150852197761893" type="System" />
-                                <condition id="-10" name="Compare opacity" sid="3877667792493302" type="alternativaE">
+                                <condition id="-10" name="Compare opacity" sid="8214989735147451" type="textoPerguntas">
                                     <param id="0" name="Comparison">2</param>
                                     <param id="1" name="Opacity">100</param>
                                 </condition>
@@ -333,21 +273,6 @@
                                 </action>
                                 <action id="-16" name="Set opacity" sid="1706482227902222" type="textoRespostas">
                                     <param id="0" name="Opacity">textoRespostas.Opacity + 2.5</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="6735538020932375" type="alternativaA">
-                                    <param id="0" name="Opacity">alternativaA.Opacity + 2.5</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="9564026841581636" type="alternativaB">
-                                    <param id="0" name="Opacity">alternativaB.Opacity + 2.5</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="7838829726060261" type="alternativaC">
-                                    <param id="0" name="Opacity">alternativaC.Opacity + 2.5</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="3552629745491113" type="alternativaD">
-                                    <param id="0" name="Opacity">alternativaD.Opacity + 2.5</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="5007030082555815" type="alternativaE">
-                                    <param id="0" name="Opacity">alternativaE.Opacity + 2.5</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -493,7 +418,7 @@
                         <event-block sid="1398330881798207">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="1608470790348047" type="System" />
-                                <condition id="-10" name="Compare opacity" sid="8376013678332283" type="alternativaE">
+                                <condition id="-10" name="Compare opacity" sid="8376013678332283" type="textoRespostas">
                                     <param id="0" name="Comparison">4</param>
                                     <param id="1" name="Opacity">0</param>
                                 </condition>
@@ -504,21 +429,6 @@
                                 </action>
                                 <action id="-16" name="Set opacity" sid="9055473113853928" type="textoRespostas">
                                     <param id="0" name="Opacity">textoRespostas.Opacity - 2.5</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="1369236565179046" type="alternativaA">
-                                    <param id="0" name="Opacity">alternativaA.Opacity - 2.5</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="4465186891035044" type="alternativaB">
-                                    <param id="0" name="Opacity">alternativaB.Opacity - 2.5</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="4052274998022696" type="alternativaC">
-                                    <param id="0" name="Opacity">alternativaC.Opacity - 2.5</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="9428316805725024" type="alternativaD">
-                                    <param id="0" name="Opacity">alternativaD.Opacity - 2.5</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="1231232786081991" type="alternativaE">
-                                    <param id="0" name="Opacity">alternativaE.Opacity - 2.5</param>
                                 </action>
                             </actions>
                             <sub-events>
@@ -582,7 +492,7 @@
                         </event-block>
                         <event-block sid="106161790845075">
                             <conditions>
-                                <condition id="-10" name="Compare opacity" sid="7180917525376069" type="alternativaE">
+                                <condition id="-10" name="Compare opacity" sid="7180917525376069" type="textoRespostas">
                                     <param id="0" name="Comparison">0</param>
                                     <param id="1" name="Opacity">0</param>
                                 </condition>
@@ -648,6 +558,21 @@
                                         </action>
                                     </actions>
                                 </event-block>
+                                <event-block sid="1898567647722776">
+                                    <conditions>
+                                        <condition id="-15" name="Pick nearest/furthest" sid="9256211314271179" type="Alternativas">
+                                            <param id="0" name="Which">0</param>
+                                            <param id="1" name="X">selAlternativaA.X</param>
+                                            <param id="2" name="Y">selAlternativaA.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="8057893855995897" type="System">
+                                            <param id="0" name="Variable">VariavelUID</param>
+                                            <param id="1" name="Value">Alternativas.UID</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                             </sub-events>
                         </event-block>
                         <event-block sid="8139290530583717">
@@ -683,6 +608,21 @@
                                         <action id="-9" name="Set value" sid="2432125470521757" type="System">
                                             <param id="0" name="Variable">PonteUID</param>
                                             <param id="1" name="Value">Pontes.UID</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="1126329350674588">
+                                    <conditions>
+                                        <condition id="-15" name="Pick nearest/furthest" sid="2022798810350596" type="Alternativas">
+                                            <param id="0" name="Which">0</param>
+                                            <param id="1" name="X">selAlternativaB.X</param>
+                                            <param id="2" name="Y">selAlternativaB.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="502010981781824" type="System">
+                                            <param id="0" name="Variable">VariavelUID</param>
+                                            <param id="1" name="Value">Alternativas.UID</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -724,6 +664,21 @@
                                         </action>
                                     </actions>
                                 </event-block>
+                                <event-block sid="4486872505447625">
+                                    <conditions>
+                                        <condition id="-15" name="Pick nearest/furthest" sid="2599955985689234" type="Alternativas">
+                                            <param id="0" name="Which">0</param>
+                                            <param id="1" name="X">selAlternativaC.X</param>
+                                            <param id="2" name="Y">selAlternativaC.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="676262066885247" type="System">
+                                            <param id="0" name="Variable">VariavelUID</param>
+                                            <param id="1" name="Value">Alternativas.UID</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                             </sub-events>
                         </event-block>
                         <event-block sid="9233931703728528">
@@ -759,6 +714,21 @@
                                         <action id="-9" name="Set value" sid="5838490125641963" type="System">
                                             <param id="0" name="Variable">PonteUID</param>
                                             <param id="1" name="Value">Pontes.UID</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="7744413158475881">
+                                    <conditions>
+                                        <condition id="-15" name="Pick nearest/furthest" sid="7582507823317553" type="Alternativas">
+                                            <param id="0" name="Which">0</param>
+                                            <param id="1" name="X">selAlternativaD.X</param>
+                                            <param id="2" name="Y">selAlternativaD.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="2184015444088888" type="System">
+                                            <param id="0" name="Variable">VariavelUID</param>
+                                            <param id="1" name="Value">Alternativas.UID</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -800,6 +770,21 @@
                                         </action>
                                     </actions>
                                 </event-block>
+                                <event-block sid="882172899404462">
+                                    <conditions>
+                                        <condition id="-15" name="Pick nearest/furthest" sid="467704495766131" type="Alternativas">
+                                            <param id="0" name="Which">0</param>
+                                            <param id="1" name="X">selAlternativaE.X</param>
+                                            <param id="2" name="Y">selAlternativaE.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="3000245317862148" type="System">
+                                            <param id="0" name="Variable">VariavelUID</param>
+                                            <param id="1" name="Value">Alternativas.UID</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                             </sub-events>
                         </event-block>
                     </sub-events>
@@ -833,6 +818,49 @@
                                     <param id="1" name="Value">100</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <comment>É o que &quot;muda a cor&quot; da alternativa para azul</comment>
+                                <event-block sid="3937098800804522">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="9699436489564353" type="Alternativas">
+                                            <param id="0" name="Unique ID">VariavelUID</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <comment>Se já estiver azul não muda</comment>
+                                        <event-block sid="4539415928947569">
+                                            <conditions>
+                                                <condition id="3" name="Compare frame" sid="7123498379577303" type="Alternativas">
+                                                    <param id="0" name="Comparison">1</param>
+                                                    <param id="1" name="Number">0</param>
+                                                </condition>
+                                                <condition id="3" name="Compare frame" sid="4787891337558482" type="Alternativas">
+                                                    <param id="0" name="Comparison">1</param>
+                                                    <param id="1" name="Number">3</param>
+                                                </condition>
+                                                <condition id="3" name="Compare frame" sid="4377026685583801" type="Alternativas">
+                                                    <param id="0" name="Comparison">1</param>
+                                                    <param id="1" name="Number">6</param>
+                                                </condition>
+                                                <condition id="3" name="Compare frame" sid="4488210704387378" type="Alternativas">
+                                                    <param id="0" name="Comparison">1</param>
+                                                    <param id="1" name="Number">9</param>
+                                                </condition>
+                                                <condition id="3" name="Compare frame" sid="6569179694592211" type="Alternativas">
+                                                    <param id="0" name="Comparison">1</param>
+                                                    <param id="1" name="Number">12</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="5" name="Set frame" sid="7719639418188702" type="Alternativas">
+                                                    <param id="0" name="Frame number">Alternativas.AnimationFrame - 2</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <event-block sid="8816027619610096">
                             <conditions>
@@ -870,6 +898,47 @@
                                             <param id="0" name="Frame number">0</param>
                                         </action>
                                     </actions>
+                                </event-block>
+                                <comment>É o que &quot;muda a cor&quot; da alternativa para vermelho</comment>
+                                <event-block sid="6723260306656786">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="5931855053485519" type="Alternativas">
+                                            <param id="0" name="Unique ID">VariavelUID</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <comment>Se já estiver vermelho não muda</comment>
+                                        <event-block sid="9316350686877687">
+                                            <conditions>
+                                                <condition id="3" name="Compare frame" sid="4223081857300412" type="Alternativas">
+                                                    <param id="0" name="Comparison">1</param>
+                                                    <param id="1" name="Number">1</param>
+                                                </condition>
+                                                <condition id="3" name="Compare frame" sid="6291019068816583" type="Alternativas">
+                                                    <param id="0" name="Comparison">1</param>
+                                                    <param id="1" name="Number">4</param>
+                                                </condition>
+                                                <condition id="3" name="Compare frame" sid="3565445671854454" type="Alternativas">
+                                                    <param id="0" name="Comparison">1</param>
+                                                    <param id="1" name="Number">7</param>
+                                                </condition>
+                                                <condition id="3" name="Compare frame" sid="2598146937381346" type="Alternativas">
+                                                    <param id="0" name="Comparison">1</param>
+                                                    <param id="1" name="Number">10</param>
+                                                </condition>
+                                                <condition id="3" name="Compare frame" sid="2215371332857129" type="Alternativas">
+                                                    <param id="0" name="Comparison">1</param>
+                                                    <param id="1" name="Number">13</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="5" name="Set frame" sid="3794157861836836" type="Alternativas">
+                                                    <param id="0" name="Frame number">Alternativas.AnimationFrame - 1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                                 <event-block sid="7253765266434292">
                                     <conditions>
