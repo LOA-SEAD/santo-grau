@@ -21,6 +21,8 @@
         <variable constant="0" name="alternativaCM" sid="7593771871950864" static="0" type="text"></variable>
         <comment>Resposta correta importada do .json</comment>
         <variable constant="0" name="respostaCertaCM" sid="7634110463548163" static="0" type="text"></variable>
+        <comment>Criado para armazenar o UID da ponte que o jogador passou, pois utilizar o método de detecção através da posição do jogador poderia quebrar a ponte errada</comment>
+        <variable constant="0" name="PonteUID" sid="1401521525684759" static="0" type="number">0</variable>
         <comment>Inicializações</comment>
         <event-block sid="1021034089245405">
             <conditions>
@@ -388,6 +390,21 @@
                                 </action>
                             </actions>
                             <sub-events>
+                                <event-block sid="2097969647590187">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="416729334093032" type="System">
+                                            <param id="0" name="Variable">perguntaCM</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">2</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="6480990976549526" type="parede">
+                                            <param id="0" name="X">701</param>
+                                            <param id="1" name="Y">438</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                                 <event-block sid="9140199304361447">
                                     <conditions>
                                         <condition id="-14" name="Compare variable" sid="2447433586546292" type="System">
@@ -398,8 +415,28 @@
                                     </conditions>
                                     <actions>
                                         <action id="-3" name="Set position" sid="2171805390154107" type="parede">
-                                            <param id="0" name="X">1017</param>
+                                            <param id="0" name="X">966</param>
                                             <param id="1" name="Y">438</param>
+                                        </action>
+                                        <action id="-3" name="Set position" sid="5871525685326905" type="selAlternativaA">
+                                            <param id="0" name="X">selAlternativaA.X - 25</param>
+                                            <param id="1" name="Y">223</param>
+                                        </action>
+                                        <action id="-3" name="Set position" sid="5587244081762241" type="selAlternativaB">
+                                            <param id="0" name="X">selAlternativaB.X - 25</param>
+                                            <param id="1" name="Y">330</param>
+                                        </action>
+                                        <action id="-3" name="Set position" sid="4944436312649103" type="selAlternativaC">
+                                            <param id="0" name="X">selAlternativaC.X - 25</param>
+                                            <param id="1" name="Y">437</param>
+                                        </action>
+                                        <action id="-3" name="Set position" sid="3129337108086598" type="selAlternativaD">
+                                            <param id="0" name="X">selAlternativaD.X - 25</param>
+                                            <param id="1" name="Y">544</param>
+                                        </action>
+                                        <action id="-3" name="Set position" sid="893884291652502" type="selAlternativaE">
+                                            <param id="0" name="X">selAlternativaE.X - 25</param>
+                                            <param id="1" name="Y">651</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -413,23 +450,23 @@
                                     </conditions>
                                     <actions>
                                         <action id="-3" name="Set position" sid="5286936339297295" type="selAlternativaA">
-                                            <param id="0" name="X">1097</param>
+                                            <param id="0" name="X">1099</param>
                                             <param id="1" name="Y">223</param>
                                         </action>
                                         <action id="-3" name="Set position" sid="7225652743341751" type="selAlternativaB">
-                                            <param id="0" name="X">1082</param>
+                                            <param id="0" name="X">1079</param>
                                             <param id="1" name="Y">330</param>
                                         </action>
                                         <action id="-3" name="Set position" sid="3234958413539137" type="selAlternativaC">
-                                            <param id="0" name="X">1067</param>
+                                            <param id="0" name="X">1059</param>
                                             <param id="1" name="Y">437</param>
                                         </action>
                                         <action id="-3" name="Set position" sid="876795579493659" type="selAlternativaD">
-                                            <param id="0" name="X">1052</param>
+                                            <param id="0" name="X">1039</param>
                                             <param id="1" name="Y">544</param>
                                         </action>
                                         <action id="-3" name="Set position" sid="5820714451411586" type="selAlternativaE">
-                                            <param id="0" name="X">1037</param>
+                                            <param id="0" name="X">1019</param>
                                             <param id="1" name="Y">651</param>
                                         </action>
                                         <action id="-3" name="Set position" sid="1840674861829503" type="parede">
@@ -595,6 +632,23 @@
                                     <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="8892270191326723">
+                                    <conditions>
+                                        <condition id="-15" name="Pick nearest/furthest" sid="5790094353171778" type="Pontes">
+                                            <param id="0" name="Which">0</param>
+                                            <param id="1" name="X">selAlternativaA.X</param>
+                                            <param id="2" name="Y">selAlternativaA.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="7250083208162549" type="System">
+                                            <param id="0" name="Variable">PonteUID</param>
+                                            <param id="1" name="Value">Pontes.UID</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <event-block sid="8139290530583717">
                             <conditions>
@@ -616,6 +670,23 @@
                                     <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="4762586210453416">
+                                    <conditions>
+                                        <condition id="-15" name="Pick nearest/furthest" sid="9061055620641309" type="Pontes">
+                                            <param id="0" name="Which">0</param>
+                                            <param id="1" name="X">selAlternativaB.X</param>
+                                            <param id="2" name="Y">selAlternativaB.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="2432125470521757" type="System">
+                                            <param id="0" name="Variable">PonteUID</param>
+                                            <param id="1" name="Value">Pontes.UID</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <event-block sid="8860658689697719">
                             <conditions>
@@ -637,6 +708,23 @@
                                     <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="6679766067094518">
+                                    <conditions>
+                                        <condition id="-15" name="Pick nearest/furthest" sid="8054823954408811" type="Pontes">
+                                            <param id="0" name="Which">0</param>
+                                            <param id="1" name="X">selAlternativaC.X</param>
+                                            <param id="2" name="Y">selAlternativaC.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="467560248026946" type="System">
+                                            <param id="0" name="Variable">PonteUID</param>
+                                            <param id="1" name="Value">Pontes.UID</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <event-block sid="9233931703728528">
                             <conditions>
@@ -658,6 +746,23 @@
                                     <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="8532156957050429">
+                                    <conditions>
+                                        <condition id="-15" name="Pick nearest/furthest" sid="864052159898038" type="Pontes">
+                                            <param id="0" name="Which">0</param>
+                                            <param id="1" name="X">selAlternativaD.X</param>
+                                            <param id="2" name="Y">selAlternativaD.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="5838490125641963" type="System">
+                                            <param id="0" name="Variable">PonteUID</param>
+                                            <param id="1" name="Value">Pontes.UID</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <event-block sid="488663325968357">
                             <conditions>
@@ -679,6 +784,23 @@
                                     <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="4870975214645495">
+                                    <conditions>
+                                        <condition id="-15" name="Pick nearest/furthest" sid="6907108574998337" type="Pontes">
+                                            <param id="0" name="Which">0</param>
+                                            <param id="1" name="X">selAlternativaE.X</param>
+                                            <param id="2" name="Y">selAlternativaE.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="3754224411863636" type="System">
+                                            <param id="0" name="Variable">PonteUID</param>
+                                            <param id="1" name="Value">Pontes.UID</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -739,10 +861,8 @@
                                 <comment>É o que &quot;quebra&quot; a ponte </comment>
                                 <event-block sid="5519654705942098">
                                     <conditions>
-                                        <condition id="-15" name="Pick nearest/furthest" sid="4125381629998808" type="Pontes">
-                                            <param id="0" name="Which">0</param>
-                                            <param id="1" name="X">playerAnim.X</param>
-                                            <param id="2" name="Y">playerAnim.Y</param>
+                                        <condition id="-14" name="Pick by unique ID" sid="4125381629998808" type="Pontes">
+                                            <param id="0" name="Unique ID">PonteUID</param>
                                         </condition>
                                     </conditions>
                                     <actions>
