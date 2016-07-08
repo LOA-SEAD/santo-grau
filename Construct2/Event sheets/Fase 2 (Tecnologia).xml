@@ -3,14 +3,63 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase 2 (Tecnologia)</name>
     <events>
+        <variable constant="0" name="controleFase2" sid="3444370594834962" static="0" type="number">0</variable>
+        <variable constant="0" name="telao" sid="1763920419121629" static="0" type="number">0</variable>
         <variable constant="0" name="palavra1" sid="8925465934116768" static="0" type="text"></variable>
         <variable constant="0" name="palavra2" sid="2659963504474121" static="0" type="text"></variable>
         <variable constant="0" name="palavra3" sid="640949609577656" static="0" type="text"></variable>
+        <variable constant="0" name="embaralhada1" sid="170905985841937" static="0" type="text"></variable>
+        <variable constant="0" name="embaralhada2" sid="4189807408507557" static="0" type="text"></variable>
+        <variable constant="0" name="embaralhada3" sid="7969606375424727" static="0" type="text"></variable>
         <event-block sid="5819905138494612">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="7461295097562547" type="System" />
             </conditions>
             <actions>
+                <action id="0" name="Load JSON" sid="5109230592467949" type="computadorJSON" />
+                <action id="13" name="Set URL" sid="5137872676196242" type="telaoHTML">
+                    <param id="0" name="URL">&quot;telao.html&quot;</param>
+                </action>
+                <action id="-9" name="Set value" sid="1109441788124615" type="System">
+                    <param id="0" name="Variable">controleFase2</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="3530242809191083" type="System">
+                    <param id="0" name="Variable">telao</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="4623737854282467" type="System">
+                    <param id="0" name="Variable">palavra1</param>
+                    <param id="1" name="Value">computadorJSON.GetData(&quot;words&quot;,0)</param>
+                </action>
+                <action id="-9" name="Set value" sid="6941026900358253" type="System">
+                    <param id="0" name="Variable">palavra2</param>
+                    <param id="1" name="Value">computadorJSON.GetData(&quot;words&quot;,1)</param>
+                </action>
+                <action id="-9" name="Set value" sid="6961364071927619" type="System">
+                    <param id="0" name="Variable">palavra3</param>
+                    <param id="1" name="Value">computadorJSON.GetData(&quot;words&quot;,2)</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="8537946398762712" type="computadorResp">
+                    <param id="0" name="Property name">&quot;font-size&quot;</param>
+                    <param id="1" name="Value">&quot;30px&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="428467375141755" type="computadorResp">
+                    <param id="0" name="Property name">&quot;font-family&quot;</param>
+                    <param id="1" name="Value">&quot;Courier New&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="5633026210743314" type="computadorResp">
+                    <param id="0" name="Property name">&quot;font-weight&quot;</param>
+                    <param id="1" name="Value">&quot;bold&quot;</param>
+                </action>
+                <action behavior="Pin" id="0" name="Pin to object" sid="6482170630538966" type="computadorResp">
+                    <param id="0" name="Pin to">computadorTela</param>
+                    <param id="1" name="Mode">0</param>
+                </action>
+                <action behavior="Pin" id="0" name="Pin to object" sid="650591725851665" type="computadorDica">
+                    <param id="0" name="Pin to">computadorTela</param>
+                    <param id="1" name="Mode">0</param>
+                </action>
                 <action id="-3" name="Set position" sid="1475743840822415" type="player">
                     <param id="0" name="X">61</param>
                     <param id="1" name="Y">612</param>
@@ -27,33 +76,120 @@
                     <param id="0" name="Animation">&quot;Default&quot;</param>
                     <param id="1" name="From">1</param>
                 </action>
-                <action id="13" name="Set URL" sid="5137872676196242" type="telaoHTML">
-                    <param id="0" name="URL">&quot;telao.html&quot;</param>
+                <action id="-16" name="Wait" sid="5638862637940158" type="System">
+                    <param id="0" name="Seconds">0.5</param>
                 </action>
-                <action id="0" name="Load JSON" sid="5109230592467949" type="computadoresJSON" />
-                <action id="-9" name="Set value" sid="4623737854282467" type="System">
-                    <param id="0" name="Variable">palavra1</param>
-                    <param id="1" name="Value">computadoresJSON.GetData(&quot;words&quot;,0)</param>
+                <action id="-9" name="Set value" sid="2460993725107455" type="System">
+                    <param id="0" name="Variable">controleFase2</param>
+                    <param id="1" name="Value">1</param>
                 </action>
-                <action id="-9" name="Set value" sid="6941026900358253" type="System">
-                    <param id="0" name="Variable">palavra2</param>
-                    <param id="1" name="Value">computadoresJSON.GetData(&quot;words&quot;,1)</param>
-                </action>
-                <action id="-9" name="Set value" sid="6961364071927619" type="System">
-                    <param id="0" name="Variable">palavra3</param>
-                    <param id="1" name="Value">computadoresJSON.GetData(&quot;words&quot;,2)</param>
-                </action>
-                <action id="0" name="Execute" sid="1900478576505477" type="shuffleJS">
-                    <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; palavra1 &amp; &quot;&apos;)&quot;</param>
-                </action>
-                <action id="0" name="Set text" sid="3138789527219314" type="debug">
-                    <param id="0" name="Text">palavra1 &amp; palavra2 &amp; palavra3</param>
-                </action>
-                <action id="5" name="Set web font" sid="3611916853205676" type="debug">
+                <action disabled="1" id="5" name="Set web font" sid="3611916853205676" type="debug">
                     <param id="0" name="Family name">&quot;motion.ttf&quot;</param>
                     <param id="1" name="CSS URL">&quot;http://www.dafont.com/brankovic.font&quot;</param>
                 </action>
             </actions>
+        </event-block>
+        <event-block sid="7565248514853059">
+            <conditions>
+                <condition id="-14" name="Compare variable" sid="8623901697009993" type="System">
+                    <param id="0" name="Variable">controleFase2</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Value">1</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="0" name="Execute" sid="9464158561839314" type="shuffle">
+                    <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; palavra1 &amp; &quot;&apos;)&quot;</param>
+                </action>
+                <action id="-9" name="Set value" sid="2127595470171542" type="System">
+                    <param id="0" name="Variable">embaralhada1</param>
+                    <param id="1" name="Value">shuffle.ReadExecutionReturn</param>
+                </action>
+                <action id="0" name="Execute" sid="4225456646609501" type="shuffle">
+                    <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; palavra2 &amp; &quot;&apos;)&quot;</param>
+                </action>
+                <action id="-9" name="Set value" sid="908057005103467" type="System">
+                    <param id="0" name="Variable">embaralhada2</param>
+                    <param id="1" name="Value">shuffle.ReadExecutionReturn</param>
+                </action>
+                <action id="0" name="Execute" sid="4453724744559708" type="shuffle">
+                    <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; palavra3 &amp; &quot;&apos;)&quot;</param>
+                </action>
+                <action id="-9" name="Set value" sid="254013293517213" type="System">
+                    <param id="0" name="Variable">embaralhada3</param>
+                    <param id="1" name="Value">shuffle.ReadExecutionReturn</param>
+                </action>
+                <action id="-9" name="Set value" sid="4247534676236611" type="System">
+                    <param id="0" name="Variable">controleFase2</param>
+                    <param id="1" name="Value">2</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="3867128592494029">
+            <conditions>
+                <condition id="-14" name="Compare variable" sid="1345454683130149" type="System">
+                    <param id="0" name="Variable">controleFase2</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Value">2</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="5909162236663135">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="301411352185064" type="System">
+                            <param id="0" name="Variable">embaralhada1</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">palavra1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Execute" sid="6562176998018612" type="shuffle">
+                            <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; palavra1 &amp; &quot;&apos;)&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="7245689831691299" type="System">
+                            <param id="0" name="Variable">embaralhada1</param>
+                            <param id="1" name="Value">shuffle.ReadExecutionReturn</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="802623571144287">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="2675381815522746" type="System">
+                            <param id="0" name="Variable">embaralhada2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">palavra2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Execute" sid="3460630124120452" type="shuffle">
+                            <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; palavra2 &amp; &quot;&apos;)&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="3299697496656461" type="System">
+                            <param id="0" name="Variable">embaralhada2</param>
+                            <param id="1" name="Value">shuffle.ReadExecutionReturn</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="5075157840321251">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="5429013730205004" type="System">
+                            <param id="0" name="Variable">embaralhada3</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">palavra3</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Execute" sid="4344991796556666" type="shuffle">
+                            <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; palavra3 &amp; &quot;&apos;)&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="6257930564456185" type="System">
+                            <param id="0" name="Variable">embaralhada3</param>
+                            <param id="1" name="Value">shuffle.ReadExecutionReturn</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
         </event-block>
         <event-group description="" sid="1249762280384846" title="Efeitos2">
             <sub-events>
@@ -73,6 +209,9 @@
                         <action id="0" name="Set text" sid="5757129352923526" type="pontuacao">
                             <param id="0" name="Text">&quot;Rendimento acadêmico: &quot; &amp; pontos</param>
                         </action>
+                        <action id="0" name="Set text" sid="5924170227415062" type="debug">
+                            <param id="0" name="Text">palavra1 &amp; &quot; &quot; &amp;  palavra2 &amp; &quot; &quot; &amp;  palavra3 &amp; &quot; &quot; &amp; embaralhada1 &amp; &quot; &quot; &amp; embaralhada2 &amp; &quot; &quot; &amp; embaralhada3</param>
+                        </action>
                     </actions>
                 </event-block>
                 <event-block sid="1096809854280954">
@@ -83,13 +222,13 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action behavior="Solid" id="0" name="Set enabled" sid="380036447020041" type="computadores">
+                        <action behavior="Solid" id="0" name="Set enabled" sid="380036447020041" type="computador">
                             <param id="0" name="State">0</param>
                         </action>
                         <action behavior="Solid" id="0" name="Set enabled" sid="6765197046871539" type="selecaoComputador">
                             <param id="0" name="State">1</param>
                         </action>
-                        <action id="-15" name="Set visible" sid="4723107950213747" type="computadoresCenario">
+                        <action id="-15" name="Set visible" sid="4723107950213747" type="computadorCenario">
                             <param id="0" name="Visibility">1</param>
                         </action>
                     </actions>
@@ -99,13 +238,13 @@
                         <condition id="-22" name="Else" sid="8321607030360989" type="System" />
                     </conditions>
                     <actions>
-                        <action behavior="Solid" id="0" name="Set enabled" sid="2672781927168349" type="computadores">
+                        <action behavior="Solid" id="0" name="Set enabled" sid="2672781927168349" type="computador">
                             <param id="0" name="State">1</param>
                         </action>
                         <action behavior="Solid" id="0" name="Set enabled" sid="7413220848473115" type="selecaoComputador">
                             <param id="0" name="State">0</param>
                         </action>
-                        <action id="-15" name="Set visible" sid="7534154754717382" type="computadoresCenario">
+                        <action id="-15" name="Set visible" sid="7534154754717382" type="computadorCenario">
                             <param id="0" name="Visibility">0</param>
                         </action>
                     </actions>
@@ -176,11 +315,23 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Execute" sid="1411649928843422" type="shuffleJS">
-                                            <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; palavra1 &amp; &quot;&apos;)&quot;</param>
+                                        <action id="-12" name="Set group active" sid="53997296585529" type="System">
+                                            <param id="0" name="Group name">&quot;Telao&quot;</param>
+                                            <param id="1" name="State">0</param>
                                         </action>
-                                        <action id="0" name="Set text" sid="5710889130060719" type="debug">
-                                            <param id="0" name="Text">shuffleJS.ReadExecutionReturn</param>
+                                        <action id="0" name="Set visible" sid="2522010193764276" type="telaoHTML">
+                                            <param id="0" name="Visibility">0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="8566035094067242" type="System">
+                                            <param id="0" name="Variable">controleFase2</param>
+                                            <param id="1" name="Value">2</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="7969553364816318" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="0" name="Set text" sid="8101207772789168" type="computadorResp">
+                                            <param id="0" name="Text">&quot;&quot;</param>
                                         </action>
                                         <action id="-12" name="Set group active" sid="8487189829115734" type="System">
                                             <param id="0" name="Group name">&quot;Computador1&quot;</param>
@@ -196,11 +347,23 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Execute" sid="8917615234627222" type="shuffleJS">
-                                            <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; palavra2 &amp; &quot;&apos;)&quot;</param>
+                                        <action id="-12" name="Set group active" sid="7006905494805387" type="System">
+                                            <param id="0" name="Group name">&quot;Telao&quot;</param>
+                                            <param id="1" name="State">0</param>
                                         </action>
-                                        <action id="0" name="Set text" sid="9065484109046822" type="debug">
-                                            <param id="0" name="Text">shuffleJS.ReadExecutionReturn</param>
+                                        <action id="0" name="Set visible" sid="3314126803421173" type="telaoHTML">
+                                            <param id="0" name="Visibility">0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="5942515119247308" type="System">
+                                            <param id="0" name="Variable">controleFase2</param>
+                                            <param id="1" name="Value">2</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="9430508359949126" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="0" name="Set text" sid="6144597557077133" type="computadorResp">
+                                            <param id="0" name="Text">&quot;&quot;</param>
                                         </action>
                                         <action id="-12" name="Set group active" sid="3664612488746282" type="System">
                                             <param id="0" name="Group name">&quot;Computador2&quot;</param>
@@ -216,11 +379,23 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Execute" sid="1276519236781298" type="shuffleJS">
-                                            <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; palavra3 &amp; &quot;&apos;)&quot;</param>
+                                        <action id="-12" name="Set group active" sid="694518869609943" type="System">
+                                            <param id="0" name="Group name">&quot;Telao&quot;</param>
+                                            <param id="1" name="State">0</param>
                                         </action>
-                                        <action id="0" name="Set text" sid="2404400794855668" type="debug">
-                                            <param id="0" name="Text">shuffleJS.ReadExecutionReturn</param>
+                                        <action id="0" name="Set visible" sid="373386257265092" type="telaoHTML">
+                                            <param id="0" name="Visibility">0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="6490562038802868" type="System">
+                                            <param id="0" name="Variable">controleFase2</param>
+                                            <param id="1" name="Value">2</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="1829736376237082" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="0" name="Set text" sid="4655976873761237" type="computadorResp">
+                                            <param id="0" name="Text">&quot;&quot;</param>
                                         </action>
                                         <action id="-12" name="Set group active" sid="5685803581100642" type="System">
                                             <param id="0" name="Group name">&quot;Computador3&quot;</param>
@@ -240,26 +415,15 @@
                             <sub-events>
                                 <event-block sid="3447223290115638">
                                     <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="8730561796376211" type="computadoresResp">
+                                        <condition id="-14" name="Pick by unique ID" sid="8730561796376211" type="computadorResp">
                                             <param id="0" name="Unique ID">70</param>
                                         </condition>
                                     </conditions>
                                     <actions />
-                                    <sub-events>
-                                        <event-block sid="3864909163028518">
-                                            <conditions>
-                                                <condition id="0" name="Compare text" sid="3984609763472922" type="computadoresResp">
-                                                    <param id="0" name="Text">computadoresJSON.GetData(&quot;words&quot;,0)</param>
-                                                    <param id="1" name="Case">0</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions />
-                                        </event-block>
-                                    </sub-events>
                                 </event-block>
                                 <event-block sid="4981760263031344">
                                     <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="9228657446902781" type="computadoresResp">
+                                        <condition id="-14" name="Pick by unique ID" sid="9228657446902781" type="computadorResp">
                                             <param id="0" name="Unique ID">88</param>
                                         </condition>
                                     </conditions>
@@ -267,8 +431,8 @@
                                     <sub-events>
                                         <event-block sid="5095004666509067">
                                             <conditions>
-                                                <condition id="0" name="Compare text" sid="6165222022762083" type="computadoresResp">
-                                                    <param id="0" name="Text">computadoresJSON.GetData(&quot;words&quot;,1)</param>
+                                                <condition id="0" name="Compare text" sid="6165222022762083" type="computadorResp">
+                                                    <param id="0" name="Text">computadorJSON.GetData(&quot;words&quot;,1)</param>
                                                     <param id="1" name="Case">0</param>
                                                 </condition>
                                             </conditions>
@@ -278,7 +442,7 @@
                                 </event-block>
                                 <event-block sid="9501868351004185">
                                     <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="8848144053456561" type="computadoresResp">
+                                        <condition id="-14" name="Pick by unique ID" sid="8848144053456561" type="computadorResp">
                                             <param id="0" name="Unique ID">89</param>
                                         </condition>
                                     </conditions>
@@ -286,8 +450,8 @@
                                     <sub-events>
                                         <event-block sid="7042948248128258">
                                             <conditions>
-                                                <condition id="0" name="Compare text" sid="2794317839112255" type="computadoresResp">
-                                                    <param id="0" name="Text">computadoresJSON.GetData(&quot;words&quot;,2)</param>
+                                                <condition id="0" name="Compare text" sid="2794317839112255" type="computadorResp">
+                                                    <param id="0" name="Text">computadorJSON.GetData(&quot;words&quot;,2)</param>
                                                     <param id="1" name="Case">0</param>
                                                 </condition>
                                             </conditions>
@@ -313,9 +477,9 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action disabled="1" id="-12" name="Set group active" sid="224856264284969" type="System">
-                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                            <param id="1" name="State">0</param>
+                        <action id="-9" name="Set value" sid="6517372003228806" type="System">
+                            <param id="0" name="Variable">telao</param>
+                            <param id="1" name="Value">1</param>
                         </action>
                         <action id="-12" name="Set group active" sid="1319684117656353" type="System">
                             <param id="0" name="Group name">&quot;Telao&quot;</param>
@@ -611,63 +775,348 @@
         <event-group description="" inactive="1" sid="1980499974198863" title="Computador1">
             <sub-events>
                 <event-block sid="9402733510995834">
-                    <conditions />
-                    <actions />
-                </event-block>
-                <event-block disabled="1" sid="897277641330733">
-                    <conditions />
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="3307869280831721" type="System">
+                            <param id="0" name="Variable">controleFase2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">2</param>
+                        </condition>
+                    </conditions>
                     <actions>
-                        <action id="-12" name="Set group active" sid="3798613384081883" type="System">
-                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="6719038861308221" type="System">
-                            <param id="0" name="Group name">&quot;Computador1&quot;</param>
-                            <param id="1" name="State">0</param>
+                        <action id="0" name="Set text" sid="5638450282293462" type="computadorDica">
+                            <param id="0" name="Text">uppercase(embaralhada1)</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="9311600133713041">
+                            <conditions>
+                                <condition id="-2" name="Compare Y" sid="871612610396553" type="computadorTela">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Y co-ordinate">400</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="1424105530962051" type="computadorTela">
+                                    <param id="0" name="Y">computadorTela.Y-20</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="5489917426521142">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="4557391534286844" type="System" />
+                            </conditions>
+                            <actions />
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="5120784875560205">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="1878366157679458" type="Keyboard">
+                            <param id="0" name="Key">13 (Return)</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="1937065986069702">
+                            <conditions>
+                                <condition id="0" name="Compare text" sid="6827474966669485" type="computadorResp">
+                                    <param id="0" name="Text">computadorJSON.GetData(&quot;words&quot;,0)</param>
+                                    <param id="1" name="Case">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="7736663616887878" type="System">
+                                    <param id="0" name="Variable">controleFase2</param>
+                                    <param id="1" name="Value">3</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="897277641330733">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="6585230907531904" type="Keyboard">
+                            <param id="0" name="Key">27 (Esc)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="5394831048586732" type="System">
+                            <param id="0" name="Variable">controleFase2</param>
+                            <param id="1" name="Value">3</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="4400878734396145">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="550261050580039" type="System">
+                            <param id="0" name="Variable">controleFase2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">3</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="3334874358306413">
+                            <conditions>
+                                <condition id="-2" name="Compare Y" sid="5214772509783018" type="computadorTela">
+                                    <param id="0" name="Comparison">2</param>
+                                    <param id="1" name="Y co-ordinate">1200</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="7139155908755505" type="computadorTela">
+                                    <param id="0" name="Y">computadorTela.Y+20</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="7275810093537207">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="1507554395968886" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="770197104868309" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="3593452585980663" type="System">
+                                    <param id="0" name="Group name">&quot;Computador1&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="3346580751124091">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="7465103874486403" type="System">
+                                            <param id="0" name="Variable">telao</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Set visible" sid="9162045843668506" type="telaoHTML">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
-        <event-group description="" inactive="1" sid="2004645848307277" title="Computador2">
+        <event-group description="" inactive="1" sid="3128624885820388" title="Computador2">
             <sub-events>
-                <event-block sid="6956019762127945">
-                    <conditions />
-                    <actions />
-                </event-block>
-                <event-block disabled="1" sid="2218805912438189">
-                    <conditions />
+                <event-block sid="9402733510995834">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="3307869280831721" type="System">
+                            <param id="0" name="Variable">controleFase2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">2</param>
+                        </condition>
+                    </conditions>
                     <actions>
-                        <action id="-12" name="Set group active" sid="775630274099293" type="System">
-                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="2559350716973428" type="System">
-                            <param id="0" name="Group name">&quot;Computador2&quot;</param>
-                            <param id="1" name="State">0</param>
+                        <action id="0" name="Set text" sid="2324499795937316" type="computadorDica">
+                            <param id="0" name="Text">uppercase(embaralhada2)</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="9311600133713041">
+                            <conditions>
+                                <condition id="-2" name="Compare Y" sid="871612610396553" type="computadorTela">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Y co-ordinate">400</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="1424105530962051" type="computadorTela">
+                                    <param id="0" name="Y">computadorTela.Y-20</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="5489917426521142">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="4557391534286844" type="System" />
+                            </conditions>
+                            <actions />
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="897277641330733">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="6585230907531904" type="Keyboard">
+                            <param id="0" name="Key">27 (Esc)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="5394831048586732" type="System">
+                            <param id="0" name="Variable">controleFase2</param>
+                            <param id="1" name="Value">3</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="4400878734396145">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="550261050580039" type="System">
+                            <param id="0" name="Variable">controleFase2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">3</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="3334874358306413">
+                            <conditions>
+                                <condition id="-2" name="Compare Y" sid="5214772509783018" type="computadorTela">
+                                    <param id="0" name="Comparison">2</param>
+                                    <param id="1" name="Y co-ordinate">1200</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="7139155908755505" type="computadorTela">
+                                    <param id="0" name="Y">computadorTela.Y+20</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="7275810093537207">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="1507554395968886" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="770197104868309" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="3593452585980663" type="System">
+                                    <param id="0" name="Group name">&quot;Computador2&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="7276389212459927">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="6028993381108198" type="System">
+                                            <param id="0" name="Variable">telao</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Set visible" sid="5663335800306579" type="telaoHTML">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
-        <event-group description="" inactive="1" sid="1285505247417339" title="Computador3">
+        <event-group description="" inactive="1" sid="5603986832035747" title="Computador3">
             <sub-events>
-                <event-block sid="2803875802537632">
-                    <conditions />
-                    <actions />
-                </event-block>
-                <event-block disabled="1" sid="1829572092603316">
-                    <conditions />
+                <event-block sid="9402733510995834">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="3307869280831721" type="System">
+                            <param id="0" name="Variable">controleFase2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">2</param>
+                        </condition>
+                    </conditions>
                     <actions>
-                        <action id="-12" name="Set group active" sid="8094292415277" type="System">
-                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="4008153800325144" type="System">
-                            <param id="0" name="Group name">&quot;Computador3&quot;</param>
-                            <param id="1" name="State">0</param>
+                        <action id="0" name="Set text" sid="837362438022357" type="computadorDica">
+                            <param id="0" name="Text">uppercase(embaralhada3)</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="9311600133713041">
+                            <conditions>
+                                <condition id="-2" name="Compare Y" sid="871612610396553" type="computadorTela">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Y co-ordinate">400</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="1424105530962051" type="computadorTela">
+                                    <param id="0" name="Y">computadorTela.Y-20</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="5489917426521142">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="4557391534286844" type="System" />
+                            </conditions>
+                            <actions />
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="897277641330733">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="6585230907531904" type="Keyboard">
+                            <param id="0" name="Key">27 (Esc)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="5394831048586732" type="System">
+                            <param id="0" name="Variable">controleFase2</param>
+                            <param id="1" name="Value">3</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="4400878734396145">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="550261050580039" type="System">
+                            <param id="0" name="Variable">controleFase2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">3</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="3334874358306413">
+                            <conditions>
+                                <condition id="-2" name="Compare Y" sid="5214772509783018" type="computadorTela">
+                                    <param id="0" name="Comparison">2</param>
+                                    <param id="1" name="Y co-ordinate">1200</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="7139155908755505" type="computadorTela">
+                                    <param id="0" name="Y">computadorTela.Y+20</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="7275810093537207">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="1507554395968886" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="770197104868309" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="3593452585980663" type="System">
+                                    <param id="0" name="Group name">&quot;Computador3&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="5987605597610382">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="9139000794710601" type="System">
+                                            <param id="0" name="Variable">telao</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Set visible" sid="6291330219960821" type="telaoHTML">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
@@ -679,11 +1128,12 @@
                         <action id="0" name="Set visible" sid="1934222737005397" type="telaoHTML">
                             <param id="0" name="Visibility">1</param>
                         </action>
-                        <action id="-15" name="Set visible" sid="5082624184341549" type="sintonia1">
+                        <action id="-15" name="Set visible" sid="4844891621446474" type="sintonia">
                             <param id="0" name="Visibility">0</param>
                         </action>
-                        <action id="-15" name="Set visible" sid="7678032961174094" type="sintonia2">
-                            <param id="0" name="Visibility">0</param>
+                        <action id="4" name="Set animation" sid="5082624184341549" type="sintonia">
+                            <param id="0" name="Animation">&quot;Final&quot;</param>
+                            <param id="1" name="From">1</param>
                         </action>
                     </actions>
                 </event-block>
@@ -694,10 +1144,7 @@
                             <param id="0" name="Group name">&quot;playerMove2&quot;</param>
                             <param id="1" name="State">1</param>
                         </action>
-                        <action id="-15" name="Set visible" sid="2790353269376155" type="sintonia1">
-                            <param id="0" name="Visibility">1</param>
-                        </action>
-                        <action id="-15" name="Set visible" sid="7343692704464586" type="sintonia2">
+                        <action id="-15" name="Set visible" sid="2790353269376155" type="sintonia">
                             <param id="0" name="Visibility">1</param>
                         </action>
                         <action id="0" name="Set visible" sid="7460795794171744" type="telaoHTML">
@@ -724,11 +1171,7 @@
                     <param id="1" name="State">1</param>
                 </action>
                 <action id="-9" name="Destroy" sid="7669583388323185" type="telaoHTML" />
-                <action id="4" name="Set animation" sid="4783184067186409" type="sintonia1">
-                    <param id="0" name="Animation">&quot;Final&quot;</param>
-                    <param id="1" name="From">1</param>
-                </action>
-                <action id="4" name="Set animation" sid="2396023102936854" type="sintonia2">
+                <action id="4" name="Set animation" sid="4783184067186409" type="sintonia">
                     <param id="0" name="Animation">&quot;Final&quot;</param>
                     <param id="1" name="From">1</param>
                 </action>
