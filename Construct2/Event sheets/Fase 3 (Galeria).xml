@@ -45,7 +45,7 @@
                     <param id="0" name="Animation">&quot;Default&quot;</param>
                     <param id="1" name="From">1</param>
                 </action>
-                <action id="-16" name="Set opacity" sid="7682274721188121" type="QuadrosTeste">
+                <action id="-16" name="Set opacity" sid="7682274721188121" type="MuralQuadros">
                     <param id="0" name="Opacity">0</param>
                 </action>
                 <action id="-12" name="Set group active" sid="9221966531166957" type="System">
@@ -68,14 +68,15 @@
                     <param id="0" name="Group name">&quot;localizarChave&quot;</param>
                     <param id="1" name="State">0</param>
                 </action>
+                <action id="-12" name="Set group active" sid="235196242322519" type="System">
+                    <param id="0" name="Group name">&quot;saidaGAL&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
                 <action id="0" name="Load JSON" sid="4808618138882582" type="DialogosJSON" />
                 <action id="0" name="Load JSON" sid="6934720499260367" type="QuadrosJSON" />
                 <action id="0" name="Clear" sid="6757824165300672" type="Resposta" />
                 <action id="0" name="Clear" sid="9701182539403744" type="OrdemAtual" />
-                <action id="-16" name="Set opacity" sid="1926515396501819" type="Dialogo">
-                    <param id="0" name="Opacity">0</param>
-                </action>
-                <action id="-16" name="Set opacity" sid="493891802638083" type="Avancar">
+                <action id="-16" name="Set opacity" sid="1926515396501819" type="BalaoDialogo">
                     <param id="0" name="Opacity">0</param>
                 </action>
                 <action id="-16" name="Set opacity" sid="2045096423416115" type="Personagem">
@@ -87,7 +88,7 @@
                 <action id="-16" name="Set opacity" sid="6297385735262426" type="Chave">
                     <param id="0" name="Opacity">0</param>
                 </action>
-                <action id="11" name="Set collisions enabled" sid="4217019818019758" type="saidaGAL">
+                <action id="11" name="Set collisions enabled" sid="4217019818019758" type="SaidaGAL">
                     <param id="0" name="Collisions">0</param>
                 </action>
                 <action id="-16" name="Set opacity" sid="6901387167522475" type="Fantasmas">
@@ -101,7 +102,20 @@
                     <param id="1" name="Mode">0</param>
                 </action>
                 <action id="0" name="Set text" sid="9426213284247127" type="dicaTexto">
-                    <param id="0" name="Text">&quot;Pressione E para conversar com o bibliotecário&quot;</param>
+                    <param id="0" name="Text">&quot;Pressione E para conversar com Einstein&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+        <comment>Einstein é visível</comment>
+        <event-block sid="4841051601009874">
+            <conditions>
+                <condition id="-14" name="Pick by unique ID" sid="6219977531335588" type="Fantasmas">
+                    <param id="0" name="Unique ID">227</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-16" name="Set opacity" sid="207620686170381" type="Fantasmas">
+                    <param id="0" name="Opacity">100</param>
                 </action>
             </actions>
         </event-block>
@@ -123,11 +137,11 @@
                 </action>
             </actions>
         </event-block>
-        <comment>Sobe dica para conversar com o bibliotecário</comment>
+        <comment>Sobe dica para conversar com Einstein</comment>
         <event-block any="1" sid="8184022603915785">
             <conditions>
                 <condition id="1" name="Is overlapping another object" sid="3876750697826487" type="player">
-                    <param id="0" name="Object">selBibliotecario</param>
+                    <param id="0" name="Object">SelecaoEinstein</param>
                 </condition>
             </conditions>
             <actions />
@@ -177,10 +191,13 @@
         <event-block sid="6062525126708422">
             <conditions>
                 <condition id="1" name="Is overlapping another object" sid="5426140650707876" type="player">
-                    <param id="0" name="Object">selBibliotecario</param>
+                    <param id="0" name="Object">SelecaoEinstein</param>
                 </condition>
                 <condition id="2" name="Key is down" sid="1161521404134509" type="Keyboard">
                     <param id="0" name="Key">69 (E)</param>
+                </condition>
+                <condition id="2" name="Is playing" sid="4623048803601847" type="playerAnim">
+                    <param id="0" name="Animation">&quot;TrasParado&quot;</param>
                 </condition>
             </conditions>
             <actions>
@@ -201,7 +218,7 @@
                     <param id="0" name="Group name">&quot;dialogoGaleria&quot;</param>
                     <param id="1" name="State">1</param>
                 </action>
-                <action id="-9" name="Destroy" sid="5328791875943443" type="selBibliotecario" />
+                <action id="-9" name="Destroy" sid="5328791875943443" type="SelecaoEinstein" />
             </actions>
         </event-block>
         <comment>Sobe dica para ordenar os quadros</comment>
@@ -277,9 +294,12 @@
                 <condition id="2" name="Key is down" sid="6256006701647014" type="Keyboard">
                     <param id="0" name="Key">69 (E)</param>
                 </condition>
-                <condition id="-10" name="Compare opacity" sid="4539723784871463" type="Dialogo">
+                <condition id="-10" name="Compare opacity" sid="4539723784871463" type="BalaoDialogo">
                     <param id="0" name="Comparison">0</param>
                     <param id="1" name="Opacity">0</param>
+                </condition>
+                <condition id="2" name="Is playing" sid="9969562668928525" type="playerAnim">
+                    <param id="0" name="Animation">&quot;TrasParado&quot;</param>
                 </condition>
             </conditions>
             <actions />
@@ -319,20 +339,20 @@
                 <event-block sid="536095591584953">
                     <conditions>
                         <condition id="-1" name="Every tick" sid="4858459743707592" type="System" />
-                        <condition id="-10" name="Compare opacity" sid="697956556261024" type="QuadrosTeste">
+                        <condition id="-10" name="Compare opacity" sid="697956556261024" type="MuralQuadros">
                             <param id="0" name="Comparison">2</param>
                             <param id="1" name="Opacity">100</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-16" name="Set opacity" sid="2076384807695057" type="QuadrosTeste">
-                            <param id="0" name="Opacity">QuadrosTeste.Opacity + 2.5</param>
+                        <action id="-16" name="Set opacity" sid="2076384807695057" type="MuralQuadros">
+                            <param id="0" name="Opacity">MuralQuadros.Opacity + 2.5</param>
                         </action>
                     </actions>
                 </event-block>
                 <event-block sid="9590722395535614">
                     <conditions>
-                        <condition id="-10" name="Compare opacity" sid="777040374093621" type="QuadrosTeste">
+                        <condition id="-10" name="Compare opacity" sid="777040374093621" type="MuralQuadros">
                             <param id="0" name="Comparison">0</param>
                             <param id="1" name="Opacity">100</param>
                         </condition>
@@ -359,7 +379,7 @@
                     <param id="1" name="Click type">0</param>
                     <param id="2" name="Object clicked">selecaoComida</param>
                 </condition>
-                <condition id="-10" name="Compare opacity" sid="9244725577974001" type="QuadrosTeste">
+                <condition id="-10" name="Compare opacity" sid="9244725577974001" type="MuralQuadros">
                     <param id="0" name="Comparison">0</param>
                     <param id="1" name="Opacity">100</param>
                 </condition>
@@ -388,20 +408,20 @@
                 <event-block sid="9111195368472245">
                     <conditions>
                         <condition id="-1" name="Every tick" sid="3837281148603076" type="System" />
-                        <condition id="-10" name="Compare opacity" sid="4080625836939906" type="QuadrosTeste">
+                        <condition id="-10" name="Compare opacity" sid="4080625836939906" type="MuralQuadros">
                             <param id="0" name="Comparison">4</param>
                             <param id="1" name="Opacity">0</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-16" name="Set opacity" sid="3897813820729303" type="QuadrosTeste">
-                            <param id="0" name="Opacity">QuadrosTeste.Opacity - 2.5</param>
+                        <action id="-16" name="Set opacity" sid="3897813820729303" type="MuralQuadros">
+                            <param id="0" name="Opacity">MuralQuadros.Opacity - 2.5</param>
                         </action>
                     </actions>
                 </event-block>
                 <event-block sid="5152413625063937">
                     <conditions>
-                        <condition id="-10" name="Compare opacity" sid="6145115409282713" type="QuadrosTeste">
+                        <condition id="-10" name="Compare opacity" sid="6145115409282713" type="MuralQuadros">
                             <param id="0" name="Comparison">0</param>
                             <param id="1" name="Opacity">0</param>
                         </condition>
@@ -415,72 +435,79 @@
                 </event-block>
             </sub-events>
         </event-block>
-        <comment>Estes dois blocos servem para que só seja modificado o vetor com a ordem dos quadros quando o jogador soltar o quadro que ele estiver arrastando</comment>
-        <event-block sid="8510538776884853">
-            <conditions>
-                <condition behavior="DragDrop" id="0" name="Is dragging" sid="6326581813458748" type="Quadros" />
-                <condition id="-14" name="Compare variable" sid="8028017958561686" type="System">
-                    <param id="0" name="Variable">respostaCerta</param>
-                    <param id="1" name="Comparison">1</param>
-                    <param id="2" name="Value">1</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="-12" name="Set group active" sid="4108876777246292" type="System">
-                    <param id="0" name="Group name">&quot;operacoesQuadros&quot;</param>
-                    <param id="1" name="State">0</param>
-                </action>
-            </actions>
-        </event-block>
-        <event-block sid="7745757215299397">
-            <conditions>
-                <condition behavior="DragDrop" id="2" name="On drop" sid="9737852282607683" type="Quadros" />
-            </conditions>
-            <actions>
-                <action id="-12" name="Set group active" sid="9301324868269133" type="System">
-                    <param id="0" name="Group name">&quot;operacoesQuadros&quot;</param>
-                    <param id="1" name="State">1</param>
-                </action>
-            </actions>
-        </event-block>
-        <comment>Para dar o efeito de que aquele quadro pode ser selecionado</comment>
-        <event-block sid="8714694988860868">
-            <conditions>
-                <condition id="7" name="Cursor is over object" sid="1457052431695047" type="Mouse">
-                    <param id="0" name="Object">Quadros</param>
-                </condition>
-                <condition id="-15" name="Is group active" sid="6497959654309785" type="System">
-                    <param id="0" name="Group name">&quot;operacoesQuadros&quot;</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="-3" name="Set position" sid="978527522061864" type="selecaoQuadros">
-                    <param id="0" name="X">Quadros.X - 87</param>
-                    <param id="1" name="Y">Quadros.Y - 207</param>
-                </action>
-                <action id="-15" name="Set visible" sid="6809823583346089" type="selecaoQuadros">
-                    <param id="0" name="Visibility">1</param>
-                </action>
-            </actions>
-        </event-block>
-        <event-block sid="5285029341809828">
-            <conditions>
-                <condition id="-22" name="Else" sid="1479360089627582" type="System" />
-            </conditions>
-            <actions />
+        <comment>Grupo onde estão localizados todas as funções que criam o efeito de 3D na fase</comment>
+        <event-group description="" sid="8721442510616232" title="Efeitos3DGaleria" />
+        <comment>Grupo criado apenas para separar determinados controles utilizados na movimentação dos quadros que ficavam na parte inicial </comment>
+        <event-group description="" sid="5019977194563664" title="movimentacaoQuadros">
             <sub-events>
-                <event-block sid="3586832671623449">
+                <comment>Estes dois blocos servem para que só seja modificado o vetor com a ordem dos quadros quando o jogador soltar o quadro que ele estiver arrastando</comment>
+                <event-block sid="8510538776884853">
                     <conditions>
-                        <condition id="-9" name="Is visible" sid="2896233769926908" type="selecaoQuadros" />
+                        <condition behavior="DragDrop" id="0" name="Is dragging" sid="6326581813458748" type="Quadros" />
+                        <condition id="-14" name="Compare variable" sid="8028017958561686" type="System">
+                            <param id="0" name="Variable">respostaCerta</param>
+                            <param id="1" name="Comparison">1</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
                     </conditions>
                     <actions>
-                        <action id="-15" name="Set visible" sid="9854584582412311" type="selecaoQuadros">
-                            <param id="0" name="Visibility">0</param>
+                        <action id="-12" name="Set group active" sid="4108876777246292" type="System">
+                            <param id="0" name="Group name">&quot;operacoesQuadros&quot;</param>
+                            <param id="1" name="State">0</param>
                         </action>
                     </actions>
                 </event-block>
+                <event-block sid="7745757215299397">
+                    <conditions>
+                        <condition behavior="DragDrop" id="2" name="On drop" sid="9737852282607683" type="Quadros" />
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="9301324868269133" type="System">
+                            <param id="0" name="Group name">&quot;operacoesQuadros&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Para dar o efeito de que aquele quadro pode ser selecionado</comment>
+                <event-block sid="8714694988860868">
+                    <conditions>
+                        <condition id="7" name="Cursor is over object" sid="1457052431695047" type="Mouse">
+                            <param id="0" name="Object">Quadros</param>
+                        </condition>
+                        <condition id="-15" name="Is group active" sid="6497959654309785" type="System">
+                            <param id="0" name="Group name">&quot;operacoesQuadros&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Set position" sid="978527522061864" type="SelecaoQuadros">
+                            <param id="0" name="X">Quadros.X - 87</param>
+                            <param id="1" name="Y">Quadros.Y - 207</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="6809823583346089" type="SelecaoQuadros">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="5285029341809828">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="1479360089627582" type="System" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="3586832671623449">
+                            <conditions>
+                                <condition id="-9" name="Is visible" sid="2896233769926908" type="SelecaoQuadros" />
+                            </conditions>
+                            <actions>
+                                <action id="-15" name="Set visible" sid="9854584582412311" type="SelecaoQuadros">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
             </sub-events>
-        </event-block>
+        </event-group>
         <comment>Usada no início da execução para carregar aos quadros com estes nomes, sendo que eles devem possuir 160X200, pois o tiledBackground não possui uma maneira de dar zoom in/zoom out na imagem</comment>
         <event-group description="" sid="1077548239582358" title="carregarQuadros">
             <sub-events>
@@ -517,8 +544,8 @@
                                     <param id="0" name="URI">int(QuadrosJSON.GetData(&quot;ordemInicial&quot;,Quadro-1))&amp;&quot;.png&quot;</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="6920614503469052" type="Quadros">
-                                    <param id="0" name="X">220 + (225 * ((quadro - 1) % 5))</param>
-                                    <param id="1" name="Y">240 + (225 * floor((quadro - 1) / 5))</param>
+                                    <param id="0" name="X">241 + (197 * ((quadro - 1) % 5))</param>
+                                    <param id="1" name="Y">350 + (242 * floor((quadro - 1) / 5))</param>
                                 </action>
                                 <action id="2" name="Set at X" sid="4129478874464819" type="Resposta">
                                     <param id="0" name="X">Quadro-1</param>
@@ -593,23 +620,20 @@
                         <event-block sid="6947965155873984">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="1153563277756434" type="System" />
-                                <condition id="-10" name="Compare opacity" sid="8122682219136367" type="Dialogo">
+                                <condition id="-10" name="Compare opacity" sid="8122682219136367" type="BalaoDialogo">
                                     <param id="0" name="Comparison">2</param>
                                     <param id="1" name="Opacity">100</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-16" name="Set opacity" sid="913413046183617" type="Avancar">
-                                    <param id="0" name="Opacity">Avancar.Opacity + 2.5</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="6391924252284335" type="Dialogo">
-                                    <param id="0" name="Opacity">Dialogo.Opacity + 2.5</param>
+                                <action id="-16" name="Set opacity" sid="6391924252284335" type="BalaoDialogo">
+                                    <param id="0" name="Opacity">BalaoDialogo.Opacity + 2.5</param>
                                 </action>
                             </actions>
                         </event-block>
                         <event-block sid="1063766848155857">
                             <conditions>
-                                <condition id="-10" name="Compare opacity" sid="2666635763728809" type="Dialogo">
+                                <condition id="-10" name="Compare opacity" sid="2666635763728809" type="BalaoDialogo">
                                     <param id="0" name="Comparison">0</param>
                                     <param id="1" name="Opacity">100</param>
                                 </condition>
@@ -711,10 +735,8 @@
                     <sub-events>
                         <event-block sid="967206266723503">
                             <conditions>
-                                <condition id="6" name="On object clicked" sid="7262807909701723" type="Mouse">
-                                    <param id="0" name="Mouse button">0</param>
-                                    <param id="1" name="Click type">0</param>
-                                    <param id="2" name="Object clicked">selAvancar</param>
+                                <condition id="2" name="Key is down" sid="7262807909701723" type="Keyboard">
+                                    <param id="0" name="Key">69 (E)</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -797,24 +819,21 @@
                                         <event-block sid="8780816480840603">
                                             <conditions>
                                                 <condition id="-1" name="Every tick" sid="8648319375542872" type="System" />
-                                                <condition id="-10" name="Compare opacity" sid="4855550661841529" type="Dialogo">
+                                                <condition id="-10" name="Compare opacity" sid="4855550661841529" type="BalaoDialogo">
                                                     <param id="0" name="Comparison">4</param>
                                                     <param id="1" name="Opacity">0</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
-                                                <action id="-16" name="Set opacity" sid="7957299445376175" type="Avancar">
-                                                    <param id="0" name="Opacity">Avancar.Opacity - 2.5</param>
-                                                </action>
-                                                <action id="-16" name="Set opacity" sid="8209586396246137" type="Dialogo">
-                                                    <param id="0" name="Opacity">Dialogo.Opacity - 2.5</param>
+                                                <action id="-16" name="Set opacity" sid="8209586396246137" type="BalaoDialogo">
+                                                    <param id="0" name="Opacity">BalaoDialogo.Opacity - 2.5</param>
                                                 </action>
                                             </actions>
                                         </event-block>
                                         <comment>Embora será fechada a caixa de diálogo, adiciona-se um no indice da frase pois podem ter mais diálogos depois</comment>
                                         <event-block sid="8636057356561711">
                                             <conditions>
-                                                <condition id="-10" name="Compare opacity" sid="9125666550510349" type="Dialogo">
+                                                <condition id="-10" name="Compare opacity" sid="9125666550510349" type="BalaoDialogo">
                                                     <param id="0" name="Comparison">0</param>
                                                     <param id="1" name="Opacity">0</param>
                                                 </condition>
@@ -849,7 +868,7 @@
                                                     </conditions>
                                                     <actions>
                                                         <action id="-4" name="Set layer visible" sid="4660890779684976" type="System">
-                                                            <param id="0" name="Layer">3</param>
+                                                            <param id="0" name="Layer">&quot;EfeitoEscuro&quot;</param>
                                                             <param id="1" name="Visibility">1</param>
                                                         </action>
                                                         <action id="-16" name="Set opacity" sid="4973419202493159" type="Fantasmas">
@@ -878,7 +897,7 @@
                                                         <action id="-16" name="Set opacity" sid="5059473328722128" type="Chave">
                                                             <param id="0" name="Opacity">100</param>
                                                         </action>
-                                                        <action id="-3" name="Set position" sid="634130663392524" type="selChave">
+                                                        <action id="-3" name="Set position" sid="634130663392524" type="SelecaoChave">
                                                             <param id="0" name="X">Chave.X</param>
                                                             <param id="1" name="Y">Chave.Y</param>
                                                         </action>
@@ -1001,8 +1020,8 @@
                             <conditions>
                                 <condition id="-15" name="Pick nearest/furthest" sid="30200312459867" type="Quadros">
                                     <param id="0" name="Which">0</param>
-                                    <param id="1" name="X">192</param>
-                                    <param id="2" name="Y">234</param>
+                                    <param id="1" name="X">223</param>
+                                    <param id="2" name="Y">329</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1016,8 +1035,8 @@
                             <conditions>
                                 <condition id="-15" name="Pick nearest/furthest" sid="5051681976290594" type="Quadros">
                                     <param id="0" name="Which">0</param>
-                                    <param id="1" name="X">417</param>
-                                    <param id="2" name="Y">234</param>
+                                    <param id="1" name="X">420</param>
+                                    <param id="2" name="Y">329</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1031,8 +1050,8 @@
                             <conditions>
                                 <condition id="-15" name="Pick nearest/furthest" sid="1929019721270545" type="Quadros">
                                     <param id="0" name="Which">0</param>
-                                    <param id="1" name="X">642</param>
-                                    <param id="2" name="Y">234</param>
+                                    <param id="1" name="X">617</param>
+                                    <param id="2" name="Y">329</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1046,8 +1065,8 @@
                             <conditions>
                                 <condition id="-15" name="Pick nearest/furthest" sid="2751646724777779" type="Quadros">
                                     <param id="0" name="Which">0</param>
-                                    <param id="1" name="X">867</param>
-                                    <param id="2" name="Y">234</param>
+                                    <param id="1" name="X">814</param>
+                                    <param id="2" name="Y">329</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1061,8 +1080,8 @@
                             <conditions>
                                 <condition id="-15" name="Pick nearest/furthest" sid="5700878756138722" type="Quadros">
                                     <param id="0" name="Which">0</param>
-                                    <param id="1" name="X">1092</param>
-                                    <param id="2" name="Y">234</param>
+                                    <param id="1" name="X">1011</param>
+                                    <param id="2" name="Y">329</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1076,8 +1095,8 @@
                             <conditions>
                                 <condition id="-15" name="Pick nearest/furthest" sid="6194744444951365" type="Quadros">
                                     <param id="0" name="Which">0</param>
-                                    <param id="1" name="X">192</param>
-                                    <param id="2" name="Y">459</param>
+                                    <param id="1" name="X">223</param>
+                                    <param id="2" name="Y">571</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1091,8 +1110,8 @@
                             <conditions>
                                 <condition id="-15" name="Pick nearest/furthest" sid="2456025274757944" type="Quadros">
                                     <param id="0" name="Which">0</param>
-                                    <param id="1" name="X">417</param>
-                                    <param id="2" name="Y">459</param>
+                                    <param id="1" name="X">420</param>
+                                    <param id="2" name="Y">571</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1106,8 +1125,8 @@
                             <conditions>
                                 <condition id="-15" name="Pick nearest/furthest" sid="4093654740575174" type="Quadros">
                                     <param id="0" name="Which">0</param>
-                                    <param id="1" name="X">642</param>
-                                    <param id="2" name="Y">459</param>
+                                    <param id="1" name="X">617</param>
+                                    <param id="2" name="Y">571</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1121,8 +1140,8 @@
                             <conditions>
                                 <condition id="-15" name="Pick nearest/furthest" sid="6496592417500392" type="Quadros">
                                     <param id="0" name="Which">0</param>
-                                    <param id="1" name="X">867</param>
-                                    <param id="2" name="Y">459</param>
+                                    <param id="1" name="X">814</param>
+                                    <param id="2" name="Y">571</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1136,8 +1155,8 @@
                             <conditions>
                                 <condition id="-15" name="Pick nearest/furthest" sid="7319523355351856" type="Quadros">
                                     <param id="0" name="Which">0</param>
-                                    <param id="1" name="X">1092</param>
-                                    <param id="2" name="Y">459</param>
+                                    <param id="1" name="X">1011</param>
+                                    <param id="2" name="Y">571</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1228,20 +1247,20 @@
                                 <event-block sid="6085935778562451">
                                     <conditions>
                                         <condition id="-1" name="Every tick" sid="8311248685635901" type="System" />
-                                        <condition id="-10" name="Compare opacity" sid="8871323319716001" type="QuadrosTeste">
+                                        <condition id="-10" name="Compare opacity" sid="8871323319716001" type="MuralQuadros">
                                             <param id="0" name="Comparison">4</param>
                                             <param id="1" name="Opacity">0</param>
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="-16" name="Set opacity" sid="4208535028306787" type="QuadrosTeste">
-                                            <param id="0" name="Opacity">QuadrosTeste.Opacity - 2.5</param>
+                                        <action id="-16" name="Set opacity" sid="4208535028306787" type="MuralQuadros">
+                                            <param id="0" name="Opacity">MuralQuadros.Opacity - 2.5</param>
                                         </action>
                                     </actions>
                                 </event-block>
                                 <event-block sid="750325561758365">
                                     <conditions>
-                                        <condition id="-10" name="Compare opacity" sid="7381590799526875" type="QuadrosTeste">
+                                        <condition id="-10" name="Compare opacity" sid="7381590799526875" type="MuralQuadros">
                                             <param id="0" name="Comparison">0</param>
                                             <param id="1" name="Opacity">0</param>
                                         </condition>
@@ -1306,8 +1325,8 @@
                             </conditions>
                             <actions>
                                 <action id="-7" name="Set size" sid="2001791779069108" type="LuzPersonagem">
-                                    <param id="0" name="Width">LuzPersonagem.Width - 0.5</param>
-                                    <param id="1" name="Height">LuzPersonagem.Height - 0.5</param>
+                                    <param id="0" name="Width">LuzPersonagem.Width - 0.35</param>
+                                    <param id="1" name="Height">LuzPersonagem.Height - 0.35</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1323,12 +1342,12 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <comment>Para o caso da chave estar sobrepondo a parede, no caso de sobrepor o bibliotecário não há problema pela chave ser maior que ele</comment>
+                        <comment>Para o caso da chave estar visível por causa da luz da lamparina, obrigando o jogador a ter que procurar a chave</comment>
                         <event-block sid="1508621012594603">
                             <conditions>
                                 <condition id="-23" name="While" sid="1004704244794835" type="System" />
                                 <condition id="1" name="Is overlapping another object" sid="9268322218867604" type="Chave">
-                                    <param id="0" name="Object">Mural</param>
+                                    <param id="0" name="Object">LuzParede</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1336,10 +1355,7 @@
                                     <param id="0" name="X">round(random(100, 1180)) </param>
                                     <param id="1" name="Y">round(random(25, 695)) </param>
                                 </action>
-                                <action behavior="Solid" id="0" name="Set enabled" sid="8480600870703357" type="Chave">
-                                    <param id="0" name="State">1</param>
-                                </action>
-                                <action id="-3" name="Set position" sid="4799751577591653" type="selChave">
+                                <action id="-3" name="Set position" sid="4799751577591653" type="SelecaoChave">
                                     <param id="0" name="X">Chave.X</param>
                                     <param id="1" name="Y">Chave.Y</param>
                                 </action>
@@ -1469,8 +1485,8 @@
                                     </conditions>
                                     <actions>
                                         <action id="-7" name="Set size" sid="2192774164712161" type="LuzPersonagem">
-                                            <param id="0" name="Width">LuzPersonagem.Width + 2.5</param>
-                                            <param id="1" name="Height">LuzPersonagem.Height + 2.5</param>
+                                            <param id="0" name="Width">LuzPersonagem.Width + 1.5</param>
+                                            <param id="1" name="Height">LuzPersonagem.Height + 1.5</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1485,7 +1501,7 @@
                             <param id="0" name="Object">Fantasmas</param>
                         </condition>
                         <condition id="-5" name="Compare width" sid="9549609794779692" type="LuzPersonagem">
-                            <param id="0" name="Comparison">0</param>
+                            <param id="0" name="Comparison">3</param>
                             <param id="1" name="Width">0</param>
                         </condition>
                     </conditions>
@@ -1518,33 +1534,64 @@
                             <param id="0" name="Key">69 (E)</param>
                         </condition>
                         <condition id="1" name="Is overlapping another object" sid="6175167707911985" type="player">
-                            <param id="0" name="Object">selChave</param>
+                            <param id="0" name="Object">SelecaoChave</param>
                         </condition>
                     </conditions>
                     <actions>
                         <action id="-9" name="Destroy" sid="2433062249916656" type="Chave" />
-                        <action id="-9" name="Destroy" sid="1765500496901364" type="selChave" />
+                        <action id="-9" name="Destroy" sid="1765500496901364" type="SelecaoChave" />
                         <action id="-9" name="Destroy" sid="2322279731337848" type="Fantasmas" />
                         <action id="-4" name="Set layer visible" sid="3647425600807111" type="System">
-                            <param id="0" name="Layer">3</param>
+                            <param id="0" name="Layer">&quot;EfeitoEscuro&quot;</param>
                             <param id="1" name="Visibility">0</param>
                         </action>
                         <action id="4" name="Set font color" sid="4031057697429541" type="pontuacao">
                             <param id="0" name="Color">rgb(0, 0, 0)</param>
                         </action>
-                        <action id="11" name="Set collisions enabled" sid="9171524106194535" type="saidaGAL">
+                        <action id="11" name="Set collisions enabled" sid="9171524106194535" type="SaidaGAL">
                             <param id="0" name="Collisions">1</param>
                         </action>
                         <action id="-10" name="Add to" sid="7453172238563238" type="System">
                             <param id="0" name="Variable">pontos</param>
                             <param id="1" name="Value">100</param>
                         </action>
+                        <action id="-12" name="Set group active" sid="977371892841502" type="System">
+                            <param id="0" name="Group name">&quot;saidaGAL&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <comment>Controla a parte final da fase onde é liberado para o jogador avançar de fase</comment>
+        <event-group description="" sid="9970735460129695" title="saidaGAL">
+            <sub-events>
+                <event-block sid="3467705433559294">
+                    <conditions>
+                        <condition id="-1" name="Every tick" sid="4529079741557885" type="System" />
+                        <condition id="-2" name="Compare Y" sid="9896737462930129" type="PortaGaleria">
+                            <param id="0" name="Comparison">5</param>
+                            <param id="1" name="Y co-ordinate">-84</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="6422177336796143" type="PortaGaleria">
+                            <param id="0" name="Y">PortaGaleria.Y - 0.5</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="8695326529244837">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="8788106960562331" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="4821891254706167" type="PortaGaleria" />
                     </actions>
                 </event-block>
                 <event-block sid="5505512525482997">
                     <conditions>
                         <condition id="0" name="On collision with another object" sid="3535859703960768" type="player">
-                            <param id="0" name="Object">saidaGAL</param>
+                            <param id="0" name="Object">SaidaGAL</param>
                         </condition>
                     </conditions>
                     <actions>
