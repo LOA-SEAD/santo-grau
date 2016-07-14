@@ -128,45 +128,6 @@
                     <param id="2" name="Duration">1.2</param>
                 </action>
             </actions>
-            <sub-events>
-                <comment>Apenas para o caso dos blocos já estarem em movimento</comment>
-                <event-block disabled="1" sid="9008059881064161">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="4337835055638638" type="System">
-                            <param id="0" name="Variable">inicializarBlocos</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
-                        <condition id="-14" name="Compare variable" sid="6850049541114735" type="System">
-                            <param id="0" name="Variable">perguntaBN</param>
-                            <param id="1" name="Comparison">1</param>
-                            <param id="2" name="Value">4</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-9" name="Set value" sid="9672460678999434" type="System">
-                            <param id="0" name="Variable">perguntaBN</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="9988373258061136" type="System">
-                            <param id="0" name="Variable">esconderTextosBN</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                        <action behavior="Bullet" id="0" name="Set speed" sid="769557493071203" type="selAlternativa1">
-                            <param id="0" name="Speed">200 * perguntaBN</param>
-                        </action>
-                        <action behavior="Bullet" id="0" name="Set speed" sid="7786540349414388" type="selAlternativa2">
-                            <param id="0" name="Speed">200 * perguntaBN</param>
-                        </action>
-                        <action behavior="Bullet" id="0" name="Set speed" sid="4615971618499549" type="selAlternativa3">
-                            <param id="0" name="Speed">200 * perguntaBN</param>
-                        </action>
-                        <action behavior="8Direction" id="4" name="Set max speed" sid="8077082690646635" type="player">
-                            <param id="0" name="Max Speed">selAlternativa1.Bullet.Speed</param>
-                        </action>
-                    </actions>
-                </event-block>
-            </sub-events>
         </event-block>
         <event-block sid="8940978710968183">
             <conditions>
@@ -186,7 +147,7 @@
             </actions>
         </event-block>
         <comment>Grupo onde estão localizados todas as funções que criam o efeito de 3D na fase</comment>
-        <event-group description="" disabled="1" sid="8028684966302005" title="efeito3DFFBN">
+        <event-group description="" sid="8028684966302005" title="efeito3DFFBN">
             <sub-events>
                 <event-block disabled="1" sid="4143348047846037">
                     <conditions>
@@ -226,6 +187,131 @@
                         </action>
                     </actions>
                 </event-block>
+                <event-group description="" sid="535428965768749" title="efeito3DColisaoStalactites">
+                    <sub-events>
+                        <event-block sid="4659793925013116">
+                            <conditions>
+                                <condition id="-2" name="Compare Y" sid="8284849707233725" type="player">
+                                    <param id="0" name="Comparison">3</param>
+                                    <param id="1" name="Y co-ordinate">720</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="11" name="Set collisions enabled" sid="8744087551783735" type="Stalactites">
+                                    <param id="0" name="Collisions">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="8542157739881094">
+                            <conditions>
+                                <condition id="-2" name="Compare Y" sid="9141477210776226" type="player">
+                                    <param id="0" name="Comparison">5</param>
+                                    <param id="1" name="Y co-ordinate">235</param>
+                                </condition>
+                                <condition id="-2" name="Compare Y" sid="3507238689849704" type="player">
+                                    <param id="0" name="Comparison">3</param>
+                                    <param id="1" name="Y co-ordinate">275</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="7076142233480972">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="6927446581453064" type="Stalactites">
+                                            <param id="0" name="Unique ID">140</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="11" name="Set collisions enabled" sid="5675234289315009" type="Stalactites">
+                                            <param id="0" name="Collisions">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="1343451484816601">
+                            <conditions>
+                                <condition id="-2" name="Compare Y" sid="8976365876250236" type="player">
+                                    <param id="0" name="Comparison">5</param>
+                                    <param id="1" name="Y co-ordinate">305</param>
+                                </condition>
+                                <condition id="-2" name="Compare Y" sid="8918374784938937" type="player">
+                                    <param id="0" name="Comparison">3</param>
+                                    <param id="1" name="Y co-ordinate">345</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="5467495399481508">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="8146785518345934" type="Stalactites">
+                                            <param id="0" name="Unique ID">292</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="11" name="Set collisions enabled" sid="6724033684877536" type="Stalactites">
+                                            <param id="0" name="Collisions">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="7301839449442477">
+                            <conditions>
+                                <condition id="-2" name="Compare Y" sid="8032801376365559" type="player">
+                                    <param id="0" name="Comparison">5</param>
+                                    <param id="1" name="Y co-ordinate">495</param>
+                                </condition>
+                                <condition id="-2" name="Compare Y" sid="968391908893113" type="player">
+                                    <param id="0" name="Comparison">3</param>
+                                    <param id="1" name="Y co-ordinate">535</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="2118043640452757">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="6401517791232779" type="Stalactites">
+                                            <param id="0" name="Unique ID">163</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="11" name="Set collisions enabled" sid="8179028149105665" type="Stalactites">
+                                            <param id="0" name="Collisions">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="356373632594834">
+                            <conditions>
+                                <condition id="-2" name="Compare Y" sid="1086330556425162" type="player">
+                                    <param id="0" name="Comparison">5</param>
+                                    <param id="1" name="Y co-ordinate">575</param>
+                                </condition>
+                                <condition id="-2" name="Compare Y" sid="621439228822417" type="player">
+                                    <param id="0" name="Comparison">3</param>
+                                    <param id="1" name="Y co-ordinate">615</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="7047473367708177">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="3706574077996141" type="Stalactites">
+                                            <param id="0" name="Unique ID">293</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="11" name="Set collisions enabled" sid="3575233245084962" type="Stalactites">
+                                            <param id="0" name="Collisions">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-group>
             </sub-events>
         </event-group>
         <comment>Dispara o evento das perguntas</comment>
