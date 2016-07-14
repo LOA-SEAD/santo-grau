@@ -3,6 +3,9 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase 2 (Tecnologia)</name>
     <events>
+        <variable constant="0" name="dialogos2" sid="7654575358438118" static="0" type="number">0</variable>
+        <variable constant="0" name="controleDialogos2" sid="4701525490277637" static="0" type="number">0</variable>
+        <variable constant="0" name="controlePCs" sid="4439462595446367" static="0" type="number">0</variable>
         <variable constant="0" name="controleFase2" sid="3444370594834962" static="0" type="number">0</variable>
         <variable constant="0" name="telao" sid="1763920419121629" static="0" type="number">0</variable>
         <variable constant="0" name="embaralhada1" sid="170905985841937" static="0" type="text"></variable>
@@ -16,7 +19,8 @@
                 <condition id="-2" name="On start of layout" sid="7461295097562547" type="System" />
             </conditions>
             <actions>
-                <action id="0" name="Load JSON" sid="5109230592467949" type="computadorJSON" />
+                <action id="0" name="Load JSON" sid="5109230592467949" type="ComputadorJSON" />
+                <action id="0" name="Load JSON" sid="7785929271228467" type="DialogosJSON" />
                 <action id="13" name="Set URL" sid="5137872676196242" type="telaoHTML">
                     <param id="0" name="URL">&quot;telao.html&quot;</param>
                 </action>
@@ -28,7 +32,7 @@
                     <param id="0" name="Variable">telao</param>
                     <param id="1" name="Value">0</param>
                 </action>
-                <action id="5" name="Set web font" sid="4121083550281179" type="botoesTexto">
+                <action id="5" name="Set web font" sid="9195974529639826" type="botoesTexto">
                     <param id="0" name="Family name">&quot;please_write_me_a_songmedium&quot;</param>
                     <param id="1" name="CSS URL">&quot;stylesheet.css&quot;</param>
                 </action>
@@ -83,9 +87,22 @@
                     <param id="0" name="Pin to">computadorTela</param>
                     <param id="1" name="Mode">0</param>
                 </action>
+                <action behavior="Pin" id="0" name="Pin to object" sid="9503983265039045" type="botaoFechar">
+                    <param id="0" name="Pin to">computadorTela</param>
+                    <param id="1" name="Mode">0</param>
+                </action>
                 <action behavior="Pin" id="0" name="Pin to object" sid="2111481337493404" type="botoesTexto">
                     <param id="0" name="Pin to">botoes</param>
                     <param id="1" name="Mode">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="8112450413182282" type="BalaoDialogo">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="7419479669390697" type="DialogoPersonagem">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="527219693361751" type="Dialogos">
+                    <param id="0" name="Opacity">0</param>
                 </action>
                 <action id="-3" name="Set position" sid="1475743840822415" type="player">
                     <param id="0" name="X">61</param>
@@ -268,9 +285,6 @@
                         <action id="0" name="Set text" sid="5757129352923526" type="pontuacao">
                             <param id="0" name="Text">&quot;Rendimento acadêmico: &quot; &amp; pontos</param>
                         </action>
-                        <action id="0" name="Set text" sid="9861720307919956" type="debug">
-                            <param id="0" name="Text">botoesTexto.X</param>
-                        </action>
                     </actions>
                 </event-block>
                 <event-block sid="1096809854280954">
@@ -291,6 +305,44 @@
                             <param id="0" name="Visibility">1</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="8110689987073169">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="892206445516501" type="computadorOff">
+                                    <param id="0" name="Unique ID">284</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="2266155627478019" type="computadorOff">
+                                    <param id="0" name="Opacity">100</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="1406343763100156">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="4173711413710474" type="computadorOff">
+                                    <param id="0" name="Unique ID">286</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="1625854616228638" type="computadorOff">
+                                    <param id="0" name="Opacity">100</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="5814172186762327">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="5463256227288162" type="computadorOff">
+                                    <param id="0" name="Unique ID">288</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="7433435572974119" type="computadorOff">
+                                    <param id="0" name="Opacity">100</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="9577066224704956">
                     <conditions>
@@ -307,6 +359,44 @@
                             <param id="0" name="Visibility">0</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="4372547741047197">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="7822637912598072" type="computadorOff">
+                                    <param id="0" name="Unique ID">284</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="7283730239448422" type="computadorOff">
+                                    <param id="0" name="Opacity">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="3179510612049416">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="5205735037227944" type="computadorOff">
+                                    <param id="0" name="Unique ID">286</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="8494398390872278" type="computadorOff">
+                                    <param id="0" name="Opacity">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="2239344752731818">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="7791299184790313" type="computadorOff">
+                                    <param id="0" name="Unique ID">288</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="4354265817092054" type="computadorOff">
+                                    <param id="0" name="Opacity">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="7557032660996632">
                     <conditions>
@@ -343,10 +433,104 @@
                         <action id="-9" name="Destroy" sid="8015333300599499" type="Porta" />
                     </actions>
                 </event-block>
+                <event-block sid="8003542816713105">
+                    <conditions>
+                        <condition id="-4" name="Is outside layout" sid="5094863292809561" type="computadorFeedback" />
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="7790523128743106" type="computadorFeedback">
+                            <param id="0" name="Frame number">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="2836258565102184">
+                    <conditions>
+                        <condition id="7" name="Cursor is over object" sid="6612838823283171" type="Mouse">
+                            <param id="0" name="Object">botaoFechar</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set cursor style" sid="9506880553797136" type="Mouse">
+                            <param id="0" name="Cursor style">1</param>
+                        </action>
+                        <action id="5" name="Set frame" sid="36749410507563" type="botaoFechar">
+                            <param id="0" name="Frame number">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="6559254035760273">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="3629478898964845" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set cursor style" sid="9697415989489436" type="Mouse">
+                            <param id="0" name="Cursor style">0</param>
+                        </action>
+                        <action id="5" name="Set frame" sid="195427327397533" type="botaoFechar">
+                            <param id="0" name="Frame number">0</param>
+                        </action>
+                    </actions>
+                </event-block>
             </sub-events>
         </event-group>
         <event-group description="" sid="7215253089937078" title="Acoes2">
             <sub-events>
+                <comment>Ação de ativação do Robô na primeira vez</comment>
+                <event-block sid="8784221567555369">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="3328888553214424" type="Keyboard">
+                            <param id="0" name="Key">69 (E)</param>
+                        </condition>
+                        <condition id="1" name="Is overlapping another object" sid="4277598487526181" type="player">
+                            <param id="0" name="Object">selecaoRobo</param>
+                        </condition>
+                        <condition id="2" name="Is playing" sid="5798126917212931" type="playerAnim">
+                            <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="2866799345981109" type="System">
+                            <param id="0" name="Variable">controleFase2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">2</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="6863790093598221" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="8475161316834703" type="System">
+                            <param id="0" name="Group name">&quot;DialogoRobo&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Ação de ativação do Robô quando finalizar</comment>
+                <event-block sid="395617126533555">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="7179683517292856" type="Keyboard">
+                            <param id="0" name="Key">69 (E)</param>
+                        </condition>
+                        <condition id="1" name="Is overlapping another object" sid="6361351268811614" type="player">
+                            <param id="0" name="Object">selecaoRobo</param>
+                        </condition>
+                        <condition id="2" name="Is playing" sid="3448371883103252" type="playerAnim">
+                            <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="6563498402066649" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">13</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="9171294918004471" type="System">
+                            <param id="0" name="Group name">&quot;DialogoRobo&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Ação de ativação dos Computadores</comment>
                 <event-block sid="4844050602414782">
                     <conditions>
                         <condition id="1" name="Is overlapping another object" sid="2049465120280247" type="player">
@@ -354,6 +538,11 @@
                         </condition>
                         <condition id="2" name="Is playing" sid="409240367673276" type="playerAnim">
                             <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="626837493797751" type="System">
+                            <param id="0" name="Variable">controleFase2</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">3</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -383,7 +572,7 @@
                                         </action>
                                         <action id="-9" name="Set value" sid="8566035094067242" type="System">
                                             <param id="0" name="Variable">controleFase2</param>
-                                            <param id="1" name="Value">2</param>
+                                            <param id="1" name="Value">4</param>
                                         </action>
                                         <action id="-12" name="Set group active" sid="7969553364816318" type="System">
                                             <param id="0" name="Group name">&quot;playerMove2&quot;</param>
@@ -415,7 +604,7 @@
                                         </action>
                                         <action id="-9" name="Set value" sid="5942515119247308" type="System">
                                             <param id="0" name="Variable">controleFase2</param>
-                                            <param id="1" name="Value">2</param>
+                                            <param id="1" name="Value">4</param>
                                         </action>
                                         <action id="-12" name="Set group active" sid="9430508359949126" type="System">
                                             <param id="0" name="Group name">&quot;playerMove2&quot;</param>
@@ -447,7 +636,7 @@
                                         </action>
                                         <action id="-9" name="Set value" sid="6490562038802868" type="System">
                                             <param id="0" name="Variable">controleFase2</param>
-                                            <param id="1" name="Value">2</param>
+                                            <param id="1" name="Value">4</param>
                                         </action>
                                         <action id="-12" name="Set group active" sid="1829736376237082" type="System">
                                             <param id="0" name="Group name">&quot;playerMove2&quot;</param>
@@ -478,6 +667,11 @@
                         <condition id="2" name="Is playing" sid="3689583454875703" type="playerAnim">
                             <param id="0" name="Animation">&quot;TrasParado&quot;</param>
                         </condition>
+                        <condition id="-14" name="Compare variable" sid="7861409568110128" type="System">
+                            <param id="0" name="Variable">controleFase2</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">3</param>
+                        </condition>
                     </conditions>
                     <actions>
                         <action id="-9" name="Set value" sid="6517372003228806" type="System">
@@ -486,26 +680,6 @@
                         </action>
                         <action id="-12" name="Set group active" sid="1319684117656353" type="System">
                             <param id="0" name="Group name">&quot;Telao&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <comment>Ação de ativação do Robô</comment>
-                <event-block sid="8784221567555369">
-                    <conditions>
-                        <condition id="0" name="On key pressed" sid="3328888553214424" type="Keyboard">
-                            <param id="0" name="Key">69 (E)</param>
-                        </condition>
-                        <condition id="1" name="Is overlapping another object" sid="4277598487526181" type="player">
-                            <param id="0" name="Object">selecaoRobo</param>
-                        </condition>
-                        <condition id="2" name="Is playing" sid="5798126917212931" type="playerAnim">
-                            <param id="0" name="Animation">&quot;TrasParado&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action disabled="1" id="-12" name="Set group active" sid="8475161316834703" type="System">
-                            <param id="0" name="Group name">&quot;DialogoRobo&quot;</param>
                             <param id="1" name="State">1</param>
                         </action>
                     </actions>
@@ -765,10 +939,798 @@
         <event-group description="" inactive="1" sid="9474284485684025" title="DialogoRobo">
             <sub-events>
                 <event-block sid="1036851305176572">
-                    <conditions />
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="7119972662211151" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
                     <actions>
                         <action id="-12" name="Set group active" sid="9221779578256253" type="System">
                             <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="6933490804090591" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="5560370158001905">
+                    <conditions>
+                        <condition id="-1" name="Every tick" sid="1698782744775792" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set text" sid="2181809223306746" type="DialogoPersonagem">
+                            <param id="0" name="Text">DialogosJSON.GetData(&quot;Tecnologia&quot; &amp; dialogos2, 0)</param>
+                        </action>
+                        <action id="0" name="Set text" sid="5194792961254562" type="Dialogos">
+                            <param id="0" name="Text">DialogosJSON.GetData(&quot;Tecnologia&quot; &amp; dialogos2, 1)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="113717729627676">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="1488383732634033" type="BalaoDialogo">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Opacity">100</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="1230319997937773" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Set opacity" sid="4325740600314158" type="BalaoDialogo">
+                            <param id="0" name="Opacity">BalaoDialogo.Opacity+2</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="4326390614315233" type="Dialogos">
+                            <param id="0" name="Opacity">Dialogos.Opacity+2</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="565680032812401" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">DialogoPersonagem.Opacity+2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="3621628196542893">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="9970490305674511" type="Keyboard">
+                            <param id="0" name="Key">69 (E)</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="9864120451447436" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="5390151958757511" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Value">2</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="9615891658606623" type="Dialogos">
+                            <param id="0" name="Opacity">100</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="6588996735323246" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">100</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="9035051204499672" type="BalaoDialogo">
+                            <param id="0" name="Opacity">100</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="2659984438247073">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="9243788427118915" type="Dialogos">
+                            <param id="0" name="Comparison">5</param>
+                            <param id="1" name="Opacity">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="2014416234659398" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Set opacity" sid="6101049209115392" type="Dialogos">
+                            <param id="0" name="Opacity">Dialogos.Opacity-2</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="9591562163358677" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">DialogoPersonagem.Opacity-2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="6075310655401721">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="3747687857293016" type="Dialogos">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Opacity">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="727177016172244" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="4675870148144405" type="System">
+                            <param id="0" name="Variable">dialogos2</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="2865434530189131" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Value">3</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="7668760189301433">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="6391308582331212" type="Dialogos">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Opacity">100</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="3136731344007725" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">3</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Set opacity" sid="4647158559413357" type="Dialogos">
+                            <param id="0" name="Opacity">Dialogos.Opacity+2</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="7062738232462575" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">DialogoPersonagem.Opacity+2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="9186617469844399">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="1240234102389063" type="Keyboard">
+                            <param id="0" name="Key">69 (E)</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="6964061259326994" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">3</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="9265552090130963" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Value">4</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="3491769923570581" type="Dialogos">
+                            <param id="0" name="Opacity">100</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="1951373427550339" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">100</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="9851429869319998">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="347283005744398" type="Dialogos">
+                            <param id="0" name="Comparison">5</param>
+                            <param id="1" name="Opacity">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="3535094249702379" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">4</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Set opacity" sid="2406739767144799" type="Dialogos">
+                            <param id="0" name="Opacity">Dialogos.Opacity-2</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="566795545188873" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">DialogoPersonagem.Opacity-2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="7048918293219445">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="262689971755" type="Dialogos">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Opacity">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="5663892966466417" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">4</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="9871971216288739" type="System">
+                            <param id="0" name="Variable">dialogos2</param>
+                            <param id="1" name="Value">2</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="6269967946783133" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Value">5</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="2004321000836779">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="5073042932481975" type="Dialogos">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Opacity">100</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="2875922601631722" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">5</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Set opacity" sid="3334669769879845" type="Dialogos">
+                            <param id="0" name="Opacity">Dialogos.Opacity+2</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="438450151992341" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">DialogoPersonagem.Opacity+2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="436598972777066">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="1325732477698826" type="Keyboard">
+                            <param id="0" name="Key">69 (E)</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="3902410817393974" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">5</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="368192687261928" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Value">6</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="3626987184183435" type="Dialogos">
+                            <param id="0" name="Opacity">100</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="2829149300545668" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">100</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="7365571228779048">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="7170679993972821" type="Dialogos">
+                            <param id="0" name="Comparison">5</param>
+                            <param id="1" name="Opacity">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="9928202736767466" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">6</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Set opacity" sid="4978239565042816" type="Dialogos">
+                            <param id="0" name="Opacity">Dialogos.Opacity-2</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="477981606090388" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">DialogoPersonagem.Opacity-2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="9951790311340031">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="8811113924110645" type="Dialogos">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Opacity">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="4128043391436611" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">6</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="5732920506511041" type="System">
+                            <param id="0" name="Variable">dialogos2</param>
+                            <param id="1" name="Value">3</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="5935936634465258" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Value">7</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="3687386640175782">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="5028094059552155" type="Dialogos">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Opacity">100</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="9144216314865042" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">7</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Set opacity" sid="6259675681639238" type="Dialogos">
+                            <param id="0" name="Opacity">Dialogos.Opacity+2</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="2777890467160803" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">DialogoPersonagem.Opacity+2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="1949296904780524">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="9273557318091139" type="Keyboard">
+                            <param id="0" name="Key">69 (E)</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="2569547126976309" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">7</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="2484863771789092" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Value">8</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="2035129854173837" type="Dialogos">
+                            <param id="0" name="Opacity">100</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="7934796701899178" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">100</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="2014661741953799">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="6700566402221254" type="Dialogos">
+                            <param id="0" name="Comparison">5</param>
+                            <param id="1" name="Opacity">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="7034391618076742" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">8</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Set opacity" sid="4689728269037746" type="Dialogos">
+                            <param id="0" name="Opacity">Dialogos.Opacity-2</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="310689294843994" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">DialogoPersonagem.Opacity-2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="5243477583895289">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="3536152119975901" type="Dialogos">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Opacity">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="3882796388948505" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">8</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="2315797280281274" type="System">
+                            <param id="0" name="Variable">dialogos2</param>
+                            <param id="1" name="Value">4</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="2975739358211239" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Value">9</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="5072429071186304">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="2759124727027294" type="Dialogos">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Opacity">100</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="300924599655805" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">9</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Set opacity" sid="2377587419474282" type="Dialogos">
+                            <param id="0" name="Opacity">Dialogos.Opacity+2</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="9408925443878655" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">DialogoPersonagem.Opacity+2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="1700841749182517">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="5823069347070034" type="Keyboard">
+                            <param id="0" name="Key">69 (E)</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="6683149871889849" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">9</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="7024443963947798" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Value">10</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="5100531030234064" type="Dialogos">
+                            <param id="0" name="Opacity">100</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="4934722694198708" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">100</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="3372356046459929">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="7955473224396954" type="Dialogos">
+                            <param id="0" name="Comparison">5</param>
+                            <param id="1" name="Opacity">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="7622454098462089" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">10</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Set opacity" sid="6538286945370297" type="Dialogos">
+                            <param id="0" name="Opacity">Dialogos.Opacity-2</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="9891792698765483" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">DialogoPersonagem.Opacity-2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="6747766256211482">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="6169526859791676" type="Dialogos">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Opacity">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="802033160707892" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">10</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="7026710499795135" type="System">
+                            <param id="0" name="Variable">dialogos2</param>
+                            <param id="1" name="Value">5</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="1748069822655724" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Value">11</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="602583745304313">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="4154808107242002" type="Dialogos">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Opacity">100</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="4328324054122967" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">11</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Set opacity" sid="8022404576040462" type="Dialogos">
+                            <param id="0" name="Opacity">Dialogos.Opacity+2</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="2704420828081356" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">DialogoPersonagem.Opacity+2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="826551792771972">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="5733139227042301" type="Keyboard">
+                            <param id="0" name="Key">69 (E)</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="3368557175454247" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">11</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="8155542318605601" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Value">12</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="6071624206470739" type="Dialogos">
+                            <param id="0" name="Opacity">100</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="9001952514691029" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">100</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="4325499883067129">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="4609657015919338" type="Dialogos">
+                            <param id="0" name="Comparison">5</param>
+                            <param id="1" name="Opacity">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="4885752055058131" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">12</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Set opacity" sid="6391428981860928" type="Dialogos">
+                            <param id="0" name="Opacity">Dialogos.Opacity-2</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="6889842697966112" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">DialogoPersonagem.Opacity-2</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="7148784673684954" type="BalaoDialogo">
+                            <param id="0" name="Opacity">BalaoDialogo.Opacity-2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="7436181323563237">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="8380519304428274" type="Dialogos">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Opacity">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="6790747542516871" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">12</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="3973364470527548" type="System">
+                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="1067806848979432" type="System">
+                            <param id="0" name="Variable">controleFase2</param>
+                            <param id="1" name="Value">3</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="7782530479619536" type="System">
+                            <param id="0" name="Variable">dialogos2</param>
+                            <param id="1" name="Value">6</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="8630053945934654" type="System">
+                            <param id="0" name="Group name">&quot;DialogoRobo&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="2850964002996042">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="2593552929549919" type="Dialogos">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Opacity">100</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="7220133249206967" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">13</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="3484517786046486" type="System">
+                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="9733476301647004" type="Dialogos">
+                            <param id="0" name="Opacity">Dialogos.Opacity+2</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="9876916525154724" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">DialogoPersonagem.Opacity+2</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="3068574230633595" type="BalaoDialogo">
+                            <param id="0" name="Opacity">BalaoDialogo.Opacity+2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="5189495063440858">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="6065390794442774" type="BalaoDialogo">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Opacity">100</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="4213423444685653" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">13</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="8376699077259675" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Value">14</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="3867949297063537">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="2443355576264742" type="Keyboard">
+                            <param id="0" name="Key">69 (E)</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="6244730467607306" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">14</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="2951920556237946" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Value">15</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="1539755955706237" type="BalaoDialogo">
+                            <param id="0" name="Opacity">100</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="6196890155416033" type="Dialogos">
+                            <param id="0" name="Opacity">100</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="5714215516941417" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">100</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="9033695901698062">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="6089909267608846" type="Dialogos">
+                            <param id="0" name="Comparison">5</param>
+                            <param id="1" name="Opacity">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="2428437179753718" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">15</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Set opacity" sid="2803858513964224" type="Dialogos">
+                            <param id="0" name="Opacity">Dialogos.Opacity-2</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="5622841617797987" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">DialogoPersonagem.Opacity-2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="152265727002859">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="5075549059252648" type="Dialogos">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Opacity">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="4102773912707473" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">15</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="8017925732649349" type="System">
+                            <param id="0" name="Variable">dialogos2</param>
+                            <param id="1" name="Value">7</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="6768035878674226" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Value">16</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="4388516694757963">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="7513068494231533" type="Dialogos">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Opacity">100</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="4063456556406436" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">16</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Set opacity" sid="5258150827234277" type="Dialogos">
+                            <param id="0" name="Opacity">Dialogos.Opacity+2</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="6546262805493365" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">DialogoPersonagem.Opacity+2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="3283537998321969">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="6844379963241111" type="Keyboard">
+                            <param id="0" name="Key">69 (E)</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="5338611858844552" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">16</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="6612419226474428" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Value">17</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="5080116676262309" type="Dialogos">
+                            <param id="0" name="Opacity">100</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="1148968116197319" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">100</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="3061632651607421">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="2534127061424749" type="Dialogos">
+                            <param id="0" name="Comparison">5</param>
+                            <param id="1" name="Opacity">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="1418648672090268" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">17</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Set opacity" sid="5289183646353321" type="Dialogos">
+                            <param id="0" name="Opacity">Dialogos.Opacity-2</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="8651202461823901" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">DialogoPersonagem.Opacity-2</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="5159386490796304" type="BalaoDialogo">
+                            <param id="0" name="Opacity">BalaoDialogo.Opacity-2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="5348235081537096">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="674451476302179" type="Dialogos">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Opacity">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="8312654156824284" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">17</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="3660982012659783" type="System">
+                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="9450253076648116" type="System">
+                            <param id="0" name="Group name">&quot;Saida2&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="7090676830445549" type="System">
+                            <param id="0" name="Group name">&quot;DialogoRobo&quot;</param>
                             <param id="1" name="State">0</param>
                         </action>
                     </actions>
@@ -782,7 +1744,7 @@
                         <condition id="-14" name="Compare variable" sid="3307869280831721" type="System">
                             <param id="0" name="Variable">controleFase2</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">2</param>
+                            <param id="2" name="Value">4</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -840,7 +1802,7 @@
                             <actions>
                                 <action id="-9" name="Set value" sid="7736663616887878" type="System">
                                     <param id="0" name="Variable">controleFase2</param>
-                                    <param id="1" name="Value">3</param>
+                                    <param id="1" name="Value">5</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="8697960191043146" type="System">
                                     <param id="0" name="Group name">&quot;EfeitoEnviar&quot;</param>
@@ -854,6 +1816,46 @@
                                     <param id="0" name="Frame number">1</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="9409157970685426">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="2773754331663754" type="selecaoComputador">
+                                            <param id="0" name="Unique ID">199</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="1343519782881672" type="System">
+                                            <param id="0" name="Variable">controlePCs</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-9" name="Destroy" sid="6242508293309317" type="selecaoComputador" />
+                                    </actions>
+                                </event-block>
+                                <event-block sid="5822066723970938">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="2674723672779747" type="computadorOff">
+                                            <param id="0" name="Unique ID">239</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-15" name="Set visible" sid="9356873529666592" type="computadorOff">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="5550515984106806">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="1599729310918682" type="computadorOff">
+                                            <param id="0" name="Unique ID">284</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-15" name="Set visible" sid="1040456213556911" type="computadorOff">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <event-block sid="8564039797921932">
                             <conditions>
@@ -867,16 +1869,21 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <event-block sid="897277641330733">
+                <event-block any="1" sid="897277641330733">
                     <conditions>
                         <condition id="0" name="On key pressed" sid="6585230907531904" type="Keyboard">
                             <param id="0" name="Key">27 (Esc)</param>
+                        </condition>
+                        <condition id="6" name="On object clicked" sid="7428301160987279" type="Mouse">
+                            <param id="0" name="Mouse button">0</param>
+                            <param id="1" name="Click type">0</param>
+                            <param id="2" name="Object clicked">botaoFechar</param>
                         </condition>
                     </conditions>
                     <actions>
                         <action id="-9" name="Set value" sid="5394831048586732" type="System">
                             <param id="0" name="Variable">controleFase2</param>
-                            <param id="1" name="Value">3</param>
+                            <param id="1" name="Value">5</param>
                         </action>
                         <action id="-12" name="Set group active" sid="4838846832678555" type="System">
                             <param id="0" name="Group name">&quot;EfeitoEnviar&quot;</param>
@@ -893,7 +1900,7 @@
                         <condition id="-14" name="Compare variable" sid="550261050580039" type="System">
                             <param id="0" name="Variable">controleFase2</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">3</param>
+                            <param id="2" name="Value">5</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -902,7 +1909,7 @@
                             <conditions>
                                 <condition id="-2" name="Compare Y" sid="5214772509783018" type="computadorTela">
                                     <param id="0" name="Comparison">2</param>
-                                    <param id="1" name="Y co-ordinate">1055</param>
+                                    <param id="1" name="Y co-ordinate">1075</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -953,7 +1960,7 @@
                         <condition id="-14" name="Compare variable" sid="3307869280831721" type="System">
                             <param id="0" name="Variable">controleFase2</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">2</param>
+                            <param id="2" name="Value">4</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -1011,7 +2018,7 @@
                             <actions>
                                 <action id="-9" name="Set value" sid="1115673006415674" type="System">
                                     <param id="0" name="Variable">controleFase2</param>
-                                    <param id="1" name="Value">3</param>
+                                    <param id="1" name="Value">5</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="2222006041913298" type="System">
                                     <param id="0" name="Group name">&quot;EfeitoEnviar&quot;</param>
@@ -1025,6 +2032,46 @@
                                     <param id="0" name="Frame number">1</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="4770076016852178">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="9327950171183803" type="selecaoComputador">
+                                            <param id="0" name="Unique ID">200</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Destroy" sid="5567975935541105" type="selecaoComputador" />
+                                        <action id="-10" name="Add to" sid="6150077693008949" type="System">
+                                            <param id="0" name="Variable">controlePCs</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="9359115547095337">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="9484295273471209" type="computadorOff">
+                                            <param id="0" name="Unique ID">285</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-15" name="Set visible" sid="4958026901077239" type="computadorOff">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="7746670262126886">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="3245296145202615" type="computadorOff">
+                                            <param id="0" name="Unique ID">286</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-15" name="Set visible" sid="5938062102190036" type="computadorOff">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <event-block sid="5845023449514879">
                             <conditions>
@@ -1047,7 +2094,7 @@
                     <actions>
                         <action id="-9" name="Set value" sid="5394831048586732" type="System">
                             <param id="0" name="Variable">controleFase2</param>
-                            <param id="1" name="Value">3</param>
+                            <param id="1" name="Value">5</param>
                         </action>
                         <action id="-12" name="Set group active" sid="3998958842649142" type="System">
                             <param id="0" name="Group name">&quot;EfeitoEnviar&quot;</param>
@@ -1064,7 +2111,7 @@
                         <condition id="-14" name="Compare variable" sid="550261050580039" type="System">
                             <param id="0" name="Variable">controleFase2</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">3</param>
+                            <param id="2" name="Value">5</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -1073,7 +2120,7 @@
                             <conditions>
                                 <condition id="-2" name="Compare Y" sid="5214772509783018" type="computadorTela">
                                     <param id="0" name="Comparison">2</param>
-                                    <param id="1" name="Y co-ordinate">1055</param>
+                                    <param id="1" name="Y co-ordinate">1075</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1124,7 +2171,7 @@
                         <condition id="-14" name="Compare variable" sid="3307869280831721" type="System">
                             <param id="0" name="Variable">controleFase2</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">2</param>
+                            <param id="2" name="Value">4</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -1182,7 +2229,7 @@
                             <actions>
                                 <action id="-9" name="Set value" sid="8767909082543963" type="System">
                                     <param id="0" name="Variable">controleFase2</param>
-                                    <param id="1" name="Value">3</param>
+                                    <param id="1" name="Value">5</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="6264320841169148" type="System">
                                     <param id="0" name="Group name">&quot;EfeitoEnviar&quot;</param>
@@ -1196,6 +2243,46 @@
                                     <param id="0" name="Frame number">1</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="9045503244732369">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="4371532281242367" type="selecaoComputador">
+                                            <param id="0" name="Unique ID">201</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Destroy" sid="1397081742721989" type="selecaoComputador" />
+                                        <action id="-10" name="Add to" sid="4925152989227368" type="System">
+                                            <param id="0" name="Variable">controlePCs</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="5128044830180922">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="9736903634866216" type="computadorOff">
+                                            <param id="0" name="Unique ID">287</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-15" name="Set visible" sid="3758030878173916" type="computadorOff">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="8132572019170556">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="2520977598411383" type="computadorOff">
+                                            <param id="0" name="Unique ID">288</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-15" name="Set visible" sid="4192460279783438" type="computadorOff">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <event-block sid="9290215614834756">
                             <conditions>
@@ -1218,7 +2305,7 @@
                     <actions>
                         <action id="-9" name="Set value" sid="5394831048586732" type="System">
                             <param id="0" name="Variable">controleFase2</param>
-                            <param id="1" name="Value">3</param>
+                            <param id="1" name="Value">5</param>
                         </action>
                         <action id="-12" name="Set group active" sid="9079964367126697" type="System">
                             <param id="0" name="Group name">&quot;EfeitoEnviar&quot;</param>
@@ -1235,7 +2322,7 @@
                         <condition id="-14" name="Compare variable" sid="550261050580039" type="System">
                             <param id="0" name="Variable">controleFase2</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">3</param>
+                            <param id="2" name="Value">5</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -1244,7 +2331,7 @@
                             <conditions>
                                 <condition id="-2" name="Compare Y" sid="5214772509783018" type="computadorTela">
                                     <param id="0" name="Comparison">2</param>
-                                    <param id="1" name="Y co-ordinate">1055</param>
+                                    <param id="1" name="Y co-ordinate">1075</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1320,6 +2407,9 @@
                 <event-block sid="6064010715389985">
                     <conditions>
                         <condition id="-22" name="Else" sid="5019986035737965" type="System" />
+                        <condition id="7" inverted="1" name="Cursor is over object" sid="8771722517563687" type="Mouse">
+                            <param id="0" name="Object">botaoFechar</param>
+                        </condition>
                     </conditions>
                     <actions>
                         <action id="0" name="Set cursor style" sid="4064942776859176" type="Mouse">
@@ -1355,43 +2445,32 @@
                         </action>
                     </actions>
                 </event-block>
-                <event-block disabled="1" sid="758462754245063">
-                    <conditions />
-                    <actions>
-                        <action id="-12" name="Set group active" sid="3408781378027561" type="System">
-                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                        <action id="-15" name="Set visible" sid="2790353269376155" type="sintonia">
-                            <param id="0" name="Visibility">1</param>
-                        </action>
-                        <action id="0" name="Set visible" sid="7460795794171744" type="telaoHTML">
-                            <param id="0" name="Visibility">0</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="8817205191597076" type="System">
-                            <param id="0" name="Group name">&quot;Computador1&quot;</param>
-                            <param id="1" name="State">0</param>
-                        </action>
-                    </actions>
-                </event-block>
             </sub-events>
         </event-group>
-        <comment>MUDAR A CONDIÇÃO DE APERTAR A TECLA P PARA A CONDIÇÃO FINAL QUE DISPARA A PORTA DA SAÍDA E O FINAL DA FASE!</comment>
         <event-block sid="932767707794578">
             <conditions>
-                <condition id="0" name="On key pressed" sid="8163276182188839" type="Keyboard">
-                    <param id="0" name="Key">80 (P)</param>
+                <condition id="-14" name="Compare variable" sid="8163276182188839" type="System">
+                    <param id="0" name="Variable">controlePCs</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Value">3</param>
                 </condition>
             </conditions>
             <actions>
-                <action id="-12" name="Set group active" sid="9450253076648116" type="System">
-                    <param id="0" name="Group name">&quot;Saida2&quot;</param>
-                    <param id="1" name="State">1</param>
-                </action>
                 <action id="-9" name="Destroy" sid="7669583388323185" type="telaoHTML" />
                 <action id="4" name="Set animation" sid="4783184067186409" type="sintonia">
                     <param id="0" name="Animation">&quot;Final&quot;</param>
                     <param id="1" name="From">1</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="9840446688293528">
+            <conditions>
+                <condition id="-19" name="On destroyed" sid="5872652070893707" type="telaoHTML" />
+            </conditions>
+            <actions>
+                <action id="-9" name="Set value" sid="304862270262976" type="System">
+                    <param id="0" name="Variable">controleDialogos2</param>
+                    <param id="1" name="Value">13</param>
                 </action>
             </actions>
         </event-block>
