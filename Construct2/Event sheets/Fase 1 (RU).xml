@@ -3,6 +3,7 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase 1 (RU)</name>
     <events>
+        <variable constant="0" name="pause" sid="884162534047725" static="0" type="number">0</variable>
         <variable constant="0" name="velocidadePessoas" sid="3394612400055466" static="0" type="number">400</variable>
         <variable constant="0" name="controleDica" sid="9200675717542735" static="0" type="number">0</variable>
         <variable constant="0" name="pontos" sid="2102700230222047" static="0" type="number">1000</variable>
@@ -52,25 +53,10 @@
                     <param id="1" name="CSS URL">&quot;stylesheet.css&quot;</param>
                 </action>
                 <action id="0" name="Set text" sid="6772179497614026" type="pontoTexto">
-                    <param id="0" name="Text">&quot;&quot;</param>
+                    <param id="0" name="Text">&quot;0&quot;</param>
                 </action>
                 <action disabled="1" id="4" name="Set font color" sid="7221162382546414" type="pontoTexto">
                     <param id="0" name="Color">rgb(41, 90, 165)</param>
-                </action>
-                <action id="-12" name="Set group active" sid="675954625368047" type="System">
-                    <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
-                    <param id="1" name="State">1</param>
-                </action>
-                <action id="-16" name="Wait" sid="1496299890780769" type="System">
-                    <param id="0" name="Seconds">4</param>
-                </action>
-                <action id="-12" name="Set group active" sid="2651195804035274" type="System">
-                    <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
-                    <param id="1" name="State">0</param>
-                </action>
-                <action id="-12" name="Set group active" sid="6479718861586813" type="System">
-                    <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
-                    <param id="1" name="State">1</param>
                 </action>
             </actions>
             <sub-events>
@@ -171,6 +157,9 @@
                         </condition>
                     </conditions>
                     <actions>
+                        <action id="-16" name="Wait" sid="1726861224155011" type="System">
+                            <param id="0" name="Seconds">0.00001</param>
+                        </action>
                         <action behavior="Bullet" id="5" name="Set enabled" sid="204523677210777" type="comida">
                             <param id="0" name="State">1</param>
                         </action>
@@ -236,6 +225,32 @@
                         </action>
                     </actions>
                 </event-block>
+                <event-block sid="3588032293963589">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="2131249170404311" type="System">
+                            <param id="0" name="Variable">pause</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="9084686476504229" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="5948984509082563" type="System">
+                            <param id="0" name="Seconds">4</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="6849288991775877" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="4889238507234664" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
             </sub-events>
         </event-block>
         <event-block sid="7023767148830803">
@@ -284,6 +299,11 @@
                     <conditions>
                         <condition id="0" name="On key pressed" sid="7194074014765671" type="Keyboard">
                             <param id="0" name="Key">69 (E)</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="10299731398014" type="System">
+                            <param id="0" name="Variable">pause</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -414,8 +434,17 @@
                         <condition id="0" name="On key pressed" sid="5240621242918209" type="Keyboard">
                             <param id="0" name="Key">69 (E)</param>
                         </condition>
+                        <condition id="-14" name="Compare variable" sid="4014421137484876" type="System">
+                            <param id="0" name="Variable">pause</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
                     </conditions>
                     <actions>
+                        <action id="-9" name="Set value" sid="5421688765893137" type="System">
+                            <param id="0" name="Variable">controleDica</param>
+                            <param id="1" name="Value">3</param>
+                        </action>
                         <action id="-9" name="Destroy" sid="8959022778019757" type="easterEgg1" />
                     </actions>
                 </event-block>
@@ -491,6 +520,9 @@
                         <action id="0" name="Set text" sid="271143859029338" type="pontuacaoTexto">
                             <param id="0" name="Text">pontos</param>
                         </action>
+                        <action id="0" name="Set text" sid="7672167764946297" type="debug">
+                            <param id="0" name="Text">pause</param>
+                        </action>
                     </actions>
                     <sub-events>
                         <event-block sid="7239634039038255">
@@ -518,6 +550,34 @@
                             <actions>
                                 <action id="7" name="Set mirrored" sid="2275177258209963" type="personagens">
                                     <param id="0" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="4979549780880692">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="2331069631545539" type="System">
+                                    <param id="0" name="Variable">pause</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-1" name="Set X" sid="3956869294529662" type="fundoPause">
+                                    <param id="0" name="X">1920</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="2873586340594203">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="1446344829364477" type="System">
+                                    <param id="0" name="Variable">pause</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-1" name="Set X" sid="5904146550683581" type="fundoPause">
+                                    <param id="0" name="X">640</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -727,30 +787,7 @@
                     <sub-events>
                         <event-block any="1" sid="1291562279406253">
                             <conditions>
-                                <condition id="0" name="On key pressed" sid="5192310792353752" type="Keyboard">
-                                    <param id="0" name="Key">65 (A)</param>
-                                </condition>
-                                <condition id="0" name="On key pressed" sid="5126477219969222" type="Keyboard">
-                                    <param id="0" name="Key">83 (S)</param>
-                                </condition>
-                                <condition id="0" name="On key pressed" sid="7107357844451839" type="Keyboard">
-                                    <param id="0" name="Key">68 (D)</param>
-                                </condition>
-                                <condition id="0" name="On key pressed" sid="5628862555352867" type="Keyboard">
-                                    <param id="0" name="Key">87 (W)</param>
-                                </condition>
-                                <condition id="0" name="On key pressed" sid="1494026287176131" type="Keyboard">
-                                    <param id="0" name="Key">37 (Left arrow)</param>
-                                </condition>
-                                <condition id="0" name="On key pressed" sid="6598814649169138" type="Keyboard">
-                                    <param id="0" name="Key">40 (Down arrow)</param>
-                                </condition>
-                                <condition id="0" name="On key pressed" sid="2364812209087016" type="Keyboard">
-                                    <param id="0" name="Key">39 (Right arrow)</param>
-                                </condition>
-                                <condition id="0" name="On key pressed" sid="1879613143215371" type="Keyboard">
-                                    <param id="0" name="Key">38 (Up arrow)</param>
-                                </condition>
+                                <condition behavior="8Direction" id="0" name="Is moving" sid="5192310792353752" type="player" />
                             </conditions>
                             <actions>
                                 <action id="-9" name="Set value" sid="8750147155381322" type="System">
@@ -846,12 +883,25 @@
                                     <param id="0" name="Key">69 (E)</param>
                                 </condition>
                             </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="67692341934355" type="System">
-                                    <param id="0" name="Variable">controleDica</param>
-                                    <param id="1" name="Value">2</param>
-                                </action>
-                            </actions>
+                            <actions />
+                            <sub-events>
+                                <event-block any="1" sid="9027576041720552">
+                                    <conditions>
+                                        <condition id="1" name="Is overlapping another object" sid="1693529978662327" type="player">
+                                            <param id="0" name="Object">easterEgg1</param>
+                                        </condition>
+                                        <condition id="1" name="Is overlapping another object" sid="7020680811358024" type="player">
+                                            <param id="0" name="Object">selecaoComida</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="67692341934355" type="System">
+                                            <param id="0" name="Variable">controleDica</param>
+                                            <param id="1" name="Value">2</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <event-block sid="4112413123635982">
                             <conditions>
@@ -2299,6 +2349,86 @@
             <actions>
                 <action id="-37" name="Load" sid="7109634514434816" type="System">
                     <param id="0" name="Slot">&quot;save&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="8145596573702693">
+            <conditions>
+                <condition id="0" name="On key pressed" sid="9485252101753743" type="Keyboard">
+                    <param id="0" name="Key">27 (Esc)</param>
+                </condition>
+                <condition id="-14" name="Compare variable" sid="2844984765822422" type="System">
+                    <param id="0" name="Variable">pause</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Value">0</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-9" name="Set value" sid="7512685465008251" type="System">
+                    <param id="0" name="Variable">pause</param>
+                    <param id="1" name="Value">1</param>
+                </action>
+                <action id="0" name="Set text" sid="1623035715109636" type="pontoTexto">
+                    <param id="0" name="Text">&quot;0&quot;</param>
+                </action>
+                <action id="4" name="Set font color" sid="6093876423667959" type="pontoTexto">
+                    <param id="0" name="Color">rgb(125, 125, 125)</param>
+                </action>
+                <action id="-12" name="Set group active" sid="1772286616080686" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="8229243228357266" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+                <action id="-12" name="Set group active" sid="4396052832106391" type="System">
+                    <param id="0" name="Group name">&quot;playerMove1&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="6086735305587082" type="System">
+                    <param id="0" name="Group name">&quot;PopupDica1&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-13" name="Set time scale" sid="7641920841118689" type="System">
+                    <param id="0" name="Time scale">0.0</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="2528609114659741">
+            <conditions>
+                <condition id="0" name="On key pressed" sid="1957002003546365" type="Keyboard">
+                    <param id="0" name="Key">32 (Space)</param>
+                </condition>
+                <condition id="-14" name="Compare variable" sid="4364385395859108" type="System">
+                    <param id="0" name="Variable">pause</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Value">1</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-9" name="Set value" sid="5729000218417325" type="System">
+                    <param id="0" name="Variable">pause</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="3981995647075318" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="8657674511027715" type="System">
+                    <param id="0" name="Group name">&quot;playerMove1&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+                <action id="-12" name="Set group active" sid="7039167803408902" type="System">
+                    <param id="0" name="Group name">&quot;PopupDica1&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+                <action id="-13" name="Set time scale" sid="881488403197425" type="System">
+                    <param id="0" name="Time scale">1.0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="8764148321350564" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
+                    <param id="1" name="State">1</param>
                 </action>
             </actions>
         </event-block>
