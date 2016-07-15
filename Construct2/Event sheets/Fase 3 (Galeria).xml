@@ -136,305 +136,360 @@
                     <param id="0" name="Text">&quot;Rendimento acadêmico: &quot; &amp; pontos</param>
                 </action>
             </actions>
-        </event-block>
-        <comment>Sobe dica para conversar com Einstein</comment>
-        <event-block any="1" sid="8184022603915785">
-            <conditions>
-                <condition id="1" name="Is overlapping another object" sid="3876750697826487" type="player">
-                    <param id="0" name="Object">SelecaoEinstein</param>
-                </condition>
-            </conditions>
-            <actions />
             <sub-events>
-                <event-block sid="1360049059185404">
+                <comment>Efeito de profundidade no Einstein</comment>
+                <event-block sid="8617993090494586">
                     <conditions>
-                        <condition id="-2" name="Compare Y" sid="6359714887004335" type="dicaPopUp">
-                            <param id="0" name="Comparison">4</param>
-                            <param id="1" name="Y co-ordinate">660</param>
+                        <condition id="-14" name="Pick by unique ID" sid="1735687592885528" type="Fantasmas">
+                            <param id="0" name="Unique ID">227</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-2" name="Set Y" sid="7532999245725414" type="dicaPopUp">
-                            <param id="0" name="Y">dicaPopUp.Y-3</param>
+                        <action id="-7" name="Set size" sid="4191377407884242" type="Fantasmas">
+                            <param id="0" name="Width">(1-((720-Fantasmas.Y)*0.000555))*145</param>
+                            <param id="1" name="Height">(1-((720-Fantasmas.Y)*0.000555))*180</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Efeito de profundidade no Beethoven</comment>
+                <event-block sid="9590568881287151">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="1293904409517629" type="Fantasmas">
+                            <param id="0" name="Unique ID">230</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-7" name="Set size" sid="8187263739482343" type="Fantasmas">
+                            <param id="0" name="Width">(1-((720-Fantasmas.Y)*0.000555))*142</param>
+                            <param id="1" name="Height">(1-((720-Fantasmas.Y)*0.000555))*170</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Efeito de profundidade no Dali</comment>
+                <event-block sid="4752801210647541">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="7049482637958243" type="Fantasmas">
+                            <param id="0" name="Unique ID">231</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-7" name="Set size" sid="6380952568896224" type="Fantasmas">
+                            <param id="0" name="Width">(1-((720-Fantasmas.Y)*0.000555))*155</param>
+                            <param id="1" name="Height">(1-((720-Fantasmas.Y)*0.000555))*164</param>
                         </action>
                     </actions>
                 </event-block>
             </sub-events>
         </event-block>
-        <comment>Desce dica para conversar com o bibliotecário</comment>
-        <event-block sid="3487361776120188">
-            <conditions>
-                <condition id="-22" name="Else" sid="9143762695555115" type="System" />
-                <condition id="-14" inverted="1" name="Compare variable" sid="3916874377193149" type="System">
-                    <param id="0" name="Variable">fraseAtualGAL</param>
-                    <param id="1" name="Comparison">0</param>
-                    <param id="2" name="Value">5</param>
-                </condition>
-            </conditions>
-            <actions />
+        <comment>Grupo que controla ações que dependem do jogador pressionar a tecla E (interação com Einstein e dicas)</comment>
+        <event-group description="" sid="3829177506289873" title="animacoesConversasDicas">
             <sub-events>
-                <event-block sid="5986606297127971">
+                <comment>Sobe dica para conversar com Einstein</comment>
+                <event-block any="1" sid="8184022603915785">
                     <conditions>
-                        <condition id="-2" name="Compare Y" sid="87874478947629" type="dicaPopUp">
-                            <param id="0" name="Comparison">2</param>
-                            <param id="1" name="Y co-ordinate">778</param>
+                        <condition id="1" name="Is overlapping another object" sid="3876750697826487" type="player">
+                            <param id="0" name="Object">SelecaoEinstein</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="-2" name="Set Y" sid="1110080840340901" type="dicaPopUp">
-                            <param id="0" name="Y">dicaPopUp.Y+3</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="1360049059185404">
+                            <conditions>
+                                <condition id="-2" name="Compare Y" sid="6359714887004335" type="dicaPopUp">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Y co-ordinate">660</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="7532999245725414" type="dicaPopUp">
+                                    <param id="0" name="Y">dicaPopUp.Y-3</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
-            </sub-events>
-        </event-block>
-        <event-block sid="6062525126708422">
-            <conditions>
-                <condition id="1" name="Is overlapping another object" sid="5426140650707876" type="player">
-                    <param id="0" name="Object">SelecaoEinstein</param>
-                </condition>
-                <condition id="2" name="Key is down" sid="1161521404134509" type="Keyboard">
-                    <param id="0" name="Key">69 (E)</param>
-                </condition>
-                <condition id="2" name="Is playing" sid="4623048803601847" type="playerAnim">
-                    <param id="0" name="Animation">&quot;TrasParado&quot;</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="-9" name="Set value" sid="3847613789192533" type="System">
-                    <param id="0" name="Variable">tamanhoDialogoGAL</param>
-                    <param id="1" name="Value">4</param>
-                </action>
-                <action id="-9" name="Set value" sid="7926800931931627" type="System">
-                    <param id="0" name="Variable">carregarDialogoChave</param>
-                    <param id="1" name="Value">1</param>
-                </action>
-                <action id="2" name="Stop" sid="2950220598687543" type="playerAnim" />
-                <action id="-12" name="Set group active" sid="9391033416436006" type="System">
-                    <param id="0" name="Group name">&quot;playerMoveGAL&quot;</param>
-                    <param id="1" name="State">0</param>
-                </action>
-                <action id="-12" name="Set group active" sid="5040351626937007" type="System">
-                    <param id="0" name="Group name">&quot;dialogoGaleria&quot;</param>
-                    <param id="1" name="State">1</param>
-                </action>
-                <action id="-9" name="Destroy" sid="5328791875943443" type="SelecaoEinstein" />
-            </actions>
-        </event-block>
-        <comment>Sobe dica para ordenar os quadros</comment>
-        <event-block sid="343906429276003">
-            <conditions>
-                <condition id="-14" name="Compare variable" sid="8148930757124867" type="System">
-                    <param id="0" name="Variable">fraseAtualGAL</param>
-                    <param id="1" name="Comparison">0</param>
-                    <param id="2" name="Value">5</param>
-                </condition>
-                <condition id="1" name="Is overlapping another object" sid="958589223237896" type="player">
-                    <param id="0" name="Object">selecaoComida</param>
-                </condition>
-                <condition id="-14" inverted="1" name="Compare variable" sid="6399666085739221" type="System">
-                    <param id="0" name="Variable">iniciarAnimacao</param>
-                    <param id="1" name="Comparison">0</param>
-                    <param id="2" name="Value">1</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="0" name="Set text" sid="180882659128416" type="dicaTexto">
-                    <param id="0" name="Text">&quot;Pressione E para ordenar os quadros&quot;</param>
-                </action>
-            </actions>
-            <sub-events>
-                <event-block sid="17042616374342">
+                <comment>Desce dica para conversar com o bibliotecário</comment>
+                <event-block sid="3487361776120188">
                     <conditions>
-                        <condition id="-2" name="Compare Y" sid="7154805784324536" type="dicaPopUp">
-                            <param id="0" name="Comparison">4</param>
-                            <param id="1" name="Y co-ordinate">660</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-2" name="Set Y" sid="9773157708465303" type="dicaPopUp">
-                            <param id="0" name="Y">dicaPopUp.Y-3</param>
-                        </action>
-                    </actions>
-                </event-block>
-            </sub-events>
-        </event-block>
-        <comment>Desce dica para ordenar os quadros</comment>
-        <event-block sid="1744485609435248">
-            <conditions>
-                <condition id="-22" name="Else" sid="5484987471074017" type="System" />
-                <condition id="-14" name="Compare variable" sid="7848400368038743" type="System">
-                    <param id="0" name="Variable">fraseAtualGAL</param>
-                    <param id="1" name="Comparison">0</param>
-                    <param id="2" name="Value">5</param>
-                </condition>
-            </conditions>
-            <actions />
-            <sub-events>
-                <event-block sid="4533107679195536">
-                    <conditions>
-                        <condition id="-2" name="Compare Y" sid="2936851690228144" type="dicaPopUp">
-                            <param id="0" name="Comparison">2</param>
-                            <param id="1" name="Y co-ordinate">778</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-2" name="Set Y" sid="8221384092365327" type="dicaPopUp">
-                            <param id="0" name="Y">dicaPopUp.Y+3</param>
-                        </action>
-                    </actions>
-                </event-block>
-            </sub-events>
-        </event-block>
-        <event-block sid="7454483833152009">
-            <conditions>
-                <condition id="1" name="Is overlapping another object" sid="2222609733822314" type="player">
-                    <param id="0" name="Object">selecaoComida</param>
-                </condition>
-                <condition id="2" name="Key is down" sid="6256006701647014" type="Keyboard">
-                    <param id="0" name="Key">69 (E)</param>
-                </condition>
-                <condition id="-10" name="Compare opacity" sid="4539723784871463" type="BalaoDialogo">
-                    <param id="0" name="Comparison">0</param>
-                    <param id="1" name="Opacity">0</param>
-                </condition>
-                <condition id="2" name="Is playing" sid="9969562668928525" type="playerAnim">
-                    <param id="0" name="Animation">&quot;TrasParado&quot;</param>
-                </condition>
-            </conditions>
-            <actions />
-            <sub-events>
-                <event-block sid="2760115659530621">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="9032575874006345" type="System">
+                        <condition id="-22" name="Else" sid="9143762695555115" type="System" />
+                        <condition id="-14" inverted="1" name="Compare variable" sid="3916874377193149" type="System">
                             <param id="0" name="Variable">fraseAtualGAL</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">5</param>
                         </condition>
                     </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="5986606297127971">
+                            <conditions>
+                                <condition id="-2" name="Compare Y" sid="87874478947629" type="dicaPopUp">
+                                    <param id="0" name="Comparison">2</param>
+                                    <param id="1" name="Y co-ordinate">778</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="1110080840340901" type="dicaPopUp">
+                                    <param id="0" name="Y">dicaPopUp.Y+3</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="6062525126708422">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="5426140650707876" type="player">
+                            <param id="0" name="Object">SelecaoEinstein</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="1161521404134509" type="Keyboard">
+                            <param id="0" name="Key">69 (E)</param>
+                        </condition>
+                        <condition id="2" name="Is playing" sid="4623048803601847" type="playerAnim">
+                            <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                        </condition>
+                    </conditions>
                     <actions>
-                        <action id="-9" name="Set value" sid="429080087630228" type="System">
-                            <param id="0" name="Variable">iniciarAnimacao</param>
+                        <action id="-9" name="Set value" sid="3847613789192533" type="System">
+                            <param id="0" name="Variable">tamanhoDialogoGAL</param>
+                            <param id="1" name="Value">4</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="7926800931931627" type="System">
+                            <param id="0" name="Variable">carregarDialogoChave</param>
                             <param id="1" name="Value">1</param>
                         </action>
-                        <action id="2" name="Stop" sid="565313019397246" type="playerAnim" />
-                        <action id="-12" name="Set group active" sid="9702621905499418" type="System">
+                        <action id="2" name="Stop" sid="2950220598687543" type="playerAnim" />
+                        <action id="-12" name="Set group active" sid="9391033416436006" type="System">
                             <param id="0" name="Group name">&quot;playerMoveGAL&quot;</param>
                             <param id="1" name="State">0</param>
                         </action>
-                    </actions>
-                </event-block>
-            </sub-events>
-        </event-block>
-        <event-block sid="3988945501635567">
-            <conditions>
-                <condition id="-14" name="Compare variable" sid="8399356402495472" type="System">
-                    <param id="0" name="Variable">iniciarAnimacao</param>
-                    <param id="1" name="Comparison">0</param>
-                    <param id="2" name="Value">1</param>
-                </condition>
-            </conditions>
-            <actions />
-            <sub-events>
-                <event-block sid="536095591584953">
-                    <conditions>
-                        <condition id="-1" name="Every tick" sid="4858459743707592" type="System" />
-                        <condition id="-10" name="Compare opacity" sid="697956556261024" type="MuralQuadros">
-                            <param id="0" name="Comparison">2</param>
-                            <param id="1" name="Opacity">100</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-16" name="Set opacity" sid="2076384807695057" type="MuralQuadros">
-                            <param id="0" name="Opacity">MuralQuadros.Opacity + 2.5</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="9590722395535614">
-                    <conditions>
-                        <condition id="-10" name="Compare opacity" sid="777040374093621" type="MuralQuadros">
-                            <param id="0" name="Comparison">0</param>
-                            <param id="1" name="Opacity">100</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-9" name="Set value" sid="8491817895597313" type="System">
-                            <param id="0" name="Variable">iniciarAnimacao</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="6395472186335182" type="System">
-                            <param id="0" name="Group name">&quot;visualizarQuadros&quot;</param>
+                        <action id="-12" name="Set group active" sid="5040351626937007" type="System">
+                            <param id="0" name="Group name">&quot;dialogoGaleria&quot;</param>
                             <param id="1" name="State">1</param>
                         </action>
-                        <action id="-9" name="Destroy" sid="1169394142089471" type="dicaPopUp" />
-                        <action id="-9" name="Destroy" sid="5613323581113454" type="dicaTexto" />
+                        <action id="-9" name="Destroy" sid="5328791875943443" type="SelecaoEinstein" />
                     </actions>
                 </event-block>
-            </sub-events>
-        </event-block>
-        <event-block sid="1985184831597969">
-            <conditions>
-                <condition id="6" name="On object clicked" sid="4752721050209126" type="Mouse">
-                    <param id="0" name="Mouse button">0</param>
-                    <param id="1" name="Click type">0</param>
-                    <param id="2" name="Object clicked">selecaoComida</param>
-                </condition>
-                <condition id="-10" name="Compare opacity" sid="9244725577974001" type="MuralQuadros">
-                    <param id="0" name="Comparison">0</param>
-                    <param id="1" name="Opacity">100</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="-9" name="Set value" sid="7833411403449488" type="System">
-                    <param id="0" name="Variable">finalizarAnimacao</param>
-                    <param id="1" name="Value">1</param>
-                </action>
-                <action id="-12" name="Set group active" sid="587882631574705" type="System">
-                    <param id="0" name="Group name">&quot;esconderQuadros&quot;</param>
-                    <param id="1" name="State">1</param>
-                </action>
-            </actions>
-        </event-block>
-        <event-block sid="2909495655769617">
-            <conditions>
-                <condition id="-14" name="Compare variable" sid="3418735951163016" type="System">
-                    <param id="0" name="Variable">finalizarAnimacao</param>
-                    <param id="1" name="Comparison">0</param>
-                    <param id="2" name="Value">1</param>
-                </condition>
-            </conditions>
-            <actions />
-            <sub-events>
-                <event-block sid="9111195368472245">
+                <comment>Sobe dica para ordenar os quadros</comment>
+                <event-block sid="343906429276003">
                     <conditions>
-                        <condition id="-1" name="Every tick" sid="3837281148603076" type="System" />
-                        <condition id="-10" name="Compare opacity" sid="4080625836939906" type="MuralQuadros">
-                            <param id="0" name="Comparison">4</param>
-                            <param id="1" name="Opacity">0</param>
+                        <condition id="-14" name="Compare variable" sid="8148930757124867" type="System">
+                            <param id="0" name="Variable">fraseAtualGAL</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">5</param>
+                        </condition>
+                        <condition id="1" name="Is overlapping another object" sid="958589223237896" type="player">
+                            <param id="0" name="Object">selecaoComida</param>
+                        </condition>
+                        <condition id="-14" inverted="1" name="Compare variable" sid="6399666085739221" type="System">
+                            <param id="0" name="Variable">iniciarAnimacao</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-16" name="Set opacity" sid="3897813820729303" type="MuralQuadros">
-                            <param id="0" name="Opacity">MuralQuadros.Opacity - 2.5</param>
+                        <action id="0" name="Set text" sid="180882659128416" type="dicaTexto">
+                            <param id="0" name="Text">&quot;Pressione E para ordenar os quadros&quot;</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="17042616374342">
+                            <conditions>
+                                <condition id="-2" name="Compare Y" sid="7154805784324536" type="dicaPopUp">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Y co-ordinate">660</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="9773157708465303" type="dicaPopUp">
+                                    <param id="0" name="Y">dicaPopUp.Y-3</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
-                <event-block sid="5152413625063937">
+                <comment>Desce dica para ordenar os quadros</comment>
+                <event-block sid="1744485609435248">
                     <conditions>
-                        <condition id="-10" name="Compare opacity" sid="6145115409282713" type="MuralQuadros">
+                        <condition id="-22" name="Else" sid="5484987471074017" type="System" />
+                        <condition id="-14" name="Compare variable" sid="7848400368038743" type="System">
+                            <param id="0" name="Variable">fraseAtualGAL</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">5</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="4533107679195536">
+                            <conditions>
+                                <condition id="-2" name="Compare Y" sid="2936851690228144" type="dicaPopUp">
+                                    <param id="0" name="Comparison">2</param>
+                                    <param id="1" name="Y co-ordinate">778</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="8221384092365327" type="dicaPopUp">
+                                    <param id="0" name="Y">dicaPopUp.Y+3</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="7454483833152009">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="2222609733822314" type="player">
+                            <param id="0" name="Object">selecaoComida</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="6256006701647014" type="Keyboard">
+                            <param id="0" name="Key">69 (E)</param>
+                        </condition>
+                        <condition id="-10" name="Compare opacity" sid="4539723784871463" type="BalaoDialogo">
                             <param id="0" name="Comparison">0</param>
                             <param id="1" name="Opacity">0</param>
                         </condition>
+                        <condition id="2" name="Is playing" sid="9969562668928525" type="playerAnim">
+                            <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="2760115659530621">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="9032575874006345" type="System">
+                                    <param id="0" name="Variable">fraseAtualGAL</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">5</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="429080087630228" type="System">
+                                    <param id="0" name="Variable">iniciarAnimacao</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="2" name="Stop" sid="565313019397246" type="playerAnim" />
+                                <action id="-12" name="Set group active" sid="9702621905499418" type="System">
+                                    <param id="0" name="Group name">&quot;playerMoveGAL&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <comment>Grupo que controla o mural onde o jogador ordena os quadros</comment>
+        <event-group description="" sid="6314953665114603" title="animacaoOrdenaQuadros">
+            <sub-events>
+                <event-block sid="3988945501635567">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="8399356402495472" type="System">
+                            <param id="0" name="Variable">iniciarAnimacao</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="536095591584953">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="4858459743707592" type="System" />
+                                <condition id="-10" name="Compare opacity" sid="697956556261024" type="MuralQuadros">
+                                    <param id="0" name="Comparison">2</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="2076384807695057" type="MuralQuadros">
+                                    <param id="0" name="Opacity">MuralQuadros.Opacity + 2.5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="9590722395535614">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="777040374093621" type="MuralQuadros">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="8491817895597313" type="System">
+                                    <param id="0" name="Variable">iniciarAnimacao</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="6395472186335182" type="System">
+                                    <param id="0" name="Group name">&quot;visualizarQuadros&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="1169394142089471" type="dicaPopUp" />
+                                <action id="-9" name="Destroy" sid="5613323581113454" type="dicaTexto" />
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Caso o jogador possa sair da ordenação de quadros é só modificar e descomentar essa parte</comment>
+                <event-block disabled="1" sid="1985184831597969">
+                    <conditions>
+                        <condition id="6" name="On object clicked" sid="4752721050209126" type="Mouse">
+                            <param id="0" name="Mouse button">0</param>
+                            <param id="1" name="Click type">0</param>
+                            <param id="2" name="Object clicked">selecaoComida</param>
+                        </condition>
+                        <condition id="-10" name="Compare opacity" sid="9244725577974001" type="MuralQuadros">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Opacity">100</param>
+                        </condition>
                     </conditions>
                     <actions>
-                        <action id="-9" name="Set value" sid="9860826632281608" type="System">
+                        <action id="-9" name="Set value" sid="7833411403449488" type="System">
                             <param id="0" name="Variable">finalizarAnimacao</param>
-                            <param id="1" name="Value">0</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="587882631574705" type="System">
+                            <param id="0" name="Group name">&quot;esconderQuadros&quot;</param>
+                            <param id="1" name="State">1</param>
                         </action>
                     </actions>
                 </event-block>
+                <event-block sid="2909495655769617">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="3418735951163016" type="System">
+                            <param id="0" name="Variable">finalizarAnimacao</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="9111195368472245">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="3837281148603076" type="System" />
+                                <condition id="-10" name="Compare opacity" sid="4080625836939906" type="MuralQuadros">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="3897813820729303" type="MuralQuadros">
+                                    <param id="0" name="Opacity">MuralQuadros.Opacity - 2.5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="5152413625063937">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="6145115409282713" type="MuralQuadros">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="9860826632281608" type="System">
+                                    <param id="0" name="Variable">finalizarAnimacao</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
             </sub-events>
-        </event-block>
+        </event-group>
         <comment>Grupo onde estão localizados todas as funções que criam o efeito de 3D na fase</comment>
         <event-group description="" sid="8721442510616232" title="Efeitos3DGaleria">
             <sub-events>
@@ -818,16 +873,16 @@
                             </conditions>
                             <actions>
                                 <action id="-3" name="Set position" sid="4392815089175737" type="BalaoDialogo">
-                                    <param id="0" name="X">378</param>
-                                    <param id="1" name="Y">131</param>
+                                    <param id="0" name="X">335</param>
+                                    <param id="1" name="Y">164</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="1605598438406289" type="DialogoPersonagem">
-                                    <param id="0" name="X">239</param>
-                                    <param id="1" name="Y">58</param>
+                                    <param id="0" name="X">178</param>
+                                    <param id="1" name="Y">73</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="5232277600265197" type="Dialogos">
-                                    <param id="0" name="X">184</param>
-                                    <param id="1" name="Y">83</param>
+                                    <param id="0" name="X">110</param>
+                                    <param id="1" name="Y">99</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -838,16 +893,16 @@
                             </conditions>
                             <actions>
                                 <action id="-3" name="Set position" sid="6123979219139684" type="BalaoDialogo">
-                                    <param id="0" name="X">player.X + 195</param>
-                                    <param id="1" name="Y">player.Y - 149</param>
+                                    <param id="0" name="X">player.X + 179</param>
+                                    <param id="1" name="Y">player.Y - 126</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="6726351252957261" type="DialogoPersonagem">
-                                    <param id="0" name="X">player.X + 56</param>
-                                    <param id="1" name="Y">player.Y - 222</param>
+                                    <param id="0" name="X">player.X + 22</param>
+                                    <param id="1" name="Y">player.Y - 218</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="2326175334291855" type="Dialogos">
-                                    <param id="0" name="X">player.X + 1</param>
-                                    <param id="1" name="Y">player.Y - 197</param>
+                                    <param id="0" name="X">player.X - 46</param>
+                                    <param id="1" name="Y">player.Y - 191</param>
                                 </action>
                             </actions>
                         </event-block>
