@@ -57,6 +57,18 @@
                 <action id="-16" name="Set opacity" sid="6391318132146658" type="perguntas">
                     <param id="0" name="Opacity">0</param>
                 </action>
+                <action id="-3" name="Set position" sid="6876395952770684" type="pontuacao">
+                    <param id="0" name="X">640</param>
+                    <param id="1" name="Y">786</param>
+                </action>
+                <action behavior="Pin" id="0" name="Pin to object" sid="9795841326987812" type="pontoTexto">
+                    <param id="0" name="Pin to">pontuacao</param>
+                    <param id="1" name="Mode">0</param>
+                </action>
+                <action behavior="Pin" id="0" name="Pin to object" sid="9804610515974353" type="pontuacaoTexto">
+                    <param id="0" name="Pin to">pontuacao</param>
+                    <param id="1" name="Mode">0</param>
+                </action>
                 <action id="-16" name="Set opacity" sid="251087772017551" type="textoPerguntas">
                     <param id="0" name="Opacity">0</param>
                 </action>
@@ -65,6 +77,35 @@
                 </action>
                 <action id="-16" name="Set opacity" sid="4592278714346477" type="textoRespostas">
                     <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="5" name="Set web font" sid="1171413331119855" type="pontuacaoTexto">
+                    <param id="0" name="Family name">&quot;please_write_me_a_songmedium&quot;</param>
+                    <param id="1" name="CSS URL">&quot;stylesheet.css&quot;</param>
+                </action>
+                <action id="5" name="Set web font" sid="9086656161791667" type="pontoTexto">
+                    <param id="0" name="Family name">&quot;please_write_me_a_songmedium&quot;</param>
+                    <param id="1" name="CSS URL">&quot;stylesheet.css&quot;</param>
+                </action>
+                <action id="0" name="Set text" sid="1164383991637168" type="pontoTexto">
+                    <param id="0" name="Text">&quot;&quot;</param>
+                </action>
+                <action disabled="1" id="4" name="Set font color" sid="1507307983381988" type="pontoTexto">
+                    <param id="0" name="Color">rgb(41, 90, 165)</param>
+                </action>
+                <action id="-12" name="Set group active" sid="8079021264114094" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1aFFCM&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+                <action id="-16" name="Wait" sid="2745436090341712" type="System">
+                    <param id="0" name="Seconds">4</param>
+                </action>
+                <action id="-12" name="Set group active" sid="6453625159689003" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1aFFCM&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="2950349515437576" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1bFFCM&quot;</param>
+                    <param id="1" name="State">1</param>
                 </action>
             </actions>
         </event-block>
@@ -82,7 +123,7 @@
                     <param id="1" name="Height">(1-((720-playerAnim.Y)*0.000555))*144</param>
                 </action>
                 <action id="0" name="Set text" sid="901025095795257" type="pontuacaoTexto">
-                    <param id="0" name="Text">&quot;Rendimento acadêmico: &quot; &amp; pontos</param>
+                    <param id="0" name="Text">pontos</param>
                 </action>
             </actions>
         </event-block>
@@ -98,6 +139,40 @@
                 </action>
             </actions>
         </event-block>
+        <event-group description="" inactive="1" sid="3505633937908079" title="Pontuacao1aFFCM">
+            <sub-events>
+                <event-block sid="3544968347758162">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="8769965317838408" type="pontuacao">
+                            <param id="0" name="Comparison">5</param>
+                            <param id="1" name="Y co-ordinate">636</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="6306910430131981" type="pontuacao">
+                            <param id="0" name="Y">pontuacao.Y-3</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" inactive="1" sid="8479674531708785" title="Pontuacao1bFFCM">
+            <sub-events>
+                <event-block sid="5064080862840392">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="6316474383240982" type="pontuacao">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Y co-ordinate">786</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="188183413441595" type="pontuacao">
+                            <param id="0" name="Y">pontuacao.Y+3</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
         <comment>Dispara o evento das perguntas</comment>
         <event-group description="" sid="5096846006289192" title="inicioPerguntasFFCM">
             <sub-events>
@@ -435,6 +510,31 @@
                                             <param id="0" name="Variable">pontos</param>
                                             <param id="1" name="Value">-100</param>
                                         </action>
+                                        <action id="0" name="Set text" sid="2741831029890363" type="pontoTexto">
+                                            <param id="0" name="Text">&quot;-100&quot;</param>
+                                        </action>
+                                        <action id="4" name="Set font color" sid="3137087284607553" type="pontoTexto">
+                                            <param id="0" name="Color">rgb(235, 17, 53)</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="7663007531350141" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao1bFFCM&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="448171349193317" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao1aFFCM&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="6556679420235491" type="System">
+                                            <param id="0" name="Seconds">4</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="2943422389297437" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao1aFFCM&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="4508981550044488" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao1bFFCM&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
                                     </actions>
                                 </event-block>
                             </sub-events>
@@ -739,6 +839,35 @@
                                                     <param id="0" name="Variable">pontos</param>
                                                     <param id="1" name="Value">100</param>
                                                 </action>
+                                                <action id="0" name="Set text" sid="6647053803839729" type="pontoTexto">
+                                                    <param id="0" name="Text">&quot;100&quot;</param>
+                                                </action>
+                                                <action id="4" name="Set font color" sid="6474508215868928" type="pontoTexto">
+                                                    <param id="0" name="Color">rgb(41, 90, 165)</param>
+                                                </action>
+                                                <action id="-12" name="Set group active" sid="6681667837129795" type="System">
+                                                    <param id="0" name="Group name">&quot;Pontuacao1bFFCM&quot;</param>
+                                                    <param id="1" name="State">0</param>
+                                                </action>
+                                                <action id="-12" name="Set group active" sid="873640705782259" type="System">
+                                                    <param id="0" name="Group name">&quot;Pontuacao1aFFCM&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                                <action id="-16" name="Wait" sid="4376834316743454" type="System">
+                                                    <param id="0" name="Seconds">4</param>
+                                                </action>
+                                                <action id="-12" name="Set group active" sid="8795027749384203" type="System">
+                                                    <param id="0" name="Group name">&quot;Pontuacao1aFFCM&quot;</param>
+                                                    <param id="1" name="State">0</param>
+                                                </action>
+                                                <action id="-12" name="Set group active" sid="1268785913568789" type="System">
+                                                    <param id="0" name="Group name">&quot;Pontuacao1bFFCM&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                                <action id="-12" name="Set group active" sid="6732415525072518" type="System">
+                                                    <param id="0" name="Group name">&quot;saidaGAL&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
                                             </actions>
                                         </event-block>
                                     </sub-events>
@@ -802,6 +931,31 @@
                                                 <action id="-10" name="Add to" sid="1397937927894916" type="System">
                                                     <param id="0" name="Variable">pontos</param>
                                                     <param id="1" name="Value">-100</param>
+                                                </action>
+                                                <action id="0" name="Set text" sid="334151765304167" type="pontoTexto">
+                                                    <param id="0" name="Text">&quot;-100&quot;</param>
+                                                </action>
+                                                <action id="4" name="Set font color" sid="6707721558455364" type="pontoTexto">
+                                                    <param id="0" name="Color">rgb(235, 17, 53)</param>
+                                                </action>
+                                                <action id="-12" name="Set group active" sid="6160106383776267" type="System">
+                                                    <param id="0" name="Group name">&quot;Pontuacao1bFFCM&quot;</param>
+                                                    <param id="1" name="State">0</param>
+                                                </action>
+                                                <action id="-12" name="Set group active" sid="627896034043387" type="System">
+                                                    <param id="0" name="Group name">&quot;Pontuacao1aFFCM&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                                <action id="-16" name="Wait" sid="9859058541980876" type="System">
+                                                    <param id="0" name="Seconds">4</param>
+                                                </action>
+                                                <action id="-12" name="Set group active" sid="1647777185602226" type="System">
+                                                    <param id="0" name="Group name">&quot;Pontuacao1aFFCM&quot;</param>
+                                                    <param id="1" name="State">0</param>
+                                                </action>
+                                                <action id="-12" name="Set group active" sid="8188343740471719" type="System">
+                                                    <param id="0" name="Group name">&quot;Pontuacao1bFFCM&quot;</param>
+                                                    <param id="1" name="State">1</param>
                                                 </action>
                                             </actions>
                                         </event-block>

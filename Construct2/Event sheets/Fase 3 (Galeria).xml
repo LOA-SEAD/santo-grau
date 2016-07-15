@@ -74,6 +74,18 @@
                 </action>
                 <action id="0" name="Load JSON" sid="4808618138882582" type="DialogosJSON" />
                 <action id="0" name="Load JSON" sid="6934720499260367" type="QuadrosJSON" />
+                <action id="-3" name="Set position" sid="965533967054913" type="pontuacao">
+                    <param id="0" name="X">640</param>
+                    <param id="1" name="Y">786</param>
+                </action>
+                <action behavior="Pin" id="0" name="Pin to object" sid="7378624651733241" type="pontoTexto">
+                    <param id="0" name="Pin to">pontuacao</param>
+                    <param id="1" name="Mode">0</param>
+                </action>
+                <action behavior="Pin" id="0" name="Pin to object" sid="1196876175424125" type="pontuacaoTexto">
+                    <param id="0" name="Pin to">pontuacao</param>
+                    <param id="1" name="Mode">0</param>
+                </action>
                 <action id="0" name="Clear" sid="6757824165300672" type="Resposta" />
                 <action id="0" name="Clear" sid="9701182539403744" type="OrdemAtual" />
                 <action id="-16" name="Set opacity" sid="1926515396501819" type="BalaoDialogo">
@@ -104,6 +116,35 @@
                 <action id="0" name="Set text" sid="9426213284247127" type="dicaTexto">
                     <param id="0" name="Text">&quot;Pressione E para conversar com Einstein&quot;</param>
                 </action>
+                <action id="5" name="Set web font" sid="7416769854996486" type="pontuacaoTexto">
+                    <param id="0" name="Family name">&quot;please_write_me_a_songmedium&quot;</param>
+                    <param id="1" name="CSS URL">&quot;stylesheet.css&quot;</param>
+                </action>
+                <action id="5" name="Set web font" sid="5113536917626527" type="pontoTexto">
+                    <param id="0" name="Family name">&quot;please_write_me_a_songmedium&quot;</param>
+                    <param id="1" name="CSS URL">&quot;stylesheet.css&quot;</param>
+                </action>
+                <action id="0" name="Set text" sid="7164684931894335" type="pontoTexto">
+                    <param id="0" name="Text">&quot;&quot;</param>
+                </action>
+                <action disabled="1" id="4" name="Set font color" sid="8158481120145312" type="pontoTexto">
+                    <param id="0" name="Color">rgb(41, 90, 165)</param>
+                </action>
+                <action id="-12" name="Set group active" sid="2219416856828121" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1aGAL&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+                <action id="-16" name="Wait" sid="980101119540943" type="System">
+                    <param id="0" name="Seconds">4</param>
+                </action>
+                <action id="-12" name="Set group active" sid="5215097590216663" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1aGAL&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="3623592048838467" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1bGAL&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
             </actions>
         </event-block>
         <comment>Einstein é visível</comment>
@@ -132,8 +173,12 @@
                     <param id="0" name="Width">(1-((720-playerAnim.Y)*0.000555))*82</param>
                     <param id="1" name="Height">(1-((720-playerAnim.Y)*0.000555))*144</param>
                 </action>
-                <action id="0" name="Set text" sid="6591496149364015" type="pontuacaoTexto">
-                    <param id="0" name="Text">&quot;Rendimento acadêmico: &quot; &amp; pontos</param>
+                <action id="-7" name="Set size" sid="3406820763346543" type="EinsteinCenario">
+                    <param id="0" name="Width">(1-((720-EinsteinCenario.Y)*0.000555))*145</param>
+                    <param id="1" name="Height">(1-((720-EinsteinCenario.Y)*0.000555))*180</param>
+                </action>
+                <action id="0" name="Set text" sid="9945197871284769" type="pontuacaoTexto">
+                    <param id="0" name="Text">pontos</param>
                 </action>
             </actions>
             <sub-events>
@@ -490,6 +535,40 @@
                 </event-block>
             </sub-events>
         </event-group>
+        <event-group description="" inactive="1" sid="7778362899177031" title="Pontuacao1aGAL">
+            <sub-events>
+                <event-block sid="3544968347758162">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="8769965317838408" type="pontuacao">
+                            <param id="0" name="Comparison">5</param>
+                            <param id="1" name="Y co-ordinate">636</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="6306910430131981" type="pontuacao">
+                            <param id="0" name="Y">pontuacao.Y-3</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" inactive="1" sid="6940766939302398" title="Pontuacao1bGAL">
+            <sub-events>
+                <event-block sid="5064080862840392">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="6316474383240982" type="pontuacao">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Y co-ordinate">786</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="188183413441595" type="pontuacao">
+                            <param id="0" name="Y">pontuacao.Y+3</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
         <comment>Grupo onde estão localizados todas as funções que criam o efeito de 3D na fase</comment>
         <event-group description="" sid="8721442510616232" title="Efeitos3DGaleria">
             <sub-events>
@@ -563,6 +642,15 @@
                             <param id="0" name="State">0</param>
                         </action>
                         <action id="-15" name="Set visible" sid="8553677796313293" type="MuralCenario">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="2462113441545114" type="SolidoEinstein">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="5274224497484994" type="EinsteinCenario">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="733870448288094" type="EinsteinCenario">
                             <param id="0" name="Visibility">1</param>
                         </action>
                     </actions>
@@ -681,6 +769,25 @@
                             <param id="0" name="State">1</param>
                         </action>
                         <action id="-15" name="Set visible" sid="2870431228906571" type="AbajurCenario">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="1892015304160674">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="591587694981751" type="player">
+                            <param id="0" name="Comparison">4</param>
+                            <param id="1" name="Y co-ordinate">263</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="7148567346716834" type="SolidoEinstein">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="1494995628130327" type="EinsteinCenario">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="5403250354871891" type="EinsteinCenario">
                             <param id="0" name="Visibility">0</param>
                         </action>
                     </actions>
@@ -1172,6 +1279,8 @@
                                                             <param id="0" name="Layer">&quot;EfeitoEscuro&quot;</param>
                                                             <param id="1" name="Visibility">1</param>
                                                         </action>
+                                                        <action id="-9" name="Destroy" sid="4745426364815126" type="EinsteinCenario" />
+                                                        <action id="-9" name="Destroy" sid="8802159087815485" type="SolidoEinstein" />
                                                         <action id="-16" name="Set opacity" sid="4973419202493159" type="Fantasmas">
                                                             <param id="0" name="Opacity">100</param>
                                                         </action>
@@ -1180,9 +1289,6 @@
                                                         </action>
                                                         <action behavior="Pathfinding" id="3" name="Set enabled" sid="5501872835418116" type="Fantasmas">
                                                             <param id="0" name="Set">1</param>
-                                                        </action>
-                                                        <action id="4" name="Set font color" sid="3263851953450714" type="pontuacaoTexto">
-                                                            <param id="0" name="Color">rgb(255, 255, 255)</param>
                                                         </action>
                                                         <action id="-9" name="Set value" sid="5877488027590067" type="System">
                                                             <param id="0" name="Variable">carregarDialogoChave</param>
@@ -1209,6 +1315,31 @@
                                                         <action id="-10" name="Add to" sid="2663111965761124" type="System">
                                                             <param id="0" name="Variable">pontos</param>
                                                             <param id="1" name="Value">100</param>
+                                                        </action>
+                                                        <action id="0" name="Set text" sid="8837233135233388" type="pontoTexto">
+                                                            <param id="0" name="Text">&quot;100&quot;</param>
+                                                        </action>
+                                                        <action id="4" name="Set font color" sid="2891416925168782" type="pontoTexto">
+                                                            <param id="0" name="Color">rgb(41, 90, 165)</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="3318981940142599" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao1bGAL&quot;</param>
+                                                            <param id="1" name="State">0</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="9647441922042794" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao1aGAL&quot;</param>
+                                                            <param id="1" name="State">1</param>
+                                                        </action>
+                                                        <action id="-16" name="Wait" sid="3606906230269614" type="System">
+                                                            <param id="0" name="Seconds">4</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="411444160248753" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao1aGAL&quot;</param>
+                                                            <param id="1" name="State">0</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="7084566275380045" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao1bGAL&quot;</param>
+                                                            <param id="1" name="State">1</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
@@ -1842,6 +1973,31 @@
                                     <param id="0" name="Variable">pontos</param>
                                     <param id="1" name="Value">-50</param>
                                 </action>
+                                <action id="0" name="Set text" sid="1347308780570123" type="pontoTexto">
+                                    <param id="0" name="Text">&quot;-50&quot;</param>
+                                </action>
+                                <action id="4" name="Set font color" sid="9496663888667034" type="pontoTexto">
+                                    <param id="0" name="Color">rgb(235, 17, 53)</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="8648216485694327" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao1bGAL&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="1996642547757979" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao1aGAL&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="7407346415609037" type="System">
+                                    <param id="0" name="Seconds">4</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="6271605726678101" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao1aGAL&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="4473636224397301" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao1bGAL&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
                             </actions>
                         </event-block>
                     </sub-events>
@@ -1864,15 +2020,37 @@
                             <param id="0" name="Layer">&quot;EfeitoEscuro&quot;</param>
                             <param id="1" name="Visibility">0</param>
                         </action>
-                        <action id="4" name="Set font color" sid="4031057697429541" type="pontuacaoTexto">
-                            <param id="0" name="Color">rgb(0, 0, 0)</param>
-                        </action>
                         <action id="11" name="Set collisions enabled" sid="9171524106194535" type="SaidaGAL">
                             <param id="0" name="Collisions">1</param>
                         </action>
                         <action id="-10" name="Add to" sid="7453172238563238" type="System">
                             <param id="0" name="Variable">pontos</param>
                             <param id="1" name="Value">100</param>
+                        </action>
+                        <action id="0" name="Set text" sid="9617344024946068" type="pontoTexto">
+                            <param id="0" name="Text">&quot;100&quot;</param>
+                        </action>
+                        <action id="4" name="Set font color" sid="1850660752922502" type="pontoTexto">
+                            <param id="0" name="Color">rgb(41, 90, 165)</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="7362460399210201" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao1bGAL&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="9756342003086695" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao1aGAL&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="4229282176082729" type="System">
+                            <param id="0" name="Seconds">4</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="9137455878796534" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao1aGAL&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="9346200927397541" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao1bGAL&quot;</param>
+                            <param id="1" name="State">1</param>
                         </action>
                         <action id="-12" name="Set group active" sid="977371892841502" type="System">
                             <param id="0" name="Group name">&quot;saidaGAL&quot;</param>
