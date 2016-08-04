@@ -3,12 +3,28 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase Final (TCC)</name>
     <events>
+        <comment>Para disparar o inicio do evento das perguntas</comment>
+        <variable constant="0" name="ativarMensagemTCC" sid="9878133739028811" static="0" type="number">0</variable>
+        <comment>Criado para controlar a troca das perguntas</comment>
+        <variable constant="0" name="carregarTextosTCC" sid="8152206803164497" static="0" type="number">1</variable>
+        <comment>Para organização do número da pergunta que está atualmente</comment>
+        <variable constant="0" name="perguntaTCC" sid="4155409836309671" static="0" type="number">1</variable>
+        <comment>Resposta correta importada do .json</comment>
+        <variable constant="0" name="respostaCertaTCC" sid="3820401929034189" static="0" type="text"></variable>
+        <comment>Criado para controlar a aparição das perguntas</comment>
+        <variable constant="0" name="carregarPerguntasTCC" sid="1676222007776343" static="0" type="number">0</variable>
+        <comment>Para conferir a alternativa</comment>
+        <variable constant="0" name="verificarAlternativaTCC" sid="9519960439893545" static="0" type="number">0</variable>
+        <comment>Criado para controlar o descarregamento das perguntas</comment>
+        <variable constant="0" name="descarregarPerguntasTCC" sid="605959177600716" static="0" type="number">0</variable>
         <event-block sid="9765162608650695">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="7057668097993137" type="System" />
             </conditions>
             <actions>
                 <action id="2" name="Stop" sid="3820824243619726" type="Colunas" />
+                <action id="2" name="Stop" sid="2158387185574569" type="Monstro" />
+                <action id="2" name="Stop" sid="3210088745454267" type="Bolinha" />
                 <action id="-4" name="Set position to another object" sid="6921429280797062" type="playerAnim">
                     <param id="0" name="Object">player</param>
                     <param id="1" name="Image point (optional)">0</param>
@@ -20,6 +36,65 @@
                 <action id="4" name="Set animation" sid="7649074634257544" type="playerAnim">
                     <param id="0" name="Animation">&quot;Default&quot;</param>
                     <param id="1" name="From">1</param>
+                </action>
+                <action id="0" name="Load JSON" sid="4124394286927907" type="LoadJSONTCC" />
+                <action id="-16" name="Set opacity" sid="2874902008453546" type="perguntas">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-3" name="Set position" sid="3391557660469357" type="pontuacao">
+                    <param id="0" name="X">640</param>
+                    <param id="1" name="Y">786</param>
+                </action>
+                <action behavior="Pin" id="0" name="Pin to object" sid="2957221545263083" type="pontoTexto">
+                    <param id="0" name="Pin to">pontuacao</param>
+                    <param id="1" name="Mode">0</param>
+                </action>
+                <action behavior="Pin" id="0" name="Pin to object" sid="5799803322160047" type="pontuacaoTexto">
+                    <param id="0" name="Pin to">pontuacao</param>
+                    <param id="1" name="Mode">0</param>
+                </action>
+                <action id="5" name="Set web font" sid="2449844142295598" type="pontuacaoTexto">
+                    <param id="0" name="Family name">&quot;please_write_me_a_songmedium&quot;</param>
+                    <param id="1" name="CSS URL">&quot;stylesheet.css&quot;</param>
+                </action>
+                <action id="5" name="Set web font" sid="79371357010719" type="pontoTexto">
+                    <param id="0" name="Family name">&quot;please_write_me_a_songmedium&quot;</param>
+                    <param id="1" name="CSS URL">&quot;stylesheet.css&quot;</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="9627875626005166" type="textoPerguntas">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="9060771473698778" type="textoRespostas">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="0" name="Set text" sid="9006910095765269" type="pontoTexto">
+                    <param id="0" name="Text">&quot;&quot;</param>
+                </action>
+                <action disabled="1" id="4" name="Set font color" sid="7645855472775188" type="pontoTexto">
+                    <param id="0" name="Color">rgb(41, 90, 165)</param>
+                </action>
+                <action id="-12" name="Set group active" sid="6381412195315874" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="1200485977154306" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1aFFTCC&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+                <action id="-16" name="Wait" sid="221082421156426" type="System">
+                    <param id="0" name="Seconds">4</param>
+                </action>
+                <action id="-12" name="Set group active" sid="9074572915783078" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1aFFTCC&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="7732610344217706" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+                <action id="-12" name="Set group active" sid="6197974535981543" type="System">
+                    <param id="0" name="Group name">&quot;gerarPerguntasJsonFFTCC&quot;</param>
+                    <param id="1" name="State">1</param>
                 </action>
             </actions>
         </event-block>
@@ -37,10 +112,87 @@
                     <param id="1" name="Height">(1-((720-playerAnim.Y)*0.000555))*144</param>
                 </action>
                 <action id="0" name="Set text" sid="9341638240819411" type="pontuacaoTexto">
-                    <param id="0" name="Text">&quot;Rendimento acadêmico: &quot; &amp; pontos</param>
+                    <param id="0" name="Text">pontos</param>
                 </action>
             </actions>
         </event-block>
+        <event-block disabled="1" sid="995577930556153">
+            <conditions>
+                <condition id="0" name="On collision with another object" sid="4075759583121737" type="player">
+                    <param id="0" name="Object">Bolinha</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action behavior="Flash" id="0" name="Flash" sid="2404735242087543" type="playerAnim">
+                    <param id="0" name="&apos;On&apos; time">0.1</param>
+                    <param id="1" name="&apos;Off&apos; time">0.1</param>
+                    <param id="2" name="Duration">1.2</param>
+                </action>
+                <action id="-10" name="Add to" sid="7393677496525183" type="System">
+                    <param id="0" name="Variable">pontos</param>
+                    <param id="1" name="Value">-100</param>
+                </action>
+                <action id="0" name="Set text" sid="4426585644377495" type="pontoTexto">
+                    <param id="0" name="Text">&quot;-100&quot;</param>
+                </action>
+                <action id="4" name="Set font color" sid="1523336498052841" type="pontoTexto">
+                    <param id="0" name="Color">rgb(235, 17, 53)</param>
+                </action>
+                <action id="-12" name="Set group active" sid="3364177370232788" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="5109065335373116" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1aFFTCC&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+                <action id="-16" name="Wait" sid="6365588008076536" type="System">
+                    <param id="0" name="Seconds">4</param>
+                </action>
+                <action id="-12" name="Set group active" sid="8045871398606579" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1aFFTCC&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="6744886047401694" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-group description="" sid="586130633962506" title="Pontuacao1aFFTCC">
+            <sub-events>
+                <event-block sid="2435567400937132">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="5241781660665097" type="pontuacao">
+                            <param id="0" name="Comparison">5</param>
+                            <param id="1" name="Y co-ordinate">636</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="8843318482375879" type="pontuacao">
+                            <param id="0" name="Y">pontuacao.Y-3</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="2107702648457552" title="Pontuacao1bFFTCC">
+            <sub-events>
+                <event-block sid="7337881548298292">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="2067334999402726" type="pontuacao">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Y co-ordinate">786</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="3748328858010294" type="pontuacao">
+                            <param id="0" name="Y">pontuacao.Y+3</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
         <comment>Grupo onde estão localizados todas as funções que criam o efeito de 3D na fase</comment>
         <event-group description="" sid="4489698396721648" title="Efeito3DTCC">
             <sub-events>
@@ -75,6 +227,62 @@
                         </action>
                         <action id="-15" name="Set visible" sid="8277224692461334" type="TochaDirInfCenario">
                             <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="9496494960780354" type="TochaDirSup">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="8635327979207062" type="TochaDirSupCenario">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="4100492495859457" type="TochaDirSupCenario">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="8445424394595572" type="TochaEsqInf">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="4067960421952066" type="TochaEsqInfCenario">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="2757672173606363" type="TochaEsqInfCenario">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="294023069322571" type="TochaEsqSup">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="1394079032272324" type="TochaEsqSupCenario">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="1156555177207543" type="TochaEsqSupCenario">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Tochas inferiores</comment>
+                <event-block sid="3903938950322889">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="5593542955559484" type="player">
+                            <param id="0" name="Comparison">4</param>
+                            <param id="1" name="Y co-ordinate">624</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="2660555447324055" type="TochaDirInf">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="6655671974238163" type="TochaDirInfCenario">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="3327920927243328" type="TochaDirInfCenario">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="8652960900126427" type="TochaEsqInf">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="9732259838783115" type="TochaEsqInfCenario">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="5065217758615289" type="TochaEsqInfCenario">
+                            <param id="0" name="Visibility">0</param>
                         </action>
                     </actions>
                 </event-block>
@@ -133,6 +341,755 @@
                                 </action>
                                 <action id="-15" name="Set visible" sid="5757778863634367" type="ColunaDirInfCenario">
                                     <param id="0" name="Visibility">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Tochas superiores</comment>
+                <event-block sid="9594849942483215">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="7480274256574263" type="player">
+                            <param id="0" name="Comparison">4</param>
+                            <param id="1" name="Y co-ordinate">292</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="1337776256743952" type="TochaDirSup">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="706187335411244" type="TochaDirSupCenario">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="4706518800350998" type="TochaDirSupCenario">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="4455519675228514" type="TochaEsqSup">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="8875565733607941" type="TochaEsqSupCenario">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="1918361421628519" type="TochaEsqSupCenario">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <comment>Controla os diálogos entre a personagem e o diploma. Por enquanto ainda não implementado.</comment>
+        <event-group description="" disabled="1" sid="6165545514467218" title="dialogoTCC">
+            <sub-events>
+                <event-block disabled="1" sid="1884421490486591">
+                    <conditions />
+                    <actions />
+                    <sub-events>
+                        <comment>Como neste diálogo é sempre Diploma - Personagem - Diploma... é possível controlar o local onde o balão de fala vai aparecer deste modo</comment>
+                        <comment>Fala Diploma</comment>
+                        <event-block disabled="1" sid="9047234160619637">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="3316282211951495" type="System">
+                                    <param id="0" name="First value">fraseAtualGAL % 2</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Set position" sid="4392815089175737" type="BalaoDialogo">
+                                    <param id="0" name="X">335</param>
+                                    <param id="1" name="Y">164</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="1605598438406289" type="DialogoPersonagem">
+                                    <param id="0" name="X">178</param>
+                                    <param id="1" name="Y">73</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="5232277600265197" type="Dialogos">
+                                    <param id="0" name="X">110</param>
+                                    <param id="1" name="Y">99</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>Fala Personagem</comment>
+                        <event-block disabled="1" sid="2757364721462507">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="7018420972416253" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Set position" sid="6123979219139684" type="BalaoDialogo">
+                                    <param id="0" name="X">player.X + 179</param>
+                                    <param id="1" name="Y">player.Y - 126</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="6726351252957261" type="DialogoPersonagem">
+                                    <param id="0" name="X">player.X + 22</param>
+                                    <param id="1" name="Y">player.Y - 218</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="2326175334291855" type="Dialogos">
+                                    <param id="0" name="X">player.X - 46</param>
+                                    <param id="1" name="Y">player.Y - 191</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block disabled="1" sid="7864321511827534">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="6139243193522705" type="System">
+                            <param id="0" name="Variable">carregarDialogoChave</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block disabled="1" sid="6947965155873984">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="1153563277756434" type="System" />
+                                <condition id="-10" name="Compare opacity" sid="8122682219136367" type="BalaoDialogo">
+                                    <param id="0" name="Comparison">2</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="6391924252284335" type="BalaoDialogo">
+                                    <param id="0" name="Opacity">BalaoDialogo.Opacity + 2.5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block disabled="1" sid="1063766848155857">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="2666635763728809" type="BalaoDialogo">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="7064480727097253" type="System">
+                                    <param id="0" name="Variable">carregarDialogoChave</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="3750448601983108" type="System">
+                                    <param id="0" name="Variable">inserirDialogosGAL</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block disabled="1" sid="4212819327572353">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="1978286095861282" type="System">
+                            <param id="0" name="Variable">inserirDialogosGAL</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set text" sid="9850614298075376" type="DialogoPersonagem">
+                            <param id="0" name="Text">DialogosJSON.GetData(&quot;Galeria&quot; &amp; fraseAtualGAL, 0)</param>
+                        </action>
+                        <action id="0" name="Set text" sid="6097330422489349" type="Dialogos">
+                            <param id="0" name="Text">DialogosJSON.GetData(&quot;Galeria&quot; &amp; fraseAtualGAL, 1)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="5736202123258391" type="System">
+                            <param id="0" name="Variable">carregarDialogosGAL</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="734770583771572" type="System">
+                            <param id="0" name="Variable">inserirDialogosGAL</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block disabled="1" sid="6562674761415342">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="2057155147115209" type="System">
+                            <param id="0" name="Variable">carregarDialogosGAL</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block disabled="1" sid="3865695801829001">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="4762155467233548" type="System" />
+                                <condition id="-10" name="Compare opacity" sid="1083983620420042" type="Dialogos">
+                                    <param id="0" name="Comparison">2</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="6420037409351896" type="DialogoPersonagem">
+                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity + 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="9486876649278532" type="Dialogos">
+                                    <param id="0" name="Opacity">Dialogos.Opacity + 2.5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block disabled="1" sid="128118744092674">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="6676818522652748" type="Dialogos">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="2300360818317934" type="System">
+                                    <param id="0" name="Variable">avancarDialogosGAL</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="6277415436725126" type="System">
+                                    <param id="0" name="Variable">carregarDialogosGAL</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block disabled="1" sid="6012476314306541">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="993470401340621" type="System">
+                            <param id="0" name="Variable">avancarDialogosGAL</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block disabled="1" sid="967206266723503">
+                            <conditions>
+                                <condition id="2" name="Key is down" sid="7262807909701723" type="Keyboard">
+                                    <param id="0" name="Key">69 (E)</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="2835356462809307" type="System">
+                                    <param id="0" name="Variable">descarregarDialogosGAL</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="1151726365250803" type="System">
+                                    <param id="0" name="Variable">avancarDialogosGAL</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block disabled="1" sid="3684460480267711">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="6643990683784331" type="System">
+                            <param id="0" name="Variable">descarregarDialogosGAL</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block disabled="1" sid="9752645512717703">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="8533615797836688" type="System" />
+                                <condition id="-10" name="Compare opacity" sid="2022028121915767" type="Dialogos">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="4004250315959297" type="DialogoPersonagem">
+                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity - 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="2982996949466901" type="Dialogos">
+                                    <param id="0" name="Opacity">Dialogos.Opacity - 2.5</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <comment>Esta comparação é devido a um bug caso o consiga avançar o texto mais rápido do que o ele sendo limpo</comment>
+                                <event-block disabled="1" sid="6235115272108113">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="5468776926063931" type="System">
+                                            <param id="0" name="Variable">carregarDialogosGAL</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="7544727634461249" type="System">
+                                            <param id="0" name="Variable">carregarDialogoChave</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block disabled="1" sid="9971774148349686">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="5489908162637236" type="Dialogos">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block disabled="1" sid="1655110943677482">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="8281589974273678" type="System">
+                                            <param id="0" name="First value">fraseAtualGAL</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">tamanhoDialogoGAL</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block disabled="1" sid="8780816480840603">
+                                            <conditions>
+                                                <condition id="-1" name="Every tick" sid="8648319375542872" type="System" />
+                                                <condition id="-10" name="Compare opacity" sid="4855550661841529" type="BalaoDialogo">
+                                                    <param id="0" name="Comparison">4</param>
+                                                    <param id="1" name="Opacity">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Set opacity" sid="8209586396246137" type="BalaoDialogo">
+                                                    <param id="0" name="Opacity">BalaoDialogo.Opacity - 2.5</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <comment>Embora será fechada a caixa de diálogo, adiciona-se um no indice da frase pois podem ter mais diálogos depois</comment>
+                                        <event-block disabled="1" sid="8636057356561711">
+                                            <conditions>
+                                                <condition id="-10" name="Compare opacity" sid="9125666550510349" type="BalaoDialogo">
+                                                    <param id="0" name="Comparison">0</param>
+                                                    <param id="1" name="Opacity">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-10" name="Add to" sid="4270841858966979" type="System">
+                                                    <param id="0" name="Variable">fraseAtualGAL</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="4135822565429336" type="System">
+                                                    <param id="0" name="Variable">descarregarDialogosGAL</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                                <action id="-12" name="Set group active" sid="3130328104406448" type="System">
+                                                    <param id="0" name="Group name">&quot;dialogoGaleria&quot;</param>
+                                                    <param id="1" name="State">0</param>
+                                                </action>
+                                                <action id="-12" name="Set group active" sid="4849866285031774" type="System">
+                                                    <param id="0" name="Group name">&quot;playerMoveGAL&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                            <sub-events>
+                                                <comment>Ativar a parte escura</comment>
+                                                <event-block disabled="1" sid="6260428200640797">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="2864854961540279" type="System">
+                                                            <param id="0" name="Variable">tamanhoDialogoGAL</param>
+                                                            <param id="1" name="Comparison">1</param>
+                                                            <param id="2" name="Value">4</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-10" name="Add to" sid="2663111965761124" type="System">
+                                                            <param id="0" name="Variable">pontos</param>
+                                                            <param id="1" name="Value">100</param>
+                                                        </action>
+                                                        <action id="0" name="Set text" sid="8837233135233388" type="pontoTexto">
+                                                            <param id="0" name="Text">&quot;100&quot;</param>
+                                                        </action>
+                                                        <action id="4" name="Set font color" sid="2891416925168782" type="pontoTexto">
+                                                            <param id="0" name="Color">rgb(41, 90, 165)</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="3318981940142599" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao1bGAL&quot;</param>
+                                                            <param id="1" name="State">0</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="9647441922042794" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao1aGAL&quot;</param>
+                                                            <param id="1" name="State">1</param>
+                                                        </action>
+                                                        <action id="-16" name="Wait" sid="3606906230269614" type="System">
+                                                            <param id="0" name="Seconds">4</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="411444160248753" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao1aGAL&quot;</param>
+                                                            <param id="1" name="State">0</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="7084566275380045" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao1bGAL&quot;</param>
+                                                            <param id="1" name="State">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block disabled="1" sid="5630013193041494">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="3794480225929178" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="9286553841062039" type="System">
+                                            <param id="0" name="Variable">fraseAtualGAL</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="4555938386400547" type="System">
+                                            <param id="0" name="Variable">inserirDialogosGAL</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="3773442136975277" type="System">
+                                            <param id="0" name="Variable">descarregarDialogosGAL</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <comment>Importa as perguntas que estiverem em um arquivo .json</comment>
+        <event-group description="" sid="407833997573688" title="gerarPerguntasJsonFFTCC">
+            <sub-events>
+                <comment>Carrega a posição onde estará as letras da alternativa e o texto da pergunta. Não é possível centralizar o texto pois não dá para obter o tamanho do texto localizado no arquivo .json</comment>
+                <event-block sid="4018207027143204">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="5626822018945053" type="System">
+                            <param id="0" name="Variable">carregarTextosTCC</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set text" sid="9922866634395319" type="textoPerguntas">
+                            <param id="0" name="Text">perguntaTCC &amp; &quot;- &quot; &amp; LoadJSONTCC.GetData(perguntaTCC, 0)</param>
+                        </action>
+                        <action disabled="1" id="-1" name="Set X" sid="918859528342287" type="textoPerguntas">
+                            <param id="0" name="X">(perguntas.Width - textoPerguntas.TextWidth + 252)/2</param>
+                        </action>
+                        <action id="0" name="Set text" sid="6125302347176068" type="textoRespostas">
+                            <param id="0" name="Text">&quot;A- &quot; &amp; LoadJSONTCC.GetData(perguntaTCC, 1) &amp; &quot;  B- &quot; &amp; LoadJSONTCC.GetData(perguntaTCC, 2) &amp; &quot;  C- &quot; &amp; LoadJSONTCC.GetData(perguntaTCC, 3) &amp; &quot;  D- &quot; &amp; LoadJSONTCC.GetData(perguntaTCC, 4) &amp; &quot;  E- &quot; &amp; LoadJSONTCC.GetData(perguntaTCC, 5)</param>
+                        </action>
+                        <action disabled="1" id="-1" name="Set X" sid="9523141288566661" type="textoRespostas">
+                            <param id="0" name="X">(perguntas.Width - textoRespostas.TextWidth + 252) / 2</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="4416427829563817" type="System">
+                            <param id="0" name="Variable">respostaCertaTCC</param>
+                            <param id="1" name="Value">LoadJSONTCC.GetData(perguntaTCC,6)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="9384548464053497" type="System">
+                            <param id="0" name="Variable">carregarPerguntasTCC</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="7566127033317842" type="System">
+                            <param id="0" name="Variable">carregarTextosTCC</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Carrega na tela o texto da pergunta e as alternativas na ponte</comment>
+                <event-block sid="5286753458580869">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="2025878918700423" type="System">
+                            <param id="0" name="Variable">carregarPerguntasTCC</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="7877580689674407">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="3150852197761893" type="System" />
+                                <condition id="-10" name="Compare opacity" sid="6098837673025368" type="perguntas">
+                                    <param id="0" name="Comparison">2</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="2641154664611221" type="perguntas">
+                                    <param id="0" name="Opacity">perguntas.Opacity + 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="8468324499048207" type="textoPerguntas">
+                                    <param id="0" name="Opacity">textoPerguntas.Opacity + 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="1706482227902222" type="textoRespostas">
+                                    <param id="0" name="Opacity">textoRespostas.Opacity + 2.5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="2551488609303346">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="7931251448544622" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="7265018292057465" type="System">
+                                    <param id="0" name="Variable">verificarAlternativaTCC</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="5351694586913291" type="System">
+                                    <param id="0" name="Variable">carregarPerguntasTCC</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Descarrega na tela o texto da pergunta e as alternativas na ponte</comment>
+                <event-block sid="6077847565891277">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="9585350852058588" type="System">
+                            <param id="0" name="Variable">descarregarPerguntasTCC</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="1398330881798207">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="1608470790348047" type="System" />
+                                <condition id="-10" name="Compare opacity" sid="7465190865508464" type="perguntas">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="5004410695619337" type="perguntas">
+                                    <param id="0" name="Opacity">perguntas.Opacity - 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="3767536613095061" type="textoPerguntas">
+                                    <param id="0" name="Opacity">textoPerguntas.Opacity - 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="9055473113853928" type="textoRespostas">
+                                    <param id="0" name="Opacity">textoRespostas.Opacity - 2.5</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <comment>Esta comparação é devido a um bug caso ocorra uma escolha de alternativa mais rápida do que o texto sendo limpo</comment>
+                                <event-block sid="7231355149086325">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="8662733787154967" type="System">
+                                            <param id="0" name="Variable">carregarPerguntasTCC</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="8481203326007977" type="System">
+                                            <param id="0" name="Variable">carregarPerguntasTCC</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="5008714877110425">
+                                    <conditions>
+                                        <condition id="-10" name="Compare opacity" sid="9475024979464372" type="perguntas">
+                                            <param id="0" name="Comparison">0</param>
+                                            <param id="1" name="Opacity">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="8424982893702807" type="System">
+                                            <param id="0" name="Group name">&quot;gerarPerguntasJsonFFTCC&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="106161790845075">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="7180917525376069" type="textoRespostas">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="2542760056326775" type="System">
+                                    <param id="0" name="Variable">carregarTextosTCC</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="4693757343293364" type="System">
+                                    <param id="0" name="Variable">descarregarPerguntasTCC</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Parte de verificar as alternativas</comment>
+                <event-block sid="5716842043748232">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="3648989301167759" type="System">
+                            <param id="0" name="Variable">verificarAlternativaTCC</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                        <condition id="1" name="Is overlapping another object" sid="6729553706410268" type="player">
+                            <param id="0" name="Object">AlternativasChao</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="5793724562251928">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="3237814420960202" type="System">
+                                    <param id="0" name="First value">alternativaCM</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">respostaCertaCM</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Add to" sid="692655055517221" type="System">
+                                    <param id="0" name="Variable">perguntaTCC</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <comment>É o que &quot;muda a cor&quot; da alternativa para azul</comment>
+                                <event-block sid="3937098800804522">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="9699436489564353" type="AlternativasChao">
+                                            <param id="0" name="Unique ID">VariavelUID</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <comment>Se já estiver azul não muda</comment>
+                                        <event-block sid="4539415928947569">
+                                            <conditions>
+                                                <condition id="3" name="Compare frame" sid="7123498379577303" type="AlternativasChao">
+                                                    <param id="0" name="Comparison">1</param>
+                                                    <param id="1" name="Number">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="5" name="Set frame" sid="7719639418188702" type="AlternativasChao">
+                                                    <param id="0" name="Frame number">0</param>
+                                                </action>
+                                                <action disabled="1" id="-10" name="Add to" sid="3125939558383115" type="System">
+                                                    <param id="0" name="Variable">pontos</param>
+                                                    <param id="1" name="Value">100</param>
+                                                </action>
+                                                <action disabled="1" id="0" name="Set text" sid="6647053803839729" type="pontoTexto">
+                                                    <param id="0" name="Text">&quot;100&quot;</param>
+                                                </action>
+                                                <action disabled="1" id="4" name="Set font color" sid="6474508215868928" type="pontoTexto">
+                                                    <param id="0" name="Color">rgb(41, 90, 165)</param>
+                                                </action>
+                                                <action disabled="1" id="-12" name="Set group active" sid="6681667837129795" type="System">
+                                                    <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
+                                                    <param id="1" name="State">0</param>
+                                                </action>
+                                                <action disabled="1" id="-12" name="Set group active" sid="873640705782259" type="System">
+                                                    <param id="0" name="Group name">&quot;Pontuacao1aFFTCC&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                                <action disabled="1" id="-16" name="Wait" sid="4376834316743454" type="System">
+                                                    <param id="0" name="Seconds">4</param>
+                                                </action>
+                                                <action disabled="1" id="-12" name="Set group active" sid="8795027749384203" type="System">
+                                                    <param id="0" name="Group name">&quot;Pontuacao1aFFTCC&quot;</param>
+                                                    <param id="1" name="State">0</param>
+                                                </action>
+                                                <action disabled="1" id="-12" name="Set group active" sid="1268785913568789" type="System">
+                                                    <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="8816027619610096">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="3013058512679844" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Set position" sid="2638783148028285" type="player">
+                                    <param id="0" name="X">27</param>
+                                    <param id="1" name="Y">449</param>
+                                </action>
+                                <action behavior="Flash" id="0" name="Flash" sid="8359306057322136" type="playerAnim">
+                                    <param id="0" name="&apos;On&apos; time">0.1</param>
+                                    <param id="1" name="&apos;Off&apos; time">0.1</param>
+                                    <param id="2" name="Duration">1.2</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <comment>É o que &quot;muda a cor&quot; da alternativa para vermelho</comment>
+                                <event-block sid="6723260306656786">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="5931855053485519" type="AlternativasChao">
+                                            <param id="0" name="Unique ID">VariavelUID</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <comment>Se já estiver vermelho não muda. Quanto a questão dos pontos, ele vai reduzir aqui na primeira vez que o jogador errar a alternativa e nas outras vezes no evento no começo</comment>
+                                        <event-block sid="9316350686877687">
+                                            <conditions>
+                                                <condition id="3" name="Compare frame" sid="4223081857300412" type="AlternativasChao">
+                                                    <param id="0" name="Comparison">1</param>
+                                                    <param id="1" name="Number">1</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="5" name="Set frame" sid="3794157861836836" type="AlternativasChao">
+                                                    <param id="0" name="Frame number">1</param>
+                                                </action>
+                                                <action id="-10" name="Add to" sid="1397937927894916" type="System">
+                                                    <param id="0" name="Variable">pontos</param>
+                                                    <param id="1" name="Value">-100</param>
+                                                </action>
+                                                <action id="0" name="Set text" sid="334151765304167" type="pontoTexto">
+                                                    <param id="0" name="Text">&quot;-100&quot;</param>
+                                                </action>
+                                                <action id="4" name="Set font color" sid="6707721558455364" type="pontoTexto">
+                                                    <param id="0" name="Color">rgb(235, 17, 53)</param>
+                                                </action>
+                                                <action id="-12" name="Set group active" sid="6160106383776267" type="System">
+                                                    <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
+                                                    <param id="1" name="State">0</param>
+                                                </action>
+                                                <action id="-12" name="Set group active" sid="627896034043387" type="System">
+                                                    <param id="0" name="Group name">&quot;Pontuacao1aFFTCC&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                                <action id="-16" name="Wait" sid="9859058541980876" type="System">
+                                                    <param id="0" name="Seconds">4</param>
+                                                </action>
+                                                <action id="-12" name="Set group active" sid="1647777185602226" type="System">
+                                                    <param id="0" name="Group name">&quot;Pontuacao1aFFTCC&quot;</param>
+                                                    <param id="1" name="State">0</param>
+                                                </action>
+                                                <action id="-12" name="Set group active" sid="8188343740471719" type="System">
+                                                    <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="9921088284773163">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="9784561846871037" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="7310104937253358" type="System">
+                                    <param id="0" name="Variable">verificarAlternativaTCC</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="2602810595519853" type="System">
+                                    <param id="0" name="Variable">descarregarPerguntasTCC</param>
+                                    <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
                         </event-block>
