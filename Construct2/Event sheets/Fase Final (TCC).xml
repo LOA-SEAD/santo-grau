@@ -17,13 +17,24 @@
         <variable constant="0" name="verificarAlternativaTCC" sid="9519960439893545" static="0" type="number">0</variable>
         <comment>Criado para controlar o descarregamento das perguntas</comment>
         <variable constant="0" name="descarregarPerguntasTCC" sid="605959177600716" static="0" type="number">0</variable>
+        <comment>Controla o número de bolinhas que o monstro tacará na personagem</comment>
+        <variable constant="0" name="numeroBolinhas" sid="7283443753727402" static="0" type="number">2</variable>
+        <comment>Usado para definir qual é a bolinha que está sendo atirada</comment>
+        <variable constant="0" name="bolinhaCriada" sid="5616519829245582" static="0" type="number">0</variable>
+        <comment>Usado para variar onde será lançada a primeira bolinha, afetando todas as outras já que cada um é lançada 20º acima</comment>
+        <variable constant="0" name="fatorAleatorio" sid="2716728850718649" static="0" type="number">0</variable>
+        <comment>Valor aleatório de qual bolinha ficará no chão para ser arremeçada</comment>
+        <variable constant="0" name="bolinhaParaTacar" sid="9828862306270733" static="0" type="number">0</variable>
+        <comment>ID da bolinha que pode ser tacada</comment>
+        <variable constant="0" name="IDBolinhaParaTacar" sid="8461671428802606" static="0" type="number">0</variable>
         <event-block sid="9765162608650695">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="7057668097993137" type="System" />
             </conditions>
             <actions>
                 <action id="2" name="Stop" sid="3820824243619726" type="Colunas" />
-                <action id="2" name="Stop" sid="2158387185574569" type="Monstro" />
+                <action id="2" name="Stop" sid="2158387185574569" type="MonstroInferior" />
+                <action id="2" name="Stop" sid="6598208786233197" type="MonstroSuperior" />
                 <action id="2" name="Stop" sid="3210088745454267" type="Bolinha" />
                 <action id="-4" name="Set position to another object" sid="6921429280797062" type="playerAnim">
                     <param id="0" name="Object">player</param>
@@ -96,6 +107,14 @@
                     <param id="0" name="Group name">&quot;gerarPerguntasJsonFFTCC&quot;</param>
                     <param id="1" name="State">1</param>
                 </action>
+                <action id="-9" name="Set value" sid="1995612674424417" type="System">
+                    <param id="0" name="Variable">fatorAleatorio</param>
+                    <param id="1" name="Value">random(0, 21)</param>
+                </action>
+                <action id="-9" name="Set value" sid="2379231184719015" type="System">
+                    <param id="0" name="Variable">bolinhaParaTacar</param>
+                    <param id="1" name="Value">random(0, numeroBolinhas)</param>
+                </action>
             </actions>
         </event-block>
         <event-block sid="8935176459426232">
@@ -111,12 +130,20 @@
                     <param id="0" name="Width">(1-((720-playerAnim.Y)*0.000555))*82</param>
                     <param id="1" name="Height">(1-((720-playerAnim.Y)*0.000555))*144</param>
                 </action>
+                <action id="-7" name="Set size" sid="4846279008801372" type="MonstroInferior">
+                    <param id="0" name="Width">(1-((720-MonstroInferior.Y)*0.000555))*571</param>
+                    <param id="1" name="Height">(1-((720-MonstroInferior.Y)*0.000555))*512</param>
+                </action>
+                <action id="-7" name="Set size" sid="1864785623874803" type="MonstroSuperior">
+                    <param id="0" name="Width">(1-((720-MonstroSuperior.Y)*0.000555))*571</param>
+                    <param id="1" name="Height">(1-((720-MonstroSuperior.Y)*0.000555))*512</param>
+                </action>
                 <action id="0" name="Set text" sid="9341638240819411" type="pontuacaoTexto">
                     <param id="0" name="Text">pontos</param>
                 </action>
             </actions>
         </event-block>
-        <event-block disabled="1" sid="995577930556153">
+        <event-block sid="995577930556153">
             <conditions>
                 <condition id="0" name="On collision with another object" sid="4075759583121737" type="player">
                     <param id="0" name="Object">Bolinha</param>
@@ -130,10 +157,10 @@
                 </action>
                 <action id="-10" name="Add to" sid="7393677496525183" type="System">
                     <param id="0" name="Variable">pontos</param>
-                    <param id="1" name="Value">-100</param>
+                    <param id="1" name="Value">-50</param>
                 </action>
                 <action id="0" name="Set text" sid="4426585644377495" type="pontoTexto">
-                    <param id="0" name="Text">&quot;-100&quot;</param>
+                    <param id="0" name="Text">&quot;-50&quot;</param>
                 </action>
                 <action id="4" name="Set font color" sid="1523336498052841" type="pontoTexto">
                     <param id="0" name="Color">rgb(235, 17, 53)</param>
@@ -158,6 +185,165 @@
                     <param id="1" name="State">1</param>
                 </action>
             </actions>
+        </event-block>
+        <event-block disabled="1" sid="3634717291346176">
+            <conditions>
+                <condition id="-6" name="Every X seconds" sid="9821395773536191" type="System">
+                    <param id="0" name="Interval (seconds)">3.0</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="5" name="Set frame" sid="5053401563383806" type="MonstroInferior">
+                    <param id="0" name="Frame number">1</param>
+                </action>
+                <action id="5" name="Set frame" sid="5077240280761444" type="MonstroSuperior">
+                    <param id="0" name="Frame number">1</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="961167877358313">
+            <conditions>
+                <condition id="-6" name="Every X seconds" sid="4759814940678856" type="System">
+                    <param id="0" name="Interval (seconds)">8.0 - (1.0 * numeroBolinhas)</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <comment>Criação das bolinhas jogadas pelo monstro, com o número delas variando conforme a quantidade de dano que o monstro já sofreu</comment>
+                <event-block sid="5856810624499208">
+                    <conditions>
+                        <condition id="-10" name="For" sid="325195492158382" type="System">
+                            <param id="0" name="Name">&quot;&quot;</param>
+                            <param id="1" name="Start index">1</param>
+                            <param id="2" name="End index">numeroBolinhas</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Create object" sid="2583611773932871" type="System">
+                            <param id="0" name="Object to create">Bolinha</param>
+                            <param id="1" name="Layer">&quot;FundoAcima&quot;</param>
+                            <param id="2" name="X">810</param>
+                            <param id="3" name="Y">400</param>
+                        </action>
+                        <action id="2" name="Stop" sid="5788153304984247" type="Bolinha" />
+                        <action behavior="Bullet" id="5" name="Set enabled" sid="1556419099682961" type="Bolinha">
+                            <param id="0" name="State">1</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <comment>Aqui é definido o ângulo onde a bolinha é tacada e a velocidade</comment>
+                        <event-block sid="1580107450617517">
+                            <conditions>
+                                <condition id="-17" name="Pick top/bottom" sid="1120062495179796" type="Bolinha">
+                                    <param id="0" name="Which">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="2312753347558049" type="Bolinha">
+                                    <param id="0" name="Angle">180 - (numeroBolinhas * 10) + (20 * bolinhaCriada) + fatorAleatorio</param>
+                                </action>
+                                <action behavior="Bullet" id="0" name="Set speed" sid="1294276807491177" type="Bolinha">
+                                    <param id="0" name="Speed">(100 * numeroBolinhas) - 100</param>
+                                </action>
+                                <action behavior="Bullet" disabled="1" id="2" name="Set gravity" sid="9934737139546691" type="Bolinha">
+                                    <param id="0" name="Gravity">5 * (numeroBolinhas - 1)</param>
+                                </action>
+                                <action id="-10" name="Add to" sid="3617233402949727" type="System">
+                                    <param id="0" name="Variable">bolinhaCriada</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Apenas para testes a parte de editar o número de bolinhas atiradas</comment>
+                <event-block sid="1573889761972644">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="6106354352313572" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="3401055232888638" type="System">
+                            <param id="0" name="Variable">bolinhaCriada</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-10" name="Add to" sid="2785657667464432" type="System">
+                            <param id="0" name="Variable">numeroBolinhas</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="1790471606744508" type="System">
+                            <param id="0" name="Variable">fatorAleatorio</param>
+                            <param id="1" name="Value">random(0, 21)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="8676751353289389" type="System">
+                            <param id="0" name="Variable">bolinhaParaTacar</param>
+                            <param id="1" name="Value">random(0, numeroBolinhas)</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="3404166711086221">
+                            <conditions>
+                                <condition id="-17" name="Pick top/bottom" sid="8541072818502896" type="Bolinha">
+                                    <param id="0" name="Which">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="4907439788654313" type="System">
+                                    <param id="0" name="Variable">IDBolinhaParaTacar</param>
+                                    <param id="1" name="Value">Bolinha.UID + bolinhaParaTacar</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="6998950019153331">
+                                    <conditions>
+                                        <condition id="-23" name="While" sid="20664666444938" type="System" />
+                                        <condition behavior="Bullet" id="1" name="Compare distance travelled" sid="838674789049983" type="Bolinha">
+                                            <param id="0" name="Comparison">3</param>
+                                            <param id="1" name="Distance">350</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                </event-block>
+                                <event-block sid="3836109546916114">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="35871850004169" type="System" />
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <comment>COLOCAR UM WAIT DE TEMPO DE 3 BOLINHAS PARA DESTRUIR ESSA INSTÂNCIA</comment>
+                                        <event-block sid="1906260726613477">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="4554604348061881" type="Bolinha">
+                                                    <param id="0" name="Unique ID">IDBolinhaParaTacar</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="6047962766314198" type="Bolinha">
+                                                    <param id="0" name="Speed">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="6306511890785285">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="1219309586530135" type="System">
+                                    <param id="0" name="Variable">numeroBolinhas</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">7</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="3792724115505786" type="System">
+                                    <param id="0" name="Variable">numeroBolinhas</param>
+                                    <param id="1" name="Value">2</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
         </event-block>
         <event-group description="" sid="586130633962506" title="Pontuacao1aFFTCC">
             <sub-events>
