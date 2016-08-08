@@ -11,6 +11,8 @@
         <variable constant="0" name="perguntaTCC" sid="4155409836309671" static="0" type="number">1</variable>
         <comment>Resposta correta importada do .json</comment>
         <variable constant="0" name="respostaCertaTCC" sid="3820401929034189" static="0" type="text"></variable>
+        <comment>Alternativa escolhida pelo jogador</comment>
+        <variable constant="0" name="alternativaTCC" sid="4342135068651746" static="0" type="text"></variable>
         <comment>Criado para controlar a aparição das perguntas</comment>
         <variable constant="0" name="carregarPerguntasTCC" sid="1676222007776343" static="0" type="number">0</variable>
         <comment>Para conferir a alternativa</comment>
@@ -27,6 +29,10 @@
         <variable constant="0" name="bolinhaParaTacar" sid="9828862306270733" static="0" type="number">0</variable>
         <comment>ID da bolinha que pode ser tacada</comment>
         <variable constant="0" name="IDBolinhaParaTacar" sid="8461671428802606" static="0" type="number">0</variable>
+        <comment>Variavel onde será armazenada a distância que determinada bolinha irá percorrer antes de parar</comment>
+        <variable constant="0" name="distanciaBolinha" sid="4513061841983165" static="0" type="number">0</variable>
+        <comment>Usado para definir qual é a alternativa que está sendo definida a posição</comment>
+        <variable constant="0" name="alternativaPosicionada" sid="6323849513271556" static="0" type="number">341</variable>
         <event-block sid="9765162608650695">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="7057668097993137" type="System" />
@@ -36,6 +42,10 @@
                 <action id="2" name="Stop" sid="2158387185574569" type="MonstroInferior" />
                 <action id="2" name="Stop" sid="6598208786233197" type="MonstroSuperior" />
                 <action id="2" name="Stop" sid="3210088745454267" type="Bolinha" />
+                <action id="2" name="Stop" sid="8907106147658914" type="AlternativasChao" />
+                <action id="-16" name="Set opacity" sid="5715121723097438" type="AlternativasChao">
+                    <param id="0" name="Opacity">0</param>
+                </action>
                 <action id="-4" name="Set position to another object" sid="6921429280797062" type="playerAnim">
                     <param id="0" name="Object">player</param>
                     <param id="1" name="Image point (optional)">0</param>
@@ -110,10 +120,6 @@
                 <action id="-9" name="Set value" sid="1995612674424417" type="System">
                     <param id="0" name="Variable">fatorAleatorio</param>
                     <param id="1" name="Value">random(0, 21)</param>
-                </action>
-                <action id="-9" name="Set value" sid="2379231184719015" type="System">
-                    <param id="0" name="Variable">bolinhaParaTacar</param>
-                    <param id="1" name="Value">random(0, numeroBolinhas)</param>
                 </action>
             </actions>
         </event-block>
@@ -200,150 +206,6 @@
                     <param id="0" name="Frame number">1</param>
                 </action>
             </actions>
-        </event-block>
-        <event-block sid="961167877358313">
-            <conditions>
-                <condition id="-6" name="Every X seconds" sid="4759814940678856" type="System">
-                    <param id="0" name="Interval (seconds)">8.0 - (1.0 * numeroBolinhas)</param>
-                </condition>
-            </conditions>
-            <actions />
-            <sub-events>
-                <comment>Criação das bolinhas jogadas pelo monstro, com o número delas variando conforme a quantidade de dano que o monstro já sofreu</comment>
-                <event-block sid="5856810624499208">
-                    <conditions>
-                        <condition id="-10" name="For" sid="325195492158382" type="System">
-                            <param id="0" name="Name">&quot;&quot;</param>
-                            <param id="1" name="Start index">1</param>
-                            <param id="2" name="End index">numeroBolinhas</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-3" name="Create object" sid="2583611773932871" type="System">
-                            <param id="0" name="Object to create">Bolinha</param>
-                            <param id="1" name="Layer">&quot;FundoAcima&quot;</param>
-                            <param id="2" name="X">810</param>
-                            <param id="3" name="Y">400</param>
-                        </action>
-                        <action id="2" name="Stop" sid="5788153304984247" type="Bolinha" />
-                        <action behavior="Bullet" id="5" name="Set enabled" sid="1556419099682961" type="Bolinha">
-                            <param id="0" name="State">1</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <comment>Aqui é definido o ângulo onde a bolinha é tacada e a velocidade</comment>
-                        <event-block sid="1580107450617517">
-                            <conditions>
-                                <condition id="-17" name="Pick top/bottom" sid="1120062495179796" type="Bolinha">
-                                    <param id="0" name="Which">1</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="2312753347558049" type="Bolinha">
-                                    <param id="0" name="Angle">180 - (numeroBolinhas * 10) + (20 * bolinhaCriada) + fatorAleatorio</param>
-                                </action>
-                                <action behavior="Bullet" id="0" name="Set speed" sid="1294276807491177" type="Bolinha">
-                                    <param id="0" name="Speed">(100 * numeroBolinhas) - 100</param>
-                                </action>
-                                <action behavior="Bullet" disabled="1" id="2" name="Set gravity" sid="9934737139546691" type="Bolinha">
-                                    <param id="0" name="Gravity">5 * (numeroBolinhas - 1)</param>
-                                </action>
-                                <action id="-10" name="Add to" sid="3617233402949727" type="System">
-                                    <param id="0" name="Variable">bolinhaCriada</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <comment>Apenas para testes a parte de editar o número de bolinhas atiradas</comment>
-                <event-block sid="1573889761972644">
-                    <conditions>
-                        <condition id="-22" name="Else" sid="6106354352313572" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-9" name="Set value" sid="3401055232888638" type="System">
-                            <param id="0" name="Variable">bolinhaCriada</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-10" name="Add to" sid="2785657667464432" type="System">
-                            <param id="0" name="Variable">numeroBolinhas</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="1790471606744508" type="System">
-                            <param id="0" name="Variable">fatorAleatorio</param>
-                            <param id="1" name="Value">random(0, 21)</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="8676751353289389" type="System">
-                            <param id="0" name="Variable">bolinhaParaTacar</param>
-                            <param id="1" name="Value">random(0, numeroBolinhas)</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block disabled="1" sid="3404166711086221">
-                            <conditions>
-                                <condition id="-17" name="Pick top/bottom" sid="8541072818502896" type="Bolinha">
-                                    <param id="0" name="Which">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="4907439788654313" type="System">
-                                    <param id="0" name="Variable">IDBolinhaParaTacar</param>
-                                    <param id="1" name="Value">Bolinha.UID + bolinhaParaTacar</param>
-                                </action>
-                            </actions>
-                            <sub-events>
-                                <event-block disabled="1" sid="6998950019153331">
-                                    <conditions>
-                                        <condition id="-23" name="While" sid="20664666444938" type="System" />
-                                        <condition behavior="Bullet" id="1" name="Compare distance travelled" sid="838674789049983" type="Bolinha">
-                                            <param id="0" name="Comparison">3</param>
-                                            <param id="1" name="Distance">350</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions />
-                                </event-block>
-                                <event-block disabled="1" sid="3836109546916114">
-                                    <conditions>
-                                        <condition id="-22" name="Else" sid="35871850004169" type="System" />
-                                    </conditions>
-                                    <actions />
-                                    <sub-events>
-                                        <comment>COLOCAR UM WAIT DE TEMPO DE 3 BOLINHAS PARA DESTRUIR ESSA INSTÂNCIA</comment>
-                                        <event-block disabled="1" sid="1906260726613477">
-                                            <conditions>
-                                                <condition id="-14" name="Pick by unique ID" sid="4554604348061881" type="Bolinha">
-                                                    <param id="0" name="Unique ID">IDBolinhaParaTacar</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="6047962766314198" type="Bolinha">
-                                                    <param id="0" name="Speed">0</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <event-block sid="6306511890785285">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="1219309586530135" type="System">
-                                    <param id="0" name="Variable">numeroBolinhas</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">7</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="3792724115505786" type="System">
-                                    <param id="0" name="Variable">numeroBolinhas</param>
-                                    <param id="1" name="Value">2</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-            </sub-events>
         </event-block>
         <event-group description="" sid="586130633962506" title="Pontuacao1aFFTCC">
             <sub-events>
@@ -560,6 +422,149 @@
                             <param id="0" name="Visibility">0</param>
                         </action>
                     </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="2053943835045973" title="controleBolinhas">
+            <sub-events>
+                <event-block sid="961167877358313">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="4759814940678856" type="System">
+                            <param id="0" name="Interval (seconds)">8.0 - (1.0 * numeroBolinhas)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="8676751353289389" type="System">
+                            <param id="0" name="Variable">bolinhaParaTacar</param>
+                            <param id="1" name="Value">floor(random(0, numeroBolinhas))</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="8437216726821023" type="System">
+                            <param id="0" name="Variable">distanciaBolinha</param>
+                            <param id="1" name="Value">random(150, 280)</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <comment>Criação das bolinhas jogadas pelo monstro, com o número delas variando conforme a quantidade de dano que o monstro já sofreu</comment>
+                        <event-block sid="5856810624499208">
+                            <conditions>
+                                <condition id="-10" name="For" sid="325195492158382" type="System">
+                                    <param id="0" name="Name">&quot;&quot;</param>
+                                    <param id="1" name="Start index">1</param>
+                                    <param id="2" name="End index">numeroBolinhas</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="2583611773932871" type="System">
+                                    <param id="0" name="Object to create">Bolinha</param>
+                                    <param id="1" name="Layer">&quot;FundoAcima&quot;</param>
+                                    <param id="2" name="X">MonstroInferior.X - 213</param>
+                                    <param id="3" name="Y">MonstroInferior.Y + 84</param>
+                                </action>
+                                <action id="2" name="Stop" sid="5788153304984247" type="Bolinha" />
+                                <action behavior="Bullet" id="5" name="Set enabled" sid="1556419099682961" type="Bolinha">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <comment>Aqui é definido o ângulo onde a bolinha é tacada e a velocidade</comment>
+                                <event-block sid="1580107450617517">
+                                    <conditions>
+                                        <condition id="-17" name="Pick top/bottom" sid="1120062495179796" type="Bolinha">
+                                            <param id="0" name="Which">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="2312753347558049" type="Bolinha">
+                                            <param id="0" name="Angle">180 - (numeroBolinhas * 10) + (20 * bolinhaCriada) + fatorAleatorio</param>
+                                        </action>
+                                        <action behavior="Bullet" id="0" name="Set speed" sid="1294276807491177" type="Bolinha">
+                                            <param id="0" name="Speed">(100 * numeroBolinhas) - 100</param>
+                                        </action>
+                                        <action behavior="Bullet" disabled="1" id="2" name="Set gravity" sid="9934737139546691" type="Bolinha">
+                                            <param id="0" name="Gravity">5 * (numeroBolinhas - 1)</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="4907439788654313" type="System">
+                                            <param id="0" name="Variable">IDBolinhaParaTacar</param>
+                                            <param id="1" name="Value">Bolinha.UID - bolinhaParaTacar</param>
+                                        </action>
+                                        <action id="-10" name="Add to" sid="3617233402949727" type="System">
+                                            <param id="0" name="Variable">bolinhaCriada</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment>Apenas para testes a parte de editar o número de bolinhas atiradas</comment>
+                        <event-block sid="1573889761972644">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="6106354352313572" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="3401055232888638" type="System">
+                                    <param id="0" name="Variable">bolinhaCriada</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-10" name="Add to" sid="2785657667464432" type="System">
+                                    <param id="0" name="Variable">numeroBolinhas</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="1790471606744508" type="System">
+                                    <param id="0" name="Variable">fatorAleatorio</param>
+                                    <param id="1" name="Value">random(0, 21)</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="6306511890785285">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="1219309586530135" type="System">
+                                            <param id="0" name="Variable">numeroBolinhas</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">7</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="3792724115505786" type="System">
+                                            <param id="0" name="Variable">numeroBolinhas</param>
+                                            <param id="1" name="Value">2</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Calcula qual bolinha precisa ficar na tela</comment>
+                <event-block sid="1906260726613477">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="4554604348061881" type="Bolinha">
+                            <param id="0" name="Unique ID">IDBolinhaParaTacar</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <comment>Momento onde a bolinha irá parar</comment>
+                        <event-block sid="4969840070814515">
+                            <conditions>
+                                <condition behavior="Bullet" id="1" name="Compare distance travelled" sid="2283532377392335" type="Bolinha">
+                                    <param id="0" name="Comparison">5</param>
+                                    <param id="1" name="Distance">distanciaBolinha</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="Bullet" id="0" name="Set speed" sid="6047962766314198" type="Bolinha">
+                                    <param id="0" name="Speed">0</param>
+                                </action>
+                                <action id="11" name="Set collisions enabled" sid="8672796091569831" type="Bolinha">
+                                    <param id="0" name="Collisions">0</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="2618964962327099" type="System">
+                                    <param id="0" name="Seconds">(8.0 - (1.0 * numeroBolinhas)) * 3</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="5850707264811628" type="Bolinha" />
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
@@ -1021,10 +1026,180 @@
                                     <param id="1" name="Value">0</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <comment>Criação das alternativas no chão</comment>
+                                <event-block sid="9788980726739672">
+                                    <conditions>
+                                        <condition id="-10" name="For" sid="6899650283460032" type="System">
+                                            <param id="0" name="Name">&quot;&quot;</param>
+                                            <param id="1" name="Start index">0</param>
+                                            <param id="2" name="End index">4</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="1636916269874146">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="3765085182199792" type="AlternativasChao">
+                                                    <param id="0" name="Unique ID">alternativaPosicionada</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action disabled="1" id="-3" name="Set position" sid="5883272571278617" type="AlternativasChao">
+                                                    <param id="0" name="X">random(490, 760)</param>
+                                                    <param id="1" name="Y">random(210, 660)</param>
+                                                </action>
+                                                <action id="-10" name="Add to" sid="6207487290954895" type="System">
+                                                    <param id="0" name="Variable">alternativaPosicionada</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                                <action id="-16" name="Set opacity" sid="4582247238749531" type="AlternativasChao">
+                                                    <param id="0" name="Opacity">100</param>
+                                                </action>
+                                            </actions>
+                                            <sub-events>
+                                                <event-block sid="7223824274859619">
+                                                    <conditions>
+                                                        <condition id="-23" name="While" sid="1774856393899517" type="System" />
+                                                        <condition id="1" name="Is overlapping another object" sid="9369035012794391" type="AlternativasChao">
+                                                            <param id="0" name="Object">AlternativasChao</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-3" name="Set position" sid="1772664456340849" type="AlternativasChao">
+                                                            <param id="0" name="X">random(490, 760)</param>
+                                                            <param id="1" name="Y">random(210, 660)</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="2310061500622682">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="1982800833723187" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="7361053894609064" type="System">
+                                            <param id="0" name="Variable">alternativaPosicionada</param>
+                                            <param id="1" name="Value">341</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>Para o caso de alguma alternativa estar se sobrepondo</comment>
+                                <event-block sid="5520385758652333">
+                                    <conditions>
+                                        <condition id="-23" name="While" sid="5677008361488756" type="System" />
+                                        <condition id="1" name="Is overlapping another object" sid="8490658989452963" type="AlternativasChao">
+                                            <param id="0" name="Object">AlternativasChao</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="8637116940827579" type="AlternativasChao">
+                                            <param id="0" name="X">random(490, 760)</param>
+                                            <param id="1" name="Y">random(210, 660)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
-                <comment>Descarrega na tela o texto da pergunta e as alternativas na ponte</comment>
+                <comment>Obtém a alternativa exata conforme a letra que o jogador estiver mais próximo</comment>
+                <event-block sid="8839821772363013">
+                    <conditions>
+                        <condition id="-15" name="Pick nearest/furthest" sid="8426705750402846" type="AlternativasChao">
+                            <param id="0" name="Which">0</param>
+                            <param id="1" name="X">player.X</param>
+                            <param id="2" name="Y">player.Y + (player.Height)/2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="922552968740949" type="System">
+                            <param id="0" name="Variable">VariavelUID</param>
+                            <param id="1" name="Value">AlternativasChao.UID</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="1624897174587289">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="563096382514794" type="System">
+                                    <param id="0" name="Variable">VariavelUID</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">341</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="527994043438335" type="System">
+                                    <param id="0" name="Variable">alternativaTCC</param>
+                                    <param id="1" name="Value">&quot;A&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="9095319901752109">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="4955466434766462" type="System">
+                                    <param id="0" name="Variable">VariavelUID</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">342</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="6412759658187804" type="System">
+                                    <param id="0" name="Variable">alternativaTCC</param>
+                                    <param id="1" name="Value">&quot;B&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="325595545597734">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="8452474233121731" type="System">
+                                    <param id="0" name="Variable">VariavelUID</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">343</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="2041987305537509" type="System">
+                                    <param id="0" name="Variable">alternativaTCC</param>
+                                    <param id="1" name="Value">&quot;C&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="1561708956741666">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="2586949143340882" type="System">
+                                    <param id="0" name="Variable">VariavelUID</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">344</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="1359869145561021" type="System">
+                                    <param id="0" name="Variable">alternativaTCC</param>
+                                    <param id="1" name="Value">&quot;D&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="9905125354828874">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="3890840190832715" type="System">
+                                    <param id="0" name="Variable">VariavelUID</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">345</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="4152024582468488" type="System">
+                                    <param id="0" name="Variable">alternativaTCC</param>
+                                    <param id="1" name="Value">&quot;E&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Descarrega na tela o texto da pergunta e as alternativas no chão</comment>
                 <event-block sid="6077847565891277">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="9585350852058588" type="System">
@@ -1046,6 +1221,9 @@
                             <actions>
                                 <action id="-16" name="Set opacity" sid="5004410695619337" type="perguntas">
                                     <param id="0" name="Opacity">perguntas.Opacity - 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="8378675531171638" type="AlternativasChao">
+                                    <param id="0" name="Opacity">AlternativasChao.Opacity - 2.5</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="3767536613095061" type="textoPerguntas">
                                     <param id="0" name="Opacity">textoPerguntas.Opacity - 2.5</param>
@@ -1124,9 +1302,9 @@
                         <event-block sid="5793724562251928">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="3237814420960202" type="System">
-                                    <param id="0" name="First value">alternativaCM</param>
+                                    <param id="0" name="First value">alternativaTCC</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">respostaCertaCM</param>
+                                    <param id="2" name="Second value">respostaCertaTCC</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1156,6 +1334,14 @@
                                             <actions>
                                                 <action id="5" name="Set frame" sid="7719639418188702" type="AlternativasChao">
                                                     <param id="0" name="Frame number">0</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="7310104937253358" type="System">
+                                                    <param id="0" name="Variable">verificarAlternativaTCC</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="2602810595519853" type="System">
+                                                    <param id="0" name="Variable">descarregarPerguntasTCC</param>
+                                                    <param id="1" name="Value">1</param>
                                                 </action>
                                                 <action disabled="1" id="-10" name="Add to" sid="3125939558383115" type="System">
                                                     <param id="0" name="Variable">pontos</param>
@@ -1197,10 +1383,6 @@
                                 <condition id="-22" name="Else" sid="3013058512679844" type="System" />
                             </conditions>
                             <actions>
-                                <action id="-3" name="Set position" sid="2638783148028285" type="player">
-                                    <param id="0" name="X">27</param>
-                                    <param id="1" name="Y">449</param>
-                                </action>
                                 <action behavior="Flash" id="0" name="Flash" sid="8359306057322136" type="playerAnim">
                                     <param id="0" name="&apos;On&apos; time">0.1</param>
                                     <param id="1" name="&apos;Off&apos; time">0.1</param>
@@ -1264,16 +1446,16 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
-                        <event-block sid="9921088284773163">
+                        <event-block disabled="1" sid="9921088284773163">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="9784561846871037" type="System" />
                             </conditions>
                             <actions>
-                                <action id="-9" name="Set value" sid="7310104937253358" type="System">
+                                <action id="-9" name="Set value" sid="7662148244172522" type="System">
                                     <param id="0" name="Variable">verificarAlternativaTCC</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="2602810595519853" type="System">
+                                <action id="-9" name="Set value" sid="9246080682372828" type="System">
                                     <param id="0" name="Variable">descarregarPerguntasTCC</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
