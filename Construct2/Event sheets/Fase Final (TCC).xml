@@ -33,6 +33,7 @@
         <variable constant="0" name="distanciaBolinha" sid="4513061841983165" static="0" type="number">0</variable>
         <comment>Usado para definir qual é a alternativa que está sendo definida a posição</comment>
         <variable constant="0" name="alternativaPosicionada" sid="6323849513271556" static="0" type="number">341</variable>
+        <variable constant="0" name="dsgdesgs" sid="603169203805121" static="0" type="number">0</variable>
         <event-block sid="9765162608650695">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="7057668097993137" type="System" />
@@ -94,6 +95,10 @@
                 <action disabled="1" id="4" name="Set font color" sid="7645855472775188" type="pontoTexto">
                     <param id="0" name="Color">rgb(41, 90, 165)</param>
                 </action>
+                <action id="-12" name="Set group active" sid="274787290574448" type="System">
+                    <param id="0" name="Group name">&quot;controleDanoMonstro&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
                 <action id="-12" name="Set group active" sid="6381412195315874" type="System">
                     <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
                     <param id="1" name="State">0</param>
@@ -153,6 +158,10 @@
             <conditions>
                 <condition id="0" name="On collision with another object" sid="4075759583121737" type="player">
                     <param id="0" name="Object">Bolinha</param>
+                </condition>
+                <condition behavior="Bullet" id="0" name="Compare speed" sid="103483406900229" type="Bolinha">
+                    <param id="0" name="Comparison">4</param>
+                    <param id="1" name="Speed">0</param>
                 </condition>
             </conditions>
             <actions>
@@ -505,7 +514,7 @@
                                     <param id="0" name="Variable">bolinhaCriada</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
-                                <action id="-10" name="Add to" sid="2785657667464432" type="System">
+                                <action disabled="1" id="-10" name="Add to" sid="2785657667464432" type="System">
                                     <param id="0" name="Variable">numeroBolinhas</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
@@ -515,7 +524,7 @@
                                 </action>
                             </actions>
                             <sub-events>
-                                <event-block sid="6306511890785285">
+                                <event-block disabled="1" sid="6306511890785285">
                                     <conditions>
                                         <condition id="-14" name="Compare variable" sid="1219309586530135" type="System">
                                             <param id="0" name="Variable">numeroBolinhas</param>
@@ -554,9 +563,6 @@
                             <actions>
                                 <action behavior="Bullet" id="0" name="Set speed" sid="6047962766314198" type="Bolinha">
                                     <param id="0" name="Speed">0</param>
-                                </action>
-                                <action id="11" name="Set collisions enabled" sid="8672796091569831" type="Bolinha">
-                                    <param id="0" name="Collisions">0</param>
                                 </action>
                                 <action id="-16" name="Wait" sid="2618964962327099" type="System">
                                     <param id="0" name="Seconds">(8.0 - (1.0 * numeroBolinhas)) * 3</param>
@@ -1045,7 +1051,7 @@
                                                 </condition>
                                             </conditions>
                                             <actions>
-                                                <action disabled="1" id="-3" name="Set position" sid="5883272571278617" type="AlternativasChao">
+                                                <action id="-3" name="Set position" sid="5883272571278617" type="AlternativasChao">
                                                     <param id="0" name="X">random(490, 760)</param>
                                                     <param id="1" name="Y">random(210, 660)</param>
                                                 </action>
@@ -1273,10 +1279,6 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-9" name="Set value" sid="2542760056326775" type="System">
-                                    <param id="0" name="Variable">carregarTextosTCC</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
                                 <action id="-9" name="Set value" sid="4693757343293364" type="System">
                                     <param id="0" name="Variable">descarregarPerguntasTCC</param>
                                     <param id="1" name="Value">0</param>
@@ -1299,165 +1301,305 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="5793724562251928">
+                        <comment>Verifica se de fato o jogador está sobre uma bolinha de alternativa</comment>
+                        <event-block sid="511123998304735">
                             <conditions>
-                                <condition id="-8" name="Compare two values" sid="3237814420960202" type="System">
-                                    <param id="0" name="First value">alternativaTCC</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">respostaCertaTCC</param>
+                                <condition id="-8" name="Compare two values" sid="334032007632623" type="System">
+                                    <param id="0" name="First value">player.Y + (player.Height)/2</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Second value">AlternativasChao.Y - 26</param>
+                                </condition>
+                                <condition id="-8" name="Compare two values" sid="867594855535298" type="System">
+                                    <param id="0" name="First value">player.Y + (player.Height)/2</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Second value">AlternativasChao.Y +26</param>
                                 </condition>
                             </conditions>
-                            <actions>
-                                <action id="-10" name="Add to" sid="692655055517221" type="System">
-                                    <param id="0" name="Variable">perguntaTCC</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                            </actions>
+                            <actions />
                             <sub-events>
-                                <comment>É o que &quot;muda a cor&quot; da alternativa para azul</comment>
-                                <event-block sid="3937098800804522">
+                                <event-block sid="5793724562251928">
                                     <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="9699436489564353" type="AlternativasChao">
-                                            <param id="0" name="Unique ID">VariavelUID</param>
+                                        <condition id="-8" name="Compare two values" sid="3237814420960202" type="System">
+                                            <param id="0" name="First value">alternativaTCC</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">respostaCertaTCC</param>
                                         </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="692655055517221" type="System">
+                                            <param id="0" name="Variable">perguntaTCC</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <comment>É o que &quot;muda a cor&quot; da alternativa para azul</comment>
+                                        <event-block sid="3937098800804522">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="9699436489564353" type="AlternativasChao">
+                                                    <param id="0" name="Unique ID">VariavelUID</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                            <sub-events>
+                                                <comment>Se já estiver azul não muda</comment>
+                                                <event-block sid="4539415928947569">
+                                                    <conditions>
+                                                        <condition id="3" name="Compare frame" sid="7123498379577303" type="AlternativasChao">
+                                                            <param id="0" name="Comparison">1</param>
+                                                            <param id="1" name="Number">0</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="5" name="Set frame" sid="7719639418188702" type="AlternativasChao">
+                                                            <param id="0" name="Frame number">0</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="581252232492726" type="System">
+                                                            <param id="0" name="Group name">&quot;controleDanoMonstro&quot;</param>
+                                                            <param id="1" name="State">1</param>
+                                                        </action>
+                                                        <action id="-9" name="Set value" sid="7310104937253358" type="System">
+                                                            <param id="0" name="Variable">verificarAlternativaTCC</param>
+                                                            <param id="1" name="Value">0</param>
+                                                        </action>
+                                                        <action id="-9" name="Set value" sid="2602810595519853" type="System">
+                                                            <param id="0" name="Variable">descarregarPerguntasTCC</param>
+                                                            <param id="1" name="Value">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="8816027619610096">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="3013058512679844" type="System" />
                                     </conditions>
                                     <actions />
                                     <sub-events>
-                                        <comment>Se já estiver azul não muda</comment>
-                                        <event-block sid="4539415928947569">
+                                        <comment>É o que &quot;muda a cor&quot; da alternativa para vermelho</comment>
+                                        <event-block sid="6723260306656786">
                                             <conditions>
-                                                <condition id="3" name="Compare frame" sid="7123498379577303" type="AlternativasChao">
-                                                    <param id="0" name="Comparison">1</param>
-                                                    <param id="1" name="Number">0</param>
+                                                <condition id="-14" name="Pick by unique ID" sid="5931855053485519" type="AlternativasChao">
+                                                    <param id="0" name="Unique ID">VariavelUID</param>
                                                 </condition>
                                             </conditions>
-                                            <actions>
-                                                <action id="5" name="Set frame" sid="7719639418188702" type="AlternativasChao">
-                                                    <param id="0" name="Frame number">0</param>
-                                                </action>
-                                                <action id="-9" name="Set value" sid="7310104937253358" type="System">
-                                                    <param id="0" name="Variable">verificarAlternativaTCC</param>
-                                                    <param id="1" name="Value">0</param>
-                                                </action>
-                                                <action id="-9" name="Set value" sid="2602810595519853" type="System">
-                                                    <param id="0" name="Variable">descarregarPerguntasTCC</param>
-                                                    <param id="1" name="Value">1</param>
-                                                </action>
-                                                <action disabled="1" id="-10" name="Add to" sid="3125939558383115" type="System">
-                                                    <param id="0" name="Variable">pontos</param>
-                                                    <param id="1" name="Value">100</param>
-                                                </action>
-                                                <action disabled="1" id="0" name="Set text" sid="6647053803839729" type="pontoTexto">
-                                                    <param id="0" name="Text">&quot;100&quot;</param>
-                                                </action>
-                                                <action disabled="1" id="4" name="Set font color" sid="6474508215868928" type="pontoTexto">
-                                                    <param id="0" name="Color">rgb(41, 90, 165)</param>
-                                                </action>
-                                                <action disabled="1" id="-12" name="Set group active" sid="6681667837129795" type="System">
-                                                    <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
-                                                    <param id="1" name="State">0</param>
-                                                </action>
-                                                <action disabled="1" id="-12" name="Set group active" sid="873640705782259" type="System">
-                                                    <param id="0" name="Group name">&quot;Pontuacao1aFFTCC&quot;</param>
-                                                    <param id="1" name="State">1</param>
-                                                </action>
-                                                <action disabled="1" id="-16" name="Wait" sid="4376834316743454" type="System">
-                                                    <param id="0" name="Seconds">4</param>
-                                                </action>
-                                                <action disabled="1" id="-12" name="Set group active" sid="8795027749384203" type="System">
-                                                    <param id="0" name="Group name">&quot;Pontuacao1aFFTCC&quot;</param>
-                                                    <param id="1" name="State">0</param>
-                                                </action>
-                                                <action disabled="1" id="-12" name="Set group active" sid="1268785913568789" type="System">
-                                                    <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
-                                                    <param id="1" name="State">1</param>
-                                                </action>
-                                            </actions>
+                                            <actions />
+                                            <sub-events>
+                                                <comment>Se já estiver vermelho não muda. Quanto a questão dos pontos, ele vai reduzir aqui na primeira vez que o jogador errar a alternativa e nas outras vezes no evento no começo</comment>
+                                                <event-block sid="9316350686877687">
+                                                    <conditions>
+                                                        <condition id="3" name="Compare frame" sid="4223081857300412" type="AlternativasChao">
+                                                            <param id="0" name="Comparison">1</param>
+                                                            <param id="1" name="Number">1</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action behavior="Flash" id="0" name="Flash" sid="8359306057322136" type="playerAnim">
+                                                            <param id="0" name="&apos;On&apos; time">0.1</param>
+                                                            <param id="1" name="&apos;Off&apos; time">0.1</param>
+                                                            <param id="2" name="Duration">1.2</param>
+                                                        </action>
+                                                        <action id="5" name="Set frame" sid="3794157861836836" type="AlternativasChao">
+                                                            <param id="0" name="Frame number">1</param>
+                                                        </action>
+                                                        <action id="-10" name="Add to" sid="1397937927894916" type="System">
+                                                            <param id="0" name="Variable">pontos</param>
+                                                            <param id="1" name="Value">-100</param>
+                                                        </action>
+                                                        <action id="0" name="Set text" sid="334151765304167" type="pontoTexto">
+                                                            <param id="0" name="Text">&quot;-100&quot;</param>
+                                                        </action>
+                                                        <action id="4" name="Set font color" sid="6707721558455364" type="pontoTexto">
+                                                            <param id="0" name="Color">rgb(235, 17, 53)</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="6160106383776267" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
+                                                            <param id="1" name="State">0</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="627896034043387" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao1aFFTCC&quot;</param>
+                                                            <param id="1" name="State">1</param>
+                                                        </action>
+                                                        <action id="-16" name="Wait" sid="9859058541980876" type="System">
+                                                            <param id="0" name="Seconds">4</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="1647777185602226" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao1aFFTCC&quot;</param>
+                                                            <param id="1" name="State">0</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="8188343740471719" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
+                                                            <param id="1" name="State">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
                                         </event-block>
                                     </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
-                        <event-block sid="8816027619610096">
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="767041782866214" title="controleDanoMonstro">
+            <sub-events>
+                <event-block sid="737467397204607">
+                    <conditions>
+                        <condition id="-15" name="Pick nearest/furthest" sid="874781404416719" type="Bolinha">
+                            <param id="0" name="Which">0</param>
+                            <param id="1" name="X">player.X</param>
+                            <param id="2" name="Y">player.Y</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="548465538786429" type="System">
+                            <param id="0" name="Variable">dsgdesgs</param>
+                            <param id="1" name="Value">Bolinha.UID</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="789424081505775">
                             <conditions>
-                                <condition id="-22" name="Else" sid="3013058512679844" type="System" />
+                                <condition id="1" name="Is overlapping another object" sid="265881348598099" type="player">
+                                    <param id="0" name="Object">Bolinha</param>
+                                </condition>
+                                <condition id="2" name="Key is down" sid="240802519109461" type="Keyboard">
+                                    <param id="0" name="Key">69 (E)</param>
+                                </condition>
+                                <condition behavior="Bullet" id="0" name="Compare speed" sid="242656401441337" type="Bolinha">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Speed">0</param>
+                                </condition>
                             </conditions>
                             <actions>
-                                <action behavior="Flash" id="0" name="Flash" sid="8359306057322136" type="playerAnim">
+                                <action id="5" name="Set frame" sid="395030672326213" type="Bolinha">
+                                    <param id="0" name="Frame number">1</param>
+                                </action>
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="245485629609649" type="Bolinha">
+                                    <param id="0" name="Angle">0</param>
+                                </action>
+                                <action behavior="Bullet" id="0" name="Set speed" sid="445350621997142" type="Bolinha">
+                                    <param id="0" name="Speed">200</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="316959711223408">
+                    <conditions>
+                        <condition id="3" name="Compare frame" sid="698408741989529" type="Bolinha">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Number">1</param>
+                        </condition>
+                        <condition id="1" name="Is overlapping another object" sid="494594499682877" type="MonstroSuperior">
+                            <param id="0" name="Object">Bolinha</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="868399148158324" type="Bolinha" />
+                        <action id="-10" name="Add to" sid="532689078150351" type="System">
+                            <param id="0" name="Variable">numeroBolinhas</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action disabled="1" id="-10" name="Add to" sid="3125939558383115" type="System">
+                            <param id="0" name="Variable">pontos</param>
+                            <param id="1" name="Value">100</param>
+                        </action>
+                        <action disabled="1" id="0" name="Set text" sid="6647053803839729" type="pontoTexto">
+                            <param id="0" name="Text">&quot;100&quot;</param>
+                        </action>
+                        <action disabled="1" id="4" name="Set font color" sid="6474508215868928" type="pontoTexto">
+                            <param id="0" name="Color">rgb(41, 90, 165)</param>
+                        </action>
+                        <action disabled="1" id="-12" name="Set group active" sid="6681667837129795" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action disabled="1" id="-12" name="Set group active" sid="873640705782259" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao1aFFTCC&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action disabled="1" id="-16" name="Wait" sid="4376834316743454" type="System">
+                            <param id="0" name="Seconds">4</param>
+                        </action>
+                        <action disabled="1" id="-12" name="Set group active" sid="8795027749384203" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao1aFFTCC&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action disabled="1" id="-12" name="Set group active" sid="1268785913568789" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="675238043683833">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="994053851788793" type="System">
+                                    <param id="0" name="Variable">numeroBolinhas</param>
+                                    <param id="1" name="Comparison">2</param>
+                                    <param id="2" name="Value">7</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="Flash" id="0" name="Flash" sid="714310801847492" type="MonstroInferior">
                                     <param id="0" name="&apos;On&apos; time">0.1</param>
                                     <param id="1" name="&apos;Off&apos; time">0.1</param>
                                     <param id="2" name="Duration">1.2</param>
                                 </action>
+                                <action behavior="Flash" id="0" name="Flash" sid="913255964259408" type="MonstroSuperior">
+                                    <param id="0" name="&apos;On&apos; time">0.1</param>
+                                    <param id="1" name="&apos;Off&apos; time">0.1</param>
+                                    <param id="2" name="Duration">1.2</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="637658369518013" type="MonstroInferior">
+                                    <param id="0" name="Frame number">1</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="708437148987477" type="MonstroSuperior">
+                                    <param id="0" name="Frame number">1</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="993130405196224" type="System">
+                                    <param id="0" name="Seconds">1.2</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="498731481776035" type="MonstroInferior">
+                                    <param id="0" name="Frame number">0</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="286576910290209" type="MonstroSuperior">
+                                    <param id="0" name="Frame number">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="838790950053011" type="System">
+                                    <param id="0" name="Group name">&quot;gerarPerguntasJsonFFTCC&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="515293394767362" type="System">
+                                    <param id="0" name="Variable">carregarTextosTCC</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="901747324658089" type="System">
+                                    <param id="0" name="Group name">&quot;controleDanoMonstro&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="594873117317672" type="AlternativasChao">
+                                    <param id="0" name="Frame number">2</param>
+                                </action>
                             </actions>
-                            <sub-events>
-                                <comment>É o que &quot;muda a cor&quot; da alternativa para vermelho</comment>
-                                <event-block sid="6723260306656786">
-                                    <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="5931855053485519" type="AlternativasChao">
-                                            <param id="0" name="Unique ID">VariavelUID</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions />
-                                    <sub-events>
-                                        <comment>Se já estiver vermelho não muda. Quanto a questão dos pontos, ele vai reduzir aqui na primeira vez que o jogador errar a alternativa e nas outras vezes no evento no começo</comment>
-                                        <event-block sid="9316350686877687">
-                                            <conditions>
-                                                <condition id="3" name="Compare frame" sid="4223081857300412" type="AlternativasChao">
-                                                    <param id="0" name="Comparison">1</param>
-                                                    <param id="1" name="Number">1</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="5" name="Set frame" sid="3794157861836836" type="AlternativasChao">
-                                                    <param id="0" name="Frame number">1</param>
-                                                </action>
-                                                <action id="-10" name="Add to" sid="1397937927894916" type="System">
-                                                    <param id="0" name="Variable">pontos</param>
-                                                    <param id="1" name="Value">-100</param>
-                                                </action>
-                                                <action id="0" name="Set text" sid="334151765304167" type="pontoTexto">
-                                                    <param id="0" name="Text">&quot;-100&quot;</param>
-                                                </action>
-                                                <action id="4" name="Set font color" sid="6707721558455364" type="pontoTexto">
-                                                    <param id="0" name="Color">rgb(235, 17, 53)</param>
-                                                </action>
-                                                <action id="-12" name="Set group active" sid="6160106383776267" type="System">
-                                                    <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
-                                                    <param id="1" name="State">0</param>
-                                                </action>
-                                                <action id="-12" name="Set group active" sid="627896034043387" type="System">
-                                                    <param id="0" name="Group name">&quot;Pontuacao1aFFTCC&quot;</param>
-                                                    <param id="1" name="State">1</param>
-                                                </action>
-                                                <action id="-16" name="Wait" sid="9859058541980876" type="System">
-                                                    <param id="0" name="Seconds">4</param>
-                                                </action>
-                                                <action id="-12" name="Set group active" sid="1647777185602226" type="System">
-                                                    <param id="0" name="Group name">&quot;Pontuacao1aFFTCC&quot;</param>
-                                                    <param id="1" name="State">0</param>
-                                                </action>
-                                                <action id="-12" name="Set group active" sid="8188343740471719" type="System">
-                                                    <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
-                                                    <param id="1" name="State">1</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
-                                </event-block>
-                            </sub-events>
                         </event-block>
-                        <event-block disabled="1" sid="9921088284773163">
+                        <event-block sid="666371800017018">
                             <conditions>
-                                <condition id="-1" name="Every tick" sid="9784561846871037" type="System" />
+                                <condition id="-22" name="Else" sid="914443855693737" type="System" />
                             </conditions>
                             <actions>
-                                <action id="-9" name="Set value" sid="7662148244172522" type="System">
-                                    <param id="0" name="Variable">verificarAlternativaTCC</param>
-                                    <param id="1" name="Value">0</param>
+                                <action id="-12" name="Set group active" sid="724678745556876" type="System">
+                                    <param id="0" name="Group name">&quot;controleBolinhas&quot;</param>
+                                    <param id="1" name="State">0</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="9246080682372828" type="System">
-                                    <param id="0" name="Variable">descarregarPerguntasTCC</param>
-                                    <param id="1" name="Value">1</param>
+                                <action id="3" name="Start" sid="153414397090549" type="MonstroInferior">
+                                    <param id="0" name="From">0</param>
+                                </action>
+                                <action id="3" name="Start" sid="285230821211673" type="MonstroSuperior">
+                                    <param id="0" name="From">0</param>
                                 </action>
                             </actions>
                         </event-block>
