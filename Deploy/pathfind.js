@@ -459,25 +459,25 @@
 			if (!obsLeft)
 				this.addCellToOpenList(x - 1, y, 10);
 
-			if (diagonals && !obsLeft && !obsTop)
+			if (diagonals && !obsLeft && !obsTop && (this.at(x - 1, y - 1) !== PF_OBSTACLE))
 				this.addCellToOpenList(x - 1, y - 1, 14);
 
 			if (!obsTop)
 				this.addCellToOpenList(x, y - 1, 10);
 
-			if (diagonals && !obsTop && !obsRight)
+			if (diagonals && !obsTop && !obsRight && (this.at(x + 1, y - 1) !== PF_OBSTACLE))
 				this.addCellToOpenList(x + 1, y - 1, 14);
 
 			if (!obsRight)
 				this.addCellToOpenList(x + 1, y, 10);
 
-			if (diagonals && !obsRight && !obsBottom)
+			if (diagonals && !obsRight && !obsBottom && (this.at(x + 1, y + 1) !== PF_OBSTACLE))
 				this.addCellToOpenList(x + 1, y + 1, 14);
 
 			if (!obsBottom)
 				this.addCellToOpenList(x, y + 1, 10);
 
-			if (diagonals && !obsBottom && !obsLeft)
+			if (diagonals && !obsBottom && !obsLeft && (this.at(x - 1, y + 1) !== PF_OBSTACLE))
 				this.addCellToOpenList(x - 1, y + 1, 14);
 		}
 		

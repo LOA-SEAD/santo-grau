@@ -12,9 +12,16 @@
                 <condition id="-2" name="On start of layout" sid="5340975223950603" type="System" />
             </conditions>
             <actions>
+                <action id="33" name="Stop all" sid="730728521622629" type="Audio" />
                 <action id="-3" name="Set position" sid="1262157357680325" type="player">
                     <param id="0" name="X">346</param>
                     <param id="1" name="Y">648</param>
+                </action>
+                <action id="0" name="Play" sid="559009394689999" type="Audio">
+                    <param id="0" name="Audio file">OSantoDeGrau</param>
+                    <param id="2" name="Loop">1</param>
+                    <param id="3" name="Volume">0</param>
+                    <param id="1" name="Tag (optional)">&quot;ru&quot;</param>
                 </action>
                 <action id="-4" name="Set position to another object" sid="1705287340971909" type="playerAnim">
                     <param id="0" name="Object">player</param>
@@ -62,16 +69,19 @@
                     <param id="0" name="Pin to">fundoPause</param>
                     <param id="1" name="Mode">0</param>
                 </action>
-                <action behavior="Pin" id="0" name="Pin to object" sid="5868136024135705" type="botoesTexto">
-                    <param id="0" name="Pin to">botoes</param>
-                    <param id="1" name="Mode">0</param>
-                </action>
                 <action id="5" name="Set web font" sid="4788129726108942" type="botoesTexto">
                     <param id="0" name="Family name">&quot;please_write_me_a_songmedium&quot;</param>
                     <param id="1" name="CSS URL">&quot;stylesheet.css&quot;</param>
                 </action>
                 <action id="3" name="Set font size" sid="7542927032912457" type="botoesTexto">
                     <param id="0" name="Size (pt)">32</param>
+                </action>
+                <action id="5" name="Set web font" sid="950852952692430" type="feedback">
+                    <param id="0" name="Family name">&quot;please_write_me_a_songmedium&quot;</param>
+                    <param id="1" name="CSS URL">&quot;stylesheet.css&quot;</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="231835884781067" type="feedback">
+                    <param id="0" name="Opacity">0</param>
                 </action>
             </actions>
             <sub-events>
@@ -158,6 +168,66 @@
                                     <param id="0" name="Y">1040</param>
                                 </action>
                                 <action behavior="Pin" id="0" name="Pin to object" sid="427203067245025" type="dicaTexto">
+                                    <param id="0" name="Pin to">dicaPopUp</param>
+                                    <param id="1" name="Mode">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="977950225188116">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="554158351580866" type="dicaPopUp">
+                            <param id="0" name="Unique ID">346</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="362120435896051" type="dicaPopUp">
+                            <param id="0" name="Y">1168</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="384955372683842">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="704049157417863" type="dicaTexto">
+                                    <param id="0" name="Unique ID">347</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="886191500296739" type="dicaTexto">
+                                    <param id="0" name="Y">1168</param>
+                                </action>
+                                <action behavior="Pin" id="0" name="Pin to object" sid="480977246459379" type="dicaTexto">
+                                    <param id="0" name="Pin to">dicaPopUp</param>
+                                    <param id="1" name="Mode">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="935557828576878">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="307944640362342" type="dicaPopUp">
+                            <param id="0" name="Unique ID">348</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="185176741392412" type="dicaPopUp">
+                            <param id="0" name="Y">1296</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="157359300988357">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="733073713617307" type="dicaTexto">
+                                    <param id="0" name="Unique ID">349</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="837184498568609" type="dicaTexto">
+                                    <param id="0" name="Y">1296</param>
+                                </action>
+                                <action behavior="Pin" id="0" name="Pin to object" sid="524853735048770" type="dicaTexto">
                                     <param id="0" name="Pin to">dicaPopUp</param>
                                     <param id="1" name="Mode">0</param>
                                 </action>
@@ -456,12 +526,25 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-9" name="Set value" sid="5421688765893137" type="System">
-                            <param id="0" name="Variable">controleDica</param>
-                            <param id="1" name="Value">3</param>
-                        </action>
                         <action id="-9" name="Destroy" sid="8959022778019757" type="easterEgg1" />
                     </actions>
+                    <sub-events>
+                        <event-block sid="995168953837770">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="264438671394686" type="System">
+                                    <param id="0" name="Variable">controleDica</param>
+                                    <param id="1" name="Comparison">2</param>
+                                    <param id="2" name="Value">3</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="5421688765893137" type="System">
+                                    <param id="0" name="Variable">controleDica</param>
+                                    <param id="1" name="Value">3</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-block>
@@ -527,7 +610,7 @@
                             <param id="1" name="Height">(1-((579-Comida.Y)*0.0019512))*30</param>
                         </action>
                         <action id="-16" name="Set opacity" sid="4841127416295914" type="dicaPopUp">
-                            <param id="0" name="Opacity">0.78125*(dicaPopUp.Y-528)</param>
+                            <param id="0" name="Opacity">0.8*(dicaPopUp.Y-528)</param>
                         </action>
                         <action id="-16" name="Set opacity" sid="2659123056017244" type="dicaTexto">
                             <param id="0" name="Opacity">0.78125*(dicaTexto.Y-528)</param>
@@ -535,7 +618,7 @@
                         <action id="0" name="Set text" sid="271143859029338" type="pontuacaoTexto">
                             <param id="0" name="Text">pontos</param>
                         </action>
-                        <action id="0" name="Set text" sid="7672167764946297" type="debug">
+                        <action id="0" name="Set text" sid="7672167764946297" type="feedback">
                             <param id="0" name="Text">pause</param>
                         </action>
                     </actions>
@@ -790,6 +873,7 @@
         </event-group>
         <event-group description="" sid="1994250370825968" title="PopupDica1">
             <sub-events>
+                <comment>Dica 1 dos direcionais</comment>
                 <event-block sid="4444661614832459">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="8457064018439787" type="System">
@@ -869,7 +953,7 @@
                                     <conditions>
                                         <condition id="-2" name="Compare Y" sid="3607011098066079" type="dicaPopUp">
                                             <param id="0" name="Comparison">4</param>
-                                            <param id="1" name="Y co-ordinate">910</param>
+                                            <param id="1" name="Y co-ordinate">912</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -880,8 +964,55 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
+                        <event-block sid="753582370312115">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="608570535205598" type="dicaPopUp">
+                                    <param id="0" name="Unique ID">346</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="472838255797196">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="616467132615559" type="dicaPopUp">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">1040</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="244909102991938" type="dicaPopUp">
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="742909868271587">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="486942569424571" type="dicaPopUp">
+                                    <param id="0" name="Unique ID">348</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="450320548083902">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="742450445213625" type="dicaPopUp">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">1168</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="539951887649067" type="dicaPopUp">
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
                     </sub-events>
                 </event-block>
+                <comment>Dica 2 da ação E</comment>
                 <event-block sid="6618487715930654">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="4558761282282609" type="System">
@@ -935,7 +1066,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-2" name="Set Y" sid="1020911150169977" type="dicaPopUp">
-                                            <param id="0" name="Y">dicaPopUp.Y-2</param>
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -958,7 +1089,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-2" name="Set Y" sid="8807299470390276" type="dicaPopUp">
-                                            <param id="0" name="Y">dicaPopUp.Y-2</param>
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -981,7 +1112,53 @@
                                     </conditions>
                                     <actions>
                                         <action id="-2" name="Set Y" sid="9580771163104043" type="dicaPopUp">
-                                            <param id="0" name="Y">dicaPopUp.Y-2</param>
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="161362478043806">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="286047159123805" type="dicaPopUp">
+                                    <param id="0" name="Unique ID">346</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="307848711520281">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="612614798711904" type="dicaPopUp">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">912</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="834170286788071" type="dicaPopUp">
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="939818303284616">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="904321222168104" type="dicaPopUp">
+                                    <param id="0" name="Unique ID">348</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="887110471254923">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="423615050229282" type="dicaPopUp">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">1040</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="664969385806601" type="dicaPopUp">
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -989,6 +1166,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment>Dica 3 dos colecionáveis</comment>
                 <event-block sid="3558777389426841">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="2527716291764478" type="System">
@@ -1016,7 +1194,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-2" name="Set Y" sid="7807860665656534" type="dicaPopUp">
-                                            <param id="0" name="Y">dicaPopUp.Y-2</param>
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1039,7 +1217,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-2" name="Set Y" sid="9215310683246854" type="dicaPopUp">
-                                            <param id="0" name="Y">dicaPopUp.Y-2</param>
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1062,7 +1240,53 @@
                                     </conditions>
                                     <actions>
                                         <action id="-2" name="Set Y" sid="2565663993021278" type="dicaPopUp">
-                                            <param id="0" name="Y">dicaPopUp.Y-2</param>
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="481039173820202">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="482179337485358" type="dicaPopUp">
+                                    <param id="0" name="Unique ID">346</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="113053986819542">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="577267863966161" type="dicaPopUp">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">784</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="713892281100462" type="dicaPopUp">
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="309312119032083">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="951521086624937" type="dicaPopUp">
+                                    <param id="0" name="Unique ID">348</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="950627069661046">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="995285382769134" type="dicaPopUp">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">912</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="389075164554359" type="dicaPopUp">
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1082,6 +1306,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment>Dica 4 da ação do Esc e menu de pausa</comment>
                 <event-block sid="8625454851065402">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="163079300748763" type="System">
@@ -1109,7 +1334,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-2" name="Set Y" sid="3498980568076096" type="dicaPopUp">
-                                            <param id="0" name="Y">dicaPopUp.Y-2</param>
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1132,7 +1357,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-2" name="Set Y" sid="706129172294081" type="dicaPopUp">
-                                            <param id="0" name="Y">dicaPopUp.Y-2</param>
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1155,41 +1380,351 @@
                                     </conditions>
                                     <actions>
                                         <action id="-2" name="Set Y" sid="4468932507013892" type="dicaPopUp">
-                                            <param id="0" name="Y">dicaPopUp.Y-2</param>
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
                                         </action>
                                     </actions>
                                 </event-block>
-                                <event-block sid="1281628334331575">
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="250654443727271">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="319268425476421" type="dicaPopUp">
+                                    <param id="0" name="Unique ID">346</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="600194366314649">
                                     <conditions>
-                                        <condition id="-22" name="Else" sid="5638611426114919" type="System" />
+                                        <condition id="-2" name="Compare Y" sid="434134085540837" type="dicaPopUp">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">656</param>
+                                        </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="-9" name="Set value" sid="3288709407616581" type="System">
-                                            <param id="0" name="Variable">controleDica</param>
-                                            <param id="1" name="Value">4</param>
+                                        <action id="-2" name="Set Y" sid="992191217299117" type="dicaPopUp">
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="212426078382699">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="503960727378190" type="dicaPopUp">
+                                    <param id="0" name="Unique ID">348</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="743981884724965">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="126655038444717" type="dicaPopUp">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">784</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="398904169457487" type="dicaPopUp">
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="248063329183209">
+                            <conditions />
+                            <actions>
+                                <action id="-16" name="Wait" sid="500033398505834" type="System">
+                                    <param id="0" name="Seconds">7</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="683381914223859" type="System">
+                                    <param id="0" name="Variable">controleDica</param>
+                                    <param id="1" name="Value">4</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Dica 5 da ação da barra de espaço e continuação do jogo</comment>
+                <event-block sid="276449136733086">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="507840066293694" type="System">
+                            <param id="0" name="Variable">controleDica</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">4</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="459678252310489">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="395825497389356" type="dicaPopUp">
+                                    <param id="0" name="Unique ID">19</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="507134370380675">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="905792741845992" type="dicaPopUp">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">144</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="858108931877775" type="dicaPopUp">
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="819208581205325">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="350643319357963" type="dicaPopUp">
+                                    <param id="0" name="Unique ID">105</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="334173091260975">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="865024712866774" type="dicaPopUp">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">272</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="408854615983894" type="dicaPopUp">
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="223728031454956">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="891245520956609" type="dicaPopUp">
+                                    <param id="0" name="Unique ID">4</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="498830765689265">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="129565365298012" type="dicaPopUp">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">400</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="210803452279060" type="dicaPopUp">
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="855851147709541">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="787214625856939" type="dicaPopUp">
+                                    <param id="0" name="Unique ID">346</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="682319599056383">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="856566470062501" type="dicaPopUp">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">528</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="873883186832656" type="dicaPopUp">
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="509439618447324">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="456455015321188" type="dicaPopUp">
+                                    <param id="0" name="Unique ID">348</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="927145631069498">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="290424913032354" type="dicaPopUp">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">656</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="324990278672575" type="dicaPopUp">
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="340727856234738">
+                            <conditions />
+                            <actions>
+                                <action id="-16" name="Wait" sid="986529859714215" type="System">
+                                    <param id="0" name="Seconds">7</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="220630241202749" type="System">
+                                    <param id="0" name="Variable">controleDica</param>
+                                    <param id="1" name="Value">5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="921937035918206">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="888969148981239" type="System">
+                            <param id="0" name="Variable">controleDica</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">5</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="505261771215413">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="765542642411118" type="dicaPopUp">
+                                    <param id="0" name="Unique ID">19</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="470419657246804">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="460798997352674" type="dicaPopUp">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">16</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="698055179128897" type="dicaPopUp">
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="953326798582946">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="541964760717853" type="dicaPopUp">
+                                    <param id="0" name="Unique ID">105</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="255435914218902">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="928144353744273" type="dicaPopUp">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">144</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="982061741741456" type="dicaPopUp">
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="834721963385343">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="929104901482716" type="dicaPopUp">
+                                    <param id="0" name="Unique ID">4</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="640546055346625">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="627318252347192" type="dicaPopUp">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">272</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="472451719821692" type="dicaPopUp">
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="508649689868033">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="701819715472512" type="dicaPopUp">
+                                    <param id="0" name="Unique ID">346</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="817267944196825">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="161243138043924" type="dicaPopUp">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">400</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="220579428687403" type="dicaPopUp">
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="884644770090287">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="749949424038528" type="dicaPopUp">
+                                    <param id="0" name="Unique ID">348</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="502853389027087">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="423362517262616" type="dicaPopUp">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">528</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="163087922966876" type="dicaPopUp">
+                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="456770704968553">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="791692946799891" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Destroy" sid="3918684595991456" type="dicaPopUp" />
+                                        <action id="-9" name="Destroy" sid="1714643343603165" type="dicaTexto" />
+                                        <action id="-12" name="Set group active" sid="1395557272016304" type="System">
+                                            <param id="0" name="Group name">&quot;PopupDica1&quot;</param>
+                                            <param id="1" name="State">0</param>
                                         </action>
                                     </actions>
                                 </event-block>
                             </sub-events>
                         </event-block>
                     </sub-events>
-                </event-block>
-                <event-block sid="1408405438586102">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="7250954230010712" type="System">
-                            <param id="0" name="Variable">controleDica</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">4</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-9" name="Destroy" sid="3918684595991456" type="dicaPopUp" />
-                        <action id="-9" name="Destroy" sid="1714643343603165" type="dicaTexto" />
-                        <action id="-12" name="Set group active" sid="1395557272016304" type="System">
-                            <param id="0" name="Group name">&quot;PopupDica1&quot;</param>
-                            <param id="1" name="State">0</param>
-                        </action>
-                    </actions>
                 </event-block>
             </sub-events>
         </event-group>
@@ -2328,35 +2863,8 @@
         </event-group>
         <event-group description="" sid="6111277681990985" title="MenuPause1">
             <sub-events>
-                <event-block sid="2073576799576862">
-                    <conditions>
-                        <condition id="0" name="On key pressed" sid="2379663212439886" type="Keyboard">
-                            <param id="0" name="Key">90 (Z)</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-36" name="Save" sid="8210709001977841" type="System">
-                            <param id="0" name="Slot">&quot;save&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="3116154442565213">
-                    <conditions>
-                        <condition id="0" name="On key pressed" sid="8973383265033117" type="Keyboard">
-                            <param id="0" name="Key">76 (L)</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-37" name="Load" sid="7109634514434816" type="System">
-                            <param id="0" name="Slot">&quot;save&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
                 <event-block sid="8145596573702693">
                     <conditions>
-                        <condition id="0" name="On key pressed" sid="9485252101753743" type="Keyboard">
-                            <param id="0" name="Key">27 (Esc)</param>
-                        </condition>
                         <condition id="-14" name="Compare variable" sid="2844984765822422" type="System">
                             <param id="0" name="Variable">pause</param>
                             <param id="1" name="Comparison">0</param>
@@ -2364,42 +2872,61 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-9" name="Set value" sid="7512685465008251" type="System">
-                            <param id="0" name="Variable">pause</param>
-                            <param id="1" name="Value">1</param>
+                        <action id="-1" name="Set X" sid="848041463165284" type="botoesTexto">
+                            <param id="0" name="X">1920</param>
                         </action>
-                        <action id="0" name="Set text" sid="1623035715109636" type="pontoTexto">
-                            <param id="0" name="Text">&quot;0&quot;</param>
-                        </action>
-                        <action id="4" name="Set font color" sid="6093876423667959" type="pontoTexto">
-                            <param id="0" name="Color">rgb(125, 125, 125)</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="1772286616080686" type="System">
-                            <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
-                            <param id="1" name="State">0</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="8229243228357266" type="System">
-                            <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="4396052832106391" type="System">
-                            <param id="0" name="Group name">&quot;playerMove1&quot;</param>
-                            <param id="1" name="State">0</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="6086735305587082" type="System">
-                            <param id="0" name="Group name">&quot;PopupDica1&quot;</param>
-                            <param id="1" name="State">0</param>
-                        </action>
-                        <action id="-13" name="Set time scale" sid="7641920841118689" type="System">
-                            <param id="0" name="Time scale">0.0</param>
+                        <action id="-2" name="Set Y" sid="722326523385265" type="menuOpcoesX">
+                            <param id="0" name="Y">-40</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <event-block any="1" sid="910131197056940">
+                            <conditions>
+                                <condition id="0" name="On key pressed" sid="9485252101753743" type="Keyboard">
+                                    <param id="0" name="Key">27 (Esc)</param>
+                                </condition>
+                                <condition id="6" name="On object clicked" sid="355613411478856" type="Mouse">
+                                    <param id="0" name="Mouse button">0</param>
+                                    <param id="1" name="Click type">0</param>
+                                    <param id="2" name="Object clicked">menuOpcoes</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="7512685465008251" type="System">
+                                    <param id="0" name="Variable">pause</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="0" name="Set text" sid="1623035715109636" type="pontoTexto">
+                                    <param id="0" name="Text">&quot;0&quot;</param>
+                                </action>
+                                <action id="4" name="Set font color" sid="6093876423667959" type="pontoTexto">
+                                    <param id="0" name="Color">rgb(125, 125, 125)</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="1772286616080686" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="8229243228357266" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="4396052832106391" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove1&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="6086735305587082" type="System">
+                                    <param id="0" name="Group name">&quot;PopupDica1&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-13" name="Set time scale" sid="7641920841118689" type="System">
+                                    <param id="0" name="Time scale">0.0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="2528609114659741">
                     <conditions>
-                        <condition id="0" name="On key pressed" sid="1957002003546365" type="Keyboard">
-                            <param id="0" name="Key">32 (Space)</param>
-                        </condition>
                         <condition id="-14" name="Compare variable" sid="4364385395859108" type="System">
                             <param id="0" name="Variable">pause</param>
                             <param id="1" name="Comparison">0</param>
@@ -2407,35 +2934,471 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-9" name="Set value" sid="5729000218417325" type="System">
-                            <param id="0" name="Variable">pause</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="3981995647075318" type="System">
-                            <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
-                            <param id="1" name="State">0</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="8657674511027715" type="System">
-                            <param id="0" name="Group name">&quot;playerMove1&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="7039167803408902" type="System">
-                            <param id="0" name="Group name">&quot;PopupDica1&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                        <action id="-13" name="Set time scale" sid="881488403197425" type="System">
-                            <param id="0" name="Time scale">1.0</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="8764148321350564" type="System">
-                            <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
-                            <param id="1" name="State">1</param>
+                        <action id="-2" name="Set Y" sid="328641531394563" type="menuOpcoesX">
+                            <param id="0" name="Y">40</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <event-block any="1" sid="759816447816617">
+                            <conditions>
+                                <condition id="0" name="On key pressed" sid="1957002003546365" type="Keyboard">
+                                    <param id="0" name="Key">32 (Space)</param>
+                                </condition>
+                                <condition id="6" name="On object clicked" sid="485820917183714" type="Mouse">
+                                    <param id="0" name="Mouse button">0</param>
+                                    <param id="1" name="Click type">0</param>
+                                    <param id="2" name="Object clicked">menuOpcoesX</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-13" name="Set time scale" sid="881488403197425" type="System">
+                                    <param id="0" name="Time scale">1.0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="5729000218417325" type="System">
+                                    <param id="0" name="Variable">pause</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="3981995647075318" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="8657674511027715" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove1&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="7039167803408902" type="System">
+                                    <param id="0" name="Group name">&quot;PopupDica1&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="8764148321350564" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="291629241319640">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="823654393606924" type="botoes">
+                                    <param id="0" name="Unique ID">303</param>
+                                </condition>
+                                <condition id="-14" name="Pick by unique ID" sid="251746998831970" type="botoesTexto">
+                                    <param id="0" name="Unique ID">309</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="651033674127095">
+                                    <conditions>
+                                        <condition id="7" name="Cursor is over object" sid="588442786610183" type="Mouse">
+                                            <param id="0" name="Object">botoes</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-1" name="Set X" sid="535237789063579" type="botoesTexto">
+                                            <param id="0" name="X">643</param>
+                                        </action>
+                                        <action id="-2" name="Set Y" sid="699504816210891" type="botoesTexto">
+                                            <param id="0" name="Y">75</param>
+                                        </action>
+                                        <action id="5" name="Set frame" sid="180832756239530" type="botoes">
+                                            <param id="0" name="Frame number">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="905566446919199">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="609684954739299" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-1" name="Set X" sid="325483736467500" type="botoesTexto">
+                                            <param id="0" name="X">640</param>
+                                        </action>
+                                        <action id="-2" name="Set Y" sid="332222295487270" type="botoesTexto">
+                                            <param id="0" name="Y">65</param>
+                                        </action>
+                                        <action id="5" name="Set frame" sid="612841479247650" type="botoes">
+                                            <param id="0" name="Frame number">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="692687553028048">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="693377638709756" type="botoes">
+                                    <param id="0" name="Unique ID">304</param>
+                                </condition>
+                                <condition id="-14" name="Pick by unique ID" sid="847464190848420" type="botoesTexto">
+                                    <param id="0" name="Unique ID">310</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="999694260757476">
+                                    <conditions>
+                                        <condition id="7" name="Cursor is over object" sid="620907143649650" type="Mouse">
+                                            <param id="0" name="Object">botoes</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-1" name="Set X" sid="471416713809554" type="botoesTexto">
+                                            <param id="0" name="X">643</param>
+                                        </action>
+                                        <action id="-2" name="Set Y" sid="453638390763435" type="botoesTexto">
+                                            <param id="0" name="Y">165</param>
+                                        </action>
+                                        <action id="5" name="Set frame" sid="326443637012584" type="botoes">
+                                            <param id="0" name="Frame number">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="361662357049166">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="530808808946757" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-1" name="Set X" sid="599424356637909" type="botoesTexto">
+                                            <param id="0" name="X">640</param>
+                                        </action>
+                                        <action id="-2" name="Set Y" sid="100209510260174" type="botoesTexto">
+                                            <param id="0" name="Y">155</param>
+                                        </action>
+                                        <action id="5" name="Set frame" sid="113596865108869" type="botoes">
+                                            <param id="0" name="Frame number">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="303393580186191">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="258157474225873" type="botoes">
+                                    <param id="0" name="Unique ID">305</param>
+                                </condition>
+                                <condition id="-14" name="Pick by unique ID" sid="582959730506502" type="botoesTexto">
+                                    <param id="0" name="Unique ID">311</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="470693647352324">
+                                    <conditions>
+                                        <condition id="7" name="Cursor is over object" sid="633315422039867" type="Mouse">
+                                            <param id="0" name="Object">botoes</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-1" name="Set X" sid="488977453765751" type="botoesTexto">
+                                            <param id="0" name="X">643</param>
+                                        </action>
+                                        <action id="-2" name="Set Y" sid="517750279007891" type="botoesTexto">
+                                            <param id="0" name="Y">255</param>
+                                        </action>
+                                        <action id="5" name="Set frame" sid="199631129211841" type="botoes">
+                                            <param id="0" name="Frame number">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="102262743781523">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="693812590514184" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-1" name="Set X" sid="849747210960613" type="botoesTexto">
+                                            <param id="0" name="X">640</param>
+                                        </action>
+                                        <action id="-2" name="Set Y" sid="159730786195684" type="botoesTexto">
+                                            <param id="0" name="Y">245</param>
+                                        </action>
+                                        <action id="5" name="Set frame" sid="662642616809495" type="botoes">
+                                            <param id="0" name="Frame number">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="904510606602849">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="769017727582173" type="botoes">
+                                    <param id="0" name="Unique ID">306</param>
+                                </condition>
+                                <condition id="-14" name="Pick by unique ID" sid="439286550285816" type="botoesTexto">
+                                    <param id="0" name="Unique ID">312</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="181570521243808">
+                                    <conditions>
+                                        <condition id="7" name="Cursor is over object" sid="355400064030863" type="Mouse">
+                                            <param id="0" name="Object">botoes</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-1" name="Set X" sid="365269136631320" type="botoesTexto">
+                                            <param id="0" name="X">643</param>
+                                        </action>
+                                        <action id="-2" name="Set Y" sid="200063821268303" type="botoesTexto">
+                                            <param id="0" name="Y">345</param>
+                                        </action>
+                                        <action id="5" name="Set frame" sid="948937533687400" type="botoes">
+                                            <param id="0" name="Frame number">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="470380046580496">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="401795442027305" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-1" name="Set X" sid="858512036540379" type="botoesTexto">
+                                            <param id="0" name="X">640</param>
+                                        </action>
+                                        <action id="-2" name="Set Y" sid="622035684405579" type="botoesTexto">
+                                            <param id="0" name="Y">335</param>
+                                        </action>
+                                        <action id="5" name="Set frame" sid="528719706804539" type="botoes">
+                                            <param id="0" name="Frame number">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="866335317254284">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="536228059170415" type="botoes">
+                                    <param id="0" name="Unique ID">307</param>
+                                </condition>
+                                <condition id="-14" name="Pick by unique ID" sid="568151561312519" type="botoesTexto">
+                                    <param id="0" name="Unique ID">313</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="668046370287471">
+                                    <conditions>
+                                        <condition id="7" name="Cursor is over object" sid="683561982607211" type="Mouse">
+                                            <param id="0" name="Object">botoes</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-1" name="Set X" sid="774218099151941" type="botoesTexto">
+                                            <param id="0" name="X">643</param>
+                                        </action>
+                                        <action id="-2" name="Set Y" sid="896245359950554" type="botoesTexto">
+                                            <param id="0" name="Y">435</param>
+                                        </action>
+                                        <action id="5" name="Set frame" sid="875159701797720" type="botoes">
+                                            <param id="0" name="Frame number">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="405362260203917">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="780818135233019" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-1" name="Set X" sid="376913157188985" type="botoesTexto">
+                                            <param id="0" name="X">640</param>
+                                        </action>
+                                        <action id="-2" name="Set Y" sid="520286804017203" type="botoesTexto">
+                                            <param id="0" name="Y">425</param>
+                                        </action>
+                                        <action id="5" name="Set frame" sid="467246082518160" type="botoes">
+                                            <param id="0" name="Frame number">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="728575854731719">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="320949615064143" type="botoes">
+                                    <param id="0" name="Unique ID">308</param>
+                                </condition>
+                                <condition id="-14" name="Pick by unique ID" sid="560051860745919" type="botoesTexto">
+                                    <param id="0" name="Unique ID">314</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="494170356529890">
+                                    <conditions>
+                                        <condition id="7" name="Cursor is over object" sid="270209283495918" type="Mouse">
+                                            <param id="0" name="Object">botoes</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-1" name="Set X" sid="194696870479288" type="botoesTexto">
+                                            <param id="0" name="X">643</param>
+                                        </action>
+                                        <action id="-2" name="Set Y" sid="460819943643641" type="botoesTexto">
+                                            <param id="0" name="Y">525</param>
+                                        </action>
+                                        <action id="5" name="Set frame" sid="285642816280086" type="botoes">
+                                            <param id="0" name="Frame number">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="762490431733201">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="159225810172910" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-1" name="Set X" sid="323172206423548" type="botoesTexto">
+                                            <param id="0" name="X">640</param>
+                                        </action>
+                                        <action id="-2" name="Set Y" sid="796119070477326" type="botoesTexto">
+                                            <param id="0" name="Y">515</param>
+                                        </action>
+                                        <action id="5" name="Set frame" sid="984924150961945" type="botoes">
+                                            <param id="0" name="Frame number">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
                 </event-block>
-                <event-block sid="6953236589857068">
+                <event-block sid="823722574978399">
+                    <conditions>
+                        <condition id="6" name="On object clicked" sid="197704939002857" type="Mouse">
+                            <param id="0" name="Mouse button">0</param>
+                            <param id="1" name="Click type">0</param>
+                            <param id="2" name="Object clicked">botoes</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <comment>Ação do botão &quot;Continuar&quot;</comment>
+                        <event-block sid="2073576799576862">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="2379663212439886" type="botoes">
+                                    <param id="0" name="Unique ID">303</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-13" name="Set time scale" sid="579505741338048" type="System">
+                                    <param id="0" name="Time scale">1.0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="610295915671195" type="System">
+                                    <param id="0" name="Variable">pause</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="786334478856972" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="602505819689488" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove1&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="736585245769547" type="System">
+                                    <param id="0" name="Group name">&quot;PopupDica1&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="514068001990402" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>Ação do botão &quot;Salvar&quot;</comment>
+                        <event-block sid="114032727772020">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="557034637088048" type="botoes">
+                                    <param id="0" name="Unique ID">304</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-13" name="Set time scale" sid="182409464994941" type="System">
+                                    <param id="0" name="Time scale">1.0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="817964782522637" type="System">
+                                    <param id="0" name="Variable">pause</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="297532933634444" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="229371968475857" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove1&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="234568066383669" type="System">
+                                    <param id="0" name="Group name">&quot;PopupDica1&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="355816584333871" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-36" name="Save" sid="7109634514434816" type="System">
+                                    <param id="0" name="Slot">&quot;save&quot;</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="448626310156155" type="System">
+                                    <param id="0" name="Seconds">0.0001</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>Ação do botão &quot;Carregar&quot;</comment>
+                        <event-block sid="445783647298437">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="636376284114668" type="botoes">
+                                    <param id="0" name="Unique ID">305</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-37" name="Load" sid="877503106086107" type="System">
+                                    <param id="0" name="Slot">&quot;save&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>Ação do botão &quot;Recompensas&quot;</comment>
+                        <event-block sid="338014651407677">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="580586333095025" type="botoes">
+                                    <param id="0" name="Unique ID">306</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                        <comment>Ação do botão &quot;Áudio&quot;</comment>
+                        <event-block sid="617146486618625">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="680072210482757" type="botoes">
+                                    <param id="0" name="Unique ID">307</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                        <comment>Ação do botão &quot;Sair&quot;</comment>
+                        <event-block sid="383783129063172">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="921645842011839" type="botoes">
+                                    <param id="0" name="Unique ID">308</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="246378870299573">
+                    <conditions>
+                        <condition id="7" name="Cursor is over object" sid="693998335392792" type="Mouse">
+                            <param id="0" name="Object">botoes</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                </event-block>
+                <event-block any="1" sid="6953236589857068">
                     <conditions>
                         <condition id="7" name="Cursor is over object" sid="6156774914186161" type="Mouse">
                             <param id="0" name="Object">botoes</param>
+                        </condition>
+                        <condition id="7" name="Cursor is over object" sid="708326275661489" type="Mouse">
+                            <param id="0" name="Object">menuOpcoes</param>
                         </condition>
                     </conditions>
                     <actions>
