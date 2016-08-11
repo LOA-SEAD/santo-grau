@@ -3,7 +3,7 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase 1 (RU)</name>
     <events>
-        <variable constant="0" name="pausepopup" sid="887596533667891" static="0" type="number">0</variable>
+        <variable constant="0" name="checkpoint" sid="276733773896948" static="0" type="number">0</variable>
         <variable constant="0" name="pause" sid="884162534047725" static="0" type="number">0</variable>
         <variable constant="0" name="velocidadePessoas" sid="3394612400055466" static="0" type="number">400</variable>
         <variable constant="0" name="controleDica" sid="9200675717542735" static="0" type="number">0</variable>
@@ -23,6 +23,10 @@
                     <param id="2" name="Loop">1</param>
                     <param id="3" name="Volume">0</param>
                     <param id="1" name="Tag (optional)">&quot;ru&quot;</param>
+                </action>
+                <action id="5" name="Set playback rate" sid="468207475923302" type="Audio">
+                    <param id="0" name="Tag">&quot;ru&quot;</param>
+                    <param id="1" name="Playback rate">1.0</param>
                 </action>
                 <action id="-4" name="Set position to another object" sid="1705287340971909" type="playerAnim">
                     <param id="0" name="Object">player</param>
@@ -50,6 +54,10 @@
                 </action>
                 <action id="-9" name="Set value" sid="9443338212964294" type="System">
                     <param id="0" name="Variable">controleDica</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="261026404784720" type="System">
+                    <param id="0" name="Variable">checkpoint</param>
                     <param id="1" name="Value">0</param>
                 </action>
                 <action behavior="Pin" id="0" name="Pin to object" sid="5796567787877941" type="botoes">
@@ -496,6 +504,10 @@
                                 <condition id="-4" inverted="1" name="Is outside layout" sid="4159315523573828" type="lasanha" />
                             </conditions>
                             <actions>
+                                <action id="5" name="Set playback rate" sid="505518357880880" type="Audio">
+                                    <param id="0" name="Tag">&quot;ru&quot;</param>
+                                    <param id="1" name="Playback rate">0.5</param>
+                                </action>
                                 <action id="-1" name="Set X" sid="1317404183412115" type="lasanha">
                                     <param id="0" name="X">-157</param>
                                 </action>
@@ -521,6 +533,10 @@
                                 <action id="-1" name="Set X" sid="6411056026251607" type="lasanha">
                                     <param id="0" name="X">157</param>
                                 </action>
+                                <action id="5" name="Set playback rate" sid="766792687196514" type="Audio">
+                                    <param id="0" name="Tag">&quot;ru&quot;</param>
+                                    <param id="1" name="Playback rate">1.0</param>
+                                </action>
                             </actions>
                         </event-block>
                         <event-block sid="1130265586956355">
@@ -531,6 +547,10 @@
                                 <condition id="-4" inverted="1" name="Is outside layout" sid="5790202092250641" type="cafe" />
                             </conditions>
                             <actions>
+                                <action id="5" name="Set playback rate" sid="962843509239746" type="Audio">
+                                    <param id="0" name="Tag">&quot;ru&quot;</param>
+                                    <param id="1" name="Playback rate">2.0</param>
+                                </action>
                                 <action id="-1" name="Set X" sid="9465309245220693" type="cafe">
                                     <param id="0" name="X">1350</param>
                                 </action>
@@ -559,6 +579,10 @@
                                 <action id="6" name="Set speed" sid="6544612582668206" type="playerAnim">
                                     <param id="0" name="Speed">0</param>
                                 </action>
+                                <action id="5" name="Set playback rate" sid="846674152525844" type="Audio">
+                                    <param id="0" name="Tag">&quot;ru&quot;</param>
+                                    <param id="1" name="Playback rate">1.0</param>
+                                </action>
                             </actions>
                         </event-block>
                     </sub-events>
@@ -583,10 +607,14 @@
         <event-block sid="8819308992293401">
             <conditions>
                 <condition id="1" name="Is overlapping another object" sid="3794249019165164" type="player">
-                    <param id="0" name="Object">fimLasanha</param>
+                    <param id="0" name="Object">fimPowerup</param>
                 </condition>
             </conditions>
             <actions>
+                <action id="-9" name="Set value" sid="169419747694717" type="System">
+                    <param id="0" name="Variable">checkpoint</param>
+                    <param id="1" name="Value">1</param>
+                </action>
                 <action id="-12" name="Set group active" sid="4806460147105571" type="System">
                     <param id="0" name="Group name">&quot;GuerraLasanha&quot;</param>
                     <param id="1" name="State">0</param>
@@ -595,8 +623,23 @@
                     <param id="0" name="Group name">&quot;GuerraNormal&quot;</param>
                     <param id="1" name="State">1</param>
                 </action>
+                <action id="-12" name="Set group active" sid="575963610370136" type="System">
+                    <param id="0" name="Group name">&quot;FluxoCafe&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="503464500191099" type="System">
+                    <param id="0" name="Group name">&quot;FluxoNormal&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+                <action id="5" name="Set playback rate" sid="871638783129245" type="Audio">
+                    <param id="0" name="Tag">&quot;ru&quot;</param>
+                    <param id="1" name="Playback rate">1.0</param>
+                </action>
                 <action id="-1" name="Set X" sid="5572890881213659" type="lasanha">
                     <param id="0" name="X">157</param>
+                </action>
+                <action id="-1" name="Set X" sid="900606305658054" type="cafe">
+                    <param id="0" name="X">1109</param>
                 </action>
             </actions>
         </event-block>
@@ -642,6 +685,42 @@
                     </sub-events>
                 </event-block>
             </sub-events>
+        </event-block>
+        <event-block sid="504474398183465">
+            <conditions>
+                <condition id="-19" name="On destroyed" sid="851007183187247" type="recompensa" />
+            </conditions>
+            <actions>
+                <action id="-10" name="Add to" sid="990938209674447" type="System">
+                    <param id="0" name="Variable">alternativaBN</param>
+                    <param id="1" name="Value">100</param>
+                </action>
+                <action id="0" name="Set text" sid="125737208919539" type="pontoTexto">
+                    <param id="0" name="Text">&quot;+100&quot;</param>
+                </action>
+                <action id="4" name="Set font color" sid="867258961396934" type="pontoTexto">
+                    <param id="0" name="Color">rgb(41, 90, 165)</param>
+                </action>
+                <action id="-12" name="Set group active" sid="519419900108821" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="922446190176604" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+                <action id="-16" name="Wait" sid="252372374256256" type="System">
+                    <param id="0" name="Seconds">4</param>
+                </action>
+                <action id="-12" name="Set group active" sid="901407189727878" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="835241267512808" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+            </actions>
         </event-block>
         <event-group description="" inactive="1" sid="1086244335304577" title="Pontuacao1a">
             <sub-events>
@@ -2762,49 +2841,82 @@
                                 <condition id="0" name="On collision with another object" sid="9020696017692122" type="comida">
                                     <param id="0" name="Object">player</param>
                                 </condition>
-                                <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="1964539719987914" type="playerAnim" />
                             </conditions>
-                            <actions>
-                                <action id="-9" name="Destroy" sid="3402406013807364" type="comida" />
-                                <action id="-3" name="Set position" sid="693635713680786" type="player">
-                                    <param id="0" name="X">290</param>
-                                    <param id="1" name="Y">648</param>
-                                </action>
-                                <action behavior="Flash" id="0" name="Flash" sid="4946729375131296" type="playerAnim">
-                                    <param id="0" name="&apos;On&apos; time">0.1</param>
-                                    <param id="1" name="&apos;Off&apos; time">0.1</param>
-                                    <param id="2" name="Duration">1.2</param>
-                                </action>
-                                <action id="-11" name="Subtract from" sid="9747149067734361" type="System">
-                                    <param id="0" name="Variable">pontos</param>
-                                    <param id="1" name="Value">50</param>
-                                </action>
-                                <action id="0" name="Set text" sid="1281969150842924" type="pontoTexto">
-                                    <param id="0" name="Text">&quot;-50&quot;</param>
-                                </action>
-                                <action id="4" name="Set font color" sid="2219989380080604" type="pontoTexto">
-                                    <param id="0" name="Color">rgb(235, 17, 53)</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="3968839818619819" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
-                                    <param id="1" name="State">0</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="1912209976546911" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="6816711244298328" type="System">
-                                    <param id="0" name="Seconds">4</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="575132586462895" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
-                                    <param id="1" name="State">0</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="8395874315950024" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
-                            </actions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="379142173873359">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="837607290072924" type="System">
+                                            <param id="0" name="Variable">checkpoint</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="452976277191210" type="player">
+                                            <param id="0" name="X">360</param>
+                                            <param id="1" name="Y">520</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="245486445363543">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="554476266737458" type="System">
+                                            <param id="0" name="Variable">checkpoint</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="119767954599647" type="player">
+                                            <param id="0" name="X">940</param>
+                                            <param id="1" name="Y">455</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="806870248581881">
+                                    <conditions>
+                                        <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="448098830580195" type="playerAnim" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Destroy" sid="3402406013807364" type="comida" />
+                                        <action behavior="Flash" id="0" name="Flash" sid="4946729375131296" type="playerAnim">
+                                            <param id="0" name="&apos;On&apos; time">0.1</param>
+                                            <param id="1" name="&apos;Off&apos; time">0.1</param>
+                                            <param id="2" name="Duration">1.2</param>
+                                        </action>
+                                        <action id="-11" name="Subtract from" sid="9747149067734361" type="System">
+                                            <param id="0" name="Variable">pontos</param>
+                                            <param id="1" name="Value">50</param>
+                                        </action>
+                                        <action id="0" name="Set text" sid="1281969150842924" type="pontoTexto">
+                                            <param id="0" name="Text">&quot;-50&quot;</param>
+                                        </action>
+                                        <action id="4" name="Set font color" sid="2219989380080604" type="pontoTexto">
+                                            <param id="0" name="Color">rgb(235, 17, 53)</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="3968839818619819" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="1912209976546911" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="6816711244298328" type="System">
+                                            <param id="0" name="Seconds">4</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="575132586462895" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="8395874315950024" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-group>
@@ -2867,9 +2979,9 @@
                                 <condition behavior="Flash" id="0" inverted="1" name="Is flashing" sid="6040296660669112" type="playerAnim" />
                             </conditions>
                             <actions>
-                                <action id="-3" name="Set position" sid="3656986712288264" type="player">
-                                    <param id="0" name="X">944</param>
-                                    <param id="1" name="Y">419</param>
+                                <action id="-3" name="Set position" sid="112278551259202" type="player">
+                                    <param id="0" name="X">940</param>
+                                    <param id="1" name="Y">455</param>
                                 </action>
                                 <action behavior="Flash" id="0" name="Flash" sid="9024310644293903" type="playerAnim">
                                     <param id="0" name="&apos;On&apos; time">0.1</param>
