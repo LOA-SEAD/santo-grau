@@ -47,6 +47,10 @@
         <variable constant="0" name="descarregarDialogosTCC" sid="474724734753358" static="0" type="number">0</variable>
         <comment>Serve para marcar o tamanho do diálogo que irá ocorrer naquele momento para saber quantas vezes será lido falas no arquivo .json</comment>
         <variable constant="0" name="tamanhoDialogoTCC" sid="909586675699812" static="0" type="number">6</variable>
+        <comment>Usada para marcar qual personagem irá falar, sendo que nos números pares a fala é do diploma e nos números ímpares a fala é da personagem</comment>
+        <variable constant="0" name="falaPersonagens" sid="437038877608341" static="0" type="number">0</variable>
+        <comment>Define qual das animações da personagem estará executando</comment>
+        <variable constant="0" name="animacaoPersonagem" sid="688613633883342" static="0" type="number">0</variable>
         <event-block sid="9765162608650695">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="7057668097993137" type="System" />
@@ -625,8 +629,21 @@
                                 <action id="-16" name="Wait" sid="2618964962327099" type="System">
                                     <param id="0" name="Seconds">(8.0 - (1.0 * numeroBolinhas)) * 3</param>
                                 </action>
-                                <action id="-9" name="Destroy" sid="5850707264811628" type="Bolinha" />
                             </actions>
+                            <sub-events>
+                                <comment>Apenas se a bolinha ainda não foi lançada é que ela é destruida, pois existe a possibilidade disso ocorrer após ela ser lançada</comment>
+                                <event-block sid="543433641214089">
+                                    <conditions>
+                                        <condition id="3" name="Compare frame" sid="472263728872268" type="Bolinha">
+                                            <param id="0" name="Comparison">0</param>
+                                            <param id="1" name="Number">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Destroy" sid="5850707264811628" type="Bolinha" />
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -639,12 +656,11 @@
                     <conditions />
                     <actions />
                     <sub-events>
-                        <comment>Como neste diálogo é sempre Diploma - Personagem - Diploma... é possível controlar o local onde o balão de fala vai aparecer deste modo</comment>
                         <comment>Fala Diploma</comment>
                         <event-block sid="9047234160619637">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="3316282211951495" type="System">
-                                    <param id="0" name="First value">fraseAtualTCC % 2</param>
+                                    <param id="0" name="First value">falaPersonagens % 2</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Second value">0</param>
                                 </condition>
@@ -655,8 +671,8 @@
                                     <param id="1" name="Y">98</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="1605598438406289" type="DialogoPersonagem">
-                                    <param id="0" name="X">707</param>
-                                    <param id="1" name="Y">6</param>
+                                    <param id="0" name="X">715</param>
+                                    <param id="1" name="Y">8</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="5232277600265197" type="Dialogos">
                                     <param id="0" name="X">639</param>
@@ -675,8 +691,8 @@
                                     <param id="1" name="Y">player.Y - 126</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="6726351252957261" type="DialogoPersonagem">
-                                    <param id="0" name="X">player.X + 22</param>
-                                    <param id="1" name="Y">player.Y - 218</param>
+                                    <param id="0" name="X">player.X + 29</param>
+                                    <param id="1" name="Y">player.Y - 215</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="2326175334291855" type="Dialogos">
                                     <param id="0" name="X">player.X - 46</param>
@@ -926,6 +942,10 @@
                                                     <param id="0" name="Variable">fraseAtualTCC</param>
                                                     <param id="1" name="Value">1</param>
                                                 </action>
+                                                <action id="-9" name="Set value" sid="678668611333213" type="System">
+                                                    <param id="0" name="Variable">falaPersonagens</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
                                                 <action id="-9" name="Set value" sid="4135822565429336" type="System">
                                                     <param id="0" name="Variable">descarregarDialogosTCC</param>
                                                     <param id="1" name="Value">0</param>
@@ -979,6 +999,10 @@
                                         <action id="-9" name="Set value" sid="3773442136975277" type="System">
                                             <param id="0" name="Variable">descarregarDialogosTCC</param>
                                             <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="-10" name="Add to" sid="253852069162283" type="System">
+                                            <param id="0" name="Variable">falaPersonagens</param>
+                                            <param id="1" name="Value">1</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1397,6 +1421,10 @@
                                                                     <param id="0" name="Variable">descarregarPerguntasTCC</param>
                                                                     <param id="1" name="Value">1</param>
                                                                 </action>
+                                                                <action id="-9" name="Set value" sid="393726569651147" type="System">
+                                                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                                                    <param id="1" name="Value">1</param>
+                                                                </action>
                                                             </actions>
                                                         </event-block>
                                                     </sub-events>
@@ -1418,7 +1446,7 @@
                                                     </conditions>
                                                     <actions />
                                                     <sub-events>
-                                                        <comment>Se já estiver vermelho não muda. Quanto a questão dos pontos, ele vai reduzir aqui na primeira vez que o jogador errar a alternativa e nas outras vezes no evento no começo</comment>
+                                                        <comment>Se já estiver vermelho não muda, reduzindo os pontos apenas na primeira vez que o jogador passar sobre a alternativa</comment>
                                                         <event-block sid="9316350686877687">
                                                             <conditions>
                                                                 <condition id="3" name="Compare frame" sid="4223081857300412" type="AlternativasChao">
@@ -1480,6 +1508,25 @@
         </event-group>
         <event-group description="" sid="767041782866214" title="controleDanoMonstro">
             <sub-events>
+                <comment>Evento para &quot;acender a tocha&quot;</comment>
+                <event-block sid="818950180961907">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="449921544306500" type="player">
+                            <param id="0" name="Object">AcendeTocha</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="739295558602163" type="System">
+                            <param id="0" name="Variable">animacaoPersonagem</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="323625220790632" type="System">
+                            <param id="0" name="Variable">animacaoPersonagem</param>
+                            <param id="1" name="Value">2</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <event-block sid="737467397204607">
                     <conditions>
                         <condition id="-15" name="Pick nearest/furthest" sid="874781404416719" type="Bolinha">
@@ -1492,6 +1539,11 @@
                     <sub-events>
                         <event-block sid="789424081505775">
                             <conditions>
+                                <condition id="-14" name="Compare variable" sid="115850309149028" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
                                 <condition id="1" name="Is overlapping another object" sid="265881348598099" type="player">
                                     <param id="0" name="Object">Bolinha</param>
                                 </condition>
@@ -1525,6 +1577,10 @@
                         </condition>
                     </conditions>
                     <actions>
+                        <action id="-9" name="Set value" sid="289291233495282" type="System">
+                            <param id="0" name="Variable">animacaoPersonagem</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
                         <action id="11" name="Set collisions enabled" sid="520216336789946" type="MonstroInferior">
                             <param id="0" name="Collisions">0</param>
                         </action>
@@ -1535,6 +1591,10 @@
                         <action id="-10" name="Add to" sid="532689078150351" type="System">
                             <param id="0" name="Variable">numeroBolinhas</param>
                             <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="950982278802764" type="System">
+                            <param id="0" name="Group name">&quot;controleBolinhas&quot;</param>
+                            <param id="1" name="State">0</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -1572,10 +1632,6 @@
                                 <action id="5" name="Set frame" sid="286576910290209" type="MonstroSuperior">
                                     <param id="0" name="Frame number">0</param>
                                 </action>
-                                <action id="-12" name="Set group active" sid="838790950053011" type="System">
-                                    <param id="0" name="Group name">&quot;gerarPerguntasJsonFFTCC&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
                                 <action id="-9" name="Set value" sid="515293394767362" type="System">
                                     <param id="0" name="Variable">carregarTextosTCC</param>
                                     <param id="1" name="Value">1</param>
@@ -1593,35 +1649,6 @@
                                 <action id="11" name="Set collisions enabled" sid="350721660612779" type="MonstroSuperior">
                                     <param id="0" name="Collisions">1</param>
                                 </action>
-                                <action id="-10" name="Add to" sid="3125939558383115" type="System">
-                                    <param id="0" name="Variable">pontos</param>
-                                    <param id="1" name="Value">100</param>
-                                </action>
-                                <action id="0" name="Set text" sid="6647053803839729" type="pontoTexto">
-                                    <param id="0" name="Text">&quot;100&quot;</param>
-                                </action>
-                                <action id="4" name="Set font color" sid="6474508215868928" type="pontoTexto">
-                                    <param id="0" name="Color">rgb(41, 90, 165)</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="6681667837129795" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
-                                    <param id="1" name="State">0</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="873640705782259" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao1aFFTCC&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="4376834316743454" type="System">
-                                    <param id="0" name="Seconds">4</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="8795027749384203" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao1aFFTCC&quot;</param>
-                                    <param id="1" name="State">0</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="1268785913568789" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
                             </actions>
                             <sub-events>
                                 <event-block sid="633253939823707">
@@ -1633,25 +1660,70 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="-9" name="Set value" sid="618603758294182" type="System">
-                                            <param id="0" name="Variable">tamanhoDialogoTCC</param>
-                                            <param id="1" name="Value">7</param>
-                                        </action>
                                         <action id="2" name="Stop" sid="333804371726730" type="playerAnim" />
                                         <action id="-12" name="Set group active" sid="708586758733690" type="System">
                                             <param id="0" name="Group name">&quot;playerMoveFFTCC&quot;</param>
                                             <param id="1" name="State">0</param>
                                         </action>
-                                        <action id="-12" name="Set group active" sid="632781758107537" type="System">
-                                            <param id="0" name="Group name">&quot;gerarPerguntasJsonFFTCC&quot;</param>
-                                            <param id="1" name="State">0</param>
+                                        <action id="-9" name="Set value" sid="618603758294182" type="System">
+                                            <param id="0" name="Variable">tamanhoDialogoTCC</param>
+                                            <param id="1" name="Value">7</param>
                                         </action>
-                                        <action id="-12" name="Set group active" sid="950982278802764" type="System">
-                                            <param id="0" name="Group name">&quot;controleBolinhas&quot;</param>
-                                            <param id="1" name="State">0</param>
+                                        <action id="-9" name="Set value" sid="245143600081171" type="System">
+                                            <param id="0" name="Variable">carregarBalaoDialogo</param>
+                                            <param id="1" name="Value">1</param>
                                         </action>
                                         <action id="-12" name="Set group active" sid="562052023551070" type="System">
                                             <param id="0" name="Group name">&quot;dialogoTCC&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="509295008427298">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="509480274307195" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="838790950053011" type="System">
+                                            <param id="0" name="Group name">&quot;gerarPerguntasJsonFFTCC&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="938977277492661" type="System">
+                                            <param id="0" name="Group name">&quot;controleBolinhas&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="441464318980224">
+                                    <conditions />
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="3125939558383115" type="System">
+                                            <param id="0" name="Variable">pontos</param>
+                                            <param id="1" name="Value">100</param>
+                                        </action>
+                                        <action id="0" name="Set text" sid="6647053803839729" type="pontoTexto">
+                                            <param id="0" name="Text">&quot;100&quot;</param>
+                                        </action>
+                                        <action id="4" name="Set font color" sid="6474508215868928" type="pontoTexto">
+                                            <param id="0" name="Color">rgb(41, 90, 165)</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="848924651638523" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="561636941789053" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao1aFFTCC&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="480606658155164" type="System">
+                                            <param id="0" name="Seconds">4</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="354584916081373" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao1aFFTCC&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="140699363810088" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
                                             <param id="1" name="State">1</param>
                                         </action>
                                     </actions>
@@ -1663,7 +1735,7 @@
                                 <condition id="-22" name="Else" sid="914443855693737" type="System" />
                             </conditions>
                             <actions>
-                                <action id="-12" name="Set group active" sid="724678745556876" type="System">
+                                <action disabled="1" id="-12" name="Set group active" sid="724678745556876" type="System">
                                     <param id="0" name="Group name">&quot;controleBolinhas&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
@@ -1702,14 +1774,18 @@
                                     <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="798046864336067" type="System">
-                                    <param id="0" name="Variable">tamanhoDialogoTCC</param>
-                                    <param id="1" name="Value">13</param>
-                                </action>
                                 <action id="2" name="Stop" sid="989171858636803" type="playerAnim" />
                                 <action id="-12" name="Set group active" sid="622191243991356" type="System">
                                     <param id="0" name="Group name">&quot;playerMoveFFTCC&quot;</param>
                                     <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="244789510978313" type="System">
+                                    <param id="0" name="Variable">tamanhoDialogoTCC</param>
+                                    <param id="1" name="Value">13</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="670641613199686" type="System">
+                                    <param id="0" name="Variable">carregarBalaoDialogo</param>
+                                    <param id="1" name="Value">1</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="613512491708428" type="System">
                                     <param id="0" name="Group name">&quot;gerarPerguntasJsonFFTCC&quot;</param>
@@ -1725,6 +1801,7 @@
                 </event-block>
             </sub-events>
         </event-group>
+        <comment>Todos os casos quando animacaoPersonagem for igual à 1 serão substituidos pela personagem com a tocha apagada</comment>
         <event-group description="" sid="6751052447410165" title="playerMoveFFTCC">
             <sub-events>
                 <event-block any="1" sid="2583311756782099">
@@ -1743,11 +1820,49 @@
                         <action behavior="8Direction" id="7" name="Simulate control" sid="2204283161784401" type="player">
                             <param id="0" name="Control">2</param>
                         </action>
-                        <action id="4" name="Set animation" sid="3066358439289303" type="playerAnim">
-                            <param id="0" name="Animation">&quot;TrasAndando&quot;</param>
-                            <param id="1" name="From">1</param>
-                        </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="494132851041437">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="351926111077622" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="3066358439289303" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;TrasAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="312054148508655">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="504671840463770" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="891637998234127" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;TrasAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="348748147993404">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="216490823936192" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block any="1" sid="4354240999080201">
                     <conditions>
@@ -1765,11 +1880,49 @@
                         <action behavior="8Direction" id="7" name="Simulate control" sid="7145886402395038" type="player">
                             <param id="0" name="Control">0</param>
                         </action>
-                        <action id="4" name="Set animation" sid="8178867767154846" type="playerAnim">
-                            <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
-                            <param id="1" name="From">1</param>
-                        </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="248243697663474">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="621447734563031" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="8178867767154846" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="780445620268079">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="260718214521843" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="289805705389335" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="984898181487109">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="647291024483382" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block any="1" sid="2189815775495272">
                     <conditions>
@@ -1787,11 +1940,49 @@
                         <action behavior="8Direction" id="7" name="Simulate control" sid="1822176199420059" type="player">
                             <param id="0" name="Control">1</param>
                         </action>
-                        <action id="4" name="Set animation" sid="4007720476374855" type="playerAnim">
-                            <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
-                            <param id="1" name="From">1</param>
-                        </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="451224962659009">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="890132301766454" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="4007720476374855" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="460379130743636">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="365119212011810" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="155298539658416" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="206312094040883">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="441201030440533" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block any="1" sid="259763088041246">
                     <conditions>
@@ -1809,11 +2000,49 @@
                         <action behavior="8Direction" id="7" name="Simulate control" sid="1318105454922122" type="player">
                             <param id="0" name="Control">3</param>
                         </action>
-                        <action id="4" name="Set animation" sid="2179193773821538" type="playerAnim">
-                            <param id="0" name="Animation">&quot;FrenteAndando&quot;</param>
-                            <param id="1" name="From">1</param>
-                        </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="343544797999859">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="135633428782247" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="2179193773821538" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;FrenteAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="831864081867607">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="171836044768847" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="902470547183173" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;FrenteAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="466021170029613">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="516047579536766" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="7919200414995156">
                     <conditions>
@@ -1824,12 +2053,49 @@
                             <param id="0" name="Key">83 (S)</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="4" name="Set animation" sid="5639464411243017" type="playerAnim">
-                            <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
-                            <param id="1" name="From">1</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="829668192270652">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="182778893465891" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="5639464411243017" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="825691415380550">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="792262168864152" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="185604719595315" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="580503013453614">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="623564896390627" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="7696280092630503">
                     <conditions>
@@ -1840,12 +2106,49 @@
                             <param id="0" name="Key">68 (D)</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="4" name="Set animation" sid="6219312602426583" type="playerAnim">
-                            <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
-                            <param id="1" name="From">1</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="763221031687731">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="457281028597858" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="6219312602426583" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="754094158075564">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="944434528330414" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="417834460674572" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="979193118473175">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="834648826066894" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="7808754473495884">
                     <conditions>
@@ -1856,12 +2159,49 @@
                             <param id="0" name="Key">40 (Down arrow)</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="4" name="Set animation" sid="2775325661499118" type="playerAnim">
-                            <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
-                            <param id="1" name="From">1</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="785136126204287">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="708246762066302" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="2775325661499118" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="465602971339142">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="543374301202981" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="568500301585897" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="259255043623678">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="282032222467132" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="2751764296564113">
                     <conditions>
@@ -1872,12 +2212,49 @@
                             <param id="0" name="Key">39 (Right arrow)</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="4" name="Set animation" sid="6671574924110977" type="playerAnim">
-                            <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
-                            <param id="1" name="From">1</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="646217051148853">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="481460433731056" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="6671574924110977" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="196248938089133">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="253110782018325" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="452976141788847" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="704279465317283">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="473544800962281" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block any="1" sid="3773383549790542">
                     <conditions>
@@ -1888,12 +2265,49 @@
                             <param id="0" name="Key">38 (Up arrow)</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="4" name="Set animation" sid="1766117261780943" type="playerAnim">
-                            <param id="0" name="Animation">&quot;TrasParado&quot;</param>
-                            <param id="1" name="From">1</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="947109253228938">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="201576153325201" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="1766117261780943" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="422551377663052">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="533889509355651" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="322970687590443" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="554121080519951">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="299838487732137" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block any="1" sid="3255248241284806">
                     <conditions>
@@ -1904,12 +2318,49 @@
                             <param id="0" name="Key">40 (Down arrow)</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="4" name="Set animation" sid="3151753962808145" type="playerAnim">
-                            <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
-                            <param id="1" name="From">1</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="249360677984152">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="202510442050785" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="3151753962808145" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="797306698429603">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="911772226113284" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="254011362924159" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="409783553370395">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="678455855271236" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block any="1" sid="242006943993595">
                     <conditions>
@@ -1920,12 +2371,49 @@
                             <param id="0" name="Key">37 (Left arrow)</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="4" name="Set animation" sid="3633798121633091" type="playerAnim">
-                            <param id="0" name="Animation">&quot;EsquerdaParado&quot;</param>
-                            <param id="1" name="From">1</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="993400040360642">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="129015421880045" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="3633798121633091" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;EsquerdaParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="621481722670783">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="480457473540071" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="256249796141504" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;EsquerdaParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="878847929614150">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="939239863416165" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block any="1" sid="5105599929156162">
                     <conditions>
@@ -1936,12 +2424,49 @@
                             <param id="0" name="Key">39 (Right arrow)</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="4" name="Set animation" sid="8585015241693119" type="playerAnim">
-                            <param id="0" name="Animation">&quot;DireitaParado&quot;</param>
-                            <param id="1" name="From">1</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="697531839231058">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="615734286560771" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="8585015241693119" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;DireitaParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="266228094370844">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="865228974058758" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="943864672192951" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;DireitaParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="506431250779761">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="648258933957859" type="System">
+                                    <param id="0" name="Variable">animacaoPersonagem</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
