@@ -22,6 +22,7 @@
                 <action id="33" name="Stop all" sid="824385784403312" type="Audio" />
                 <action id="0" name="Load JSON" sid="5109230592467949" type="ComputadorJSON" />
                 <action id="0" name="Load JSON" sid="7785929271228467" type="DialogosJSON" />
+                <action id="0" name="Load JSON" sid="824268785472454" type="FasesJSON" />
                 <action id="13" name="Set URL" sid="5137872676196242" type="telaoHTML">
                     <param id="0" name="URL">&quot;telao.html&quot;</param>
                 </action>
@@ -29,7 +30,7 @@
                     <param id="0" name="Audio file">OSantoJoGrau</param>
                     <param id="2" name="Loop">1</param>
                     <param id="3" name="Volume">volMusica</param>
-                    <param id="1" name="Tag (optional)">&quot;tecnologia&quot;</param>
+                    <param id="1" name="Tag (optional)">&quot;musica&quot;</param>
                 </action>
                 <action id="0" name="Play" sid="614433064897662" type="Audio">
                     <param id="0" name="Audio file">chuvisco</param>
@@ -166,168 +167,203 @@
                 </action>
             </actions>
         </event-block>
-        <event-block sid="7565248514853059">
-            <conditions>
-                <condition id="-14" name="Compare variable" sid="8623901697009993" type="System">
-                    <param id="0" name="Variable">controleFase2</param>
-                    <param id="1" name="Comparison">0</param>
-                    <param id="2" name="Value">1</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="0" name="Execute" sid="9464158561839314" type="shuffle">
-                    <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; computadorJSON.GetData(&quot;words&quot;,0) &amp; &quot;&apos;)&quot;</param>
-                </action>
-                <action id="-9" name="Set value" sid="2127595470171542" type="System">
-                    <param id="0" name="Variable">embaralhada1</param>
-                    <param id="1" name="Value">shuffle.ReadExecutionReturn</param>
-                </action>
-                <action id="0" name="Execute" sid="4225456646609501" type="shuffle">
-                    <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; computadorJSON.GetData(&quot;words&quot;,1) &amp; &quot;&apos;)&quot;</param>
-                </action>
-                <action id="-9" name="Set value" sid="908057005103467" type="System">
-                    <param id="0" name="Variable">embaralhada2</param>
-                    <param id="1" name="Value">shuffle.ReadExecutionReturn</param>
-                </action>
-                <action id="0" name="Execute" sid="4453724744559708" type="shuffle">
-                    <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; computadorJSON.GetData(&quot;words&quot;,2) &amp; &quot;&apos;)&quot;</param>
-                </action>
-                <action id="-9" name="Set value" sid="254013293517213" type="System">
-                    <param id="0" name="Variable">embaralhada3</param>
-                    <param id="1" name="Value">shuffle.ReadExecutionReturn</param>
-                </action>
-                <action id="0" name="Execute" sid="7937464615052294" type="shuffle">
-                    <param id="0" name="Value">&quot;length(&apos;&quot; &amp; embaralhada1 &amp; &quot;&apos;)&quot;</param>
-                </action>
-                <action id="-9" name="Set value" sid="2737564437050518" type="System">
-                    <param id="0" name="Variable">comprimento1</param>
-                    <param id="1" name="Value">shuffle.ReadExecutionReturn</param>
-                </action>
-                <action id="0" name="Execute" sid="1035528766147079" type="shuffle">
-                    <param id="0" name="Value">&quot;length(&apos;&quot; &amp; embaralhada2 &amp; &quot;&apos;)&quot;</param>
-                </action>
-                <action id="-9" name="Set value" sid="1034474411206056" type="System">
-                    <param id="0" name="Variable">comprimento2</param>
-                    <param id="1" name="Value">shuffle.ReadExecutionReturn</param>
-                </action>
-                <action id="0" name="Execute" sid="6368776983175873" type="shuffle">
-                    <param id="0" name="Value">&quot;length(&apos;&quot; &amp; embaralhada3 &amp; &quot;&apos;)&quot;</param>
-                </action>
-                <action id="-9" name="Set value" sid="9539189039055893" type="System">
-                    <param id="0" name="Variable">comprimento3</param>
-                    <param id="1" name="Value">shuffle.ReadExecutionReturn</param>
-                </action>
-                <action id="-9" name="Set value" sid="4247534676236611" type="System">
-                    <param id="0" name="Variable">controleFase2</param>
-                    <param id="1" name="Value">2</param>
-                </action>
-            </actions>
-        </event-block>
-        <event-block sid="3867128592494029">
-            <conditions>
-                <condition id="-14" name="Compare variable" sid="1345454683130149" type="System">
-                    <param id="0" name="Variable">controleFase2</param>
-                    <param id="1" name="Comparison">0</param>
-                    <param id="2" name="Value">2</param>
-                </condition>
-                <condition id="-14" name="Compare variable" sid="349754862876269" type="System">
-                    <param id="0" name="Variable">comprimento1</param>
-                    <param id="1" name="Comparison">4</param>
-                    <param id="2" name="Value">1</param>
-                </condition>
-                <condition id="-14" name="Compare variable" sid="4895442442533868" type="System">
-                    <param id="0" name="Variable">comprimento2</param>
-                    <param id="1" name="Comparison">4</param>
-                    <param id="2" name="Value">1</param>
-                </condition>
-                <condition id="-14" name="Compare variable" sid="7952150078532146" type="System">
-                    <param id="0" name="Variable">comprimento3</param>
-                    <param id="1" name="Comparison">4</param>
-                    <param id="2" name="Value">1</param>
-                </condition>
-            </conditions>
-            <actions />
+        <event-group description="" sid="339726690014977" title="Mecanica1">
             <sub-events>
-                <event-block sid="5909162236663135">
+                <event-block sid="7565248514853059">
                     <conditions>
-                        <condition id="-14" name="Compare variable" sid="193068438448273" type="System">
-                            <param id="0" name="Variable">embaralhada1</param>
+                        <condition id="-14" name="Compare variable" sid="8623901697009993" type="System">
+                            <param id="0" name="Variable">controleFase2</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">computadorJSON.GetData(&quot;words&quot;,0)</param>
+                            <param id="2" name="Value">1</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="0" name="Execute" sid="3950066251391654" type="shuffle">
+                        <action id="0" name="Execute" sid="9464158561839314" type="shuffle">
                             <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; computadorJSON.GetData(&quot;words&quot;,0) &amp; &quot;&apos;)&quot;</param>
                         </action>
-                        <action id="-9" name="Set value" sid="7245689831691299" type="System">
+                        <action id="-9" name="Set value" sid="2127595470171542" type="System">
                             <param id="0" name="Variable">embaralhada1</param>
                             <param id="1" name="Value">shuffle.ReadExecutionReturn</param>
                         </action>
-                    </actions>
-                </event-block>
-                <event-block sid="802623571144287">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="7794387822973772" type="System">
-                            <param id="0" name="Variable">embaralhada2</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">computadorJSON.GetData(&quot;words&quot;,1)</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Execute" sid="7155747836182343" type="shuffle">
+                        <action id="0" name="Execute" sid="4225456646609501" type="shuffle">
                             <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; computadorJSON.GetData(&quot;words&quot;,1) &amp; &quot;&apos;)&quot;</param>
                         </action>
-                        <action id="-9" name="Set value" sid="3299697496656461" type="System">
+                        <action id="-9" name="Set value" sid="908057005103467" type="System">
                             <param id="0" name="Variable">embaralhada2</param>
                             <param id="1" name="Value">shuffle.ReadExecutionReturn</param>
                         </action>
-                    </actions>
-                </event-block>
-                <event-block sid="5075157840321251">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="6819244516167934" type="System">
-                            <param id="0" name="Variable">embaralhada3</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">computadorJSON.GetData(&quot;words&quot;,2)</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Execute" sid="9641555838247986" type="shuffle">
+                        <action id="0" name="Execute" sid="4453724744559708" type="shuffle">
                             <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; computadorJSON.GetData(&quot;words&quot;,2) &amp; &quot;&apos;)&quot;</param>
                         </action>
-                        <action id="-9" name="Set value" sid="6257930564456185" type="System">
+                        <action id="-9" name="Set value" sid="254013293517213" type="System">
                             <param id="0" name="Variable">embaralhada3</param>
                             <param id="1" name="Value">shuffle.ReadExecutionReturn</param>
                         </action>
+                        <action id="0" name="Execute" sid="7937464615052294" type="shuffle">
+                            <param id="0" name="Value">&quot;length(&apos;&quot; &amp; embaralhada1 &amp; &quot;&apos;)&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="2737564437050518" type="System">
+                            <param id="0" name="Variable">comprimento1</param>
+                            <param id="1" name="Value">shuffle.ReadExecutionReturn</param>
+                        </action>
+                        <action id="0" name="Execute" sid="1035528766147079" type="shuffle">
+                            <param id="0" name="Value">&quot;length(&apos;&quot; &amp; embaralhada2 &amp; &quot;&apos;)&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="1034474411206056" type="System">
+                            <param id="0" name="Variable">comprimento2</param>
+                            <param id="1" name="Value">shuffle.ReadExecutionReturn</param>
+                        </action>
+                        <action id="0" name="Execute" sid="6368776983175873" type="shuffle">
+                            <param id="0" name="Value">&quot;length(&apos;&quot; &amp; embaralhada3 &amp; &quot;&apos;)&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="9539189039055893" type="System">
+                            <param id="0" name="Variable">comprimento3</param>
+                            <param id="1" name="Value">shuffle.ReadExecutionReturn</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="4247534676236611" type="System">
+                            <param id="0" name="Variable">controleFase2</param>
+                            <param id="1" name="Value">2</param>
+                        </action>
                     </actions>
                 </event-block>
-            </sub-events>
-        </event-block>
-        <event-block sid="934833575090739">
-            <conditions>
-                <condition id="1" name="Is overlapping another object" sid="381637143482779" type="player">
-                    <param id="0" name="Object">recompensa</param>
-                </condition>
-            </conditions>
-            <actions />
-            <sub-events>
-                <event-block sid="181300847656020">
+                <event-block sid="3867128592494029">
                     <conditions>
-                        <condition id="0" name="On key pressed" sid="587212936352965" type="Keyboard">
-                            <param id="0" name="Key">69 (E)</param>
+                        <condition id="-14" name="Compare variable" sid="1345454683130149" type="System">
+                            <param id="0" name="Variable">controleFase2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">2</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="349754862876269" type="System">
+                            <param id="0" name="Variable">comprimento1</param>
+                            <param id="1" name="Comparison">4</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="4895442442533868" type="System">
+                            <param id="0" name="Variable">comprimento2</param>
+                            <param id="1" name="Comparison">4</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="7952150078532146" type="System">
+                            <param id="0" name="Variable">comprimento3</param>
+                            <param id="1" name="Comparison">4</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="5909162236663135">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="193068438448273" type="System">
+                                    <param id="0" name="Variable">embaralhada1</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">computadorJSON.GetData(&quot;words&quot;,0)</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Execute" sid="3950066251391654" type="shuffle">
+                                    <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; computadorJSON.GetData(&quot;words&quot;,0) &amp; &quot;&apos;)&quot;</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="7245689831691299" type="System">
+                                    <param id="0" name="Variable">embaralhada1</param>
+                                    <param id="1" name="Value">shuffle.ReadExecutionReturn</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="802623571144287">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="7794387822973772" type="System">
+                                    <param id="0" name="Variable">embaralhada2</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">computadorJSON.GetData(&quot;words&quot;,1)</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Execute" sid="7155747836182343" type="shuffle">
+                                    <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; computadorJSON.GetData(&quot;words&quot;,1) &amp; &quot;&apos;)&quot;</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="3299697496656461" type="System">
+                                    <param id="0" name="Variable">embaralhada2</param>
+                                    <param id="1" name="Value">shuffle.ReadExecutionReturn</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="5075157840321251">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="6819244516167934" type="System">
+                                    <param id="0" name="Variable">embaralhada3</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">computadorJSON.GetData(&quot;words&quot;,2)</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Execute" sid="9641555838247986" type="shuffle">
+                                    <param id="0" name="Value">&quot;shuffle(&apos;&quot; &amp; computadorJSON.GetData(&quot;words&quot;,2) &amp; &quot;&apos;)&quot;</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="6257930564456185" type="System">
+                                    <param id="0" name="Variable">embaralhada3</param>
+                                    <param id="1" name="Value">shuffle.ReadExecutionReturn</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="934833575090739">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="381637143482779" type="player">
+                            <param id="0" name="Object">recompensa</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="181300847656020">
+                            <conditions>
+                                <condition id="0" name="On key pressed" sid="587212936352965" type="Keyboard">
+                                    <param id="0" name="Key">69 (E)</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="700905978343184" type="recompensa">
+                                    <param id="0" name="Instance variable">recompensa2</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="694295402817876" type="recompensa" />
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="932767707794578">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="8163276182188839" type="System">
+                            <param id="0" name="Variable">controlePCs</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">3</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-10" name="Set value" sid="700905978343184" type="recompensa">
-                            <param id="0" name="Instance variable">recompensa2</param>
-                            <param id="1" name="Value">1</param>
+                        <action id="-9" name="Destroy" sid="7669583388323185" type="telaoHTML" />
+                        <action id="4" name="Set animation" sid="4783184067186409" type="sintonia">
+                            <param id="0" name="Animation">&quot;Final&quot;</param>
+                            <param id="1" name="From">1</param>
                         </action>
-                        <action id="-9" name="Destroy" sid="694295402817876" type="recompensa" />
+                    </actions>
+                </event-block>
+                <event-block sid="9840446688293528">
+                    <conditions>
+                        <condition id="-19" name="On destroyed" sid="5872652070893707" type="telaoHTML" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="304862270262976" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Value">14</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="250062796213096" type="System">
+                            <param id="0" name="Group name">&quot;DialogoRobo&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
                     </actions>
                 </event-block>
             </sub-events>
-        </event-block>
+        </event-group>
         <event-group description="" sid="1249762280384846" title="Efeitos2">
             <sub-events>
                 <event-block sid="2449858748110358">
@@ -345,6 +381,14 @@
                         </action>
                         <action id="0" name="Set text" sid="5757129352923526" type="pontuacaoTexto">
                             <param id="0" name="Text">&quot;Rendimento acadêmico: &quot; &amp; pontos &amp; &quot; &quot; &amp; recompensa.recompensa1 &amp; recompensa.recompensa2</param>
+                        </action>
+                        <action id="3" name="Set volume" sid="434257862864570" type="Audio">
+                            <param id="0" name="Tag">&quot;musica&quot;</param>
+                            <param id="1" name="dB">volMusica</param>
+                        </action>
+                        <action id="3" name="Set volume" sid="449953429512136" type="Audio">
+                            <param id="0" name="Tag">&quot;sons&quot;</param>
+                            <param id="1" name="dB">volSons</param>
                         </action>
                     </actions>
                 </event-block>
@@ -2746,37 +2790,6 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <event-block sid="932767707794578">
-            <conditions>
-                <condition id="-14" name="Compare variable" sid="8163276182188839" type="System">
-                    <param id="0" name="Variable">controlePCs</param>
-                    <param id="1" name="Comparison">0</param>
-                    <param id="2" name="Value">3</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="-9" name="Destroy" sid="7669583388323185" type="telaoHTML" />
-                <action id="4" name="Set animation" sid="4783184067186409" type="sintonia">
-                    <param id="0" name="Animation">&quot;Final&quot;</param>
-                    <param id="1" name="From">1</param>
-                </action>
-            </actions>
-        </event-block>
-        <event-block sid="9840446688293528">
-            <conditions>
-                <condition id="-19" name="On destroyed" sid="5872652070893707" type="telaoHTML" />
-            </conditions>
-            <actions>
-                <action id="-9" name="Set value" sid="304862270262976" type="System">
-                    <param id="0" name="Variable">controleDialogos2</param>
-                    <param id="1" name="Value">14</param>
-                </action>
-                <action id="-12" name="Set group active" sid="250062796213096" type="System">
-                    <param id="0" name="Group name">&quot;DialogoRobo&quot;</param>
-                    <param id="1" name="State">1</param>
-                </action>
-            </actions>
-        </event-block>
         <event-group description="" inactive="1" sid="3726014130864171" title="Saida2">
             <sub-events>
                 <event-block sid="8283465333687756">
