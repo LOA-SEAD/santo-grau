@@ -919,6 +919,24 @@
                             <param id="1" name="State">1</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <comment>Apenas para que os quadros não fiquem espalhados em qualquer posição, então é utilizado o sprite PosicionadorQuadros para atuar &quot;como um imã&quot; (valeu pela sugestão, Valerio!)</comment>
+                        <event-block sid="134458215674590">
+                            <conditions>
+                                <condition id="-15" name="Pick nearest/furthest" sid="127749774586223" type="PosicionadorQuadros">
+                                    <param id="0" name="Which">0</param>
+                                    <param id="1" name="X">Quadros.X</param>
+                                    <param id="2" name="Y">Quadros.Y</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Set position" sid="370377677896611" type="Quadros">
+                                    <param id="0" name="X">PosicionadorQuadros.X</param>
+                                    <param id="1" name="Y">PosicionadorQuadros.Y</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <comment>Para dar o efeito de que aquele quadro pode ser selecionado</comment>
                 <event-block sid="8714694988860868">
@@ -1056,7 +1074,7 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <comment>Controla os diálogos entre a personagem e Bert.</comment>
+        <comment>Controla os diálogos entre a personagem e Einstein</comment>
         <event-group description="" sid="1573909898037785" title="dialogoGaleria">
             <sub-events>
                 <event-block sid="1884421490486591">
@@ -1243,12 +1261,11 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="7" name="Play (by name)" sid="211650563943884" type="Audio">
-                                    <param id="0" name="Folder">0</param>
-                                    <param id="1" name="Audio file name">choose(&quot;passar_dialogo1&quot;, &quot;passar_dialogo2&quot;, &quot;passar_dialogo3&quot;)</param>
-                                    <param id="3" name="Loop">0</param>
-                                    <param id="4" name="Volume">volSons</param>
-                                    <param id="2" name="Tag (optional)">&quot;sons&quot;</param>
+                                <action id="0" name="Play" sid="211650563943884" type="Audio">
+                                    <param id="0" name="Audio file">passar_dialogo</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="2835356462809307" type="System">
                                     <param id="0" name="Variable">descarregarDialogosGAL</param>
@@ -1419,7 +1436,7 @@
                                                             <param id="1" name="Value">100</param>
                                                         </action>
                                                         <action id="0" name="Set text" sid="8837233135233388" type="pontoTexto">
-                                                            <param id="0" name="Text">&quot;100&quot;</param>
+                                                            <param id="0" name="Text">&quot;+100&quot;</param>
                                                         </action>
                                                         <action id="4" name="Set font color" sid="2891416925168782" type="pontoTexto">
                                                             <param id="0" name="Color">rgb(41, 90, 165)</param>
@@ -2204,7 +2221,7 @@
                             <param id="1" name="Value">100</param>
                         </action>
                         <action id="0" name="Set text" sid="9617344024946068" type="pontoTexto">
-                            <param id="0" name="Text">&quot;100&quot;</param>
+                            <param id="0" name="Text">&quot;+100&quot;</param>
                         </action>
                         <action id="4" name="Set font color" sid="1850660752922502" type="pontoTexto">
                             <param id="0" name="Color">rgb(41, 90, 165)</param>
