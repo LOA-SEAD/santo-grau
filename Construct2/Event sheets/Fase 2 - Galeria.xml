@@ -330,6 +330,29 @@
                 </event-block>
             </sub-events>
         </event-block>
+        <comment>Ação para o jogador abrir o armário e pegar a recompensa</comment>
+        <event-block sid="544527834019890">
+            <conditions>
+                <condition id="1" name="Is overlapping another object" sid="464702853105520" type="player">
+                    <param id="0" name="Object">AbreArmario</param>
+                </condition>
+                <condition id="2" name="Key is down" sid="681928718586127" type="Keyboard">
+                    <param id="0" name="Key">69 (E)</param>
+                </condition>
+                <condition id="2" name="Is playing" sid="690854542172808" type="playerAnim">
+                    <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="0" name="Play" sid="921241955817236" type="Audio">
+                    <param id="0" name="Audio file">porta_armario</param>
+                    <param id="2" name="Loop">0</param>
+                    <param id="3" name="Volume">volSons</param>
+                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                </action>
+                <action id="-9" name="Destroy" sid="531783168521912" type="AbreArmario" />
+            </actions>
+        </event-block>
         <comment>Grupo que controla ações que dependem do jogador pressionar a tecla E (interação com Einstein e dicas)</comment>
         <event-group description="" sid="3829177506289873" title="animacoesConversasDicas">
             <sub-events>
@@ -357,7 +380,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <comment>Desce dica para conversar com o bibliotecário</comment>
+                <comment>Desce dica para conversar com Einstein</comment>
                 <event-block sid="3487361776120188">
                     <conditions>
                         <condition id="-22" name="Else" sid="9143762695555115" type="System" />
@@ -409,6 +432,12 @@
                         <action id="-12" name="Set group active" sid="9391033416436006" type="System">
                             <param id="0" name="Group name">&quot;playerMoveGAL&quot;</param>
                             <param id="1" name="State">0</param>
+                        </action>
+                        <action id="0" name="Play" sid="630564296322413" type="Audio">
+                            <param id="0" name="Audio file">tossindo</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">volSons</param>
+                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                         </action>
                         <action id="-12" name="Set group active" sid="5040351626937007" type="System">
                             <param id="0" name="Group name">&quot;dialogoGaleria&quot;</param>
@@ -1276,6 +1305,9 @@
                                     <param id="3" name="Volume">volSons</param>
                                     <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                 </action>
+                                <action id="-16" name="Wait" sid="518535856822469" type="System">
+                                    <param id="0" name="Seconds">0.5</param>
+                                </action>
                                 <action id="-9" name="Set value" sid="2835356462809307" type="System">
                                     <param id="0" name="Variable">descarregarDialogosGAL</param>
                                     <param id="1" name="Value">1</param>
@@ -1406,6 +1438,21 @@
                                                         <action id="-4" name="Set layer visible" sid="4660890779684976" type="System">
                                                             <param id="0" name="Layer">&quot;EfeitoEscuro&quot;</param>
                                                             <param id="1" name="Visibility">1</param>
+                                                        </action>
+                                                        <action id="0" name="Play" sid="814347881711170" type="Audio">
+                                                            <param id="0" name="Audio file">risada_maligna</param>
+                                                            <param id="2" name="Loop">0</param>
+                                                            <param id="3" name="Volume">volSons</param>
+                                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                                        </action>
+                                                        <action id="6" name="Stop" sid="887104411035384" type="Audio">
+                                                            <param id="0" name="Tag">&quot;musica&quot;</param>
+                                                        </action>
+                                                        <action id="0" name="Play" sid="341908903561108" type="Audio">
+                                                            <param id="0" name="Audio file">ambiencia_fantasmagorica</param>
+                                                            <param id="2" name="Loop">1</param>
+                                                            <param id="3" name="Volume">volSons</param>
+                                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                                         </action>
                                                         <action id="-9" name="Destroy" sid="4745426364815126" type="EinsteinCenario" />
                                                         <action id="-9" name="Destroy" sid="8802159087815485" type="SolidoEinstein" />
@@ -2215,6 +2262,15 @@
                         </condition>
                     </conditions>
                     <actions>
+                        <action id="6" name="Stop" sid="382422753854971" type="Audio">
+                            <param id="0" name="Tag">&quot;sons&quot;</param>
+                        </action>
+                        <action id="0" name="Play" sid="837996007695531" type="Audio">
+                            <param id="0" name="Audio file">OSantoTiGrau</param>
+                            <param id="2" name="Loop">1</param>
+                            <param id="3" name="Volume">volMusica</param>
+                            <param id="1" name="Tag (optional)">&quot;musica&quot;</param>
+                        </action>
                         <action id="-9" name="Destroy" sid="2433062249916656" type="Chave" />
                         <action id="-9" name="Destroy" sid="1765500496901364" type="SelecaoChave" />
                         <action id="-9" name="Destroy" sid="2322279731337848" type="Fantasmas" />
@@ -2257,6 +2313,12 @@
                         <action id="-12" name="Set group active" sid="977371892841502" type="System">
                             <param id="0" name="Group name">&quot;saidaGAL&quot;</param>
                             <param id="1" name="State">1</param>
+                        </action>
+                        <action id="0" name="Play" sid="610091136066403" type="Audio">
+                            <param id="0" name="Audio file">passagem_subindo</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">volSons</param>
+                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                         </action>
                     </actions>
                 </event-block>
