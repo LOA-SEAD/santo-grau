@@ -1305,18 +1305,46 @@
                                     <param id="3" name="Volume">volSons</param>
                                     <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                 </action>
-                                <action id="-16" name="Wait" sid="518535856822469" type="System">
-                                    <param id="0" name="Seconds">0.5</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="2835356462809307" type="System">
-                                    <param id="0" name="Variable">descarregarDialogosGAL</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
                                 <action id="-9" name="Set value" sid="1151726365250803" type="System">
                                     <param id="0" name="Variable">avancarDialogosGAL</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
+                                <action id="-16" name="Wait" sid="518535856822469" type="System">
+                                    <param id="0" name="Seconds">0.5</param>
+                                </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="793431210692012">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="992199962546976" type="System">
+                                            <param id="0" name="First value">fraseAtualGAL</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">tamanhoDialogoGAL</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="2835356462809307" type="System">
+                                            <param id="0" name="Variable">descarregarDialogosGAL</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="5630013193041494">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="3794480225929178" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="9286553841062039" type="System">
+                                            <param id="0" name="Variable">fraseAtualGAL</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="4555938386400547" type="System">
+                                            <param id="0" name="Variable">inserirDialogosGAL</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -1345,6 +1373,9 @@
                                 <action id="-16" name="Set opacity" sid="2982996949466901" type="Dialogos">
                                     <param id="0" name="Opacity">Dialogos.Opacity - 2.5</param>
                                 </action>
+                                <action id="-16" name="Set opacity" sid="8209586396246137" type="BalaoDialogo">
+                                    <param id="0" name="Opacity">BalaoDialogo.Opacity - 2.5</param>
+                                </action>
                             </actions>
                             <sub-events>
                                 <comment>Esta comparação é devido a um bug caso o consiga avançar o texto mais rápido do que o ele sendo limpo</comment>
@@ -1365,6 +1396,7 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
+                        <comment>Embora será fechada a caixa de diálogo, adiciona-se um no indice da frase pois podem ter mais diálogos depois</comment>
                         <event-block sid="9971774148349686">
                             <conditions>
                                 <condition id="-10" name="Compare opacity" sid="5489908162637236" type="Dialogos">
@@ -1372,9 +1404,119 @@
                                     <param id="1" name="Opacity">0</param>
                                 </condition>
                             </conditions>
-                            <actions />
+                            <actions>
+                                <action id="-10" name="Add to" sid="4270841858966979" type="System">
+                                    <param id="0" name="Variable">fraseAtualGAL</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="4135822565429336" type="System">
+                                    <param id="0" name="Variable">descarregarDialogosGAL</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="3130328104406448" type="System">
+                                    <param id="0" name="Group name">&quot;dialogoGaleria&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="4849866285031774" type="System">
+                                    <param id="0" name="Group name">&quot;playerMoveGAL&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
                             <sub-events>
-                                <event-block sid="1655110943677482">
+                                <comment>Ativar a parte escura</comment>
+                                <event-block sid="6260428200640797">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="2864854961540279" type="System">
+                                            <param id="0" name="Variable">tamanhoDialogoGAL</param>
+                                            <param id="1" name="Comparison">1</param>
+                                            <param id="2" name="Value">4</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-4" name="Set layer visible" sid="4660890779684976" type="System">
+                                            <param id="0" name="Layer">&quot;EfeitoEscuro&quot;</param>
+                                            <param id="1" name="Visibility">1</param>
+                                        </action>
+                                        <action id="0" name="Play" sid="814347881711170" type="Audio">
+                                            <param id="0" name="Audio file">risada_maligna</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="6" name="Stop" sid="887104411035384" type="Audio">
+                                            <param id="0" name="Tag">&quot;musica&quot;</param>
+                                        </action>
+                                        <action id="0" name="Play" sid="341908903561108" type="Audio">
+                                            <param id="0" name="Audio file">ambiencia_fantasmagorica</param>
+                                            <param id="2" name="Loop">1</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="-9" name="Destroy" sid="4745426364815126" type="EinsteinCenario" />
+                                        <action id="-9" name="Destroy" sid="8802159087815485" type="SolidoEinstein" />
+                                        <action id="-16" name="Set opacity" sid="4973419202493159" type="Fantasmas">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="11" name="Set collisions enabled" sid="2470085126462598" type="Fantasmas">
+                                            <param id="0" name="Collisions">1</param>
+                                        </action>
+                                        <action behavior="Pathfinding" id="3" name="Set enabled" sid="5501872835418116" type="Fantasmas">
+                                            <param id="0" name="Set">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="5877488027590067" type="System">
+                                            <param id="0" name="Variable">carregarDialogoChave</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-3" name="Set position" sid="4601637514477443" type="Chave">
+                                            <param id="0" name="X">round(random(95, 1185)) </param>
+                                            <param id="1" name="Y">round(random(191, 669)) </param>
+                                        </action>
+                                        <action behavior="Solid" id="0" name="Set enabled" sid="5867548543608923" type="Chave">
+                                            <param id="0" name="State">1</param>
+                                        </action>
+                                        <action disabled="1" id="-16" name="Set opacity" sid="5059473328722128" type="Chave">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-3" name="Set position" sid="634130663392524" type="SelecaoChave">
+                                            <param id="0" name="X">Chave.X</param>
+                                            <param id="1" name="Y">Chave.Y</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="1792546577323884" type="System">
+                                            <param id="0" name="Group name">&quot;localizarChave&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-10" name="Add to" sid="2663111965761124" type="System">
+                                            <param id="0" name="Variable">pontos</param>
+                                            <param id="1" name="Value">100</param>
+                                        </action>
+                                        <action id="0" name="Set text" sid="8837233135233388" type="pontoTexto">
+                                            <param id="0" name="Text">&quot;+100&quot;</param>
+                                        </action>
+                                        <action id="4" name="Set font color" sid="2891416925168782" type="pontoTexto">
+                                            <param id="0" name="Color">rgb(41, 90, 165)</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="3318981940142599" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao1bGAL&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="9647441922042794" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao1aGAL&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="3606906230269614" type="System">
+                                            <param id="0" name="Seconds">4</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="411444160248753" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao1aGAL&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="7084566275380045" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao1bGAL&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block disabled="1" sid="1655110943677482">
                                     <conditions>
                                         <condition id="-8" name="Compare two values" sid="8281589974273678" type="System">
                                             <param id="0" name="First value">fraseAtualGAL</param>
@@ -1384,7 +1526,7 @@
                                     </conditions>
                                     <actions />
                                     <sub-events>
-                                        <event-block sid="8780816480840603">
+                                        <event-block disabled="1" sid="8780816480840603">
                                             <conditions>
                                                 <condition id="-1" name="Every tick" sid="8648319375542872" type="System" />
                                                 <condition id="-10" name="Compare opacity" sid="4855550661841529" type="BalaoDialogo">
@@ -1392,154 +1534,18 @@
                                                     <param id="1" name="Opacity">0</param>
                                                 </condition>
                                             </conditions>
-                                            <actions>
-                                                <action id="-16" name="Set opacity" sid="8209586396246137" type="BalaoDialogo">
-                                                    <param id="0" name="Opacity">BalaoDialogo.Opacity - 2.5</param>
-                                                </action>
-                                            </actions>
+                                            <actions />
                                         </event-block>
-                                        <comment>Embora será fechada a caixa de diálogo, adiciona-se um no indice da frase pois podem ter mais diálogos depois</comment>
-                                        <event-block sid="8636057356561711">
+                                        <event-block disabled="1" sid="8636057356561711">
                                             <conditions>
                                                 <condition id="-10" name="Compare opacity" sid="9125666550510349" type="BalaoDialogo">
                                                     <param id="0" name="Comparison">0</param>
                                                     <param id="1" name="Opacity">0</param>
                                                 </condition>
                                             </conditions>
-                                            <actions>
-                                                <action id="-10" name="Add to" sid="4270841858966979" type="System">
-                                                    <param id="0" name="Variable">fraseAtualGAL</param>
-                                                    <param id="1" name="Value">1</param>
-                                                </action>
-                                                <action id="-9" name="Set value" sid="4135822565429336" type="System">
-                                                    <param id="0" name="Variable">descarregarDialogosGAL</param>
-                                                    <param id="1" name="Value">0</param>
-                                                </action>
-                                                <action id="-12" name="Set group active" sid="3130328104406448" type="System">
-                                                    <param id="0" name="Group name">&quot;dialogoGaleria&quot;</param>
-                                                    <param id="1" name="State">0</param>
-                                                </action>
-                                                <action id="-12" name="Set group active" sid="4849866285031774" type="System">
-                                                    <param id="0" name="Group name">&quot;playerMoveGAL&quot;</param>
-                                                    <param id="1" name="State">1</param>
-                                                </action>
-                                            </actions>
-                                            <sub-events>
-                                                <comment>Ativar a parte escura</comment>
-                                                <event-block sid="6260428200640797">
-                                                    <conditions>
-                                                        <condition id="-14" name="Compare variable" sid="2864854961540279" type="System">
-                                                            <param id="0" name="Variable">tamanhoDialogoGAL</param>
-                                                            <param id="1" name="Comparison">1</param>
-                                                            <param id="2" name="Value">4</param>
-                                                        </condition>
-                                                    </conditions>
-                                                    <actions>
-                                                        <action id="-4" name="Set layer visible" sid="4660890779684976" type="System">
-                                                            <param id="0" name="Layer">&quot;EfeitoEscuro&quot;</param>
-                                                            <param id="1" name="Visibility">1</param>
-                                                        </action>
-                                                        <action id="0" name="Play" sid="814347881711170" type="Audio">
-                                                            <param id="0" name="Audio file">risada_maligna</param>
-                                                            <param id="2" name="Loop">0</param>
-                                                            <param id="3" name="Volume">volSons</param>
-                                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                                        </action>
-                                                        <action id="6" name="Stop" sid="887104411035384" type="Audio">
-                                                            <param id="0" name="Tag">&quot;musica&quot;</param>
-                                                        </action>
-                                                        <action id="0" name="Play" sid="341908903561108" type="Audio">
-                                                            <param id="0" name="Audio file">ambiencia_fantasmagorica</param>
-                                                            <param id="2" name="Loop">1</param>
-                                                            <param id="3" name="Volume">volSons</param>
-                                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                                        </action>
-                                                        <action id="-9" name="Destroy" sid="4745426364815126" type="EinsteinCenario" />
-                                                        <action id="-9" name="Destroy" sid="8802159087815485" type="SolidoEinstein" />
-                                                        <action id="-16" name="Set opacity" sid="4973419202493159" type="Fantasmas">
-                                                            <param id="0" name="Opacity">100</param>
-                                                        </action>
-                                                        <action id="11" name="Set collisions enabled" sid="2470085126462598" type="Fantasmas">
-                                                            <param id="0" name="Collisions">1</param>
-                                                        </action>
-                                                        <action behavior="Pathfinding" id="3" name="Set enabled" sid="5501872835418116" type="Fantasmas">
-                                                            <param id="0" name="Set">1</param>
-                                                        </action>
-                                                        <action id="-9" name="Set value" sid="5877488027590067" type="System">
-                                                            <param id="0" name="Variable">carregarDialogoChave</param>
-                                                            <param id="1" name="Value">1</param>
-                                                        </action>
-                                                        <action id="-3" name="Set position" sid="4601637514477443" type="Chave">
-                                                            <param id="0" name="X">round(random(95, 1185)) </param>
-                                                            <param id="1" name="Y">round(random(191, 669)) </param>
-                                                        </action>
-                                                        <action behavior="Solid" id="0" name="Set enabled" sid="5867548543608923" type="Chave">
-                                                            <param id="0" name="State">1</param>
-                                                        </action>
-                                                        <action disabled="1" id="-16" name="Set opacity" sid="5059473328722128" type="Chave">
-                                                            <param id="0" name="Opacity">100</param>
-                                                        </action>
-                                                        <action id="-3" name="Set position" sid="634130663392524" type="SelecaoChave">
-                                                            <param id="0" name="X">Chave.X</param>
-                                                            <param id="1" name="Y">Chave.Y</param>
-                                                        </action>
-                                                        <action id="-12" name="Set group active" sid="1792546577323884" type="System">
-                                                            <param id="0" name="Group name">&quot;localizarChave&quot;</param>
-                                                            <param id="1" name="State">1</param>
-                                                        </action>
-                                                        <action id="-10" name="Add to" sid="2663111965761124" type="System">
-                                                            <param id="0" name="Variable">pontos</param>
-                                                            <param id="1" name="Value">100</param>
-                                                        </action>
-                                                        <action id="0" name="Set text" sid="8837233135233388" type="pontoTexto">
-                                                            <param id="0" name="Text">&quot;+100&quot;</param>
-                                                        </action>
-                                                        <action id="4" name="Set font color" sid="2891416925168782" type="pontoTexto">
-                                                            <param id="0" name="Color">rgb(41, 90, 165)</param>
-                                                        </action>
-                                                        <action id="-12" name="Set group active" sid="3318981940142599" type="System">
-                                                            <param id="0" name="Group name">&quot;Pontuacao1bGAL&quot;</param>
-                                                            <param id="1" name="State">0</param>
-                                                        </action>
-                                                        <action id="-12" name="Set group active" sid="9647441922042794" type="System">
-                                                            <param id="0" name="Group name">&quot;Pontuacao1aGAL&quot;</param>
-                                                            <param id="1" name="State">1</param>
-                                                        </action>
-                                                        <action id="-16" name="Wait" sid="3606906230269614" type="System">
-                                                            <param id="0" name="Seconds">4</param>
-                                                        </action>
-                                                        <action id="-12" name="Set group active" sid="411444160248753" type="System">
-                                                            <param id="0" name="Group name">&quot;Pontuacao1aGAL&quot;</param>
-                                                            <param id="1" name="State">0</param>
-                                                        </action>
-                                                        <action id="-12" name="Set group active" sid="7084566275380045" type="System">
-                                                            <param id="0" name="Group name">&quot;Pontuacao1bGAL&quot;</param>
-                                                            <param id="1" name="State">1</param>
-                                                        </action>
-                                                    </actions>
-                                                </event-block>
-                                            </sub-events>
+                                            <actions />
                                         </event-block>
                                     </sub-events>
-                                </event-block>
-                                <event-block sid="5630013193041494">
-                                    <conditions>
-                                        <condition id="-22" name="Else" sid="3794480225929178" type="System" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="-10" name="Add to" sid="9286553841062039" type="System">
-                                            <param id="0" name="Variable">fraseAtualGAL</param>
-                                            <param id="1" name="Value">1</param>
-                                        </action>
-                                        <action id="-9" name="Set value" sid="4555938386400547" type="System">
-                                            <param id="0" name="Variable">inserirDialogosGAL</param>
-                                            <param id="1" name="Value">1</param>
-                                        </action>
-                                        <action id="-9" name="Set value" sid="3773442136975277" type="System">
-                                            <param id="0" name="Variable">descarregarDialogosGAL</param>
-                                            <param id="1" name="Value">0</param>
-                                        </action>
-                                    </actions>
                                 </event-block>
                             </sub-events>
                         </event-block>

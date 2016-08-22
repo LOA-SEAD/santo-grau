@@ -942,15 +942,50 @@
                                     <param id="3" name="Volume">volSons</param>
                                     <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="2835356462809307" type="System">
-                                    <param id="0" name="Variable">descarregarDialogosTCC</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
                                 <action id="-9" name="Set value" sid="1151726365250803" type="System">
                                     <param id="0" name="Variable">avancarDialogosTCC</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
+                                <action id="-16" name="Wait" sid="2835356462809307" type="System">
+                                    <param id="0" name="Seconds">0.5</param>
+                                </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="314157356950062">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="359988076453355" type="System">
+                                            <param id="0" name="First value">fraseAtualTCC</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">tamanhoDialogoTCC</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="353895545451798" type="System">
+                                            <param id="0" name="Variable">descarregarDialogosTCC</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="298631741683906">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="192583095429549" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="801117420009969" type="System">
+                                            <param id="0" name="Variable">fraseAtualTCC</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="512068436315266" type="System">
+                                            <param id="0" name="Variable">inserirDialogosTCC</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-10" name="Add to" sid="253852069162283" type="System">
+                                            <param id="0" name="Variable">falaPersonagens</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -979,6 +1014,9 @@
                                 <action id="-16" name="Set opacity" sid="2982996949466901" type="Dialogos">
                                     <param id="0" name="Opacity">Dialogos.Opacity - 2.5</param>
                                 </action>
+                                <action id="-16" name="Set opacity" sid="8209586396246137" type="BalaoDialogo">
+                                    <param id="0" name="Opacity">BalaoDialogo.Opacity - 2.5</param>
+                                </action>
                             </actions>
                             <sub-events>
                                 <comment>Esta comparação é devido a um bug caso o consiga avançar o texto mais rápido do que o ele sendo limpo</comment>
@@ -999,6 +1037,7 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
+                        <comment>Embora será fechada a caixa de diálogo, adiciona-se um no indice da frase pois podem ter mais diálogos depois</comment>
                         <event-block sid="9971774148349686">
                             <conditions>
                                 <condition id="-10" name="Compare opacity" sid="5489908162637236" type="Dialogos">
@@ -1006,106 +1045,45 @@
                                     <param id="1" name="Opacity">0</param>
                                 </condition>
                             </conditions>
-                            <actions />
+                            <actions>
+                                <action id="-10" name="Add to" sid="4270841858966979" type="System">
+                                    <param id="0" name="Variable">fraseAtualTCC</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="678668611333213" type="System">
+                                    <param id="0" name="Variable">falaPersonagens</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="4135822565429336" type="System">
+                                    <param id="0" name="Variable">descarregarDialogosTCC</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="3130328104406448" type="System">
+                                    <param id="0" name="Group name">&quot;dialogoTCC&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="4849866285031774" type="System">
+                                    <param id="0" name="Group name">&quot;gerarPerguntasJsonFFTCC&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="677139466673551" type="System">
+                                    <param id="0" name="Group name">&quot;playerMoveFFTCC&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
                             <sub-events>
-                                <event-block sid="1655110943677482">
+                                <event-block sid="218699784967925">
                                     <conditions>
-                                        <condition id="-8" name="Compare two values" sid="8281589974273678" type="System">
-                                            <param id="0" name="First value">fraseAtualTCC</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Second value">tamanhoDialogoTCC</param>
+                                        <condition id="-14" name="Compare variable" sid="390379597508673" type="System">
+                                            <param id="0" name="Variable">tamanhoDialogoTCC</param>
+                                            <param id="1" name="Comparison">1</param>
+                                            <param id="2" name="Value">13</param>
                                         </condition>
                                     </conditions>
-                                    <actions />
-                                    <sub-events>
-                                        <event-block sid="8780816480840603">
-                                            <conditions>
-                                                <condition id="-1" name="Every tick" sid="8648319375542872" type="System" />
-                                                <condition id="-10" name="Compare opacity" sid="4855550661841529" type="BalaoDialogo">
-                                                    <param id="0" name="Comparison">4</param>
-                                                    <param id="1" name="Opacity">0</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-16" name="Set opacity" sid="8209586396246137" type="BalaoDialogo">
-                                                    <param id="0" name="Opacity">BalaoDialogo.Opacity - 2.5</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <comment>Embora será fechada a caixa de diálogo, adiciona-se um no indice da frase pois podem ter mais diálogos depois</comment>
-                                        <event-block sid="8636057356561711">
-                                            <conditions>
-                                                <condition id="-10" name="Compare opacity" sid="9125666550510349" type="BalaoDialogo">
-                                                    <param id="0" name="Comparison">0</param>
-                                                    <param id="1" name="Opacity">0</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-10" name="Add to" sid="4270841858966979" type="System">
-                                                    <param id="0" name="Variable">fraseAtualTCC</param>
-                                                    <param id="1" name="Value">1</param>
-                                                </action>
-                                                <action id="-9" name="Set value" sid="678668611333213" type="System">
-                                                    <param id="0" name="Variable">falaPersonagens</param>
-                                                    <param id="1" name="Value">0</param>
-                                                </action>
-                                                <action id="-9" name="Set value" sid="4135822565429336" type="System">
-                                                    <param id="0" name="Variable">descarregarDialogosTCC</param>
-                                                    <param id="1" name="Value">0</param>
-                                                </action>
-                                                <action id="-12" name="Set group active" sid="3130328104406448" type="System">
-                                                    <param id="0" name="Group name">&quot;dialogoTCC&quot;</param>
-                                                    <param id="1" name="State">0</param>
-                                                </action>
-                                                <action id="-12" name="Set group active" sid="4849866285031774" type="System">
-                                                    <param id="0" name="Group name">&quot;gerarPerguntasJsonFFTCC&quot;</param>
-                                                    <param id="1" name="State">1</param>
-                                                </action>
-                                                <action id="-12" name="Set group active" sid="677139466673551" type="System">
-                                                    <param id="0" name="Group name">&quot;playerMoveFFTCC&quot;</param>
-                                                    <param id="1" name="State">1</param>
-                                                </action>
-                                            </actions>
-                                            <sub-events>
-                                                <event-block sid="218699784967925">
-                                                    <conditions>
-                                                        <condition id="-14" name="Compare variable" sid="390379597508673" type="System">
-                                                            <param id="0" name="Variable">tamanhoDialogoTCC</param>
-                                                            <param id="1" name="Comparison">1</param>
-                                                            <param id="2" name="Value">13</param>
-                                                        </condition>
-                                                    </conditions>
-                                                    <actions>
-                                                        <action id="-12" name="Set group active" sid="875167850922623" type="System">
-                                                            <param id="0" name="Group name">&quot;controleBolinhas&quot;</param>
-                                                            <param id="1" name="State">1</param>
-                                                        </action>
-                                                    </actions>
-                                                </event-block>
-                                            </sub-events>
-                                        </event-block>
-                                    </sub-events>
-                                </event-block>
-                                <event-block sid="5630013193041494">
-                                    <conditions>
-                                        <condition id="-22" name="Else" sid="3794480225929178" type="System" />
-                                    </conditions>
                                     <actions>
-                                        <action id="-10" name="Add to" sid="9286553841062039" type="System">
-                                            <param id="0" name="Variable">fraseAtualTCC</param>
-                                            <param id="1" name="Value">1</param>
-                                        </action>
-                                        <action id="-9" name="Set value" sid="4555938386400547" type="System">
-                                            <param id="0" name="Variable">inserirDialogosTCC</param>
-                                            <param id="1" name="Value">1</param>
-                                        </action>
-                                        <action id="-9" name="Set value" sid="3773442136975277" type="System">
-                                            <param id="0" name="Variable">descarregarDialogosTCC</param>
-                                            <param id="1" name="Value">0</param>
-                                        </action>
-                                        <action id="-10" name="Add to" sid="253852069162283" type="System">
-                                            <param id="0" name="Variable">falaPersonagens</param>
-                                            <param id="1" name="Value">1</param>
+                                        <action id="-12" name="Set group active" sid="875167850922623" type="System">
+                                            <param id="0" name="Group name">&quot;controleBolinhas&quot;</param>
+                                            <param id="1" name="State">1</param>
                                         </action>
                                     </actions>
                                 </event-block>
