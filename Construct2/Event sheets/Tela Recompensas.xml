@@ -3,6 +3,7 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Tela Recompensas</name>
     <events>
+        <variable constant="0" name="recompensa" sid="111874700507289" static="0" type="number">-1</variable>
         <variable constant="0" name="numeroFases" sid="756657245154607" static="0" type="number">0</variable>
         <event-block sid="599376218408180">
             <conditions>
@@ -10,28 +11,84 @@
             </conditions>
             <actions>
                 <action id="0" name="Load JSON" sid="402733446774198" type="FasesJSON" />
+                <action id="0" name="Load JSON" sid="189328044295052" type="GaleriaJSON" />
                 <action id="-9" name="Set value" sid="969908293207479" type="System">
                     <param id="0" name="Variable">numeroFases</param>
                     <param id="1" name="Value">fasesJSON.GetData(&quot;quantidade&quot;,0)</param>
                 </action>
-                <action id="-9" name="Set value" sid="182663793423548" type="System">
+                <action id="-15" name="Set visible" sid="666317870237127" type="galeriaPopUp">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="-15" name="Set visible" sid="989301005655621" type="galeriaNome">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="-15" name="Set visible" sid="909076825989382" type="galeriaData">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="-15" name="Set visible" sid="228941627376256" type="galeriaFrase">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="-15" name="Set visible" sid="528965907596312" type="galeriaDescricao">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="-15" name="Set visible" sid="490206845357123" type="galeriaLicenca">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="-15" name="Set visible" sid="891190395034399" type="galeriaFoto">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="-15" name="Set visible" sid="684697761632189" type="botaoFechar">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="-15" name="Set visible" sid="770505807111047" type="fundoPause">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="547999125924785" type="System">
                     <param id="0" name="Variable">recompensa1</param>
                     <param id="1" name="Value">1</param>
                 </action>
-                <action id="-9" name="Set value" sid="510827985362000" type="System">
+                <action id="-9" name="Set value" sid="795242150442008" type="System">
+                    <param id="0" name="Variable">recompensa2</param>
+                    <param id="1" name="Value">1</param>
+                </action>
+                <action id="-9" name="Set value" sid="147256798171879" type="System">
                     <param id="0" name="Variable">recompensa3</param>
                     <param id="1" name="Value">1</param>
                 </action>
-                <action id="-9" name="Set value" sid="731382119016084" type="System">
+                <action id="-9" name="Set value" sid="960417890803964" type="System">
+                    <param id="0" name="Variable">recompensa4</param>
+                    <param id="1" name="Value">1</param>
+                </action>
+                <action id="-9" name="Set value" sid="704853365434250" type="System">
                     <param id="0" name="Variable">recompensa5</param>
+                    <param id="1" name="Value">1</param>
+                </action>
+                <action id="-9" name="Set value" sid="560404382346882" type="System">
+                    <param id="0" name="Variable">recompensa6</param>
                     <param id="1" name="Value">1</param>
                 </action>
             </actions>
             <sub-events>
+                <event-block sid="160465895641027">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="185453323116394" type="recompensa">
+                            <param id="0" name="Unique ID">406</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-15" name="Set visible" sid="160282926718663" type="recompensa">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-group description="Ações para desenhar a tela de Recompensas, posicionando os slots proporcionalmente de acordo com as fases escolhidas pelo professor para compor o jogo, com seus respectivas recompensas" sid="410392135377807" title="DesenhodaTela">
+            <sub-events>
                 <comment>Recompensa fixa - Fase 0</comment>
                 <event-block sid="248311387787430">
                     <conditions>
-                        <condition id="-14" name="Pick by unique ID" sid="231331304946744" type="recompensaSlot">
+                        <condition id="-14" name="Pick by unique ID" sid="231331304946744" type="galeriaSlot">
                             <param id="0" name="Unique ID">392</param>
                         </condition>
                         <condition id="-14" name="Pick by unique ID" sid="166439629606732" type="recompensa">
@@ -40,7 +97,7 @@
                     </conditions>
                     <actions>
                         <action behavior="Pin" id="0" name="Pin to object" sid="154961036614978" type="recompensa">
-                            <param id="0" name="Pin to">recompensaSlot</param>
+                            <param id="0" name="Pin to">galeriaSlot</param>
                             <param id="1" name="Mode">0</param>
                         </action>
                     </actions>
@@ -74,7 +131,7 @@
                 <comment>Recompensa dinâmica - Fase 1</comment>
                 <event-block sid="137362413093300">
                     <conditions>
-                        <condition id="-14" name="Pick by unique ID" sid="776110930890461" type="recompensaSlot">
+                        <condition id="-14" name="Pick by unique ID" sid="776110930890461" type="galeriaSlot">
                             <param id="0" name="Unique ID">394</param>
                         </condition>
                         <condition id="-14" name="Pick by unique ID" sid="497948878845944" type="recompensa">
@@ -83,7 +140,7 @@
                     </conditions>
                     <actions>
                         <action behavior="Pin" id="0" name="Pin to object" sid="305154864555526" type="recompensa">
-                            <param id="0" name="Pin to">recompensaSlot</param>
+                            <param id="0" name="Pin to">galeriaSlot</param>
                             <param id="1" name="Mode">0</param>
                         </action>
                     </actions>
@@ -117,7 +174,7 @@
                 <comment>Recompensa dinâmica - Fase 2</comment>
                 <event-block sid="310542013085777">
                     <conditions>
-                        <condition id="-14" name="Pick by unique ID" sid="497418561607560" type="recompensaSlot">
+                        <condition id="-14" name="Pick by unique ID" sid="497418561607560" type="galeriaSlot">
                             <param id="0" name="Unique ID">396</param>
                         </condition>
                         <condition id="-14" name="Pick by unique ID" sid="220904449184732" type="recompensa">
@@ -126,7 +183,7 @@
                     </conditions>
                     <actions>
                         <action behavior="Pin" id="0" name="Pin to object" sid="534211625871216" type="recompensa">
-                            <param id="0" name="Pin to">recompensaSlot</param>
+                            <param id="0" name="Pin to">galeriaSlot</param>
                             <param id="1" name="Mode">0</param>
                         </action>
                     </actions>
@@ -160,7 +217,7 @@
                 <comment>Recompensa fixa - Fase 3</comment>
                 <event-block sid="365018342036742">
                     <conditions>
-                        <condition id="-14" name="Pick by unique ID" sid="645656907664151" type="recompensaSlot">
+                        <condition id="-14" name="Pick by unique ID" sid="645656907664151" type="galeriaSlot">
                             <param id="0" name="Unique ID">398</param>
                         </condition>
                         <condition id="-14" name="Pick by unique ID" sid="415934538310581" type="recompensa">
@@ -169,7 +226,7 @@
                     </conditions>
                     <actions>
                         <action behavior="Pin" id="0" name="Pin to object" sid="124300397031160" type="recompensa">
-                            <param id="0" name="Pin to">recompensaSlot</param>
+                            <param id="0" name="Pin to">galeriaSlot</param>
                             <param id="1" name="Mode">0</param>
                         </action>
                     </actions>
@@ -203,7 +260,7 @@
                 <comment>Recompensa fixa - Fase 4</comment>
                 <event-block sid="224673808767302">
                     <conditions>
-                        <condition id="-14" name="Pick by unique ID" sid="828104088054891" type="recompensaSlot">
+                        <condition id="-14" name="Pick by unique ID" sid="828104088054891" type="galeriaSlot">
                             <param id="0" name="Unique ID">400</param>
                         </condition>
                         <condition id="-14" name="Pick by unique ID" sid="178383655697109" type="recompensa">
@@ -212,7 +269,7 @@
                     </conditions>
                     <actions>
                         <action behavior="Pin" id="0" name="Pin to object" sid="742271340328598" type="recompensa">
-                            <param id="0" name="Pin to">recompensaSlot</param>
+                            <param id="0" name="Pin to">galeriaSlot</param>
                             <param id="1" name="Mode">0</param>
                         </action>
                     </actions>
@@ -246,7 +303,7 @@
                 <comment>Recompensa fixa - Fase 5</comment>
                 <event-block sid="854285649372935">
                     <conditions>
-                        <condition id="-14" name="Pick by unique ID" sid="535554182922120" type="recompensaSlot">
+                        <condition id="-14" name="Pick by unique ID" sid="535554182922120" type="galeriaSlot">
                             <param id="0" name="Unique ID">402</param>
                         </condition>
                         <condition id="-14" name="Pick by unique ID" sid="150952448754541" type="recompensa">
@@ -255,7 +312,7 @@
                     </conditions>
                     <actions>
                         <action behavior="Pin" id="0" name="Pin to object" sid="534646368043118" type="recompensa">
-                            <param id="0" name="Pin to">recompensaSlot</param>
+                            <param id="0" name="Pin to">galeriaSlot</param>
                             <param id="1" name="Mode">0</param>
                         </action>
                     </actions>
@@ -286,10 +343,6 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-            </sub-events>
-        </event-block>
-        <event-group description="" sid="410392135377807" title="PosicionamentoRecompensas">
-            <sub-events>
                 <event-block sid="559600373835572">
                     <conditions>
                         <condition id="-8" name="Compare two values" sid="169410750058998" type="System">
@@ -302,12 +355,12 @@
                     <sub-events>
                         <event-block sid="766048941486417">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="197570614714745" type="recompensaSlot">
+                                <condition id="-14" name="Pick by unique ID" sid="197570614714745" type="galeriaSlot">
                                     <param id="0" name="Unique ID">392</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-3" name="Set position" sid="495854839723268" type="recompensaSlot">
+                                <action id="-3" name="Set position" sid="495854839723268" type="galeriaSlot">
                                     <param id="0" name="X">435</param>
                                     <param id="1" name="Y">300</param>
                                 </action>
@@ -315,12 +368,12 @@
                         </event-block>
                         <event-block sid="553478128350839">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="667271955855429" type="recompensaSlot">
+                                <condition id="-14" name="Pick by unique ID" sid="667271955855429" type="galeriaSlot">
                                     <param id="0" name="Unique ID">398</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-3" name="Set position" sid="929774998361122" type="recompensaSlot">
+                                <action id="-3" name="Set position" sid="929774998361122" type="galeriaSlot">
                                     <param id="0" name="X">845</param>
                                     <param id="1" name="Y">300</param>
                                 </action>
@@ -328,12 +381,12 @@
                         </event-block>
                         <event-block sid="983530877041309">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="310677545867974" type="recompensaSlot">
+                                <condition id="-14" name="Pick by unique ID" sid="310677545867974" type="galeriaSlot">
                                     <param id="0" name="Unique ID">400</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-3" name="Set position" sid="598516085964458" type="recompensaSlot">
+                                <action id="-3" name="Set position" sid="598516085964458" type="galeriaSlot">
                                     <param id="0" name="X">435</param>
                                     <param id="1" name="Y">570</param>
                                 </action>
@@ -341,12 +394,12 @@
                         </event-block>
                         <event-block sid="678480856912757">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="271189319805230" type="recompensaSlot">
+                                <condition id="-14" name="Pick by unique ID" sid="271189319805230" type="galeriaSlot">
                                     <param id="0" name="Unique ID">402</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-3" name="Set position" sid="923848114015156" type="recompensaSlot">
+                                <action id="-3" name="Set position" sid="923848114015156" type="galeriaSlot">
                                     <param id="0" name="X">845</param>
                                     <param id="1" name="Y">570</param>
                                 </action>
@@ -366,12 +419,12 @@
                     <sub-events>
                         <event-block sid="965220413189517">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="937503781589790" type="recompensaSlot">
+                                <condition id="-14" name="Pick by unique ID" sid="937503781589790" type="galeriaSlot">
                                     <param id="0" name="Unique ID">392</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-3" name="Set position" sid="790474156639946" type="recompensaSlot">
+                                <action id="-3" name="Set position" sid="790474156639946" type="galeriaSlot">
                                     <param id="0" name="X">280</param>
                                     <param id="1" name="Y">300</param>
                                 </action>
@@ -389,12 +442,12 @@
                             <sub-events>
                                 <event-block sid="666638719945730">
                                     <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="162701888499251" type="recompensaSlot">
+                                        <condition id="-14" name="Pick by unique ID" sid="162701888499251" type="galeriaSlot">
                                             <param id="0" name="Unique ID">394</param>
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="-3" name="Set position" sid="385026094223744" type="recompensaSlot">
+                                        <action id="-3" name="Set position" sid="385026094223744" type="galeriaSlot">
                                             <param id="0" name="X">640</param>
                                             <param id="1" name="Y">300</param>
                                         </action>
@@ -414,12 +467,12 @@
                             <sub-events>
                                 <event-block sid="555719374153005">
                                     <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="850853774280710" type="recompensaSlot">
+                                        <condition id="-14" name="Pick by unique ID" sid="850853774280710" type="galeriaSlot">
                                             <param id="0" name="Unique ID">396</param>
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="-3" name="Set position" sid="382100221187596" type="recompensaSlot">
+                                        <action id="-3" name="Set position" sid="382100221187596" type="galeriaSlot">
                                             <param id="0" name="X">640</param>
                                             <param id="1" name="Y">300</param>
                                         </action>
@@ -429,12 +482,12 @@
                         </event-block>
                         <event-block sid="876117342167315">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="162885665585982" type="recompensaSlot">
+                                <condition id="-14" name="Pick by unique ID" sid="162885665585982" type="galeriaSlot">
                                     <param id="0" name="Unique ID">398</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-3" name="Set position" sid="355582138513895" type="recompensaSlot">
+                                <action id="-3" name="Set position" sid="355582138513895" type="galeriaSlot">
                                     <param id="0" name="X">1000</param>
                                     <param id="1" name="Y">300</param>
                                 </action>
@@ -442,12 +495,12 @@
                         </event-block>
                         <event-block sid="637223987199833">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="770548170106182" type="recompensaSlot">
+                                <condition id="-14" name="Pick by unique ID" sid="770548170106182" type="galeriaSlot">
                                     <param id="0" name="Unique ID">400</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-3" name="Set position" sid="454895021544201" type="recompensaSlot">
+                                <action id="-3" name="Set position" sid="454895021544201" type="galeriaSlot">
                                     <param id="0" name="X">435</param>
                                     <param id="1" name="Y">570</param>
                                 </action>
@@ -455,12 +508,12 @@
                         </event-block>
                         <event-block sid="483872626741886">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="525751520623781" type="recompensaSlot">
+                                <condition id="-14" name="Pick by unique ID" sid="525751520623781" type="galeriaSlot">
                                     <param id="0" name="Unique ID">402</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-3" name="Set position" sid="205195657612890" type="recompensaSlot">
+                                <action id="-3" name="Set position" sid="205195657612890" type="galeriaSlot">
                                     <param id="0" name="X">845</param>
                                     <param id="1" name="Y">570</param>
                                 </action>
@@ -480,12 +533,12 @@
                     <sub-events>
                         <event-block sid="942119786847148">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="675628730264822" type="recompensaSlot">
+                                <condition id="-14" name="Pick by unique ID" sid="675628730264822" type="galeriaSlot">
                                     <param id="0" name="Unique ID">392</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-3" name="Set position" sid="893635700707346" type="recompensaSlot">
+                                <action id="-3" name="Set position" sid="893635700707346" type="galeriaSlot">
                                     <param id="0" name="X">280</param>
                                     <param id="1" name="Y">300</param>
                                 </action>
@@ -493,12 +546,12 @@
                         </event-block>
                         <event-block sid="955383584277947">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="295873308518772" type="recompensaSlot">
+                                <condition id="-14" name="Pick by unique ID" sid="295873308518772" type="galeriaSlot">
                                     <param id="0" name="Unique ID">394</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-3" name="Set position" sid="933771638070198" type="recompensaSlot">
+                                <action id="-3" name="Set position" sid="933771638070198" type="galeriaSlot">
                                     <param id="0" name="X">640</param>
                                     <param id="1" name="Y">300</param>
                                 </action>
@@ -506,12 +559,12 @@
                         </event-block>
                         <event-block sid="198528177687528">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="864493900929651" type="recompensaSlot">
+                                <condition id="-14" name="Pick by unique ID" sid="864493900929651" type="galeriaSlot">
                                     <param id="0" name="Unique ID">396</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-3" name="Set position" sid="649354465234711" type="recompensaSlot">
+                                <action id="-3" name="Set position" sid="649354465234711" type="galeriaSlot">
                                     <param id="0" name="X">1000</param>
                                     <param id="1" name="Y">300</param>
                                 </action>
@@ -519,12 +572,12 @@
                         </event-block>
                         <event-block sid="351197146183844">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="587341392370829" type="recompensaSlot">
+                                <condition id="-14" name="Pick by unique ID" sid="587341392370829" type="galeriaSlot">
                                     <param id="0" name="Unique ID">398</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-3" name="Set position" sid="526754428329173" type="recompensaSlot">
+                                <action id="-3" name="Set position" sid="526754428329173" type="galeriaSlot">
                                     <param id="0" name="X">280</param>
                                     <param id="1" name="Y">570</param>
                                 </action>
@@ -532,12 +585,12 @@
                         </event-block>
                         <event-block sid="572911728899539">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="105816986579778" type="recompensaSlot">
+                                <condition id="-14" name="Pick by unique ID" sid="105816986579778" type="galeriaSlot">
                                     <param id="0" name="Unique ID">400</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-3" name="Set position" sid="485315476099968" type="recompensaSlot">
+                                <action id="-3" name="Set position" sid="485315476099968" type="galeriaSlot">
                                     <param id="0" name="X">640</param>
                                     <param id="1" name="Y">570</param>
                                 </action>
@@ -545,12 +598,12 @@
                         </event-block>
                         <event-block sid="103235068813739">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="992693265222244" type="recompensaSlot">
+                                <condition id="-14" name="Pick by unique ID" sid="992693265222244" type="galeriaSlot">
                                     <param id="0" name="Unique ID">402</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-3" name="Set position" sid="237861337699820" type="recompensaSlot">
+                                <action id="-3" name="Set position" sid="237861337699820" type="galeriaSlot">
                                     <param id="0" name="X">1000</param>
                                     <param id="1" name="Y">570</param>
                                 </action>
@@ -560,17 +613,108 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <event-block sid="525193651163119">
+        <event-group description="" sid="240249098607389" title="Efeitos0">
+            <sub-events>
+                <event-block sid="525193651163119">
+                    <conditions>
+                        <condition id="7" name="Cursor is over object" sid="320740479779759" type="Mouse">
+                            <param id="0" name="Object">galeriaSlot</param>
+                        </condition>
+                        <condition id="-9" inverted="1" name="Is visible" sid="853368045890997" type="galeriaPopUp" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="589326144652295">
+                            <conditions>
+                                <condition id="-15" name="Pick nearest/furthest" sid="835257652261846" type="recompensa">
+                                    <param id="0" name="Which">0</param>
+                                    <param id="1" name="X">Mouse.X</param>
+                                    <param id="2" name="Y">Mouse.Y</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="528699570614475">
+                                    <conditions>
+                                        <condition id="3" inverted="1" name="Compare frame" sid="638218204559098" type="recompensa">
+                                            <param id="0" name="Comparison">0</param>
+                                            <param id="1" name="Number">6</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Set cursor style" sid="450946751276552" type="Mouse">
+                                            <param id="0" name="Cursor style">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="909758803442318">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="784992359749430" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Set cursor style" sid="786463030281296" type="Mouse">
+                                            <param id="0" name="Cursor style">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="922232963162189">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="690215598406934" type="System" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="186348391757052">
+                            <conditions>
+                                <condition id="-9" name="Is visible" sid="220915414802659" type="galeriaPopUp" />
+                                <condition id="7" name="Cursor is over object" sid="939560684592285" type="Mouse">
+                                    <param id="0" name="Object">botaoFechar</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Set cursor style" sid="794421539742506" type="Mouse">
+                                    <param id="0" name="Cursor style">1</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="817714614464311" type="botaoFechar">
+                                    <param id="0" name="Frame number">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="632271335682113">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="305070787784114" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Set cursor style" sid="130374378615727" type="Mouse">
+                                    <param id="0" name="Cursor style">0</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="972616317415147" type="botaoFechar">
+                                    <param id="0" name="Frame number">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="Abre a tela com as informações da recompensa desbloqueada." inactive="1" sid="584349823258759" title="PopUpRecompensas" />
+        <event-block sid="805978738754021">
             <conditions>
-                <condition id="7" name="Cursor is over object" sid="320740479779759" type="Mouse">
-                    <param id="0" name="Object">recompensaSlot</param>
+                <condition id="6" name="On object clicked" sid="336881396571945" type="Mouse">
+                    <param id="0" name="Mouse button">0</param>
+                    <param id="1" name="Click type">0</param>
+                    <param id="2" name="Object clicked">galeriaSlot</param>
                 </condition>
+                <condition id="-9" inverted="1" name="Is visible" sid="214243145785317" type="galeriaPopUp" />
             </conditions>
             <actions />
             <sub-events>
-                <event-block sid="589326144652295">
+                <event-block sid="498580712213589">
                     <conditions>
-                        <condition id="-15" name="Pick nearest/furthest" sid="835257652261846" type="recompensa">
+                        <condition id="-15" name="Pick nearest/furthest" sid="298127615477651" type="recompensa">
                             <param id="0" name="Which">0</param>
                             <param id="1" name="X">Mouse.X</param>
                             <param id="2" name="Y">Mouse.Y</param>
@@ -578,26 +722,89 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="528699570614475">
+                        <event-block sid="525490839071296">
                             <conditions>
-                                <condition id="3" inverted="1" name="Compare frame" sid="638218204559098" type="recompensa">
+                                <condition id="3" inverted="1" name="Compare frame" sid="989630851915623" type="recompensa">
                                     <param id="0" name="Comparison">0</param>
                                     <param id="1" name="Number">6</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Set cursor style" sid="450946751276552" type="Mouse">
-                                    <param id="0" name="Cursor style">1</param>
+                                <action id="-9" name="Set value" sid="466206104135003" type="System">
+                                    <param id="0" name="Variable">recompensa</param>
+                                    <param id="1" name="Value">recompensa.AnimationFrame</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="212499291731994" type="galeriaFoto">
+                                    <param id="0" name="Frame number">recompensa.AnimationFrame</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="421284265661782" type="galeriaPopUp">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="835566176071943" type="galeriaNome">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="848934510516183" type="galeriaData">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="215378363506965" type="galeriaFrase">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="155924078223080" type="galeriaDescricao">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="775677949681423" type="galeriaLicenca">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="476263367413921" type="galeriaFoto">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="997919281645334" type="botaoFechar">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="412103100877287" type="fundoPause">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="0" name="Set text" sid="330873589143747" type="galeriaNome">
+                                    <param id="0" name="Text">GaleriaJSON.GetData(&quot;nome&quot;, recompensa.AnimationFrame)</param>
+                                </action>
+                                <action id="0" name="Set text" sid="815649780119226" type="galeriaData">
+                                    <param id="0" name="Text">GaleriaJSON.GetData(&quot;data&quot;, recompensa.AnimationFrame)</param>
+                                </action>
+                                <action id="0" name="Set text" sid="275509303028148" type="galeriaFrase">
+                                    <param id="0" name="Text">GaleriaJSON.GetData(&quot;frase&quot;, recompensa.AnimationFrame)</param>
+                                </action>
+                                <action id="0" name="Set text" sid="220408643746445" type="galeriaDescricao">
+                                    <param id="0" name="Text">GaleriaJSON.GetData(&quot;descricao&quot;, recompensa.AnimationFrame)</param>
+                                </action>
+                                <action id="0" name="Set text" sid="306384230229796" type="galeriaLicenca">
+                                    <param id="0" name="Text">GaleriaJSON.GetData(&quot;licenca&quot;, recompensa.AnimationFrame)</param>
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="909758803442318">
+                    </sub-events>
+                </event-block>
+                <event-block sid="665189175754373">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="458057092612143" type="System">
+                            <param id="0" name="Variable">recompensa</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="793150615757472">
                             <conditions>
-                                <condition id="-22" name="Else" sid="784992359749430" type="System" />
+                                <condition id="-14" name="Pick by unique ID" sid="958267232723305" type="recompensa">
+                                    <param id="0" name="Unique ID">406</param>
+                                </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Set cursor style" sid="786463030281296" type="Mouse">
-                                    <param id="0" name="Cursor style">0</param>
+                                <action id="-15" name="Set visible" sid="961286206960423" type="recompensa">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="310658475786703" type="recompensa">
+                                    <param id="0" name="Frame number">recompensa</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -605,13 +812,88 @@
                 </event-block>
             </sub-events>
         </event-block>
-        <event-block sid="922232963162189">
+        <event-block sid="794091963215389">
             <conditions>
-                <condition id="-22" name="Else" sid="690215598406934" type="System" />
+                <condition id="6" name="On object clicked" sid="102053446182390" type="Mouse">
+                    <param id="0" name="Mouse button">0</param>
+                    <param id="1" name="Click type">0</param>
+                    <param id="2" name="Object clicked">botaoFechar</param>
+                </condition>
+                <condition id="-9" name="Is visible" sid="522552193886938" type="galeriaPopUp" />
             </conditions>
             <actions>
-                <action id="0" name="Set cursor style" sid="794421539742506" type="Mouse">
-                    <param id="0" name="Cursor style">0</param>
+                <action id="-9" name="Set value" sid="533755762203735" type="System">
+                    <param id="0" name="Variable">recompensa</param>
+                    <param id="1" name="Value">-1</param>
+                </action>
+                <action id="-15" name="Set visible" sid="907053820109713" type="galeriaPopUp">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="-15" name="Set visible" sid="588702853359610" type="galeriaNome">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="-15" name="Set visible" sid="773159388276342" type="galeriaData">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="-15" name="Set visible" sid="563105079000196" type="galeriaFrase">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="-15" name="Set visible" sid="150894989208794" type="galeriaDescricao">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="-15" name="Set visible" sid="345362465936736" type="galeriaLicenca">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="-15" name="Set visible" sid="706734206770275" type="galeriaFoto">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="-15" name="Set visible" sid="752284486472948" type="botaoFechar">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="-15" name="Set visible" sid="402730949743956" type="fundoPause">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+            </actions>
+            <sub-events>
+                <event-block sid="148744332587278">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="505780103394530" type="recompensa">
+                            <param id="0" name="Unique ID">406</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-15" name="Set visible" sid="528493122439937" type="recompensa">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="924967920424539">
+            <conditions>
+                <condition id="7" name="Cursor is over object" sid="672456820537755" type="Mouse">
+                    <param id="0" name="Object">galeriaVoltar</param>
+                </condition>
+                <condition id="-9" inverted="1" name="Is visible" sid="313948744202076" type="galeriaPopUp" />
+            </conditions>
+            <actions>
+                <action id="0" name="Set cursor style" sid="748078339404169" type="Mouse">
+                    <param id="0" name="Cursor style">1</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="718589693697541">
+            <conditions>
+                <condition id="6" name="On object clicked" sid="403356996841302" type="Mouse">
+                    <param id="0" name="Mouse button">0</param>
+                    <param id="1" name="Click type">0</param>
+                    <param id="2" name="Object clicked">galeriaVoltar</param>
+                </condition>
+                <condition id="-9" inverted="1" name="Is visible" sid="756503251507335" type="galeriaPopUp" />
+            </conditions>
+            <actions>
+                <action id="-2" name="Go to layout" sid="400858578873763" type="System">
+                    <param id="0" name="Layout">Menu Principal</param>
                 </action>
             </actions>
         </event-block>
