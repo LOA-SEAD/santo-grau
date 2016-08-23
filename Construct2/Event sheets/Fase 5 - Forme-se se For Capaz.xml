@@ -267,6 +267,7 @@
                 </action>
             </actions>
         </event-block>
+        <comment>Evento para quando as bolinhas lançadas pelo monstro atingem a personagem</comment>
         <event-block sid="995577930556153">
             <conditions>
                 <condition id="0" name="On collision with another object" sid="4075759583121737" type="player">
@@ -621,6 +622,12 @@
                                 </action>
                                 <action behavior="Bullet" id="5" name="Set enabled" sid="1556419099682961" type="Bolinha">
                                     <param id="0" name="State">1</param>
+                                </action>
+                                <action id="0" name="Play" sid="313327880583398" type="Audio">
+                                    <param id="0" name="Audio file">monstro_atacando</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                 </action>
                             </actions>
                             <sub-events>
@@ -1490,6 +1497,12 @@
                                                                 <action id="5" name="Set frame" sid="7719639418188702" type="AlternativasChao">
                                                                     <param id="0" name="Frame number">0</param>
                                                                 </action>
+                                                                <action id="0" name="Play" sid="394886490422861" type="Audio">
+                                                                    <param id="0" name="Audio file">acerto</param>
+                                                                    <param id="2" name="Loop">0</param>
+                                                                    <param id="3" name="Volume">volSons</param>
+                                                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                                                </action>
                                                                 <action id="-12" name="Set group active" sid="581252232492726" type="System">
                                                                     <param id="0" name="Group name">&quot;controleDanoMonstro&quot;</param>
                                                                     <param id="1" name="State">1</param>
@@ -1614,8 +1627,15 @@
                             <param id="0" name="Variable">animacaoPersonagem</param>
                             <param id="1" name="Value">2</param>
                         </action>
+                        <action id="0" name="Play" sid="998884108238573" type="Audio">
+                            <param id="0" name="Audio file">acendendo_tocha</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">volSons</param>
+                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                        </action>
                     </actions>
                 </event-block>
+                <comment>Evento para atirar as bolinhas pegando fogo</comment>
                 <event-block sid="737467397204607">
                     <conditions>
                         <condition id="-15" name="Pick nearest/furthest" sid="874781404416719" type="Bolinha">
@@ -1654,10 +1674,17 @@
                                 <action id="5" name="Set frame" sid="395030672326213" type="Bolinha">
                                     <param id="0" name="Frame number">1</param>
                                 </action>
+                                <action id="0" name="Play" sid="507306795042506" type="Audio">
+                                    <param id="0" name="Audio file">atirando_bolas_fogo</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
                             </actions>
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment>Evento para detectar a colisão das bolinhas pegando fogo com o monstro</comment>
                 <event-block sid="316959711223408">
                     <conditions>
                         <condition id="3" name="Compare frame" sid="698408741989529" type="Bolinha">
@@ -1699,6 +1726,12 @@
                                 </condition>
                             </conditions>
                             <actions>
+                                <action id="0" name="Play" sid="667029307033064" type="Audio">
+                                    <param id="0" name="Audio file">monstro_dano</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
                                 <action behavior="Flash" id="0" name="Flash" sid="714310801847492" type="MonstroInferior">
                                     <param id="0" name="&apos;On&apos; time">0.1</param>
                                     <param id="1" name="&apos;Off&apos; time">0.1</param>

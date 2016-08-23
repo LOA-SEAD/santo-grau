@@ -83,6 +83,14 @@
                     <param id="0" name="Group name">&quot;saidaGAL&quot;</param>
                     <param id="1" name="State">0</param>
                 </action>
+                <action id="-12" name="Set group active" sid="619287234293197" type="System">
+                    <param id="0" name="Group name">&quot;controleLasanhaGAL&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="829490469444419" type="System">
+                    <param id="0" name="Group name">&quot;controleCafeGAL&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
                 <action id="0" name="Load JSON" sid="4808618138882582" type="DialogosJSON" />
                 <action id="0" name="Load JSON" sid="6934720499260367" type="QuadrosJSON" />
                 <action id="0" name="Load JSON" sid="154317895988781" type="FasesJSON" />
@@ -110,6 +118,12 @@
                     <param id="0" name="Opacity">0</param>
                 </action>
                 <action id="-16" name="Set opacity" sid="6297385735262426" type="Chave">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="375357687383611" type="cafe">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="838666715267533" type="lasanha">
                     <param id="0" name="Opacity">0</param>
                 </action>
                 <action id="11" name="Set collisions enabled" sid="4217019818019758" type="SaidaGAL">
@@ -171,8 +185,38 @@
                     <param id="0" name="Pin to">fundoPause</param>
                     <param id="1" name="Mode">0</param>
                 </action>
+                <action behavior="Pin" id="0" name="Pin to object" sid="690308559835557" type="SelecaoChave">
+                    <param id="0" name="Pin to">Chave</param>
+                    <param id="1" name="Mode">0</param>
+                </action>
             </actions>
             <sub-events>
+                <event-block sid="287946371448025">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="553932102279407" type="selecaoComida">
+                            <param id="0" name="Unique ID">419</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Pin" id="0" name="Pin to object" sid="216857165371689" type="selecaoComida">
+                            <param id="0" name="Pin to">lasanha</param>
+                            <param id="1" name="Mode">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="385751262028616">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="455726321418263" type="selecaoComida">
+                            <param id="0" name="Unique ID">420</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Pin" id="0" name="Pin to object" sid="524083774731536" type="selecaoComida">
+                            <param id="0" name="Pin to">cafe</param>
+                            <param id="1" name="Mode">0</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <event-block sid="416439152684003">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="587208384054810" type="System">
@@ -1474,15 +1518,24 @@
                                         <action behavior="Solid" id="0" name="Set enabled" sid="5867548543608923" type="Chave">
                                             <param id="0" name="State">1</param>
                                         </action>
-                                        <action disabled="1" id="-16" name="Set opacity" sid="5059473328722128" type="Chave">
-                                            <param id="0" name="Opacity">100</param>
+                                        <action id="-3" name="Set position" sid="110634048186634" type="cafe">
+                                            <param id="0" name="X">round(random(95, 1185)) </param>
+                                            <param id="1" name="Y">round(random(191, 669)) </param>
                                         </action>
-                                        <action id="-3" name="Set position" sid="634130663392524" type="SelecaoChave">
-                                            <param id="0" name="X">Chave.X</param>
-                                            <param id="1" name="Y">Chave.Y</param>
+                                        <action id="-3" name="Set position" sid="714880597376505" type="lasanha">
+                                            <param id="0" name="X">round(random(95, 1185)) </param>
+                                            <param id="1" name="Y">round(random(191, 669)) </param>
                                         </action>
                                         <action id="-12" name="Set group active" sid="1792546577323884" type="System">
                                             <param id="0" name="Group name">&quot;localizarChave&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="212296603959258" type="System">
+                                            <param id="0" name="Group name">&quot;controleCafeGAL&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="275335605941158" type="System">
+                                            <param id="0" name="Group name">&quot;controleLasanhaGAL&quot;</param>
                                             <param id="1" name="State">1</param>
                                         </action>
                                         <action id="-10" name="Add to" sid="2663111965761124" type="System">
@@ -1896,10 +1949,9 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-16" name="Wait" sid="9399743302151576" type="System">
+                                <action disabled="1" id="-16" name="Wait" sid="9399743302151576" type="System">
                                     <param id="0" name="Seconds">1.0</param>
                                 </action>
-                                <action id="-9" name="Destroy" sid="6683921056154097" type="selecaoComida" />
                                 <action id="-15" name="Set visible" sid="9030443069814387" type="Quadros">
                                     <param id="0" name="Visibility">0</param>
                                 </action>
@@ -1911,6 +1963,17 @@
                                 </action>
                             </actions>
                             <sub-events>
+                                <comment>Destrói o campo de seleção do mural</comment>
+                                <event-block sid="355050235596338">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="157159095708650" type="selecaoComida">
+                                            <param id="0" name="Unique ID">167</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Destroy" sid="175270503838058" type="selecaoComida" />
+                                    </actions>
+                                </event-block>
                                 <event-block sid="6085935778562451">
                                     <conditions>
                                         <condition id="-1" name="Every tick" sid="8311248685635901" type="System" />
@@ -1933,6 +1996,12 @@
                                         </condition>
                                     </conditions>
                                     <actions>
+                                        <action id="0" name="Play" sid="895318167615292" type="Audio">
+                                            <param id="0" name="Audio file">acerto</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
                                         <action id="-9" name="Set value" sid="1405052962396852" type="System">
                                             <param id="0" name="Variable">tamanhoDialogoGAL</param>
                                             <param id="1" name="Value">5</param>
@@ -2009,22 +2078,18 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <comment>Para o caso da chave estar visível por causa da luz da lamparina, obrigando o jogador a ter que procurar a chave</comment>
+                        <comment>Para o caso da chave estar visível por causa da luz da personagem, obrigando o jogador a ter que procurar a chave</comment>
                         <event-block sid="1508621012594603">
                             <conditions>
                                 <condition id="-23" name="While" sid="1004704244794835" type="System" />
                                 <condition id="1" name="Is overlapping another object" sid="9268322218867604" type="Chave">
-                                    <param id="0" name="Object">LuzParede</param>
+                                    <param id="0" name="Object">LuzPersonagem</param>
                                 </condition>
                             </conditions>
                             <actions>
                                 <action id="-3" name="Set position" sid="4087636230400278" type="Chave">
                                     <param id="0" name="X">round(random(95, 1185)) </param>
                                     <param id="1" name="Y">round(random(191, 669)) </param>
-                                </action>
-                                <action id="-3" name="Set position" sid="4799751577591653" type="SelecaoChave">
-                                    <param id="0" name="X">Chave.X</param>
-                                    <param id="1" name="Y">Chave.Y</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2080,6 +2145,7 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
+                        <comment>Os três eventos abaixo servem para verificar se a chave foi criada em um local onde já existe um objeto</comment>
                         <event-block any="1" sid="3956093543169147">
                             <conditions>
                                 <condition id="1" name="Is overlapping another object" sid="8654359055431426" type="Chave">
@@ -2092,6 +2158,33 @@
                             <actions>
                                 <action id="-2" name="Set Y" sid="4473754810215797" type="Chave">
                                     <param id="0" name="Y">Chave.Y + 70</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block any="1" sid="567966981328459">
+                            <conditions>
+                                <condition id="1" name="Is overlapping another object" sid="300609416837112" type="Chave">
+                                    <param id="0" name="Object">CaixaVaso</param>
+                                </condition>
+                                <condition id="1" name="Is overlapping another object" sid="404037978494011" type="Chave">
+                                    <param id="0" name="Object">Abajur</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-1" name="Set X" sid="987260044533446" type="Chave">
+                                    <param id="0" name="X">Chave.X + 150</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="535561923418578">
+                            <conditions>
+                                <condition id="1" name="Is overlapping another object" sid="271299130996703" type="Chave">
+                                    <param id="0" name="Object">Bau</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-1" name="Set X" sid="640328840847203" type="Chave">
+                                    <param id="0" name="X">Chave.X + 80</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2244,7 +2337,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <comment>Para não facilitar no encontro da chave, ela só se torna visível caso o jogador ao menos passou com a luz por ela</comment>
+                <comment>Para não facilitar qualquer encontro, todos os objetos só se tornam visívels caso o jogador ao menos passou com a luz por eles</comment>
                 <event-block sid="229761903945801">
                     <conditions>
                         <condition id="1" name="Is overlapping another object" sid="592914884461123" type="LuzPersonagem">
@@ -2253,6 +2346,30 @@
                     </conditions>
                     <actions>
                         <action id="-16" name="Set opacity" sid="219973586332094" type="Chave">
+                            <param id="0" name="Opacity">100</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="353395439828927">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="600836769664385" type="LuzPersonagem">
+                            <param id="0" name="Object">cafe</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Set opacity" sid="395424655551150" type="cafe">
+                            <param id="0" name="Opacity">100</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="490367289551919">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="216535635866280" type="LuzPersonagem">
+                            <param id="0" name="Object">lasanha</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Set opacity" sid="853077756062689" type="lasanha">
                             <param id="0" name="Opacity">100</param>
                         </action>
                     </actions>
@@ -2617,5 +2734,546 @@
                 </action>
             </actions>
         </event-block>
+        <comment>Grupo criado para controlar todas as ações que envolvam a lasanha nesta fase</comment>
+        <event-group description="" sid="281965407265133" title="controleLasanhaGAL">
+            <sub-events>
+                <comment>Para o caso da lasanha estar sobrepondo a chave</comment>
+                <event-block sid="777406363267700">
+                    <conditions>
+                        <condition id="-23" name="While" sid="671634177337593" type="System" />
+                        <condition id="1" name="Is overlapping another object" sid="803339283035216" type="lasanha">
+                            <param id="0" name="Object">Chave</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Set position" sid="471814945094588" type="lasanha">
+                            <param id="0" name="X">round(random(95, 1185)) </param>
+                            <param id="1" name="Y">round(random(191, 669)) </param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Para o caso da lasanha estar sobrepondo o café</comment>
+                <event-block sid="313252265086191">
+                    <conditions>
+                        <condition id="-23" name="While" sid="657099181739695" type="System" />
+                        <condition id="1" name="Is overlapping another object" sid="380578670389200" type="lasanha">
+                            <param id="0" name="Object">cafe</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Set position" sid="184833965975657" type="lasanha">
+                            <param id="0" name="X">round(random(95, 1185)) </param>
+                            <param id="1" name="Y">round(random(191, 669)) </param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Para o caso da lasanha estar sobrepondo algum dos fantasmas, o que impossibilitaria a locomoção dele</comment>
+                <event-block disabled="1" sid="163762827814757">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="484367449598313" type="Fantasmas">
+                            <param id="0" name="Object">lasanha</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block disabled="1" sid="295357476873240">
+                            <conditions>
+                                <condition id="-15" name="Pick nearest/furthest" sid="696487734792329" type="Fantasmas">
+                                    <param id="0" name="Which">0</param>
+                                    <param id="1" name="X">lasanha.X</param>
+                                    <param id="2" name="Y">lasanha.Y</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block any="1" disabled="1" sid="992229924262424">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="791218020556259" type="System">
+                                            <param id="0" name="First value">Fantasmas.UID</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">227</param>
+                                        </condition>
+                                        <condition id="-8" name="Compare two values" sid="140340560615462" type="System">
+                                            <param id="0" name="First value">Fantasmas.UID</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">230</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="150810523093672" type="Fantasmas">
+                                            <param id="0" name="Y">lasanha.Y - 120</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block disabled="1" sid="948094590536235">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="907325161826139" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-1" name="Set X" sid="703394229994241" type="Fantasmas">
+                                            <param id="0" name="X">lasanha.X - 160</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Os três eventos abaixo servem para verificar se a lasanha foi criada em um local onde já existe um objeto</comment>
+                <event-block any="1" sid="871236521188983">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="563089493554603" type="lasanha">
+                            <param id="0" name="Object">Armario</param>
+                        </condition>
+                        <condition id="1" name="Is overlapping another object" sid="605945004749030" type="lasanha">
+                            <param id="0" name="Object">Pano</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="738634670613163" type="lasanha">
+                            <param id="0" name="Y">lasanha.Y + 70</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="399083624448978">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="324359677006500" type="lasanha">
+                            <param id="0" name="Object">CaixaVaso</param>
+                        </condition>
+                        <condition id="1" name="Is overlapping another object" sid="279002426468848" type="lasanha">
+                            <param id="0" name="Object">Abajur</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="723064626014700" type="lasanha">
+                            <param id="0" name="X">lasanha.X + 150</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="236508912987449">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="708823853003698" type="lasanha">
+                            <param id="0" name="Object">Bau</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="126805087656104" type="lasanha">
+                            <param id="0" name="X">lasanha.X + 80</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="856372099940584">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="157997440601915" type="selecaoComida">
+                            <param id="0" name="Unique ID">419</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="804156100274125">
+                            <conditions>
+                                <condition id="1" name="Is overlapping another object" sid="409596188295706" type="player">
+                                    <param id="0" name="Object">selecaoComida</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="568924930633227" type="lasanha">
+                                    <param id="0" name="Animation">&quot;Selecionado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="685572960630251">
+                                    <conditions>
+                                        <condition id="0" name="On key pressed" sid="824025174866338" type="Keyboard">
+                                            <param id="0" name="Key">69 (E)</param>
+                                        </condition>
+                                        <condition id="-14" name="Compare variable" sid="576498423019809" type="System">
+                                            <param id="0" name="Variable">pause</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Destroy" sid="273335518905352" type="lasanha" />
+                                        <action id="-9" name="Destroy" sid="390390067375016" type="selecaoComida" />
+                                        <action id="0" name="Play" sid="269419423605824" type="Audio">
+                                            <param id="0" name="Audio file">coletando_lasanha</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action behavior="Pathfinding" id="7" name="Set max speed" sid="198488015231712" type="Fantasmas">
+                                            <param id="0" name="Speed">30</param>
+                                        </action>
+                                        <action behavior="Pathfinding" id="8" name="Set acceleration" sid="238827008105268" type="Fantasmas">
+                                            <param id="0" name="Acceleration">45</param>
+                                        </action>
+                                        <action behavior="Pathfinding" id="10" name="Set rotate speed" sid="354866550920094" type="Fantasmas">
+                                            <param id="0" name="Rotate speed">30</param>
+                                        </action>
+                                        <action id="5" name="Set playback rate" sid="211815938453560" type="Audio">
+                                            <param id="0" name="Tag">&quot;musica&quot;</param>
+                                            <param id="1" name="Playback rate">0.5</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="479859635478526" type="System">
+                                            <param id="0" name="Seconds">20</param>
+                                        </action>
+                                        <action id="5" name="Set playback rate" sid="478213666937138" type="Audio">
+                                            <param id="0" name="Tag">&quot;musica&quot;</param>
+                                            <param id="1" name="Playback rate">1</param>
+                                        </action>
+                                        <action behavior="Pathfinding" id="7" name="Set max speed" sid="141694303447920" type="Fantasmas">
+                                            <param id="0" name="Speed">200</param>
+                                        </action>
+                                        <action behavior="Pathfinding" id="8" name="Set acceleration" sid="389278244940478" type="Fantasmas">
+                                            <param id="0" name="Acceleration">300</param>
+                                        </action>
+                                        <action behavior="Pathfinding" id="10" name="Set rotate speed" sid="150545008735856" type="Fantasmas">
+                                            <param id="0" name="Rotate speed">200</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block disabled="1" sid="256665349681906">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="505908165428342" type="selecaoComida">
+                                                    <param id="0" name="Unique ID">40</param>
+                                                </condition>
+                                                <condition id="-4" inverted="1" name="Is outside layout" sid="871604562256520" type="lasanha" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-1" name="Set X" sid="927780729607868" type="lasanha">
+                                                    <param id="0" name="X">-157</param>
+                                                </action>
+                                                <action id="0" name="Play" sid="451938068107418" type="Audio">
+                                                    <param id="0" name="Audio file">coletando_lasanha</param>
+                                                    <param id="2" name="Loop">0</param>
+                                                    <param id="3" name="Volume">volSons</param>
+                                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                                </action>
+                                                <action behavior="Pathfinding" id="7" name="Set max speed" sid="802252346431306" type="Fantasmas">
+                                                    <param id="0" name="Speed">30</param>
+                                                </action>
+                                                <action behavior="Pathfinding" id="8" name="Set acceleration" sid="758953748366490" type="Fantasmas">
+                                                    <param id="0" name="Acceleration">45</param>
+                                                </action>
+                                                <action behavior="Pathfinding" id="10" name="Set rotate speed" sid="905050970820229" type="Fantasmas">
+                                                    <param id="0" name="Rotate speed">30</param>
+                                                </action>
+                                                <action id="5" name="Set playback rate" sid="741298233246507" type="Audio">
+                                                    <param id="0" name="Tag">&quot;musica&quot;</param>
+                                                    <param id="1" name="Playback rate">0.5</param>
+                                                </action>
+                                                <action id="-16" name="Wait" sid="979659777715619" type="System">
+                                                    <param id="0" name="Seconds">20</param>
+                                                </action>
+                                                <action id="5" name="Set playback rate" sid="394895618901069" type="Audio">
+                                                    <param id="0" name="Tag">&quot;musica&quot;</param>
+                                                    <param id="1" name="Playback rate">1</param>
+                                                </action>
+                                                <action behavior="Pathfinding" id="7" name="Set max speed" sid="913371470888927" type="Fantasmas">
+                                                    <param id="0" name="Speed">200</param>
+                                                </action>
+                                                <action behavior="Pathfinding" id="8" name="Set acceleration" sid="213992529263205" type="Fantasmas">
+                                                    <param id="0" name="Acceleration">300</param>
+                                                </action>
+                                                <action behavior="Pathfinding" id="10" name="Set rotate speed" sid="192809594136431" type="Fantasmas">
+                                                    <param id="0" name="Rotate speed">200</param>
+                                                </action>
+                                                <action id="-1" name="Set X" sid="940941274791774" type="lasanha">
+                                                    <param id="0" name="X">157</param>
+                                                </action>
+                                                <action id="5" name="Set playback rate" sid="646864524655052" type="Audio">
+                                                    <param id="0" name="Tag">&quot;musica&quot;</param>
+                                                    <param id="1" name="Playback rate">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="513326381577841">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="828363180060738" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="253244999256584" type="lasanha">
+                                    <param id="0" name="Animation">&quot;Default&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <comment>Grupo criado para controlar todas as ações que envolvam o café nesta fase</comment>
+        <event-group description="" sid="170841125524922" title="controleCafeGAL">
+            <sub-events>
+                <comment>Para o caso do café estar sobrepondo a chave</comment>
+                <event-block sid="357584524559623">
+                    <conditions>
+                        <condition id="-23" name="While" sid="770879379253989" type="System" />
+                        <condition id="1" name="Is overlapping another object" sid="795962982694378" type="cafe">
+                            <param id="0" name="Object">Chave</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Set position" sid="500705223568121" type="cafe">
+                            <param id="0" name="X">round(random(95, 1185)) </param>
+                            <param id="1" name="Y">round(random(191, 669)) </param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Para o caso do café estar sobrepondo algum dos fantasmas, o que impossibilitaria a locomoção dele</comment>
+                <event-block disabled="1" sid="276244373202896">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="521899361206561" type="Fantasmas">
+                            <param id="0" name="Object">cafe</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="832028299646260">
+                            <conditions>
+                                <condition id="-15" name="Pick nearest/furthest" sid="818879006411397" type="Fantasmas">
+                                    <param id="0" name="Which">0</param>
+                                    <param id="1" name="X">cafe.X</param>
+                                    <param id="2" name="Y">cafe.Y</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block any="1" sid="115327888819762">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="167171140681924" type="System">
+                                            <param id="0" name="First value">Fantasmas.UID</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">227</param>
+                                        </condition>
+                                        <condition id="-8" name="Compare two values" sid="356460938483565" type="System">
+                                            <param id="0" name="First value">Fantasmas.UID</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">230</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="244934364847774" type="Fantasmas">
+                                            <param id="0" name="Y">cafe.Y - 120</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="836818888023783">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="280028387077735" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-1" name="Set X" sid="997142507509262" type="Fantasmas">
+                                            <param id="0" name="X">cafe.X - 160</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Os três eventos abaixo servem para verificar se o café foi criado em um local onde já existe um objeto</comment>
+                <event-block any="1" sid="651859797133602">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="304662954865471" type="cafe">
+                            <param id="0" name="Object">Armario</param>
+                        </condition>
+                        <condition id="1" name="Is overlapping another object" sid="733224500714391" type="cafe">
+                            <param id="0" name="Object">Pano</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="612557194782903" type="cafe">
+                            <param id="0" name="Y">cafe.Y + 70</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="248819872822000">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="163005093831696" type="cafe">
+                            <param id="0" name="Object">CaixaVaso</param>
+                        </condition>
+                        <condition id="1" name="Is overlapping another object" sid="976462572742303" type="cafe">
+                            <param id="0" name="Object">Abajur</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="292373274492273" type="cafe">
+                            <param id="0" name="X">cafe.X + 150</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="658770182482899">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="132865501089776" type="cafe">
+                            <param id="0" name="Object">Bau</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="856910012805887" type="cafe">
+                            <param id="0" name="X">cafe.X + 80</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="455355687709541">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="971764935579569" type="selecaoComida">
+                            <param id="0" name="Unique ID">420</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="823360839957651">
+                            <conditions>
+                                <condition id="1" name="Is overlapping another object" sid="523532718382829" type="player">
+                                    <param id="0" name="Object">selecaoComida</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="550949575086843" type="cafe">
+                                    <param id="0" name="Animation">&quot;Selecionado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="468677481137987">
+                                    <conditions>
+                                        <condition id="0" name="On key pressed" sid="494022560612280" type="Keyboard">
+                                            <param id="0" name="Key">69 (E)</param>
+                                        </condition>
+                                        <condition id="-14" name="Compare variable" sid="768814643899691" type="System">
+                                            <param id="0" name="Variable">pause</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Destroy" sid="159534690167648" type="cafe" />
+                                        <action id="-9" name="Destroy" sid="862052987131529" type="selecaoComida" />
+                                        <action id="0" name="Play" sid="396652056396046" type="Audio">
+                                            <param id="0" name="Audio file">coletar_cafe</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action behavior="8Direction" id="4" name="Set max speed" sid="534673282183579" type="player">
+                                            <param id="0" name="Max Speed">900</param>
+                                        </action>
+                                        <action behavior="8Direction" id="5" name="Set acceleration" sid="284416297097458" type="player">
+                                            <param id="0" name="Acceleration">999999999999999</param>
+                                        </action>
+                                        <action behavior="8Direction" id="6" name="Set deceleration" sid="534580548897492" type="player">
+                                            <param id="0" name="Deceleration">999999999999999</param>
+                                        </action>
+                                        <action id="6" name="Set speed" sid="920350130790407" type="playerAnim">
+                                            <param id="0" name="Speed">10</param>
+                                        </action>
+                                        <action id="5" name="Set playback rate" sid="944289225098360" type="Audio">
+                                            <param id="0" name="Tag">&quot;musica&quot;</param>
+                                            <param id="1" name="Playback rate">2.0</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="305883044601595" type="System">
+                                            <param id="0" name="Seconds">20</param>
+                                        </action>
+                                        <action id="5" name="Set playback rate" sid="386513268540093" type="Audio">
+                                            <param id="0" name="Tag">&quot;musica&quot;</param>
+                                            <param id="1" name="Playback rate">1</param>
+                                        </action>
+                                        <action behavior="8Direction" id="4" name="Set max speed" sid="613205765889430" type="player">
+                                            <param id="0" name="Max Speed">200</param>
+                                        </action>
+                                        <action behavior="8Direction" id="5" name="Set acceleration" sid="426235609530052" type="player">
+                                            <param id="0" name="Acceleration">600</param>
+                                        </action>
+                                        <action behavior="8Direction" id="6" name="Set deceleration" sid="721262215164898" type="player">
+                                            <param id="0" name="Deceleration">1000</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block disabled="1" sid="886697856946876">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="910846308046376" type="selecaoComida">
+                                                    <param id="0" name="Unique ID">41</param>
+                                                </condition>
+                                                <condition id="-4" inverted="1" name="Is outside layout" sid="967175584370637" type="cafe" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-1" name="Set X" sid="506346076019640" type="cafe">
+                                                    <param id="0" name="X">1350</param>
+                                                </action>
+                                                <action id="0" name="Play" sid="619629982216287" type="Audio">
+                                                    <param id="0" name="Audio file">coletar_cafe</param>
+                                                    <param id="2" name="Loop">0</param>
+                                                    <param id="3" name="Volume">volSons</param>
+                                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                                </action>
+                                                <action behavior="8Direction" id="4" name="Set max speed" sid="407395871342713" type="player">
+                                                    <param id="0" name="Max Speed">900</param>
+                                                </action>
+                                                <action behavior="8Direction" id="5" name="Set acceleration" sid="746392278724775" type="player">
+                                                    <param id="0" name="Acceleration">999999999999999</param>
+                                                </action>
+                                                <action behavior="8Direction" id="6" name="Set deceleration" sid="530758050688043" type="player">
+                                                    <param id="0" name="Deceleration">999999999999999</param>
+                                                </action>
+                                                <action id="6" name="Set speed" sid="871219143991093" type="playerAnim">
+                                                    <param id="0" name="Speed">10</param>
+                                                </action>
+                                                <action id="5" name="Set playback rate" sid="964646912178585" type="Audio">
+                                                    <param id="0" name="Tag">&quot;musica&quot;</param>
+                                                    <param id="1" name="Playback rate">2.0</param>
+                                                </action>
+                                                <action id="-16" name="Wait" sid="425460209705903" type="System">
+                                                    <param id="0" name="Seconds">20</param>
+                                                </action>
+                                                <action id="5" name="Set playback rate" sid="454427166111513" type="Audio">
+                                                    <param id="0" name="Tag">&quot;musica&quot;</param>
+                                                    <param id="1" name="Playback rate">1</param>
+                                                </action>
+                                                <action behavior="8Direction" id="4" name="Set max speed" sid="220106621562005" type="player">
+                                                    <param id="0" name="Max Speed">200</param>
+                                                </action>
+                                                <action behavior="8Direction" id="5" name="Set acceleration" sid="822922733976123" type="player">
+                                                    <param id="0" name="Acceleration">600</param>
+                                                </action>
+                                                <action behavior="8Direction" id="6" name="Set deceleration" sid="294095106563294" type="player">
+                                                    <param id="0" name="Deceleration">1000</param>
+                                                </action>
+                                                <action id="6" name="Set speed" sid="949068331507369" type="playerAnim">
+                                                    <param id="0" name="Speed">10</param>
+                                                </action>
+                                                <action id="-1" name="Set X" sid="404853185504299" type="cafe">
+                                                    <param id="0" name="X">1109</param>
+                                                </action>
+                                                <action id="6" name="Set speed" sid="452995657100621" type="playerAnim">
+                                                    <param id="0" name="Speed">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="430248603901578">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="894842407867995" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="358646859616729" type="cafe">
+                                    <param id="0" name="Animation">&quot;Default&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
     </events>
 </c2eventsheet>
