@@ -30,6 +30,7 @@
             </conditions>
             <actions>
                 <action id="33" name="Stop all" sid="988785683465708" type="Audio" />
+                <action id="2" name="Stop" sid="909458216718383" type="recompensa" />
                 <action id="-4" name="Set position to another object" sid="3380644162080405" type="playerAnim">
                     <param id="0" name="Object">player</param>
                     <param id="1" name="Image point (optional)">0</param>
@@ -63,6 +64,14 @@
                 </action>
                 <action id="-12" name="Set group active" sid="7831782007893582" type="System">
                     <param id="0" name="Group name">&quot;blocos&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="921016325009078" type="System">
+                    <param id="0" name="Group name">&quot;controleLasanhaFFBG&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="435481257446453" type="System">
+                    <param id="0" name="Group name">&quot;controleCafeFFBN&quot;</param>
                     <param id="1" name="State">0</param>
                 </action>
                 <action id="0" name="Load JSON" sid="9328277791879841" type="LoadJSONBN" />
@@ -173,6 +182,32 @@
                         </action>
                     </actions>
                 </event-block>
+                <event-block sid="701480667684293">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="110566327381305" type="selecaoComida">
+                            <param id="0" name="Unique ID">424</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Pin" id="0" name="Pin to object" sid="585322335592603" type="selecaoComida">
+                            <param id="0" name="Pin to">lasanha</param>
+                            <param id="1" name="Mode">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="325410596443595">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="854864700287616" type="selecaoComida">
+                            <param id="0" name="Unique ID">425</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Pin" id="0" name="Pin to object" sid="974526111789922" type="selecaoComida">
+                            <param id="0" name="Pin to">cafe</param>
+                            <param id="1" name="Mode">0</param>
+                        </action>
+                    </actions>
+                </event-block>
             </sub-events>
         </event-block>
         <event-block sid="132384906989112">
@@ -190,25 +225,6 @@
                     <param id="0" name="Seconds">3</param>
                 </action>
                 <action id="-16" name="Set opacity" sid="712658604070234" type="feedback">
-                    <param id="0" name="Opacity">0</param>
-                </action>
-            </actions>
-        </event-block>
-        <event-block sid="221842070530797">
-            <conditions>
-                <condition id="-19" name="On destroyed" sid="667219418065474" type="recompensa" />
-            </conditions>
-            <actions>
-                <action id="0" name="Set text" sid="191230836181615" type="feedback">
-                    <param id="0" name="Text">&quot;RECOMPENSA DESBLOQUEADA&quot;</param>
-                </action>
-                <action id="-16" name="Set opacity" sid="321523403291352" type="feedback">
-                    <param id="0" name="Opacity">100</param>
-                </action>
-                <action id="-16" name="Wait" sid="168663658922369" type="System">
-                    <param id="0" name="Seconds">3</param>
-                </action>
-                <action id="-16" name="Set opacity" sid="196569754869289" type="feedback">
                     <param id="0" name="Opacity">0</param>
                 </action>
             </actions>
@@ -241,53 +257,63 @@
         </event-block>
         <event-block sid="9655654399141965">
             <conditions>
-                <condition id="0" name="On collision with another object" sid="1731258949088634" type="player">
+                <condition id="1" name="Is overlapping another object" sid="1731258949088634" type="player">
                     <param id="0" name="Object">Stalactites</param>
                 </condition>
             </conditions>
-            <actions>
-                <action id="7" name="Play (by name)" sid="525135213441412" type="Audio">
-                    <param id="0" name="Folder">0</param>
-                    <param id="1" name="Audio file name">choose(&quot;dano1&quot;, &quot;dano2&quot;, &quot;dano3&quot;)</param>
-                    <param id="3" name="Loop">0</param>
-                    <param id="4" name="Volume">volSons</param>
-                    <param id="2" name="Tag (optional)">&quot;sons&quot;</param>
-                </action>
-                <action behavior="Flash" id="0" name="Flash" sid="6936698516906039" type="playerAnim">
-                    <param id="0" name="&apos;On&apos; time">0.1</param>
-                    <param id="1" name="&apos;Off&apos; time">0.1</param>
-                    <param id="2" name="Duration">1.2</param>
-                </action>
-                <action id="-10" name="Add to" sid="1260592435381286" type="System">
-                    <param id="0" name="Variable">pontos</param>
-                    <param id="1" name="Value">-50</param>
-                </action>
-                <action id="0" name="Set text" sid="6469389595356948" type="pontoTexto">
-                    <param id="0" name="Text">&quot;-50&quot;</param>
-                </action>
-                <action id="4" name="Set font color" sid="1039000632348362" type="pontoTexto">
-                    <param id="0" name="Color">rgb(235, 17, 53)</param>
-                </action>
-                <action id="-12" name="Set group active" sid="2225811593284857" type="System">
-                    <param id="0" name="Group name">&quot;Pontuacao1bFFBN&quot;</param>
-                    <param id="1" name="State">0</param>
-                </action>
-                <action id="-12" name="Set group active" sid="7456818317579256" type="System">
-                    <param id="0" name="Group name">&quot;Pontuacao1aFFBN&quot;</param>
-                    <param id="1" name="State">1</param>
-                </action>
-                <action id="-16" name="Wait" sid="1611437412462928" type="System">
-                    <param id="0" name="Seconds">4</param>
-                </action>
-                <action id="-12" name="Set group active" sid="6557168039207248" type="System">
-                    <param id="0" name="Group name">&quot;Pontuacao1aFFBN&quot;</param>
-                    <param id="1" name="State">0</param>
-                </action>
-                <action id="-12" name="Set group active" sid="14974284036589" type="System">
-                    <param id="0" name="Group name">&quot;Pontuacao1bFFBN&quot;</param>
-                    <param id="1" name="State">1</param>
-                </action>
-            </actions>
+            <actions />
+            <sub-events>
+                <event-block sid="472313403352766">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="724978966687149" type="System">
+                            <param id="0" name="Interval (seconds)">1.2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Play (by name)" sid="525135213441412" type="Audio">
+                            <param id="0" name="Folder">0</param>
+                            <param id="1" name="Audio file name">choose(&quot;dano1&quot;, &quot;dano2&quot;, &quot;dano3&quot;)</param>
+                            <param id="3" name="Loop">0</param>
+                            <param id="4" name="Volume">volSons</param>
+                            <param id="2" name="Tag (optional)">&quot;sons&quot;</param>
+                        </action>
+                        <action behavior="Flash" id="0" name="Flash" sid="6936698516906039" type="playerAnim">
+                            <param id="0" name="&apos;On&apos; time">0.1</param>
+                            <param id="1" name="&apos;Off&apos; time">0.1</param>
+                            <param id="2" name="Duration">1.2</param>
+                        </action>
+                        <action id="-10" name="Add to" sid="1260592435381286" type="System">
+                            <param id="0" name="Variable">pontos</param>
+                            <param id="1" name="Value">-50</param>
+                        </action>
+                        <action id="0" name="Set text" sid="6469389595356948" type="pontoTexto">
+                            <param id="0" name="Text">&quot;-50&quot;</param>
+                        </action>
+                        <action id="4" name="Set font color" sid="1039000632348362" type="pontoTexto">
+                            <param id="0" name="Color">rgb(235, 17, 53)</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="2225811593284857" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao1bFFBN&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="7456818317579256" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao1aFFBN&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="1611437412462928" type="System">
+                            <param id="0" name="Seconds">4</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="6557168039207248" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao1aFFBN&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="14974284036589" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao1bFFBN&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
         </event-block>
         <event-block sid="8940978710968183">
             <conditions>
@@ -303,6 +329,90 @@
             <actions>
                 <action id="-2" name="Go to layout" sid="4111735116296527" type="System">
                     <param id="0" name="Layout">Fase 5</param>
+                </action>
+            </actions>
+        </event-block>
+        <comment>Ação de pegar o easterEgg5</comment>
+        <event-block sid="352424125753901">
+            <conditions>
+                <condition id="1" name="Is overlapping another object" sid="308715074157434" type="player">
+                    <param id="0" name="Object">recompensa</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="140275801959709">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="801297522885414" type="Keyboard">
+                            <param id="0" name="Key">69 (E)</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="330691793095527" type="System">
+                            <param id="0" name="Variable">pause</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="291178328025037" type="System">
+                            <param id="0" name="Variable">recompensa5</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="669510217837672" type="recompensa" />
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="221842070530797">
+            <conditions>
+                <condition id="-19" name="On destroyed" sid="667219418065474" type="recompensa" />
+            </conditions>
+            <actions>
+                <action id="-10" name="Add to" sid="880122217306940" type="System">
+                    <param id="0" name="Variable">pontos</param>
+                    <param id="1" name="Value">100</param>
+                </action>
+                <action id="0" name="Set text" sid="843995815500861" type="feedback">
+                    <param id="0" name="Text">&quot;RECOMPENSA DESBLOQUEADA&quot;</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="824124012289816" type="feedback">
+                    <param id="0" name="Opacity">100</param>
+                </action>
+                <action id="0" name="Set text" sid="669574686619363" type="pontoTexto">
+                    <param id="0" name="Text">&quot;+100&quot;</param>
+                </action>
+                <action id="4" name="Set font color" sid="317317234257983" type="pontoTexto">
+                    <param id="0" name="Color">rgb(41, 90, 165)</param>
+                </action>
+                <action id="0" name="Play" sid="393030637141635" type="Audio">
+                    <param id="0" name="Audio file">colecionavel</param>
+                    <param id="2" name="Loop">0</param>
+                    <param id="3" name="Volume">volSons</param>
+                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                </action>
+                <action id="-12" name="Set group active" sid="700001385557205" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1bFFBN&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="749088976607950" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1aFFBN&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+                <action id="-16" name="Wait" sid="591746474738675" type="System">
+                    <param id="0" name="Seconds">3</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="964534550762371" type="feedback">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Wait" sid="232615902532160" type="System">
+                    <param id="0" name="Seconds">1</param>
+                </action>
+                <action id="-12" name="Set group active" sid="318421422133437" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1aFFBN&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="433582140074579" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1bFFBN&quot;</param>
+                    <param id="1" name="State">1</param>
                 </action>
             </actions>
         </event-block>
@@ -770,17 +880,14 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action behavior="8Direction" id="4" name="Set max speed" sid="6995405432396862" type="player">
-                                            <param id="0" name="Max Speed">200</param>
+                                        <action behavior="Bullet" id="5" name="Set enabled" sid="2846786911381915" type="selAlternativa1">
+                                            <param id="0" name="State">0</param>
                                         </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="2846786911381915" type="selAlternativa1">
-                                            <param id="0" name="Speed">0</param>
+                                        <action behavior="Bullet" id="5" name="Set enabled" sid="4882499054353443" type="selAlternativa2">
+                                            <param id="0" name="State">0</param>
                                         </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="4882499054353443" type="selAlternativa2">
-                                            <param id="0" name="Speed">0</param>
-                                        </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="4518172572291398" type="selAlternativa3">
-                                            <param id="0" name="Speed">0</param>
+                                        <action behavior="Bullet" id="5" name="Set enabled" sid="4518172572291398" type="selAlternativa3">
+                                            <param id="0" name="State">0</param>
                                         </action>
                                         <action behavior="Solid" id="0" name="Set enabled" sid="5587983182926641" type="selAlternativa1">
                                             <param id="0" name="State">0</param>
@@ -796,6 +903,32 @@
                                             <param id="1" name="State">0</param>
                                         </action>
                                     </actions>
+                                    <sub-events>
+                                        <comment>Para o caso do efeito do café estar ativo</comment>
+                                        <event-block sid="534356365871843">
+                                            <conditions>
+                                                <condition id="-15" name="Is group active" sid="664928948033479" type="System">
+                                                    <param id="0" name="Group name">&quot;controleCafeFFBN&quot;</param>
+                                                </condition>
+                                                <condition id="-4" name="Is outside layout" sid="863565278683332" type="cafe" />
+                                            </conditions>
+                                            <actions>
+                                                <action behavior="8Direction" id="4" name="Set max speed" sid="6995405432396862" type="player">
+                                                    <param id="0" name="Max Speed">900</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="320577392283646">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="927203719860403" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action behavior="8Direction" id="4" name="Set max speed" sid="141462247787853" type="player">
+                                                    <param id="0" name="Max Speed">200</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -1030,21 +1163,68 @@
                             <param id="1" name="State">1</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <comment>A cada resposta certa há 50% de chance de aparecer o café e 50% de chance de aparecer a lasanha, sendo que ambos só aparecem caso não estejam na arena</comment>
+                        <event-block sid="493370773427510">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="491337165811892" type="System">
+                                    <param id="0" name="First value">round(random(0, 2))</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">1</param>
+                                </condition>
+                                <condition id="-4" name="Is outside layout" sid="777711933339964" type="lasanha" />
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Set position" sid="459570558052498" type="lasanha">
+                                    <param id="0" name="X">round(random(106, 1179))</param>
+                                    <param id="1" name="Y">round(random(220, 670))</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="396241289182531" type="System">
+                                    <param id="0" name="Group name">&quot;controleLasanhaFFBG&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>Se não apareceu a lasanha, aparece o café</comment>
+                        <event-block sid="575270036070506">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="404869106614753" type="System" />
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="893811502908168">
+                                    <conditions>
+                                        <condition id="-4" name="Is outside layout" sid="937357422793519" type="cafe" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="953703334874326" type="cafe">
+                                            <param id="0" name="X">round(random(106, 1179))</param>
+                                            <param id="1" name="Y">round(random(220, 670))</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="411492898580190" type="System">
+                                            <param id="0" name="Group name">&quot;controleCafeFFBN&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="9832726161815892">
                     <conditions>
                         <condition id="-22" name="Else" sid="7352035128923322" type="System" />
                     </conditions>
                     <actions>
-                        <action id="-9" name="Set value" sid="5071498661462462" type="System">
+                        <action disabled="1" id="-9" name="Set value" sid="5071498661462462" type="System">
                             <param id="0" name="Variable">perguntaBN</param>
                             <param id="1" name="Value">1</param>
                         </action>
-                        <action id="-3" name="Set position" sid="3715178578863329" type="player">
+                        <action disabled="1" id="-3" name="Set position" sid="3715178578863329" type="player">
                             <param id="0" name="X">54</param>
                             <param id="1" name="Y">404</param>
                         </action>
-                        <action behavior="8Direction" id="0" name="Stop" sid="3921811517886007" type="player" />
+                        <action behavior="8Direction" disabled="1" id="0" name="Stop" sid="3921811517886007" type="player" />
                         <action id="7" name="Play (by name)" sid="464535170552236" type="Audio">
                             <param id="0" name="Folder">0</param>
                             <param id="1" name="Audio file name">choose(&quot;dano1&quot;, &quot;dano2&quot;, &quot;dano3&quot;)</param>
@@ -1066,6 +1246,12 @@
                         </action>
                         <action id="4" name="Set font color" sid="2802896052731567" type="pontoTexto">
                             <param id="0" name="Color">rgb(235, 17, 53)</param>
+                        </action>
+                        <action id="0" name="Play" sid="975242998021148" type="Audio">
+                            <param id="0" name="Audio file">hit_bloco_gelo</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">volSons</param>
+                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                         </action>
                         <action id="-12" name="Set group active" sid="6632276336233687" type="System">
                             <param id="0" name="Group name">&quot;Pontuacao1bFFBN&quot;</param>
@@ -1397,5 +1583,320 @@
                 </action>
             </actions>
         </event-block>
+        <comment>Grupo criado para controlar todas as ações que envolvam a lasanha nesta fase</comment>
+        <event-group description="" sid="826469767237089" title="controleLasanhaFFBG">
+            <sub-events>
+                <event-block sid="373919617458417">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="785274332317394" type="selecaoComida">
+                            <param id="0" name="Unique ID">424</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="573883678831818">
+                            <conditions>
+                                <condition id="1" name="Is overlapping another object" sid="737891417677037" type="player">
+                                    <param id="0" name="Object">selecaoComida</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="916899094357146" type="lasanha">
+                                    <param id="0" name="Animation">&quot;Selecionado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="381710749227765">
+                                    <conditions>
+                                        <condition id="0" name="On key pressed" sid="575627118068371" type="Keyboard">
+                                            <param id="0" name="Key">69 (E)</param>
+                                        </condition>
+                                        <condition id="-14" name="Compare variable" sid="500113157582442" type="System">
+                                            <param id="0" name="Variable">pause</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-1" name="Set X" sid="829480279972663" type="lasanha">
+                                            <param id="0" name="X">-157</param>
+                                        </action>
+                                        <action id="0" name="Play" sid="313914757740563" type="Audio">
+                                            <param id="0" name="Audio file">coletando_lasanha</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action behavior="Bullet" id="0" name="Set speed" sid="845257801931750" type="selAlternativa1">
+                                            <param id="0" name="Speed">30 * perguntaBN</param>
+                                        </action>
+                                        <action behavior="Bullet" id="0" name="Set speed" sid="789565575471496" type="selAlternativa2">
+                                            <param id="0" name="Speed">30 * perguntaBN</param>
+                                        </action>
+                                        <action behavior="Bullet" id="0" name="Set speed" sid="223777257693888" type="selAlternativa3">
+                                            <param id="0" name="Speed">30 * perguntaBN</param>
+                                        </action>
+                                        <action id="5" name="Set playback rate" sid="860312635551583" type="Audio">
+                                            <param id="0" name="Tag">&quot;musica&quot;</param>
+                                            <param id="1" name="Playback rate">0.5</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="279026708743834" type="System">
+                                            <param id="0" name="Seconds">20</param>
+                                        </action>
+                                        <action id="5" name="Set playback rate" sid="894364081175865" type="Audio">
+                                            <param id="0" name="Tag">&quot;musica&quot;</param>
+                                            <param id="1" name="Playback rate">1</param>
+                                        </action>
+                                        <action behavior="Bullet" id="0" name="Set speed" sid="275674142947925" type="selAlternativa1">
+                                            <param id="0" name="Speed">200 * perguntaBN</param>
+                                        </action>
+                                        <action behavior="Bullet" id="0" name="Set speed" sid="537475881419690" type="selAlternativa2">
+                                            <param id="0" name="Speed">200 * perguntaBN</param>
+                                        </action>
+                                        <action behavior="Bullet" id="0" name="Set speed" sid="142510154657461" type="selAlternativa3">
+                                            <param id="0" name="Speed">200 * perguntaBN</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="726845028538492" type="System">
+                                            <param id="0" name="Group name">&quot;controleLasanhaFFBG&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block disabled="1" sid="845459910868555">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="906159922303393" type="selecaoComida">
+                                                    <param id="0" name="Unique ID">424</param>
+                                                </condition>
+                                                <condition id="-4" inverted="1" name="Is outside layout" sid="321528949693058" type="lasanha" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Destroy" sid="220372168455041" type="lasanha" />
+                                                <action id="-9" name="Destroy" sid="538799362730734" type="selecaoComida" />
+                                                <action id="0" name="Play" sid="927889169134094" type="Audio">
+                                                    <param id="0" name="Audio file">coletando_lasanha</param>
+                                                    <param id="2" name="Loop">0</param>
+                                                    <param id="3" name="Volume">volSons</param>
+                                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="156444302815249" type="selAlternativa1">
+                                                    <param id="0" name="Speed">30 * perguntaBN</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="253647594382428" type="selAlternativa2">
+                                                    <param id="0" name="Speed">30 * perguntaBN</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="938885011771418" type="selAlternativa3">
+                                                    <param id="0" name="Speed">30 * perguntaBN</param>
+                                                </action>
+                                                <action id="5" name="Set playback rate" sid="612550364559570" type="Audio">
+                                                    <param id="0" name="Tag">&quot;musica&quot;</param>
+                                                    <param id="1" name="Playback rate">0.5</param>
+                                                </action>
+                                                <action id="-16" name="Wait" sid="807594958648347" type="System">
+                                                    <param id="0" name="Seconds">20</param>
+                                                </action>
+                                                <action id="5" name="Set playback rate" sid="822296327473782" type="Audio">
+                                                    <param id="0" name="Tag">&quot;musica&quot;</param>
+                                                    <param id="1" name="Playback rate">1</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="145217494535227" type="selAlternativa1">
+                                                    <param id="0" name="Speed">200 * perguntaBN</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="810245286188211" type="selAlternativa2">
+                                                    <param id="0" name="Speed">200 * perguntaBN</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="485032233040241" type="selAlternativa3">
+                                                    <param id="0" name="Speed">200 * perguntaBN</param>
+                                                </action>
+                                                <action id="-12" name="Set group active" sid="365303688907126" type="System">
+                                                    <param id="0" name="Group name">&quot;controleLasanhaFFBG&quot;</param>
+                                                    <param id="1" name="State">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="552722811475023">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="560380163092950" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="394293056652742" type="lasanha">
+                                    <param id="0" name="Animation">&quot;Default&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <comment>Grupo criado para controlar todas as ações que envolvam o café nesta fase</comment>
+        <event-group description="" sid="352411589673795" title="controleCafeFFBN">
+            <sub-events>
+                <event-block sid="552540794086311">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="116893327689354" type="selecaoComida">
+                            <param id="0" name="Unique ID">425</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="900589991593190">
+                            <conditions>
+                                <condition id="1" name="Is overlapping another object" sid="269251988534792" type="player">
+                                    <param id="0" name="Object">selecaoComida</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="455364532161989" type="cafe">
+                                    <param id="0" name="Animation">&quot;Selecionado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="427590489065971">
+                                    <conditions>
+                                        <condition id="0" name="On key pressed" sid="233371801189184" type="Keyboard">
+                                            <param id="0" name="Key">69 (E)</param>
+                                        </condition>
+                                        <condition id="-14" name="Compare variable" sid="659116667955966" type="System">
+                                            <param id="0" name="Variable">pause</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-1" name="Set X" sid="256236847588903" type="cafe">
+                                            <param id="0" name="X">-157</param>
+                                        </action>
+                                        <action id="0" name="Play" sid="891477081798872" type="Audio">
+                                            <param id="0" name="Audio file">coletar_cafe</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action behavior="8Direction" id="4" name="Set max speed" sid="825901399119917" type="player">
+                                            <param id="0" name="Max Speed">selAlternativa1.Bullet.Speed * 4.5</param>
+                                        </action>
+                                        <action behavior="8Direction" disabled="1" id="5" name="Set acceleration" sid="129771416122983" type="player">
+                                            <param id="0" name="Acceleration">999999999999999</param>
+                                        </action>
+                                        <action behavior="8Direction" disabled="1" id="6" name="Set deceleration" sid="986317535183001" type="player">
+                                            <param id="0" name="Deceleration">999999999999999</param>
+                                        </action>
+                                        <action id="6" name="Set speed" sid="634955916894702" type="playerAnim">
+                                            <param id="0" name="Speed">10</param>
+                                        </action>
+                                        <action id="5" name="Set playback rate" sid="602522589342779" type="Audio">
+                                            <param id="0" name="Tag">&quot;musica&quot;</param>
+                                            <param id="1" name="Playback rate">2.0</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="579100227873901" type="System">
+                                            <param id="0" name="Seconds">20</param>
+                                        </action>
+                                        <action id="5" name="Set playback rate" sid="873691010377308" type="Audio">
+                                            <param id="0" name="Tag">&quot;musica&quot;</param>
+                                            <param id="1" name="Playback rate">1</param>
+                                        </action>
+                                        <action id="6" name="Set speed" sid="387368389517922" type="playerAnim">
+                                            <param id="0" name="Speed">0</param>
+                                        </action>
+                                        <action behavior="8Direction" id="4" name="Set max speed" sid="923607314672922" type="player">
+                                            <param id="0" name="Max Speed">selAlternativa1.Bullet.Speed</param>
+                                        </action>
+                                        <action behavior="8Direction" disabled="1" id="5" name="Set acceleration" sid="470815102031526" type="player">
+                                            <param id="0" name="Acceleration">600</param>
+                                        </action>
+                                        <action behavior="8Direction" disabled="1" id="6" name="Set deceleration" sid="116805220612066" type="player">
+                                            <param id="0" name="Deceleration">1000</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="125877752708809" type="System">
+                                            <param id="0" name="Group name">&quot;controleCafeFFBN&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block disabled="1" sid="777615552043056">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="558535382205030" type="selecaoComida">
+                                                    <param id="0" name="Unique ID">425</param>
+                                                </condition>
+                                                <condition id="-4" inverted="1" name="Is outside layout" sid="628193884713935" type="cafe" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Destroy" sid="835952414858516" type="cafe" />
+                                                <action id="-9" name="Destroy" sid="994306007071652" type="selecaoComida" />
+                                                <action id="0" name="Play" sid="701414082501461" type="Audio">
+                                                    <param id="0" name="Audio file">coletar_cafe</param>
+                                                    <param id="2" name="Loop">0</param>
+                                                    <param id="3" name="Volume">volSons</param>
+                                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                                </action>
+                                                <action behavior="8Direction" id="4" name="Set max speed" sid="578622106309327" type="player">
+                                                    <param id="0" name="Max Speed">selAlternativa1.Bullet.Speed * 4.5</param>
+                                                </action>
+                                                <action behavior="8Direction" disabled="1" id="5" name="Set acceleration" sid="744385247829114" type="player">
+                                                    <param id="0" name="Acceleration">999999999999999</param>
+                                                </action>
+                                                <action behavior="8Direction" disabled="1" id="6" name="Set deceleration" sid="919101228309959" type="player">
+                                                    <param id="0" name="Deceleration">999999999999999</param>
+                                                </action>
+                                                <action id="6" name="Set speed" sid="745136964833697" type="playerAnim">
+                                                    <param id="0" name="Speed">10</param>
+                                                </action>
+                                                <action id="5" name="Set playback rate" sid="487956822726456" type="Audio">
+                                                    <param id="0" name="Tag">&quot;musica&quot;</param>
+                                                    <param id="1" name="Playback rate">2.0</param>
+                                                </action>
+                                                <action id="-16" name="Wait" sid="180658700923539" type="System">
+                                                    <param id="0" name="Seconds">20</param>
+                                                </action>
+                                                <action id="5" name="Set playback rate" sid="957275578627460" type="Audio">
+                                                    <param id="0" name="Tag">&quot;musica&quot;</param>
+                                                    <param id="1" name="Playback rate">1</param>
+                                                </action>
+                                                <action id="6" name="Set speed" sid="864179757337100" type="playerAnim">
+                                                    <param id="0" name="Speed">0</param>
+                                                </action>
+                                                <action behavior="8Direction" id="4" name="Set max speed" sid="734533208899964" type="player">
+                                                    <param id="0" name="Max Speed">selAlternativa1.Bullet.Speed</param>
+                                                </action>
+                                                <action behavior="8Direction" disabled="1" id="5" name="Set acceleration" sid="556711442846978" type="player">
+                                                    <param id="0" name="Acceleration">600</param>
+                                                </action>
+                                                <action behavior="8Direction" disabled="1" id="6" name="Set deceleration" sid="325540225953316" type="player">
+                                                    <param id="0" name="Deceleration">1000</param>
+                                                </action>
+                                                <action id="-1" name="Set X" sid="648789230275303" type="cafe">
+                                                    <param id="0" name="X">1109</param>
+                                                </action>
+                                                <action id="-12" name="Set group active" sid="827596011641258" type="System">
+                                                    <param id="0" name="Group name">&quot;controleCafeFFBN&quot;</param>
+                                                    <param id="1" name="State">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="300898793808315">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="774782954825454" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="866858455201385" type="cafe">
+                                    <param id="0" name="Animation">&quot;Default&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
     </events>
 </c2eventsheet>
