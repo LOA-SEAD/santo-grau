@@ -23,6 +23,10 @@
         <variable constant="0" name="perguntaBN" sid="6441704503141091" static="0" type="number">1</variable>
         <comment>Para disparar o inicio do evento das perguntas</comment>
         <variable constant="0" name="ativarMensagemBN" sid="4095025016447207" static="0" type="number">0</variable>
+        <comment>Como há muitas modificações de velocidade durante a fase, é mais fácil controlá-las por meio de uma variável</comment>
+        <variable constant="0" name="efeitoCafeAtivo" sid="173578820706610" static="0" type="number">0</variable>
+        <comment>Como há muitas modificações de velocidade durante a fase, é mais fácil controlá-las por meio de uma variável</comment>
+        <variable constant="0" name="efeitoLasanhaAtivo" sid="693969454921725" static="0" type="number">0</variable>
         <comment>Inicializações</comment>
         <event-block sid="8671060664838949">
             <conditions>
@@ -67,7 +71,7 @@
                     <param id="1" name="State">0</param>
                 </action>
                 <action id="-12" name="Set group active" sid="921016325009078" type="System">
-                    <param id="0" name="Group name">&quot;controleLasanhaFFBG&quot;</param>
+                    <param id="0" name="Group name">&quot;controleLasanhaFFBN&quot;</param>
                     <param id="1" name="State">0</param>
                 </action>
                 <action id="-12" name="Set group active" sid="435481257446453" type="System">
@@ -898,37 +902,14 @@
                                         <action behavior="Solid" id="0" name="Set enabled" sid="649659029292639" type="selAlternativa3">
                                             <param id="0" name="State">0</param>
                                         </action>
+                                        <action behavior="8Direction" id="4" name="Set max speed" sid="141462247787853" type="player">
+                                            <param id="0" name="Max Speed">200 + (efeitoCafeAtivo * 700)</param>
+                                        </action>
                                         <action id="-12" name="Set group active" sid="5572211203743972" type="System">
                                             <param id="0" name="Group name">&quot;blocos&quot;</param>
                                             <param id="1" name="State">0</param>
                                         </action>
                                     </actions>
-                                    <sub-events>
-                                        <comment>Para o caso do efeito do café estar ativo</comment>
-                                        <event-block sid="534356365871843">
-                                            <conditions>
-                                                <condition id="-15" name="Is group active" sid="664928948033479" type="System">
-                                                    <param id="0" name="Group name">&quot;controleCafeFFBN&quot;</param>
-                                                </condition>
-                                                <condition id="-4" name="Is outside layout" sid="863565278683332" type="cafe" />
-                                            </conditions>
-                                            <actions>
-                                                <action behavior="8Direction" id="4" name="Set max speed" sid="6995405432396862" type="player">
-                                                    <param id="0" name="Max Speed">900</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="320577392283646">
-                                            <conditions>
-                                                <condition id="-22" name="Else" sid="927203719860403" type="System" />
-                                            </conditions>
-                                            <actions>
-                                                <action behavior="8Direction" id="4" name="Set max speed" sid="141462247787853" type="player">
-                                                    <param id="0" name="Max Speed">200</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -1129,6 +1110,18 @@
                             <param id="3" name="Volume">volSons</param>
                             <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                         </action>
+                        <action behavior="Bullet" id="0" name="Set speed" sid="1037335552228716" type="selAlternativa1">
+                            <param id="0" name="Speed">200 * perguntaBN - (efeitoLasanhaAtivo * 170 * perguntaBN)</param>
+                        </action>
+                        <action behavior="Bullet" id="0" name="Set speed" sid="2806613975207155" type="selAlternativa2">
+                            <param id="0" name="Speed">200 * perguntaBN - (efeitoLasanhaAtivo * 170 * perguntaBN)</param>
+                        </action>
+                        <action behavior="Bullet" id="0" name="Set speed" sid="5903313655326572" type="selAlternativa3">
+                            <param id="0" name="Speed">200 * perguntaBN - (efeitoLasanhaAtivo * 170 * perguntaBN)</param>
+                        </action>
+                        <action behavior="8Direction" id="4" name="Set max speed" sid="7884800207288088" type="player">
+                            <param id="0" name="Max Speed">200 * perguntaBN + (efeitoCafeAtivo * 200 * perguntaBN * 3.5)</param>
+                        </action>
                         <action id="-10" name="Add to" sid="4368475574908269" type="System">
                             <param id="0" name="Variable">pontos</param>
                             <param id="1" name="Value">100</param>
@@ -1180,7 +1173,7 @@
                                     <param id="1" name="Y">round(random(220, 670))</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="396241289182531" type="System">
-                                    <param id="0" name="Group name">&quot;controleLasanhaFFBG&quot;</param>
+                                    <param id="0" name="Group name">&quot;controleLasanhaFFBN&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
                             </actions>
@@ -1203,7 +1196,7 @@
                                         </action>
                                         <action id="-12" name="Set group active" sid="411492898580190" type="System">
                                             <param id="0" name="Group name">&quot;controleCafeFFBN&quot;</param>
-                                            <param id="1" name="State">0</param>
+                                            <param id="1" name="State">1</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1279,18 +1272,6 @@
                         <condition id="-1" name="Every tick" sid="9967413766143762" type="System" />
                     </conditions>
                     <actions>
-                        <action behavior="Bullet" id="0" name="Set speed" sid="1037335552228716" type="selAlternativa1">
-                            <param id="0" name="Speed">200 * perguntaBN</param>
-                        </action>
-                        <action behavior="Bullet" id="0" name="Set speed" sid="2806613975207155" type="selAlternativa2">
-                            <param id="0" name="Speed">200 * perguntaBN</param>
-                        </action>
-                        <action behavior="Bullet" id="0" name="Set speed" sid="5903313655326572" type="selAlternativa3">
-                            <param id="0" name="Speed">200 * perguntaBN</param>
-                        </action>
-                        <action behavior="8Direction" id="4" name="Set max speed" sid="7884800207288088" type="player">
-                            <param id="0" name="Max Speed">selAlternativa1.Bullet.Speed</param>
-                        </action>
                         <action id="-9" name="Set value" sid="1382421297625496" type="System">
                             <param id="0" name="Variable">verificarAlternativaBN</param>
                             <param id="1" name="Value">0</param>
@@ -1584,7 +1565,7 @@
             </actions>
         </event-block>
         <comment>Grupo criado para controlar todas as ações que envolvam a lasanha nesta fase</comment>
-        <event-group description="" sid="826469767237089" title="controleLasanhaFFBG">
+        <event-group description="" sid="826469767237089" title="controleLasanhaFFBN">
             <sub-events>
                 <event-block sid="373919617458417">
                     <conditions>
@@ -1637,6 +1618,10 @@
                                         <action behavior="Bullet" id="0" name="Set speed" sid="223777257693888" type="selAlternativa3">
                                             <param id="0" name="Speed">30 * perguntaBN</param>
                                         </action>
+                                        <action id="-9" name="Set value" sid="525553334829281" type="System">
+                                            <param id="0" name="Variable">efeitoLasanhaAtivo</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
                                         <action id="5" name="Set playback rate" sid="860312635551583" type="Audio">
                                             <param id="0" name="Tag">&quot;musica&quot;</param>
                                             <param id="1" name="Playback rate">0.5</param>
@@ -1648,6 +1633,10 @@
                                             <param id="0" name="Tag">&quot;musica&quot;</param>
                                             <param id="1" name="Playback rate">1</param>
                                         </action>
+                                        <action id="-9" name="Set value" sid="424732764710098" type="System">
+                                            <param id="0" name="Variable">efeitoLasanhaAtivo</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
                                         <action behavior="Bullet" id="0" name="Set speed" sid="275674142947925" type="selAlternativa1">
                                             <param id="0" name="Speed">200 * perguntaBN</param>
                                         </action>
@@ -1658,7 +1647,7 @@
                                             <param id="0" name="Speed">200 * perguntaBN</param>
                                         </action>
                                         <action id="-12" name="Set group active" sid="726845028538492" type="System">
-                                            <param id="0" name="Group name">&quot;controleLasanhaFFBG&quot;</param>
+                                            <param id="0" name="Group name">&quot;controleLasanhaFFBN&quot;</param>
                                             <param id="1" name="State">0</param>
                                         </action>
                                     </actions>
@@ -1688,6 +1677,10 @@
                                                 <action behavior="Bullet" id="0" name="Set speed" sid="938885011771418" type="selAlternativa3">
                                                     <param id="0" name="Speed">30 * perguntaBN</param>
                                                 </action>
+                                                <action id="-9" name="Set value" sid="620219151810245" type="System">
+                                                    <param id="0" name="Variable">efeitoLasanhaAtivo</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
                                                 <action id="5" name="Set playback rate" sid="612550364559570" type="Audio">
                                                     <param id="0" name="Tag">&quot;musica&quot;</param>
                                                     <param id="1" name="Playback rate">0.5</param>
@@ -1699,6 +1692,10 @@
                                                     <param id="0" name="Tag">&quot;musica&quot;</param>
                                                     <param id="1" name="Playback rate">1</param>
                                                 </action>
+                                                <action id="-9" name="Set value" sid="841016687050129" type="System">
+                                                    <param id="0" name="Variable">efeitoLasanhaAtivo</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
                                                 <action behavior="Bullet" id="0" name="Set speed" sid="145217494535227" type="selAlternativa1">
                                                     <param id="0" name="Speed">200 * perguntaBN</param>
                                                 </action>
@@ -1709,7 +1706,7 @@
                                                     <param id="0" name="Speed">200 * perguntaBN</param>
                                                 </action>
                                                 <action id="-12" name="Set group active" sid="365303688907126" type="System">
-                                                    <param id="0" name="Group name">&quot;controleLasanhaFFBG&quot;</param>
+                                                    <param id="0" name="Group name">&quot;controleLasanhaFFBN&quot;</param>
                                                     <param id="1" name="State">0</param>
                                                 </action>
                                             </actions>
@@ -1779,7 +1776,7 @@
                                             <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                         </action>
                                         <action behavior="8Direction" id="4" name="Set max speed" sid="825901399119917" type="player">
-                                            <param id="0" name="Max Speed">selAlternativa1.Bullet.Speed * 4.5</param>
+                                            <param id="0" name="Max Speed">200 * perguntaBN * 4.5</param>
                                         </action>
                                         <action behavior="8Direction" disabled="1" id="5" name="Set acceleration" sid="129771416122983" type="player">
                                             <param id="0" name="Acceleration">999999999999999</param>
@@ -1789,6 +1786,10 @@
                                         </action>
                                         <action id="6" name="Set speed" sid="634955916894702" type="playerAnim">
                                             <param id="0" name="Speed">10</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="495493341703273" type="System">
+                                            <param id="0" name="Variable">efeitoCafeAtivo</param>
+                                            <param id="1" name="Value">1</param>
                                         </action>
                                         <action id="5" name="Set playback rate" sid="602522589342779" type="Audio">
                                             <param id="0" name="Tag">&quot;musica&quot;</param>
@@ -1801,11 +1802,15 @@
                                             <param id="0" name="Tag">&quot;musica&quot;</param>
                                             <param id="1" name="Playback rate">1</param>
                                         </action>
+                                        <action id="-9" name="Set value" sid="944758849217762" type="System">
+                                            <param id="0" name="Variable">efeitoCafeAtivo</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
                                         <action id="6" name="Set speed" sid="387368389517922" type="playerAnim">
                                             <param id="0" name="Speed">0</param>
                                         </action>
                                         <action behavior="8Direction" id="4" name="Set max speed" sid="923607314672922" type="player">
-                                            <param id="0" name="Max Speed">selAlternativa1.Bullet.Speed</param>
+                                            <param id="0" name="Max Speed">200 * perguntaBN</param>
                                         </action>
                                         <action behavior="8Direction" disabled="1" id="5" name="Set acceleration" sid="470815102031526" type="player">
                                             <param id="0" name="Acceleration">600</param>
@@ -1836,7 +1841,7 @@
                                                     <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                                 </action>
                                                 <action behavior="8Direction" id="4" name="Set max speed" sid="578622106309327" type="player">
-                                                    <param id="0" name="Max Speed">selAlternativa1.Bullet.Speed * 4.5</param>
+                                                    <param id="0" name="Max Speed">200 * perguntaBN * 4.5</param>
                                                 </action>
                                                 <action behavior="8Direction" disabled="1" id="5" name="Set acceleration" sid="744385247829114" type="player">
                                                     <param id="0" name="Acceleration">999999999999999</param>
@@ -1846,6 +1851,10 @@
                                                 </action>
                                                 <action id="6" name="Set speed" sid="745136964833697" type="playerAnim">
                                                     <param id="0" name="Speed">10</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="730700490114648" type="System">
+                                                    <param id="0" name="Variable">efeitoCafeAtivo</param>
+                                                    <param id="1" name="Value">1</param>
                                                 </action>
                                                 <action id="5" name="Set playback rate" sid="487956822726456" type="Audio">
                                                     <param id="0" name="Tag">&quot;musica&quot;</param>
@@ -1858,11 +1867,15 @@
                                                     <param id="0" name="Tag">&quot;musica&quot;</param>
                                                     <param id="1" name="Playback rate">1</param>
                                                 </action>
+                                                <action id="-9" name="Set value" sid="207005379244015" type="System">
+                                                    <param id="0" name="Variable">efeitoCafeAtivo</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
                                                 <action id="6" name="Set speed" sid="864179757337100" type="playerAnim">
                                                     <param id="0" name="Speed">0</param>
                                                 </action>
                                                 <action behavior="8Direction" id="4" name="Set max speed" sid="734533208899964" type="player">
-                                                    <param id="0" name="Max Speed">selAlternativa1.Bullet.Speed</param>
+                                                    <param id="0" name="Max Speed">200 * perguntaBN</param>
                                                 </action>
                                                 <action behavior="8Direction" disabled="1" id="5" name="Set acceleration" sid="556711442846978" type="player">
                                                     <param id="0" name="Acceleration">600</param>
@@ -1876,6 +1889,21 @@
                                                 <action id="-12" name="Set group active" sid="827596011641258" type="System">
                                                     <param id="0" name="Group name">&quot;controleCafeFFBN&quot;</param>
                                                     <param id="1" name="State">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <comment>Pois após tudo parar a velocidade volta ao normal</comment>
+                                        <event-block sid="300311006403955">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="477901006216443" type="System">
+                                                    <param id="0" name="Variable">perguntaBN</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">4</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action behavior="8Direction" id="4" name="Set max speed" sid="408042802548774" type="player">
+                                                    <param id="0" name="Max Speed">200</param>
                                                 </action>
                                             </actions>
                                         </event-block>
