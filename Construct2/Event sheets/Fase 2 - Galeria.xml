@@ -27,6 +27,7 @@
         <variable constant="0" name="descarregarDialogosGAL" sid="5863083947421018" static="0" type="number">0</variable>
         <comment>Utilizado para controle do momento em que o jogador pode avançar as falas</comment>
         <variable constant="0" name="avancarDialogosGAL" sid="2434999407990406" static="0" type="number">0</variable>
+        <variable constant="0" name="estaAcendendoVela" sid="221783546930456" static="0" type="number">0</variable>
         <event-block sid="5554538898794456">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="3689958973850941" type="System" />
@@ -38,6 +39,12 @@
                     <param id="2" name="Loop">1</param>
                     <param id="3" name="Volume">volMusica</param>
                     <param id="1" name="Tag (optional)">&quot;musica&quot;</param>
+                </action>
+                <action id="0" name="Play" sid="358942785850878" type="Audio">
+                    <param id="0" name="Audio file">acendendo_vela</param>
+                    <param id="2" name="Loop">1</param>
+                    <param id="3" name="Volume">volSons</param>
+                    <param id="1" name="Tag (optional)">&quot;sonsVela&quot;</param>
                 </action>
                 <action id="2" name="Stop" sid="3799662746830079" type="Fantasmas" />
                 <action id="-4" name="Set position to another object" sid="3595203182699471" type="playerAnim">
@@ -126,6 +133,12 @@
                 <action id="-16" name="Set opacity" sid="838666715267533" type="lasanha">
                     <param id="0" name="Opacity">0</param>
                 </action>
+                <action id="-16" name="Set opacity" sid="159083667904444" type="perguntas">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="989514265790622" type="textoPerguntas">
+                    <param id="0" name="Opacity">0</param>
+                </action>
                 <action id="11" name="Set collisions enabled" sid="4217019818019758" type="SaidaGAL">
                     <param id="0" name="Collisions">0</param>
                 </action>
@@ -141,6 +154,9 @@
                 </action>
                 <action id="0" name="Set text" sid="9426213284247127" type="dicaTexto">
                     <param id="0" name="Text">&quot;Pressione E para conversar com Einstein&quot;</param>
+                </action>
+                <action id="0" name="Set text" sid="769668259754405" type="textoPerguntas">
+                    <param id="0" name="Text">QuadrosJSON.GetData(&quot;dicaOrdenacao&quot;, 0)</param>
                 </action>
                 <action id="5" name="Set web font" sid="7416769854996486" type="pontuacaoTexto">
                     <param id="0" name="Family name">&quot;please_write_me_a_songmedium&quot;</param>
@@ -300,6 +316,37 @@
                 </action>
             </actions>
         </event-block>
+        <comment>Controle de volume da luz na personagem sendo aumentada ou diminuida</comment>
+        <event-block sid="201667870814470">
+            <conditions>
+                <condition id="-14" name="Compare variable" sid="511005818250854" type="System">
+                    <param id="0" name="Variable">estaAcendendoVela</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Value">1</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="2" name="Set muted" sid="758789574398232" type="Audio">
+                    <param id="0" name="Tag">&quot;sonsVela&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="669540313324560">
+            <conditions>
+                <condition id="-14" name="Compare variable" sid="804651169117888" type="System">
+                    <param id="0" name="Variable">estaAcendendoVela</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Value">0</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="2" name="Set muted" sid="709027644416777" type="Audio">
+                    <param id="0" name="Tag">&quot;sonsVela&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+            </actions>
+        </event-block>
         <event-block sid="7879974350802997">
             <conditions>
                 <condition id="-1" name="Every tick" sid="8510141545562972" type="System" />
@@ -326,6 +373,10 @@
                 </action>
                 <action id="3" name="Set volume" sid="200736495944557" type="Audio">
                     <param id="0" name="Tag">&quot;sons&quot;</param>
+                    <param id="1" name="dB">volSons</param>
+                </action>
+                <action id="3" name="Set volume" sid="692705553736701" type="Audio">
+                    <param id="0" name="Tag">&quot;sonsVela&quot;</param>
                     <param id="1" name="dB">volSons</param>
                 </action>
             </actions>
@@ -622,6 +673,12 @@
                                 <action id="-16" name="Set opacity" sid="2076384807695057" type="MuralQuadros">
                                     <param id="0" name="Opacity">MuralQuadros.Opacity + 2.5</param>
                                 </action>
+                                <action id="-16" name="Set opacity" sid="227286412602217" type="perguntas">
+                                    <param id="0" name="Opacity">perguntas.Opacity + 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="185857841444519" type="textoPerguntas">
+                                    <param id="0" name="Opacity">textoPerguntas.Opacity + 2.5</param>
+                                </action>
                             </actions>
                         </event-block>
                         <event-block sid="9590722395535614">
@@ -691,6 +748,12 @@
                             <actions>
                                 <action id="-16" name="Set opacity" sid="3897813820729303" type="MuralQuadros">
                                     <param id="0" name="Opacity">MuralQuadros.Opacity - 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="140319735093179" type="perguntas">
+                                    <param id="0" name="Opacity">perguntas.Opacity - 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="762708868023399" type="textoPerguntas">
+                                    <param id="0" name="Opacity">textoPerguntas.Opacity - 2.5</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1986,6 +2049,12 @@
                                         <action id="-16" name="Set opacity" sid="4208535028306787" type="MuralQuadros">
                                             <param id="0" name="Opacity">MuralQuadros.Opacity - 2.5</param>
                                         </action>
+                                        <action id="-16" name="Set opacity" sid="869134549153177" type="perguntas">
+                                            <param id="0" name="Opacity">perguntas.Opacity - 2.5</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="484634863688627" type="textoPerguntas">
+                                            <param id="0" name="Opacity">textoPerguntas.Opacity - 2.5</param>
+                                        </action>
                                     </actions>
                                 </event-block>
                                 <event-block sid="750325561758365">
@@ -2040,7 +2109,6 @@
         <comment>Grupo destinado para a parte da fase onde as luzes se apagam e o personagem tem que procurar uma chave na sala</comment>
         <event-group description="" sid="9157508315894824" title="localizarChave">
             <sub-events>
-                <comment>Efeito de ir acabando a luz</comment>
                 <event-block sid="2269665524215405">
                     <conditions>
                         <condition id="-1" name="Every tick" sid="612139776512226" type="System" />
@@ -2051,22 +2119,6 @@
                             <param id="1" name="Y">player.Y</param>
                         </action>
                     </actions>
-                    <sub-events>
-                        <event-block sid="6416742693692373">
-                            <conditions>
-                                <condition id="-6" name="Compare height" sid="7658699743895193" type="LuzPersonagem">
-                                    <param id="0" name="Comparison">4</param>
-                                    <param id="1" name="Height">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-7" name="Set size" sid="2001791779069108" type="LuzPersonagem">
-                                    <param id="0" name="Width">LuzPersonagem.Width - 0.175</param>
-                                    <param id="1" name="Height">LuzPersonagem.Height - 0.175</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
                 <event-block sid="4931555662305528">
                     <conditions>
@@ -2262,13 +2314,52 @@
                                         </condition>
                                     </conditions>
                                     <actions>
+                                        <action id="-9" name="Set value" sid="488061305812273" type="System">
+                                            <param id="0" name="Variable">estaAcendendoVela</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
                                         <action id="-7" name="Set size" sid="2192774164712161" type="LuzPersonagem">
                                             <param id="0" name="Width">LuzPersonagem.Width + 0.75</param>
                                             <param id="1" name="Height">LuzPersonagem.Height + 0.75</param>
                                         </action>
                                     </actions>
                                 </event-block>
+                                <comment>Esse else é para quando o jogador parar de recarregar a vela dele</comment>
+                                <event-block sid="756534059297017">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="249889648925666" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="997887728522886" type="System">
+                                            <param id="0" name="Variable">estaAcendendoVela</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                             </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="294158647668733">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="742647738524814" type="System" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <comment>Efeito de ir acabando a luz</comment>
+                        <event-block sid="6416742693692373">
+                            <conditions>
+                                <condition id="-6" name="Compare height" sid="7658699743895193" type="LuzPersonagem">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Height">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-7" name="Set size" sid="2001791779069108" type="LuzPersonagem">
+                                    <param id="0" name="Width">LuzPersonagem.Width - 0.175</param>
+                                    <param id="1" name="Height">LuzPersonagem.Height - 0.175</param>
+                                </action>
+                            </actions>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -2387,6 +2478,12 @@
                     <actions>
                         <action id="6" name="Stop" sid="382422753854971" type="Audio">
                             <param id="0" name="Tag">&quot;sons&quot;</param>
+                        </action>
+                        <action id="0" name="Play" sid="170004080196678" type="Audio">
+                            <param id="0" name="Audio file">assopro</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">volSons</param>
+                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                         </action>
                         <action id="0" name="Play" sid="837996007695531" type="Audio">
                             <param id="0" name="Audio file">OSantoTiGrau</param>
