@@ -248,25 +248,6 @@
                 </action>
             </actions>
         </event-block>
-        <event-block sid="171742615039746">
-            <conditions>
-                <condition id="-19" name="On destroyed" sid="567116497340296" type="recompensa" />
-            </conditions>
-            <actions>
-                <action id="0" name="Set text" sid="816158462094213" type="feedback">
-                    <param id="0" name="Text">&quot;RECOMPENSA DESBLOQUEADA&quot;</param>
-                </action>
-                <action id="-16" name="Set opacity" sid="240243010798412" type="feedback">
-                    <param id="0" name="Opacity">100</param>
-                </action>
-                <action id="-16" name="Wait" sid="108891104580535" type="System">
-                    <param id="0" name="Seconds">3</param>
-                </action>
-                <action id="-16" name="Set opacity" sid="162763267700564" type="feedback">
-                    <param id="0" name="Opacity">0</param>
-                </action>
-            </actions>
-        </event-block>
         <event-block sid="8935176459426232">
             <conditions>
                 <condition id="-1" name="Every tick" sid="4589126109928491" type="System" />
@@ -356,18 +337,87 @@
                 </action>
             </actions>
         </event-block>
-        <event-block disabled="1" sid="3634717291346176">
+        <comment>Ação de pegar o easterEgg6</comment>
+        <event-block sid="193270418611537">
             <conditions>
-                <condition id="-6" name="Every X seconds" sid="9821395773536191" type="System">
-                    <param id="0" name="Interval (seconds)">3.0</param>
+                <condition id="1" name="Is overlapping another object" sid="506709398749012" type="player">
+                    <param id="0" name="Object">recompensa</param>
                 </condition>
             </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="705218401032573">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="398773062640996" type="Keyboard">
+                            <param id="0" name="Key">69 (E)</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="327826621866726" type="System">
+                            <param id="0" name="Variable">pause</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="637952408350711" type="System">
+                            <param id="0" name="Variable">recompensa6</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="449834255486384" type="recompensa" />
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="429336974339734">
+            <conditions>
+                <condition id="-19" name="On destroyed" sid="967765951694664" type="recompensa" />
+            </conditions>
             <actions>
-                <action id="5" name="Set frame" sid="5053401563383806" type="MonstroInferior">
-                    <param id="0" name="Frame number">1</param>
+                <action id="-10" name="Add to" sid="982789480298794" type="System">
+                    <param id="0" name="Variable">pontos</param>
+                    <param id="1" name="Value">100</param>
                 </action>
-                <action id="5" name="Set frame" sid="5077240280761444" type="MonstroSuperior">
-                    <param id="0" name="Frame number">1</param>
+                <action id="0" name="Set text" sid="739187713673560" type="feedback">
+                    <param id="0" name="Text">&quot;RECOMPENSA DESBLOQUEADA&quot;</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="850708931940086" type="feedback">
+                    <param id="0" name="Opacity">100</param>
+                </action>
+                <action id="0" name="Set text" sid="984611781104283" type="pontoTexto">
+                    <param id="0" name="Text">&quot;+100&quot;</param>
+                </action>
+                <action id="4" name="Set font color" sid="328401803265438" type="pontoTexto">
+                    <param id="0" name="Color">rgb(41, 90, 165)</param>
+                </action>
+                <action id="0" name="Play" sid="154407535156669" type="Audio">
+                    <param id="0" name="Audio file">colecionavel</param>
+                    <param id="2" name="Loop">0</param>
+                    <param id="3" name="Volume">volSons</param>
+                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                </action>
+                <action id="-12" name="Set group active" sid="507064059909458" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="350472863514586" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1aFFTCC&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+                <action id="-16" name="Wait" sid="617237209931104" type="System">
+                    <param id="0" name="Seconds">3</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="241343798710594" type="feedback">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Wait" sid="341069642007723" type="System">
+                    <param id="0" name="Seconds">1</param>
+                </action>
+                <action id="-12" name="Set group active" sid="992331703580057" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1aFFTCC&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="327813778370255" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1bFFTCC&quot;</param>
+                    <param id="1" name="State">1</param>
                 </action>
             </actions>
         </event-block>
@@ -624,7 +674,7 @@
                 <event-block sid="961167877358313">
                     <conditions>
                         <condition id="-6" name="Every X seconds" sid="4759814940678856" type="System">
-                            <param id="0" name="Interval (seconds)">7.0 - (0.6 * numeroBolinhas)</param>
+                            <param id="0" name="Interval (seconds)">7.0 - (0.6 * numeroBolinhas) + (efeitoLasanhaAtivo * 2 * (7.0 - (0.6 * numeroBolinhas)))</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -665,7 +715,7 @@
                                 </action>
                             </actions>
                             <sub-events>
-                                <comment>Aqui é definido o ângulo onde a bolinha é tacada e a velocidade</comment>
+                                <comment>Aqui é definido o ângulo onde a bolinha é tacada e a velocidade, sendo utilizada a mesma variável da fase dos Blocos de Neve que serve para controlar se o efeito da lasanha está ativo</comment>
                                 <event-block sid="1580107450617517">
                                     <conditions>
                                         <condition id="-17" name="Pick top/bottom" sid="1120062495179796" type="Bolinha">
@@ -677,10 +727,10 @@
                                             <param id="0" name="Angle">180 - (numeroBolinhas * 11.5) + (25 * bolinhaCriada) + fatorAleatorio</param>
                                         </action>
                                         <action behavior="Bullet" id="0" name="Set speed" sid="1294276807491177" type="Bolinha">
-                                            <param id="0" name="Speed">(100 * numeroBolinhas) - 100</param>
+                                            <param id="0" name="Speed">(100 * numeroBolinhas) - 100 - (efeitoLasanhaAtivo * 0.85 * ((100 * numeroBolinhas) - 100))</param>
                                         </action>
                                         <action behavior="Bullet" id="2" name="Set gravity" sid="9934737139546691" type="Bolinha">
-                                            <param id="0" name="Gravity">5 * (2 ^ (numeroBolinhas - 1))</param>
+                                            <param id="0" name="Gravity">5 * (2 ^ (numeroBolinhas - 1)) - (efeitoLasanhaAtivo * 0.95 * (5 * (2 ^ (numeroBolinhas - 1))))</param>
                                         </action>
                                         <action id="-9" name="Set value" sid="4907439788654313" type="System">
                                             <param id="0" name="Variable">IDBolinhaParaTacar</param>
@@ -1887,6 +1937,51 @@
                                         </action>
                                     </actions>
                                 </event-block>
+                                <comment>A cada resposta certa há 50% de chance de aparecer o café e 50% de chance de aparecer a lasanha, sendo que ambos só aparecem caso não estejam na arena</comment>
+                                <event-block sid="645099147425237">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="221433070394911" type="System">
+                                            <param id="0" name="First value">round(random(0, 2))</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">1</param>
+                                        </condition>
+                                        <condition id="-4" name="Is outside layout" sid="672728279644779" type="lasanha" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="775632787847044" type="lasanha">
+                                            <param id="0" name="X">round(random(320, 710))</param>
+                                            <param id="1" name="Y">round(random(400, 690))</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="941975227186236" type="System">
+                                            <param id="0" name="Group name">&quot;controleLasanhaFFTCC&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>Se não apareceu a lasanha, aparece o café</comment>
+                                <event-block sid="295776270079225">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="212605410339035" type="System" />
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="333995609899003">
+                                            <conditions>
+                                                <condition id="-4" name="Is outside layout" sid="931162767723024" type="cafe" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-3" name="Set position" sid="653413657590904" type="cafe">
+                                                    <param id="0" name="X">round(random(320, 710))</param>
+                                                    <param id="1" name="Y">round(random(400, 690))</param>
+                                                </action>
+                                                <action id="-12" name="Set group active" sid="195586261460483" type="System">
+                                                    <param id="0" name="Group name">&quot;controleCafeFFTCC&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
                             </sub-events>
                         </event-block>
                         <event-block sid="666371800017018">
@@ -2759,49 +2854,64 @@
                                             <param id="3" name="Volume">volSons</param>
                                             <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                         </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="368173866790317" type="selAlternativa1">
-                                            <param id="0" name="Speed">30 * perguntaBN</param>
-                                        </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="480723269341050" type="selAlternativa2">
-                                            <param id="0" name="Speed">30 * perguntaBN</param>
-                                        </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="240437558473410" type="selAlternativa3">
-                                            <param id="0" name="Speed">30 * perguntaBN</param>
-                                        </action>
-                                        <action id="-9" name="Set value" sid="133391271150772" type="System">
-                                            <param id="0" name="Variable">efeitoLasanhaAtivo</param>
-                                            <param id="1" name="Value">1</param>
-                                        </action>
-                                        <action id="5" name="Set playback rate" sid="350485949542021" type="Audio">
-                                            <param id="0" name="Tag">&quot;musica&quot;</param>
-                                            <param id="1" name="Playback rate">0.5</param>
-                                        </action>
-                                        <action id="-16" name="Wait" sid="739797761824221" type="System">
-                                            <param id="0" name="Seconds">20</param>
-                                        </action>
-                                        <action id="5" name="Set playback rate" sid="133514936102017" type="Audio">
-                                            <param id="0" name="Tag">&quot;musica&quot;</param>
-                                            <param id="1" name="Playback rate">1</param>
-                                        </action>
-                                        <action id="-9" name="Set value" sid="737573606749082" type="System">
-                                            <param id="0" name="Variable">efeitoLasanhaAtivo</param>
-                                            <param id="1" name="Value">0</param>
-                                        </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="585005184529275" type="selAlternativa1">
-                                            <param id="0" name="Speed">200 * perguntaBN</param>
-                                        </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="955343279832552" type="selAlternativa2">
-                                            <param id="0" name="Speed">200 * perguntaBN</param>
-                                        </action>
-                                        <action behavior="Bullet" id="0" name="Set speed" sid="343282273500461" type="selAlternativa3">
-                                            <param id="0" name="Speed">200 * perguntaBN</param>
-                                        </action>
-                                        <action id="-12" name="Set group active" sid="261847780949522" type="System">
-                                            <param id="0" name="Group name">&quot;controleLasanhaFFTCC&quot;</param>
-                                            <param id="1" name="State">0</param>
-                                        </action>
                                     </actions>
                                     <sub-events>
+                                        <event-block sid="298292402733425">
+                                            <conditions>
+                                                <condition behavior="Bullet" id="0" name="Compare speed" sid="885953327488708" type="Bolinha">
+                                                    <param id="0" name="Comparison">4</param>
+                                                    <param id="1" name="Speed">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="858297620906881" type="Bolinha">
+                                                    <param id="0" name="Speed">((100 * numeroBolinhas) - 100) * 0.15</param>
+                                                </action>
+                                                <action behavior="Bullet" id="2" name="Set gravity" sid="285620639609365" type="Bolinha">
+                                                    <param id="0" name="Gravity">(5 * (2 ^ (numeroBolinhas - 1))) * 0.15</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="133391271150772" type="System">
+                                                    <param id="0" name="Variable">efeitoLasanhaAtivo</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                                <action id="5" name="Set playback rate" sid="350485949542021" type="Audio">
+                                                    <param id="0" name="Tag">&quot;musica&quot;</param>
+                                                    <param id="1" name="Playback rate">0.5</param>
+                                                </action>
+                                                <action id="-16" name="Wait" sid="739797761824221" type="System">
+                                                    <param id="0" name="Seconds">20</param>
+                                                </action>
+                                                <action id="5" name="Set playback rate" sid="133514936102017" type="Audio">
+                                                    <param id="0" name="Tag">&quot;musica&quot;</param>
+                                                    <param id="1" name="Playback rate">1</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="737573606749082" type="System">
+                                                    <param id="0" name="Variable">efeitoLasanhaAtivo</param>
+                                                    <param id="1" name="Value">0</param>
+                                                </action>
+                                                <action behavior="Bullet" id="0" name="Set speed" sid="352937507052611" type="Bolinha">
+                                                    <param id="0" name="Speed">(100 * numeroBolinhas) - 100</param>
+                                                </action>
+                                                <action behavior="Bullet" id="2" name="Set gravity" sid="798856721720550" type="Bolinha">
+                                                    <param id="0" name="Gravity">5 * (2 ^ (numeroBolinhas - 1))</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="286678747012686">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="189110174973150" type="System">
+                                                    <param id="0" name="Variable">efeitoLasanhaAtivo</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="261847780949522" type="System">
+                                                    <param id="0" name="Group name">&quot;controleLasanhaFFTCC&quot;</param>
+                                                    <param id="1" name="State">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
                                         <event-block disabled="1" sid="766973913879678">
                                             <conditions>
                                                 <condition id="-14" name="Pick by unique ID" sid="580396250263171" type="selecaoComida">
@@ -2812,54 +2922,54 @@
                                             <actions>
                                                 <action id="-9" name="Destroy" sid="269297145800284" type="lasanha" />
                                                 <action id="-9" name="Destroy" sid="605704235716677" type="selecaoComida" />
-                                                <action id="0" name="Play" sid="935602556281426" type="Audio">
-                                                    <param id="0" name="Audio file">coletando_lasanha</param>
-                                                    <param id="2" name="Loop">0</param>
-                                                    <param id="3" name="Volume">volSons</param>
-                                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="333573940621793" type="selAlternativa1">
-                                                    <param id="0" name="Speed">30 * perguntaBN</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="171044941158867" type="selAlternativa2">
-                                                    <param id="0" name="Speed">30 * perguntaBN</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="355750801385009" type="selAlternativa3">
-                                                    <param id="0" name="Speed">30 * perguntaBN</param>
-                                                </action>
-                                                <action id="-9" name="Set value" sid="839664943153922" type="System">
-                                                    <param id="0" name="Variable">efeitoLasanhaAtivo</param>
-                                                    <param id="1" name="Value">1</param>
-                                                </action>
-                                                <action id="5" name="Set playback rate" sid="462133749958941" type="Audio">
-                                                    <param id="0" name="Tag">&quot;musica&quot;</param>
-                                                    <param id="1" name="Playback rate">0.5</param>
-                                                </action>
-                                                <action id="-16" name="Wait" sid="611255757235737" type="System">
-                                                    <param id="0" name="Seconds">20</param>
-                                                </action>
-                                                <action id="5" name="Set playback rate" sid="463735323925914" type="Audio">
-                                                    <param id="0" name="Tag">&quot;musica&quot;</param>
-                                                    <param id="1" name="Playback rate">1</param>
-                                                </action>
-                                                <action id="-9" name="Set value" sid="806811928308350" type="System">
-                                                    <param id="0" name="Variable">efeitoLasanhaAtivo</param>
-                                                    <param id="1" name="Value">0</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="151390688689530" type="selAlternativa1">
-                                                    <param id="0" name="Speed">200 * perguntaBN</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="916605691590491" type="selAlternativa2">
-                                                    <param id="0" name="Speed">200 * perguntaBN</param>
-                                                </action>
-                                                <action behavior="Bullet" id="0" name="Set speed" sid="651141246814928" type="selAlternativa3">
-                                                    <param id="0" name="Speed">200 * perguntaBN</param>
-                                                </action>
-                                                <action id="-12" name="Set group active" sid="268968543145746" type="System">
-                                                    <param id="0" name="Group name">&quot;controleLasanhaFFTCC&quot;</param>
-                                                    <param id="1" name="State">0</param>
-                                                </action>
                                             </actions>
+                                            <sub-events>
+                                                <event-block sid="850180233026086">
+                                                    <conditions>
+                                                        <condition behavior="Bullet" id="1" name="Compare distance travelled" sid="123393998227966" type="Bolinha">
+                                                            <param id="0" name="Comparison">4</param>
+                                                            <param id="1" name="Distance">0</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action behavior="Bullet" id="0" name="Set speed" sid="776339857790479" type="Bolinha">
+                                                            <param id="0" name="Speed">((100 * numeroBolinhas) - 100) * 0.15</param>
+                                                        </action>
+                                                        <action behavior="Bullet" id="2" name="Set gravity" sid="555816932995219" type="Bolinha">
+                                                            <param id="0" name="Gravity">(5 * (2 ^ (numeroBolinhas - 1))) * 0.15</param>
+                                                        </action>
+                                                        <action id="-9" name="Set value" sid="335609734170974" type="System">
+                                                            <param id="0" name="Variable">efeitoLasanhaAtivo</param>
+                                                            <param id="1" name="Value">1</param>
+                                                        </action>
+                                                        <action id="5" name="Set playback rate" sid="272840600967100" type="Audio">
+                                                            <param id="0" name="Tag">&quot;musica&quot;</param>
+                                                            <param id="1" name="Playback rate">0.5</param>
+                                                        </action>
+                                                        <action id="-16" name="Wait" sid="433951544092358" type="System">
+                                                            <param id="0" name="Seconds">20</param>
+                                                        </action>
+                                                        <action id="5" name="Set playback rate" sid="367837199143385" type="Audio">
+                                                            <param id="0" name="Tag">&quot;musica&quot;</param>
+                                                            <param id="1" name="Playback rate">1</param>
+                                                        </action>
+                                                        <action id="-9" name="Set value" sid="621984497561465" type="System">
+                                                            <param id="0" name="Variable">efeitoLasanhaAtivo</param>
+                                                            <param id="1" name="Value">0</param>
+                                                        </action>
+                                                        <action behavior="Bullet" id="0" name="Set speed" sid="923196749014679" type="Bolinha">
+                                                            <param id="0" name="Speed">(100 * numeroBolinhas) - 100</param>
+                                                        </action>
+                                                        <action behavior="Bullet" id="2" name="Set gravity" sid="599978254769739" type="Bolinha">
+                                                            <param id="0" name="Gravity">5 * (2 ^ (numeroBolinhas - 1))</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="235605702460985" type="System">
+                                                            <param id="0" name="Group name">&quot;controleLasanhaFFTCC&quot;</param>
+                                                            <param id="1" name="State">0</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
                                         </event-block>
                                     </sub-events>
                                 </event-block>
@@ -2960,12 +3070,23 @@
                                         <action behavior="8Direction" id="6" name="Set deceleration" sid="842985076609442" type="player">
                                             <param id="0" name="Deceleration">1000</param>
                                         </action>
-                                        <action id="-12" name="Set group active" sid="734770316124733" type="System">
-                                            <param id="0" name="Group name">&quot;controleCafeFFTCC&quot;</param>
-                                            <param id="1" name="State">0</param>
-                                        </action>
                                     </actions>
                                     <sub-events>
+                                        <event-block sid="891893877353507">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="530178145010703" type="System">
+                                                    <param id="0" name="Variable">efeitoCafeAtivo</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="734770316124733" type="System">
+                                                    <param id="0" name="Group name">&quot;controleCafeFFTCC&quot;</param>
+                                                    <param id="1" name="State">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
                                         <event-block disabled="1" sid="827889685951141">
                                             <conditions>
                                                 <condition id="-14" name="Pick by unique ID" sid="127694651732586" type="selecaoComida">
