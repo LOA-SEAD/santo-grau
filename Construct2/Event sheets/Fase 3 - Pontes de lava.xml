@@ -34,6 +34,7 @@
                 <action id="33" name="Stop all" sid="949505131564080" type="Audio" />
                 <action id="2" name="Stop" sid="7302115270220327" type="Pontes" />
                 <action id="2" name="Stop" sid="156581732483211" type="Alternativas" />
+                <action id="2" name="Stop" sid="974010938188158" type="recompensa" />
                 <action id="-4" name="Set position to another object" sid="4893206305327047" type="playerAnim">
                     <param id="0" name="Object">player</param>
                     <param id="1" name="Image point (optional)">0</param>
@@ -171,25 +172,6 @@
                 </action>
             </actions>
         </event-block>
-        <event-block sid="725934870340575">
-            <conditions>
-                <condition id="-19" name="On destroyed" sid="176133603613498" type="recompensa" />
-            </conditions>
-            <actions>
-                <action id="0" name="Set text" sid="705820206883222" type="feedback">
-                    <param id="0" name="Text">&quot;RECOMPENSA DESBLOQUEADA&quot;</param>
-                </action>
-                <action id="-16" name="Set opacity" sid="587730031689133" type="feedback">
-                    <param id="0" name="Opacity">100</param>
-                </action>
-                <action id="-16" name="Wait" sid="931893238708726" type="System">
-                    <param id="0" name="Seconds">3</param>
-                </action>
-                <action id="-16" name="Set opacity" sid="530693491859449" type="feedback">
-                    <param id="0" name="Opacity">0</param>
-                </action>
-            </actions>
-        </event-block>
         <event-block sid="5316582533687613">
             <conditions>
                 <condition id="-1" name="Every tick" sid="6373137730711896" type="System" />
@@ -225,6 +207,90 @@
             <actions>
                 <action id="-2" name="Go to layout" sid="9664151501169464" type="System">
                     <param id="0" name="Layout">Fase 4</param>
+                </action>
+            </actions>
+        </event-block>
+        <comment>Ação de pegar o easterEgg4</comment>
+        <event-block sid="395536588864618">
+            <conditions>
+                <condition id="1" name="Is overlapping another object" sid="713219782050466" type="player">
+                    <param id="0" name="Object">recompensa</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="373709491756418">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="403938622663933" type="Keyboard">
+                            <param id="0" name="Key">69 (E)</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="424283353541687" type="System">
+                            <param id="0" name="Variable">pause</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="725472283102021" type="System">
+                            <param id="0" name="Variable">recompensa4</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="393733954735869" type="recompensa" />
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="890690397113771">
+            <conditions>
+                <condition id="-19" name="On destroyed" sid="429064024370454" type="recompensa" />
+            </conditions>
+            <actions>
+                <action id="-10" name="Add to" sid="468437914106643" type="System">
+                    <param id="0" name="Variable">pontos</param>
+                    <param id="1" name="Value">100</param>
+                </action>
+                <action id="0" name="Set text" sid="743953133926704" type="feedback">
+                    <param id="0" name="Text">&quot;RECOMPENSA DESBLOQUEADA&quot;</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="397524599302916" type="feedback">
+                    <param id="0" name="Opacity">100</param>
+                </action>
+                <action id="0" name="Set text" sid="996850525533794" type="pontoTexto">
+                    <param id="0" name="Text">&quot;+100&quot;</param>
+                </action>
+                <action id="4" name="Set font color" sid="237980232060852" type="pontoTexto">
+                    <param id="0" name="Color">rgb(41, 90, 165)</param>
+                </action>
+                <action id="0" name="Play" sid="605493287997149" type="Audio">
+                    <param id="0" name="Audio file">colecionavel</param>
+                    <param id="2" name="Loop">0</param>
+                    <param id="3" name="Volume">volSons</param>
+                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                </action>
+                <action id="-12" name="Set group active" sid="573305208731065" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1bFFCM&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="343124871389480" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1aFFCM&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+                <action id="-16" name="Wait" sid="604055022913937" type="System">
+                    <param id="0" name="Seconds">3</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="467934907992867" type="feedback">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Wait" sid="782514738556063" type="System">
+                    <param id="0" name="Seconds">1</param>
+                </action>
+                <action id="-12" name="Set group active" sid="606035986814666" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1aFFCM&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="125814284084913" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao1bFFCM&quot;</param>
+                    <param id="1" name="State">1</param>
                 </action>
             </actions>
         </event-block>
