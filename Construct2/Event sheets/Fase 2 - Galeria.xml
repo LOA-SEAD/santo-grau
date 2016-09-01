@@ -48,6 +48,7 @@
                 </action>
                 <action id="2" name="Stop" sid="3799662746830079" type="Fantasmas" />
                 <action id="2" name="Stop" sid="154774546834874" type="recompensa" />
+                <action id="2" name="Stop" sid="123741489982305" type="Armario" />
                 <action id="-4" name="Set position to another object" sid="3595203182699471" type="playerAnim">
                     <param id="0" name="Object">player</param>
                     <param id="1" name="Image point (optional)">0</param>
@@ -89,7 +90,19 @@
                 </action>
                 <action id="-9" name="Set value" sid="200290013643812" type="System">
                     <param id="0" name="Variable">layoutAtual</param>
-                    <param id="1" name="Value">layoutAtual+1</param>
+                    <param id="1" name="Value">layoutAtual+1 - ocorreuGameOver</param>
+                </action>
+                <action id="-9" name="Set value" sid="539543706448988" type="System">
+                    <param id="0" name="Variable">ocorreuGameOver</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="153001161366400" type="System">
+                    <param id="0" name="Variable">fase</param>
+                    <param id="1" name="Value">2</param>
+                </action>
+                <action id="-12" name="Set group active" sid="181799255722405" type="System">
+                    <param id="0" name="Group name">&quot;carregarQuadros&quot;</param>
+                    <param id="1" name="State">1</param>
                 </action>
                 <action id="-12" name="Set group active" sid="9221966531166957" type="System">
                     <param id="0" name="Group name">&quot;visualizarQuadros&quot;</param>
@@ -205,6 +218,18 @@
                 <action behavior="Pin" id="0" name="Pin to object" sid="690308559835557" type="SelecaoChave">
                     <param id="0" name="Pin to">Chave</param>
                     <param id="1" name="Mode">0</param>
+                </action>
+                <action id="-4" name="Set layer visible" sid="918387418204771" type="System">
+                    <param id="0" name="Layer">&quot;EfeitoEscuro&quot;</param>
+                    <param id="1" name="Visibility">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="332003173883331" type="System">
+                    <param id="0" name="Variable">fraseAtualGAL</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="364030013319448" type="System">
+                    <param id="0" name="Variable">quadro</param>
+                    <param id="1" name="Value">1</param>
                 </action>
             </actions>
             <sub-events>
@@ -427,6 +452,9 @@
                     <param id="3" name="Volume">volSons</param>
                     <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                 </action>
+                <action id="5" name="Set frame" sid="634280041491894" type="Armario">
+                    <param id="0" name="Frame number">1</param>
+                </action>
                 <action id="-9" name="Destroy" sid="531783168521912" type="AbreArmario" />
                 <action id="-3" name="Set position" sid="556394538615453" type="recompensa">
                     <param id="0" name="X">249</param>
@@ -518,6 +546,21 @@
                 <action id="-12" name="Set group active" sid="668272130786809" type="System">
                     <param id="0" name="Group name">&quot;Pontuacao1bGAL&quot;</param>
                     <param id="1" name="State">1</param>
+                </action>
+            </actions>
+        </event-block>
+        <comment>Evento para dar gameover no jogo</comment>
+        <event-block sid="604615460270126">
+            <conditions>
+                <condition id="-14" name="Compare variable" sid="546944081580644" type="System">
+                    <param id="0" name="Variable">pontos</param>
+                    <param id="1" name="Comparison">2</param>
+                    <param id="2" name="Value">0</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-2" name="Go to layout" sid="813862833695488" type="System">
+                    <param id="0" name="Layout">Gameover</param>
                 </action>
             </actions>
         </event-block>
@@ -2289,7 +2332,7 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
-                        <comment>Os três eventos abaixo servem para verificar se a chave foi criada em um local onde já existe um objeto</comment>
+                        <comment>Os seis eventos abaixo servem para verificar se a chave foi criada em um local onde já existe um objeto</comment>
                         <event-block any="1" sid="3956093543169147">
                             <conditions>
                                 <condition id="1" name="Is overlapping another object" sid="8654359055431426" type="Chave">
@@ -2310,9 +2353,6 @@
                                 <condition id="1" name="Is overlapping another object" sid="300609416837112" type="Chave">
                                     <param id="0" name="Object">CaixaVaso</param>
                                 </condition>
-                                <condition id="1" name="Is overlapping another object" sid="404037978494011" type="Chave">
-                                    <param id="0" name="Object">Abajur</param>
-                                </condition>
                             </conditions>
                             <actions>
                                 <action id="-1" name="Set X" sid="987260044533446" type="Chave">
@@ -2329,6 +2369,51 @@
                             <actions>
                                 <action id="-1" name="Set X" sid="640328840847203" type="Chave">
                                     <param id="0" name="X">Chave.X + 80</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="468953967921828">
+                            <conditions>
+                                <condition id="1" name="Is overlapping another object" sid="321569594405231" type="Chave">
+                                    <param id="0" name="Object">Abajur</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-1" name="Set X" sid="411358390338688" type="Chave">
+                                    <param id="0" name="X">Chave.X - 150</param>
+                                </action>
+                                <action id="-2" name="Set Y" sid="811486797362787" type="Chave">
+                                    <param id="0" name="Y">Chave.Y + 150</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="137433145523551">
+                            <conditions>
+                                <condition id="1" name="Is overlapping another object" sid="643727292013848" type="Chave">
+                                    <param id="0" name="Object">Banco1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-1" name="Set X" sid="970750313927729" type="Chave">
+                                    <param id="0" name="X">Chave.X - 250</param>
+                                </action>
+                                <action id="-2" name="Set Y" sid="334576021808164" type="Chave">
+                                    <param id="0" name="Y">Chave.Y - 100</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="100616580169359">
+                            <conditions>
+                                <condition id="1" name="Is overlapping another object" sid="381901563735904" type="Chave">
+                                    <param id="0" name="Object">Banco2</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-1" name="Set X" sid="758921282297107" type="Chave">
+                                    <param id="0" name="X">Chave.X + 250</param>
+                                </action>
+                                <action id="-2" name="Set Y" sid="376144865846752" type="Chave">
+                                    <param id="0" name="Y">Chave.Y + 50</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3030,7 +3115,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <comment>Os três eventos abaixo servem para verificar se a lasanha foi criada em um local onde já existe um objeto</comment>
+                <comment>Os seis eventos abaixo servem para verificar se a lasanha foi criada em um local onde já existe um objeto</comment>
                 <event-block any="1" sid="871236521188983">
                     <conditions>
                         <condition id="1" name="Is overlapping another object" sid="563089493554603" type="lasanha">

@@ -38,9 +38,13 @@
                 <action id="13" name="Set URL" sid="5137872676196242" type="telaoHTML">
                     <param id="0" name="URL">&quot;telao.html&quot;</param>
                 </action>
+                <action id="-3" name="Set position" sid="628125370239161" type="telaoHTML">
+                    <param id="0" name="X">476</param>
+                    <param id="1" name="Y">70</param>
+                </action>
                 <action id="-9" name="Set value" sid="1109441788124615" type="System">
                     <param id="0" name="Variable">controleFase2</param>
-                    <param id="1" name="Value">0</param>
+                    <param id="1" name="Value">1</param>
                 </action>
                 <action id="-9" name="Set value" sid="3530242809191083" type="System">
                     <param id="0" name="Variable">telao</param>
@@ -48,10 +52,30 @@
                 </action>
                 <action id="-9" name="Set value" sid="288899399972849" type="System">
                     <param id="0" name="Variable">layoutAtual</param>
-                    <param id="1" name="Value">layoutAtual+1</param>
+                    <param id="1" name="Value">layoutAtual+1 - ocorreuGameOver</param>
+                </action>
+                <action id="-9" name="Set value" sid="108983212516555" type="System">
+                    <param id="0" name="Variable">ocorreuGameOver</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="970905675512902" type="System">
+                    <param id="0" name="Variable">fase</param>
+                    <param id="1" name="Value">1</param>
                 </action>
                 <action id="-9" name="Set value" sid="213098495120653" type="System">
                     <param id="0" name="Variable">controleDica</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="2460993725107455" type="System">
+                    <param id="0" name="Variable">controlePCs</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="360457795179207" type="System">
+                    <param id="0" name="Variable">dialogos2</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="833363582891922" type="System">
+                    <param id="0" name="Variable">controleDialogos2</param>
                     <param id="1" name="Value">0</param>
                 </action>
                 <action id="5" name="Set web font" sid="9195974529639826" type="botoesTexto">
@@ -162,12 +186,20 @@
                     <param id="0" name="Animation">&quot;Default&quot;</param>
                     <param id="1" name="From">1</param>
                 </action>
+                <action id="4" name="Set animation" sid="560005689328285" type="sintonia">
+                    <param id="0" name="Animation">&quot;Default&quot;</param>
+                    <param id="1" name="From">1</param>
+                </action>
+                <action id="-12" name="Set group active" sid="882318581412291" type="System">
+                    <param id="0" name="Group name">&quot;DialogoRobo&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="284574281595055" type="System">
+                    <param id="0" name="Group name">&quot;Saida2&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
                 <action id="-16" name="Wait" sid="5638862637940158" type="System">
                     <param id="0" name="Seconds">0.5</param>
-                </action>
-                <action id="-9" name="Set value" sid="2460993725107455" type="System">
-                    <param id="0" name="Variable">controleFase2</param>
-                    <param id="1" name="Value">1</param>
                 </action>
             </actions>
             <sub-events>
@@ -232,6 +264,21 @@
                     </sub-events>
                 </event-block>
             </sub-events>
+        </event-block>
+        <comment>Evento para dar gameover no jogo</comment>
+        <event-block sid="961794381701657">
+            <conditions>
+                <condition id="-14" name="Compare variable" sid="850427711007325" type="System">
+                    <param id="0" name="Variable">pontos</param>
+                    <param id="1" name="Comparison">2</param>
+                    <param id="2" name="Value">0</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-2" name="Go to layout" sid="562984017936752" type="System">
+                    <param id="0" name="Layout">Gameover</param>
+                </action>
+            </actions>
         </event-block>
         <event-group description="" sid="513397655923628" title="PopupDica2">
             <sub-events>
@@ -626,7 +673,10 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-9" name="Destroy" sid="7669583388323185" type="telaoHTML" />
+                        <action id="-3" name="Set position" sid="7669583388323185" type="telaoHTML">
+                            <param id="0" name="X">-500</param>
+                            <param id="1" name="Y">0</param>
+                        </action>
                         <action id="4" name="Set animation" sid="4783184067186409" type="sintonia">
                             <param id="0" name="Animation">&quot;Final&quot;</param>
                             <param id="1" name="From">1</param>
@@ -635,7 +685,8 @@
                 </event-block>
                 <event-block sid="9840446688293528">
                     <conditions>
-                        <condition id="-19" name="On destroyed" sid="5872652070893707" type="telaoHTML" />
+                        <condition id="-3" inverted="1" name="Is on-screen" sid="5872652070893707" type="telaoHTML" />
+                        <condition id="-4" name="Trigger once while true" sid="731875901955610" type="System" />
                     </conditions>
                     <actions>
                         <action id="-9" name="Set value" sid="304862270262976" type="System">
