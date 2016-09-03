@@ -23,13 +23,16 @@
                 <condition id="-2" name="On start of layout" sid="8787843259045866" type="System" />
             </conditions>
             <actions>
-                <action id="33" name="Stop all" sid="872800401247468" type="Audio" />
-                <action id="0" name="Play" sid="390825138458893" type="Audio">
-                    <param id="0" name="Audio file">OSantoGrau</param>
-                    <param id="2" name="Loop">0</param>
-                    <param id="3" name="Volume">volMusica</param>
-                    <param id="1" name="Tag (optional)">&quot;musica&quot;</param>
+                <action id="4" name="Preload" sid="307498961568044" type="Audio">
+                    <param id="0" name="Audio file">OSantoDeGrau</param>
                 </action>
+                <action id="4" name="Preload" sid="619527241557862" type="Audio">
+                    <param id="0" name="Audio file">OSantoJoGrau</param>
+                </action>
+                <action id="4" name="Preload" sid="238397030777449" type="Audio">
+                    <param id="0" name="Audio file">OSantoTiGrau</param>
+                </action>
+                <action disabled="1" id="33" name="Stop all" sid="872800401247468" type="Audio" />
                 <action id="-9" name="Set value" sid="740211410176327" type="System">
                     <param id="0" name="Variable">layoutAtual</param>
                     <param id="1" name="Value">0</param>
@@ -54,6 +57,111 @@
                     <param id="0" name="Opacity">0</param>
                 </action>
             </actions>
+            <sub-events>
+                <event-block sid="889906379320123">
+                    <conditions>
+                        <condition id="5" inverted="1" name="Is tag playing" sid="267936267103628" type="Audio">
+                            <param id="0" name="Tag">&quot;musica&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Play" sid="390825138458893" type="Audio">
+                            <param id="0" name="Audio file">OSantoGrau</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">volMusica</param>
+                            <param id="1" name="Tag (optional)">&quot;musica&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="272483894008538">
+            <conditions>
+                <condition id="-14" name="Compare variable" sid="534009694346902" type="System">
+                    <param id="0" name="Variable">volMusica</param>
+                    <param id="1" name="Comparison">2</param>
+                    <param id="2" name="Value">0</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="996487390546440">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="599288805693134" type="botoesAudio">
+                            <param id="0" name="Unique ID">555</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="883278666309521" type="botoesAudio">
+                            <param id="0" name="Frame number">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="237563651468648">
+            <conditions>
+                <condition id="-22" name="Else" sid="498751707144401" type="System" />
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="232145386667838">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="755591997362405" type="botoesAudio">
+                            <param id="0" name="Unique ID">555</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="229642166675894" type="botoesAudio">
+                            <param id="0" name="Frame number">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="683668212800660">
+            <conditions>
+                <condition id="-14" name="Compare variable" sid="534207452570929" type="System">
+                    <param id="0" name="Variable">volSons</param>
+                    <param id="1" name="Comparison">2</param>
+                    <param id="2" name="Value">0</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="521905615022571">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="264362284597851" type="botoesAudio">
+                            <param id="0" name="Unique ID">556</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="901466106731064" type="botoesAudio">
+                            <param id="0" name="Frame number">3</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="539832830689942">
+            <conditions>
+                <condition id="-22" name="Else" sid="126109534652308" type="System" />
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="451115783105253">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="911626701072941" type="botoesAudio">
+                            <param id="0" name="Unique ID">556</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="797509377373032" type="botoesAudio">
+                            <param id="0" name="Frame number">2</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
         </event-block>
         <event-block sid="9871178331122567">
             <conditions>
@@ -354,7 +462,7 @@
                     </conditions>
                     <actions>
                         <action id="-2" name="Go to layout" sid="2425458291350969" type="System">
-                            <param id="0" name="Layout">Creditos</param>
+                            <param id="0" name="Layout">Tela Creditos</param>
                         </action>
                         <action id="0" name="Play" sid="495084152434782" type="Audio">
                             <param id="0" name="Audio file">botoes_menu</param>
@@ -366,10 +474,81 @@
                 </event-block>
             </sub-events>
         </event-block>
-        <event-block sid="8067896501721556">
+        <event-block sid="759644406539698">
+            <conditions>
+                <condition id="6" name="On object clicked" sid="300274083774472" type="Mouse">
+                    <param id="0" name="Mouse button">0</param>
+                    <param id="1" name="Click type">0</param>
+                    <param id="2" name="Object clicked">botoesAudio</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="849361893375780">
+                    <conditions>
+                        <condition id="3" name="Compare frame" sid="915709265217051" type="botoesAudio">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Number">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="712422384460230" type="System">
+                            <param id="0" name="Variable">volMusica</param>
+                            <param id="1" name="Value">-100</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="329812168489104">
+                    <conditions>
+                        <condition id="3" name="Compare frame" sid="916888385210770" type="botoesAudio">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Number">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="414877002814487" type="System">
+                            <param id="0" name="Variable">volMusica</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="592993143218524">
+                    <conditions>
+                        <condition id="3" name="Compare frame" sid="231420765046044" type="botoesAudio">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Number">2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="178421358617123" type="System">
+                            <param id="0" name="Variable">volSons</param>
+                            <param id="1" name="Value">-100</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="214245230924339">
+                    <conditions>
+                        <condition id="3" name="Compare frame" sid="868865299313767" type="botoesAudio">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Number">3</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="788606505628392" type="System">
+                            <param id="0" name="Variable">volSons</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block any="1" sid="8067896501721556">
             <conditions>
                 <condition id="7" name="Cursor is over object" sid="7532436455860241" type="Mouse">
                     <param id="0" name="Object">botoes</param>
+                </condition>
+                <condition id="7" name="Cursor is over object" sid="342153983051548" type="Mouse">
+                    <param id="0" name="Object">botoesAudio</param>
                 </condition>
             </conditions>
             <actions>
