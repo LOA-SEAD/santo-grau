@@ -1470,7 +1470,6 @@
         <comment>Usada no início da execução para carregar aos quadros com estes nomes, sendo que eles devem possuir 160X200, pois o tiledBackground não possui uma maneira de dar zoom in/zoom out na imagem</comment>
         <event-group description="" sid="1077548239582358" title="carregarQuadros">
             <sub-events>
-                <variable constant="0" name="escolheQuadro" sid="597305771043091" static="0" type="number">0</variable>
                 <event-block sid="9104870988701179">
                     <conditions>
                         <condition id="-1" name="Every tick" sid="4484471508274438" type="System" />
@@ -1479,169 +1478,6 @@
                         <action id="-9" name="Set value" sid="7757490548230051" type="System">
                             <param id="0" name="Variable">numeroQuadros</param>
                             <param id="1" name="Value">int(QuadrosJSON.GetData(&quot;numero&quot;, 0))</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <comment>Preenche os arrays de resposta e o que irá gerar a ordem</comment>
-                <event-block sid="165315885563207">
-                    <conditions>
-                        <condition id="-23" name="While" sid="656780132543062" type="System" />
-                        <condition id="-14" name="Compare variable" sid="960082322783829" type="System">
-                            <param id="0" name="Variable">quadro</param>
-                            <param id="1" name="Comparison">3</param>
-                            <param id="2" name="Value">numeroQuadros</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="2" name="Set at X" sid="311818151280990" type="Resposta">
-                            <param id="0" name="X">Quadro-1</param>
-                            <param id="1" name="Value">int(QuadrosJSON.GetData(&quot;resposta&quot;,Quadro-1))</param>
-                        </action>
-                        <action id="2" name="Set at X" sid="704573887995237" type="OrdemAtual">
-                            <param id="0" name="X">Quadro-1</param>
-                            <param id="1" name="Value">int(QuadrosJSON.GetData(&quot;resposta&quot;,Quadro-1))</param>
-                        </action>
-                        <action id="2" name="Set at X" sid="730243930851386" type="AuxiliaRandomizacao">
-                            <param id="0" name="X">Quadro-1</param>
-                            <param id="1" name="Value">int(QuadrosJSON.GetData(&quot;resposta&quot;,Quadro-1))</param>
-                        </action>
-                        <action id="-10" name="Add to" sid="865001812199308" type="System">
-                            <param id="0" name="Variable">quadro</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="511017810964653">
-                    <conditions>
-                        <condition id="-22" name="Else" sid="494659170030273" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-9" name="Set value" sid="806136900118614" type="System">
-                            <param id="0" name="Variable">quadro</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <comment>Função para randomizar a ordem dos quadros</comment>
-                <event-block sid="725205174206748">
-                    <conditions>
-                        <condition id="-12" name="Repeat" sid="482110436102332" type="System">
-                            <param id="0" name="Count">numeroQuadros</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-9" name="Set value" sid="690152713448481" type="System">
-                            <param id="0" name="Variable">escolheQuadro</param>
-                            <param id="1" name="Value">round(random(0, numeroQuadros-loopindex-1))</param>
-                        </action>
-                        <action id="2" name="Set at X" sid="167680217917920" type="OrdemAtual">
-                            <param id="0" name="X">loopindex</param>
-                            <param id="1" name="Value">AuxiliaRandomizacao.At(escolheQuadro)</param>
-                        </action>
-                        <action id="9" name="Delete" sid="550117868279761" type="AuxiliaRandomizacao">
-                            <param id="0" name="Index">escolheQuadro</param>
-                            <param id="1" name="Axis">0</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <comment>Verificar se não se manteve na mesma ordem</comment>
-                <event-block sid="825026049665517">
-                    <conditions>
-                        <condition id="-23" name="While" sid="807252551537236" type="System" />
-                        <condition id="-14" name="Compare variable" sid="344850257101524" type="System">
-                            <param id="0" name="Variable">quadro</param>
-                            <param id="1" name="Comparison">3</param>
-                            <param id="2" name="Value">numeroQuadros</param>
-                        </condition>
-                    </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block sid="623794704128211">
-                            <conditions>
-                                <condition id="-8" name="Compare two values" sid="210203060863936" type="System">
-                                    <param id="0" name="First value">OrdemAtual.At(Quadro-1)</param>
-                                    <param id="1" name="Comparison">1</param>
-                                    <param id="2" name="Second value">Resposta.At(Quadro-1)</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="925225511810387" type="System">
-                                    <param id="0" name="Variable">quadro</param>
-                                    <param id="1" name="Value">numeroQuadros + 1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <comment>Se não embaralhou força apenas uma ordem reversa</comment>
-                        <event-block sid="903442191922830">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="378962861596361" type="System">
-                                    <param id="0" name="Variable">quadro</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">numeroQuadros</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="294721335204682" type="System">
-                                    <param id="0" name="Variable">quadro</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                            </actions>
-                            <sub-events>
-                                <event-block sid="566852925686792">
-                                    <conditions>
-                                        <condition id="-12" name="Repeat" sid="498784164159207" type="System">
-                                            <param id="0" name="Count">numeroQuadros</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="2" name="Set at X" sid="250475804608334" type="Resposta">
-                                            <param id="0" name="X">Quadro-1</param>
-                                            <param id="1" name="Value">int(QuadrosJSON.GetData(&quot;resposta&quot;,Quadro-1))</param>
-                                        </action>
-                                        <action id="2" name="Set at X" sid="224721940788861" type="OrdemAtual">
-                                            <param id="0" name="X">numeroQuadros-Quadro+1</param>
-                                            <param id="1" name="Value">int(QuadrosJSON.GetData(&quot;resposta&quot;,Quadro-1))</param>
-                                        </action>
-                                        <action id="-10" name="Add to" sid="815789088263616" type="System">
-                                            <param id="0" name="Variable">quadro</param>
-                                            <param id="1" name="Value">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="234810042247266">
-                                    <conditions>
-                                        <condition id="-22" name="Else" sid="999045981049745" type="System" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="670934745520403" type="System">
-                                            <param id="0" name="Variable">quadro</param>
-                                            <param id="1" name="Value">0</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <event-block sid="950806265290028">
-                            <conditions>
-                                <condition id="-1" name="Every tick" sid="847300556084993" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="-10" name="Add to" sid="886969525733483" type="System">
-                                    <param id="0" name="Variable">quadro</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="716240077629509">
-                    <conditions>
-                        <condition id="-22" name="Else" sid="117056306892038" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-9" name="Set value" sid="597677673622651" type="System">
-                            <param id="0" name="Variable">quadro</param>
-                            <param id="1" name="Value">1</param>
                         </action>
                     </actions>
                 </event-block>
@@ -1659,16 +1495,24 @@
                         <event-block sid="3822157344920091">
                             <conditions>
                                 <condition id="-14" name="Pick by unique ID" sid="412572813918708" type="Quadros">
-                                    <param id="0" name="Unique ID">OrdemAtual.At(quadro-1) + 175</param>
+                                    <param id="0" name="Unique ID">int(QuadrosJSON.GetData(&quot;ordemInicial&quot;,Quadro-1)) + 175</param>
                                 </condition>
                             </conditions>
                             <actions>
                                 <action id="2" name="Load image from URL" sid="3219540313214675" type="Quadros">
-                                    <param id="0" name="URI">OrdemAtual.At(quadro-1)&amp;&quot;.png&quot;</param>
+                                    <param id="0" name="URI">int(QuadrosJSON.GetData(&quot;ordemInicial&quot;,Quadro-1))&amp;&quot;.png&quot;</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="6920614503469052" type="Quadros">
                                     <param id="0" name="X">241 + (197 * ((quadro - 1) % 5))</param>
                                     <param id="1" name="Y">350 + (242 * floor((quadro - 1) / 5))</param>
+                                </action>
+                                <action id="2" name="Set at X" sid="4129478874464819" type="Resposta">
+                                    <param id="0" name="X">Quadro-1</param>
+                                    <param id="1" name="Value">int(QuadrosJSON.GetData(&quot;resposta&quot;,Quadro-1))</param>
+                                </action>
+                                <action id="2" name="Set at X" sid="6557034466640411" type="OrdemAtual">
+                                    <param id="0" name="X">Quadro-1</param>
+                                    <param id="1" name="Value">int(QuadrosJSON.GetData(&quot;ordemInicial&quot;,Quadro-1))</param>
                                 </action>
                                 <action id="-10" name="Add to" sid="8700776613475758" type="System">
                                     <param id="0" name="Variable">quadro</param>
@@ -1693,7 +1537,7 @@
                         <event-block sid="6296661807721067">
                             <conditions>
                                 <condition id="-14" name="Pick by unique ID" sid="3867093134526249" type="Quadros">
-                                    <param id="0" name="Unique ID">quadro + 175</param>
+                                    <param id="0" name="Unique ID">Quadro + 175</param>
                                 </condition>
                             </conditions>
                             <actions>

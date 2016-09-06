@@ -19,8 +19,6 @@
         <variable constant="0" name="alternativaCM" sid="7593771871950864" static="0" type="text"></variable>
         <comment>Resposta correta importada do .json</comment>
         <variable constant="0" name="respostaCertaCM" sid="7634110463548163" static="0" type="text"></variable>
-        <comment>Serve para alterar a resposta correta após a randomização</comment>
-        <variable constant="0" name="respostaNumero" sid="198804275214028" static="0" type="number">0</variable>
         <comment>Criado para armazenar o UID da ponte que o jogador passou, pois utilizar o método de detecção através da posição do jogador poderia quebrar a ponte errada</comment>
         <variable constant="0" name="PonteUID" sid="1401521525684759" static="0" type="number">0</variable>
         <comment>Criado para armazenar o UID da alternativa que o jogador passou, pois utilizar o método de detecção através da posição do jogador poderia alterar a alternativa errada</comment>
@@ -224,7 +222,7 @@
                 <event-block sid="731808837672988">
                     <conditions>
                         <condition id="-14" name="Pick by unique ID" sid="217356548755033" type="botoes">
-                            <param id="0" name="Unique ID">125</param>
+                            <param id="0" name="Unique ID">459</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -236,7 +234,7 @@
                 <event-block sid="109603118422852">
                     <conditions>
                         <condition id="-14" name="Pick by unique ID" sid="430589016328298" type="botoesTexto">
-                            <param id="0" name="Unique ID">126</param>
+                            <param id="0" name="Unique ID">460</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -248,7 +246,7 @@
                 <event-block sid="966839552051814">
                     <conditions>
                         <condition id="-14" name="Pick by unique ID" sid="177307426139093" type="botoes">
-                            <param id="0" name="Unique ID">127</param>
+                            <param id="0" name="Unique ID">461</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -260,7 +258,7 @@
                 <event-block sid="883967290209495">
                     <conditions>
                         <condition id="-14" name="Pick by unique ID" sid="747569553907753" type="botoesTexto">
-                            <param id="0" name="Unique ID">128</param>
+                            <param id="0" name="Unique ID">462</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -272,7 +270,7 @@
                 <event-block sid="953849834100382">
                     <conditions>
                         <condition id="-14" name="Pick by unique ID" sid="618240875539333" type="controleAudio">
-                            <param id="0" name="Unique ID">140</param>
+                            <param id="0" name="Unique ID">467</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -306,7 +304,7 @@
                 <event-block sid="630071724951185">
                     <conditions>
                         <condition id="-14" name="Pick by unique ID" sid="509054727180062" type="controleAudio">
-                            <param id="0" name="Unique ID">141</param>
+                            <param id="0" name="Unique ID">468</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -1146,7 +1144,6 @@
         <comment>Importa as perguntas que estiverem em um arquivo .json</comment>
         <event-group description="" sid="8162543738093269" title="gerarPerguntasJsonFFCM">
             <sub-events>
-                <variable constant="0" name="escolheTexto" sid="359110733042348" static="0" type="number">0</variable>
                 <comment>Carrega a posição onde estará as letras da alternativa e o texto da pergunta. Não é possível centralizar o texto pois não dá para obter o tamanho do texto localizado no arquivo .json</comment>
                 <event-block sid="4018207027143204">
                     <conditions>
@@ -1163,243 +1160,25 @@
                         <action disabled="1" id="-1" name="Set X" sid="918859528342287" type="textoPerguntas">
                             <param id="0" name="X">(perguntas.Width - textoPerguntas.TextWidth + 252)/2</param>
                         </action>
-                        <action id="1" name="Set size" sid="911797001777119" type="AuxiliaRandomFF">
-                            <param id="0" name="Width">5</param>
-                            <param id="1" name="Height">1</param>
-                            <param id="2" name="Depth">1</param>
+                        <action id="0" name="Set text" sid="6125302347176068" type="textoRespostas">
+                            <param id="0" name="Text">&quot;A- &quot; &amp; LoadJSONCM.GetData(perguntaCM, 1) &amp; &quot;  B- &quot; &amp; LoadJSONCM.GetData(perguntaCM, 2) &amp; &quot;  C- &quot; &amp; LoadJSONCM.GetData(perguntaCM, 3) &amp; &quot;  D- &quot; &amp; LoadJSONCM.GetData(perguntaCM, 4) &amp; &quot;  E- &quot; &amp; LoadJSONCM.GetData(perguntaCM, 5)</param>
+                        </action>
+                        <action disabled="1" id="-1" name="Set X" sid="9523141288566661" type="textoRespostas">
+                            <param id="0" name="X">(perguntas.Width - textoRespostas.TextWidth + 252) / 2</param>
                         </action>
                         <action id="-9" name="Set value" sid="4416427829563817" type="System">
                             <param id="0" name="Variable">respostaCertaCM</param>
                             <param id="1" name="Value">LoadJSONCM.GetData(perguntaCM,6)</param>
                         </action>
+                        <action id="-9" name="Set value" sid="9384548464053497" type="System">
+                            <param id="0" name="Variable">carregarAlternativa</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="7566127033317842" type="System">
+                            <param id="0" name="Variable">carregarTextosCM</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
                     </actions>
-                    <sub-events>
-                        <event-block sid="885230683973664">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="197324320049179" type="System">
-                                    <param id="0" name="Variable">respostaCertaCM</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;A&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="913524632463439" type="System">
-                                    <param id="0" name="Variable">respostaNumero</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="610406885625445">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="720109856792859" type="System">
-                                    <param id="0" name="Variable">respostaCertaCM</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;B&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="788279060191157" type="System">
-                                    <param id="0" name="Variable">respostaNumero</param>
-                                    <param id="1" name="Value">2</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="719723052708897">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="225663078670558" type="System">
-                                    <param id="0" name="Variable">respostaCertaCM</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;C&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="301792067337016" type="System">
-                                    <param id="0" name="Variable">respostaNumero</param>
-                                    <param id="1" name="Value">3</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="646474821609574">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="471933935040050" type="System">
-                                    <param id="0" name="Variable">respostaCertaCM</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;D&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="950211814620928" type="System">
-                                    <param id="0" name="Variable">respostaNumero</param>
-                                    <param id="1" name="Value">4</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="139383720814363">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="767589713232143" type="System">
-                                    <param id="0" name="Variable">respostaCertaCM</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;E&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="330947758094945" type="System">
-                                    <param id="0" name="Variable">respostaNumero</param>
-                                    <param id="1" name="Value">5</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <comment>Preenche os arrays de resposta e o que irá gerar a ordem</comment>
-                        <event-block sid="222608712405924">
-                            <conditions>
-                                <condition id="-12" name="Repeat" sid="483708176030215" type="System">
-                                    <param id="0" name="Count">5</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="2" name="Set at X" sid="820587365464539" type="AuxiliaRandomFF">
-                                    <param id="0" name="X">loopindex</param>
-                                    <param id="1" name="Value">loopindex + 1</param>
-                                </action>
-                                <action id="2" name="Set at X" sid="790006700374180" type="OrdemAlternativas">
-                                    <param id="0" name="X">loopindex</param>
-                                    <param id="1" name="Value">loopindex + 1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <comment>Função para randomizar a ordem das alternativas</comment>
-                        <event-block sid="935531851823507">
-                            <conditions>
-                                <condition id="-12" name="Repeat" sid="905359821412019" type="System">
-                                    <param id="0" name="Count">5</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="939389025887925" type="System">
-                                    <param id="0" name="Variable">escolheTexto</param>
-                                    <param id="1" name="Value">round(random(0, 4-loopindex))</param>
-                                </action>
-                                <action id="2" name="Set at X" sid="315167954519911" type="OrdemAlternativas">
-                                    <param id="0" name="X">loopindex</param>
-                                    <param id="1" name="Value">AuxiliaRandomFF.At(escolheTexto)</param>
-                                </action>
-                                <action id="9" name="Delete" sid="887897427485906" type="AuxiliaRandomFF">
-                                    <param id="0" name="Index">escolheTexto</param>
-                                    <param id="1" name="Axis">0</param>
-                                </action>
-                            </actions>
-                            <sub-events>
-                                <comment>Verifica se passou pela alternativa correta e atualiza a variável onde ela fica armazenada</comment>
-                                <event-block sid="453171122821633">
-                                    <conditions>
-                                        <condition id="-14" name="Compare variable" sid="293305588898160" type="System">
-                                            <param id="0" name="Variable">respostaNumero</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">OrdemAlternativas.At(loopindex)</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions />
-                                    <sub-events>
-                                        <event-block sid="529907256232992">
-                                            <conditions>
-                                                <condition id="-8" name="Compare two values" sid="232926235750491" type="System">
-                                                    <param id="0" name="First value">loopindex</param>
-                                                    <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Second value">0</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-9" name="Set value" sid="204181452774042" type="System">
-                                                    <param id="0" name="Variable">respostaCertaCM</param>
-                                                    <param id="1" name="Value">&quot;A&quot;</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="415866910831986">
-                                            <conditions>
-                                                <condition id="-8" name="Compare two values" sid="355181737263759" type="System">
-                                                    <param id="0" name="First value">loopindex</param>
-                                                    <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Second value">1</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-9" name="Set value" sid="298124074950214" type="System">
-                                                    <param id="0" name="Variable">respostaCertaCM</param>
-                                                    <param id="1" name="Value">&quot;B&quot;</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="134704701031924">
-                                            <conditions>
-                                                <condition id="-8" name="Compare two values" sid="595781845709995" type="System">
-                                                    <param id="0" name="First value">loopindex</param>
-                                                    <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Second value">2</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-9" name="Set value" sid="820103040911195" type="System">
-                                                    <param id="0" name="Variable">respostaCertaCM</param>
-                                                    <param id="1" name="Value">&quot;C&quot;</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="505615595032011">
-                                            <conditions>
-                                                <condition id="-8" name="Compare two values" sid="496667442868887" type="System">
-                                                    <param id="0" name="First value">loopindex</param>
-                                                    <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Second value">3</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-9" name="Set value" sid="840504565845684" type="System">
-                                                    <param id="0" name="Variable">respostaCertaCM</param>
-                                                    <param id="1" name="Value">&quot;D&quot;</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="126113790084752">
-                                            <conditions>
-                                                <condition id="-8" name="Compare two values" sid="286557424237165" type="System">
-                                                    <param id="0" name="First value">loopindex</param>
-                                                    <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Second value">4</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-9" name="Set value" sid="277919139549830" type="System">
-                                                    <param id="0" name="Variable">respostaCertaCM</param>
-                                                    <param id="1" name="Value">&quot;E&quot;</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <comment>Depois de tudo coloca as alternativas</comment>
-                        <event-block sid="302928559295889">
-                            <conditions />
-                            <actions>
-                                <action id="0" name="Set text" sid="6125302347176068" type="textoRespostas">
-                                    <param id="0" name="Text">&quot;A- &quot; &amp; LoadJSONCM.GetData(perguntaCM, OrdemAlternativas.At(0)) &amp; &quot;  B- &quot; &amp; LoadJSONCM.GetData(perguntaCM, OrdemAlternativas.At(1)) &amp; &quot;  C- &quot; &amp; LoadJSONCM.GetData(perguntaCM, OrdemAlternativas.At(2)) &amp; &quot;  D- &quot; &amp; LoadJSONCM.GetData(perguntaCM, OrdemAlternativas.At(3)) &amp; &quot;  E- &quot; &amp; LoadJSONCM.GetData(perguntaCM, OrdemAlternativas.At(4))</param>
-                                </action>
-                                <action disabled="1" id="-1" name="Set X" sid="9523141288566661" type="textoRespostas">
-                                    <param id="0" name="X">(perguntas.Width - textoRespostas.TextWidth + 252) / 2</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="9384548464053497" type="System">
-                                    <param id="0" name="Variable">carregarAlternativa</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="7566127033317842" type="System">
-                                    <param id="0" name="Variable">carregarTextosCM</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
                 <comment>Carrega na tela o texto da pergunta e as alternativas na ponte</comment>
                 <event-block sid="5286753458580869">
@@ -1691,21 +1470,6 @@
                                                 </action>
                                             </actions>
                                         </event-block>
-                                        <event-block sid="9921088284773163">
-                                            <conditions>
-                                                <condition id="-1" name="Every tick" sid="9784561846871037" type="System" />
-                                            </conditions>
-                                            <actions>
-                                                <action id="-9" name="Set value" sid="7310104937253358" type="System">
-                                                    <param id="0" name="Variable">verificarAlternativaCM</param>
-                                                    <param id="1" name="Value">0</param>
-                                                </action>
-                                                <action id="-9" name="Set value" sid="2602810595519853" type="System">
-                                                    <param id="0" name="Variable">descarregarAlternativa</param>
-                                                    <param id="1" name="Value">1</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
                                     </sub-events>
                                 </event-block>
                             </sub-events>
@@ -1715,7 +1479,7 @@
                                 <condition id="-22" name="Else" sid="3013058512679844" type="System" />
                             </conditions>
                             <actions>
-                                <action disabled="1" id="-9" name="Set value" sid="2729149254388748" type="System">
+                                <action id="-9" name="Set value" sid="2729149254388748" type="System">
                                     <param id="0" name="Variable">perguntaCM</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
@@ -1831,6 +1595,21 @@
                                     </actions>
                                 </event-block>
                             </sub-events>
+                        </event-block>
+                        <event-block sid="9921088284773163">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="9784561846871037" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="7310104937253358" type="System">
+                                    <param id="0" name="Variable">verificarAlternativaCM</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="2602810595519853" type="System">
+                                    <param id="0" name="Variable">descarregarAlternativa</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -2217,10 +1996,10 @@
                                 <event-block sid="353596272390653">
                                     <conditions>
                                         <condition id="-14" name="Pick by unique ID" sid="271295508794239" type="botoes">
-                                            <param id="0" name="Unique ID">72</param>
+                                            <param id="0" name="Unique ID">449</param>
                                         </condition>
                                         <condition id="-14" name="Pick by unique ID" sid="319857019227148" type="botoesTexto">
-                                            <param id="0" name="Unique ID">119</param>
+                                            <param id="0" name="Unique ID">454</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -2271,10 +2050,10 @@
                                 <event-block sid="379084488988048">
                                     <conditions>
                                         <condition id="-14" name="Pick by unique ID" sid="542976928852187" type="botoes">
-                                            <param id="0" name="Unique ID">96</param>
+                                            <param id="0" name="Unique ID">450</param>
                                         </condition>
                                         <condition id="-14" name="Pick by unique ID" sid="684553919160472" type="botoesTexto">
-                                            <param id="0" name="Unique ID">121</param>
+                                            <param id="0" name="Unique ID">455</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -2325,10 +2104,10 @@
                                 <event-block sid="835796938305675">
                                     <conditions>
                                         <condition id="-14" name="Pick by unique ID" sid="385188723025361" type="botoes">
-                                            <param id="0" name="Unique ID">112</param>
+                                            <param id="0" name="Unique ID">451</param>
                                         </condition>
                                         <condition id="-14" name="Pick by unique ID" sid="120800608110141" type="botoesTexto">
-                                            <param id="0" name="Unique ID">122</param>
+                                            <param id="0" name="Unique ID">456</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -2379,10 +2158,10 @@
                                 <event-block sid="185403626040471">
                                     <conditions>
                                         <condition id="-14" name="Pick by unique ID" sid="873642789933618" type="botoes">
-                                            <param id="0" name="Unique ID">115</param>
+                                            <param id="0" name="Unique ID">452</param>
                                         </condition>
                                         <condition id="-14" name="Pick by unique ID" sid="208703294834366" type="botoesTexto">
-                                            <param id="0" name="Unique ID">123</param>
+                                            <param id="0" name="Unique ID">457</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -2433,10 +2212,10 @@
                                 <event-block sid="965535551780213">
                                     <conditions>
                                         <condition id="-14" name="Pick by unique ID" sid="626876588094689" type="botoes">
-                                            <param id="0" name="Unique ID">117</param>
+                                            <param id="0" name="Unique ID">453</param>
                                         </condition>
                                         <condition id="-14" name="Pick by unique ID" sid="133139099361047" type="botoesTexto">
-                                            <param id="0" name="Unique ID">124</param>
+                                            <param id="0" name="Unique ID">458</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -2487,10 +2266,10 @@
                                 <event-block sid="160827025818114">
                                     <conditions>
                                         <condition id="-14" name="Pick by unique ID" sid="877833432866378" type="botoes">
-                                            <param id="0" name="Unique ID">125</param>
+                                            <param id="0" name="Unique ID">459</param>
                                         </condition>
                                         <condition id="-14" name="Pick by unique ID" sid="155963934946433" type="botoesTexto">
-                                            <param id="0" name="Unique ID">126</param>
+                                            <param id="0" name="Unique ID">460</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -2505,10 +2284,10 @@
                                 <event-block sid="126036310961503">
                                     <conditions>
                                         <condition id="-14" name="Pick by unique ID" sid="875320515957271" type="botoes">
-                                            <param id="0" name="Unique ID">127</param>
+                                            <param id="0" name="Unique ID">461</param>
                                         </condition>
                                         <condition id="-14" name="Pick by unique ID" sid="230185476698084" type="botoesTexto">
-                                            <param id="0" name="Unique ID">128</param>
+                                            <param id="0" name="Unique ID">462</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -2551,10 +2330,10 @@
                                         <event-block sid="625904712821694">
                                             <conditions>
                                                 <condition id="-14" name="Pick by unique ID" sid="730936363656612" type="botoes">
-                                                    <param id="0" name="Unique ID">72</param>
+                                                    <param id="0" name="Unique ID">449</param>
                                                 </condition>
                                                 <condition id="-14" name="Pick by unique ID" sid="788008495612765" type="botoesTexto">
-                                                    <param id="0" name="Unique ID">119</param>
+                                                    <param id="0" name="Unique ID">454</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -2569,10 +2348,10 @@
                                         <event-block sid="224675971625051">
                                             <conditions>
                                                 <condition id="-14" name="Pick by unique ID" sid="697909130138644" type="botoes">
-                                                    <param id="0" name="Unique ID">96</param>
+                                                    <param id="0" name="Unique ID">450</param>
                                                 </condition>
                                                 <condition id="-14" name="Pick by unique ID" sid="927258595571707" type="botoesTexto">
-                                                    <param id="0" name="Unique ID">121</param>
+                                                    <param id="0" name="Unique ID">455</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -2587,10 +2366,10 @@
                                         <event-block sid="852078696372529">
                                             <conditions>
                                                 <condition id="-14" name="Pick by unique ID" sid="378707881619304" type="botoes">
-                                                    <param id="0" name="Unique ID">112</param>
+                                                    <param id="0" name="Unique ID">451</param>
                                                 </condition>
                                                 <condition id="-14" name="Pick by unique ID" sid="804101642227683" type="botoesTexto">
-                                                    <param id="0" name="Unique ID">122</param>
+                                                    <param id="0" name="Unique ID">456</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -2605,10 +2384,10 @@
                                         <event-block sid="661278074812867">
                                             <conditions>
                                                 <condition id="-14" name="Pick by unique ID" sid="665036040694214" type="botoes">
-                                                    <param id="0" name="Unique ID">115</param>
+                                                    <param id="0" name="Unique ID">452</param>
                                                 </condition>
                                                 <condition id="-14" name="Pick by unique ID" sid="179377460668520" type="botoesTexto">
-                                                    <param id="0" name="Unique ID">123</param>
+                                                    <param id="0" name="Unique ID">457</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -2623,10 +2402,10 @@
                                         <event-block sid="302818189052035">
                                             <conditions>
                                                 <condition id="-14" name="Pick by unique ID" sid="783027060060811" type="botoes">
-                                                    <param id="0" name="Unique ID">117</param>
+                                                    <param id="0" name="Unique ID">453</param>
                                                 </condition>
                                                 <condition id="-14" name="Pick by unique ID" sid="534121575214087" type="botoesTexto">
-                                                    <param id="0" name="Unique ID">124</param>
+                                                    <param id="0" name="Unique ID">458</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -2641,10 +2420,10 @@
                                         <event-block sid="533112606295486">
                                             <conditions>
                                                 <condition id="-14" name="Pick by unique ID" sid="794661461460947" type="botoes">
-                                                    <param id="0" name="Unique ID">125</param>
+                                                    <param id="0" name="Unique ID">459</param>
                                                 </condition>
                                                 <condition id="-14" name="Pick by unique ID" sid="338170210464797" type="botoesTexto">
-                                                    <param id="0" name="Unique ID">126</param>
+                                                    <param id="0" name="Unique ID">460</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -2695,10 +2474,10 @@
                                         <event-block sid="645741496553638">
                                             <conditions>
                                                 <condition id="-14" name="Pick by unique ID" sid="956959305030995" type="botoes">
-                                                    <param id="0" name="Unique ID">127</param>
+                                                    <param id="0" name="Unique ID">461</param>
                                                 </condition>
                                                 <condition id="-14" name="Pick by unique ID" sid="453164333939302" type="botoesTexto">
-                                                    <param id="0" name="Unique ID">128</param>
+                                                    <param id="0" name="Unique ID">462</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -2768,10 +2547,10 @@
                                         <event-block sid="378203695813303">
                                             <conditions>
                                                 <condition id="-14" name="Pick by unique ID" sid="181085687095023" type="botoes">
-                                                    <param id="0" name="Unique ID">72</param>
+                                                    <param id="0" name="Unique ID">449</param>
                                                 </condition>
                                                 <condition id="-14" name="Pick by unique ID" sid="395114191667824" type="botoesTexto">
-                                                    <param id="0" name="Unique ID">119</param>
+                                                    <param id="0" name="Unique ID">454</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -2786,10 +2565,10 @@
                                         <event-block sid="629505706846472">
                                             <conditions>
                                                 <condition id="-14" name="Pick by unique ID" sid="997827704869374" type="botoes">
-                                                    <param id="0" name="Unique ID">96</param>
+                                                    <param id="0" name="Unique ID">450</param>
                                                 </condition>
                                                 <condition id="-14" name="Pick by unique ID" sid="299905829667732" type="botoesTexto">
-                                                    <param id="0" name="Unique ID">121</param>
+                                                    <param id="0" name="Unique ID">455</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -2804,10 +2583,10 @@
                                         <event-block sid="395230553560861">
                                             <conditions>
                                                 <condition id="-14" name="Pick by unique ID" sid="735145853615491" type="botoes">
-                                                    <param id="0" name="Unique ID">112</param>
+                                                    <param id="0" name="Unique ID">451</param>
                                                 </condition>
                                                 <condition id="-14" name="Pick by unique ID" sid="499262906934099" type="botoesTexto">
-                                                    <param id="0" name="Unique ID">122</param>
+                                                    <param id="0" name="Unique ID">456</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -2822,10 +2601,10 @@
                                         <event-block sid="286068148810533">
                                             <conditions>
                                                 <condition id="-14" name="Pick by unique ID" sid="723701662369558" type="botoes">
-                                                    <param id="0" name="Unique ID">115</param>
+                                                    <param id="0" name="Unique ID">452</param>
                                                 </condition>
                                                 <condition id="-14" name="Pick by unique ID" sid="451845775417177" type="botoesTexto">
-                                                    <param id="0" name="Unique ID">123</param>
+                                                    <param id="0" name="Unique ID">457</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -2840,10 +2619,10 @@
                                         <event-block sid="123037775679597">
                                             <conditions>
                                                 <condition id="-14" name="Pick by unique ID" sid="901240569703652" type="botoes">
-                                                    <param id="0" name="Unique ID">117</param>
+                                                    <param id="0" name="Unique ID">453</param>
                                                 </condition>
                                                 <condition id="-14" name="Pick by unique ID" sid="989260263137419" type="botoesTexto">
-                                                    <param id="0" name="Unique ID">124</param>
+                                                    <param id="0" name="Unique ID">458</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -2858,10 +2637,10 @@
                                         <event-block sid="886096372732588">
                                             <conditions>
                                                 <condition id="-14" name="Pick by unique ID" sid="457076820331671" type="botoes">
-                                                    <param id="0" name="Unique ID">125</param>
+                                                    <param id="0" name="Unique ID">459</param>
                                                 </condition>
                                                 <condition id="-14" name="Pick by unique ID" sid="355046172882426" type="botoesTexto">
-                                                    <param id="0" name="Unique ID">126</param>
+                                                    <param id="0" name="Unique ID">460</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -2876,10 +2655,10 @@
                                         <event-block sid="468519526358005">
                                             <conditions>
                                                 <condition id="-14" name="Pick by unique ID" sid="234042604040936" type="botoes">
-                                                    <param id="0" name="Unique ID">127</param>
+                                                    <param id="0" name="Unique ID">461</param>
                                                 </condition>
                                                 <condition id="-14" name="Pick by unique ID" sid="400643342134786" type="botoesTexto">
-                                                    <param id="0" name="Unique ID">128</param>
+                                                    <param id="0" name="Unique ID">462</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -2915,7 +2694,7 @@
                         <event-block sid="651019159045866">
                             <conditions>
                                 <condition id="-14" name="Pick by unique ID" sid="365280144791509" type="botoes">
-                                    <param id="0" name="Unique ID">72</param>
+                                    <param id="0" name="Unique ID">449</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -2963,7 +2742,7 @@
                         <event-block sid="998392912979323">
                             <conditions>
                                 <condition id="-14" name="Pick by unique ID" sid="548484599478472" type="botoes">
-                                    <param id="0" name="Unique ID">96</param>
+                                    <param id="0" name="Unique ID">450</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -3017,7 +2796,7 @@
                         <event-block sid="890285077254349">
                             <conditions>
                                 <condition id="-14" name="Pick by unique ID" sid="962261365180522" type="botoes">
-                                    <param id="0" name="Unique ID">112</param>
+                                    <param id="0" name="Unique ID">451</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -3036,7 +2815,7 @@
                         <event-block sid="203655120259594">
                             <conditions>
                                 <condition id="-14" name="Pick by unique ID" sid="237796139228427" type="botoes">
-                                    <param id="0" name="Unique ID">115</param>
+                                    <param id="0" name="Unique ID">452</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -3061,7 +2840,7 @@
                         <event-block sid="944402640645644">
                             <conditions>
                                 <condition id="-14" name="Pick by unique ID" sid="237288185249443" type="botoes">
-                                    <param id="0" name="Unique ID">117</param>
+                                    <param id="0" name="Unique ID">453</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -3102,7 +2881,7 @@
                         <event-block sid="369908822218650">
                             <conditions>
                                 <condition id="-14" name="Pick by unique ID" sid="128265308088726" type="botoes">
-                                    <param id="0" name="Unique ID">125</param>
+                                    <param id="0" name="Unique ID">459</param>
                                 </condition>
                             </conditions>
                             <actions />
@@ -3132,7 +2911,7 @@
                         <event-block sid="170561774098236">
                             <conditions>
                                 <condition id="-14" name="Pick by unique ID" sid="263750761056522" type="botoes">
-                                    <param id="0" name="Unique ID">127</param>
+                                    <param id="0" name="Unique ID">461</param>
                                 </condition>
                             </conditions>
                             <actions />
@@ -3248,7 +3027,7 @@
                         <event-block sid="590344987033967">
                             <conditions>
                                 <condition id="-14" name="Pick by unique ID" sid="128234881701643" type="controleAudio">
-                                    <param id="0" name="Unique ID">140</param>
+                                    <param id="0" name="Unique ID">467</param>
                                 </condition>
                             </conditions>
                             <actions />
@@ -3301,7 +3080,7 @@
                         <event-block sid="553569103611422">
                             <conditions>
                                 <condition id="-14" name="Pick by unique ID" sid="206119540781071" type="controleAudio">
-                                    <param id="0" name="Unique ID">141</param>
+                                    <param id="0" name="Unique ID">468</param>
                                 </condition>
                             </conditions>
                             <actions />
