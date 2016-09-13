@@ -550,7 +550,7 @@
                 </event-block>
             </sub-events>
         </event-block>
-        <comment>Evento para quando as bolinhas lançadas pelo monstro atingem a personagem</comment>
+        <comment>Evento para quando as bolinhas lançadas pelo monstro atingem a personagem. A mudança da expressão do diploma só ocorre enquanto ele não está bravo. Infelizmente é necessário repetir o bloco já que a mudança de expressão ocorre logo no começo do evento.</comment>
         <event-block sid="995577930556153">
             <conditions>
                 <condition id="0" name="On collision with another object" sid="4075759583121737" type="player">
@@ -559,6 +559,11 @@
                 <condition behavior="Bullet" id="0" name="Compare speed" sid="103483406900229" type="Bolinha">
                     <param id="0" name="Comparison">4</param>
                     <param id="1" name="Speed">0</param>
+                </condition>
+                <condition id="-14" name="Compare variable" sid="230095433206212" type="System">
+                    <param id="0" name="Variable">numeroBolinhas</param>
+                    <param id="1" name="Comparison">2</param>
+                    <param id="2" name="Value">6</param>
                 </condition>
             </conditions>
             <actions>
@@ -606,51 +611,69 @@
                     <param id="0" name="Group name">&quot;Pontuacao6b&quot;</param>
                     <param id="1" name="State">1</param>
                 </action>
+                <action id="5" name="Set frame" sid="907654571769502" type="Diploma">
+                    <param id="0" name="Frame number">0</param>
+                </action>
             </actions>
-            <sub-events>
-                <comment>Para garantir que um dano posterior não mude a expressão do diploma</comment>
-                <event-block sid="373135687266005">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="490765799840821" type="System">
-                            <param id="0" name="Variable">numeroBolinhas</param>
-                            <param id="1" name="Comparison">2</param>
-                            <param id="2" name="Value">7</param>
-                        </condition>
-                    </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block sid="154183906463001">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="405143924883938" type="System">
-                                    <param id="0" name="Variable">numeroBolinhas</param>
-                                    <param id="1" name="Comparison">2</param>
-                                    <param id="2" name="Value">6</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="5" name="Set frame" sid="907654571769502" type="Diploma">
-                                    <param id="0" name="Frame number">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <comment>Aqui faz outra verificação ao invés de colocar um else pois caso o jogador tome um dano e mate o monstro, é para o diploma ficar travado no frame 3</comment>
-                        <event-block sid="571387606573652">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="428864122224328" type="System">
-                                    <param id="0" name="Variable">numeroBolinhas</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">6</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="5" name="Set frame" sid="657995786098421" type="Diploma">
-                                    <param id="0" name="Frame number">2</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-            </sub-events>
+        </event-block>
+        <event-block sid="481632504172907">
+            <conditions>
+                <condition id="0" name="On collision with another object" sid="934148307994779" type="player">
+                    <param id="0" name="Object">Bolinha</param>
+                </condition>
+                <condition behavior="Bullet" id="0" name="Compare speed" sid="376962227575620" type="Bolinha">
+                    <param id="0" name="Comparison">4</param>
+                    <param id="1" name="Speed">0</param>
+                </condition>
+                <condition id="-14" name="Compare variable" sid="567922797597276" type="System">
+                    <param id="0" name="Variable">numeroBolinhas</param>
+                    <param id="1" name="Comparison">5</param>
+                    <param id="2" name="Value">6</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action behavior="Flash" id="0" name="Flash" sid="120476933994196" type="playerAnim">
+                    <param id="0" name="&apos;On&apos; time">0.1</param>
+                    <param id="1" name="&apos;Off&apos; time">0.1</param>
+                    <param id="2" name="Duration">1.2</param>
+                </action>
+                <action id="7" name="Play (by name)" sid="400296755071803" type="Audio">
+                    <param id="0" name="Folder">0</param>
+                    <param id="1" name="Audio file name">choose(&quot;dano1&quot;, &quot;dano2&quot;, &quot;dano3&quot;)</param>
+                    <param id="3" name="Loop">0</param>
+                    <param id="4" name="Volume">volSons</param>
+                    <param id="2" name="Tag (optional)">&quot;sons&quot;</param>
+                </action>
+                <action id="-10" name="Add to" sid="211953375632289" type="System">
+                    <param id="0" name="Variable">pontos</param>
+                    <param id="1" name="Value">-50</param>
+                </action>
+                <action id="0" name="Set text" sid="386430646624307" type="pontoTexto">
+                    <param id="0" name="Text">&quot;-50&quot;</param>
+                </action>
+                <action id="4" name="Set font color" sid="470593597313953" type="pontoTexto">
+                    <param id="0" name="Color">rgb(235, 17, 53)</param>
+                </action>
+                <action id="-12" name="Set group active" sid="366527585074655" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao6b&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="751627412898216" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao6a&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+                <action id="-16" name="Wait" sid="678011820891203" type="System">
+                    <param id="0" name="Seconds">4</param>
+                </action>
+                <action id="-12" name="Set group active" sid="446393975174586" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao6a&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="619919244770868" type="System">
+                    <param id="0" name="Group name">&quot;Pontuacao6b&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+            </actions>
         </event-block>
         <comment>Ação de pegar o easterEgg6</comment>
         <event-block sid="193270418611537">
@@ -1512,6 +1535,16 @@
                                         <action id="-12" name="Set group active" sid="875167850922623" type="System">
                                             <param id="0" name="Group name">&quot;controleBolinhas&quot;</param>
                                             <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="603554403138277">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="920354187945669" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Go to layout" sid="627045612449408" type="System">
+                                            <param id="0" name="Layout">Tela Creditos</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -3437,11 +3470,7 @@
                                         </event-block>
                                         <event-block sid="286678747012686">
                                             <conditions>
-                                                <condition id="-14" name="Compare variable" sid="189110174973150" type="System">
-                                                    <param id="0" name="Variable">efeitoLasanhaAtivo</param>
-                                                    <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Value">0</param>
-                                                </condition>
+                                                <condition id="-4" name="Is outside layout" sid="710174412332677" type="lasanha" />
                                             </conditions>
                                             <actions>
                                                 <action id="-12" name="Set group active" sid="261847780949522" type="System">
@@ -3455,7 +3484,7 @@
                                                 <condition id="-14" name="Pick by unique ID" sid="580396250263171" type="selecaoComida">
                                                     <param id="0" name="Unique ID">428</param>
                                                 </condition>
-                                                <condition id="-4" inverted="1" name="Is outside layout" sid="713098724889497" type="lasanha" />
+                                                <condition id="-4" name="Is outside layout" sid="713098724889497" type="lasanha" />
                                             </conditions>
                                             <actions>
                                                 <action id="-9" name="Destroy" sid="269297145800284" type="lasanha" />
@@ -3612,11 +3641,7 @@
                                     <sub-events>
                                         <event-block sid="891893877353507">
                                             <conditions>
-                                                <condition id="-14" name="Compare variable" sid="530178145010703" type="System">
-                                                    <param id="0" name="Variable">efeitoCafeAtivo</param>
-                                                    <param id="1" name="Comparison">0</param>
-                                                    <param id="2" name="Value">0</param>
-                                                </condition>
+                                                <condition id="-4" name="Is outside layout" sid="176503781167013" type="cafe" />
                                             </conditions>
                                             <actions>
                                                 <action id="-12" name="Set group active" sid="734770316124733" type="System">
@@ -3630,7 +3655,7 @@
                                                 <condition id="-14" name="Pick by unique ID" sid="127694651732586" type="selecaoComida">
                                                     <param id="0" name="Unique ID">429</param>
                                                 </condition>
-                                                <condition id="-4" inverted="1" name="Is outside layout" sid="791762163716859" type="cafe" />
+                                                <condition id="-4" name="Is outside layout" sid="791762163716859" type="cafe" />
                                             </conditions>
                                             <actions>
                                                 <action id="-9" name="Destroy" sid="794285266049659" type="cafe" />
