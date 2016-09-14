@@ -165,6 +165,10 @@
                     <param id="0" name="Group name">&quot;controleCafeGAL&quot;</param>
                     <param id="1" name="State">0</param>
                 </action>
+                <action id="-12" name="Set group active" sid="427148640658116" type="System">
+                    <param id="0" name="Group name">&quot;playerMove3&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
                 <action id="0" name="Load JSON" sid="4808618138882582" type="DialogosJSON" />
                 <action id="0" name="Load JSON" sid="6934720499260367" type="QuadrosJSON" />
                 <action id="0" name="Load JSON" sid="154317895988781" type="FasesJSON" />
@@ -1787,16 +1791,18 @@
             <sub-events>
                 <event-block sid="1884421490486591">
                     <conditions />
-                    <actions />
+                    <actions>
+                        <action id="0" name="Set text" sid="9850614298075376" type="DialogoPersonagem">
+                            <param id="0" name="Text">DialogosJSON.GetData(&quot;Galeria&quot; &amp; fraseAtualGAL, 0)</param>
+                        </action>
+                    </actions>
                     <sub-events>
-                        <comment>Como neste diálogo é sempre Personagem - Einstein - Personagem... é possível controlar o local onde o balão de fala vai aparecer deste modo</comment>
                         <comment>Fala Einstein</comment>
                         <event-block sid="9047234160619637">
                             <conditions>
-                                <condition id="-8" name="Compare two values" sid="3316282211951495" type="System">
-                                    <param id="0" name="First value">fraseAtualGAL % 2</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">1</param>
+                                <condition id="0" name="Compare text" sid="373046817279581" type="DialogoPersonagem">
+                                    <param id="0" name="Text to compare">&quot;Einstein&quot;</param>
+                                    <param id="1" name="Case sensitivity">0</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1805,11 +1811,11 @@
                                     <param id="1" name="Y">164</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="1605598438406289" type="DialogoPersonagem">
-                                    <param id="0" name="X">187</param>
-                                    <param id="1" name="Y">73</param>
+                                    <param id="0" name="X">182</param>
+                                    <param id="1" name="Y">72</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="5232277600265197" type="Dialogos">
-                                    <param id="0" name="X">110</param>
+                                    <param id="0" name="X">90</param>
                                     <param id="1" name="Y">99</param>
                                 </action>
                             </actions>
@@ -1817,7 +1823,10 @@
                         <comment>Fala Personagem</comment>
                         <event-block sid="2757364721462507">
                             <conditions>
-                                <condition id="-22" name="Else" sid="7018420972416253" type="System" />
+                                <condition id="0" name="Compare text" sid="3316282211951495" type="DialogoPersonagem">
+                                    <param id="0" name="Text to compare">&quot;nan&quot;</param>
+                                    <param id="1" name="Case sensitivity">0</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="-3" name="Set position" sid="6123979219139684" type="BalaoDialogo">
@@ -1825,11 +1834,11 @@
                                     <param id="1" name="Y">player.Y - 126</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="6726351252957261" type="DialogoPersonagem">
-                                    <param id="0" name="X">player.X + 22</param>
+                                    <param id="0" name="X">player.X + 26</param>
                                     <param id="1" name="Y">player.Y - 218</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="2326175334291855" type="Dialogos">
-                                    <param id="0" name="X">player.X - 46</param>
+                                    <param id="0" name="X">player.X - 66</param>
                                     <param id="1" name="Y">player.Y - 191</param>
                                 </action>
                             </actions>
@@ -1889,9 +1898,6 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="0" name="Set text" sid="9850614298075376" type="DialogoPersonagem">
-                            <param id="0" name="Text">DialogosJSON.GetData(&quot;Galeria&quot; &amp; fraseAtualGAL, 0)</param>
-                        </action>
                         <action id="0" name="Set text" sid="6097330422489349" type="Dialogos">
                             <param id="0" name="Text">DialogosJSON.GetData(&quot;Galeria&quot; &amp; fraseAtualGAL, 1)</param>
                         </action>
@@ -2640,7 +2646,7 @@
                                         </action>
                                         <action id="-9" name="Set value" sid="1405052962396852" type="System">
                                             <param id="0" name="Variable">tamanhoDialogoGAL</param>
-                                            <param id="1" name="Value">5</param>
+                                            <param id="1" name="Value">6</param>
                                         </action>
                                         <action id="-9" name="Set value" sid="9923358796331521" type="System">
                                             <param id="0" name="Variable">carregarDialogoChave</param>
