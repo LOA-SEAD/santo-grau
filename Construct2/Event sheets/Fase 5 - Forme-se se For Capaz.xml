@@ -46,7 +46,7 @@
         <comment>Utilizado para marcar quando se deve descarregar as falas do diálogo</comment>
         <variable constant="0" name="descarregarDialogosTCC" sid="474724734753358" static="0" type="number">0</variable>
         <comment>Serve para marcar o tamanho do diálogo que irá ocorrer naquele momento para saber quantas vezes será lido falas no arquivo .json</comment>
-        <variable constant="0" name="tamanhoDialogoTCC" sid="909586675699812" static="0" type="number">6</variable>
+        <variable constant="0" name="tamanhoDialogoTCC" sid="909586675699812" static="0" type="number">9</variable>
         <comment>Usada para marcar qual personagem irá falar, sendo que nos números pares a fala é do diploma e nos números ímpares a fala é da personagem</comment>
         <variable constant="0" name="falaPersonagens" sid="437038877608341" static="0" type="number">0</variable>
         <comment>Define qual das animações da personagem estará executando</comment>
@@ -205,7 +205,7 @@
                 </action>
                 <action id="-9" name="Set value" sid="588420537000057" type="System">
                     <param id="0" name="Variable">tamanhoDialogoTCC</param>
-                    <param id="1" name="Value">6</param>
+                    <param id="1" name="Value">9</param>
                 </action>
                 <action id="-9" name="Set value" sid="121836148627340" type="System">
                     <param id="0" name="Variable">fraseAtualTCC</param>
@@ -611,10 +611,23 @@
                     <param id="0" name="Group name">&quot;Pontuacao6b&quot;</param>
                     <param id="1" name="State">1</param>
                 </action>
-                <action id="5" name="Set frame" sid="907654571769502" type="Diploma">
-                    <param id="0" name="Frame number">0</param>
-                </action>
             </actions>
+            <sub-events>
+                <comment>Para o caso do diploma ficar irritado durante esse momento</comment>
+                <event-block sid="660439691027798">
+                    <conditions>
+                        <condition id="3" name="Compare frame" sid="855591069197800" type="Diploma">
+                            <param id="0" name="Comparison">1</param>
+                            <param id="1" name="Number">2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="907654571769502" type="Diploma">
+                            <param id="0" name="Frame number">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
         </event-block>
         <event-block sid="481632504172907">
             <conditions>
@@ -1202,15 +1215,18 @@
             <sub-events>
                 <event-block sid="1884421490486591">
                     <conditions />
-                    <actions />
+                    <actions>
+                        <action id="0" name="Set text" sid="9850614298075376" type="DialogoPersonagem">
+                            <param id="0" name="Text">DialogosJSON.GetData(&quot;TCC&quot; &amp; fraseAtualTCC, 0)</param>
+                        </action>
+                    </actions>
                     <sub-events>
                         <comment>Fala Diploma</comment>
                         <event-block sid="9047234160619637">
                             <conditions>
-                                <condition id="-8" name="Compare two values" sid="3316282211951495" type="System">
-                                    <param id="0" name="First value">falaPersonagens % 2</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Second value">0</param>
+                                <condition id="0" name="Compare text" sid="3316282211951495" type="DialogoPersonagem">
+                                    <param id="0" name="Text to compare">&quot;diploma&quot;</param>
+                                    <param id="1" name="Case sensitivity">0</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1219,11 +1235,11 @@
                                     <param id="1" name="Y">98</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="1605598438406289" type="DialogoPersonagem">
-                                    <param id="0" name="X">715</param>
-                                    <param id="1" name="Y">8</param>
+                                    <param id="0" name="X">711</param>
+                                    <param id="1" name="Y">6</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="5232277600265197" type="Dialogos">
-                                    <param id="0" name="X">639</param>
+                                    <param id="0" name="X">619</param>
                                     <param id="1" name="Y">33</param>
                                 </action>
                             </actions>
@@ -1231,7 +1247,10 @@
                         <comment>Fala Personagem</comment>
                         <event-block sid="2757364721462507">
                             <conditions>
-                                <condition id="-22" name="Else" sid="7018420972416253" type="System" />
+                                <condition id="0" name="Compare text" sid="7018420972416253" type="DialogoPersonagem">
+                                    <param id="0" name="Text to compare">&quot;personagem&quot;</param>
+                                    <param id="1" name="Case sensitivity">0</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="-3" name="Set position" sid="6123979219139684" type="BalaoDialogo">
@@ -1239,11 +1258,11 @@
                                     <param id="1" name="Y">player.Y - 126</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="6726351252957261" type="DialogoPersonagem">
-                                    <param id="0" name="X">player.X + 29</param>
-                                    <param id="1" name="Y">player.Y - 215</param>
+                                    <param id="0" name="X">player.X + 26</param>
+                                    <param id="1" name="Y">player.Y - 218</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="2326175334291855" type="Dialogos">
-                                    <param id="0" name="X">player.X - 46</param>
+                                    <param id="0" name="X">player.X - 66</param>
                                     <param id="1" name="Y">player.Y - 191</param>
                                 </action>
                             </actions>
@@ -1303,9 +1322,6 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="0" name="Set text" sid="9850614298075376" type="DialogoPersonagem">
-                            <param id="0" name="Text">DialogosJSON.GetData(&quot;TCC&quot; &amp; fraseAtualTCC, 0)</param>
-                        </action>
                         <action id="0" name="Set text" sid="6097330422489349" type="Dialogos">
                             <param id="0" name="Text">DialogosJSON.GetData(&quot;TCC&quot; &amp; fraseAtualTCC, 1)</param>
                         </action>
@@ -1528,7 +1544,7 @@
                                         <condition id="-14" name="Compare variable" sid="390379597508673" type="System">
                                             <param id="0" name="Variable">tamanhoDialogoTCC</param>
                                             <param id="1" name="Comparison">1</param>
-                                            <param id="2" name="Value">13</param>
+                                            <param id="2" name="Value">17</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -2468,7 +2484,7 @@
                                         </action>
                                         <action id="-9" name="Set value" sid="618603758294182" type="System">
                                             <param id="0" name="Variable">tamanhoDialogoTCC</param>
-                                            <param id="1" name="Value">7</param>
+                                            <param id="1" name="Value">10</param>
                                         </action>
                                         <action id="-9" name="Set value" sid="245143600081171" type="System">
                                             <param id="0" name="Variable">carregarBalaoDialogo</param>
@@ -2632,7 +2648,7 @@
                                 </action>
                                 <action id="-9" name="Set value" sid="244789510978313" type="System">
                                     <param id="0" name="Variable">tamanhoDialogoTCC</param>
-                                    <param id="1" name="Value">13</param>
+                                    <param id="1" name="Value">17</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="670641613199686" type="System">
                                     <param id="0" name="Variable">carregarBalaoDialogo</param>
