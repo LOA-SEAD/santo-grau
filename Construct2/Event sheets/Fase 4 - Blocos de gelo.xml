@@ -37,9 +37,6 @@
                 <action id="4" name="Preload" sid="979630002114500" type="Audio">
                     <param id="0" name="Audio file">hit_bloco_gelo</param>
                 </action>
-                <action id="4" name="Preload" sid="302518216258768" type="Audio">
-                    <param id="0" name="Audio file">Ice_Dreams_-_Blocos_de_Neve</param>
-                </action>
                 <action id="33" name="Stop all" sid="988785683465708" type="Audio" />
                 <action id="0" name="Play" sid="821873214175977" type="Audio">
                     <param id="0" name="Audio file">Ice_Dreams_-_Blocos_de_Neve</param>
@@ -176,12 +173,12 @@
                     <param id="0" name="Variable">pontuacaoInicio</param>
                     <param id="1" name="Value">pontos</param>
                 </action>
-                <action disabled="1" id="0" name="Clear" sid="282411886027647" type="AuxiliaRandomizacao" />
-                <action disabled="1" id="-9" name="Set value" sid="843160654674494" type="System">
+                <action id="0" name="Clear" sid="282411886027647" type="AuxiliaRandomizacao" />
+                <action id="-9" name="Set value" sid="843160654674494" type="System">
                     <param id="0" name="Variable">numeroQuestoes</param>
                     <param id="1" name="Value">3</param>
                 </action>
-                <action disabled="1" id="-9" name="Set value" sid="649726357490237" type="System">
+                <action id="-9" name="Set value" sid="649726357490237" type="System">
                     <param id="0" name="Variable">questoesExistentes</param>
                     <param id="1" name="Value">LoadJSONBN.GetData(&quot;quantidadeQuestoes&quot;,0)</param>
                 </action>
@@ -885,6 +882,7 @@
         <comment>Dispara o evento das perguntas</comment>
         <event-group description="" sid="4227888007887412" title="inicioPerguntasFFBN">
             <sub-events>
+                <variable constant="0" name="escolheTexto" sid="339869279354434" static="0" type="number">0</variable>
                 <event-block sid="4106395506459037">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="4900491812480406" type="System">
@@ -976,7 +974,50 @@
                                     <param id="0" name="Variable">carregarTextosBN</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
+                                <action id="1" name="Set size" sid="887617594622878" type="AuxiliaRandomizacao">
+                                    <param id="0" name="Width">questoesExistentes</param>
+                                    <param id="1" name="Height">1</param>
+                                    <param id="2" name="Depth">1</param>
+                                </action>
                             </actions>
+                            <sub-events>
+                                <comment>Preenche os arrays de pergunta e o que irá gerar a ordem</comment>
+                                <event-block sid="719929409322746">
+                                    <conditions>
+                                        <condition id="-12" name="Repeat" sid="387935163943041" type="System">
+                                            <param id="0" name="Count">questoesExistentes</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="2" name="Set at X" sid="565676481546301" type="AuxiliaRandomizacao">
+                                            <param id="0" name="X">loopindex</param>
+                                            <param id="1" name="Value">loopindex + 1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>Função para randomizar a ordem das perguntas</comment>
+                                <event-block sid="620998308974436">
+                                    <conditions>
+                                        <condition id="-12" name="Repeat" sid="611813900012251" type="System">
+                                            <param id="0" name="Count">3</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="910849107573205" type="System">
+                                            <param id="0" name="Variable">escolheTexto</param>
+                                            <param id="1" name="Value">round(random(0, questoesExistentes-1-loopindex))</param>
+                                        </action>
+                                        <action id="2" name="Set at X" sid="804684949706157" type="OrdemQuestoes">
+                                            <param id="0" name="X">loopindex</param>
+                                            <param id="1" name="Value">AuxiliaRandomizacao.At(escolheTexto)</param>
+                                        </action>
+                                        <action id="9" name="Delete" sid="266320687875912" type="AuxiliaRandomizacao">
+                                            <param id="0" name="Index">escolheTexto</param>
+                                            <param id="1" name="Axis">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -997,14 +1038,14 @@
                     </conditions>
                     <actions>
                         <action id="0" name="Set text" sid="2924909761490161" type="textoPerguntas">
-                            <param id="0" name="Text">perguntaBN &amp; &quot;- &quot; &amp; LoadJSONBN.GetData(perguntaBN, 0)</param>
+                            <param id="0" name="Text">perguntaBN &amp; &quot;- &quot; &amp; LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1), 0)</param>
                         </action>
                         <action disabled="1" id="-1" name="Set X" sid="3485779795234323" type="textoPerguntas">
                             <param id="0" name="X">(perguntas.Width - textoPerguntas.TextWidth + 252)/2</param>
                         </action>
                         <action id="-9" name="Set value" sid="7567671601653543" type="System">
                             <param id="0" name="Variable">respostaCertaBN</param>
-                            <param id="1" name="Value">LoadJSONBN.GetData(perguntaBN,4)</param>
+                            <param id="1" name="Value">LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1),4)</param>
                         </action>
                         <action id="1" name="Set size" sid="765715793002428" type="AuxiliaRandomFF">
                             <param id="0" name="Width">3</param>
@@ -1163,7 +1204,7 @@
                             <conditions />
                             <actions>
                                 <action id="0" name="Set text" sid="336080415209115" type="textoRespostas">
-                                    <param id="0" name="Text">&quot;1- &quot; &amp; LoadJSONBN.GetData(perguntaBN, OrdemAlternativas.At(0)) &amp; &quot;  2- &quot; &amp; LoadJSONBN.GetData(perguntaBN, OrdemAlternativas.At(1)) &amp; &quot;  3- &quot; &amp; LoadJSONBN.GetData(perguntaBN, OrdemAlternativas.At(2))</param>
+                                    <param id="0" name="Text">&quot;1- &quot; &amp; LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1), OrdemAlternativas.At(0)) &amp; &quot;  2- &quot; &amp; LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1), OrdemAlternativas.At(1)) &amp; &quot;  3- &quot; &amp; LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1), OrdemAlternativas.At(2))</param>
                                 </action>
                                 <action disabled="1" id="-1" name="Set X" sid="7079773714938992" type="textoRespostas">
                                     <param id="0" name="X">(perguntas.Width - textoRespostas.TextWidth + 252) / 2</param>
