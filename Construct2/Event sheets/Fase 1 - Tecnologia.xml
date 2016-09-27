@@ -139,10 +139,6 @@
                     <param id="0" name="Family name">&quot;please_write_me_a_songmedium&quot;</param>
                     <param id="1" name="CSS URL">&quot;stylesheet.css&quot;</param>
                 </action>
-                <action id="5" name="Set web font" sid="714249812725361" type="feedback">
-                    <param id="0" name="Family name">&quot;please_write_me_a_songmedium&quot;</param>
-                    <param id="1" name="CSS URL">&quot;stylesheet.css&quot;</param>
-                </action>
                 <action id="5" name="Set web font" sid="778636947196348" type="pontuacaoTexto">
                     <param id="0" name="Family name">&quot;please_write_me_a_songmedium&quot;</param>
                     <param id="1" name="CSS URL">&quot;stylesheet.css&quot;</param>
@@ -350,6 +346,7 @@
                 <action id="-8" name="Set angle" sid="356383711090895" type="AndaParaCimaDiploma">
                     <param id="0" name="Angle">270</param>
                 </action>
+                <action behavior="8Direction" id="0" name="Stop" sid="119902321290653" type="player" />
                 <action id="-16" name="Wait" sid="5638862637940158" type="System">
                     <param id="0" name="Seconds">0.5</param>
                 </action>
@@ -1108,6 +1105,11 @@
                     <conditions>
                         <condition id="-3" inverted="1" name="Is on-screen" sid="5872652070893707" type="telaoHTML" />
                         <condition id="-4" name="Trigger once while true" sid="731875901955610" type="System" />
+                        <condition id="-14" name="Compare variable" sid="677044930324547" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">4</param>
+                            <param id="2" name="Value">11</param>
+                        </condition>
                         <condition id="-14" name="Compare variable" sid="163944759367009" type="System">
                             <param id="0" name="Variable">controleDialogos2</param>
                             <param id="1" name="Comparison">2</param>
@@ -2560,6 +2562,10 @@
                             <param id="0" name="Group name">&quot;playerMove2&quot;</param>
                             <param id="1" name="State">0</param>
                         </action>
+                        <action id="4" name="Set animation" sid="245993844214279" type="playerAnim">
+                            <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
                         <action id="-16" name="Set opacity" sid="9733476301647004" type="Dialogos">
                             <param id="0" name="Opacity">Dialogos.Opacity+2</param>
                         </action>
@@ -3827,10 +3833,6 @@
                                     <param id="0" name="Group name">&quot;Pontuacao2a&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
-                                <action id="-12" name="Set group active" sid="657284607156373" type="System">
-                                    <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
                                 <action id="-12" name="Set group active" sid="286032484611050" type="System">
                                     <param id="0" name="Group name">&quot;PopupDica2&quot;</param>
                                     <param id="1" name="State">1</param>
@@ -3853,6 +3855,20 @@
                                     <actions>
                                         <action id="0" name="Set visible" sid="636072045404442" type="telaoHTML">
                                             <param id="0" name="Visibility">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="773409427674562">
+                                    <conditions>
+                                        <condition id="-10" inverted="1" name="Compare opacity" sid="319336010142653" type="BalaoDialogo">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Opacity">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="657284607156373" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                            <param id="1" name="State">1</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -4603,10 +4619,6 @@
                                     <param id="0" name="Group name">&quot;Pontuacao2a&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
-                                <action id="-12" name="Set group active" sid="747502043457312" type="System">
-                                    <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
                                 <action id="-12" name="Set group active" sid="305451248225748" type="System">
                                     <param id="0" name="Group name">&quot;PopupDica2&quot;</param>
                                     <param id="1" name="State">1</param>
@@ -4616,6 +4628,22 @@
                                     <param id="1" name="State">1</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="547007625493226">
+                                    <conditions>
+                                        <condition id="-10" inverted="1" name="Compare opacity" sid="114681425557381" type="BalaoDialogo">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Opacity">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="458826507231756" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <comment>Ação do botão &quot;Salvar&quot;</comment>
                         <event-block sid="493448162765616">
@@ -4641,10 +4669,6 @@
                                 <action id="-12" name="Set group active" sid="836613020147953" type="System">
                                     <param id="0" name="Group name">&quot;Pontuacao2a&quot;</param>
                                     <param id="1" name="State">0</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="204374165859039" type="System">
-                                    <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                                    <param id="1" name="State">1</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="447667751379377" type="System">
                                     <param id="0" name="Group name">&quot;PopupDica2&quot;</param>
@@ -4674,6 +4698,20 @@
                                     <actions>
                                         <action id="0" name="Set visible" sid="175691246680155" type="telaoHTML">
                                             <param id="0" name="Visibility">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="150365160745390">
+                                    <conditions>
+                                        <condition id="-10" inverted="1" name="Compare opacity" sid="289028242157485" type="BalaoDialogo">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Opacity">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="306298002466243" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                            <param id="1" name="State">1</param>
                                         </action>
                                     </actions>
                                 </event-block>
