@@ -27,7 +27,10 @@
         <variable constant="0" name="descarregarDialogosGAL" sid="5863083947421018" static="0" type="number">0</variable>
         <comment>Utilizado para controle do momento em que o jogador pode avançar as falas</comment>
         <variable constant="0" name="avancarDialogosGAL" sid="2434999407990406" static="0" type="number">0</variable>
+        <comment>Utilizado para controlar o momento em que o jogador está sobre a vela para aumentada a sua área iluminada</comment>
         <variable constant="0" name="estaAcendendoVela" sid="221783546930456" static="0" type="number">0</variable>
+        <comment>Utilizada para marcar o momento em que foi realizada a randomização na primeira vez que foi aberto o mural, para que quando ele seja fechado e reaberto os quadros não sejam reorganizados outra vez</comment>
+        <variable constant="0" name="quadrosRandomizados" sid="568985497186630" static="0" type="number">0</variable>
         <event-block sid="5554538898794456">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="3689958973850941" type="System" />
@@ -107,6 +110,9 @@
                     <param id="0" name="Opacity">0</param>
                 </action>
                 <action id="-16" name="Set opacity" sid="989514265790622" type="textoPerguntas">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="856516834530921" type="popupFechar">
                     <param id="0" name="Opacity">0</param>
                 </action>
                 <action id="-9" name="Set value" sid="200290013643812" type="System">
@@ -260,6 +266,10 @@
                 <action id="-9" name="Set value" sid="364030013319448" type="System">
                     <param id="0" name="Variable">quadro</param>
                     <param id="1" name="Value">1</param>
+                </action>
+                <action id="-9" name="Set value" sid="698130751445810" type="System">
+                    <param id="0" name="Variable">quadrosRandomizados</param>
+                    <param id="1" name="Value">0</param>
                 </action>
                 <action behavior="Pin" id="0" name="Pin to object" sid="966222187477116" type="botoes">
                     <param id="0" name="Pin to">fundoPause</param>
@@ -1052,6 +1062,10 @@
                         <condition id="2" name="Is playing" sid="9969562668928525" type="playerAnim">
                             <param id="0" name="Animation">&quot;TrasParado&quot;</param>
                         </condition>
+                        <condition id="-10" name="Compare opacity" sid="707346564766230" type="MuralQuadros">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Opacity">0</param>
+                        </condition>
                     </conditions>
                     <actions />
                     <sub-events>
@@ -1073,6 +1087,10 @@
                                     <param id="0" name="Group name">&quot;playerMove3&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
+                                <action id="-12" name="Set group active" sid="351805240014108" type="System">
+                                    <param id="0" name="Group name">&quot;carregarQuadros&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
                             </actions>
                         </event-block>
                     </sub-events>
@@ -1086,184 +1104,280 @@
                 <event-group description="" sid="1077548239582358" title="carregarQuadros">
                     <sub-events>
                         <variable constant="0" name="escolheQuadro" sid="597305771043091" static="0" type="number">0</variable>
-                        <event-block sid="9104870988701179">
+                        <event-block sid="816839103340564">
                             <conditions>
-                                <condition id="-1" name="Every tick" sid="4484471508274438" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="7757490548230051" type="System">
-                                    <param id="0" name="Variable">numeroQuadros</param>
-                                    <param id="1" name="Value">int(QuadrosJSON.GetData(&quot;numero&quot;, 0))</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <comment>Preenche os arrays de resposta e o que irá gerar a ordem</comment>
-                        <event-block sid="165315885563207">
-                            <conditions>
-                                <condition id="-23" name="While" sid="656780132543062" type="System" />
-                                <condition id="-14" name="Compare variable" sid="960082322783829" type="System">
-                                    <param id="0" name="Variable">quadro</param>
-                                    <param id="1" name="Comparison">3</param>
-                                    <param id="2" name="Value">numeroQuadros</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="2" name="Set at X" sid="311818151280990" type="Resposta">
-                                    <param id="0" name="X">Quadro-1</param>
-                                    <param id="1" name="Value">int(QuadrosJSON.GetData(&quot;resposta&quot;,Quadro-1))</param>
-                                </action>
-                                <action id="2" name="Set at X" sid="704573887995237" type="OrdemAtual">
-                                    <param id="0" name="X">Quadro-1</param>
-                                    <param id="1" name="Value">int(QuadrosJSON.GetData(&quot;resposta&quot;,Quadro-1))</param>
-                                </action>
-                                <action id="2" name="Set at X" sid="730243930851386" type="AuxiliaRandomizacao">
-                                    <param id="0" name="X">Quadro-1</param>
-                                    <param id="1" name="Value">int(QuadrosJSON.GetData(&quot;resposta&quot;,Quadro-1))</param>
-                                </action>
-                                <action id="-10" name="Add to" sid="865001812199308" type="System">
-                                    <param id="0" name="Variable">quadro</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="511017810964653">
-                            <conditions>
-                                <condition id="-22" name="Else" sid="494659170030273" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="806136900118614" type="System">
-                                    <param id="0" name="Variable">quadro</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <comment>Função para randomizar a ordem dos quadros</comment>
-                        <event-block sid="725205174206748">
-                            <conditions>
-                                <condition id="-12" name="Repeat" sid="482110436102332" type="System">
-                                    <param id="0" name="Count">numeroQuadros</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="690152713448481" type="System">
-                                    <param id="0" name="Variable">escolheQuadro</param>
-                                    <param id="1" name="Value">round(random(0, numeroQuadros-loopindex-1))</param>
-                                </action>
-                                <action id="2" name="Set at X" sid="167680217917920" type="OrdemAtual">
-                                    <param id="0" name="X">loopindex</param>
-                                    <param id="1" name="Value">AuxiliaRandomizacao.At(escolheQuadro)</param>
-                                </action>
-                                <action id="9" name="Delete" sid="550117868279761" type="AuxiliaRandomizacao">
-                                    <param id="0" name="Index">escolheQuadro</param>
-                                    <param id="1" name="Axis">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <comment>Verificar se não se manteve na mesma ordem</comment>
-                        <event-block sid="825026049665517">
-                            <conditions>
-                                <condition id="-23" name="While" sid="807252551537236" type="System" />
-                                <condition id="-14" name="Compare variable" sid="344850257101524" type="System">
-                                    <param id="0" name="Variable">quadro</param>
-                                    <param id="1" name="Comparison">3</param>
-                                    <param id="2" name="Value">numeroQuadros</param>
+                                <condition id="-14" name="Compare variable" sid="424692455177170" type="System">
+                                    <param id="0" name="Variable">quadrosRandomizados</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
                                 </condition>
                             </conditions>
                             <actions />
                             <sub-events>
-                                <event-block sid="623794704128211">
+                                <event-block sid="9104870988701179">
                                     <conditions>
-                                        <condition id="-8" name="Compare two values" sid="210203060863936" type="System">
-                                            <param id="0" name="First value">OrdemAtual.At(Quadro-1)</param>
-                                            <param id="1" name="Comparison">1</param>
-                                            <param id="2" name="Second value">Resposta.At(Quadro-1)</param>
-                                        </condition>
+                                        <condition id="-1" name="Every tick" sid="4484471508274438" type="System" />
                                     </conditions>
                                     <actions>
-                                        <action id="-9" name="Set value" sid="925225511810387" type="System">
-                                            <param id="0" name="Variable">quadro</param>
-                                            <param id="1" name="Value">numeroQuadros + 1</param>
+                                        <action id="-9" name="Set value" sid="7757490548230051" type="System">
+                                            <param id="0" name="Variable">numeroQuadros</param>
+                                            <param id="1" name="Value">int(QuadrosJSON.GetData(&quot;numero&quot;, 0))</param>
                                         </action>
                                     </actions>
                                 </event-block>
-                                <comment>Se não embaralhou força apenas uma ordem reversa</comment>
-                                <event-block sid="903442191922830">
+                                <comment>Preenche os arrays de resposta e o que irá gerar a ordem</comment>
+                                <event-block sid="165315885563207">
                                     <conditions>
-                                        <condition id="-14" name="Compare variable" sid="378962861596361" type="System">
+                                        <condition id="-23" name="While" sid="656780132543062" type="System" />
+                                        <condition id="-14" name="Compare variable" sid="960082322783829" type="System">
                                             <param id="0" name="Variable">quadro</param>
-                                            <param id="1" name="Comparison">0</param>
+                                            <param id="1" name="Comparison">3</param>
                                             <param id="2" name="Value">numeroQuadros</param>
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="-9" name="Set value" sid="294721335204682" type="System">
+                                        <action id="2" name="Set at X" sid="311818151280990" type="Resposta">
+                                            <param id="0" name="X">Quadro-1</param>
+                                            <param id="1" name="Value">int(QuadrosJSON.GetData(&quot;resposta&quot;,Quadro-1))</param>
+                                        </action>
+                                        <action id="2" name="Set at X" sid="704573887995237" type="OrdemAtual">
+                                            <param id="0" name="X">Quadro-1</param>
+                                            <param id="1" name="Value">int(QuadrosJSON.GetData(&quot;resposta&quot;,Quadro-1))</param>
+                                        </action>
+                                        <action id="2" name="Set at X" sid="730243930851386" type="AuxiliaRandomizacao">
+                                            <param id="0" name="X">Quadro-1</param>
+                                            <param id="1" name="Value">int(QuadrosJSON.GetData(&quot;resposta&quot;,Quadro-1))</param>
+                                        </action>
+                                        <action id="-10" name="Add to" sid="865001812199308" type="System">
                                             <param id="0" name="Variable">quadro</param>
                                             <param id="1" name="Value">1</param>
                                         </action>
                                     </actions>
+                                </event-block>
+                                <event-block sid="511017810964653">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="494659170030273" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="806136900118614" type="System">
+                                            <param id="0" name="Variable">quadro</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>Função para randomizar a ordem dos quadros</comment>
+                                <event-block sid="725205174206748">
+                                    <conditions>
+                                        <condition id="-12" name="Repeat" sid="482110436102332" type="System">
+                                            <param id="0" name="Count">numeroQuadros</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="690152713448481" type="System">
+                                            <param id="0" name="Variable">escolheQuadro</param>
+                                            <param id="1" name="Value">round(random(0, numeroQuadros-loopindex-1))</param>
+                                        </action>
+                                        <action id="2" name="Set at X" sid="167680217917920" type="OrdemAtual">
+                                            <param id="0" name="X">loopindex</param>
+                                            <param id="1" name="Value">AuxiliaRandomizacao.At(escolheQuadro)</param>
+                                        </action>
+                                        <action id="9" name="Delete" sid="550117868279761" type="AuxiliaRandomizacao">
+                                            <param id="0" name="Index">escolheQuadro</param>
+                                            <param id="1" name="Axis">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>Verificar se não se manteve na mesma ordem</comment>
+                                <event-block sid="825026049665517">
+                                    <conditions>
+                                        <condition id="-23" name="While" sid="807252551537236" type="System" />
+                                        <condition id="-14" name="Compare variable" sid="344850257101524" type="System">
+                                            <param id="0" name="Variable">quadro</param>
+                                            <param id="1" name="Comparison">3</param>
+                                            <param id="2" name="Value">numeroQuadros</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
                                     <sub-events>
-                                        <event-block sid="566852925686792">
+                                        <event-block sid="623794704128211">
                                             <conditions>
-                                                <condition id="-12" name="Repeat" sid="498784164159207" type="System">
-                                                    <param id="0" name="Count">numeroQuadros</param>
+                                                <condition id="-8" name="Compare two values" sid="210203060863936" type="System">
+                                                    <param id="0" name="First value">OrdemAtual.At(Quadro-1)</param>
+                                                    <param id="1" name="Comparison">1</param>
+                                                    <param id="2" name="Second value">Resposta.At(Quadro-1)</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
-                                                <action id="2" name="Set at X" sid="250475804608334" type="Resposta">
-                                                    <param id="0" name="X">Quadro-1</param>
-                                                    <param id="1" name="Value">int(QuadrosJSON.GetData(&quot;resposta&quot;,Quadro-1))</param>
+                                                <action id="-9" name="Set value" sid="925225511810387" type="System">
+                                                    <param id="0" name="Variable">quadro</param>
+                                                    <param id="1" name="Value">numeroQuadros + 1</param>
                                                 </action>
-                                                <action id="2" name="Set at X" sid="224721940788861" type="OrdemAtual">
-                                                    <param id="0" name="X">numeroQuadros-Quadro+1</param>
-                                                    <param id="1" name="Value">int(QuadrosJSON.GetData(&quot;resposta&quot;,Quadro-1))</param>
+                                                <action id="-9" name="Set value" sid="465404000768182" type="System">
+                                                    <param id="0" name="Variable">quadrosRandomizados</param>
+                                                    <param id="1" name="Value">1</param>
                                                 </action>
-                                                <action id="-10" name="Add to" sid="815789088263616" type="System">
+                                            </actions>
+                                        </event-block>
+                                        <comment>Se não embaralhou força apenas uma ordem reversa</comment>
+                                        <event-block sid="903442191922830">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="378962861596361" type="System">
+                                                    <param id="0" name="Variable">quadro</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">numeroQuadros</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="294721335204682" type="System">
+                                                    <param id="0" name="Variable">quadro</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                            <sub-events>
+                                                <event-block sid="566852925686792">
+                                                    <conditions>
+                                                        <condition id="-12" name="Repeat" sid="498784164159207" type="System">
+                                                            <param id="0" name="Count">numeroQuadros</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="2" name="Set at X" sid="250475804608334" type="Resposta">
+                                                            <param id="0" name="X">Quadro-1</param>
+                                                            <param id="1" name="Value">int(QuadrosJSON.GetData(&quot;resposta&quot;,Quadro-1))</param>
+                                                        </action>
+                                                        <action id="2" name="Set at X" sid="224721940788861" type="OrdemAtual">
+                                                            <param id="0" name="X">numeroQuadros-Quadro+1</param>
+                                                            <param id="1" name="Value">int(QuadrosJSON.GetData(&quot;resposta&quot;,Quadro-1))</param>
+                                                        </action>
+                                                        <action id="-10" name="Add to" sid="815789088263616" type="System">
+                                                            <param id="0" name="Variable">quadro</param>
+                                                            <param id="1" name="Value">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="234810042247266">
+                                                    <conditions>
+                                                        <condition id="-22" name="Else" sid="999045981049745" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-9" name="Set value" sid="670934745520403" type="System">
+                                                            <param id="0" name="Variable">quadro</param>
+                                                            <param id="1" name="Value">0</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                        <event-block sid="950806265290028">
+                                            <conditions>
+                                                <condition id="-1" name="Every tick" sid="847300556084993" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-10" name="Add to" sid="886969525733483" type="System">
                                                     <param id="0" name="Variable">quadro</param>
                                                     <param id="1" name="Value">1</param>
                                                 </action>
                                             </actions>
                                         </event-block>
-                                        <event-block sid="234810042247266">
-                                            <conditions>
-                                                <condition id="-22" name="Else" sid="999045981049745" type="System" />
-                                            </conditions>
-                                            <actions>
-                                                <action id="-9" name="Set value" sid="670934745520403" type="System">
-                                                    <param id="0" name="Variable">quadro</param>
-                                                    <param id="1" name="Value">0</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
                                     </sub-events>
                                 </event-block>
-                                <event-block sid="950806265290028">
+                                <event-block sid="716240077629509">
                                     <conditions>
-                                        <condition id="-1" name="Every tick" sid="847300556084993" type="System" />
+                                        <condition id="-22" name="Else" sid="117056306892038" type="System" />
                                     </conditions>
                                     <actions>
-                                        <action id="-10" name="Add to" sid="886969525733483" type="System">
+                                        <action id="-9" name="Set value" sid="597677673622651" type="System">
                                             <param id="0" name="Variable">quadro</param>
                                             <param id="1" name="Value">1</param>
                                         </action>
                                     </actions>
                                 </event-block>
+                                <comment>Os quadros que não possuem imagens são destruidos para que eles não sejam selecionados</comment>
+                                <event-block disabled="1" sid="459290898040363">
+                                    <conditions />
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="628966069560524" type="System">
+                                            <param id="0" name="Variable">quadro</param>
+                                            <param id="1" name="Value">numeroQuadros</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="752500102775362">
+                                    <conditions>
+                                        <condition id="-23" name="While" sid="648841165809576" type="System" />
+                                        <condition id="-14" name="Compare variable" sid="574808520376322" type="System">
+                                            <param id="0" name="Variable">quadro</param>
+                                            <param id="1" name="Comparison">3</param>
+                                            <param id="2" name="Value">numeroQuadros</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="273201341520435">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="486789222492490" type="Quadros">
+                                                    <param id="0" name="Unique ID">OrdemAtual.At(quadro-1) + 175</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="2" name="Load image from URL" sid="268649677557590" type="Quadros">
+                                                    <param id="0" name="URI">OrdemAtual.At(quadro-1)&amp;&quot;.png&quot;</param>
+                                                </action>
+                                                <action id="-3" name="Set position" sid="114365483696597" type="Quadros">
+                                                    <param id="0" name="X">241 + (197 * ((quadro - 1) % 5))</param>
+                                                    <param id="1" name="Y">350 + (242 * floor((quadro - 1) / 5))</param>
+                                                </action>
+                                                <action id="-10" name="Add to" sid="234892399341303" type="System">
+                                                    <param id="0" name="Variable">quadro</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="2989587972220891">
+                                    <conditions>
+                                        <condition id="-23" name="While" sid="9559102040038602" type="System" />
+                                        <condition id="-14" name="Compare variable" sid="2583548689425198" type="System">
+                                            <param id="0" name="Variable">quadro</param>
+                                            <param id="1" name="Comparison">3</param>
+                                            <param id="2" name="Value">10</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="6296661807721067">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="3867093134526249" type="Quadros">
+                                                    <param id="0" name="Unique ID">quadro + 175</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Destroy" sid="8475899209692568" type="Quadros" />
+                                                <action id="-10" name="Add to" sid="4796372680534415" type="System">
+                                                    <param id="0" name="Variable">quadro</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
                             </sub-events>
                         </event-block>
-                        <event-block sid="716240077629509">
-                            <conditions>
-                                <condition id="-22" name="Else" sid="117056306892038" type="System" />
-                            </conditions>
+                        <event-block sid="138182526542279">
+                            <conditions />
                             <actions>
-                                <action id="-9" name="Set value" sid="597677673622651" type="System">
+                                <action id="-9" name="Set value" sid="210050894785656" type="System">
                                     <param id="0" name="Variable">quadro</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="8175820323900607">
+                        <comment>É necessário repetir isso com algumas alterações para que os quadros não sejam reposicionados quando recarregar o mural</comment>
+                        <event-block sid="847036763078067">
                             <conditions>
-                                <condition id="-23" name="While" sid="3021253507963165" type="System" />
-                                <condition id="-14" name="Compare variable" sid="1482370420548229" type="System">
+                                <condition id="-23" name="While" sid="440382577461373" type="System" />
+                                <condition id="-14" name="Compare variable" sid="437405549448374" type="System">
                                     <param id="0" name="Variable">quadro</param>
                                     <param id="1" name="Comparison">3</param>
                                     <param id="2" name="Value">numeroQuadros</param>
@@ -1271,66 +1385,47 @@
                             </conditions>
                             <actions />
                             <sub-events>
-                                <event-block sid="3822157344920091">
+                                <event-block sid="649977333077258">
                                     <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="412572813918708" type="Quadros">
+                                        <condition id="-14" name="Pick by unique ID" sid="942708112678224" type="Quadros">
                                             <param id="0" name="Unique ID">OrdemAtual.At(quadro-1) + 175</param>
                                         </condition>
                                     </conditions>
-                                    <actions>
-                                        <action id="2" name="Load image from URL" sid="3219540313214675" type="Quadros">
-                                            <param id="0" name="URI">OrdemAtual.At(quadro-1)&amp;&quot;.png&quot;</param>
-                                        </action>
-                                        <action id="-3" name="Set position" sid="6920614503469052" type="Quadros">
-                                            <param id="0" name="X">241 + (197 * ((quadro - 1) % 5))</param>
-                                            <param id="1" name="Y">350 + (242 * floor((quadro - 1) / 5))</param>
-                                        </action>
-                                        <action id="-10" name="Add to" sid="8700776613475758" type="System">
-                                            <param id="0" name="Variable">quadro</param>
-                                            <param id="1" name="Value">1</param>
-                                        </action>
-                                    </actions>
+                                    <actions />
+                                    <sub-events>
+                                        <comment>Dessa vez é necessário saber a posição que o quadro se encontra, então busca o posicionador mais próximo dele</comment>
+                                        <event-block sid="633779400387178">
+                                            <conditions>
+                                                <condition id="-15" name="Pick nearest/furthest" sid="460050486094664" type="PosicionadorQuadros">
+                                                    <param id="0" name="Which">0</param>
+                                                    <param id="1" name="X">Quadros.X</param>
+                                                    <param id="2" name="Y">Quadros.Y</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="2" name="Load image from URL" sid="895116310226645" type="Quadros">
+                                                    <param id="0" name="URI">OrdemAtual.At(PosicionadorQuadros.IID)&amp;&quot;.png&quot;</param>
+                                                </action>
+                                                <action id="-10" name="Add to" sid="155912344509094" type="System">
+                                                    <param id="0" name="Variable">quadro</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
-                        <comment>Os quadros que não possuem imagens são destruidos para que eles não sejam selecionados</comment>
-                        <event-block sid="2989587972220891">
+                        <event-block sid="465847496010456">
                             <conditions>
-                                <condition id="-23" name="While" sid="9559102040038602" type="System" />
-                                <condition id="-14" name="Compare variable" sid="2583548689425198" type="System">
-                                    <param id="0" name="Variable">quadro</param>
-                                    <param id="1" name="Comparison">3</param>
-                                    <param id="2" name="Value">10</param>
-                                </condition>
-                            </conditions>
-                            <actions />
-                            <sub-events>
-                                <event-block sid="6296661807721067">
-                                    <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="3867093134526249" type="Quadros">
-                                            <param id="0" name="Unique ID">quadro + 175</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Destroy" sid="8475899209692568" type="Quadros" />
-                                        <action id="-10" name="Add to" sid="4796372680534415" type="System">
-                                            <param id="0" name="Variable">quadro</param>
-                                            <param id="1" name="Value">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <event-block sid="6813286573138316">
-                            <conditions>
-                                <condition id="-1" name="Every tick" sid="5453775780848445" type="System" />
+                                <condition id="-1" name="Every tick" sid="524720457709193" type="System" />
                             </conditions>
                             <actions>
-                                <action id="-9" name="Set value" sid="429080087630228" type="System">
+                                <action id="-9" name="Set value" sid="150794754045075" type="System">
                                     <param id="0" name="Variable">iniciarAnimacao</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
-                                <action id="-12" name="Set group active" sid="8623285727512276" type="System">
+                                <action id="-12" name="Set group active" sid="709439535540590" type="System">
                                     <param id="0" name="Group name">&quot;carregarQuadros&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
@@ -1338,6 +1433,54 @@
                         </event-block>
                     </sub-events>
                 </event-group>
+                <comment>Controle do botão de fechar do mural</comment>
+                <event-block sid="551247705609999">
+                    <conditions>
+                        <condition id="7" name="Cursor is over object" sid="197916354480784" type="Mouse">
+                            <param id="0" name="Object">popupFechar</param>
+                        </condition>
+                        <condition id="-10" name="Compare opacity" sid="880022127628268" type="popupFechar">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Opacity">100</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set cursor style" sid="435419354828982" type="Mouse">
+                            <param id="0" name="Cursor style">1</param>
+                        </action>
+                        <action id="5" name="Set frame" sid="326049986836006" type="popupFechar">
+                            <param id="0" name="Frame number">1</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="714160956365193">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="569870356952897" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Play" sid="958526173733876" type="Audio">
+                                    <param id="0" name="Audio file">sobre_botao</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="418455980159969">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="372723619136613" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set cursor style" sid="769154012816527" type="Mouse">
+                            <param id="0" name="Cursor style">0</param>
+                        </action>
+                        <action id="5" name="Set frame" sid="150503416518425" type="popupFechar">
+                            <param id="0" name="Frame number">0</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <event-block sid="3988945501635567">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="8399356402495472" type="System">
@@ -1357,7 +1500,7 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-16" name="Set opacity" sid="2076384807695057" type="MuralQuadros">
+                                <action breakpoint="1" id="-16" name="Set opacity" sid="2076384807695057" type="MuralQuadros">
                                     <param id="0" name="Opacity">MuralQuadros.Opacity + 2.5</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="227286412602217" type="perguntas">
@@ -1365,6 +1508,9 @@
                                 </action>
                                 <action id="-16" name="Set opacity" sid="185857841444519" type="textoPerguntas">
                                     <param id="0" name="Opacity">textoPerguntas.Opacity + 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="783612971648259" type="popupFechar">
+                                    <param id="0" name="Opacity">popupFechar.Opacity + 2.5</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1391,12 +1537,12 @@
                     </sub-events>
                 </event-block>
                 <comment>Caso o jogador possa sair da ordenação de quadros é só modificar e descomentar essa parte</comment>
-                <event-block disabled="1" sid="1985184831597969">
+                <event-block sid="1985184831597969">
                     <conditions>
                         <condition id="6" name="On object clicked" sid="4752721050209126" type="Mouse">
                             <param id="0" name="Mouse button">0</param>
                             <param id="1" name="Click type">0</param>
-                            <param id="2" name="Object clicked">selecaoComida</param>
+                            <param id="2" name="Object clicked">popupFechar</param>
                         </condition>
                         <condition id="-10" name="Compare opacity" sid="9244725577974001" type="MuralQuadros">
                             <param id="0" name="Comparison">0</param>
@@ -1442,6 +1588,9 @@
                                 <action id="-16" name="Set opacity" sid="762708868023399" type="textoPerguntas">
                                     <param id="0" name="Opacity">textoPerguntas.Opacity - 2.5</param>
                                 </action>
+                                <action id="-16" name="Set opacity" sid="879775450828885" type="popupFechar">
+                                    <param id="0" name="Opacity">popupFechar.Opacity - 2.5</param>
+                                </action>
                             </actions>
                         </event-block>
                         <event-block sid="5152413625063937">
@@ -1455,6 +1604,10 @@
                                 <action id="-9" name="Set value" sid="9860826632281608" type="System">
                                     <param id="0" name="Variable">finalizarAnimacao</param>
                                     <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="265527228037262" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove3&quot;</param>
+                                    <param id="1" name="State">1</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2651,6 +2804,9 @@
                                         </action>
                                         <action id="-16" name="Set opacity" sid="484634863688627" type="textoPerguntas">
                                             <param id="0" name="Opacity">textoPerguntas.Opacity - 2.5</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="310908527988341" type="popupFechar">
+                                            <param id="0" name="Opacity">popupFechar.Opacity - 2.5</param>
                                         </action>
                                     </actions>
                                 </event-block>
