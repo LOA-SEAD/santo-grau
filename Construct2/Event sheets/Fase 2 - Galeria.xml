@@ -534,6 +534,62 @@
                 <action id="0" name="Load JSON" sid="253880948405215" type="QuadrosJSON" />
                 <action id="0" name="Load JSON" sid="657440534405968" type="FasesJSON" />
             </actions>
+            <sub-events>
+                <comment>Para o caso do jogador recarregar o jogo com o mural já aberto</comment>
+                <event-block sid="925607692289311">
+                    <conditions>
+                        <condition id="-23" name="While" sid="307493998212311" type="System" />
+                        <condition id="-14" name="Compare variable" sid="703423252079173" type="System">
+                            <param id="0" name="Variable">quadro</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Value">numeroQuadros</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="595434531116517">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="289864917647868" type="Quadros">
+                                    <param id="0" name="Unique ID">quadro + 175</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <comment>Dessa vez é necessário saber a posição que o quadro se encontra, então busca o posicionador mais próximo dele</comment>
+                                <event-block sid="896089334965993">
+                                    <conditions>
+                                        <condition id="-15" name="Pick nearest/furthest" sid="898035643626077" type="PosicionadorQuadros">
+                                            <param id="0" name="Which">0</param>
+                                            <param id="1" name="X">Quadros.X</param>
+                                            <param id="2" name="Y">Quadros.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="2" name="Load image from URL" sid="725069731396989" type="Quadros">
+                                            <param id="0" name="URI">OrdemAtual.At(PosicionadorQuadros.IID)&amp;&quot;.png&quot;</param>
+                                        </action>
+                                        <action id="-10" name="Add to" sid="425295665037989" type="System">
+                                            <param id="0" name="Variable">quadro</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="178225119947577">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="263126161771968" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="529814536247475" type="System">
+                            <param id="0" name="Variable">quadro</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
         </event-block>
         <event-block sid="172969983221178">
             <conditions>
@@ -1388,7 +1444,7 @@
                                 <event-block sid="649977333077258">
                                     <conditions>
                                         <condition id="-14" name="Pick by unique ID" sid="942708112678224" type="Quadros">
-                                            <param id="0" name="Unique ID">OrdemAtual.At(quadro-1) + 175</param>
+                                            <param id="0" name="Unique ID">quadro + 175</param>
                                         </condition>
                                     </conditions>
                                     <actions />
@@ -2001,7 +2057,7 @@
                         <event-block sid="2757364721462507">
                             <conditions>
                                 <condition id="0" name="Compare text" sid="3316282211951495" type="DialogoPersonagem">
-                                    <param id="0" name="Text to compare">&quot;nan&quot;</param>
+                                    <param id="0" name="Text to compare">&quot;Ariel&quot;</param>
                                     <param id="1" name="Case sensitivity">0</param>
                                 </condition>
                             </conditions>
