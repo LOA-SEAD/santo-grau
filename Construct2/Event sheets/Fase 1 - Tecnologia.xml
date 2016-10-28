@@ -14,6 +14,8 @@
         <variable constant="0" name="comprimento1" sid="4132435735041251" static="0" type="number">0</variable>
         <variable constant="0" name="comprimento2" sid="1904320686080953" static="0" type="number">0</variable>
         <variable constant="0" name="comprimento3" sid="5518556409153007" static="0" type="number">0</variable>
+        <comment>Esta variável serve para impedir que seja computado mais pontos do que o devido caso o jogador fique apertando o ENTER sucessivas vezes ao acertar a resposta</comment>
+        <variable constant="0" name="acertouPalavra" sid="860583932632849" static="0" type="number">0</variable>
         <event-block sid="5819905138494612">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="7461295097562547" type="System" />
@@ -2946,6 +2948,7 @@
                             </conditions>
                             <actions />
                             <sub-events>
+                                <comment>Acertou a palavra</comment>
                                 <event-block sid="1937065986069702">
                                     <conditions>
                                         <condition id="0" name="Compare text" sid="6827474966669485" type="computadorResp">
@@ -2953,99 +2956,116 @@
                                             <param id="1" name="Case">0</param>
                                         </condition>
                                     </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="7736663616887878" type="System">
-                                            <param id="0" name="Variable">controleFase2</param>
-                                            <param id="1" name="Value">5</param>
-                                        </action>
-                                        <action id="-12" name="Set group active" sid="8697960191043146" type="System">
-                                            <param id="0" name="Group name">&quot;EfeitoEnviar&quot;</param>
-                                            <param id="1" name="State">0</param>
-                                        </action>
-                                        <action behavior="Pin" id="0" name="Pin to object" sid="1559696518835519" type="popupBotaoTexto">
-                                            <param id="0" name="Pin to">botaoPopup</param>
-                                            <param id="1" name="Mode">0</param>
-                                        </action>
-                                        <action id="5" name="Set frame" sid="2154280348545657" type="computadorFeedback">
-                                            <param id="0" name="Frame number">1</param>
-                                        </action>
-                                        <action id="0" name="Play" sid="135302935718841" type="Audio">
-                                            <param id="0" name="Audio file">acerto</param>
-                                            <param id="2" name="Loop">0</param>
-                                            <param id="3" name="Volume">volSons</param>
-                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                        </action>
-                                    </actions>
+                                    <actions />
                                     <sub-events>
                                         <event-block sid="9409157970685426">
                                             <conditions>
-                                                <condition id="-14" name="Pick by unique ID" sid="2773754331663754" type="selecaoComputador">
-                                                    <param id="0" name="Unique ID">199</param>
+                                                <condition id="-14" name="Compare variable" sid="301373408649368" type="System">
+                                                    <param id="0" name="Variable">acertouPalavra</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">0</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
-                                                <action id="-10" name="Add to" sid="1343519782881672" type="System">
-                                                    <param id="0" name="Variable">controlePCs</param>
+                                                <action id="-9" name="Set value" sid="195225644912619" type="System">
+                                                    <param id="0" name="Variable">acertouPalavra</param>
                                                     <param id="1" name="Value">1</param>
                                                 </action>
-                                                <action id="-9" name="Destroy" sid="6242508293309317" type="selecaoComputador" />
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="5822066723970938">
-                                            <conditions>
-                                                <condition id="-14" name="Pick by unique ID" sid="2674723672779747" type="computadorOff">
-                                                    <param id="0" name="Unique ID">239</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-15" name="Set visible" sid="9356873529666592" type="computadorOff">
-                                                    <param id="0" name="Visibility">1</param>
+                                                <action id="-9" name="Set value" sid="7736663616887878" type="System">
+                                                    <param id="0" name="Variable">controleFase2</param>
+                                                    <param id="1" name="Value">5</param>
                                                 </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="5550515984106806">
-                                            <conditions>
-                                                <condition id="-14" name="Pick by unique ID" sid="1599729310918682" type="computadorOff">
-                                                    <param id="0" name="Unique ID">284</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-15" name="Set visible" sid="1040456213556911" type="computadorOff">
-                                                    <param id="0" name="Visibility">1</param>
-                                                </action>
-                                                <action id="-10" name="Add to" sid="845587311416095" type="System">
-                                                    <param id="0" name="Variable">pontos</param>
-                                                    <param id="1" name="Value">50</param>
-                                                </action>
-                                                <action id="0" name="Set text" sid="173077044042875" type="pontoTexto">
-                                                    <param id="0" name="Text">&quot;+50&quot;</param>
-                                                </action>
-                                                <action id="4" name="Set font color" sid="623677224246219" type="pontoTexto">
-                                                    <param id="0" name="Color">rgb(41, 90, 165)</param>
-                                                </action>
-                                                <action id="-12" name="Set group active" sid="152578645691860" type="System">
-                                                    <param id="0" name="Group name">&quot;Pontuacao2b&quot;</param>
+                                                <action id="-12" name="Set group active" sid="8697960191043146" type="System">
+                                                    <param id="0" name="Group name">&quot;EfeitoEnviar&quot;</param>
                                                     <param id="1" name="State">0</param>
                                                 </action>
-                                                <action id="-12" name="Set group active" sid="753026064833766" type="System">
-                                                    <param id="0" name="Group name">&quot;Pontuacao2a&quot;</param>
-                                                    <param id="1" name="State">1</param>
+                                                <action behavior="Pin" id="0" name="Pin to object" sid="1559696518835519" type="popupBotaoTexto">
+                                                    <param id="0" name="Pin to">botaoPopup</param>
+                                                    <param id="1" name="Mode">0</param>
                                                 </action>
-                                                <action id="-16" name="Wait" sid="368247805018051" type="System">
-                                                    <param id="0" name="Seconds">4</param>
+                                                <action id="5" name="Set frame" sid="2154280348545657" type="computadorFeedback">
+                                                    <param id="0" name="Frame number">1</param>
                                                 </action>
-                                                <action id="-12" name="Set group active" sid="263779196884283" type="System">
-                                                    <param id="0" name="Group name">&quot;Pontuacao2a&quot;</param>
-                                                    <param id="1" name="State">0</param>
-                                                </action>
-                                                <action id="-12" name="Set group active" sid="452227101557856" type="System">
-                                                    <param id="0" name="Group name">&quot;Pontuacao2b&quot;</param>
-                                                    <param id="1" name="State">1</param>
+                                                <action id="0" name="Play" sid="135302935718841" type="Audio">
+                                                    <param id="0" name="Audio file">acerto</param>
+                                                    <param id="2" name="Loop">0</param>
+                                                    <param id="3" name="Volume">volSons</param>
+                                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                                 </action>
                                             </actions>
+                                            <sub-events>
+                                                <event-block sid="810890391176771">
+                                                    <conditions>
+                                                        <condition id="-14" name="Pick by unique ID" sid="597940123164706" type="selecaoComputador">
+                                                            <param id="0" name="Unique ID">199</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-9" name="Destroy" sid="935945171801975" type="selecaoComputador" />
+                                                        <action id="-10" name="Add to" sid="109808052308104" type="System">
+                                                            <param id="0" name="Variable">controlePCs</param>
+                                                            <param id="1" name="Value">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="5822066723970938">
+                                                    <conditions>
+                                                        <condition id="-14" name="Pick by unique ID" sid="2674723672779747" type="computadorOff">
+                                                            <param id="0" name="Unique ID">239</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-15" name="Set visible" sid="9356873529666592" type="computadorOff">
+                                                            <param id="0" name="Visibility">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="5550515984106806">
+                                                    <conditions>
+                                                        <condition id="-14" name="Pick by unique ID" sid="1599729310918682" type="computadorOff">
+                                                            <param id="0" name="Unique ID">284</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-15" name="Set visible" sid="1040456213556911" type="computadorOff">
+                                                            <param id="0" name="Visibility">1</param>
+                                                        </action>
+                                                        <action id="-10" name="Add to" sid="845587311416095" type="System">
+                                                            <param id="0" name="Variable">pontos</param>
+                                                            <param id="1" name="Value">50</param>
+                                                        </action>
+                                                        <action id="0" name="Set text" sid="173077044042875" type="pontoTexto">
+                                                            <param id="0" name="Text">&quot;+50&quot;</param>
+                                                        </action>
+                                                        <action id="4" name="Set font color" sid="623677224246219" type="pontoTexto">
+                                                            <param id="0" name="Color">rgb(41, 90, 165)</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="152578645691860" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao2b&quot;</param>
+                                                            <param id="1" name="State">0</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="753026064833766" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao2a&quot;</param>
+                                                            <param id="1" name="State">1</param>
+                                                        </action>
+                                                        <action id="-16" name="Wait" sid="368247805018051" type="System">
+                                                            <param id="0" name="Seconds">4</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="263779196884283" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao2a&quot;</param>
+                                                            <param id="1" name="State">0</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="452227101557856" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao2b&quot;</param>
+                                                            <param id="1" name="State">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
                                         </event-block>
                                     </sub-events>
                                 </event-block>
+                                <comment>Errou a palavra</comment>
                                 <event-block sid="8564039797921932">
                                     <conditions>
                                         <condition id="-22" name="Else" sid="9364863300202258" type="System" />
@@ -3160,6 +3180,10 @@
                                     <param id="0" name="Group name">&quot;Computador1&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
+                                <action id="-9" name="Set value" sid="118160708399367" type="System">
+                                    <param id="0" name="Variable">acertouPalavra</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
                             </actions>
                             <sub-events>
                                 <event-block sid="3346580751124091">
@@ -3247,6 +3271,7 @@
                             </conditions>
                             <actions />
                             <sub-events>
+                                <comment>Acertou a palavra</comment>
                                 <event-block sid="5787001339301998">
                                     <conditions>
                                         <condition id="0" name="Compare text" sid="1978381298039663" type="computadorResp">
@@ -3254,99 +3279,116 @@
                                             <param id="1" name="Case">0</param>
                                         </condition>
                                     </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="1115673006415674" type="System">
-                                            <param id="0" name="Variable">controleFase2</param>
-                                            <param id="1" name="Value">5</param>
-                                        </action>
-                                        <action id="-12" name="Set group active" sid="2222006041913298" type="System">
-                                            <param id="0" name="Group name">&quot;EfeitoEnviar&quot;</param>
-                                            <param id="1" name="State">0</param>
-                                        </action>
-                                        <action behavior="Pin" id="0" name="Pin to object" sid="294911993667559" type="popupBotaoTexto">
-                                            <param id="0" name="Pin to">botaoPopup</param>
-                                            <param id="1" name="Mode">0</param>
-                                        </action>
-                                        <action id="5" name="Set frame" sid="4428622677358307" type="computadorFeedback">
-                                            <param id="0" name="Frame number">1</param>
-                                        </action>
-                                        <action id="0" name="Play" sid="333538296312702" type="Audio">
-                                            <param id="0" name="Audio file">acerto</param>
-                                            <param id="2" name="Loop">0</param>
-                                            <param id="3" name="Volume">volSons</param>
-                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                        </action>
-                                    </actions>
+                                    <actions />
                                     <sub-events>
-                                        <event-block sid="4770076016852178">
+                                        <event-block sid="423081637262265">
                                             <conditions>
-                                                <condition id="-14" name="Pick by unique ID" sid="9327950171183803" type="selecaoComputador">
-                                                    <param id="0" name="Unique ID">200</param>
+                                                <condition id="-14" name="Compare variable" sid="504297428615867" type="System">
+                                                    <param id="0" name="Variable">acertouPalavra</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">0</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
-                                                <action id="-9" name="Destroy" sid="5567975935541105" type="selecaoComputador" />
-                                                <action id="-10" name="Add to" sid="6150077693008949" type="System">
-                                                    <param id="0" name="Variable">controlePCs</param>
+                                                <action id="-9" name="Set value" sid="548459800701776" type="System">
+                                                    <param id="0" name="Variable">acertouPalavra</param>
                                                     <param id="1" name="Value">1</param>
                                                 </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="9359115547095337">
-                                            <conditions>
-                                                <condition id="-14" name="Pick by unique ID" sid="9484295273471209" type="computadorOff">
-                                                    <param id="0" name="Unique ID">285</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-15" name="Set visible" sid="4958026901077239" type="computadorOff">
-                                                    <param id="0" name="Visibility">1</param>
+                                                <action id="-9" name="Set value" sid="1115673006415674" type="System">
+                                                    <param id="0" name="Variable">controleFase2</param>
+                                                    <param id="1" name="Value">5</param>
                                                 </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="7746670262126886">
-                                            <conditions>
-                                                <condition id="-14" name="Pick by unique ID" sid="3245296145202615" type="computadorOff">
-                                                    <param id="0" name="Unique ID">286</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-15" name="Set visible" sid="5938062102190036" type="computadorOff">
-                                                    <param id="0" name="Visibility">1</param>
-                                                </action>
-                                                <action id="-10" name="Add to" sid="757906516680800" type="System">
-                                                    <param id="0" name="Variable">pontos</param>
-                                                    <param id="1" name="Value">50</param>
-                                                </action>
-                                                <action id="0" name="Set text" sid="696449209452609" type="pontoTexto">
-                                                    <param id="0" name="Text">&quot;+50&quot;</param>
-                                                </action>
-                                                <action id="4" name="Set font color" sid="810106922486735" type="pontoTexto">
-                                                    <param id="0" name="Color">rgb(41, 90, 165)</param>
-                                                </action>
-                                                <action id="-12" name="Set group active" sid="706591125322389" type="System">
-                                                    <param id="0" name="Group name">&quot;Pontuacao2b&quot;</param>
+                                                <action id="-12" name="Set group active" sid="2222006041913298" type="System">
+                                                    <param id="0" name="Group name">&quot;EfeitoEnviar&quot;</param>
                                                     <param id="1" name="State">0</param>
                                                 </action>
-                                                <action id="-12" name="Set group active" sid="286819641697112" type="System">
-                                                    <param id="0" name="Group name">&quot;Pontuacao2a&quot;</param>
-                                                    <param id="1" name="State">1</param>
+                                                <action behavior="Pin" id="0" name="Pin to object" sid="294911993667559" type="popupBotaoTexto">
+                                                    <param id="0" name="Pin to">botaoPopup</param>
+                                                    <param id="1" name="Mode">0</param>
                                                 </action>
-                                                <action id="-16" name="Wait" sid="160203945927057" type="System">
-                                                    <param id="0" name="Seconds">4</param>
+                                                <action id="5" name="Set frame" sid="4428622677358307" type="computadorFeedback">
+                                                    <param id="0" name="Frame number">1</param>
                                                 </action>
-                                                <action id="-12" name="Set group active" sid="273831309756190" type="System">
-                                                    <param id="0" name="Group name">&quot;Pontuacao2a&quot;</param>
-                                                    <param id="1" name="State">0</param>
-                                                </action>
-                                                <action id="-12" name="Set group active" sid="980320118510045" type="System">
-                                                    <param id="0" name="Group name">&quot;Pontuacao2b&quot;</param>
-                                                    <param id="1" name="State">1</param>
+                                                <action id="0" name="Play" sid="333538296312702" type="Audio">
+                                                    <param id="0" name="Audio file">acerto</param>
+                                                    <param id="2" name="Loop">0</param>
+                                                    <param id="3" name="Volume">volSons</param>
+                                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                                 </action>
                                             </actions>
+                                            <sub-events>
+                                                <event-block sid="4770076016852178">
+                                                    <conditions>
+                                                        <condition id="-14" name="Pick by unique ID" sid="9327950171183803" type="selecaoComputador">
+                                                            <param id="0" name="Unique ID">200</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-9" name="Destroy" sid="5567975935541105" type="selecaoComputador" />
+                                                        <action id="-10" name="Add to" sid="6150077693008949" type="System">
+                                                            <param id="0" name="Variable">controlePCs</param>
+                                                            <param id="1" name="Value">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="9359115547095337">
+                                                    <conditions>
+                                                        <condition id="-14" name="Pick by unique ID" sid="9484295273471209" type="computadorOff">
+                                                            <param id="0" name="Unique ID">285</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-15" name="Set visible" sid="4958026901077239" type="computadorOff">
+                                                            <param id="0" name="Visibility">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="7746670262126886">
+                                                    <conditions>
+                                                        <condition id="-14" name="Pick by unique ID" sid="3245296145202615" type="computadorOff">
+                                                            <param id="0" name="Unique ID">286</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-15" name="Set visible" sid="5938062102190036" type="computadorOff">
+                                                            <param id="0" name="Visibility">1</param>
+                                                        </action>
+                                                        <action id="-10" name="Add to" sid="757906516680800" type="System">
+                                                            <param id="0" name="Variable">pontos</param>
+                                                            <param id="1" name="Value">50</param>
+                                                        </action>
+                                                        <action id="0" name="Set text" sid="696449209452609" type="pontoTexto">
+                                                            <param id="0" name="Text">&quot;+50&quot;</param>
+                                                        </action>
+                                                        <action id="4" name="Set font color" sid="810106922486735" type="pontoTexto">
+                                                            <param id="0" name="Color">rgb(41, 90, 165)</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="706591125322389" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao2b&quot;</param>
+                                                            <param id="1" name="State">0</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="286819641697112" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao2a&quot;</param>
+                                                            <param id="1" name="State">1</param>
+                                                        </action>
+                                                        <action id="-16" name="Wait" sid="160203945927057" type="System">
+                                                            <param id="0" name="Seconds">4</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="273831309756190" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao2a&quot;</param>
+                                                            <param id="1" name="State">0</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="980320118510045" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao2b&quot;</param>
+                                                            <param id="1" name="State">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
                                         </event-block>
                                     </sub-events>
                                 </event-block>
+                                <comment>Errou a palavra</comment>
                                 <event-block sid="5845023449514879">
                                     <conditions>
                                         <condition id="-22" name="Else" sid="8996977556214863" type="System" />
@@ -3461,6 +3503,10 @@
                                     <param id="0" name="Group name">&quot;Computador2&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
+                                <action id="-9" name="Set value" sid="644486555256735" type="System">
+                                    <param id="0" name="Variable">acertouPalavra</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
                             </actions>
                             <sub-events>
                                 <event-block sid="7276389212459927">
@@ -3548,6 +3594,7 @@
                             </conditions>
                             <actions />
                             <sub-events>
+                                <comment>Acertou a palavra</comment>
                                 <event-block sid="1702284439524865">
                                     <conditions>
                                         <condition id="0" name="Compare text" sid="196879527680875" type="computadorResp">
@@ -3555,99 +3602,116 @@
                                             <param id="1" name="Case">0</param>
                                         </condition>
                                     </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="8767909082543963" type="System">
-                                            <param id="0" name="Variable">controleFase2</param>
-                                            <param id="1" name="Value">5</param>
-                                        </action>
-                                        <action id="-12" name="Set group active" sid="6264320841169148" type="System">
-                                            <param id="0" name="Group name">&quot;EfeitoEnviar&quot;</param>
-                                            <param id="1" name="State">0</param>
-                                        </action>
-                                        <action behavior="Pin" id="0" name="Pin to object" sid="353178601731453" type="popupBotaoTexto">
-                                            <param id="0" name="Pin to">botaoPopup</param>
-                                            <param id="1" name="Mode">0</param>
-                                        </action>
-                                        <action id="5" name="Set frame" sid="193061942362838" type="computadorFeedback">
-                                            <param id="0" name="Frame number">1</param>
-                                        </action>
-                                        <action id="0" name="Play" sid="974424111266915" type="Audio">
-                                            <param id="0" name="Audio file">acerto</param>
-                                            <param id="2" name="Loop">0</param>
-                                            <param id="3" name="Volume">volSons</param>
-                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                        </action>
-                                    </actions>
+                                    <actions />
                                     <sub-events>
-                                        <event-block sid="9045503244732369">
+                                        <event-block sid="898659429687870">
                                             <conditions>
-                                                <condition id="-14" name="Pick by unique ID" sid="4371532281242367" type="selecaoComputador">
-                                                    <param id="0" name="Unique ID">201</param>
+                                                <condition id="-14" name="Compare variable" sid="487469828396239" type="System">
+                                                    <param id="0" name="Variable">acertouPalavra</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">0</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
-                                                <action id="-9" name="Destroy" sid="1397081742721989" type="selecaoComputador" />
-                                                <action id="-10" name="Add to" sid="4925152989227368" type="System">
-                                                    <param id="0" name="Variable">controlePCs</param>
+                                                <action id="-9" name="Set value" sid="964251221789809" type="System">
+                                                    <param id="0" name="Variable">acertouPalavra</param>
                                                     <param id="1" name="Value">1</param>
                                                 </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="5128044830180922">
-                                            <conditions>
-                                                <condition id="-14" name="Pick by unique ID" sid="9736903634866216" type="computadorOff">
-                                                    <param id="0" name="Unique ID">287</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-15" name="Set visible" sid="3758030878173916" type="computadorOff">
-                                                    <param id="0" name="Visibility">1</param>
+                                                <action id="-9" name="Set value" sid="8767909082543963" type="System">
+                                                    <param id="0" name="Variable">controleFase2</param>
+                                                    <param id="1" name="Value">5</param>
                                                 </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="8132572019170556">
-                                            <conditions>
-                                                <condition id="-14" name="Pick by unique ID" sid="2520977598411383" type="computadorOff">
-                                                    <param id="0" name="Unique ID">288</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-15" name="Set visible" sid="4192460279783438" type="computadorOff">
-                                                    <param id="0" name="Visibility">1</param>
-                                                </action>
-                                                <action id="-10" name="Add to" sid="452626442966427" type="System">
-                                                    <param id="0" name="Variable">pontos</param>
-                                                    <param id="1" name="Value">50</param>
-                                                </action>
-                                                <action id="0" name="Set text" sid="279021085185087" type="pontoTexto">
-                                                    <param id="0" name="Text">&quot;+50&quot;</param>
-                                                </action>
-                                                <action id="4" name="Set font color" sid="890343975575362" type="pontoTexto">
-                                                    <param id="0" name="Color">rgb(41, 90, 165)</param>
-                                                </action>
-                                                <action id="-12" name="Set group active" sid="411390078470808" type="System">
-                                                    <param id="0" name="Group name">&quot;Pontuacao2b&quot;</param>
+                                                <action id="-12" name="Set group active" sid="6264320841169148" type="System">
+                                                    <param id="0" name="Group name">&quot;EfeitoEnviar&quot;</param>
                                                     <param id="1" name="State">0</param>
                                                 </action>
-                                                <action id="-12" name="Set group active" sid="425108117191610" type="System">
-                                                    <param id="0" name="Group name">&quot;Pontuacao2a&quot;</param>
-                                                    <param id="1" name="State">1</param>
+                                                <action behavior="Pin" id="0" name="Pin to object" sid="353178601731453" type="popupBotaoTexto">
+                                                    <param id="0" name="Pin to">botaoPopup</param>
+                                                    <param id="1" name="Mode">0</param>
                                                 </action>
-                                                <action id="-16" name="Wait" sid="103060474553750" type="System">
-                                                    <param id="0" name="Seconds">4</param>
+                                                <action id="5" name="Set frame" sid="193061942362838" type="computadorFeedback">
+                                                    <param id="0" name="Frame number">1</param>
                                                 </action>
-                                                <action id="-12" name="Set group active" sid="347906658314917" type="System">
-                                                    <param id="0" name="Group name">&quot;Pontuacao2a&quot;</param>
-                                                    <param id="1" name="State">0</param>
-                                                </action>
-                                                <action id="-12" name="Set group active" sid="255421508582896" type="System">
-                                                    <param id="0" name="Group name">&quot;Pontuacao2b&quot;</param>
-                                                    <param id="1" name="State">1</param>
+                                                <action id="0" name="Play" sid="974424111266915" type="Audio">
+                                                    <param id="0" name="Audio file">acerto</param>
+                                                    <param id="2" name="Loop">0</param>
+                                                    <param id="3" name="Volume">volSons</param>
+                                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                                 </action>
                                             </actions>
+                                            <sub-events>
+                                                <event-block sid="9045503244732369">
+                                                    <conditions>
+                                                        <condition id="-14" name="Pick by unique ID" sid="4371532281242367" type="selecaoComputador">
+                                                            <param id="0" name="Unique ID">201</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-9" name="Destroy" sid="1397081742721989" type="selecaoComputador" />
+                                                        <action id="-10" name="Add to" sid="4925152989227368" type="System">
+                                                            <param id="0" name="Variable">controlePCs</param>
+                                                            <param id="1" name="Value">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="5128044830180922">
+                                                    <conditions>
+                                                        <condition id="-14" name="Pick by unique ID" sid="9736903634866216" type="computadorOff">
+                                                            <param id="0" name="Unique ID">287</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-15" name="Set visible" sid="3758030878173916" type="computadorOff">
+                                                            <param id="0" name="Visibility">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="8132572019170556">
+                                                    <conditions>
+                                                        <condition id="-14" name="Pick by unique ID" sid="2520977598411383" type="computadorOff">
+                                                            <param id="0" name="Unique ID">288</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-15" name="Set visible" sid="4192460279783438" type="computadorOff">
+                                                            <param id="0" name="Visibility">1</param>
+                                                        </action>
+                                                        <action id="-10" name="Add to" sid="452626442966427" type="System">
+                                                            <param id="0" name="Variable">pontos</param>
+                                                            <param id="1" name="Value">50</param>
+                                                        </action>
+                                                        <action id="0" name="Set text" sid="279021085185087" type="pontoTexto">
+                                                            <param id="0" name="Text">&quot;+50&quot;</param>
+                                                        </action>
+                                                        <action id="4" name="Set font color" sid="890343975575362" type="pontoTexto">
+                                                            <param id="0" name="Color">rgb(41, 90, 165)</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="411390078470808" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao2b&quot;</param>
+                                                            <param id="1" name="State">0</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="425108117191610" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao2a&quot;</param>
+                                                            <param id="1" name="State">1</param>
+                                                        </action>
+                                                        <action id="-16" name="Wait" sid="103060474553750" type="System">
+                                                            <param id="0" name="Seconds">4</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="347906658314917" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao2a&quot;</param>
+                                                            <param id="1" name="State">0</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="255421508582896" type="System">
+                                                            <param id="0" name="Group name">&quot;Pontuacao2b&quot;</param>
+                                                            <param id="1" name="State">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
                                         </event-block>
                                     </sub-events>
                                 </event-block>
+                                <comment>Errou a palavra</comment>
                                 <event-block sid="9290215614834756">
                                     <conditions>
                                         <condition id="-22" name="Else" sid="3476095616296794" type="System" />
@@ -3761,6 +3825,10 @@
                                 <action id="-12" name="Set group active" sid="3593452585980663" type="System">
                                     <param id="0" name="Group name">&quot;Computador3&quot;</param>
                                     <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="120550310489304" type="System">
+                                    <param id="0" name="Variable">acertouPalavra</param>
+                                    <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
                             <sub-events>
