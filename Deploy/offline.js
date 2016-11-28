@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1477687262,
+	"version": 1480356249,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -270,6 +270,9 @@
 		"media/monstro_morrendo_sem_delay.ogg",
 		"media/acendendo_vela.ogg",
 		"media/assopro.ogg",
+		"media/cena_1_efeitos.ogg",
+		"media/cena_2_efeitos.ogg",
+		"media/cena_3_efeitos.ogg",
 		"media/osantodegrau.ogg",
 		"media/osantograu.ogg",
 		"media/osantojograu.ogg",
@@ -277,6 +280,9 @@
 		"media/ice_dreams_-_blocos_de_neve.ogg",
 		"media/papapa_lava.ogg",
 		"media/thebossh_tcc.ogg",
+		"media/cena_2_musica.ogg",
+		"media/cena_1_musica.ogg",
+		"media/cena_3_musica.ogg",
 		"icon-16.png",
 		"icon-32.png",
 		"icon-114.png",
