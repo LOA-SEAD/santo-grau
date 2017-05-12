@@ -31,6 +31,8 @@
         <variable constant="0" name="estaAcendendoVela" sid="221783546930456" static="0" type="number">0</variable>
         <comment>Utilizada para marcar o momento em que foi realizada a randomização na primeira vez que foi aberto o mural, para que quando ele seja fechado e reaberto os quadros não sejam reorganizados outra vez</comment>
         <variable constant="0" name="quadrosRandomizados" sid="568985497186630" static="0" type="number">0</variable>
+        <comment>Utilizada para contabilizar a quantidade de vezes que o jogador arrastou os quadros, permitindo que seja enviada essa estatistica após concluir a organização dos quadros</comment>
+        <variable constant="0" name="numeroArrastos" sid="553661030920197" static="0" type="number">0</variable>
         <event-block sid="5554538898794456">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="3689958973850941" type="System" />
@@ -1583,7 +1585,7 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action breakpoint="1" id="-16" name="Set opacity" sid="2076384807695057" type="MuralQuadros">
+                                <action id="-16" name="Set opacity" sid="2076384807695057" type="MuralQuadros">
                                     <param id="0" name="Opacity">MuralQuadros.Opacity + 2.5</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="227286412602217" type="perguntas">
@@ -1982,6 +1984,10 @@
                         <condition behavior="DragDrop" id="2" name="On drop" sid="9737852282607683" type="Quadros" />
                     </conditions>
                     <actions>
+                        <action id="-10" name="Add to" sid="755171376062699" type="System">
+                            <param id="0" name="Variable">numeroArrastos</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
                         <action id="-12" name="Set group active" sid="9301324868269133" type="System">
                             <param id="0" name="Group name">&quot;operacoesQuadros&quot;</param>
                             <param id="1" name="State">1</param>
