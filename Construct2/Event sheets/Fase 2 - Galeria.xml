@@ -33,6 +33,20 @@
         <variable constant="0" name="quadrosRandomizados" sid="568985497186630" static="0" type="number">0</variable>
         <comment>Utilizada para contabilizar a quantidade de vezes que o jogador arrastou os quadros, permitindo que seja enviada essa estatistica após concluir a organização dos quadros</comment>
         <variable constant="0" name="numeroArrastos" sid="553661030920197" static="0" type="number">0</variable>
+        <comment>Serve para armazenar a posição inicial de um quadro no momento em que ele começou a ser arrastado</comment>
+        <variable constant="0" name="posicaoInicialQuadro" sid="632924344593745" static="0" type="number">11</variable>
+        <comment>Serve para armazenar a posição do quadro no momento em que ele foi solto</comment>
+        <variable constant="0" name="posicaoFinalQuadro" sid="702253499627419" static="0" type="number">11</variable>
+        <comment>Variáveis para saber qual é o quadro que está sendo arrastado e qual é o quadro que será sobreposto (caso exista um na posição)</comment>
+        <variable constant="0" name="quadroNaquelaPosicao" sid="210136707040875" static="0" type="number">0</variable>
+        <variable constant="0" name="quadroArrastado" sid="687865076070743" static="0" type="number">0</variable>
+        <comment>Variáveis para saber as coordenadas originais do quadro e para onde ele foi arrastado</comment>
+        <variable constant="0" name="XPosQuadro" sid="429845261179286" static="0" type="number">0</variable>
+        <variable constant="0" name="YPosQuadro" sid="240436408918503" static="0" type="number">0</variable>
+        <variable constant="0" name="XQuadro" sid="570426575768308" static="0" type="number">0</variable>
+        <variable constant="0" name="YQuadro" sid="742320773188587" static="0" type="number">0</variable>
+        <comment>Como a troca de posições dos quadros não funciona dentro do evento indicando que um quadro terminou de ser arrastado, essa variável faz esse papel como um trigger</comment>
+        <variable constant="0" name="arrastouQuadro" sid="443754465611538" static="0" type="number">0</variable>
         <event-block sid="5554538898794456">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="3689958973850941" type="System" />
@@ -61,6 +75,18 @@
                 <action id="-9" name="Set value" sid="594571861236202" type="System">
                     <param id="0" name="Variable">quadrosRandomizados</param>
                     <param id="1" name="Value">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="856466123440856" type="System">
+                    <param id="0" name="Variable">numeroArrastos</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="586344824449958" type="System">
+                    <param id="0" name="Variable">posicaoFinalQuadro</param>
+                    <param id="1" name="Value">11</param>
+                </action>
+                <action id="-9" name="Set value" sid="251771027698337" type="System">
+                    <param id="0" name="Variable">posicaoInicialQuadro</param>
+                    <param id="1" name="Value">11</param>
                 </action>
                 <action id="4" name="Preload" sid="241938570191040" type="Audio">
                     <param id="0" name="Audio file">ambiencia_fantasmagorica</param>
@@ -1962,7 +1988,7 @@
         <comment>Grupo criado apenas para separar determinados controles utilizados na movimentação dos quadros que ficavam na parte inicial </comment>
         <event-group description="" sid="5019977194563664" title="movimentacaoQuadros">
             <sub-events>
-                <comment>Estes dois blocos servem para que só seja modificado o vetor com a ordem dos quadros quando o jogador soltar o quadro que ele estiver arrastando</comment>
+                <comment>Os dois eventos que lidam com os quadros servem para que só seja modificado o vetor com a ordem dos quadros quando o jogador soltar o quadro que ele estiver arrastando</comment>
                 <event-block sid="8510538776884853">
                     <conditions>
                         <condition behavior="DragDrop" id="0" name="Is dragging" sid="6326581813458748" type="Quadros" />
@@ -1978,16 +2004,42 @@
                             <param id="1" name="State">0</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <comment>Armazena a posição inicial do quadro que está sendo arrastado</comment>
+                        <event-block sid="495202889633408">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="868937008864131" type="System" />
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="125894383657224">
+                                    <conditions>
+                                        <condition id="-15" name="Pick nearest/furthest" sid="889258551284342" type="PosicionadorQuadros">
+                                            <param id="0" name="Which">0</param>
+                                            <param id="1" name="X">Quadros.X</param>
+                                            <param id="2" name="Y">Quadros.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="182336910067678" type="System">
+                                            <param id="0" name="Variable">posicaoInicialQuadro</param>
+                                            <param id="1" name="Value">PosicionadorQuadros.UID</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="101197823369406" type="System">
+                                            <param id="0" name="Variable">quadroArrastado</param>
+                                            <param id="1" name="Value">OrdemAtual.At(PosicionadorQuadros.IID)</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="7745757215299397">
                     <conditions>
                         <condition behavior="DragDrop" id="2" name="On drop" sid="9737852282607683" type="Quadros" />
                     </conditions>
                     <actions>
-                        <action id="-10" name="Add to" sid="755171376062699" type="System">
-                            <param id="0" name="Variable">numeroArrastos</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
                         <action id="-12" name="Set group active" sid="9301324868269133" type="System">
                             <param id="0" name="Group name">&quot;operacoesQuadros&quot;</param>
                             <param id="1" name="State">1</param>
@@ -1995,18 +2047,152 @@
                     </actions>
                     <sub-events>
                         <comment>Apenas para que os quadros não fiquem espalhados em qualquer posição, então é utilizado o sprite PosicionadorQuadros para atuar &quot;como um imã&quot; (valeu pela sugestão, Valerio!)</comment>
-                        <event-block sid="134458215674590">
+                        <event-block sid="104319753586559">
                             <conditions>
-                                <condition id="-15" name="Pick nearest/furthest" sid="127749774586223" type="PosicionadorQuadros">
+                                <condition id="-15" name="Pick nearest/furthest" sid="326677845844878" type="PosicionadorQuadros">
                                     <param id="0" name="Which">0</param>
                                     <param id="1" name="X">Quadros.X</param>
                                     <param id="2" name="Y">Quadros.Y</param>
                                 </condition>
                             </conditions>
                             <actions>
+                                <action id="-9" name="Set value" sid="904002190402849" type="System">
+                                    <param id="0" name="Variable">quadroNaquelaPosicao</param>
+                                    <param id="1" name="Value">OrdemAtual.At(PosicionadorQuadros.IID)</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="216747182579210" type="System">
+                                    <param id="0" name="Variable">XPosQuadro</param>
+                                    <param id="1" name="Value">PosicionadorQuadros.X</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="906384444162516" type="System">
+                                    <param id="0" name="Variable">YPosQuadro</param>
+                                    <param id="1" name="Value">PosicionadorQuadros.Y</param>
+                                </action>
                                 <action id="-3" name="Set position" sid="370377677896611" type="Quadros">
                                     <param id="0" name="X">PosicionadorQuadros.X</param>
                                     <param id="1" name="Y">PosicionadorQuadros.Y</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>Armazena a posição final onde o quadro foi solto e realiza algumas verificações</comment>
+                        <event-block sid="359724595808086">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="294282846741352" type="System" />
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="243399870961348">
+                                    <conditions>
+                                        <condition id="-15" name="Pick nearest/furthest" sid="782664921607633" type="PosicionadorQuadros">
+                                            <param id="0" name="Which">0</param>
+                                            <param id="1" name="X">Quadros.X</param>
+                                            <param id="2" name="Y">Quadros.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="225763621727701" type="System">
+                                            <param id="0" name="Variable">posicaoFinalQuadro</param>
+                                            <param id="1" name="Value">PosicionadorQuadros.UID</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="644805041761412" type="System">
+                                            <param id="0" name="Variable">arrastouQuadro</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>Caso soltou o quadro em um lugar diferente do que se iniciou o arrasto, é acrescentada uma unidade na variável que controla o número de arrastos do jogador</comment>
+                                <event-block sid="709708562841422">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="478846540044792" type="System">
+                                            <param id="0" name="Variable">posicaoFinalQuadro</param>
+                                            <param id="1" name="Comparison">1</param>
+                                            <param id="2" name="Value">posicaoInicialQuadro</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="755171376062699" type="System">
+                                            <param id="0" name="Variable">numeroArrastos</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="510066382430009">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="301950540689431" type="System">
+                            <param id="0" name="Variable">arrastouQuadro</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <comment>Verifica qual é o quadro que estava mais próximo de onde foi posicionado o quadro arrastado</comment>
+                        <event-block sid="270738542637810">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="681682702996071" type="Quadros">
+                                    <param id="0" name="Unique ID">quadroNaquelaPosicao + 175</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="436281326903328" type="System">
+                                    <param id="0" name="Variable">XQuadro</param>
+                                    <param id="1" name="Value">Quadros.X</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="893783655236649" type="System">
+                                    <param id="0" name="Variable">YQuadro</param>
+                                    <param id="1" name="Value">Quadros.Y</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <comment>Verifica se realmente o quadro obtido está naquela posição ou se é apenas um quadro próximo, indicando que aquela posição estava vazia</comment>
+                                <event-block sid="510602448374008">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="736210305153252" type="System">
+                                            <param id="0" name="First value">XQuadro</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">XPosQuadro</param>
+                                        </condition>
+                                        <condition id="-8" name="Compare two values" sid="453072356959430" type="System">
+                                            <param id="0" name="First value">YQuadro</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">YPosQuadro</param>
+                                        </condition>
+                                        <condition id="-14" name="Compare variable" sid="249172750575010" type="System">
+                                            <param id="0" name="Variable">quadroArrastado</param>
+                                            <param id="1" name="Comparison">1</param>
+                                            <param id="2" name="Value">quadroNaquelaPosicao</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <comment>Coloca o quadro que está naquela posição onde o quadro arrastado estava antes</comment>
+                                        <event-block sid="598460061693141">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="310797280185394" type="PosicionadorQuadros">
+                                                    <param id="0" name="Unique ID">posicaoInicialQuadro</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-3" name="Set position" sid="923346281333495" type="Quadros">
+                                                    <param id="0" name="X">PosicionadorQuadros.X</param>
+                                                    <param id="1" name="Y">PosicionadorQuadros.Y</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="850841247455798">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Set value" sid="198108049035201" type="System">
+                                    <param id="0" name="Variable">arrastouQuadro</param>
+                                    <param id="1" name="Value">0</param>
                                 </action>
                             </actions>
                         </event-block>
