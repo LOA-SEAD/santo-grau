@@ -26,7 +26,7 @@ function sendDataTecnology(palavra,nroPalavra,erros){
 }
 
 function sendDataGallery(arrastos,seqInicial){
-    /*var info = {};
+    var info = {};
     var path;
     if(window.location.hostname == "localhost" ){   // for localhost tests
         path = "/exported-resource/saveStats"
@@ -45,12 +45,12 @@ function sendDataGallery(arrastos,seqInicial){
             success: function(data) {
             }
         })
-    });*/
+    });
     console.log(arrastos);
     console.log(seqInicial);
 }
 
-function sendDataFinalLevel(correta,pergunta,nroPergunta,respostas,escolhida,acertou,tamanho){
+function sendDataFinalLevel(pergunta,correta,nroPergunta,respostas,escolhida,acertou,tamanho){
     /*var info = {};
     var path;
     if(window.location.hostname == "localhost" ){   // for localhost tests
@@ -60,8 +60,8 @@ function sendDataFinalLevel(correta,pergunta,nroPergunta,respostas,escolhida,ace
     }
     $.getJSON("remar.json", function(json) {
         info.exportedResourceId = json.exportedResourceId;
-        info.question = correta;
-        info.answer = pergunta;
+        info.question = pergunta;
+        info.answer = correta;
         info.levelId = nroPergunta;
         info.choices = respostas;
         info.choice = escolhida;

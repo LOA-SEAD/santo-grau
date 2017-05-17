@@ -76,10 +76,6 @@
                     <param id="0" name="Variable">quadrosRandomizados</param>
                     <param id="1" name="Value">0</param>
                 </action>
-                <action id="-9" name="Set value" sid="856466123440856" type="System">
-                    <param id="0" name="Variable">numeroArrastos</param>
-                    <param id="1" name="Value">0</param>
-                </action>
                 <action id="-9" name="Set value" sid="586344824449958" type="System">
                     <param id="0" name="Variable">posicaoFinalQuadro</param>
                     <param id="1" name="Value">11</param>
@@ -1401,16 +1397,21 @@
                                         </action>
                                     </actions>
                                 </event-block>
-                                <comment>Os quadros que não possuem imagens são destruidos para que eles não sejam selecionados</comment>
-                                <event-block disabled="1" sid="459290898040363">
+                                <comment>Limpa a variável que envia os dados por javascript para o REMAR e também o número de arrastos que o jogador já executou (tudo isso é realizado aqui para o caso do jogador salvar o jogo, fechá-lo e depois voltar a jogar)</comment>
+                                <event-block sid="459290898040363">
                                     <conditions />
                                     <actions>
-                                        <action id="-10" name="Add to" sid="628966069560524" type="System">
-                                            <param id="0" name="Variable">quadro</param>
-                                            <param id="1" name="Value">numeroQuadros</param>
+                                        <action id="-9" name="Set value" sid="628966069560524" type="System">
+                                            <param id="0" name="Variable">sendJS</param>
+                                            <param id="1" name="Value">&quot;&apos;&quot;</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="856466123440856" type="System">
+                                            <param id="0" name="Variable">numeroArrastos</param>
+                                            <param id="1" name="Value">0</param>
                                         </action>
                                     </actions>
                                 </event-block>
+                                <comment>Carrega as imagens nos quadros e preenche na variável sendDataJS a ordem inicial dos quadros</comment>
                                 <event-block sid="752500102775362">
                                     <conditions>
                                         <condition id="-23" name="While" sid="648841165809576" type="System" />
@@ -1437,14 +1438,49 @@
                                                     <param id="0" name="X">241 + (197 * ((quadro - 1) % 5))</param>
                                                     <param id="1" name="Y">350 + (242 * floor((quadro - 1) / 5))</param>
                                                 </action>
+                                                <action id="-9" name="Set value" sid="795798215947055" type="System">
+                                                    <param id="0" name="Variable">sendJS</param>
+                                                    <param id="1" name="Value">sendJS &amp; OrdemAtual.At(quadro-1)</param>
+                                                </action>
                                                 <action id="-10" name="Add to" sid="234892399341303" type="System">
                                                     <param id="0" name="Variable">quadro</param>
                                                     <param id="1" name="Value">1</param>
                                                 </action>
                                             </actions>
+                                            <sub-events>
+                                                <comment>Como a variável quadro já foi atualizada, podemos utilizar a mesma condição do While para ver se o loop continuará sendo executado na próxima iteração, o que significa que é necessário colocar uma vírgula para acrescentar um novo quadro no array</comment>
+                                                <event-block sid="833913334148895">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="681401430254285" type="System">
+                                                            <param id="0" name="Variable">quadro</param>
+                                                            <param id="1" name="Comparison">3</param>
+                                                            <param id="2" name="Value">numeroQuadros</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-9" name="Set value" sid="213294918730508" type="System">
+                                                            <param id="0" name="Variable">sendJS</param>
+                                                            <param id="1" name="Value">sendJS &amp; &quot;,&quot;</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <comment>Caso o loop não continuará sendo executado, o array é fechado</comment>
+                                                <event-block sid="197324339176108">
+                                                    <conditions>
+                                                        <condition id="-22" name="Else" sid="121176532524466" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-9" name="Set value" sid="445261382399145" type="System">
+                                                            <param id="0" name="Variable">sendJS</param>
+                                                            <param id="1" name="Value">sendJS &amp; &quot;&apos;&quot;</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
                                         </event-block>
                                     </sub-events>
                                 </event-block>
+                                <comment>Os quadros que não possuem imagens são destruidos para que eles não sejam selecionados</comment>
                                 <event-block sid="2989587972220891">
                                     <conditions>
                                         <condition id="-23" name="While" sid="9559102040038602" type="System" />
@@ -1964,6 +2000,7 @@
                         </action>
                     </actions>
                 </event-block>
+                <comment>Efeito de 3D no Einstein enquanto ele está disponível para conversar</comment>
                 <event-block sid="1892015304160674">
                     <conditions>
                         <condition id="-2" name="Compare Y" sid="591587694981751" type="player">
@@ -2074,7 +2111,7 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <comment>Armazena a posição final onde o quadro foi solto e realiza algumas verificações</comment>
+                        <comment>Armazena a posição final onde o quadro foi solto e ativa a variável que funciona como um trigger</comment>
                         <event-block sid="359724595808086">
                             <conditions>
                                 <condition id="-4" name="Trigger once while true" sid="294282846741352" type="System" />
@@ -2148,7 +2185,7 @@
                                 </action>
                             </actions>
                             <sub-events>
-                                <comment>Verifica se realmente o quadro obtido está naquela posição ou se é apenas um quadro próximo, indicando que aquela posição estava vazia</comment>
+                                <comment>Verifica se realmente o quadro obtido está naquela posição ou se é apenas um quadro próximo, indicando que aquela posição estava vazia. Além disso, para o caso de estarmos movendo um quadro para um espaço vazio, caso esse local estivesse do lado da imagem, ocorria um bug de não mudar a posição, por isso que a terceira condição é necessária</comment>
                                 <event-block sid="510602448374008">
                                     <conditions>
                                         <condition id="-8" name="Compare two values" sid="736210305153252" type="System">
@@ -2187,6 +2224,7 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
+                        <comment>Zera o trigger para não executar outra vez essa parte enquanto um outro quadro não for arrastado</comment>
                         <event-block sid="850841247455798">
                             <conditions />
                             <actions>
@@ -2551,7 +2589,7 @@
                                 </action>
                             </actions>
                             <sub-events>
-                                <comment>Ativar a parte escura</comment>
+                                <comment>Ativar a parte escura e executa o javascript de playData da Galeria, apenas para que o REMAR tenha como pegar o timestamp do momento em que se iniciou a busca pela chave</comment>
                                 <event-block sid="6260428200640797">
                                     <conditions>
                                         <condition id="-14" name="Compare variable" sid="2864854961540279" type="System">
@@ -2613,6 +2651,17 @@
                                         <action id="-3" name="Set position" sid="714880597376505" type="lasanha">
                                             <param id="0" name="X">round(random(95, 1185)) </param>
                                             <param id="1" name="Y">round(random(191, 669)) </param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="267768989773765" type="System">
+                                            <param id="0" name="Variable">numeroDanosJS</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="287243041244196" type="System">
+                                            <param id="0" name="Variable">sendJS</param>
+                                            <param id="1" name="Value">&quot;&apos;false&apos;,&apos;&quot; &amp; numeroDanosJS &amp; &quot;&apos;&quot;</param>
+                                        </action>
+                                        <action id="0" name="Execute" sid="115812075285815" type="StatsJS">
+                                            <param id="0" name="Value">&quot;sendPlayDataGallery(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
                                         </action>
                                         <action id="-12" name="Set group active" sid="1792546577323884" type="System">
                                             <param id="0" name="Group name">&quot;localizarChave&quot;</param>
@@ -3000,6 +3049,7 @@
                                         </action>
                                     </actions>
                                 </event-block>
+                                <comment>Ativa a variável que funciona como um trigger para iniciar a sequência para desativar o mural, adiciona no sendDataJS a quantidade de vezes que o jogador arrastou os quadros e executa o javascript, enviando os dados de como o jogador se saiu na ordenação</comment>
                                 <event-block sid="3525393247056539">
                                     <conditions>
                                         <condition id="-14" name="Compare variable" sid="7895563149112456" type="System">
@@ -3012,6 +3062,13 @@
                                         <action id="-9" name="Set value" sid="6444455004539269" type="System">
                                             <param id="0" name="Variable">respostaCerta</param>
                                             <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="583498195429940" type="System">
+                                            <param id="0" name="Variable">sendJS</param>
+                                            <param id="1" name="Value">&quot;&apos;&quot; &amp; numeroArrastos &amp; &quot;&apos;,&quot; &amp; sendJS</param>
+                                        </action>
+                                        <action id="0" name="Execute" sid="736897574805233" type="StatsJS">
+                                            <param id="0" name="Value">&quot;sendDataGallery(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -3028,6 +3085,7 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
+                        <comment>Impede que o jogador continue arrastando os quadros</comment>
                         <event-block sid="8097234656603702">
                             <conditions>
                                 <condition id="-14" name="Compare variable" sid="1444986344672336" type="System">
@@ -3041,6 +3099,9 @@
                                     <param id="0" name="Seconds">1.0</param>
                                 </action>
                                 <action id="-15" name="Set visible" sid="9030443069814387" type="Quadros">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="686873311651177" type="SelecaoQuadros">
                                     <param id="0" name="Visibility">0</param>
                                 </action>
                                 <action behavior="DragDrop" id="0" name="Set enabled" sid="8745449081188446" type="Quadros">
@@ -3491,6 +3552,10 @@
                                     <param id="1" name="&apos;Off&apos; time">0.1</param>
                                     <param id="2" name="Duration">1.2</param>
                                 </action>
+                                <action id="-10" name="Add to" sid="981666080919449" type="System">
+                                    <param id="0" name="Variable">numeroDanosJS</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
                                 <action id="-10" name="Add to" sid="5225297808590257" type="System">
                                     <param id="0" name="Variable">pontos</param>
                                     <param id="1" name="Value">-50</param>
@@ -3561,7 +3626,7 @@
                         </action>
                     </actions>
                 </event-block>
-                <comment>Desativar a parte escura</comment>
+                <comment>Desativar a parte escura e novamente executa o javascript de playData da Galeria, mostrando que o jogador concluiu a procura da chave e a quantidade de danos que ele sofreu durante isso</comment>
                 <event-block sid="8178138007196533">
                     <conditions>
                         <condition id="0" name="On key pressed" sid="1968584531883091" type="Keyboard">
@@ -3599,6 +3664,13 @@
                         </action>
                         <action id="11" name="Set collisions enabled" sid="9171524106194535" type="saida3">
                             <param id="0" name="Collisions">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="191738463162011" type="System">
+                            <param id="0" name="Variable">sendJS</param>
+                            <param id="1" name="Value">&quot;&apos;true&apos;,&apos;&quot; &amp; numeroDanosJS &amp; &quot;&apos;&quot;</param>
+                        </action>
+                        <action id="0" name="Execute" sid="679513122054185" type="StatsJS">
+                            <param id="0" name="Value">&quot;sendPlayDataGallery(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
                         </action>
                         <action id="-10" name="Add to" sid="7453172238563238" type="System">
                             <param id="0" name="Variable">pontos</param>

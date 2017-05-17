@@ -27,6 +27,8 @@
         <variable constant="0" name="VariavelUID" sid="5832501744189628" static="0" type="number">0</variable>
         <comment>Utilizado para setar um determinado valor de coordenada Y para obter a ponte e a alternativa do personagem (já que obter isso conforme a posição do player não é muito seguro)</comment>
         <variable constant="0" name="ValorY" sid="7436500626107176" static="0" type="number">0</variable>
+        <comment>Utilizado para armazenar o texto da resposta escolhida pelo jogador ao passar por uma ponte, sendo que o texto dela não é colocado diretamente no sendJS devido à possibilidade do jogador estar apenas caindo na lava</comment>
+        <variable constant="0" name="textoRespostaEscolhida" sid="136237453774695" static="0" type="text"></variable>
         <comment>Inicializações</comment>
         <event-block sid="1021034089245405">
             <conditions>
@@ -671,6 +673,7 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <comment>Configura o tamanho do vetor que auxilia a aleatorização das perguntas que serão mostradas para o jogador e zera a variável que controla a quantidade de danos que o jogador sofreu na fase ao tentar atravessar uma ponte já quebrada</comment>
                         <event-block sid="109103041236633">
                             <conditions>
                                 <condition id="-10" name="Compare opacity" sid="901697504373977" type="textoPerguntas">
@@ -694,6 +697,10 @@
                                 <action id="-9" name="Set value" sid="280347929717904" type="System">
                                     <param id="0" name="Variable">carregarTextosCM</param>
                                     <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="299791683096393" type="System">
+                                    <param id="0" name="Variable">numeroDanosJS</param>
+                                    <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="1" name="Set size" sid="458418040952907" type="AuxiliaRandomizacao">
                                     <param id="0" name="Width">questoesExistentes</param>
@@ -744,7 +751,7 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <comment>Este grupo trata do efeito que a personagem só pode atravessar na ponte, obtem a ponte em que ela está (consequentemente a alternativa dela) &#x0D;&#x0A;e trata quando andar em uma ponte quebrada, já que estes eventos dependem a posição em que a personagem está</comment>
+        <comment>Este grupo trata do efeito que a personagem só pode atravessar na ponte, obtendo a ponte em que ela está (consequentemente a alternativa dela), e trata quando andar em uma ponte quebrada, já que estes eventos dependem a posição em que a personagem está. Além disso, ela também preenche a variável textoRespostaEscolhida com a alternativa escolhida pelo jogador ao atravessar aquela ponte</comment>
         <event-group description="" sid="1007734408633216" title="deteccaoPontesAlternativas">
             <sub-events>
                 <comment>Jogador próximo à uma ponte de alternativa A</comment>
@@ -766,6 +773,10 @@
                         </action>
                         <action id="-5" name="Set width" sid="334511696806667" type="ColisaoBordaPonte">
                             <param id="0" name="Width">88</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="206931995853898" type="System">
+                            <param id="0" name="Variable">textoRespostaEscolhida</param>
+                            <param id="1" name="Value">&quot;&apos;&quot; &amp; replace(LoadJSONCM.GetData(OrdemQuestoes.At(perguntaCM-1), OrdemAlternativas.At(0)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;&quot;</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -821,6 +832,10 @@
                                 <action id="-5" name="Set width" sid="450671486277872" type="ColisaoBordaPonte">
                                     <param id="0" name="Width">87</param>
                                 </action>
+                                <action id="-9" name="Set value" sid="985122895285924" type="System">
+                                    <param id="0" name="Variable">textoRespostaEscolhida</param>
+                                    <param id="1" name="Value">&quot;&apos;&quot; &amp; replace(LoadJSONCM.GetData(OrdemQuestoes.At(perguntaCM-1), OrdemAlternativas.At(1)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;&quot;</param>
+                                </action>
                             </actions>
                             <sub-events>
                                 <event-block sid="318740864169584">
@@ -874,6 +889,10 @@
                                         </action>
                                         <action id="-5" name="Set width" sid="296950713716495" type="ColisaoBordaPonte">
                                             <param id="0" name="Width">86.1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="933087865033849" type="System">
+                                            <param id="0" name="Variable">textoRespostaEscolhida</param>
+                                            <param id="1" name="Value">&quot;&apos;&quot; &amp; replace(LoadJSONCM.GetData(OrdemQuestoes.At(perguntaCM-1), OrdemAlternativas.At(2)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;&quot;</param>
                                         </action>
                                     </actions>
                                     <sub-events>
@@ -929,6 +948,10 @@
                                                 <action id="-5" name="Set width" sid="478062232745509" type="ColisaoBordaPonte">
                                                     <param id="0" name="Width">85.2</param>
                                                 </action>
+                                                <action id="-9" name="Set value" sid="272512036028603" type="System">
+                                                    <param id="0" name="Variable">textoRespostaEscolhida</param>
+                                                    <param id="1" name="Value">&quot;&apos;&quot; &amp; replace(LoadJSONCM.GetData(OrdemQuestoes.At(perguntaCM-1), OrdemAlternativas.At(3)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;&quot;</param>
+                                                </action>
                                             </actions>
                                             <sub-events>
                                                 <event-block sid="757148422414931">
@@ -973,6 +996,10 @@
                                                 </action>
                                                 <action id="-5" name="Set width" sid="979435913201047" type="ColisaoBordaPonte">
                                                     <param id="0" name="Width">84.4</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="815936613078193" type="System">
+                                                    <param id="0" name="Variable">textoRespostaEscolhida</param>
+                                                    <param id="1" name="Value">&quot;&apos;&quot; &amp; replace(LoadJSONCM.GetData(OrdemQuestoes.At(perguntaCM-1), OrdemAlternativas.At(4)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;&quot;</param>
                                                 </action>
                                             </actions>
                                             <sub-events>
@@ -1182,6 +1209,10 @@
                                             <param id="1" name="&apos;Off&apos; time">0.1</param>
                                             <param id="2" name="Duration">1.2</param>
                                         </action>
+                                        <action id="-10" name="Add to" sid="176833222214954" type="System">
+                                            <param id="0" name="Variable">numeroDanosJS</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
                                         <action id="-10" name="Add to" sid="2030174388829192" type="System">
                                             <param id="0" name="Variable">pontos</param>
                                             <param id="1" name="Value">-50</param>
@@ -1223,7 +1254,7 @@
         <event-group description="" sid="8162543738093269" title="gerarPerguntasJsonFFCM">
             <sub-events>
                 <variable constant="0" name="escolheTexto" sid="359110733042348" static="0" type="number">0</variable>
-                <comment>Carrega a posição onde estará as letras da alternativa e o texto da pergunta. Não é possível centralizar o texto pois não dá para obter o tamanho do texto localizado no arquivo .json</comment>
+                <comment>Carrega a posição onde estará as letras da alternativa e o texto da pergunta, além de também inserir a pergunta na variável sendJS. Não é possível centralizar o texto pois não dá para obter o tamanho do texto localizado no arquivo .json</comment>
                 <event-block sid="4018207027143204">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="5626822018945053" type="System">
@@ -1247,6 +1278,10 @@
                         <action id="-9" name="Set value" sid="550914857655324" type="System">
                             <param id="0" name="Variable">respostaCertaCM</param>
                             <param id="1" name="Value">LoadJSONCM.GetData(OrdemQuestoes.At(perguntaCM-1),6)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="401982087156659" type="System">
+                            <param id="0" name="Variable">sendJS</param>
+                            <param id="1" name="Value">&quot;&apos;&quot; &amp; replace(LoadJSONCM.GetData(OrdemQuestoes.At(perguntaCM-1), 0), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&quot;</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -1322,6 +1357,16 @@
                                 <action id="-9" name="Set value" sid="330947758094945" type="System">
                                     <param id="0" name="Variable">respostaNumero</param>
                                     <param id="1" name="Value">5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>Com a alternativa certa encontrada, se adiciona ela na variavel sendJS e mais o número da questão (de uma maneira geral, levando em conta todas as partes da fase final. Contador se inicia no 0)</comment>
+                        <event-block sid="741423556754434">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Set value" sid="113444760847400" type="System">
+                                    <param id="0" name="Variable">sendJS</param>
+                                    <param id="1" name="Value">sendJS &amp; &quot;&apos;&quot; &amp; replace(LoadJSONCM.GetData(OrdemQuestoes.At(perguntaCM-1), respostaNumero), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&apos;&quot; &amp; perguntaCM-1 &amp; &quot;&apos;,&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1455,12 +1500,16 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
-                        <comment>Depois de tudo coloca as alternativas</comment>
+                        <comment>Depois de tudo coloca as alternativas, tanto para que o jogador as visualize como também na variável sendJS</comment>
                         <event-block sid="302928559295889">
                             <conditions />
                             <actions>
                                 <action id="0" name="Set text" sid="308355269771887" type="textoRespostas">
                                     <param id="0" name="Text">&quot;A- &quot; &amp; LoadJSONCM.GetData(OrdemQuestoes.At(perguntaCM-1), OrdemAlternativas.At(0)) &amp; &quot;  B- &quot; &amp; LoadJSONCM.GetData(OrdemQuestoes.At(perguntaCM-1), OrdemAlternativas.At(1)) &amp; &quot;  C- &quot; &amp; LoadJSONCM.GetData(OrdemQuestoes.At(perguntaCM-1), OrdemAlternativas.At(2)) &amp; &quot;  D- &quot; &amp; LoadJSONCM.GetData(OrdemQuestoes.At(perguntaCM-1), OrdemAlternativas.At(3)) &amp; &quot;  E- &quot; &amp; LoadJSONCM.GetData(OrdemQuestoes.At(perguntaCM-1), OrdemAlternativas.At(4))</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="544291101859442" type="System">
+                                    <param id="0" name="Variable">sendJS</param>
+                                    <param id="1" name="Value">sendJS &amp; &quot;&apos;&quot; &amp; replace(LoadJSONCM.GetData(OrdemQuestoes.At(perguntaCM-1), OrdemAlternativas.At(0)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;,&quot; &amp; replace(LoadJSONCM.GetData(OrdemQuestoes.At(perguntaCM-1), OrdemAlternativas.At(1)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;,&quot; &amp; replace(LoadJSONCM.GetData(OrdemQuestoes.At(perguntaCM-1), OrdemAlternativas.At(2)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;,&quot; &amp; replace(LoadJSONCM.GetData(OrdemQuestoes.At(perguntaCM-1), OrdemAlternativas.At(3)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;,&quot; &amp; replace(LoadJSONCM.GetData(OrdemQuestoes.At(perguntaCM-1), OrdemAlternativas.At(4)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&quot;</param>
                                 </action>
                                 <action disabled="1" id="-1" name="Set X" sid="9523141288566661" type="textoRespostas">
                                     <param id="0" name="X">(perguntas.Width - textoRespostas.TextWidth + 252) / 2</param>
