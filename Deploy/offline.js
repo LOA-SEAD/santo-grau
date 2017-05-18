@@ -1,9 +1,10 @@
 ﻿{
-	"version": 1480447958,
+	"version": 1495139006,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
 		"jquery-2.1.1.min.js",
+		"offlineClient.js",
 		"images/parederu-sheet0.png",
 		"images/portasaida-sheet0.png",
 		"images/mesas-sheet0.png",
@@ -310,6 +311,7 @@
 		"10.png",
 		"telao.html",
 		"shuffle.js",
+		"stats.js",
 		"please write me a song.ttf",
 		"please_write_me_a_song-webfont.eot",
 		"please_write_me_a_song-webfont.svg",
