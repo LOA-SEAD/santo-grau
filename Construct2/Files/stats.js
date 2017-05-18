@@ -51,7 +51,7 @@ function sendDataGallery(arrastos,seqInicial){
 }
 
 function sendDataFinalLevel(pergunta,correta,nroPergunta,respostas,escolhida,acertou,tamanho){
-    /*var info = {};
+    var info = {};
     var path;
     if(window.location.hostname == "localhost" ){   // for localhost tests
         path = "/exported-resource/saveStats"
@@ -75,7 +75,7 @@ function sendDataFinalLevel(pergunta,correta,nroPergunta,respostas,escolhida,ace
             success: function(data) {
             }
         })
-    });*/
+    });
     console.log(pergunta);
     console.log(correta);
     console.log(nroPergunta);
@@ -86,7 +86,7 @@ function sendDataFinalLevel(pergunta,correta,nroPergunta,respostas,escolhida,ace
 }
 
 function sendPlayDataGallery(terminou,nroDanos){
-    /*var info = {};
+    var info = {};
     var path;
     if(window.location.hostname == "localhost" ){   // for localhost tests
         path = "/exported-resource/saveStats"
@@ -105,13 +105,13 @@ function sendPlayDataGallery(terminou,nroDanos){
             success: function(data) {
             }
         })
-    });*/
+    });
     console.log(terminou);
     console.log(nroDanos);
 }
 
-function sendPlayDataFinalLevel(nroDanos){
-    /*var info = {};
+function sendPlayDataFinalLevel(nroDanos,nivel){
+    var info = {};
     var path;
     if(window.location.hostname == "localhost" ){   // for localhost tests
         path = "/exported-resource/saveStats"
@@ -121,6 +121,7 @@ function sendPlayDataFinalLevel(nroDanos){
     $.getJSON("remar.json", function(json) {
         info.exportedResourceId = json.exportedResourceId;
         info.numberDamages = nroDanos;
+        info.level = nivel;
         info.gameType = 'gameStatsSantoGrauFinalLevel';
         $.ajax({
             type: "POST",
@@ -129,6 +130,7 @@ function sendPlayDataFinalLevel(nroDanos){
             success: function(data) {
             }
         })
-    });*/
+    });
     console.log(nroDanos);
+    console.log(nivel);
 }

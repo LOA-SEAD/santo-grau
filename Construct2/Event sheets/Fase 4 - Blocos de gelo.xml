@@ -532,6 +532,7 @@
                 </event-block>
             </sub-events>
         </event-block>
+        <comment>Dano causado pelas stalactites, o que também incrementa a variável da quantidade de dano que o jogador sofreu</comment>
         <event-block sid="9655654399141965">
             <conditions>
                 <condition id="1" name="Is overlapping another object" sid="1731258949088634" type="player">
@@ -558,6 +559,10 @@
                             <param id="0" name="&apos;On&apos; time">0.1</param>
                             <param id="1" name="&apos;Off&apos; time">0.1</param>
                             <param id="2" name="Duration">1.2</param>
+                        </action>
+                        <action id="-10" name="Add to" sid="265663078211375" type="System">
+                            <param id="0" name="Variable">numeroDanosJS</param>
+                            <param id="1" name="Value">1</param>
                         </action>
                         <action id="-10" name="Add to" sid="1260592435381286" type="System">
                             <param id="0" name="Variable">pontos</param>
@@ -1064,7 +1069,7 @@
         <event-group description="" sid="930110046213914" title="blocos">
             <sub-events>
                 <variable constant="0" name="escolheTexto" sid="303738456719089" static="0" type="number">0</variable>
-                <comment>Carrega o texto da pergunta. Não é possível centralizar o texto pois não dá para obter o tamanho do texto localizado no arquivo .json</comment>
+                <comment>Carrega o texto da pergunta e a insere na variável sendJS. Não é possível centralizar o texto pois não dá para obter o tamanho do texto localizado no arquivo .json</comment>
                 <event-block sid="247240928840736">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="7709434343207775" type="System">
@@ -1088,6 +1093,10 @@
                             <param id="0" name="Width">3</param>
                             <param id="1" name="Height">1</param>
                             <param id="2" name="Depth">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="318770135204706" type="System">
+                            <param id="0" name="Variable">sendJS</param>
+                            <param id="1" name="Value">&quot;&apos;&quot; &amp; replace(LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1), 0), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&quot;</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -1133,6 +1142,16 @@
                                 <action id="-9" name="Set value" sid="461898969266938" type="System">
                                     <param id="0" name="Variable">respostaNumero</param>
                                     <param id="1" name="Value">3</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>Com a alternativa certa encontrada, se adiciona ela na variavel sendJS e mais o número da questão (de uma maneira geral, levando em conta todas as partes da fase final. Contador se inicia no 0)</comment>
+                        <event-block sid="648351329387320">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Set value" sid="183627429581839" type="System">
+                                    <param id="0" name="Variable">sendJS</param>
+                                    <param id="1" name="Value">sendJS &amp; &quot;&apos;&quot; &amp; replace(LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1), respostaNumero), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&apos;&quot; &amp; perguntaBN+3 &amp; &quot;&apos;,&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1236,12 +1255,16 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
-                        <comment>Depois de tudo coloca as alternativas</comment>
+                        <comment>Depois de tudo coloca as alternativas, tanto para que o jogador as visualize como também na variável sendJS</comment>
                         <event-block sid="265697655988579">
                             <conditions />
                             <actions>
                                 <action id="0" name="Set text" sid="336080415209115" type="textoRespostas">
                                     <param id="0" name="Text">&quot;1- &quot; &amp; LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1), OrdemAlternativas.At(0)) &amp; &quot;  2- &quot; &amp; LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1), OrdemAlternativas.At(1)) &amp; &quot;  3- &quot; &amp; LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1), OrdemAlternativas.At(2))</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="111962010545169" type="System">
+                                    <param id="0" name="Variable">sendJS</param>
+                                    <param id="1" name="Value">sendJS &amp; &quot;&apos;&quot; &amp; replace(LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1), OrdemAlternativas.At(0)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;,&quot; &amp; replace(LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1), OrdemAlternativas.At(1)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;,&quot; &amp; replace(LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1), OrdemAlternativas.At(2)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&quot;</param>
                                 </action>
                                 <action disabled="1" id="-1" name="Set X" sid="7079773714938992" type="textoRespostas">
                                     <param id="0" name="X">(perguntas.Width - textoRespostas.TextWidth + 252) / 2</param>
@@ -1407,6 +1430,13 @@
                                             <param id="1" name="State">0</param>
                                         </action>
                                         <action id="-9" name="Destroy" sid="250823286787584" type="Stalactites_block" />
+                                        <action id="-9" name="Set value" sid="135721477747436" type="System">
+                                            <param id="0" name="Variable">sendJS</param>
+                                            <param id="1" name="Value">&quot;&apos;&quot; &amp; numeroDanosJS &amp; &quot;&apos;,&apos;Blocos de Neve&apos;&quot;</param>
+                                        </action>
+                                        <action id="0" name="Execute" sid="793217333378725" type="StatsJS">
+                                            <param id="0" name="Value">&quot;sendPlayDataFinalLevel(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
+                                        </action>
                                     </actions>
                                 </event-block>
                             </sub-events>
@@ -1499,7 +1529,7 @@
                         </action>
                     </actions>
                 </event-block>
-                <comment>Atribuir a alternativa referente ao bloco que o jogador pegou</comment>
+                <comment>Atribuir a alternativa referente ao bloco que o jogador pegou e preenche a variável textoRespostaEscolhida com a alternativa escolhida pelo jogador ao esbarrar em um bloco</comment>
                 <event-block sid="6293555022671856">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="8943520758999902" type="System">
@@ -1510,7 +1540,6 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <comment>Eu até quis utilizar o Every tick para não repetir as atribuições no obterAlternativa e verificarAlternativa, mas não deu certo</comment>
                         <event-block sid="1699590853007916">
                             <conditions>
                                 <condition id="0" name="On collision with another object" sid="3214732951497474" type="player">
@@ -1529,6 +1558,10 @@
                                 <action id="-9" name="Set value" sid="8922086600711869" type="System">
                                     <param id="0" name="Variable">verificarAlternativaBN</param>
                                     <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="520006215056770" type="System">
+                                    <param id="0" name="Variable">textoRespostaEscolhida</param>
+                                    <param id="1" name="Value">&quot;&apos;&quot; &amp; replace(LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1), OrdemAlternativas.At(0)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1551,6 +1584,10 @@
                                     <param id="0" name="Variable">verificarAlternativaBN</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
+                                <action id="-9" name="Set value" sid="406378705379996" type="System">
+                                    <param id="0" name="Variable">textoRespostaEscolhida</param>
+                                    <param id="1" name="Value">&quot;&apos;&quot; &amp; replace(LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1), OrdemAlternativas.At(1)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&quot;</param>
+                                </action>
                             </actions>
                         </event-block>
                         <event-block sid="2870282095673449">
@@ -1572,13 +1609,17 @@
                                     <param id="0" name="Variable">verificarAlternativaBN</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
+                                <action id="-9" name="Set value" sid="494239871564541" type="System">
+                                    <param id="0" name="Variable">textoRespostaEscolhida</param>
+                                    <param id="1" name="Value">&quot;&apos;&quot; &amp; replace(LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1), OrdemAlternativas.At(2)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&quot;</param>
+                                </action>
                             </actions>
                         </event-block>
                     </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
-        <comment>Em caso de erro o jogador volta pra primeira questão outra vez</comment>
+        <comment>Verificação da alternativa escolhida, aqui é preenchido o resto da variável sendJS e executa o javascript</comment>
         <event-block sid="2196425958287675">
             <conditions>
                 <condition id="-14" name="Compare variable" sid="9747445530129215" type="System">
@@ -1594,6 +1635,7 @@
                 </action>
             </actions>
             <sub-events>
+                <comment>Acertou a resposta</comment>
                 <event-block sid="2855855890511332">
                     <conditions>
                         <condition id="-8" name="Compare two values" sid="384668303538056" type="System">
@@ -1628,6 +1670,13 @@
                         </action>
                         <action behavior="8Direction" id="4" name="Set max speed" sid="7884800207288088" type="player">
                             <param id="0" name="Max Speed">200 * perguntaBN + (efeitoCafeAtivo * 200 * perguntaBN * 3.5)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="562180002333636" type="System">
+                            <param id="0" name="Variable">sendJS</param>
+                            <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;true&apos;,&apos;12&apos;&quot;</param>
+                        </action>
+                        <action id="0" name="Execute" sid="500511752396771" type="StatsJS">
+                            <param id="0" name="Value">&quot;sendDataFinalLevel(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
                         </action>
                         <action id="-10" name="Add to" sid="4368475574908269" type="System">
                             <param id="0" name="Variable">pontos</param>
@@ -1707,6 +1756,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment>Errou a resposta</comment>
                 <event-block sid="9832726161815892">
                     <conditions>
                         <condition id="-22" name="Else" sid="7352035128923322" type="System" />
@@ -1754,6 +1804,21 @@
                                     <param id="1" name="Y">404</param>
                                 </action>
                                 <action behavior="8Direction" disabled="1" id="0" name="Stop" sid="3921811517886007" type="player" />
+                                <action id="-9" name="Set value" sid="832060863742274" type="System">
+                                    <param id="0" name="Variable">respostaParcial</param>
+                                    <param id="1" name="Value">sendJS</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="765406765982486" type="System">
+                                    <param id="0" name="Variable">sendJS</param>
+                                    <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;false&apos;,&apos;12&apos;&quot;</param>
+                                </action>
+                                <action id="0" name="Execute" sid="198671940492192" type="StatsJS">
+                                    <param id="0" name="Value">&quot;sendDataFinalLevel(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="537662344097251" type="System">
+                                    <param id="0" name="Variable">sendJS</param>
+                                    <param id="1" name="Value">respostaParcial</param>
+                                </action>
                                 <action id="-10" name="Add to" sid="7028332991897701" type="System">
                                     <param id="0" name="Variable">pontos</param>
                                     <param id="1" name="Value">-100</param>

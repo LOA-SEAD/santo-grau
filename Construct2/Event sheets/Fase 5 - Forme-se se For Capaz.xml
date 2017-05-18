@@ -724,6 +724,10 @@
                             <param id="4" name="Volume">volSons</param>
                             <param id="2" name="Tag (optional)">&quot;sons&quot;</param>
                         </action>
+                        <action id="-10" name="Add to" sid="421223923982315" type="System">
+                            <param id="0" name="Variable">numeroDanosJS</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
                         <action id="-10" name="Add to" sid="7393677496525183" type="System">
                             <param id="0" name="Variable">pontos</param>
                             <param id="1" name="Value">-50</param>
@@ -799,6 +803,10 @@
                             <param id="4" name="Volume">volSons</param>
                             <param id="2" name="Tag (optional)">&quot;sons&quot;</param>
                         </action>
+                        <action id="-10" name="Add to" sid="324774575317561" type="System">
+                            <param id="0" name="Variable">numeroDanosJS</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
                         <action id="-10" name="Add to" sid="211953375632289" type="System">
                             <param id="0" name="Variable">pontos</param>
                             <param id="1" name="Value">-50</param>
@@ -830,6 +838,7 @@
                         </action>
                     </actions>
                 </event-block>
+                <comment>Dano causado pelo jogador entrar em contato com o monstro</comment>
                 <event-block sid="504983338843734">
                     <conditions>
                         <condition id="1" name="Is overlapping another object" sid="547252819818691" type="player">
@@ -860,6 +869,10 @@
                                     <param id="0" name="&apos;On&apos; time">0.1</param>
                                     <param id="1" name="&apos;Off&apos; time">0.1</param>
                                     <param id="2" name="Duration">1.2</param>
+                                </action>
+                                <action id="-10" name="Add to" sid="923896652507329" type="System">
+                                    <param id="0" name="Variable">numeroDanosJS</param>
+                                    <param id="1" name="Value">1</param>
                                 </action>
                                 <action id="-10" name="Add to" sid="942455518037440" type="System">
                                     <param id="0" name="Variable">pontos</param>
@@ -1749,7 +1762,7 @@
         <event-group description="" sid="407833997573688" title="gerarPerguntasJsonFFTCC">
             <sub-events>
                 <variable constant="0" name="escolheTexto" sid="881677225115220" static="0" type="number">0</variable>
-                <comment>Carrega a posição onde estará as letras da alternativa e o texto da pergunta. Não é possível centralizar o texto pois não dá para obter o tamanho do texto localizado no arquivo .json</comment>
+                <comment>Carrega a posição onde estará as letras da alternativa e o texto da pergunta, além de também inserir a pergunta na variável sendJS. Não é possível centralizar o texto pois não dá para obter o tamanho do texto localizado no arquivo .json</comment>
                 <event-block sid="4018207027143204">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="5626822018945053" type="System">
@@ -1773,6 +1786,10 @@
                             <param id="0" name="Width">5</param>
                             <param id="1" name="Height">1</param>
                             <param id="2" name="Depth">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="231933096087156" type="System">
+                            <param id="0" name="Variable">sendJS</param>
+                            <param id="1" name="Value">&quot;&apos;&quot; &amp; replace(LoadJSONTCC.GetData(OrdemQuestoes.At(perguntaTCC-1), 0), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&quot;</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -1848,6 +1865,16 @@
                                 <action id="-9" name="Set value" sid="707039651600924" type="System">
                                     <param id="0" name="Variable">respostaNumero</param>
                                     <param id="1" name="Value">5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>Com a alternativa certa encontrada, se adiciona ela na variavel sendJS e mais o número da questão (de uma maneira geral, levando em conta todas as partes da fase final. Contador se inicia no 0)</comment>
+                        <event-block sid="322318680921681">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Set value" sid="325160454878515" type="System">
+                                    <param id="0" name="Variable">sendJS</param>
+                                    <param id="1" name="Value">sendJS &amp; &quot;&apos;&quot; &amp; replace(LoadJSONTCC.GetData(OrdemQuestoes.At(perguntaTCC-1), respostaNumero), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&apos;&quot; &amp; perguntaTCC+6 &amp; &quot;&apos;,&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1981,12 +2008,16 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
-                        <comment>Depois de tudo coloca as alternativas</comment>
+                        <comment>Depois de tudo coloca as alternativas, tanto para que o jogador as visualize como também na variável sendJS</comment>
                         <event-block sid="959396315149668">
                             <conditions />
                             <actions>
                                 <action id="0" name="Set text" sid="6125302347176068" type="textoRespostas">
                                     <param id="0" name="Text">&quot;A- &quot; &amp; LoadJSONTCC.GetData(OrdemQuestoes.At(perguntaTCC-1), OrdemAlternativas.At(0)) &amp; &quot;  B- &quot; &amp; LoadJSONTCC.GetData(OrdemQuestoes.At(perguntaTCC-1), OrdemAlternativas.At(1)) &amp; &quot;  C- &quot; &amp; LoadJSONTCC.GetData(OrdemQuestoes.At(perguntaTCC-1), OrdemAlternativas.At(2)) &amp; &quot;  D- &quot; &amp; LoadJSONTCC.GetData(OrdemQuestoes.At(perguntaTCC-1), OrdemAlternativas.At(3)) &amp; &quot;  E- &quot; &amp; LoadJSONTCC.GetData(OrdemQuestoes.At(perguntaTCC-1), OrdemAlternativas.At(4))</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="157733990749145" type="System">
+                                    <param id="0" name="Variable">sendJS</param>
+                                    <param id="1" name="Value">sendJS &amp; &quot;&apos;&quot; &amp; replace(LoadJSONTCC.GetData(OrdemQuestoes.At(perguntaTCC-1), OrdemAlternativas.At(0)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;,&quot; &amp; replace(LoadJSONTCC.GetData(OrdemQuestoes.At(perguntaTCC-1), OrdemAlternativas.At(1)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;,&quot; &amp; replace(LoadJSONTCC.GetData(OrdemQuestoes.At(perguntaTCC-1), OrdemAlternativas.At(2)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;,&quot; &amp; replace(LoadJSONTCC.GetData(OrdemQuestoes.At(perguntaTCC-1), OrdemAlternativas.At(3)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;,&quot; &amp; replace(LoadJSONTCC.GetData(OrdemQuestoes.At(perguntaTCC-1), OrdemAlternativas.At(4)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&quot;</param>
                                 </action>
                                 <action disabled="1" id="-1" name="Set X" sid="9523141288566661" type="textoRespostas">
                                     <param id="0" name="X">(perguntas.Width - textoRespostas.TextWidth + 252) / 2</param>
@@ -2112,7 +2143,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <comment>Obtém a alternativa exata conforme a letra que o jogador estiver mais próximo</comment>
+                <comment>Obtém a alternativa exata conforme a letra que o jogador estiver mais próximo e preenche a variável textoRespostaEscolhida com a alternativa escolhida pelo jogador</comment>
                 <event-block sid="8839821772363013">
                     <conditions>
                         <condition id="-15" name="Pick nearest/furthest" sid="8426705750402846" type="AlternativasChao">
@@ -2141,6 +2172,10 @@
                                     <param id="0" name="Variable">alternativaTCC</param>
                                     <param id="1" name="Value">&quot;A&quot;</param>
                                 </action>
+                                <action id="-9" name="Set value" sid="279226143511091" type="System">
+                                    <param id="0" name="Variable">textoRespostaEscolhida</param>
+                                    <param id="1" name="Value">&quot;&apos;&quot; &amp; replace(LoadJSONTCC.GetData(OrdemQuestoes.At(perguntaTCC-1), OrdemAlternativas.At(0)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&quot;</param>
+                                </action>
                             </actions>
                         </event-block>
                         <event-block sid="9095319901752109">
@@ -2155,6 +2190,10 @@
                                 <action id="-9" name="Set value" sid="6412759658187804" type="System">
                                     <param id="0" name="Variable">alternativaTCC</param>
                                     <param id="1" name="Value">&quot;B&quot;</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="528797694849868" type="System">
+                                    <param id="0" name="Variable">textoRespostaEscolhida</param>
+                                    <param id="1" name="Value">&quot;&apos;&quot; &amp; replace(LoadJSONTCC.GetData(OrdemQuestoes.At(perguntaTCC-1), OrdemAlternativas.At(1)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2171,6 +2210,10 @@
                                     <param id="0" name="Variable">alternativaTCC</param>
                                     <param id="1" name="Value">&quot;C&quot;</param>
                                 </action>
+                                <action id="-9" name="Set value" sid="890418762219282" type="System">
+                                    <param id="0" name="Variable">textoRespostaEscolhida</param>
+                                    <param id="1" name="Value">&quot;&apos;&quot; &amp; replace(LoadJSONTCC.GetData(OrdemQuestoes.At(perguntaTCC-1), OrdemAlternativas.At(2)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&quot;</param>
+                                </action>
                             </actions>
                         </event-block>
                         <event-block sid="1561708956741666">
@@ -2186,6 +2229,10 @@
                                     <param id="0" name="Variable">alternativaTCC</param>
                                     <param id="1" name="Value">&quot;D&quot;</param>
                                 </action>
+                                <action id="-9" name="Set value" sid="660505567287662" type="System">
+                                    <param id="0" name="Variable">textoRespostaEscolhida</param>
+                                    <param id="1" name="Value">&quot;&apos;&quot; &amp; replace(LoadJSONTCC.GetData(OrdemQuestoes.At(perguntaTCC-1), OrdemAlternativas.At(3)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&quot;</param>
+                                </action>
                             </actions>
                         </event-block>
                         <event-block sid="9905125354828874">
@@ -2200,6 +2247,10 @@
                                 <action id="-9" name="Set value" sid="4152024582468488" type="System">
                                     <param id="0" name="Variable">alternativaTCC</param>
                                     <param id="1" name="Value">&quot;E&quot;</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="248696247609090" type="System">
+                                    <param id="0" name="Variable">textoRespostaEscolhida</param>
+                                    <param id="1" name="Value">&quot;&apos;&quot; &amp; replace(LoadJSONTCC.GetData(OrdemQuestoes.At(perguntaTCC-1), OrdemAlternativas.At(4)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2287,6 +2338,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment>Verificação da alternativa escolhida, aqui é preenchido o resto da variável sendJS e executa o javascript</comment>
                 <event-block sid="809898892781363">
                     <conditions>
                         <condition id="-14" name="Pick by unique ID" sid="582825584841686" type="AlternativasChao">
@@ -2295,7 +2347,6 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <comment>Parte de verificar as alternativas</comment>
                         <event-block sid="5716842043748232">
                             <conditions>
                                 <condition id="-14" name="Compare variable" sid="3648989301167759" type="System">
@@ -2325,6 +2376,7 @@
                                     </conditions>
                                     <actions />
                                     <sub-events>
+                                        <comment>Acertou a resposta</comment>
                                         <event-block sid="5793724562251928">
                                             <conditions>
                                                 <condition id="-8" name="Compare two values" sid="3237814420960202" type="System">
@@ -2367,6 +2419,13 @@
                                                                     <param id="3" name="Volume">volSons</param>
                                                                     <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                                                 </action>
+                                                                <action id="-9" name="Set value" sid="218482768092165" type="System">
+                                                                    <param id="0" name="Variable">sendJS</param>
+                                                                    <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;true&apos;,&apos;12&apos;&quot;</param>
+                                                                </action>
+                                                                <action id="0" name="Execute" sid="400349009738760" type="StatsJS">
+                                                                    <param id="0" name="Value">&quot;sendDataFinalLevel(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
+                                                                </action>
                                                                 <action id="-12" name="Set group active" sid="581252232492726" type="System">
                                                                     <param id="0" name="Group name">&quot;controleDanoMonstro&quot;</param>
                                                                     <param id="1" name="State">1</param>
@@ -2389,6 +2448,7 @@
                                                 </event-block>
                                             </sub-events>
                                         </event-block>
+                                        <comment>Errou a resposta</comment>
                                         <event-block sid="8816027619610096">
                                             <conditions>
                                                 <condition id="-22" name="Else" sid="3013058512679844" type="System" />
@@ -2427,6 +2487,21 @@
                                                                     <param id="0" name="&apos;On&apos; time">0.1</param>
                                                                     <param id="1" name="&apos;Off&apos; time">0.1</param>
                                                                     <param id="2" name="Duration">1.2</param>
+                                                                </action>
+                                                                <action id="-9" name="Set value" sid="768051723067936" type="System">
+                                                                    <param id="0" name="Variable">respostaParcial</param>
+                                                                    <param id="1" name="Value">sendJS</param>
+                                                                </action>
+                                                                <action id="-9" name="Set value" sid="486058108853380" type="System">
+                                                                    <param id="0" name="Variable">sendJS</param>
+                                                                    <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;false&apos;,&apos;12&apos;&quot;</param>
+                                                                </action>
+                                                                <action id="0" name="Execute" sid="888637953658761" type="StatsJS">
+                                                                    <param id="0" name="Value">&quot;sendDataFinalLevel(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
+                                                                </action>
+                                                                <action id="-9" name="Set value" sid="204087717775624" type="System">
+                                                                    <param id="0" name="Variable">sendJS</param>
+                                                                    <param id="1" name="Value">respostaParcial</param>
                                                                 </action>
                                                                 <action id="-10" name="Add to" sid="1397937927894916" type="System">
                                                                     <param id="0" name="Variable">pontos</param>
@@ -2792,6 +2867,13 @@
                                 </action>
                                 <action id="3" name="Start" sid="285230821211673" type="MonstroSuperior">
                                     <param id="0" name="From">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="704140136554758" type="System">
+                                    <param id="0" name="Variable">sendJS</param>
+                                    <param id="1" name="Value">&quot;&apos;&quot; &amp; numeroDanosJS &amp; &quot;&apos;,&apos;TCC&apos;&quot;</param>
+                                </action>
+                                <action id="0" name="Execute" sid="612617526571330" type="StatsJS">
+                                    <param id="0" name="Value">&quot;sendPlayDataFinalLevel(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
                                 </action>
                                 <action id="-10" name="Add to" sid="796900085149293" type="System">
                                     <param id="0" name="Variable">pontos</param>
