@@ -1874,7 +1874,7 @@
                             <actions>
                                 <action id="-9" name="Set value" sid="325160454878515" type="System">
                                     <param id="0" name="Variable">sendJS</param>
-                                    <param id="1" name="Value">sendJS &amp; &quot;&apos;&quot; &amp; replace(LoadJSONTCC.GetData(OrdemQuestoes.At(perguntaTCC-1), respostaNumero), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&apos;&quot; &amp; perguntaTCC+6 &amp; &quot;&apos;,&quot;</param>
+                                    <param id="1" name="Value">sendJS &amp; &quot;&apos;&quot; &amp; replace(LoadJSONTCC.GetData(OrdemQuestoes.At(perguntaTCC-1), respostaNumero), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&apos;&quot; &amp; OrdemQuestoes.At(perguntaTCC-1)+numeroQuestoesCriadas-1 &amp; &quot;&apos;,&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2848,6 +2848,7 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
+                        <comment>Destrói o monstro e envia o número de danos que o jogador sofreu</comment>
                         <event-block sid="666371800017018">
                             <conditions>
                                 <condition id="-22" name="Else" sid="914443855693737" type="System" />
@@ -2867,13 +2868,6 @@
                                 </action>
                                 <action id="3" name="Start" sid="285230821211673" type="MonstroSuperior">
                                     <param id="0" name="From">0</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="704140136554758" type="System">
-                                    <param id="0" name="Variable">sendJS</param>
-                                    <param id="1" name="Value">&quot;&apos;&quot; &amp; numeroDanosJS &amp; &quot;&apos;,&apos;TCC&apos;&quot;</param>
-                                </action>
-                                <action id="0" name="Execute" sid="612617526571330" type="StatsJS">
-                                    <param id="0" name="Value">&quot;sendPlayDataFinalLevel(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
                                 </action>
                                 <action id="-10" name="Add to" sid="796900085149293" type="System">
                                     <param id="0" name="Variable">pontos</param>
@@ -2908,6 +2902,13 @@
                                     <param id="0" name="Collisions">0</param>
                                 </action>
                                 <action id="2" name="Stop" sid="989171858636803" type="playerAnim" />
+                                <action id="-9" name="Set value" sid="704140136554758" type="System">
+                                    <param id="0" name="Variable">sendJS</param>
+                                    <param id="1" name="Value">&quot;&apos;&quot; &amp; numeroDanosJS &amp; &quot;&apos;,&apos;TCC&apos;&quot;</param>
+                                </action>
+                                <action id="0" name="Execute" sid="612617526571330" type="StatsJS">
+                                    <param id="0" name="Value">&quot;sendPlayDataFinalLevel(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
+                                </action>
                                 <action id="-12" name="Set group active" sid="622191243991356" type="System">
                                     <param id="0" name="Group name">&quot;playerMove6&quot;</param>
                                     <param id="1" name="State">0</param>
