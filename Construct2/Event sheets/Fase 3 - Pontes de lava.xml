@@ -27,6 +27,10 @@
         <variable constant="0" name="VariavelUID" sid="5832501744189628" static="0" type="number">0</variable>
         <comment>Utilizado para setar um determinado valor de coordenada Y para obter a ponte e a alternativa do personagem (já que obter isso conforme a posição do player não é muito seguro)</comment>
         <variable constant="0" name="ValorY" sid="7436500626107176" static="0" type="number">0</variable>
+        <comment>Variável utilizada para controlar o evento do jogador despausar o jogo após ele ler a pergunta</comment>
+        <variable constant="0" name="leuPergunta" sid="849273863204390" static="0" type="number">0</variable>
+        <comment>Criado para controlar o descarregamento do botão E</comment>
+        <variable constant="0" name="descarregarBotaoE" sid="390499954719790" static="0" type="number">0</variable>
         <comment>Inicializações</comment>
         <event-block sid="1021034089245405">
             <conditions>
@@ -67,6 +71,10 @@
                 </action>
                 <action id="-12" name="Set group active" sid="821509748638869" type="System">
                     <param id="0" name="Group name">&quot;inicioPerguntasFFCM&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+                <action id="-12" name="Set group active" sid="759679663024528" type="System">
+                    <param id="0" name="Group name">&quot;animacaoDurantePergunta&quot;</param>
                     <param id="1" name="State">1</param>
                 </action>
                 <action id="0" name="Load JSON" sid="7983903385541236" type="LoadJSONCM" />
@@ -202,6 +210,9 @@
                     <param id="0" name="Opacity">0</param>
                 </action>
                 <action id="-16" name="Set opacity" sid="773336709033930" type="botaoFechar">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="634050965839052" type="BotaoE">
                     <param id="0" name="Opacity">0</param>
                 </action>
                 <action id="-16" name="Set opacity" sid="588192788618107" type="controleAudio">
@@ -1562,8 +1573,12 @@
                                 <action id="-16" name="Set opacity" sid="1706482227902222" type="textoRespostas">
                                     <param id="0" name="Opacity">textoRespostas.Opacity + 2.5</param>
                                 </action>
+                                <action id="-16" name="Set opacity" sid="806670430535738" type="BotaoE">
+                                    <param id="0" name="Opacity">BotaoE.Opacity + 2.5</param>
+                                </action>
                             </actions>
                         </event-block>
+                        <comment>Trava o jogo para o jogador ler a pergunta</comment>
                         <event-block sid="2551488609303346">
                             <conditions>
                                 <condition id="-22" name="Else" sid="7931251448544622" type="System" />
@@ -1580,6 +1595,22 @@
                                 <action id="-9" name="Set value" sid="5351694586913291" type="System">
                                     <param id="0" name="Variable">carregarAlternativa</param>
                                     <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="474843370971977" type="System">
+                                    <param id="0" name="Variable">leuPergunta</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action behavior="8Direction" id="0" name="Stop" sid="810771248755228" type="player" />
+                                <action id="-12" name="Set group active" sid="727709678631641" type="System">
+                                    <param id="0" name="Group name">&quot;animacaoDurantePergunta&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="769642511450085" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove4&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-13" name="Set time scale" sid="958866244937069" type="System">
+                                    <param id="0" name="Time scale">0.0</param>
                                 </action>
                             </actions>
                             <sub-events>
@@ -1629,6 +1660,74 @@
                                     </actions>
                                 </event-block>
                             </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Terminou de ler a pergunta</comment>
+                <event-block sid="153725123529749">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="228505213031355" type="Keyboard">
+                            <param id="0" name="Key">69 (E)</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="923169226626001" type="System">
+                            <param id="0" name="Variable">leuPergunta</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="697275453008950" type="System">
+                            <param id="0" name="Variable">leuPergunta</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="861677565872618" type="System">
+                            <param id="0" name="Variable">descarregarBotaoE</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Destrava o jogo</comment>
+                <event-block sid="538882655157771">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="838819517346720" type="System">
+                            <param id="0" name="Variable">descarregarBotaoE</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="263411025977180">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="284321345937172" type="System" />
+                                <condition id="-10" name="Compare opacity" sid="678443292581744" type="BotaoE">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="987807556701519" type="BotaoE">
+                                    <param id="0" name="Opacity">BotaoE.Opacity - 2.5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="475972585292172">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="659848279068899" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-13" name="Set time scale" sid="448616378198462" type="System">
+                                    <param id="0" name="Time scale">1.0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="293213824737427" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove4&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="873844509976720" type="System">
+                                    <param id="0" name="Variable">descarregarBotaoE</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -3668,6 +3767,77 @@
                     <actions>
                         <action id="5" name="Set frame" sid="923821461750890" type="botaoFechar">
                             <param id="0" name="Frame number">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="721226502024705" title="animacaoDurantePergunta">
+            <sub-events>
+                <event-block sid="513170155794836">
+                    <conditions>
+                        <condition id="2" name="Is playing" sid="277097336918281" type="playerAnim">
+                            <param id="0" name="Animation">&quot;FrenteAndando&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="886091006474961" type="playerAnim">
+                            <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="852379400130575">
+                    <conditions>
+                        <condition id="2" name="Is playing" sid="333493937876137" type="playerAnim">
+                            <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="282262760036411">
+                            <conditions>
+                                <condition id="7" name="Is mirrored" sid="485198287842453" type="playerAnim" />
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="115043635996143" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;EsquerdaParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="605005464773858">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="791537094252168" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="734455520226329" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;DireitaParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="458937711826608">
+                    <conditions>
+                        <condition id="2" name="Is playing" sid="719775507646238" type="playerAnim">
+                            <param id="0" name="Animation">&quot;TrasAndando&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="218718977221115" type="playerAnim">
+                            <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="887553537246121">
+                    <conditions />
+                    <actions>
+                        <action id="-12" name="Set group active" sid="361627347916864" type="System">
+                            <param id="0" name="Group name">&quot;animacaoDurantePergunta&quot;</param>
+                            <param id="1" name="State">0</param>
                         </action>
                     </actions>
                 </event-block>

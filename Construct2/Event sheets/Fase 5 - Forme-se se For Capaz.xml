@@ -288,6 +288,9 @@
                 <action id="-16" name="Set opacity" sid="893355591268224" type="botaoFechar">
                     <param id="0" name="Opacity">0</param>
                 </action>
+                <action id="-16" name="Set opacity" sid="669072721214946" type="BotaoE">
+                    <param id="0" name="Opacity">0</param>
+                </action>
                 <action id="-16" name="Set opacity" sid="791511159837394" type="controleAudio">
                     <param id="0" name="Opacity">0</param>
                 </action>
@@ -2063,6 +2066,9 @@
                                 <action id="-16" name="Set opacity" sid="1706482227902222" type="textoRespostas">
                                     <param id="0" name="Opacity">textoRespostas.Opacity + 2.5</param>
                                 </action>
+                                <action id="-16" name="Set opacity" sid="330034106196075" type="BotaoE">
+                                    <param id="0" name="Opacity">BotaoE.Opacity + 2.5</param>
+                                </action>
                             </actions>
                         </event-block>
                         <event-block sid="2551488609303346">
@@ -2077,6 +2083,17 @@
                                 <action id="-9" name="Set value" sid="5351694586913291" type="System">
                                     <param id="0" name="Variable">carregarPerguntasTCC</param>
                                     <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="967947387753312" type="System">
+                                    <param id="0" name="Variable">leuPergunta</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-13" name="Set time scale" sid="260327239094815" type="System">
+                                    <param id="0" name="Time scale">0.0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="880078411965032" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove6&quot;</param>
+                                    <param id="1" name="State">0</param>
                                 </action>
                             </actions>
                             <sub-events>
@@ -2140,6 +2157,74 @@
                                     </actions>
                                 </event-block>
                             </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Terminou de ler a pergunta</comment>
+                <event-block sid="525012733423128">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="625363601821872" type="Keyboard">
+                            <param id="0" name="Key">69 (E)</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="550188931046384" type="System">
+                            <param id="0" name="Variable">leuPergunta</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="726857252834528" type="System">
+                            <param id="0" name="Variable">leuPergunta</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="704474639918328" type="System">
+                            <param id="0" name="Variable">descarregarBotaoE</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Destrava o jogo</comment>
+                <event-block sid="428191401690074">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="508413361663252" type="System">
+                            <param id="0" name="Variable">descarregarBotaoE</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="328518378742987">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="730327481194482" type="System" />
+                                <condition id="-10" name="Compare opacity" sid="654903667765462" type="BotaoE">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="513846012927621" type="BotaoE">
+                                    <param id="0" name="Opacity">BotaoE.Opacity - 2.5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="971817038925169">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="454304027486979" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-13" name="Set time scale" sid="370844913696470" type="System">
+                                    <param id="0" name="Time scale">1.0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="172040906561772" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove6&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="316702548686711" type="System">
+                                    <param id="0" name="Variable">descarregarBotaoE</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
                         </event-block>
                     </sub-events>
                 </event-block>
