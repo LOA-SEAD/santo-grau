@@ -167,6 +167,10 @@
                     <param id="0" name="Group name">&quot;controleBolinhas&quot;</param>
                     <param id="1" name="State">0</param>
                 </action>
+                <action id="-12" name="Set group active" sid="929256872969403" type="System">
+                    <param id="0" name="Group name">&quot;animacaoDurantePerguntaFFTCC&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
                 <action id="-12" name="Set group active" sid="854068385046564" type="System">
                     <param id="0" name="Group name">&quot;dialogoTCC&quot;</param>
                     <param id="1" name="State">1</param>
@@ -2084,16 +2088,21 @@
                                     <param id="0" name="Variable">carregarPerguntasTCC</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="967947387753312" type="System">
+                                <action id="-9" name="Set value" sid="827781180544078" type="System">
                                     <param id="0" name="Variable">leuPergunta</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
-                                <action id="-13" name="Set time scale" sid="260327239094815" type="System">
-                                    <param id="0" name="Time scale">0.0</param>
-                                </action>
+                                <action behavior="8Direction" id="0" name="Stop" sid="697205478760524" type="player" />
                                 <action id="-12" name="Set group active" sid="880078411965032" type="System">
                                     <param id="0" name="Group name">&quot;playerMove6&quot;</param>
                                     <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="686429546147878" type="System">
+                                    <param id="0" name="Group name">&quot;animacaoDurantePerguntaFFTCC&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-13" name="Set time scale" sid="466739414909467" type="System">
+                                    <param id="0" name="Time scale">0.0</param>
                                 </action>
                             </actions>
                             <sub-events>
@@ -3029,6 +3038,75 @@
                             </sub-events>
                         </event-block>
                     </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <comment>Grupo com o objetivo de consertar a animação da personagem após a pausa do jogo para que o jogador leia a pergunta</comment>
+        <event-group description="" sid="186932449273956" title="animacaoDurantePerguntaFFTCC">
+            <sub-events>
+                <event-block sid="322560427051058">
+                    <conditions>
+                        <condition id="2" name="Is playing" sid="498821903861667" type="playerAnim">
+                            <param id="0" name="Animation">&quot;FrenteAndando&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="470572987548989" type="playerAnim">
+                            <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="958763243528991">
+                    <conditions>
+                        <condition id="2" name="Is playing" sid="746050855981285" type="playerAnim">
+                            <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="700289699954966" type="playerAnim">
+                            <param id="0" name="Animation">&quot;DireitaParado&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="399856983900701">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="424977295458728" type="Keyboard">
+                            <param id="0" name="Key">65 (A)</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="228914121363626" type="Keyboard">
+                            <param id="0" name="Key">37 (Left arrow)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="943628179487695" type="playerAnim">
+                            <param id="0" name="Animation">&quot;EsquerdaParado&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="937471973013336">
+                    <conditions>
+                        <condition id="2" name="Is playing" sid="179141683851115" type="playerAnim">
+                            <param id="0" name="Animation">&quot;TrasAndando&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="157438444319060" type="playerAnim">
+                            <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="996898633082066">
+                    <conditions />
+                    <actions>
+                        <action id="-12" name="Set group active" sid="928667895879907" type="System">
+                            <param id="0" name="Group name">&quot;animacaoDurantePerguntaFFTCC&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                    </actions>
                 </event-block>
             </sub-events>
         </event-group>

@@ -89,6 +89,10 @@
                     <param id="0" name="Group name">&quot;controleCafeFFBN&quot;</param>
                     <param id="1" name="State">0</param>
                 </action>
+                <action id="-12" name="Set group active" sid="886522677689513" type="System">
+                    <param id="0" name="Group name">&quot;animacaoDurantePerguntaFFBN&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
                 <action id="-12" name="Set group active" sid="145370482605590" type="System">
                     <param id="0" name="Group name">&quot;inicioPerguntasFFBN&quot;</param>
                     <param id="1" name="State">1</param>
@@ -113,7 +117,7 @@
                     <param id="0" name="Opacity">0</param>
                 </action>
                 <action id="0" name="Set text" sid="1357049657443647" type="textoPerguntas">
-                    <param id="0" name="Text">&quot;Pegue o bloco com o número correspondente à alternativa correta&quot;</param>
+                    <param id="0" name="Text">&quot;Após ler a pergunta e suas alternativas, pressione a tecla &apos;E&apos; e pegue o bloco com o número correspondente à alternativa correta&quot;</param>
                 </action>
                 <action id="-16" name="Set opacity" sid="3793970731779964" type="textoRespostas">
                     <param id="0" name="Opacity">0</param>
@@ -1340,16 +1344,21 @@
                                     <param id="0" name="Variable">mostrarTextosBN</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="902788823847205" type="System">
+                                <action id="-9" name="Set value" sid="465775005852052" type="System">
                                     <param id="0" name="Variable">leuPergunta</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
-                                <action id="-13" name="Set time scale" sid="970378380162409" type="System">
-                                    <param id="0" name="Time scale">0.0</param>
-                                </action>
+                                <action behavior="8Direction" id="0" name="Stop" sid="370558102439152" type="player" />
                                 <action id="-12" name="Set group active" sid="670736484508487" type="System">
                                     <param id="0" name="Group name">&quot;playerMove5&quot;</param>
                                     <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="944567467376143" type="System">
+                                    <param id="0" name="Group name">&quot;animacaoDurantePerguntaFFBN&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-13" name="Set time scale" sid="568849633369418" type="System">
+                                    <param id="0" name="Time scale">0.0</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1961,6 +1970,75 @@
                 </event-block>
             </sub-events>
         </event-block>
+        <comment>Grupo com o objetivo de consertar a animação da personagem após a pausa do jogo para que o jogador leia a pergunta</comment>
+        <event-group description="" sid="726504917155986" title="animacaoDurantePerguntaFFBN">
+            <sub-events>
+                <event-block sid="850285526049303">
+                    <conditions>
+                        <condition id="2" name="Is playing" sid="624991290838775" type="playerAnim">
+                            <param id="0" name="Animation">&quot;FrenteAndando&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="105054925164975" type="playerAnim">
+                            <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="233358716217756">
+                    <conditions>
+                        <condition id="2" name="Is playing" sid="381035187593269" type="playerAnim">
+                            <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="521805395895202" type="playerAnim">
+                            <param id="0" name="Animation">&quot;DireitaParado&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="785507195904784">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="160288846907431" type="Keyboard">
+                            <param id="0" name="Key">65 (A)</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="903367751706574" type="Keyboard">
+                            <param id="0" name="Key">37 (Left arrow)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="263620013483520" type="playerAnim">
+                            <param id="0" name="Animation">&quot;EsquerdaParado&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="808331064414141">
+                    <conditions>
+                        <condition id="2" name="Is playing" sid="116227290568789" type="playerAnim">
+                            <param id="0" name="Animation">&quot;TrasAndando&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="4" name="Set animation" sid="270904686874777" type="playerAnim">
+                            <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="755753823614396">
+                    <conditions />
+                    <actions>
+                        <action id="-12" name="Set group active" sid="603455033425315" type="System">
+                            <param id="0" name="Group name">&quot;animacaoDurantePerguntaFFBN&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
         <event-group description="" sid="3276606380595857" title="playerMove5">
             <sub-events>
                 <event-block any="1" sid="7775912482290985">
