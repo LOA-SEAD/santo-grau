@@ -1,0 +1,703 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>Menu Principal</name>
+    <events>
+        <variable constant="0" name="recompensa1" sid="519006878087200" static="0" type="number">0</variable>
+        <variable constant="0" name="recompensa2" sid="937237145729406" static="0" type="number">0</variable>
+        <variable constant="0" name="recompensa3" sid="478865244187845" static="0" type="number">0</variable>
+        <variable constant="0" name="recompensa4" sid="982564465195445" static="0" type="number">0</variable>
+        <variable constant="0" name="recompensa5" sid="837086192855991" static="0" type="number">0</variable>
+        <variable constant="0" name="recompensa6" sid="879970507374865" static="0" type="number">0</variable>
+        <variable constant="0" name="volMusica" sid="492045108347691" static="0" type="number">-100</variable>
+        <variable constant="0" name="volSons" sid="367203655051924" static="0" type="number">0</variable>
+        <variable constant="0" name="layoutAtual" sid="616360525572722" static="0" type="number">0</variable>
+        <comment>Variável criada para armazenar a fase que o jogador está. Não é utilizada layoutAtual por causa da possibilidade do jogo ser customizado com a fase da galeria primeiro e a da tecnologia depois</comment>
+        <variable constant="0" name="fase" sid="889825898132154" static="0" type="number">0</variable>
+        <comment>Variável criada para não dar problema na variavel layoutAtual</comment>
+        <variable constant="0" name="ocorreuGameOver" sid="345072010130913" static="0" type="number">0</variable>
+        <comment>Variável criada para armazenar a pontuação que o jogador possuia no começo da fase</comment>
+        <variable constant="0" name="pontuacaoInicio" sid="977542815891861" static="0" type="number">0</variable>
+        <comment>Variável utilizada nas fases finais para controlar quantas perguntas serão sorteadas</comment>
+        <variable constant="0" name="numeroQuestoes" sid="485658048879094" static="0" type="number">0</variable>
+        <comment>Variável utilizada nas fases finais para controlar quantas perguntas foram inseridas no arquivo .json</comment>
+        <variable constant="0" name="questoesExistentes" sid="373464028363608" static="0" type="number">0</variable>
+        <comment>Armazena o comando que será enviado pelo javascript para o REMAR</comment>
+        <variable constant="0" name="sendJS" sid="147083066583424" static="0" type="text"></variable>
+        <comment>Variável utilizada para contabilizar o número de danos que o jogador sofreu em alguma fase, visando enviar essa informação por Javascript para o REMAR</comment>
+        <variable constant="0" name="numeroDanosJS" sid="227182153527757" static="0" type="number">0</variable>
+        <comment>Utilizado para armazenar o texto da resposta escolhida pelo jogador nas fases finais, sendo que o texto dela não é colocado diretamente no sendJS pelo fato da detecção da alternativa escolhida ser feito em separado</comment>
+        <variable constant="0" name="textoRespostaEscolhida" sid="843809930673162" static="0" type="text"></variable>
+        <comment>Utilizado para armazenar o valor parcial da variável sendJS antes de executar o javascript avisando que o jogador errou uma pergunta, permitindo que esse valor seja restaurado</comment>
+        <variable constant="0" name="respostaParcial" sid="984312519873737" static="0" type="text"></variable>
+        <comment>Armazena o numero de questões que o professor inseriu em todas as fases, sendo utilizado para controle do REMAR no momento de apresentar quais questões foram respondidas</comment>
+        <variable constant="0" name="numeroQuestoesCriadas" sid="771629178247534" static="0" type="number">0</variable>
+        <event-block sid="2501215411825428">
+            <conditions>
+                <condition id="-2" name="On start of layout" sid="8787843259045866" type="System" />
+            </conditions>
+            <actions>
+                <action id="4" name="Preload" sid="441098928813571" type="Audio">
+                    <param id="0" name="Audio file">OSantoGrau</param>
+                </action>
+                <action id="4" name="Preload" sid="307498961568044" type="Audio">
+                    <param id="0" name="Audio file">OSantoDeGrau</param>
+                </action>
+                <action id="4" name="Preload" sid="619527241557862" type="Audio">
+                    <param id="0" name="Audio file">OSantoJoGrau</param>
+                </action>
+                <action id="4" name="Preload" sid="238397030777449" type="Audio">
+                    <param id="0" name="Audio file">OSantoTiGrau</param>
+                </action>
+                <action id="4" name="Preload" sid="495225602593049" type="Audio">
+                    <param id="0" name="Audio file">Papapa_lava</param>
+                </action>
+                <action id="4" name="Preload" sid="831134332104691" type="Audio">
+                    <param id="0" name="Audio file">Ice_Dreams_-_Blocos_de_Neve</param>
+                </action>
+                <action id="4" name="Preload" sid="372205518522212" type="Audio">
+                    <param id="0" name="Audio file">TheBossH_TCC</param>
+                </action>
+                <action id="33" name="Stop all" sid="872800401247468" type="Audio" />
+                <action id="0" name="Play" sid="219713164786199" type="Audio">
+                    <param id="0" name="Audio file">OSantoGrau</param>
+                    <param id="2" name="Loop">1</param>
+                    <param id="3" name="Volume">volMusica</param>
+                    <param id="1" name="Tag (optional)">&quot;musica&quot;</param>
+                </action>
+                <action id="-9" name="Set value" sid="740211410176327" type="System">
+                    <param id="0" name="Variable">layoutAtual</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="5326537822278728" type="fundo0">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="6197573505556149" type="botoes">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="8737836302400819" type="botoesTexto">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="5" name="Set web font" sid="9588233436627095" type="botoesTexto">
+                    <param id="0" name="Family name">&quot;please_write_me_a_songmedium&quot;</param>
+                    <param id="1" name="CSS URL">&quot;stylesheet.css&quot;</param>
+                </action>
+                <action id="3" name="Set font size" sid="6363948734023396" type="botoesTexto">
+                    <param id="0" name="Size (pt)">32</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="935027858496903" type="logo">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="272483894008538">
+            <conditions>
+                <condition id="-14" name="Compare variable" sid="534009694346902" type="System">
+                    <param id="0" name="Variable">volMusica</param>
+                    <param id="1" name="Comparison">2</param>
+                    <param id="2" name="Value">0</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="996487390546440">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="599288805693134" type="botoesAudio">
+                            <param id="0" name="Unique ID">555</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="883278666309521" type="botoesAudio">
+                            <param id="0" name="Frame number">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="237563651468648">
+            <conditions>
+                <condition id="-22" name="Else" sid="498751707144401" type="System" />
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="232145386667838">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="755591997362405" type="botoesAudio">
+                            <param id="0" name="Unique ID">555</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="229642166675894" type="botoesAudio">
+                            <param id="0" name="Frame number">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="683668212800660">
+            <conditions>
+                <condition id="-14" name="Compare variable" sid="534207452570929" type="System">
+                    <param id="0" name="Variable">volSons</param>
+                    <param id="1" name="Comparison">2</param>
+                    <param id="2" name="Value">0</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="521905615022571">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="264362284597851" type="botoesAudio">
+                            <param id="0" name="Unique ID">556</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="901466106731064" type="botoesAudio">
+                            <param id="0" name="Frame number">3</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="539832830689942">
+            <conditions>
+                <condition id="-22" name="Else" sid="126109534652308" type="System" />
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="451115783105253">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="911626701072941" type="botoesAudio">
+                            <param id="0" name="Unique ID">556</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="797509377373032" type="botoesAudio">
+                            <param id="0" name="Frame number">2</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="9871178331122567">
+            <conditions>
+                <condition id="-1" name="Every tick" sid="2493448029493795" type="System" />
+            </conditions>
+            <actions>
+                <action id="3" name="Set volume" sid="591928821977102" type="Audio">
+                    <param id="0" name="Tag">&quot;musica&quot;</param>
+                    <param id="1" name="dB">volMusica</param>
+                </action>
+                <action id="3" name="Set volume" sid="819152277306524" type="Audio">
+                    <param id="0" name="Tag">&quot;sons&quot;</param>
+                    <param id="1" name="dB">volSons</param>
+                </action>
+            </actions>
+            <sub-events>
+                <event-block sid="1966580810246776">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="1601489753935782" type="fundo0">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Opacity">100</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Set opacity" sid="7903102707151737" type="fundo0">
+                            <param id="0" name="Opacity">fundo0.Opacity+0.5</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="4312758775113135" type="logo">
+                            <param id="0" name="Opacity">logo.Opacity+0.5</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="3186961720574602" type="botoes">
+                            <param id="0" name="Opacity">botoes.Opacity+0.5</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="3215950476692179" type="botoesTexto">
+                            <param id="0" name="Opacity">botoesTexto.Opacity+0.5</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="315922985597952">
+            <conditions>
+                <condition id="7" name="Cursor is over object" sid="427561126430696" type="Mouse">
+                    <param id="0" name="Object">logo</param>
+                </condition>
+                <condition id="-4" name="Trigger once while true" sid="619874860586649" type="System" />
+            </conditions>
+            <actions>
+                <action id="7" name="Stop speaking" sid="426145505726210" type="UserMedia" />
+                <action id="6" name="Speak text" sid="275550447444272" type="UserMedia">
+                    <param id="0" name="Text">&quot;Em Busca do Santo Grau&quot;</param>
+                    <param id="1" name="Language">&quot;pt-BR&quot;</param>
+                    <param id="2" name="Voice URI">&quot;&quot;</param>
+                    <param id="3" name="Volume">0</param>
+                    <param id="4" name="Rate">1</param>
+                    <param id="5" name="Pitch">1</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="243728049435357">
+            <conditions>
+                <condition id="7" name="Cursor is over object" sid="948542487903945" type="Mouse">
+                    <param id="0" name="Object">botoesTexto</param>
+                </condition>
+                <condition id="-4" name="Trigger once while true" sid="774195764708594" type="System" />
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="482110126255038">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="593874307204619" type="botoesTexto">
+                            <param id="0" name="Unique ID">263</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Stop speaking" sid="626953964755853" type="UserMedia" />
+                        <action id="6" name="Speak text" sid="434682959338925" type="UserMedia">
+                            <param id="0" name="Text">botoesTexto.Text</param>
+                            <param id="1" name="Language">&quot;pt-BR&quot;</param>
+                            <param id="2" name="Voice URI">&quot;&quot;</param>
+                            <param id="3" name="Volume">0</param>
+                            <param id="4" name="Rate">1</param>
+                            <param id="5" name="Pitch">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="801324655837248">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="877928189456829" type="botoesTexto">
+                            <param id="0" name="Unique ID">265</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Stop speaking" sid="165902552872272" type="UserMedia" />
+                        <action id="6" name="Speak text" sid="294660954696569" type="UserMedia">
+                            <param id="0" name="Text">botoesTexto.Text</param>
+                            <param id="1" name="Language">&quot;pt-BR&quot;</param>
+                            <param id="2" name="Voice URI">&quot;&quot;</param>
+                            <param id="3" name="Volume">0</param>
+                            <param id="4" name="Rate">1</param>
+                            <param id="5" name="Pitch">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="397500972552237">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="603361607858987" type="botoesTexto">
+                            <param id="0" name="Unique ID">266</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Stop speaking" sid="914640454670405" type="UserMedia" />
+                        <action id="6" name="Speak text" sid="633613147125564" type="UserMedia">
+                            <param id="0" name="Text">botoesTexto.Text</param>
+                            <param id="1" name="Language">&quot;pt-BR&quot;</param>
+                            <param id="2" name="Voice URI">&quot;&quot;</param>
+                            <param id="3" name="Volume">0</param>
+                            <param id="4" name="Rate">1</param>
+                            <param id="5" name="Pitch">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="609923459453798">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="732754613051004" type="botoesTexto">
+                            <param id="0" name="Unique ID">267</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Stop speaking" sid="159768411248003" type="UserMedia" />
+                        <action id="6" name="Speak text" sid="142793044069229" type="UserMedia">
+                            <param id="0" name="Text">botoesTexto.Text</param>
+                            <param id="1" name="Language">&quot;pt-BR&quot;</param>
+                            <param id="2" name="Voice URI">&quot;&quot;</param>
+                            <param id="3" name="Volume">0</param>
+                            <param id="4" name="Rate">1</param>
+                            <param id="5" name="Pitch">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>Botão de Jogar</comment>
+        <event-block sid="896802403185169">
+            <conditions>
+                <condition id="-14" name="Pick by unique ID" sid="9509336992319902" type="botoes">
+                    <param id="0" name="Unique ID">242</param>
+                </condition>
+                <condition id="-14" name="Pick by unique ID" sid="5562989130537217" type="botoesTexto">
+                    <param id="0" name="Unique ID">263</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="1650349811589659">
+                    <conditions>
+                        <condition id="7" name="Cursor is over object" sid="7994570992449109" type="Mouse">
+                            <param id="0" name="Object">botoes</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="9577597148648142" type="botoes">
+                            <param id="0" name="Frame number">1</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="3544330519735795" type="botoesTexto">
+                            <param id="0" name="X">643</param>
+                        </action>
+                        <action id="-2" name="Set Y" sid="1502049426319864" type="botoesTexto">
+                            <param id="0" name="Y">371</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="8120883982042705">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="137365700133324" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="6569766054795177" type="botoes">
+                            <param id="0" name="Frame number">0</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="8136196744117016" type="botoesTexto">
+                            <param id="0" name="X">640</param>
+                        </action>
+                        <action id="-2" name="Set Y" sid="2568460338232646" type="botoesTexto">
+                            <param id="0" name="Y">361</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="4428236349497325">
+                    <conditions>
+                        <condition id="6" name="On object clicked" sid="8107850119984847" type="Mouse">
+                            <param id="0" name="Mouse button">0</param>
+                            <param id="1" name="Click type">0</param>
+                            <param id="2" name="Object clicked">botoes</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Go to layout" sid="1941434790205836" type="System">
+                            <param id="0" name="Layout">Cena 1</param>
+                        </action>
+                        <action id="0" name="Play" sid="444276746130465" type="Audio">
+                            <param id="0" name="Audio file">botoes_menu</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">volSons</param>
+                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>Botão de Carregar</comment>
+        <event-block sid="7337884987870493">
+            <conditions>
+                <condition id="-14" name="Pick by unique ID" sid="6407050807317459" type="botoes">
+                    <param id="0" name="Unique ID">243</param>
+                </condition>
+                <condition id="-14" name="Pick by unique ID" sid="3291881085314508" type="botoesTexto">
+                    <param id="0" name="Unique ID">265</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="1063766067611044">
+                    <conditions>
+                        <condition id="7" name="Cursor is over object" sid="6514765550076286" type="Mouse">
+                            <param id="0" name="Object">botoes</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="5332876424919435" type="botoes">
+                            <param id="0" name="Frame number">1</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="6333126189031277" type="botoesTexto">
+                            <param id="0" name="X">643</param>
+                        </action>
+                        <action id="-2" name="Set Y" sid="2479873645316947" type="botoesTexto">
+                            <param id="0" name="Y">459</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="7389848892123238">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="5260645372492015" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="7063846596155536" type="botoes">
+                            <param id="0" name="Frame number">0</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="6466542885119998" type="botoesTexto">
+                            <param id="0" name="X">640</param>
+                        </action>
+                        <action id="-2" name="Set Y" sid="827018505328665" type="botoesTexto">
+                            <param id="0" name="Y">449</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="7073544333395193">
+                    <conditions>
+                        <condition id="6" name="On object clicked" sid="8671182699386034" type="Mouse">
+                            <param id="0" name="Mouse button">0</param>
+                            <param id="1" name="Click type">0</param>
+                            <param id="2" name="Object clicked">botoes</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-37" name="Load" sid="3240963582061137" type="System">
+                            <param id="0" name="Slot">&quot;save&quot;</param>
+                        </action>
+                        <action id="0" name="Play" sid="274195815024937" type="Audio">
+                            <param id="0" name="Audio file">botoes_menu</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">volSons</param>
+                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>Botão de Galeria</comment>
+        <event-block sid="2311365846041724">
+            <conditions>
+                <condition id="-14" name="Pick by unique ID" sid="7395588214869966" type="botoes">
+                    <param id="0" name="Unique ID">244</param>
+                </condition>
+                <condition id="-14" name="Pick by unique ID" sid="5110391948380429" type="botoesTexto">
+                    <param id="0" name="Unique ID">266</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="374192133566576">
+                    <conditions>
+                        <condition id="7" name="Cursor is over object" sid="3927584472491502" type="Mouse">
+                            <param id="0" name="Object">botoes</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="1220028618222745" type="botoes">
+                            <param id="0" name="Frame number">1</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="5012070631990985" type="botoesTexto">
+                            <param id="0" name="X">643</param>
+                        </action>
+                        <action id="-2" name="Set Y" sid="9098334925580951" type="botoesTexto">
+                            <param id="0" name="Y">547</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="110002229934152">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="4984193188429894" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="8942098636356893" type="botoes">
+                            <param id="0" name="Frame number">0</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="7297268191771763" type="botoesTexto">
+                            <param id="0" name="X">640</param>
+                        </action>
+                        <action id="-2" name="Set Y" sid="911407680945145" type="botoesTexto">
+                            <param id="0" name="Y">537</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="7574130865633587">
+                    <conditions>
+                        <condition id="6" name="On object clicked" sid="4006480882349895" type="Mouse">
+                            <param id="0" name="Mouse button">0</param>
+                            <param id="1" name="Click type">0</param>
+                            <param id="2" name="Object clicked">botoes</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Go to layout" sid="781856269993275" type="System">
+                            <param id="0" name="Layout">Tela Recompensas</param>
+                        </action>
+                        <action id="0" name="Play" sid="152475006703922" type="Audio">
+                            <param id="0" name="Audio file">botoes_menu</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">volSons</param>
+                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>Botão de Créditos</comment>
+        <event-block sid="8709782564474334">
+            <conditions>
+                <condition id="-14" name="Pick by unique ID" sid="3162036216929831" type="botoes">
+                    <param id="0" name="Unique ID">264</param>
+                </condition>
+                <condition id="-14" name="Pick by unique ID" sid="8485530653657175" type="botoesTexto">
+                    <param id="0" name="Unique ID">267</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="4311436424490119">
+                    <conditions>
+                        <condition id="7" name="Cursor is over object" sid="2140352125446062" type="Mouse">
+                            <param id="0" name="Object">botoes</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="2256681199407926" type="botoes">
+                            <param id="0" name="Frame number">1</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="5831229549724821" type="botoesTexto">
+                            <param id="0" name="X">643</param>
+                        </action>
+                        <action id="-2" name="Set Y" sid="1217605150079029" type="botoesTexto">
+                            <param id="0" name="Y">635</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="835591331513657">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="8469268663803431" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="5334808064355723" type="botoes">
+                            <param id="0" name="Frame number">0</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="6284031651822605" type="botoesTexto">
+                            <param id="0" name="X">640</param>
+                        </action>
+                        <action id="-2" name="Set Y" sid="3343888701993787" type="botoesTexto">
+                            <param id="0" name="Y">625</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="3863599236859557">
+                    <conditions>
+                        <condition id="6" name="On object clicked" sid="4511748684106307" type="Mouse">
+                            <param id="0" name="Mouse button">0</param>
+                            <param id="1" name="Click type">0</param>
+                            <param id="2" name="Object clicked">botoes</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Go to layout" sid="2425458291350969" type="System">
+                            <param id="0" name="Layout">Tela Creditos</param>
+                        </action>
+                        <action id="0" name="Play" sid="495084152434782" type="Audio">
+                            <param id="0" name="Audio file">botoes_menu</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">volSons</param>
+                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="759644406539698">
+            <conditions>
+                <condition id="6" name="On object clicked" sid="300274083774472" type="Mouse">
+                    <param id="0" name="Mouse button">0</param>
+                    <param id="1" name="Click type">0</param>
+                    <param id="2" name="Object clicked">botoesAudio</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="849361893375780">
+                    <conditions>
+                        <condition id="3" name="Compare frame" sid="915709265217051" type="botoesAudio">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Number">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="712422384460230" type="System">
+                            <param id="0" name="Variable">volMusica</param>
+                            <param id="1" name="Value">-100</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="329812168489104">
+                    <conditions>
+                        <condition id="3" name="Compare frame" sid="916888385210770" type="botoesAudio">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Number">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="414877002814487" type="System">
+                            <param id="0" name="Variable">volMusica</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="592993143218524">
+                    <conditions>
+                        <condition id="3" name="Compare frame" sid="231420765046044" type="botoesAudio">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Number">2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="178421358617123" type="System">
+                            <param id="0" name="Variable">volSons</param>
+                            <param id="1" name="Value">-100</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="214245230924339">
+                    <conditions>
+                        <condition id="3" name="Compare frame" sid="868865299313767" type="botoesAudio">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Number">3</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="788606505628392" type="System">
+                            <param id="0" name="Variable">volSons</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block any="1" sid="8067896501721556">
+            <conditions>
+                <condition id="7" name="Cursor is over object" sid="7532436455860241" type="Mouse">
+                    <param id="0" name="Object">botoes</param>
+                </condition>
+                <condition id="7" name="Cursor is over object" sid="342153983051548" type="Mouse">
+                    <param id="0" name="Object">botoesAudio</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="0" name="Set cursor style" sid="8967081976868625" type="Mouse">
+                    <param id="0" name="Cursor style">1</param>
+                </action>
+            </actions>
+            <sub-events>
+                <event-block sid="908434385302994">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="746890553049009" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Play" sid="838298000109799" type="Audio">
+                            <param id="0" name="Audio file">sobre_botao</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">volSons</param>
+                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="6680280857880426">
+            <conditions>
+                <condition id="-22" name="Else" sid="4608196322983756" type="System" />
+            </conditions>
+            <actions>
+                <action id="0" name="Set cursor style" sid="5934153810511411" type="Mouse">
+                    <param id="0" name="Cursor style">0</param>
+                </action>
+            </actions>
+        </event-block>
+    </events>
+</c2eventsheet>
