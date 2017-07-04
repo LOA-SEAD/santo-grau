@@ -5148,6 +5148,10 @@
                                     <param id="0" name="Group name">&quot;Pontuacao2b&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
+                                <action id="-9" name="Set value" sid="730820745649963" type="System">
+                                    <param id="0" name="Variable">tempoInicial</param>
+                                    <param id="1" name="Value">time</param>
+                                </action>
                                 <action id="-26" name="Restart layout" sid="514592648194535" type="System" />
                             </actions>
                         </event-block>
@@ -5679,6 +5683,17 @@
                         </condition>
                     </conditions>
                     <actions>
+                        <action id="-9" name="Set value" sid="241439170294635" type="System">
+                            <param id="0" name="Variable">tempoFinal</param>
+                            <param id="1" name="Value">time</param>
+                        </action>
+                        <action id="0" name="Execute" sid="426461115758248" type="StatsJS">
+                            <param id="0" name="Value">&quot;sendTimeData(&quot; &amp; tempoFinal - tempoInicial &amp; &quot;)&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="353920813063693" type="System">
+                            <param id="0" name="Variable">tempoInicial</param>
+                            <param id="1" name="Value">time</param>
+                        </action>
                         <action id="-25" name="Go to layout (by name)" sid="4741130582769087" type="System">
                             <param id="0" name="Layout">&quot;Fase &quot; &amp; FasesJSON.GetData(&quot;fases&quot;, layoutAtual)</param>
                         </action>
