@@ -139,14 +139,13 @@ function sendRankingData(pontos){
     var info = {};
     var path;
     if(window.location.hostname == "localhost" ){   // for localhost tests
-        path = "/exported-resource/saveStats"
+        path = "/exported-resource/saveScore"
     }else {                                 // for web version in production, electron and crosswalk versions
-        path = "http://remar.dc.ufscar.br/exported-resource/saveStats"
+        path = "http://remar.dc.ufscar.br/exported-resource/saveScore"
     }
     $.getJSON("remar.json", function(json) {
         info.exportedResourceId = json.exportedResourceId;
         info.score = pontos;
-        info.gameType = 'ranking';
         $.ajax({
             type: "POST",
             url: path,
