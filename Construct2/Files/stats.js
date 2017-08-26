@@ -89,15 +89,15 @@ function sendPlayDataGallery(terminou,nroDanos){
     var info = {};
     var path;
     if(window.location.hostname == "localhost" ){   // for localhost tests
-        path = "/exported-resource/saveStats"
+        path = "/exported-resource/savePlayStats"
     }else {                                 // for web version in production, electron and crosswalk versions
-        path = "http://remar.dc.ufscar.br/exported-resource/saveStats"
+        path = "http://remar.dc.ufscar.br/exported-resource/savePlayStats"
     }
     $.getJSON("remar.json", function(json) {
         info.exportedResourceId = json.exportedResourceId;
         info.finish = terminou;
         info.numberDamages = nroDanos;
-        info.gameType = 'gameStatsSantoGrauGallery';
+        info.gameType = 'SantoGrauGallery';
         $.ajax({
             type: "POST",
             url: path,
@@ -114,15 +114,15 @@ function sendPlayDataFinalLevel(nroDanos,nivel){
     var info = {};
     var path;
     if(window.location.hostname == "localhost" ){   // for localhost tests
-        path = "/exported-resource/saveStats"
+        path = "/exported-resource/savePlayStats"
     }else {                                 // for web version in production, electron and crosswalk versions
-        path = "http://remar.dc.ufscar.br/exported-resource/saveStats"
+        path = "http://remar.dc.ufscar.br/exported-resource/savePlayStats"
     }
     $.getJSON("remar.json", function(json) {
         info.exportedResourceId = json.exportedResourceId;
         info.numberDamages = nroDanos;
         info.level = nivel;
-        info.gameType = 'gameStatsSantoGrauFinalLevel';
+        info.gameType = 'SantoGrauFinalLevel';
         $.ajax({
             type: "POST",
             url: path,
@@ -155,27 +155,4 @@ function sendRankingData(pontos){
         })
     });
     console.log(pontos);
-}
-
-function sendTimeData(tempo){
-    var info = {};
-    var path;
-    if(window.location.hostname == "localhost" ){   // for localhost tests
-        path = "/exported-resource/saveStats"
-    }else {                                 // for web version in production, electron and crosswalk versions
-        path = "http://remar.dc.ufscar.br/exported-resource/saveStats"
-    }
-    $.getJSON("remar.json", function(json) {
-        info.exportedResourceId = json.exportedResourceId;
-        info.time = tempo;
-        info.gameType = 'tempo';
-        $.ajax({
-            type: "POST",
-            url: path,
-            data: info,
-            success: function(data) {
-            }
-        })
-    });
-    console.log(tempo);
 }
