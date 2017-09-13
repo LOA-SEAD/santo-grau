@@ -1,4 +1,4 @@
-function sendDataTechnology(palavra,nroPalavra,erros){
+function sendDataTechnology(palavra,resposta,nroPalavra,erros,venceu){
 	var info = {};
     var path;
     if(window.location.hostname == "localhost" ){   // for localhost tests
@@ -8,9 +8,13 @@ function sendDataTechnology(palavra,nroPalavra,erros){
 	}
 	$.getJSON("remar.json", function(json) {
         info.exportedResourceId = json.exportedResourceId;
+        info.gameIndex = 0;
         info.word = palavra;
+        info.answer = resposta;
         info.wordId = nroPalavra;
         info.numberMistake = erros;
+        info.win = venceu;
+        info.size = 3;
         info.gameType = 'shuffleWord';
         $.ajax({
             type: "POST",
@@ -21,11 +25,13 @@ function sendDataTechnology(palavra,nroPalavra,erros){
         })
 	});
 	console.log(palavra);
+    console.log(resposta);
 	console.log(nroPalavra);
 	console.log(erros);
+    console.log(venceu);
 }
 
-function sendDataGallery(arrastos,seqInicial){
+function sendDataGallery(arrastos,seqInicial,tamanho){
     var info = {};
     var path;
     if(window.location.hostname == "localhost" ){   // for localhost tests
@@ -35,8 +41,11 @@ function sendDataGallery(arrastos,seqInicial){
     }
     $.getJSON("remar.json", function(json) {
         info.exportedResourceId = json.exportedResourceId;
+        info.gameIndex = 1;
         info.numberDrag = arrastos;
         info.initialSequence = seqInicial;
+        info.win = true;
+        info.size = tamanho;
         info.gameType = 'dragPictures';
         $.ajax({
             type: "POST",
@@ -48,9 +57,10 @@ function sendDataGallery(arrastos,seqInicial){
     });
     console.log(arrastos);
     console.log(seqInicial);
+    console.log(tamanho);
 }
 
-function sendDataFinalLevel(pergunta,correta,nroPergunta,respostas,escolhida,acertou,tamanho){
+function sendDataFinalLevel(pergunta,correta,nroPergunta,respostas,escolhida,acertou,tamanho,fase){
     var info = {};
     var path;
     if(window.location.hostname == "localhost" ){   // for localhost tests
@@ -60,6 +70,7 @@ function sendDataFinalLevel(pergunta,correta,nroPergunta,respostas,escolhida,ace
     }
     $.getJSON("remar.json", function(json) {
         info.exportedResourceId = json.exportedResourceId;
+        info.gameIndex = fase;
         info.question = pergunta;
         info.answer = correta;
         info.levelId = nroPergunta;
@@ -83,6 +94,7 @@ function sendDataFinalLevel(pergunta,correta,nroPergunta,respostas,escolhida,ace
     console.log(escolhida);
     console.log(acertou);
     console.log(tamanho);
+    console.log(fase);
 }
 
 function sendPlayDataGallery(terminou,nroDanos){
