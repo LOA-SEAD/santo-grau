@@ -1779,7 +1779,7 @@
         <event-group description="" sid="407833997573688" title="gerarPerguntasJsonFFTCC">
             <sub-events>
                 <variable constant="0" name="escolheTexto" sid="881677225115220" static="0" type="number">0</variable>
-                <comment>Carrega a posição onde estará as letras da alternativa e o texto da pergunta, além de também inserir a pergunta na variável sendJS. Não é possível centralizar o texto pois não dá para obter o tamanho do texto localizado no arquivo .json</comment>
+                <comment>Carrega a posição onde estará as letras da alternativa e o texto da pergunta, além de também inserir a pergunta na variável sendJS. Não é possível centralizar o texto, pois não dá para obter o tamanho do texto localizado no arquivo .json</comment>
                 <event-block sid="4018207027143204">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="5626822018945053" type="System">
@@ -1885,13 +1885,13 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <comment>Com a alternativa certa encontrada, se adiciona ela na variavel sendJS e mais o número da questão (de uma maneira geral, levando em conta todas as partes da fase final. Contador se inicia no 0)</comment>
+                        <comment>Com a alternativa certa encontrada, se adiciona ela na variavel sendJS e mais o número da questão (Contador se inicia no 0)</comment>
                         <event-block sid="322318680921681">
                             <conditions />
                             <actions>
                                 <action id="-9" name="Set value" sid="325160454878515" type="System">
                                     <param id="0" name="Variable">sendJS</param>
-                                    <param id="1" name="Value">sendJS &amp; &quot;&apos;&quot; &amp; replace(LoadJSONTCC.GetData(OrdemQuestoes.At(perguntaTCC-1), respostaNumero), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&apos;&quot; &amp; OrdemQuestoes.At(perguntaTCC-1)+numeroQuestoesCriadas-1 &amp; &quot;&apos;,&quot;</param>
+                                    <param id="1" name="Value">sendJS &amp; &quot;&apos;&quot; &amp; replace(LoadJSONTCC.GetData(OrdemQuestoes.At(perguntaTCC-1), respostaNumero), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&apos;&quot; &amp; OrdemQuestoes.At(perguntaTCC-1)-1 &amp; &quot;&apos;,&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2525,7 +2525,7 @@
                                                                 </action>
                                                                 <action id="-9" name="Set value" sid="218482768092165" type="System">
                                                                     <param id="0" name="Variable">sendJS</param>
-                                                                    <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;true&apos;,&apos;12&apos;,&apos;4&apos;&quot;</param>
+                                                                    <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;true&apos;,&apos;&quot; &amp; LoadJSONTCC.GetData(&quot;quantidadeQuestoes&quot;,0) &amp; &quot;&apos;,&apos;4&apos;&quot;</param>
                                                                 </action>
                                                                 <action id="0" name="Execute" sid="400349009738760" type="StatsJS">
                                                                     <param id="0" name="Value">&quot;sendDataFinalLevel(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
@@ -2598,7 +2598,7 @@
                                                                 </action>
                                                                 <action id="-9" name="Set value" sid="486058108853380" type="System">
                                                                     <param id="0" name="Variable">sendJS</param>
-                                                                    <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;false&apos;,&apos;12&apos;,&apos;4&apos;&quot;</param>
+                                                                    <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;false&apos;,&apos;&quot; &amp; LoadJSONTCC.GetData(&quot;quantidadeQuestoes&quot;,0) &amp; &quot;&apos;,&apos;4&apos;&quot;</param>
                                                                 </action>
                                                                 <action id="0" name="Execute" sid="888637953658761" type="StatsJS">
                                                                     <param id="0" name="Value">&quot;sendDataFinalLevel(&quot; &amp; sendJS &amp; &quot;)&quot;</param>

@@ -11,7 +11,7 @@ function sendDataTechnology(palavra,resposta,nroPalavra,erros,venceu){
         info.gameIndex = 0;
         info.word = palavra;
         info.answer = resposta;
-        info.wordId = nroPalavra;
+        info.levelId = nroPalavra;
         info.numberMistake = erros;
         info.win = venceu;
         info.size = 3;

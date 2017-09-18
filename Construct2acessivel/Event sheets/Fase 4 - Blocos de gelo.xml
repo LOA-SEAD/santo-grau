@@ -1097,7 +1097,7 @@
         <event-group description="" sid="930110046213914" title="blocos">
             <sub-events>
                 <variable constant="0" name="escolheTexto" sid="303738456719089" static="0" type="number">0</variable>
-                <comment>Carrega o texto da pergunta e a insere na variável sendJS. Não é possível centralizar o texto pois não dá para obter o tamanho do texto localizado no arquivo .json</comment>
+                <comment>Carrega o texto da pergunta e a insere na variável sendJS. Não é possível centralizar o texto, pois não dá para obter o tamanho do texto localizado no arquivo .json</comment>
                 <event-block sid="247240928840736">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="7709434343207775" type="System">
@@ -1173,13 +1173,13 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <comment>Com a alternativa certa encontrada, se adiciona ela na variavel sendJS e mais o número da questão (de uma maneira geral, levando em conta todas as partes da fase final. Contador se inicia no 0)</comment>
+                        <comment>Com a alternativa certa encontrada, se adiciona ela na variavel sendJS e mais o número da questão (Contador se inicia no 0)</comment>
                         <event-block sid="648351329387320">
                             <conditions />
                             <actions>
                                 <action id="-9" name="Set value" sid="183627429581839" type="System">
                                     <param id="0" name="Variable">sendJS</param>
-                                    <param id="1" name="Value">sendJS &amp; &quot;&apos;&quot; &amp; replace(LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1), respostaNumero), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&apos;&quot; &amp; OrdemQuestoes.At(perguntaBN-1)+numeroQuestoesCriadas-1 &amp; &quot;&apos;,&quot;</param>
+                                    <param id="1" name="Value">sendJS &amp; &quot;&apos;&quot; &amp; replace(LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1), respostaNumero), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&apos;&quot; &amp; OrdemQuestoes.At(perguntaBN-1)-1 &amp; &quot;&apos;,&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1781,7 +1781,7 @@
                         </action>
                         <action id="-9" name="Set value" sid="562180002333636" type="System">
                             <param id="0" name="Variable">sendJS</param>
-                            <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;true&apos;,&apos;12&apos;,&apos;3&apos;&quot;</param>
+                            <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;true&apos;,&apos;&quot; &amp; LoadJSONBN.GetData(&quot;quantidadeQuestoes&quot;,0) &amp; &quot;&apos;,&apos;3&apos;&quot;</param>
                         </action>
                         <action id="0" name="Execute" sid="500511752396771" type="StatsJS">
                             <param id="0" name="Value">&quot;sendDataFinalLevel(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
@@ -1918,7 +1918,7 @@
                                 </action>
                                 <action id="-9" name="Set value" sid="765406765982486" type="System">
                                     <param id="0" name="Variable">sendJS</param>
-                                    <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;false&apos;,&apos;12&apos;,&apos;3&apos;&quot;</param>
+                                    <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;false&apos;,&apos;&quot; &amp; LoadJSONBN.GetData(&quot;quantidadeQuestoes&quot;,0) &amp; &quot;&apos;,&apos;3&apos;&quot;</param>
                                 </action>
                                 <action id="0" name="Execute" sid="198671940492192" type="StatsJS">
                                     <param id="0" name="Value">&quot;sendDataFinalLevel(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
