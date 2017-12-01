@@ -184,8 +184,18 @@
                     <param id="1" name="State">0</param>
                 </action>
                 <action behavior="8Direction" id="0" name="Stop" sid="372724120982335" type="player" />
+                <action id="0" name="Play" sid="631467634290500" type="Audio">
+                    <param id="0" name="Audio file">passo_grama</param>
+                    <param id="2" name="Loop">1</param>
+                    <param id="3" name="Volume">0</param>
+                    <param id="1" name="Tag (optional)">&quot;passos&quot;</param>
+                </action>
                 <action id="-16" name="Wait" sid="357289089757737" type="System">
                     <param id="0" name="Seconds">0.5</param>
+                </action>
+                <action id="22" name="Set paused" sid="337043203264397" type="Audio">
+                    <param id="0" name="Tag">&quot;passos&quot;</param>
+                    <param id="1" name="State">0</param>
                 </action>
             </actions>
         </event-block>
@@ -834,23 +844,51 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <event-group description="" inactive="1" sid="832931029807796" title="Pontuacao7a">
-            <sub-events>
-                <event-block sid="892066750060361">
-                    <conditions>
-                        <condition id="-2" name="Compare Y" sid="383232629763342" type="pontuacao">
-                            <param id="0" name="Comparison">5</param>
-                            <param id="1" name="Y co-ordinate">636</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-2" name="Set Y" sid="496504639960376" type="pontuacao">
-                            <param id="0" name="Y">pontuacao.Y-3</param>
-                        </action>
-                    </actions>
-                </event-block>
-            </sub-events>
-        </event-group>
+        <event-block sid="433183065119824">
+            <conditions>
+                <condition id="2" inverted="1" name="Key is down" sid="112408223253874" type="Keyboard">
+                    <param id="0" name="Key">87 (W)</param>
+                </condition>
+                <condition id="2" inverted="1" name="Key is down" sid="339653408912962" type="Keyboard">
+                    <param id="0" name="Key">83 (S)</param>
+                </condition>
+                <condition id="2" inverted="1" name="Key is down" sid="325619495474007" type="Keyboard">
+                    <param id="0" name="Key">68 (D)</param>
+                </condition>
+                <condition id="2" inverted="1" name="Key is down" sid="534011149797080" type="Keyboard">
+                    <param id="0" name="Key">65 (A)</param>
+                </condition>
+                <condition id="2" inverted="1" name="Key is down" sid="647014236598400" type="Keyboard">
+                    <param id="0" name="Key">37 (Left arrow)</param>
+                </condition>
+                <condition id="2" inverted="1" name="Key is down" sid="336353564845241" type="Keyboard">
+                    <param id="0" name="Key">39 (Right arrow)</param>
+                </condition>
+                <condition id="2" inverted="1" name="Key is down" sid="754670755749289" type="Keyboard">
+                    <param id="0" name="Key">38 (Up arrow)</param>
+                </condition>
+                <condition id="2" inverted="1" name="Key is down" sid="128278742041944" type="Keyboard">
+                    <param id="0" name="Key">40 (Down arrow)</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="22" name="Set paused" sid="708574927006018" type="Audio">
+                    <param id="0" name="Tag">&quot;passos&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="380519955507600">
+            <conditions>
+                <condition id="-22" name="Else" sid="706865537822784" type="System" />
+            </conditions>
+            <actions>
+                <action id="22" name="Set paused" sid="132240535499050" type="Audio">
+                    <param id="0" name="Tag">&quot;passos&quot;</param>
+                    <param id="1" name="State">1</param>
+                </action>
+            </actions>
+        </event-block>
         <event-group description="" inactive="1" sid="908285297592713" title="Pontuacao7b">
             <sub-events>
                 <event-block sid="516393436240119">
@@ -870,5 +908,26 @@
         </event-group>
         <event-group description="" inactive="1" sid="665805584817953" title="SaidaDiploma6" />
         <event-group description="" inactive="1" sid="593941000854643" title="Saida6" />
+        <event-group description="" inactive="1" sid="832931029807796" title="Pontuacao7a">
+            <sub-events>
+                <event-block sid="892066750060361">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="383232629763342" type="pontuacao">
+                            <param id="0" name="Comparison">5</param>
+                            <param id="1" name="Y co-ordinate">636</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="496504639960376" type="pontuacao">
+                            <param id="0" name="Y">pontuacao.Y-3</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-block sid="429147161896379">
+            <conditions />
+            <actions />
+        </event-block>
     </events>
 </c2eventsheet>
