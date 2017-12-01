@@ -4,7 +4,7 @@
     <name>Fase 6 - Campo de Futebol</name>
     <events>
         <variable constant="0" name="volPassosMax" sid="619914472349410" static="0" type="number">0</variable>
-        <variable constant="0" name="volPassosMin" sid="155369295873792" static="0" type="number">-8</variable>
+        <variable constant="0" name="volPassosMin" sid="155369295873792" static="0" type="number">-14</variable>
         <variable constant="0" name="volPassos" sid="203577669083317" static="0" type="number">0</variable>
         <event-block sid="704942424572087">
             <conditions>
@@ -197,12 +197,28 @@
                     <param id="3" name="Volume">volPassos</param>
                     <param id="1" name="Tag (optional)">&quot;passos&quot;</param>
                 </action>
-                <action id="-16" name="Wait" sid="357289089757737" type="System">
-                    <param id="0" name="Seconds">0.5</param>
+                <action id="26" name="Set listener object" sid="670320780868337" type="Audio">
+                    <param id="0" name="Object">player</param>
+                </action>
+                <action id="25" name="Play at object" sid="704821503942269" type="Audio">
+                    <param id="0" name="Audio file">passo_grama</param>
+                    <param id="1" name="Loop">1</param>
+                    <param id="2" name="Volume">volPassos</param>
+                    <param id="3" name="Object">player</param>
+                    <param id="4" name="Inner angle">45</param>
+                    <param id="5" name="Outer angle">45</param>
+                    <param id="6" name="Outer gain">5</param>
+                    <param id="7" name="Tag (optional)">&quot;passos&quot;</param>
+                </action>
+                <action id="26" name="Set listener object" sid="782016789001844" type="Audio">
+                    <param id="0" name="Object">fonteAudio</param>
                 </action>
                 <action id="22" name="Set paused" sid="337043203264397" type="Audio">
                     <param id="0" name="Tag">&quot;passos&quot;</param>
                     <param id="1" name="State">0</param>
+                </action>
+                <action id="-16" name="Wait" sid="357289089757737" type="System">
+                    <param id="0" name="Seconds">0.5</param>
                 </action>
             </actions>
         </event-block>
@@ -558,6 +574,10 @@
                         <action id="3" name="Set volume" sid="153212597076358" type="Audio">
                             <param id="0" name="Tag">&quot;sons&quot;</param>
                             <param id="1" name="dB">volSons</param>
+                        </action>
+                        <action disabled="1" id="-9" name="Set value" sid="622502591949613" type="System">
+                            <param id="0" name="Variable">volPassos</param>
+                            <param id="1" name="Value">((Player.Y*(volPassosMax - volPassosMin)/(WindowHeight) ) + volPassosMin)</param>
                         </action>
                         <action id="3" name="Set volume" sid="355593491945431" type="Audio">
                             <param id="0" name="Tag">&quot;passos&quot;</param>
