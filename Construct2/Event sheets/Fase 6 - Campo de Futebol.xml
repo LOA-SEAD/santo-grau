@@ -3,6 +3,9 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase 6 - Campo de Futebol</name>
     <events>
+        <variable constant="0" name="volPassosMax" sid="619914472349410" static="0" type="number">0</variable>
+        <variable constant="0" name="volPassosMin" sid="155369295873792" static="0" type="number">-8</variable>
+        <variable constant="0" name="volPassos" sid="203577669083317" static="0" type="number">0</variable>
         <event-block sid="704942424572087">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="961560001477127" type="System" />
@@ -184,10 +187,14 @@
                     <param id="1" name="State">0</param>
                 </action>
                 <action behavior="8Direction" id="0" name="Stop" sid="372724120982335" type="player" />
+                <action id="3" name="Set volume" sid="474952555694094" type="Audio">
+                    <param id="0" name="Tag">&quot;passos&quot;</param>
+                    <param id="1" name="dB">volPassosMax</param>
+                </action>
                 <action id="0" name="Play" sid="631467634290500" type="Audio">
                     <param id="0" name="Audio file">passo_grama</param>
                     <param id="2" name="Loop">1</param>
-                    <param id="3" name="Volume">0</param>
+                    <param id="3" name="Volume">volPassos</param>
                     <param id="1" name="Tag (optional)">&quot;passos&quot;</param>
                 </action>
                 <action id="-16" name="Wait" sid="357289089757737" type="System">
@@ -552,6 +559,10 @@
                             <param id="0" name="Tag">&quot;sons&quot;</param>
                             <param id="1" name="dB">volSons</param>
                         </action>
+                        <action id="3" name="Set volume" sid="355593491945431" type="Audio">
+                            <param id="0" name="Tag">&quot;passos&quot;</param>
+                            <param id="1" name="dB">((Player.Y*(volPassosMax - volPassosMin)/(WindowHeight) ) + volPassosMin)</param>
+                        </action>
                     </actions>
                     <sub-events>
                         <event-block sid="605368073253987">
@@ -842,53 +853,53 @@
                         </action>
                     </actions>
                 </event-block>
+                <event-block sid="433183065119824">
+                    <conditions>
+                        <condition id="2" inverted="1" name="Key is down" sid="112408223253874" type="Keyboard">
+                            <param id="0" name="Key">87 (W)</param>
+                        </condition>
+                        <condition id="2" inverted="1" name="Key is down" sid="339653408912962" type="Keyboard">
+                            <param id="0" name="Key">83 (S)</param>
+                        </condition>
+                        <condition id="2" inverted="1" name="Key is down" sid="325619495474007" type="Keyboard">
+                            <param id="0" name="Key">68 (D)</param>
+                        </condition>
+                        <condition id="2" inverted="1" name="Key is down" sid="534011149797080" type="Keyboard">
+                            <param id="0" name="Key">65 (A)</param>
+                        </condition>
+                        <condition id="2" inverted="1" name="Key is down" sid="647014236598400" type="Keyboard">
+                            <param id="0" name="Key">37 (Left arrow)</param>
+                        </condition>
+                        <condition id="2" inverted="1" name="Key is down" sid="336353564845241" type="Keyboard">
+                            <param id="0" name="Key">39 (Right arrow)</param>
+                        </condition>
+                        <condition id="2" inverted="1" name="Key is down" sid="754670755749289" type="Keyboard">
+                            <param id="0" name="Key">38 (Up arrow)</param>
+                        </condition>
+                        <condition id="2" inverted="1" name="Key is down" sid="128278742041944" type="Keyboard">
+                            <param id="0" name="Key">40 (Down arrow)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="22" name="Set paused" sid="708574927006018" type="Audio">
+                            <param id="0" name="Tag">&quot;passos&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="380519955507600">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="706865537822784" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="22" name="Set paused" sid="132240535499050" type="Audio">
+                            <param id="0" name="Tag">&quot;passos&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
             </sub-events>
         </event-group>
-        <event-block sid="433183065119824">
-            <conditions>
-                <condition id="2" inverted="1" name="Key is down" sid="112408223253874" type="Keyboard">
-                    <param id="0" name="Key">87 (W)</param>
-                </condition>
-                <condition id="2" inverted="1" name="Key is down" sid="339653408912962" type="Keyboard">
-                    <param id="0" name="Key">83 (S)</param>
-                </condition>
-                <condition id="2" inverted="1" name="Key is down" sid="325619495474007" type="Keyboard">
-                    <param id="0" name="Key">68 (D)</param>
-                </condition>
-                <condition id="2" inverted="1" name="Key is down" sid="534011149797080" type="Keyboard">
-                    <param id="0" name="Key">65 (A)</param>
-                </condition>
-                <condition id="2" inverted="1" name="Key is down" sid="647014236598400" type="Keyboard">
-                    <param id="0" name="Key">37 (Left arrow)</param>
-                </condition>
-                <condition id="2" inverted="1" name="Key is down" sid="336353564845241" type="Keyboard">
-                    <param id="0" name="Key">39 (Right arrow)</param>
-                </condition>
-                <condition id="2" inverted="1" name="Key is down" sid="754670755749289" type="Keyboard">
-                    <param id="0" name="Key">38 (Up arrow)</param>
-                </condition>
-                <condition id="2" inverted="1" name="Key is down" sid="128278742041944" type="Keyboard">
-                    <param id="0" name="Key">40 (Down arrow)</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="22" name="Set paused" sid="708574927006018" type="Audio">
-                    <param id="0" name="Tag">&quot;passos&quot;</param>
-                    <param id="1" name="State">0</param>
-                </action>
-            </actions>
-        </event-block>
-        <event-block sid="380519955507600">
-            <conditions>
-                <condition id="-22" name="Else" sid="706865537822784" type="System" />
-            </conditions>
-            <actions>
-                <action id="22" name="Set paused" sid="132240535499050" type="Audio">
-                    <param id="0" name="Tag">&quot;passos&quot;</param>
-                    <param id="1" name="State">1</param>
-                </action>
-            </actions>
-        </event-block>
         <event-group description="" inactive="1" sid="908285297592713" title="Pontuacao7b">
             <sub-events>
                 <event-block sid="516393436240119">
@@ -925,9 +936,5 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <event-block sid="429147161896379">
-            <conditions />
-            <actions />
-        </event-block>
     </events>
 </c2eventsheet>
