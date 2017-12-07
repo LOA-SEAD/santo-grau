@@ -13,6 +13,7 @@
             <actions>
                 <action id="0" name="Load JSON" sid="702652386101802" type="DialogosJSON" />
                 <action id="0" name="Load JSON" sid="334745917279527" type="FasesJSON" />
+                <action id="33" name="Stop all" sid="772298769575832" type="Audio" />
                 <action id="-9" name="Set value" sid="358939320709451" type="System">
                     <param id="0" name="Variable">pause</param>
                     <param id="1" name="Value">0</param>
@@ -377,6 +378,66 @@
                 <action id="-9" name="Set value" sid="389112205122845" type="System">
                     <param id="0" name="Variable">controleDica</param>
                     <param id="1" name="Value">0</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="825881909413485">
+            <conditions>
+                <condition id="-14" name="Compare variable" sid="296631416775571" type="System">
+                    <param id="0" name="Variable">controleDialogos2</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Value">0</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-16" name="Set opacity" sid="314212403981066" type="Dialogos">
+                    <param id="0" name="Opacity">100</param>
+                </action>
+                <action id="0" name="Set text" sid="458106717213881" type="Dialogos">
+                    <param id="0" name="Text">5-(((sqrt((player.X-capivara.X)^2+(player.Y-capivara.Y)^2))-150)/29)</param>
+                </action>
+            </actions>
+            <sub-events>
+                <event-block sid="818361537820909">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="604553403252939" type="System">
+                            <param id="0" name="Interval (seconds)">3.8</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="25" name="Play at object" sid="308119059164586" type="Audio">
+                            <param id="0" name="Audio file">Hello</param>
+                            <param id="1" name="Loop">0</param>
+                            <param id="2" name="Volume">5-(((sqrt((player.X-capivara.X)^2+(player.Y-capivara.Y)^2))-150)/29)</param>
+                            <param id="3" name="Object">capivara</param>
+                            <param id="4" name="Inner angle">45</param>
+                            <param id="5" name="Outer angle">45</param>
+                            <param id="6" name="Outer gain">100</param>
+                            <param id="7" name="Tag (optional)">&quot;capivara&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="840465905303039">
+            <conditions>
+                <condition id="11" name="Is speaking" sid="169012194651342" type="UserMedia" />
+            </conditions>
+            <actions>
+                <action id="2" name="Set muted" sid="670487380339133" type="Audio">
+                    <param id="0" name="Tag">&quot;capivara&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="843058522243198">
+            <conditions>
+                <condition id="-22" name="Else" sid="185630096137533" type="System" />
+            </conditions>
+            <actions>
+                <action id="2" name="Set muted" sid="322617385798261" type="Audio">
+                    <param id="0" name="Tag">&quot;capivara&quot;</param>
+                    <param id="1" name="State">1</param>
                 </action>
             </actions>
         </event-block>
@@ -1682,6 +1743,57 @@
                         </action>
                     </actions>
                 </event-block>
+                <event-block sid="538192440086800">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="977619073271627" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">9</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="380911566266588" type="System">
+                            <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="987611957363699">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="580924689232017" type="Dialogos">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="601782032008894" type="Dialogos">
+                                    <param id="0" name="Opacity">Dialogos.Opacity-2</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="547671995137938" type="DialogoPersonagem">
+                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity-2</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="126219228112345" type="BalaoDialogo">
+                                    <param id="0" name="Opacity">BalaoDialogo.Opacity-2</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="976888276605349">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="842693300599030" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Play" sid="942167306323589" type="Audio">
+                                            <param id="0" name="Audio file">passar_dialogo</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
                 <event-block sid="475961316715313">
                     <conditions>
                         <condition id="0" name="On key pressed" sid="342210982577192" type="Keyboard">
@@ -1857,10 +1969,6 @@
                                     <param id="3" name="Volume">volSons</param>
                                     <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="123977725428463" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">8</param>
-                                </action>
                                 <action id="-9" name="Set value" sid="330930188773943" type="System">
                                     <param id="0" name="Variable">dialogos2</param>
                                     <param id="1" name="Value">5</param>
@@ -1874,7 +1982,28 @@
                                 <action id="-16" name="Wait" sid="903297147780132" type="System">
                                     <param id="0" name="Seconds">0.5</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="601362745777192" type="System">
+                                <action id="-9" name="Set value" sid="541095505250930" type="System">
+                                    <param id="0" name="Variable">controleDialogos2</param>
+                                    <param id="1" name="Value">8</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="494975005603521">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="424371808490396" type="System">
+                                    <param id="0" name="Variable">controleDialogos2</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">8</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Play" sid="981052090501668" type="Audio">
+                                    <param id="0" name="Audio file">passar_dialogo</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="689424659235022" type="System">
                                     <param id="0" name="Variable">controleDialogos2</param>
                                     <param id="1" name="Value">9</param>
                                 </action>
