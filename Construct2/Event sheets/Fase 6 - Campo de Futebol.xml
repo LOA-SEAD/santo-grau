@@ -3,6 +3,7 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase 6 - Campo de Futebol</name>
     <events>
+        <variable constant="0" name="controleItens" sid="266507395506543" static="0" type="number">0</variable>
         <variable constant="0" name="volPassosMax" sid="619914472349410" static="0" type="number">0</variable>
         <variable constant="0" name="volPassosMin" sid="155369295873792" static="0" type="number">-14</variable>
         <variable constant="0" name="volPassos" sid="203577669083317" static="0" type="number">0</variable>
@@ -21,6 +22,10 @@
                 <action id="-9" name="Set value" sid="801623572615250" type="System">
                     <param id="0" name="Variable">layoutAtual</param>
                     <param id="1" name="Value">layoutAtual+1 - ocorreuGameOver</param>
+                </action>
+                <action id="-9" name="Set value" sid="649670333796955" type="System">
+                    <param id="0" name="Variable">controleItens</param>
+                    <param id="1" name="Value">0</param>
                 </action>
                 <action id="-9" name="Set value" sid="674873619607004" type="System">
                     <param id="0" name="Variable">ocorreuGameOver</param>
@@ -143,6 +148,10 @@
                 <action behavior="Pin" id="0" name="Pin to object" sid="902572675910898" type="AnimacaoDiploma">
                     <param id="0" name="Pin to">AndaParaCimaDiploma</param>
                     <param id="1" name="Mode">1</param>
+                </action>
+                <action behavior="Pin" id="0" name="Pin to object" sid="132065715315347" type="campoBola">
+                    <param id="0" name="Pin to">campoBola</param>
+                    <param id="1" name="Mode">0</param>
                 </action>
                 <action id="5" name="Set frame" sid="659212649605458" type="AnimacaoDiploma">
                     <param id="0" name="Frame number">0</param>
@@ -1683,6 +1692,30 @@
                         </action>
                     </actions>
                 </event-block>
+                <event-block sid="210052716306670">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="448135696339567" type="System">
+                            <param id="0" name="Variable">controleItens</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="623197607815745">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="638441780189891" type="campoItens">
+                                    <param id="0" name="Unique ID">685</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="Physics" id="27" name="Set enabled" sid="320794064614705" type="campoItens">
+                                    <param id="0" name="Mode">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
             </sub-events>
         </event-group>
         <event-group description="" inactive="1" sid="588094124050570" title="DialogoCapivara">
@@ -2006,6 +2039,10 @@
                                 <action id="-9" name="Set value" sid="689424659235022" type="System">
                                     <param id="0" name="Variable">controleDialogos2</param>
                                     <param id="1" name="Value">9</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="997961585336745" type="System">
+                                    <param id="0" name="Variable">controleItens</param>
+                                    <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
                         </event-block>
