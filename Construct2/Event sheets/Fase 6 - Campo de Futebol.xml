@@ -7,6 +7,10 @@
         <variable constant="0" name="volPassosMax" sid="619914472349410" static="0" type="number">0</variable>
         <variable constant="0" name="volPassosMin" sid="155369295873792" static="0" type="number">-14</variable>
         <variable constant="0" name="volPassos" sid="203577669083317" static="0" type="number">0</variable>
+        <comment>Auxilia na criação dos objetos</comment>
+        <variable constant="0" name="auxiliaRandomObjetos" sid="186967823184162" static="0" type="number">0</variable>
+        <comment>Para limitar o número de objetos jogados no campo</comment>
+        <variable constant="0" name="numeroObjetosAtirados" sid="705265042607194" static="0" type="number">0</variable>
         <event-block sid="704942424572087">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="961560001477127" type="System" />
@@ -206,6 +210,10 @@
                 </action>
                 <action id="-12" name="Set group active" sid="944740911093044" type="System">
                     <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="261541074159230" type="System">
+                    <param id="0" name="Group name">&quot;ArremecoObjetos&quot;</param>
                     <param id="1" name="State">0</param>
                 </action>
                 <action behavior="8Direction" id="0" name="Stop" sid="372724120982335" type="player" />
@@ -649,6 +657,18 @@
                 <action id="-2" name="Go to layout" sid="855206006951768" type="System">
                     <param id="0" name="Layout">Tela Gameover</param>
                 </action>
+            </actions>
+        </event-block>
+        <comment>Para destruir o objeto depois dele ter sido jogado</comment>
+        <event-block sid="436326695648630">
+            <conditions>
+                <condition id="-2" name="Compare Y" sid="985072625411531" type="campoItens">
+                    <param id="0" name="Comparison">4</param>
+                    <param id="1" name="Y co-ordinate">850</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-9" name="Destroy" sid="801577099352038" type="campoItens" />
             </actions>
         </event-block>
         <comment>Para a animação do diploma fugindo</comment>
@@ -1692,7 +1712,7 @@
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="210052716306670">
+                <event-block disabled="1" sid="210052716306670">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="448135696339567" type="System">
                             <param id="0" name="Variable">controleItens</param>
@@ -1702,7 +1722,7 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="623197607815745">
+                        <event-block disabled="1" sid="623197607815745">
                             <conditions>
                                 <condition id="-14" name="Pick by unique ID" sid="638441780189891" type="campoItens">
                                     <param id="0" name="Unique ID">685</param>
@@ -1781,7 +1801,7 @@
                         <condition id="-14" name="Compare variable" sid="977619073271627" type="System">
                             <param id="0" name="Variable">controleDialogos2</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">9</param>
+                            <param id="2" name="Value">6</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -1855,7 +1875,7 @@
                                     <param id="3" name="Volume">volSons</param>
                                     <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="272963535177131" type="System">
+                                <action disabled="1" id="-9" name="Set value" sid="272963535177131" type="System">
                                     <param id="0" name="Variable">controleDialogos2</param>
                                     <param id="1" name="Value">2</param>
                                 </action>
@@ -1877,7 +1897,7 @@
                                 </action>
                                 <action id="-9" name="Set value" sid="312114837239792" type="System">
                                     <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">3</param>
+                                    <param id="1" name="Value">2</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1886,7 +1906,7 @@
                                 <condition id="-14" name="Compare variable" sid="341235363373501" type="System">
                                     <param id="0" name="Variable">controleDialogos2</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">3</param>
+                                    <param id="2" name="Value">2</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1896,7 +1916,7 @@
                                     <param id="3" name="Volume">volSons</param>
                                     <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="969794491793865" type="System">
+                                <action disabled="1" id="-9" name="Set value" sid="969794491793865" type="System">
                                     <param id="0" name="Variable">controleDialogos2</param>
                                     <param id="1" name="Value">4</param>
                                 </action>
@@ -1915,7 +1935,7 @@
                                 </action>
                                 <action id="-9" name="Set value" sid="711978590469468" type="System">
                                     <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">5</param>
+                                    <param id="1" name="Value">3</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1924,7 +1944,7 @@
                                 <condition id="-14" name="Compare variable" sid="491882212517257" type="System">
                                     <param id="0" name="Variable">controleDialogos2</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">5</param>
+                                    <param id="2" name="Value">3</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1949,7 +1969,7 @@
                                 </action>
                                 <action id="-9" name="Set value" sid="108704515324128" type="System">
                                     <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">6</param>
+                                    <param id="1" name="Value">4</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1958,7 +1978,7 @@
                                 <condition id="-14" name="Compare variable" sid="710506595509042" type="System">
                                     <param id="0" name="Variable">controleDialogos2</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">6</param>
+                                    <param id="2" name="Value">4</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1983,7 +2003,7 @@
                                 </action>
                                 <action id="-9" name="Set value" sid="881982537808669" type="System">
                                     <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">7</param>
+                                    <param id="1" name="Value">5</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1992,7 +2012,7 @@
                                 <condition id="-14" name="Compare variable" sid="818766705369425" type="System">
                                     <param id="0" name="Variable">controleDialogos2</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">7</param>
+                                    <param id="2" name="Value">5</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -2002,31 +2022,59 @@
                                     <param id="3" name="Volume">volSons</param>
                                     <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="330930188773943" type="System">
+                                <action disabled="1" id="-9" name="Set value" sid="330930188773943" type="System">
                                     <param id="0" name="Variable">dialogos2</param>
                                     <param id="1" name="Value">5</param>
                                 </action>
-                                <action id="-16" name="Set opacity" sid="360847097099586" type="Dialogos">
+                                <action disabled="1" id="-16" name="Set opacity" sid="360847097099586" type="Dialogos">
                                     <param id="0" name="Opacity">100</param>
                                 </action>
-                                <action id="-16" name="Set opacity" sid="283244874121440" type="DialogoPersonagem">
+                                <action disabled="1" id="-16" name="Set opacity" sid="283244874121440" type="DialogoPersonagem">
                                     <param id="0" name="Opacity">100</param>
                                 </action>
-                                <action id="-16" name="Wait" sid="903297147780132" type="System">
+                                <action disabled="1" id="-16" name="Wait" sid="903297147780132" type="System">
                                     <param id="0" name="Seconds">0.5</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="541095505250930" type="System">
                                     <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">8</param>
+                                    <param id="1" name="Value">6</param>
+                                </action>
+                                <action disabled="1" id="-9" name="Set value" sid="988529861751086" type="System">
+                                    <param id="0" name="Variable">controleItens</param>
+                                    <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="770521459362437">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="729733740172193" type="campoItens">
+                                            <param id="0" name="Unique ID">685</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Wait" sid="272009564994529" type="System">
+                                            <param id="0" name="Seconds">3.0</param>
+                                        </action>
+                                        <action behavior="Physics" id="27" name="Set enabled" sid="235209531648543" type="campoItens">
+                                            <param id="0" name="Mode">1</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="582910809046504" type="System">
+                                            <param id="0" name="Seconds">3.0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="195779915239277" type="System">
+                                            <param id="0" name="Group name">&quot;ArremecoObjetos&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
-                        <event-block sid="494975005603521">
+                        <event-block disabled="1" sid="494975005603521">
                             <conditions>
                                 <condition id="-14" name="Compare variable" sid="424371808490396" type="System">
                                     <param id="0" name="Variable">controleDialogos2</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">8</param>
+                                    <param id="2" name="Value">6</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -2038,15 +2086,143 @@
                                 </action>
                                 <action id="-9" name="Set value" sid="689424659235022" type="System">
                                     <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">9</param>
+                                    <param id="1" name="Value">7</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="997961585336745" type="System">
+                                <action disabled="1" id="-9" name="Set value" sid="997961585336745" type="System">
                                     <param id="0" name="Variable">controleItens</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
                         </event-block>
                     </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" inactive="1" sid="942358895313242" title="ArremecoObjetos">
+            <sub-events>
+                <comment>Para atirar o item colecionável - TO DO</comment>
+                <event-block sid="589451094801835">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="811028875326610" type="System">
+                            <param id="0" name="Variable">numeroObjetosAtirados</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">5</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action disabled="1" id="-12" name="Set group active" sid="696069893732433" type="System">
+                            <param id="0" name="Group name">&quot;ArremecoObjetos&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Sorteia uma posicao para criar um objeto</comment>
+                <event-block sid="996942480875308">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="323871159826829" type="System">
+                            <param id="0" name="Interval (seconds)">3.0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="367971056690142" type="System">
+                            <param id="0" name="Variable">auxiliaRandomObjetos</param>
+                            <param id="1" name="Value">round(random(0, 4))</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="863023786177926">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="868357913710142" type="objetosSpawn">
+                                    <param id="0" name="Unique ID">756 + auxiliaRandomObjetos</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="301012595190932" type="System">
+                                    <param id="0" name="Object to create">campoItens</param>
+                                    <param id="1" name="Layer">&quot;Cenario2&quot;</param>
+                                    <param id="2" name="X">objetosSpawn.X</param>
+                                    <param id="3" name="Y">objetosSpawn.Y</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="974221503882596" type="campoItens">
+                                    <param id="0" name="Frame number">round(random(0,4))</param>
+                                </action>
+                                <action behavior="Physics" id="27" name="Set enabled" sid="593082401420068" type="campoItens">
+                                    <param id="0" name="Mode">1</param>
+                                </action>
+                                <action id="-10" name="Add to" sid="658861097501870" type="System">
+                                    <param id="0" name="Variable">numeroObjetosAtirados</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Para de arremeçar objetos</comment>
+                <event-block sid="724016178930594">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="137963636226292" type="System">
+                            <param id="0" name="Variable">numeroObjetosAtirados</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">9</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="672174588124789" type="System">
+                            <param id="0" name="Group name">&quot;ArremecoObjetos&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="837259427823450" type="System">
+                            <param id="0" name="Seconds">2.0</param>
+                        </action>
+                        <action id="-10" name="Add to" sid="173069145984750" type="System">
+                            <param id="0" name="Variable">numeroObjetosAtirados</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="120858864474595" title="FisicaBola">
+            <sub-events>
+                <comment>MELHORAR</comment>
+                <event-block sid="722245850582271">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="465455008769872" type="System">
+                            <param id="0" name="Variable">numeroObjetosAtirados</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">10</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="117091263820934">
+                            <conditions>
+                                <condition id="-2" name="Compare Y" sid="596164635522416" type="campoBola">
+                                    <param id="0" name="Comparison">2</param>
+                                    <param id="1" name="Y co-ordinate">630</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Set Y" sid="671678536029533" type="campoBola">
+                                    <param id="0" name="Y">campoBola.Y + 2</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="682857520609946">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="619688780776822" type="campoBola">
+                            <param id="0" name="Comparison">5</param>
+                            <param id="1" name="Y co-ordinate">630</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="524250548482790" type="System">
+                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="1" name="Value">7</param>
+                        </action>
+                    </actions>
                 </event-block>
             </sub-events>
         </event-group>
@@ -2081,6 +2257,1440 @@
                     <actions>
                         <action id="-2" name="Set Y" sid="496504639960376" type="pontuacao">
                             <param id="0" name="Y">pontuacao.Y-3</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="615677142509151" title="MenuPause7">
+            <sub-events>
+                <event-block sid="664415028881181">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="615585542593398" type="System">
+                            <param id="0" name="Variable">pause</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="814383974841160" type="botoesTexto">
+                            <param id="0" name="X">1920</param>
+                        </action>
+                        <action id="-2" name="Set Y" sid="839106765250122" type="menuOpcoesX">
+                            <param id="0" name="Y">-40</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block any="1" sid="753650948270866">
+                            <conditions>
+                                <condition id="0" name="On key pressed" sid="968610653415173" type="Keyboard">
+                                    <param id="0" name="Key">27</param>
+                                </condition>
+                                <condition id="6" name="On object clicked" sid="156027911594162" type="Mouse">
+                                    <param id="0" name="Mouse button">0</param>
+                                    <param id="1" name="Click type">0</param>
+                                    <param id="2" name="Object clicked">menuOpcoes</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Play" sid="729445361731759" type="Audio">
+                                    <param id="0" name="Audio file">botoes_menu</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="133337593640453" type="System">
+                                    <param id="0" name="Variable">pause</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="0" name="Set text" sid="243336208729967" type="pontoTexto">
+                                    <param id="0" name="Text">&quot;0&quot;</param>
+                                </action>
+                                <action id="4" name="Set font color" sid="257196626359377" type="pontoTexto">
+                                    <param id="0" name="Color">rgb(125, 125, 125)</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="518516634558861" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao7b&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="296040889753769" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao7a&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="869989816402030" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="336036849569208" type="System">
+                                    <param id="0" name="Group name">&quot;PopupDica3&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-13" name="Set time scale" sid="665295556482276" type="System">
+                                    <param id="0" name="Time scale">0.0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="803806431283566">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="394687266284800" type="System">
+                            <param id="0" name="Variable">pause</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="390836192027167" type="menuOpcoesX">
+                            <param id="0" name="Y">40</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block any="1" sid="730487004740872">
+                            <conditions>
+                                <condition id="0" name="On key pressed" sid="863188461392631" type="Keyboard">
+                                    <param id="0" name="Key">32</param>
+                                </condition>
+                                <condition id="6" name="On object clicked" sid="574226814935230" type="Mouse">
+                                    <param id="0" name="Mouse button">0</param>
+                                    <param id="1" name="Click type">0</param>
+                                    <param id="2" name="Object clicked">menuOpcoesX</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Play" sid="878486541294146" type="Audio">
+                                    <param id="0" name="Audio file">botoes_menu</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="402315133302403" type="popup">
+                                    <param id="0" name="Opacity">0</param>
+                                </action>
+                                <action id="-13" name="Set time scale" sid="451219044562087" type="System">
+                                    <param id="0" name="Time scale">1.0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="504862828187714" type="System">
+                                    <param id="0" name="Variable">pause</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="759084368446773" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao7a&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="180968969011482" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="938460333327266" type="System">
+                                    <param id="0" name="Group name">&quot;PopupDica3&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="737842264073869" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao7b&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>Comportamento do menu convencional</comment>
+                        <event-block sid="784514830815688">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="390665130997284" type="popup">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="533085181245033" type="botaoFechar">
+                                    <param id="0" name="Opacity">0</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="282898565871403" type="audioTexto">
+                                    <param id="0" name="Opacity">0</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="275623463571079" type="popupTexto">
+                                    <param id="0" name="Opacity">0</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="228996438741345" type="controleAudio">
+                                    <param id="0" name="Opacity">0</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="901793515454978">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="177525467153961" type="botoes">
+                                            <param id="0" name="Unique ID">658</param>
+                                        </condition>
+                                        <condition id="-14" name="Pick by unique ID" sid="398334771585248" type="botoesTexto">
+                                            <param id="0" name="Unique ID">666</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Set opacity" sid="995960176823491" type="botoes">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="272475510209063" type="botoesTexto">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="402351411873444">
+                                            <conditions>
+                                                <condition id="7" name="Cursor is over object" sid="784379707960402" type="Mouse">
+                                                    <param id="0" name="Object">botoes</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-1" name="Set X" sid="540364665977155" type="botoesTexto">
+                                                    <param id="0" name="X">643</param>
+                                                </action>
+                                                <action id="-2" name="Set Y" sid="737655713790991" type="botoesTexto">
+                                                    <param id="0" name="Y">76</param>
+                                                </action>
+                                                <action id="5" name="Set frame" sid="879424762934561" type="botoes">
+                                                    <param id="0" name="Frame number">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="415498626102618">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="650512092332180" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-1" name="Set X" sid="596208213029958" type="botoesTexto">
+                                                    <param id="0" name="X">640</param>
+                                                </action>
+                                                <action id="-2" name="Set Y" sid="579960364335815" type="botoesTexto">
+                                                    <param id="0" name="Y">66</param>
+                                                </action>
+                                                <action id="5" name="Set frame" sid="401997167692590" type="botoes">
+                                                    <param id="0" name="Frame number">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="313077954869795">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="434251155376130" type="botoes">
+                                            <param id="0" name="Unique ID">659</param>
+                                        </condition>
+                                        <condition id="-14" name="Pick by unique ID" sid="439937133878992" type="botoesTexto">
+                                            <param id="0" name="Unique ID">667</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Set opacity" sid="215349106096726" type="botoes">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="244276556295925" type="botoesTexto">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="261438595433832">
+                                            <conditions>
+                                                <condition id="7" name="Cursor is over object" sid="155452107912747" type="Mouse">
+                                                    <param id="0" name="Object">botoes</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-1" name="Set X" sid="343233713697208" type="botoesTexto">
+                                                    <param id="0" name="X">643</param>
+                                                </action>
+                                                <action id="-2" name="Set Y" sid="859511578420823" type="botoesTexto">
+                                                    <param id="0" name="Y">187</param>
+                                                </action>
+                                                <action id="5" name="Set frame" sid="997816521017944" type="botoes">
+                                                    <param id="0" name="Frame number">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="132289452016558">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="237981299710614" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-1" name="Set X" sid="290068377918066" type="botoesTexto">
+                                                    <param id="0" name="X">640</param>
+                                                </action>
+                                                <action id="-2" name="Set Y" sid="128899688382343" type="botoesTexto">
+                                                    <param id="0" name="Y">177</param>
+                                                </action>
+                                                <action id="5" name="Set frame" sid="393830112139481" type="botoes">
+                                                    <param id="0" name="Frame number">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="709509680924917">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="331219960948605" type="botoes">
+                                            <param id="0" name="Unique ID">660</param>
+                                        </condition>
+                                        <condition id="-14" name="Pick by unique ID" sid="616559254155049" type="botoesTexto">
+                                            <param id="0" name="Unique ID">668</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Set opacity" sid="694104853536596" type="botoes">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="249394104734125" type="botoesTexto">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="834932074381400">
+                                            <conditions>
+                                                <condition id="7" name="Cursor is over object" sid="228829906180558" type="Mouse">
+                                                    <param id="0" name="Object">botoes</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-1" name="Set X" sid="360126149893790" type="botoesTexto">
+                                                    <param id="0" name="X">643</param>
+                                                </action>
+                                                <action id="-2" name="Set Y" sid="951664468351382" type="botoesTexto">
+                                                    <param id="0" name="Y">300</param>
+                                                </action>
+                                                <action id="5" name="Set frame" sid="537897068217936" type="botoes">
+                                                    <param id="0" name="Frame number">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="810514457127752">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="987225313569417" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-1" name="Set X" sid="713587392147570" type="botoesTexto">
+                                                    <param id="0" name="X">640</param>
+                                                </action>
+                                                <action id="-2" name="Set Y" sid="717607525166048" type="botoesTexto">
+                                                    <param id="0" name="Y">290</param>
+                                                </action>
+                                                <action id="5" name="Set frame" sid="709917854864978" type="botoes">
+                                                    <param id="0" name="Frame number">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="481596241009968">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="604073208646502" type="botoes">
+                                            <param id="0" name="Unique ID">661</param>
+                                        </condition>
+                                        <condition id="-14" name="Pick by unique ID" sid="778692076542757" type="botoesTexto">
+                                            <param id="0" name="Unique ID">669</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Set opacity" sid="190128573765888" type="botoes">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="933105894420561" type="botoesTexto">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="468925387821009">
+                                            <conditions>
+                                                <condition id="7" name="Cursor is over object" sid="232814252658270" type="Mouse">
+                                                    <param id="0" name="Object">botoes</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-1" name="Set X" sid="698956499137542" type="botoesTexto">
+                                                    <param id="0" name="X">643</param>
+                                                </action>
+                                                <action id="-2" name="Set Y" sid="784702815262904" type="botoesTexto">
+                                                    <param id="0" name="Y">412</param>
+                                                </action>
+                                                <action id="5" name="Set frame" sid="155534035188530" type="botoes">
+                                                    <param id="0" name="Frame number">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="677416691936373">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="134205700029861" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-1" name="Set X" sid="111787008222896" type="botoesTexto">
+                                                    <param id="0" name="X">640</param>
+                                                </action>
+                                                <action id="-2" name="Set Y" sid="458536035488413" type="botoesTexto">
+                                                    <param id="0" name="Y">402</param>
+                                                </action>
+                                                <action id="5" name="Set frame" sid="735995120366733" type="botoes">
+                                                    <param id="0" name="Frame number">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="617134839692500">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="689542934541795" type="botoes">
+                                            <param id="0" name="Unique ID">662</param>
+                                        </condition>
+                                        <condition id="-14" name="Pick by unique ID" sid="905652116839718" type="botoesTexto">
+                                            <param id="0" name="Unique ID">670</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Set opacity" sid="640427611681126" type="botoes">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="499868394085732" type="botoesTexto">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="375980474932733">
+                                            <conditions>
+                                                <condition id="7" name="Cursor is over object" sid="483884099422474" type="Mouse">
+                                                    <param id="0" name="Object">botoes</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-1" name="Set X" sid="289234136518026" type="botoesTexto">
+                                                    <param id="0" name="X">643</param>
+                                                </action>
+                                                <action id="-2" name="Set Y" sid="253190538073640" type="botoesTexto">
+                                                    <param id="0" name="Y">525</param>
+                                                </action>
+                                                <action id="5" name="Set frame" sid="677234192815001" type="botoes">
+                                                    <param id="0" name="Frame number">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="756684354606443">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="918682955088793" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-1" name="Set X" sid="284893657904444" type="botoesTexto">
+                                                    <param id="0" name="X">640</param>
+                                                </action>
+                                                <action id="-2" name="Set Y" sid="967714174300253" type="botoesTexto">
+                                                    <param id="0" name="Y">515</param>
+                                                </action>
+                                                <action id="5" name="Set frame" sid="760810700746375" type="botoes">
+                                                    <param id="0" name="Frame number">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="196481732432979">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="471321460838636" type="botoes">
+                                            <param id="0" name="Unique ID">671</param>
+                                        </condition>
+                                        <condition id="-14" name="Pick by unique ID" sid="271933874218727" type="botoesTexto">
+                                            <param id="0" name="Unique ID">672</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Set opacity" sid="380078490082889" type="botoes">
+                                            <param id="0" name="Opacity">0</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="160364807189171" type="botoesTexto">
+                                            <param id="0" name="Opacity">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="688026751583216">
+                                    <conditions>
+                                        <condition id="-14" name="Pick by unique ID" sid="236252704216776" type="botoes">
+                                            <param id="0" name="Unique ID">673</param>
+                                        </condition>
+                                        <condition id="-14" name="Pick by unique ID" sid="603002092690855" type="botoesTexto">
+                                            <param id="0" name="Unique ID">674</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Set opacity" sid="810434744121416" type="botoes">
+                                            <param id="0" name="Opacity">0</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="976074556144241" type="botoesTexto">
+                                            <param id="0" name="Opacity">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="469210271692108">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="599115760035690" type="System" />
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <comment>Ação do botão de controle &quot;Sair&quot;</comment>
+                                <event-block sid="942893982474338">
+                                    <conditions>
+                                        <condition id="-10" name="Compare opacity" sid="709827207412508" type="popupTexto">
+                                            <param id="0" name="Comparison">0</param>
+                                            <param id="1" name="Opacity">100</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Set opacity" sid="644461948753169" type="botaoFechar">
+                                            <param id="0" name="Opacity">0</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="785533218471898" type="audioTexto">
+                                            <param id="0" name="Opacity">0</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="728044999954127" type="controleAudio">
+                                            <param id="0" name="Opacity">0</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="541267560747772">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="257316300508663" type="botoes">
+                                                    <param id="0" name="Unique ID">658</param>
+                                                </condition>
+                                                <condition id="-14" name="Pick by unique ID" sid="424175016947596" type="botoesTexto">
+                                                    <param id="0" name="Unique ID">666</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Set opacity" sid="281537441973916" type="botoes">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                                <action id="-16" name="Set opacity" sid="731198638400680" type="botoesTexto">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="565773569703841">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="498425415875273" type="botoes">
+                                                    <param id="0" name="Unique ID">659</param>
+                                                </condition>
+                                                <condition id="-14" name="Pick by unique ID" sid="777213158382680" type="botoesTexto">
+                                                    <param id="0" name="Unique ID">667</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Set opacity" sid="900823838643340" type="botoes">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                                <action id="-16" name="Set opacity" sid="353134425373638" type="botoesTexto">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="765719086837919">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="119882372614386" type="botoes">
+                                                    <param id="0" name="Unique ID">660</param>
+                                                </condition>
+                                                <condition id="-14" name="Pick by unique ID" sid="774084981518592" type="botoesTexto">
+                                                    <param id="0" name="Unique ID">668</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Set opacity" sid="167684988897789" type="botoes">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                                <action id="-16" name="Set opacity" sid="338678313650778" type="botoesTexto">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="308767769958483">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="608737321401804" type="botoes">
+                                                    <param id="0" name="Unique ID">661</param>
+                                                </condition>
+                                                <condition id="-14" name="Pick by unique ID" sid="820527802399930" type="botoesTexto">
+                                                    <param id="0" name="Unique ID">669</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Set opacity" sid="202458855561426" type="botoes">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                                <action id="-16" name="Set opacity" sid="534782292351284" type="botoesTexto">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="699239184838767">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="356077551202224" type="botoes">
+                                                    <param id="0" name="Unique ID">662</param>
+                                                </condition>
+                                                <condition id="-14" name="Pick by unique ID" sid="359709394443493" type="botoesTexto">
+                                                    <param id="0" name="Unique ID">670</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Set opacity" sid="421971072521958" type="botoes">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                                <action id="-16" name="Set opacity" sid="825736938113818" type="botoesTexto">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="457945340914482">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="589608398498600" type="botoes">
+                                                    <param id="0" name="Unique ID">671</param>
+                                                </condition>
+                                                <condition id="-14" name="Pick by unique ID" sid="839833387581035" type="botoesTexto">
+                                                    <param id="0" name="Unique ID">672</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Set opacity" sid="953828995152274" type="botoes">
+                                                    <param id="0" name="Opacity">100</param>
+                                                </action>
+                                                <action id="-16" name="Set opacity" sid="490844388002604" type="botoesTexto">
+                                                    <param id="0" name="Opacity">100</param>
+                                                </action>
+                                            </actions>
+                                            <sub-events>
+                                                <event-block sid="383823983612968">
+                                                    <conditions>
+                                                        <condition id="7" name="Cursor is over object" sid="485461871317852" type="Mouse">
+                                                            <param id="0" name="Object">botoes</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-1" name="Set X" sid="186260076425381" type="botoesTexto">
+                                                            <param id="0" name="X">643</param>
+                                                        </action>
+                                                        <action id="-2" name="Set Y" sid="943620142150689" type="botoesTexto">
+                                                            <param id="0" name="Y">385</param>
+                                                        </action>
+                                                        <action id="5" name="Set frame" sid="298320389029188" type="botoes">
+                                                            <param id="0" name="Frame number">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="823201781857986">
+                                                    <conditions>
+                                                        <condition id="-22" name="Else" sid="722059487265834" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-1" name="Set X" sid="184742066023506" type="botoesTexto">
+                                                            <param id="0" name="X">640</param>
+                                                        </action>
+                                                        <action id="-2" name="Set Y" sid="957733504113664" type="botoesTexto">
+                                                            <param id="0" name="Y">375</param>
+                                                        </action>
+                                                        <action id="5" name="Set frame" sid="532883988198103" type="botoes">
+                                                            <param id="0" name="Frame number">0</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                        <event-block sid="541873406767978">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="832384989361928" type="botoes">
+                                                    <param id="0" name="Unique ID">673</param>
+                                                </condition>
+                                                <condition id="-14" name="Pick by unique ID" sid="954971191941122" type="botoesTexto">
+                                                    <param id="0" name="Unique ID">674</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Set opacity" sid="105385751698102" type="botoes">
+                                                    <param id="0" name="Opacity">100</param>
+                                                </action>
+                                                <action id="-16" name="Set opacity" sid="746662855170578" type="botoesTexto">
+                                                    <param id="0" name="Opacity">100</param>
+                                                </action>
+                                            </actions>
+                                            <sub-events>
+                                                <event-block sid="152277791367667">
+                                                    <conditions>
+                                                        <condition id="7" name="Cursor is over object" sid="430799556156354" type="Mouse">
+                                                            <param id="0" name="Object">botoes</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-1" name="Set X" sid="482645579240607" type="botoesTexto">
+                                                            <param id="0" name="X">643</param>
+                                                        </action>
+                                                        <action id="-2" name="Set Y" sid="899037994140156" type="botoesTexto">
+                                                            <param id="0" name="Y">475</param>
+                                                        </action>
+                                                        <action id="5" name="Set frame" sid="263814676239075" type="botoes">
+                                                            <param id="0" name="Frame number">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="363585253195294">
+                                                    <conditions>
+                                                        <condition id="-22" name="Else" sid="658402471943323" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-1" name="Set X" sid="597510362976795" type="botoesTexto">
+                                                            <param id="0" name="X">640</param>
+                                                        </action>
+                                                        <action id="-2" name="Set Y" sid="621047730378630" type="botoesTexto">
+                                                            <param id="0" name="Y">465</param>
+                                                        </action>
+                                                        <action id="5" name="Set frame" sid="883472419145547" type="botoes">
+                                                            <param id="0" name="Frame number">0</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <comment>Ação do botão de controle &quot;Áudio&quot;</comment>
+                                <event-block sid="248820306828130">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="433820982759420" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Set opacity" sid="293941025061647" type="botaoFechar">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="147928273183283" type="audioTexto">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="463328557317051" type="controleAudio">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="199451348772021">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="548638244224757" type="botoes">
+                                                    <param id="0" name="Unique ID">658</param>
+                                                </condition>
+                                                <condition id="-14" name="Pick by unique ID" sid="683538916480201" type="botoesTexto">
+                                                    <param id="0" name="Unique ID">666</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Set opacity" sid="906750347014573" type="botoes">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                                <action id="-16" name="Set opacity" sid="241989690875218" type="botoesTexto">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="793293674343742">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="833299241428034" type="botoes">
+                                                    <param id="0" name="Unique ID">659</param>
+                                                </condition>
+                                                <condition id="-14" name="Pick by unique ID" sid="709057340007298" type="botoesTexto">
+                                                    <param id="0" name="Unique ID">667</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Set opacity" sid="743684646948495" type="botoes">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                                <action id="-16" name="Set opacity" sid="994982301668902" type="botoesTexto">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="987379148865112">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="278736975460995" type="botoes">
+                                                    <param id="0" name="Unique ID">660</param>
+                                                </condition>
+                                                <condition id="-14" name="Pick by unique ID" sid="927454042884313" type="botoesTexto">
+                                                    <param id="0" name="Unique ID">668</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Set opacity" sid="632689854992540" type="botoes">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                                <action id="-16" name="Set opacity" sid="676543201291698" type="botoesTexto">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="397401024854300">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="209549073941198" type="botoes">
+                                                    <param id="0" name="Unique ID">661</param>
+                                                </condition>
+                                                <condition id="-14" name="Pick by unique ID" sid="270129312274803" type="botoesTexto">
+                                                    <param id="0" name="Unique ID">669</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Set opacity" sid="817677154810383" type="botoes">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                                <action id="-16" name="Set opacity" sid="179713917717836" type="botoesTexto">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="283479560682049">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="689128563615632" type="botoes">
+                                                    <param id="0" name="Unique ID">662</param>
+                                                </condition>
+                                                <condition id="-14" name="Pick by unique ID" sid="462835672096249" type="botoesTexto">
+                                                    <param id="0" name="Unique ID">670</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Set opacity" sid="266736245691996" type="botoes">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                                <action id="-16" name="Set opacity" sid="406465294007859" type="botoesTexto">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="761206601319588">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="236346535369198" type="botoes">
+                                                    <param id="0" name="Unique ID">671</param>
+                                                </condition>
+                                                <condition id="-14" name="Pick by unique ID" sid="401199596197907" type="botoesTexto">
+                                                    <param id="0" name="Unique ID">672</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Set opacity" sid="557484607724779" type="botoes">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                                <action id="-16" name="Set opacity" sid="864705581624926" type="botoesTexto">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="117655166600975">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="534311479345418" type="botoes">
+                                                    <param id="0" name="Unique ID">673</param>
+                                                </condition>
+                                                <condition id="-14" name="Pick by unique ID" sid="421787224428699" type="botoesTexto">
+                                                    <param id="0" name="Unique ID">674</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Set opacity" sid="143225353768467" type="botoes">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                                <action id="-16" name="Set opacity" sid="441450910030416" type="botoesTexto">
+                                                    <param id="0" name="Opacity">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="849685780820637">
+                    <conditions>
+                        <condition id="6" name="On object clicked" sid="372249998723714" type="Mouse">
+                            <param id="0" name="Mouse button">0</param>
+                            <param id="1" name="Click type">0</param>
+                            <param id="2" name="Object clicked">botoes</param>
+                        </condition>
+                        <condition id="-10" name="Compare opacity" sid="411745491945513" type="popup">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Opacity">0</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <comment>Ação do botão &quot;Continuar&quot;</comment>
+                        <event-block sid="732567021154786">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="461059298220144" type="botoes">
+                                    <param id="0" name="Unique ID">658</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Play" sid="986762814358160" type="Audio">
+                                    <param id="0" name="Audio file">botoes_menu</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-13" name="Set time scale" sid="233496078700324" type="System">
+                                    <param id="0" name="Time scale">1.0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="849946448304120" type="System">
+                                    <param id="0" name="Variable">pause</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="439961456897844" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao7a&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="617727690296125" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="481905245042834" type="System">
+                                    <param id="0" name="Group name">&quot;PopupDica3&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="666812929864688" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao7b&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>Ação do botão &quot;Salvar&quot;</comment>
+                        <event-block sid="572566995654625">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="896201450544013" type="botoes">
+                                    <param id="0" name="Unique ID">659</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Play" sid="619349095205403" type="Audio">
+                                    <param id="0" name="Audio file">botoes_menu</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-13" name="Set time scale" sid="640134850515165" type="System">
+                                    <param id="0" name="Time scale">1.0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="462432936284363" type="System">
+                                    <param id="0" name="Variable">pause</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="425546508293081" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao7a&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="893821179874592" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="683464277205759" type="System">
+                                    <param id="0" name="Group name">&quot;PopupDica3&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="561914505542631" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao7b&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-36" name="Save" sid="389430481245068" type="System">
+                                    <param id="0" name="Slot">&quot;save&quot;</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="827713270361990" type="System">
+                                    <param id="0" name="Seconds">0.0001</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>Ação do botão &quot;Recomeçar&quot;</comment>
+                        <event-block sid="527313509693635">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="842935311882603" type="botoes">
+                                    <param id="0" name="Unique ID">660</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Play" sid="507942551365433" type="Audio">
+                                    <param id="0" name="Audio file">botoes_menu</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="230471278286065" type="System">
+                                    <param id="0" name="Variable">pontos</param>
+                                    <param id="1" name="Value">pontuacaoInicio</param>
+                                </action>
+                                <action id="-13" name="Set time scale" sid="253520663922931" type="System">
+                                    <param id="0" name="Time scale">1.0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="557461899613234" type="System">
+                                    <param id="0" name="Variable">pause</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="629255640825511" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao7a&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="806680112795680" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="300638997931886" type="System">
+                                    <param id="0" name="Group name">&quot;PopupDica3&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="256607490108167" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao7b&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="247686076566437" type="System">
+                                    <param id="0" name="Variable">tempoInicial</param>
+                                    <param id="1" name="Value">time</param>
+                                </action>
+                                <action id="-26" name="Restart layout" sid="235739615866442" type="System" />
+                            </actions>
+                        </event-block>
+                        <comment>Ação do botão &quot;Áudio&quot;</comment>
+                        <event-block sid="920226639742486">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="797196445557549" type="botoes">
+                                    <param id="0" name="Unique ID">661</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Play" sid="261924106034489" type="Audio">
+                                    <param id="0" name="Audio file">botoes_menu</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="779045311682639" type="popup">
+                                    <param id="0" name="Opacity">100</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="549723817915287" type="popupTexto">
+                                    <param id="0" name="Opacity">0</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="464554423383975" type="audioTexto">
+                                    <param id="0" name="Opacity">100</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>Ação do botão &quot;Sair&quot;</comment>
+                        <event-block sid="381199181870878">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="357534928002375" type="botoes">
+                                    <param id="0" name="Unique ID">662</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Play" sid="782804782467632" type="Audio">
+                                    <param id="0" name="Audio file">botoes_menu</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="466503548737587" type="popup">
+                                    <param id="0" name="Opacity">100</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="783648827673263" type="audioTexto">
+                                    <param id="0" name="Opacity">0</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="131765879921558" type="popupTexto">
+                                    <param id="0" name="Opacity">100</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="344359786802763">
+                    <conditions>
+                        <condition id="6" name="On object clicked" sid="659276529427589" type="Mouse">
+                            <param id="0" name="Mouse button">0</param>
+                            <param id="1" name="Click type">0</param>
+                            <param id="2" name="Object clicked">botoes</param>
+                        </condition>
+                        <condition id="-10" name="Compare opacity" sid="724589960344031" type="popup">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Opacity">100</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <comment>Ação do botão &quot;Popup NAO&quot;</comment>
+                        <event-block sid="654191055304647">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="817785792632942" type="botoes">
+                                    <param id="0" name="Unique ID">671</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="412098709399597">
+                                    <conditions>
+                                        <condition id="-10" name="Compare opacity" sid="460071514105018" type="botoes">
+                                            <param id="0" name="Comparison">0</param>
+                                            <param id="1" name="Opacity">100</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Play" sid="793698430410140" type="Audio">
+                                            <param id="0" name="Audio file">botoes_menu</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="644921991059209" type="popup">
+                                            <param id="0" name="Opacity">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment>Ação do botão &quot;Popup SIM&quot;</comment>
+                        <event-block sid="639219907510775">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="605912487974721" type="botoes">
+                                    <param id="0" name="Unique ID">673</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="281069403956721">
+                                    <conditions>
+                                        <condition id="-10" name="Compare opacity" sid="685607706464497" type="botoes">
+                                            <param id="0" name="Comparison">0</param>
+                                            <param id="1" name="Opacity">100</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Play" sid="841569055943994" type="Audio">
+                                            <param id="0" name="Audio file">botoes_menu</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="-13" name="Set time scale" sid="411263265025321" type="System">
+                                            <param id="0" name="Time scale">1.0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="264319752612450" type="System">
+                                            <param id="0" name="Variable">pause</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="686307052907826" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao7a&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="470975794601983" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="726413627509618" type="System">
+                                            <param id="0" name="Group name">&quot;PopupDica3&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="442787649004780" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao7b&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="860344577288864" type="popup">
+                                            <param id="0" name="Opacity">0</param>
+                                        </action>
+                                        <action id="33" name="Stop all" sid="780161489227130" type="Audio" />
+                                        <action id="-2" name="Go to layout" sid="868389609411259" type="System">
+                                            <param id="0" name="Layout">Menu</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="460168813050499">
+                    <conditions>
+                        <condition id="6" name="On object clicked" sid="413836512266691" type="Mouse">
+                            <param id="0" name="Mouse button">0</param>
+                            <param id="1" name="Click type">0</param>
+                            <param id="2" name="Object clicked">botaoFechar</param>
+                        </condition>
+                        <condition id="-10" name="Compare opacity" sid="569777371057150" type="botaoFechar">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Opacity">100</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Play" sid="113956725733593" type="Audio">
+                            <param id="0" name="Audio file">botoes_menu</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">volSons</param>
+                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="516567659932091" type="popup">
+                            <param id="0" name="Opacity">0</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="408461010340741" type="audioTexto">
+                            <param id="0" name="Opacity">0</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="244033149770069" type="popupTexto">
+                            <param id="0" name="Opacity">0</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="275561684078038" type="botaoFechar">
+                            <param id="0" name="Opacity">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="325985139081386">
+                    <conditions>
+                        <condition id="6" name="On object clicked" sid="421016660308934" type="Mouse">
+                            <param id="0" name="Mouse button">0</param>
+                            <param id="1" name="Click type">0</param>
+                            <param id="2" name="Object clicked">controleAudio</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="988673665837846">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="116286007947709" type="controleAudio">
+                                    <param id="0" name="Unique ID">678</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="211564012897642">
+                                    <conditions>
+                                        <condition id="3" name="Compare frame" sid="581053542802798" type="controleAudio">
+                                            <param id="0" name="Comparison">0</param>
+                                            <param id="1" name="Number">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Play" sid="886930812347317" type="Audio">
+                                            <param id="0" name="Audio file">botoes_menu</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="5" name="Set frame" sid="904456008988777" type="controleAudio">
+                                            <param id="0" name="Frame number">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="523342918846345" type="System">
+                                            <param id="0" name="Variable">volMusica</param>
+                                            <param id="1" name="Value">-100</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="730611819104725">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="981970247963326" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Play" sid="271407252949227" type="Audio">
+                                            <param id="0" name="Audio file">botoes_menu</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="5" name="Set frame" sid="612328925988702" type="controleAudio">
+                                            <param id="0" name="Frame number">0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="788127596386299" type="System">
+                                            <param id="0" name="Variable">volMusica</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="957707400474474">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="974965830484114" type="controleAudio">
+                                    <param id="0" name="Unique ID">679</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="129127553928353">
+                                    <conditions>
+                                        <condition id="3" name="Compare frame" sid="703077460104293" type="controleAudio">
+                                            <param id="0" name="Comparison">0</param>
+                                            <param id="1" name="Number">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="5" name="Set frame" sid="621754082500159" type="controleAudio">
+                                            <param id="0" name="Frame number">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="771987684256055" type="System">
+                                            <param id="0" name="Variable">volSons</param>
+                                            <param id="1" name="Value">-100</param>
+                                        </action>
+                                        <action id="0" name="Play" sid="269902100283153" type="Audio">
+                                            <param id="0" name="Audio file">botoes_menu</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="145566042836745">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="308891096939811" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="5" name="Set frame" sid="220993902917277" type="controleAudio">
+                                            <param id="0" name="Frame number">0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="439911052020966" type="System">
+                                            <param id="0" name="Variable">volSons</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="0" name="Play" sid="867020462322377" type="Audio">
+                                            <param id="0" name="Audio file">botoes_menu</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block any="1" sid="397786039651900">
+                    <conditions>
+                        <condition id="7" name="Cursor is over object" sid="256031696478288" type="Mouse">
+                            <param id="0" name="Object">botoes</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="793165586720886">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="831198066239588" type="botoes">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Set cursor style" sid="121268853538427" type="Mouse">
+                                    <param id="0" name="Cursor style">1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="113976172095655">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="262182359381863" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Play" sid="195982210404021" type="Audio">
+                                            <param id="0" name="Audio file">sobre_botao</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="582328659109841">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="344538285192134" type="System" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block any="1" sid="150718681547524">
+                            <conditions>
+                                <condition id="7" name="Cursor is over object" sid="316363899796870" type="Mouse">
+                                    <param id="0" name="Object">menuOpcoes</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Set cursor style" sid="385675044406350" type="Mouse">
+                                    <param id="0" name="Cursor style">1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="932292902776194">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="881290322241315" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Play" sid="286075341463224" type="Audio">
+                                            <param id="0" name="Audio file">sobre_botao</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="328063356998842">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="830381062622891" type="System" />
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="142674106360065">
+                                    <conditions>
+                                        <condition id="7" name="Cursor is over object" sid="125606186863143" type="Mouse">
+                                            <param id="0" name="Object">botaoFechar</param>
+                                        </condition>
+                                        <condition id="-10" name="Compare opacity" sid="570745932853008" type="botaoFechar">
+                                            <param id="0" name="Comparison">0</param>
+                                            <param id="1" name="Opacity">100</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Set cursor style" sid="376312154464298" type="Mouse">
+                                            <param id="0" name="Cursor style">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="853249453358793">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="822451939469035" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Set cursor style" sid="935474357095614" type="Mouse">
+                                            <param id="0" name="Cursor style">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="182499450071428">
+                    <conditions>
+                        <condition id="7" name="Cursor is over object" sid="316223457309465" type="Mouse">
+                            <param id="0" name="Object">botaoFechar</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="871195392731364" type="botaoFechar">
+                            <param id="0" name="Frame number">1</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="321629591408395">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="202509717593717" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Play" sid="252737133846198" type="Audio">
+                                    <param id="0" name="Audio file">sobre_botao</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="795326691006186">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="251067187548327" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="626062865026465" type="botaoFechar">
+                            <param id="0" name="Frame number">0</param>
                         </action>
                     </actions>
                 </event-block>
