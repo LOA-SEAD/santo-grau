@@ -31,7 +31,7 @@ function sendDataTechnology(palavra,resposta,nroPalavra,erros,venceu){
     console.log(venceu);
 }
 
-function sendDataGallery(arrastos,seqInicial,tamanho){
+function sendDataGallery(arrastos,seqInicial){
     var info = {};
     var path;
     if(window.location.hostname == "localhost" ){   // for localhost tests
@@ -58,7 +58,6 @@ function sendDataGallery(arrastos,seqInicial,tamanho){
     });
     console.log(arrastos);
     console.log(seqInicial);
-    console.log(tamanho);
 }
 
 function sendDataFinalLevel(pergunta,correta,nroPergunta,respostas,escolhida,acertou,tamanho,fase){
