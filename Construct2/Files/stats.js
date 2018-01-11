@@ -1,4 +1,4 @@
-function sendDataTechnology(palavra,resposta,nroPalavra,erros,venceu){
+function sendDataTechnology(palavra,correta,resposta,nroPalavra,tentativas,venceu){
 	var info = {};
     var path;
     if(window.location.hostname == "localhost" ){   // for localhost tests
@@ -10,9 +10,10 @@ function sendDataTechnology(palavra,resposta,nroPalavra,erros,venceu){
         info.exportedResourceId = json.exportedResourceId;
         info.gameIndex = 0;
         info.word = palavra;
+        info.correctAnswer = correta;
         info.answer = resposta;
         info.levelId = nroPalavra;
-        info.numberMistake = erros;
+        info.numberTries = tentativas;
         info.win = venceu;
         info.size = 3;
         info.gameType = 'shuffleWord';
@@ -25,9 +26,10 @@ function sendDataTechnology(palavra,resposta,nroPalavra,erros,venceu){
         })
 	});
 	console.log(palavra);
+	console.log(correta);
     console.log(resposta);
 	console.log(nroPalavra);
-	console.log(erros);
+	console.log(tentativas);
     console.log(venceu);
 }
 
