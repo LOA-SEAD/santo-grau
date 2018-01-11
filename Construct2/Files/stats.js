@@ -45,7 +45,8 @@ function sendDataGallery(arrastos,seqInicial,tamanho){
         info.numberDrag = arrastos;
         info.initialSequence = seqInicial;
         info.win = true;
-        info.size = tamanho;
+        info.size = 1;
+        info.levelId = 0;
         info.gameType = 'dragPictures';
         $.ajax({
             type: "POST",
