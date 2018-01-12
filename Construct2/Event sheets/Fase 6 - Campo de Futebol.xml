@@ -11,6 +11,20 @@
         <variable constant="0" name="auxiliaRandomObjetos" sid="186967823184162" static="0" type="number">0</variable>
         <comment>Para limitar o número de objetos jogados no campo</comment>
         <variable constant="0" name="numeroObjetosAtirados" sid="705265042607194" static="0" type="number">0</variable>
+        <comment>Serve para marcar o tamanho do diálogo que irá ocorrer naquele momento para saber quantas vezes será lido falas no arquivo .json</comment>
+        <variable constant="0" name="tamanhoDialogoCAM" sid="467432363075844" static="0" type="number">0</variable>
+        <comment>Marca qual é a frase que está sendo mostrada para o jogador</comment>
+        <variable constant="0" name="fraseAtualCAM" sid="987774218693556" static="0" type="number">0</variable>
+        <comment>Utilizada para inserir nos objetos text o texto que será mostrado para o jogador</comment>
+        <variable constant="0" name="inserirDialogosCAM" sid="343365486890299" static="0" type="number">0</variable>
+        <comment>Utilizado para marcar quando se deve carregar as falas do diálogo</comment>
+        <variable constant="0" name="carregarDialogosCAM" sid="982538287106870" static="0" type="number">0</variable>
+        <comment>Utilizado para marcar quando se deve descarregar as falas do diálogo</comment>
+        <variable constant="0" name="descarregarDialogosCAM" sid="146339157432020" static="0" type="number">0</variable>
+        <comment>Utilizado para controle do momento em que o jogador pode avançar as falas</comment>
+        <variable constant="0" name="avancarDialogosCAM" sid="637589815382703" static="0" type="number">0</variable>
+        <comment>Utilizado para controle o ínicio dos diálogos</comment>
+        <variable constant="0" name="controleDialogoFut" sid="654176648451923" static="0" type="number">0</variable>
         <event-block sid="704942424572087">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="961560001477127" type="System" />
@@ -53,6 +67,34 @@
                 </action>
                 <action id="-9" name="Set value" sid="599006513573435" type="System">
                     <param id="0" name="Variable">controleDialogos2</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="829068982132864" type="System">
+                    <param id="0" name="Variable">controleDialogoFut</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="280843174114515" type="System">
+                    <param id="0" name="Variable">tamanhoDialogoCAM</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="386928486860936" type="System">
+                    <param id="0" name="Variable">fraseAtualCAM</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="606130578920535" type="System">
+                    <param id="0" name="Variable">inserirDialogosCAM</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="562008928110112" type="System">
+                    <param id="0" name="Variable">carregarDialogosCAM</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="537888034892850" type="System">
+                    <param id="0" name="Variable">descarregarDialogosCAM</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="828801402040640" type="System">
+                    <param id="0" name="Variable">avancarDialogosCAM</param>
                     <param id="1" name="Value">0</param>
                 </action>
                 <action id="3" name="Set font size" sid="599127348236850" type="botoesTexto">
@@ -398,7 +440,26 @@
                 </action>
             </actions>
         </event-block>
-        <event-block sid="825881909413485">
+        <event-block sid="818361537820909">
+            <conditions>
+                <condition id="0" name="On key pressed" sid="604553403252939" type="Keyboard">
+                    <param id="0" name="Key">81</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="25" name="Play at object" sid="308119059164586" type="Audio">
+                    <param id="0" name="Audio file">Hello</param>
+                    <param id="1" name="Loop">0</param>
+                    <param id="2" name="Volume">5-(((sqrt((player.X-capivara.X)^2+(player.Y-capivara.Y)^2))-150)/29)</param>
+                    <param id="3" name="Object">capivara</param>
+                    <param id="4" name="Inner angle">45</param>
+                    <param id="5" name="Outer angle">45</param>
+                    <param id="6" name="Outer gain">100</param>
+                    <param id="7" name="Tag (optional)">&quot;capivara&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block disabled="1" sid="825881909413485">
             <conditions>
                 <condition id="-14" name="Compare variable" sid="296631416775571" type="System">
                     <param id="0" name="Variable">controleDialogos2</param>
@@ -414,27 +475,6 @@
                     <param id="0" name="Text">5-(((sqrt((player.X-capivara.X)^2+(player.Y-capivara.Y)^2))-150)/29)</param>
                 </action>
             </actions>
-            <sub-events>
-                <event-block sid="818361537820909">
-                    <conditions>
-                        <condition id="0" name="On key pressed" sid="604553403252939" type="Keyboard">
-                            <param id="0" name="Key">81</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="25" name="Play at object" sid="308119059164586" type="Audio">
-                            <param id="0" name="Audio file">Hello</param>
-                            <param id="1" name="Loop">0</param>
-                            <param id="2" name="Volume">5-(((sqrt((player.X-capivara.X)^2+(player.Y-capivara.Y)^2))-150)/29)</param>
-                            <param id="3" name="Object">capivara</param>
-                            <param id="4" name="Inner angle">45</param>
-                            <param id="5" name="Outer angle">45</param>
-                            <param id="6" name="Outer gain">100</param>
-                            <param id="7" name="Tag (optional)">&quot;capivara&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-            </sub-events>
         </event-block>
         <event-block sid="840465905303039">
             <conditions>
@@ -853,32 +893,210 @@
                         <action id="-9" name="Destroy" sid="273513880097641" type="dicaTexto" />
                     </actions>
                 </event-block>
-                <comment>Ação para disparar o dialogo do mascote pedindo para a bola ser chutada</comment>
+                <comment>Início com a torcida em volume normal e depois diminuindo</comment>
+                <event-block sid="405748539175139">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="195521797191682" type="System">
+                            <param id="0" name="Variable">fraseAtualCAM</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="101205410029140">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="984101643518757" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="195723287536612" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="183495590778170" type="System">
+                                    <param id="0" name="Seconds">4.0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="872900072852423" type="System">
+                                    <param id="0" name="Variable">tamanhoDialogoCAM</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="251967191037374" type="System">
+                                    <param id="0" name="Variable">controleDialogoFut</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="2" name="Stop" sid="790143678397783" type="playerAnim" />
+                                <action id="-12" name="Set group active" sid="769287980475411" type="System">
+                                    <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Controle da torcida vaiando</comment>
+                <event-block sid="988623833901689">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="956536365057977" type="System">
+                            <param id="0" name="Variable">fraseAtualCAM</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">4</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="856215122792185">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="281276243020194" type="System" />
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="612071355810754">
+                                    <conditions>
+                                        <condition id="-10" name="Compare opacity" sid="101313170216903" type="Dialogos">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Opacity">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Set opacity" sid="982724829122721" type="Dialogos">
+                                            <param id="0" name="Opacity">Dialogos.Opacity-2.5</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="511376737624331" type="DialogoPersonagem">
+                                            <param id="0" name="Opacity">DialogoPersonagem.Opacity-2.5</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="740306781387602" type="BalaoDialogo">
+                                            <param id="0" name="Opacity">BalaoDialogo.Opacity-2.5</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="587024720212484">
+                                    <conditions>
+                                        <condition id="-10" name="Compare opacity" sid="527455285288937" type="Dialogos">
+                                            <param id="0" name="Comparison">3</param>
+                                            <param id="1" name="Opacity">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="2" name="Stop" sid="322174218014424" type="playerAnim" />
+                                        <action id="-12" name="Set group active" sid="325546601257640" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="739635672247395" type="System">
+                                            <param id="0" name="Variable">controleDialogoFut</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="704309467645209" type="System">
+                                            <param id="0" name="Variable">tamanhoDialogoCAM</param>
+                                            <param id="1" name="Value">4</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="464541097433988" type="System">
+                                            <param id="0" name="Seconds">10.0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="372537816893900" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Ações que envolvam a bola</comment>
                 <event-block sid="882644559324894">
                     <conditions>
                         <condition id="1" name="Is overlapping another object" sid="580790995249124" type="player">
                             <param id="0" name="Object">selecaoBola</param>
                         </condition>
-                        <condition id="-14" name="Compare variable" sid="732196549639122" type="System">
-                            <param id="0" name="Variable">controleDialogos2</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">8</param>
-                        </condition>
                     </conditions>
-                    <actions>
-                        <action id="-9" name="Set value" sid="489634964996229" type="System">
-                            <param id="0" name="Variable">dialogos2</param>
-                            <param id="1" name="Value">6</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="222780926405144" type="System">
-                            <param id="0" name="Variable">controleDialogos2</param>
-                            <param id="1" name="Value">9</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="138079338376920" type="System">
-                            <param id="0" name="Group name">&quot;playerMove7&quot;</param>
-                            <param id="1" name="State">0</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <comment>Ação para disparar o dialogo do mascote pedindo para a bola ser chutada</comment>
+                        <event-block sid="148487420197088">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="732196549639122" type="System">
+                                    <param id="0" name="Variable">fraseAtualCAM</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">6</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="718642510104566">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="715408790327227" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="222780926405144" type="System">
+                                            <param id="0" name="Variable">controleDialogoFut</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="819516269785059" type="System">
+                                            <param id="0" name="Variable">tamanhoDialogoCAM</param>
+                                            <param id="1" name="Value">6</param>
+                                        </action>
+                                        <action id="2" name="Stop" sid="302853548186654" type="playerAnim" />
+                                        <action id="-12" name="Set group active" sid="138079338376920" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="408952362483541" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment>Ação para chutar a bola</comment>
+                        <event-block sid="750424422758128">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="390363390137536" type="System">
+                                    <param id="0" name="Variable">fraseAtualCAM</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">7</param>
+                                </condition>
+                                <condition id="2" name="Key is down" sid="564568563446458" type="Keyboard">
+                                    <param id="0" name="Key">69</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-18" name="Rotate clockwise" sid="679786215036444" type="campoBola">
+                                    <param id="0" name="Degrees">270</param>
+                                </action>
+                                <action behavior="Bullet" id="5" name="Set enabled" sid="206766382414545" type="campoBola">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block disabled="1" sid="921029651759982">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="812049136711922" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="709629340702077" type="System">
+                                            <param id="0" name="Variable">controleDialogoFut</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="152921779764816" type="System">
+                                            <param id="0" name="Variable">tamanhoDialogoCAM</param>
+                                            <param id="1" name="Value">6</param>
+                                        </action>
+                                        <action id="2" name="Stop" sid="554436932705535" type="playerAnim" />
+                                        <action id="-12" name="Set group active" sid="121332509964147" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="495540908590548" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
@@ -1764,7 +1982,7 @@
                 <comment>Ação de ativação da Capivara na primeira vez</comment>
                 <event-block sid="318777205670032">
                     <conditions>
-                        <condition id="0" name="On key pressed" sid="491254991917059" type="Keyboard">
+                        <condition id="2" name="Key is down" sid="491254991917059" type="Keyboard">
                             <param id="0" name="Key">69</param>
                         </condition>
                         <condition id="-14" name="Compare variable" sid="663696591531424" type="System">
@@ -1776,23 +1994,51 @@
                             <param id="0" name="Object">selecaoCapivara</param>
                         </condition>
                         <condition id="-14" name="Compare variable" sid="993345678191856" type="System">
-                            <param id="0" name="Variable">controleDialogos2</param>
+                            <param id="0" name="Variable">fraseAtualCAM</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">0</param>
+                            <param id="2" name="Value">2</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="-12" name="Set group active" sid="434425310723106" type="System">
-                            <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                        <action disabled="1" id="0" name="Play" sid="912362084893841" type="Audio">
-                            <param id="0" name="Audio file">robo_fala1</param>
-                            <param id="2" name="Loop">0</param>
-                            <param id="3" name="Volume">volSons</param>
-                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="230743799779840">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="499127855960191" type="System" />
+                            </conditions>
+                            <actions>
+                                <action disabled="1" id="-9" name="Set value" sid="643538742349654" type="System">
+                                    <param id="0" name="Variable">dialogos2</param>
+                                    <param id="1" name="Value">2</param>
+                                </action>
+                                <action disabled="1" id="-16" name="Wait" sid="995839669253193" type="System">
+                                    <param id="0" name="Seconds">0.5</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="243430784390039" type="System">
+                                    <param id="0" name="Variable">controleDialogoFut</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="805777936007163" type="System">
+                                    <param id="0" name="Variable">tamanhoDialogoCAM</param>
+                                    <param id="1" name="Value">3</param>
+                                </action>
+                                <action id="2" name="Stop" sid="965835062227863" type="playerAnim" />
+                                <action id="-12" name="Set group active" sid="564779420568208" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="814868600482535" type="System">
+                                    <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action disabled="1" id="0" name="Play" sid="912362084893841" type="Audio">
+                                    <param id="0" name="Audio file">robo_fala1</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block disabled="1" sid="210052716306670">
                     <conditions>
@@ -1820,145 +2066,241 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <event-group description="" inactive="1" sid="588094124050570" title="DialogoCapivara">
+        <event-group description="" sid="588094124050570" title="DialogoCapivara">
             <sub-events>
-                <event-block sid="493253680932989">
-                    <conditions>
-                        <condition id="-1" name="Every tick" sid="926567161501242" type="System" />
-                    </conditions>
+                <comment>Marca quem fala e a posição do balão</comment>
+                <event-block sid="963632994522284">
+                    <conditions />
                     <actions>
-                        <action id="0" name="Set text" sid="118251151652365" type="DialogoPersonagem">
-                            <param id="0" name="Text">DialogosJSON.GetData(&quot;Futebol&quot; &amp; dialogos2, 0)</param>
-                        </action>
-                        <action id="0" name="Set text" sid="787263758606433" type="Dialogos">
-                            <param id="0" name="Text">DialogosJSON.GetData(&quot;Futebol&quot; &amp; dialogos2, 1)</param>
+                        <action id="0" name="Set text" sid="772157187620696" type="DialogoPersonagem">
+                            <param id="0" name="Text">DialogosJSON.GetData(&quot;Futebol&quot; &amp; fraseAtualCAM, 0)</param>
                         </action>
                     </actions>
-                </event-block>
-                <event-block sid="405748539175139">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="195521797191682" type="System">
-                            <param id="0" name="Variable">controleDialogos2</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-12" name="Set group active" sid="195723287536612" type="System">
-                            <param id="0" name="Group name">&quot;playerMove7&quot;</param>
-                            <param id="1" name="State">0</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="251967191037374" type="System">
-                            <param id="0" name="Variable">controleDialogos2</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="108550405814850">
-                    <conditions>
-                        <condition id="-10" name="Compare opacity" sid="176009574321829" type="BalaoDialogo">
-                            <param id="0" name="Comparison">3</param>
-                            <param id="1" name="Opacity">100</param>
-                        </condition>
-                    </conditions>
-                    <actions />
                     <sub-events>
-                        <event-block any="1" sid="960373624499075">
+                        <event-block sid="386996379078882">
                             <conditions>
-                                <condition id="-14" name="Compare variable" sid="779896764261864" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">1</param>
-                                </condition>
-                                <condition disabled="1" id="-14" name="Compare variable" sid="636455608252301" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">4</param>
-                                </condition>
-                                <condition id="-14" name="Compare variable" sid="993961847062097" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">7</param>
-                                </condition>
-                                <condition id="-14" name="Compare variable" sid="594376657521196" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">9</param>
+                                <condition id="0" name="Compare text" sid="717182750931678" type="DialogoPersonagem">
+                                    <param id="0" name="Text to compare">&quot;Capivara&quot;</param>
+                                    <param id="1" name="Case sensitivity">0</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-16" name="Set opacity" sid="385963314323408" type="BalaoDialogo">
-                                    <param id="0" name="Opacity">BalaoDialogo.Opacity+2</param>
+                                <action id="-3" name="Set position" sid="654269112111549" type="BalaoDialogo">
+                                    <param id="0" name="X">320</param>
+                                    <param id="1" name="Y">120</param>
                                 </action>
-                                <action id="-16" name="Set opacity" sid="601715316205760" type="Dialogos">
-                                    <param id="0" name="Opacity">Dialogos.Opacity+2</param>
+                                <action id="-3" name="Set position" sid="482362287959513" type="DialogoPersonagem">
+                                    <param id="0" name="X">167</param>
+                                    <param id="1" name="Y">28</param>
                                 </action>
-                                <action id="-16" name="Set opacity" sid="338734614817738" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity+2</param>
+                                <action id="-3" name="Set position" sid="272232162781000" type="Dialogos">
+                                    <param id="0" name="X">75</param>
+                                    <param id="1" name="Y">55</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="193466160984229">
+                            <conditions>
+                                <condition id="0" name="Compare text" sid="546075864935099" type="DialogoPersonagem">
+                                    <param id="0" name="Text to compare">&quot;Ariel&quot;</param>
+                                    <param id="1" name="Case sensitivity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Set position" sid="721391464555802" type="BalaoDialogo">
+                                    <param id="0" name="X">player.X + 179</param>
+                                    <param id="1" name="Y">player.Y - 126</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="994355061240118" type="DialogoPersonagem">
+                                    <param id="0" name="X">player.X + 26</param>
+                                    <param id="1" name="Y">player.Y - 218</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="190060094260078" type="Dialogos">
+                                    <param id="0" name="X">player.X - 66</param>
+                                    <param id="1" name="Y">player.Y - 191</param>
                                 </action>
                             </actions>
                         </event-block>
                     </sub-events>
                 </event-block>
-                <event-block any="1" sid="538192440086800">
+                <comment>Carrega o balão caso ele não esteja ativo e libera a inserção do diálogo</comment>
+                <event-block sid="839103387711190">
                     <conditions>
-                        <condition disabled="1" id="-14" name="Compare variable" sid="719550318216676" type="System">
-                            <param id="0" name="Variable">controleDialogos2</param>
+                        <condition id="-14" name="Compare variable" sid="883686659948542" type="System">
+                            <param id="0" name="Variable">controleDialogoFut</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">3</param>
-                        </condition>
-                        <condition id="-14" name="Compare variable" sid="977619073271627" type="System">
-                            <param id="0" name="Variable">controleDialogos2</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">6</param>
-                        </condition>
-                        <condition id="-14" name="Compare variable" sid="427897957493063" type="System">
-                            <param id="0" name="Variable">controleDialogos2</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">8</param>
-                        </condition>
-                        <condition id="-14" name="Compare variable" sid="441628371096848" type="System">
-                            <param id="0" name="Variable">controleDialogos2</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">10</param>
+                            <param id="2" name="Value">1</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="-12" name="Set group active" sid="380911566266588" type="System">
-                            <param id="0" name="Group name">&quot;playerMove7&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                    </actions>
+                    <actions />
                     <sub-events>
-                        <event-block sid="987611957363699">
+                        <event-block sid="494214078386547">
                             <conditions>
-                                <condition id="-10" name="Compare opacity" sid="580924689232017" type="Dialogos">
-                                    <param id="0" name="Comparison">4</param>
-                                    <param id="1" name="Opacity">0</param>
+                                <condition id="-1" name="Every tick" sid="199691501509836" type="System" />
+                                <condition id="-10" name="Compare opacity" sid="879817913026524" type="BalaoDialogo">
+                                    <param id="0" name="Comparison">2</param>
+                                    <param id="1" name="Opacity">100</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-16" name="Set opacity" sid="601782032008894" type="Dialogos">
-                                    <param id="0" name="Opacity">Dialogos.Opacity-2</param>
+                                <action id="-16" name="Set opacity" sid="117031554643824" type="BalaoDialogo">
+                                    <param id="0" name="Opacity">BalaoDialogo.Opacity + 2.5</param>
                                 </action>
-                                <action id="-16" name="Set opacity" sid="547671995137938" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity-2</param>
+                            </actions>
+                        </event-block>
+                        <event-block sid="252682795637991">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="610129651653406" type="BalaoDialogo">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="762915309039815" type="System">
+                                    <param id="0" name="Variable">controleDialogoFut</param>
+                                    <param id="1" name="Value">0</param>
                                 </action>
-                                <action id="-16" name="Set opacity" sid="126219228112345" type="BalaoDialogo">
-                                    <param id="0" name="Opacity">BalaoDialogo.Opacity-2</param>
+                                <action id="-9" name="Set value" sid="255469128134979" type="System">
+                                    <param id="0" name="Variable">inserirDialogosCAM</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Insere a fala do personagem</comment>
+                <event-block sid="988645724446371">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="671064021734948" type="System">
+                            <param id="0" name="Variable">inserirDialogosCAM</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set text" sid="596501502854591" type="Dialogos">
+                            <param id="0" name="Text">DialogosJSON.GetData(&quot;Futebol&quot; &amp; fraseAtualCAM, 1)</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="271803785464170" type="System">
+                            <param id="0" name="Variable">carregarDialogosCAM</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="425482993513145" type="System">
+                            <param id="0" name="Variable">inserirDialogosCAM</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Carrega o texto no balão e libera pro jogador avançar com a tecla E</comment>
+                <event-block sid="741166523477507">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="744466933995641" type="System">
+                            <param id="0" name="Variable">carregarDialogosCAM</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="998359928419825">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="136882846022992" type="System" />
+                                <condition id="-10" name="Compare opacity" sid="808849674341895" type="Dialogos">
+                                    <param id="0" name="Comparison">2</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="545397026550679" type="DialogoPersonagem">
+                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity + 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="322340801110901" type="Dialogos">
+                                    <param id="0" name="Opacity">Dialogos.Opacity + 2.5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="761880432997099">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="771029601941319" type="Dialogos">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="927230485316822" type="System">
+                                    <param id="0" name="Variable">avancarDialogosCAM</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="271332285551082" type="System">
+                                    <param id="0" name="Variable">carregarDialogosCAM</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Avança o diálogo</comment>
+                <event-block sid="128646145003381">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="546754884555188" type="System">
+                            <param id="0" name="Variable">avancarDialogosCAM</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="886552853515950">
+                            <conditions>
+                                <condition id="2" name="Key is down" sid="269293628971527" type="Keyboard">
+                                    <param id="0" name="Key">69</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Play" sid="235534774182178" type="Audio">
+                                    <param id="0" name="Audio file">passar_dialogo</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="955417072234715" type="System">
+                                    <param id="0" name="Variable">avancarDialogosCAM</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="743205710498112" type="System">
+                                    <param id="0" name="Seconds">0.5</param>
                                 </action>
                             </actions>
                             <sub-events>
-                                <event-block sid="976888276605349">
+                                <comment>Verifica se terminou todos os diálogos reservados para aquele momento</comment>
+                                <event-block sid="531479946217341">
                                     <conditions>
-                                        <condition id="-4" name="Trigger once while true" sid="842693300599030" type="System" />
+                                        <condition id="-8" name="Compare two values" sid="532743318078719" type="System">
+                                            <param id="0" name="First value">fraseAtualCAM</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">tamanhoDialogoCAM</param>
+                                        </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Play" sid="942167306323589" type="Audio">
-                                            <param id="0" name="Audio file">passar_dialogo</param>
-                                            <param id="2" name="Loop">0</param>
-                                            <param id="3" name="Volume">volSons</param>
-                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        <action id="-9" name="Set value" sid="418440977540421" type="System">
+                                            <param id="0" name="Variable">descarregarDialogosCAM</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>Se não terminou, repete o loop</comment>
+                                <event-block sid="443248536415926">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="729404398228400" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="667521586458437" type="System">
+                                            <param id="0" name="Variable">fraseAtualCAM</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="787077108677602" type="System">
+                                            <param id="0" name="Variable">inserirDialogosCAM</param>
+                                            <param id="1" name="Value">1</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1966,7 +2308,130 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <event-block sid="475961316715313">
+                <comment>Descarrega os diálogos</comment>
+                <event-block sid="360278713508639">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="430920999680352" type="System">
+                            <param id="0" name="Variable">descarregarDialogosCAM</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="818110195873001">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="163294253474084" type="System" />
+                                <condition id="-10" name="Compare opacity" sid="445466598459150" type="Dialogos">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="519034204813994" type="DialogoPersonagem">
+                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity - 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="940211818426688" type="Dialogos">
+                                    <param id="0" name="Opacity">Dialogos.Opacity - 2.5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="553884990200850" type="BalaoDialogo">
+                                    <param id="0" name="Opacity">BalaoDialogo.Opacity - 2.5</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <comment>Esta comparação é devido a um bug caso o consiga avançar o texto mais rápido do que o ele sendo limpo</comment>
+                                <event-block sid="791211816828055">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="230561720659227" type="System">
+                                            <param id="0" name="Variable">carregarDialogosCAM</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="194344245598985" type="System">
+                                            <param id="0" name="Variable">controleDialogoFut</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment>Embora será fechada a caixa de diálogo, adiciona-se um no indice da frase pois podem ter mais diálogos depois</comment>
+                        <event-block sid="352451878798217">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="962254476493550" type="Dialogos">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Add to" sid="243365636158481" type="System">
+                                    <param id="0" name="Variable">fraseAtualCAM</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="847172961601329" type="System">
+                                    <param id="0" name="Variable">descarregarDialogosCAM</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="643822687487653" type="System">
+                                    <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="387344187496716" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="850841652449385">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="691138419844809" type="System">
+                                            <param id="0" name="Variable">fraseAtualCAM</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">5</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="770521459362437">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="729733740172193" type="campoItens">
+                                                    <param id="0" name="Unique ID">685</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Wait" sid="272009564994529" type="System">
+                                                    <param id="0" name="Seconds">3.0</param>
+                                                </action>
+                                                <action behavior="Physics" id="27" name="Set enabled" sid="235209531648543" type="campoItens">
+                                                    <param id="0" name="Mode">1</param>
+                                                </action>
+                                                <action behavior="Bullet" id="5" name="Set enabled" sid="531481642889860" type="campoItens">
+                                                    <param id="0" name="State">1</param>
+                                                </action>
+                                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="626240408829461" type="campoItens">
+                                                    <param id="0" name="Angle">270</param>
+                                                </action>
+                                                <action id="-15" name="Set visible" sid="449129515057912" type="campoItens">
+                                                    <param id="0" name="Visibility">1</param>
+                                                </action>
+                                                <action id="-16" name="Wait" sid="582910809046504" type="System">
+                                                    <param id="0" name="Seconds">5.0</param>
+                                                </action>
+                                                <action id="-12" name="Set group active" sid="195779915239277" type="System">
+                                                    <param id="0" name="Group name">&quot;ArremecoObjetos&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block disabled="1" sid="475961316715313">
                     <conditions>
                         <condition id="0" name="On key pressed" sid="342210982577192" type="Keyboard">
                             <param id="0" name="Key">69</param>
@@ -1979,159 +2444,12 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="370634545354270">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="816213085747962" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">1</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Play" sid="771524800572833" type="Audio">
-                                    <param id="0" name="Audio file">passar_dialogo</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action disabled="1" id="-9" name="Set value" sid="272963535177131" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">2</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="600900572853297" type="System">
-                                    <param id="0" name="Variable">dialogos2</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="973411293234529" type="Dialogos">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="602304833704114" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="897156867614805" type="BalaoDialogo">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="527988121193714" type="System">
-                                    <param id="0" name="Seconds">0.5</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="312114837239792" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">2</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="978153528949471">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="341235363373501" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">2</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Play" sid="538914264431745" type="Audio">
-                                    <param id="0" name="Audio file">passar_dialogo</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action disabled="1" id="-9" name="Set value" sid="969794491793865" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">4</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="643538742349654" type="System">
-                                    <param id="0" name="Variable">dialogos2</param>
-                                    <param id="1" name="Value">2</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="602556226884775" type="Dialogos">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="573674964747228" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="957701203949873" type="System">
-                                    <param id="0" name="Seconds">0.5</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="711978590469468" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">3</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="963232946136522">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="491882212517257" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">3</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Play" sid="732530757171970" type="Audio">
-                                    <param id="0" name="Audio file">passar_dialogo</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="412199001131240" type="System">
-                                    <param id="0" name="Variable">dialogos2</param>
-                                    <param id="1" name="Value">3</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="872438387797434" type="Dialogos">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="677507737149235" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="494087708184399" type="System">
-                                    <param id="0" name="Seconds">0.5</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="108704515324128" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">4</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="779346834158593">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="710506595509042" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">4</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Play" sid="325221384165160" type="Audio">
-                                    <param id="0" name="Audio file">passar_dialogo</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="967291022514571" type="System">
-                                    <param id="0" name="Variable">dialogos2</param>
-                                    <param id="1" name="Value">4</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="893955052236920" type="Dialogos">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="803221972939086" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="709596107196478" type="System">
-                                    <param id="0" name="Seconds">0.5</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="881982537808669" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">5</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="733112429139597">
+                        <event-block disabled="1" sid="733112429139597">
                             <conditions>
                                 <condition id="-14" name="Compare variable" sid="818766705369425" type="System">
                                     <param id="0" name="Variable">controleDialogos2</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">5</param>
+                                    <param id="2" name="Value">7</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -2141,101 +2459,13 @@
                                     <param id="3" name="Volume">volSons</param>
                                     <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                 </action>
-                                <action disabled="1" id="-9" name="Set value" sid="330930188773943" type="System">
-                                    <param id="0" name="Variable">dialogos2</param>
-                                    <param id="1" name="Value">5</param>
-                                </action>
-                                <action disabled="1" id="-16" name="Set opacity" sid="360847097099586" type="Dialogos">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action disabled="1" id="-16" name="Set opacity" sid="283244874121440" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action disabled="1" id="-16" name="Wait" sid="903297147780132" type="System">
-                                    <param id="0" name="Seconds">0.5</param>
-                                </action>
                                 <action id="-9" name="Set value" sid="541095505250930" type="System">
                                     <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">6</param>
+                                    <param id="1" name="Value">8</param>
                                 </action>
                                 <action disabled="1" id="-9" name="Set value" sid="988529861751086" type="System">
                                     <param id="0" name="Variable">controleItens</param>
                                     <param id="1" name="Value">1</param>
-                                </action>
-                            </actions>
-                            <sub-events>
-                                <event-block sid="770521459362437">
-                                    <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="729733740172193" type="campoItens">
-                                            <param id="0" name="Unique ID">685</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-16" name="Wait" sid="272009564994529" type="System">
-                                            <param id="0" name="Seconds">3.0</param>
-                                        </action>
-                                        <action behavior="Physics" id="27" name="Set enabled" sid="235209531648543" type="campoItens">
-                                            <param id="0" name="Mode">1</param>
-                                        </action>
-                                        <action behavior="Bullet" id="5" name="Set enabled" sid="531481642889860" type="campoItens">
-                                            <param id="0" name="State">1</param>
-                                        </action>
-                                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="626240408829461" type="campoItens">
-                                            <param id="0" name="Angle">270</param>
-                                        </action>
-                                        <action id="-15" name="Set visible" sid="449129515057912" type="campoItens">
-                                            <param id="0" name="Visibility">1</param>
-                                        </action>
-                                        <action id="-16" name="Wait" sid="582910809046504" type="System">
-                                            <param id="0" name="Seconds">5.0</param>
-                                        </action>
-                                        <action id="-12" name="Set group active" sid="195779915239277" type="System">
-                                            <param id="0" name="Group name">&quot;ArremecoObjetos&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <event-block sid="494975005603521">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="424371808490396" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">7</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Play" sid="981052090501668" type="Audio">
-                                    <param id="0" name="Audio file">passar_dialogo</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="689424659235022" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">8</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="925096215099794">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="996086738289662" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">9</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Play" sid="506435525243852" type="Audio">
-                                    <param id="0" name="Audio file">passar_dialogo</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="906372103647420" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">10</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2401,19 +2631,28 @@
                     </conditions>
                     <actions>
                         <action id="-9" name="Set value" sid="524250548482790" type="System">
-                            <param id="0" name="Variable">controleDialogos2</param>
-                            <param id="1" name="Value">7</param>
+                            <param id="0" name="Variable">controleDialogoFut</param>
+                            <param id="1" name="Value">1</param>
                         </action>
-                        <action id="-9" name="Set value" sid="370505479351965" type="System">
+                        <action id="-9" name="Set value" sid="888225124038421" type="System">
+                            <param id="0" name="Variable">tamanhoDialogoCAM</param>
+                            <param id="1" name="Value">5</param>
+                        </action>
+                        <action id="2" name="Stop" sid="873416227072754" type="playerAnim" />
+                        <action id="-12" name="Set group active" sid="955772703549660" type="System">
+                            <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="138636006246571" type="System">
+                            <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action disabled="1" id="-9" name="Set value" sid="370505479351965" type="System">
                             <param id="0" name="Variable">dialogos2</param>
                             <param id="1" name="Value">5</param>
                         </action>
                         <action id="-12" name="Set group active" sid="858180921490548" type="System">
                             <param id="0" name="Group name">&quot;FisicaBola&quot;</param>
-                            <param id="1" name="State">0</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="955772703549660" type="System">
-                            <param id="0" name="Group name">&quot;playerMove7&quot;</param>
                             <param id="1" name="State">0</param>
                         </action>
                     </actions>
