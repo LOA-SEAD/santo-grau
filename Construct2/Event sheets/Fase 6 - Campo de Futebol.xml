@@ -25,6 +25,8 @@
         <variable constant="0" name="avancarDialogosCAM" sid="637589815382703" static="0" type="number">0</variable>
         <comment>Utilizado para controle o ínicio dos diálogos</comment>
         <variable constant="0" name="controleDialogoFut" sid="654176648451923" static="0" type="number">0</variable>
+        <comment>Para organização do número da pergunta que está atualmente</comment>
+        <variable constant="0" name="perguntaFUT" sid="864637135447124" static="0" type="number">1</variable>
         <event-block sid="704942424572087">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="961560001477127" type="System" />
@@ -32,6 +34,7 @@
             <actions>
                 <action id="0" name="Load JSON" sid="702652386101802" type="DialogosJSON" />
                 <action id="0" name="Load JSON" sid="334745917279527" type="FasesJSON" />
+                <action id="0" name="Load JSON" sid="225598662008420" type="LoadJSONFUT" />
                 <action id="33" name="Stop all" sid="772298769575832" type="Audio" />
                 <action id="-9" name="Set value" sid="358939320709451" type="System">
                     <param id="0" name="Variable">pause</param>
@@ -97,7 +100,14 @@
                     <param id="0" name="Variable">avancarDialogosCAM</param>
                     <param id="1" name="Value">0</param>
                 </action>
+                <action id="-4" name="Set layer visible" sid="544412279759474" type="System">
+                    <param id="0" name="Layer">&quot;PlacarPopup&quot;</param>
+                    <param id="1" name="Visibility">1</param>
+                </action>
                 <action id="3" name="Set font size" sid="599127348236850" type="botoesTexto">
+                    <param id="0" name="Size (pt)">32</param>
+                </action>
+                <action id="3" name="Set font size" sid="917612568573197" type="placarBotaoTexto">
                     <param id="0" name="Size (pt)">32</param>
                 </action>
                 <action id="3" name="Set font size" sid="319227955484941" type="audioTexto">
@@ -122,6 +132,42 @@
                 <action id="5" name="Set web font" sid="473622710760801" type="botoesTexto">
                     <param id="0" name="Family name">&quot;please_write_me_a_songmedium&quot;</param>
                     <param id="1" name="CSS URL">&quot;stylesheet.css&quot;</param>
+                </action>
+                <action id="5" name="Set web font" sid="493098233134410" type="placarBotaoTexto">
+                    <param id="0" name="Family name">&quot;please_write_me_a_songmedium&quot;</param>
+                    <param id="1" name="CSS URL">&quot;stylesheet.css&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="326980428138558" type="placarResp1">
+                    <param id="0" name="Property name">&quot;font-size&quot;</param>
+                    <param id="1" name="Value">&quot;72px&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="791687764833013" type="placarResp1">
+                    <param id="0" name="Property name">&quot;font-family&quot;</param>
+                    <param id="1" name="Value">&quot;please_write_me_a_songmedium&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="542538834833927" type="placarResp1">
+                    <param id="0" name="Property name">&quot;border&quot;</param>
+                    <param id="1" name="Value">&quot;1px solid white&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="788179798893403" type="placarResp1">
+                    <param id="0" name="Property name">&quot;text-align&quot;</param>
+                    <param id="1" name="Value">&quot;center&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="556242814695902" type="placarResp2">
+                    <param id="0" name="Property name">&quot;font-size&quot;</param>
+                    <param id="1" name="Value">&quot;72px&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="136117331327202" type="placarResp2">
+                    <param id="0" name="Property name">&quot;font-family&quot;</param>
+                    <param id="1" name="Value">&quot;please_write_me_a_songmedium&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="186569372721532" type="placarResp2">
+                    <param id="0" name="Property name">&quot;border&quot;</param>
+                    <param id="1" name="Value">&quot;1px solid white&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="711465598967988" type="placarResp2">
+                    <param id="0" name="Property name">&quot;text-align&quot;</param>
+                    <param id="1" name="Value">&quot;center&quot;</param>
                 </action>
                 <action id="-3" name="Set position" sid="848735166068198" type="BalaoDialogo">
                     <param id="0" name="X">320</param>
@@ -169,6 +215,10 @@
                 </action>
                 <action behavior="Pin" id="0" name="Pin to object" sid="355030265303466" type="botoes">
                     <param id="0" name="Pin to">fundoPause</param>
+                    <param id="1" name="Mode">0</param>
+                </action>
+                <action behavior="Pin" id="0" name="Pin to object" sid="316502832260165" type="placarBotao">
+                    <param id="0" name="Pin to">placarFundo</param>
                     <param id="1" name="Mode">0</param>
                 </action>
                 <action behavior="Pin" id="0" name="Pin to object" sid="773690970288512" type="popup">
@@ -420,6 +470,36 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <event-block sid="306849467298778">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="188338559080195" type="System">
+                            <param id="0" name="Variable">pause</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="855882688962399" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao7b&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="279451206364803" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao7a&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="394459426273099" type="System">
+                            <param id="0" name="Seconds">4</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="404047411855702" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao7a&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="641319399709374" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao7b&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
             </sub-events>
         </event-block>
         <event-block sid="455185946872440">
@@ -494,36 +574,6 @@
             <actions>
                 <action id="2" name="Set muted" sid="322617385798261" type="Audio">
                     <param id="0" name="Tag">&quot;capivara&quot;</param>
-                    <param id="1" name="State">1</param>
-                </action>
-            </actions>
-        </event-block>
-        <event-block sid="306849467298778">
-            <conditions>
-                <condition id="-14" name="Compare variable" sid="188338559080195" type="System">
-                    <param id="0" name="Variable">pause</param>
-                    <param id="1" name="Comparison">0</param>
-                    <param id="2" name="Value">0</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="-12" name="Set group active" sid="855882688962399" type="System">
-                    <param id="0" name="Group name">&quot;Pontuacao7b&quot;</param>
-                    <param id="1" name="State">0</param>
-                </action>
-                <action id="-12" name="Set group active" sid="279451206364803" type="System">
-                    <param id="0" name="Group name">&quot;Pontuacao7a&quot;</param>
-                    <param id="1" name="State">1</param>
-                </action>
-                <action id="-16" name="Wait" sid="394459426273099" type="System">
-                    <param id="0" name="Seconds">4</param>
-                </action>
-                <action id="-12" name="Set group active" sid="404047411855702" type="System">
-                    <param id="0" name="Group name">&quot;Pontuacao7a&quot;</param>
-                    <param id="1" name="State">0</param>
-                </action>
-                <action id="-12" name="Set group active" sid="641319399709374" type="System">
-                    <param id="0" name="Group name">&quot;Pontuacao7b&quot;</param>
                     <param id="1" name="State">1</param>
                 </action>
             </actions>
@@ -633,10 +683,14 @@
             <actions>
                 <action id="0" name="Load JSON" sid="882533869199040" type="DialogosJSON" />
                 <action id="0" name="Load JSON" sid="847081367440394" type="FasesJSON" />
+                <action id="0" name="Load JSON" sid="770100290238342" type="LoadJSONFUT" />
                 <action id="3" name="Set font size" sid="466599342993158" type="botoesTexto">
                     <param id="0" name="Size (pt)">32</param>
                 </action>
                 <action id="3" name="Set font size" sid="134329723586001" type="audioTexto">
+                    <param id="0" name="Size (pt)">32</param>
+                </action>
+                <action id="3" name="Set font size" sid="551600638193196" type="placarBotaoTexto">
                     <param id="0" name="Size (pt)">32</param>
                 </action>
                 <action id="3" name="Set font size" sid="247579371551928" type="popupTexto">
@@ -665,6 +719,38 @@
                 <action id="5" name="Set web font" sid="106664885070822" type="botoesTexto">
                     <param id="0" name="Family name">&quot;please_write_me_a_songmedium&quot;</param>
                     <param id="1" name="CSS URL">&quot;stylesheet.css&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="190086052685967" type="placarResp1">
+                    <param id="0" name="Property name">&quot;font-size&quot;</param>
+                    <param id="1" name="Value">&quot;72px&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="514194629735876" type="placarResp1">
+                    <param id="0" name="Property name">&quot;font-family&quot;</param>
+                    <param id="1" name="Value">&quot;please_write_me_a_songmedium&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="173174143580308" type="placarResp1">
+                    <param id="0" name="Property name">&quot;border&quot;</param>
+                    <param id="1" name="Value">&quot;1px solid white&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="815221904143744" type="placarResp1">
+                    <param id="0" name="Property name">&quot;text-align&quot;</param>
+                    <param id="1" name="Value">&quot;center&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="980695203907696" type="placarResp2">
+                    <param id="0" name="Property name">&quot;font-size&quot;</param>
+                    <param id="1" name="Value">&quot;72px&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="653587975822516" type="placarResp2">
+                    <param id="0" name="Property name">&quot;font-family&quot;</param>
+                    <param id="1" name="Value">&quot;please_write_me_a_songmedium&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="620071896699026" type="placarResp2">
+                    <param id="0" name="Property name">&quot;border&quot;</param>
+                    <param id="1" name="Value">&quot;1px solid white&quot;</param>
+                </action>
+                <action id="7" name="Set CSS style" sid="297721982008787" type="placarResp2">
+                    <param id="0" name="Property name">&quot;text-align&quot;</param>
+                    <param id="1" name="Value">&quot;center&quot;</param>
                 </action>
             </actions>
             <sub-events>
@@ -2063,6 +2149,173 @@
                             </actions>
                         </event-block>
                     </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <comment>Controla todas as ações relacionadas com o placar</comment>
+        <event-group description="" sid="599576324251404" title="PlacarControle">
+            <sub-events>
+                <comment>Controle do botão de fechar do placar</comment>
+                <event-block sid="435035818663797">
+                    <conditions>
+                        <condition id="7" name="Cursor is over object" sid="189840952648780" type="Mouse">
+                            <param id="0" name="Object">placarFechar</param>
+                        </condition>
+                        <condition id="-10" name="Compare opacity" sid="443843980510385" type="placarFechar">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Opacity">100</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Set cursor style" sid="640062593613871" type="Mouse">
+                            <param id="0" name="Cursor style">1</param>
+                        </action>
+                        <action id="5" name="Set frame" sid="899211812992522" type="placarFechar">
+                            <param id="0" name="Frame number">1</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="767514644746514">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="516536041297549" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Play" sid="620656401454235" type="Audio">
+                                    <param id="0" name="Audio file">sobre_botao</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="356196790969732">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="489743728842516" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="488270576863129" type="placarFechar">
+                            <param id="0" name="Frame number">0</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <comment>Controle do botão de chutar</comment>
+                        <event-block sid="562955876558822">
+                            <conditions>
+                                <condition id="7" name="Cursor is over object" sid="748532201329962" type="Mouse">
+                                    <param id="0" name="Object">placarBotao</param>
+                                </condition>
+                                <condition id="-10" name="Compare opacity" sid="342676294949905" type="placarBotao">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Set cursor style" sid="928650878272190" type="Mouse">
+                                    <param id="0" name="Cursor style">1</param>
+                                </action>
+                                <action id="-1" name="Set X" sid="694224228183204" type="placarBotaoTexto">
+                                    <param id="0" name="X">643</param>
+                                </action>
+                                <action id="-2" name="Set Y" sid="857154876343734" type="placarBotaoTexto">
+                                    <param id="0" name="Y">632</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="651579424906011" type="placarBotao">
+                                    <param id="0" name="Frame number">1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="342715516018928">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="728146418763073" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Play" sid="282219376332293" type="Audio">
+                                            <param id="0" name="Audio file">sobre_botao</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="741382330238473">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="512821716881682" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-1" name="Set X" sid="979315646066938" type="placarBotaoTexto">
+                                    <param id="0" name="X">640</param>
+                                </action>
+                                <action id="-2" name="Set Y" sid="168779901761598" type="placarBotaoTexto">
+                                    <param id="0" name="Y">622</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="443540188400518" type="placarBotao">
+                                    <param id="0" name="Frame number">0</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <comment>Controle do botão para trocar de pergunta</comment>
+                                <event-block sid="669539285334217">
+                                    <conditions>
+                                        <condition id="7" name="Cursor is over object" sid="327494164128399" type="Mouse">
+                                            <param id="0" name="Object">placarMudaPergunta</param>
+                                        </condition>
+                                        <condition id="-10" name="Compare opacity" sid="701743566455654" type="placarMudaPergunta">
+                                            <param id="0" name="Comparison">0</param>
+                                            <param id="1" name="Opacity">100</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Set cursor style" sid="100129632800782" type="Mouse">
+                                            <param id="0" name="Cursor style">1</param>
+                                        </action>
+                                        <action id="5" name="Set frame" sid="367454477299261" type="placarMudaPergunta">
+                                            <param id="0" name="Frame number">1</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="917159305526521">
+                                            <conditions>
+                                                <condition id="-4" name="Trigger once while true" sid="509999029135597" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Play" sid="576154021385505" type="Audio">
+                                                    <param id="0" name="Audio file">sobre_botao</param>
+                                                    <param id="2" name="Loop">0</param>
+                                                    <param id="3" name="Volume">volSons</param>
+                                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="289531203042035">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="482513565922248" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Set cursor style" sid="101657070695555" type="Mouse">
+                                            <param id="0" name="Cursor style">0</param>
+                                        </action>
+                                        <action id="5" name="Set frame" sid="859761035232687" type="placarMudaPergunta">
+                                            <param id="0" name="Frame number">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="865803925746907">
+                    <conditions />
+                    <actions>
+                        <action id="0" name="Set text" sid="861464498044538" type="placarPergunta">
+                            <param id="0" name="Text">perguntaFUT &amp; &quot;- &quot; &amp;LoadJSONFUT.GetData(&quot;desafio&quot; &amp; perguntaFUT, 0)</param>
+                        </action>
+                    </actions>
                 </event-block>
             </sub-events>
         </event-group>
