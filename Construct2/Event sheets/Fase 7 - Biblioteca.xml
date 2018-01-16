@@ -3,6 +3,9 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase 7 - Biblioteca</name>
     <events>
+        <variable constant="0" name="dialogos8" sid="365007556410423" static="0" type="number">0</variable>
+        <variable constant="0" name="controleDialogos8" sid="729389120990500" static="0" type="number">0</variable>
+        <variable constant="0" name="controleFase8" sid="583436959185553" static="0" type="number">0</variable>
         <event-block sid="900782436585763">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="974973112681185" type="System" />
@@ -10,6 +13,9 @@
             <actions>
                 <action id="4" name="Preload" sid="557687433950682" type="Audio">
                     <param id="0" name="Audio file">acerto</param>
+                </action>
+                <action id="4" name="Preload" sid="403204511373814" type="Audio">
+                    <param id="0" name="Audio file">colecionavel</param>
                 </action>
                 <action id="33" name="Stop all" sid="701910513711929" type="Audio" />
                 <action id="0" name="Play" sid="475133934047342" type="Audio">
@@ -520,6 +526,40 @@
                 </event-block>
             </sub-events>
         </event-group>
+        <event-group description="" inactive="1" sid="742223392847084" title="Pontuacao8a">
+            <sub-events>
+                <event-block sid="332971556299704">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="173027478381015" type="pontuacao">
+                            <param id="0" name="Comparison">5</param>
+                            <param id="1" name="Y co-ordinate">636</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="724065179512831" type="pontuacao">
+                            <param id="0" name="Y">pontuacao.Y-3</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" inactive="1" sid="385108064074155" title="Pontuacao8b">
+            <sub-events>
+                <event-block sid="107612889796321">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="187125877067698" type="pontuacao">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Y co-ordinate">786</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="694235327525991" type="pontuacao">
+                            <param id="0" name="Y">pontuacao.Y+3</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
         <event-group description="" sid="429907656460125" title="Efeitos3">
             <sub-events>
                 <event-block sid="281523341830373">
@@ -651,6 +691,117 @@
                 </event-block>
             </sub-events>
         </event-group>
+        <comment>Grupo que modela os comportamentos relacionados à mecânica da fase</comment>
+        <event-group description="" sid="964480653704033" title="Mecanica8" />
+        <comment>Grupo com ações de trigger da fase</comment>
+        <event-group description="" sid="387926486040169" title="Acoes8">
+            <sub-events>
+                <event-block sid="734620441709765">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="671447180775503" type="Keyboard">
+                            <param id="0" name="Key">69</param>
+                        </condition>
+                        <condition id="1" name="Is overlapping another object" sid="851758559473053" type="player">
+                            <param id="0" name="Object">recompensa</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="720797040646048" type="System">
+                            <param id="0" name="Variable">pause</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="462854924842156" type="recompensa" />
+                        <action id="-9" name="Set value" sid="338801898504622" type="System">
+                            <param id="0" name="Variable">recompensa2</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-10" name="Add to" sid="762074958348355" type="System">
+                            <param id="0" name="Variable">pontos</param>
+                            <param id="1" name="Value">100</param>
+                        </action>
+                        <action id="0" name="Set text" sid="725680633194383" type="feedback">
+                            <param id="0" name="Text">&quot;RECOMPENSA DESBLOQUEADA&quot;</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="938513957794011" type="feedback">
+                            <param id="0" name="Opacity">100</param>
+                        </action>
+                        <action id="0" name="Set text" sid="807998475900038" type="pontoTexto">
+                            <param id="0" name="Text">&quot;+100&quot;</param>
+                        </action>
+                        <action id="4" name="Set font color" sid="870992112022884" type="pontoTexto">
+                            <param id="0" name="Color">rgb(41, 90, 165)</param>
+                        </action>
+                        <action id="0" name="Play" sid="167537574892188" type="Audio">
+                            <param id="0" name="Audio file">colecionavel</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">volSons</param>
+                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="154312246809712" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao8b&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="248391888546329" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao8a&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="754624146292473" type="System">
+                            <param id="0" name="Seconds">3</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="352750319857079" type="feedback">
+                            <param id="0" name="Opacity">0</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="896126768166666" type="System">
+                            <param id="0" name="Seconds">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="449113274266068" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao8a&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="973197087363909" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao8b&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="121666314486217">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="199388760663222" type="Keyboard">
+                            <param id="0" name="Key">69</param>
+                        </condition>
+                        <condition id="-8" name="Compare two values" sid="214139745082632" type="System">
+                            <param id="0" name="First value">pause</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">0</param>
+                        </condition>
+                        <condition id="1" name="Is overlapping another object" sid="496320327708478" type="player">
+                            <param id="0" name="Object">selecaoMago</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="994089419399029" type="System">
+                            <param id="0" name="Variable">controleFase8</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="456975424536493" type="System">
+                            <param id="0" name="Variable">controleDialogos8</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition behavior="8Direction" id="1" name="Compare speed" sid="925942946562189" type="player">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Speed">0.1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-15" name="Set visible" sid="358783136422680" type="selecaoMago">
+                            <param id="0" name="Visibility">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <comment>Grupo que controla a movimentação do jogador</comment>
         <event-group description="" sid="254005631517636" title="playerMove8">
             <sub-events>
                 <event-block any="1" sid="910773993544395">
@@ -887,6 +1038,7 @@
                 </event-block>
             </sub-events>
         </event-group>
+        <comment>Grupo com os efeitos de profundidade dos elementos da Biblioteca</comment>
         <event-group description="" sid="682592748590700" title="Efeitos3DBiblioteca">
             <sub-events>
                 <comment>Efeito 3D da bancada</comment>
@@ -951,6 +1103,7 @@
                 </event-block>
             </sub-events>
         </event-group>
+        <comment>Grupo que defnie o comportamento do menu de pause</comment>
         <event-group description="" sid="933764284109754" title="MenuPause8">
             <sub-events>
                 <event-block sid="759576178336036">
@@ -2559,5 +2712,7 @@
                 </event-block>
             </sub-events>
         </event-group>
+        <comment>Grupo que controla o dialogo com o Klapaucius</comment>
+        <event-group description="" inactive="1" sid="352945737234944" title="DialogoMago" />
     </events>
 </c2eventsheet>
