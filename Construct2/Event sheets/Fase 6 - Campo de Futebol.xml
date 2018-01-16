@@ -27,6 +27,12 @@
         <variable constant="0" name="controleDialogoFut" sid="654176648451923" static="0" type="number">0</variable>
         <comment>Para organização do número da pergunta que está atualmente</comment>
         <variable constant="0" name="perguntaFUT" sid="864637135447124" static="0" type="number">1</variable>
+        <comment>Serve para controlar o aparecimento da camada do placar</comment>
+        <variable constant="0" name="opacidadeLayer" sid="866305535968068" static="0" type="number">0</variable>
+        <comment>Serve para carregar e descarregar o placar quando a variável possuir os valores 1 e 2, respectivamente</comment>
+        <variable constant="0" name="controlePlacar" sid="224327238695947" static="0" type="number">0</variable>
+        <comment>Controla o que ocoore com a bola após o placar seja fechado, seja utilizando o botão de X ou clicando no botão &quot;Chutar&quot;.&#x0D;&#x0A;0- Não faz nada (ação do botão fechar) / 1- Chuta para fora (errou totalmente ou parcialmente as respostas) / 2- Faz o gol (acertou as respostas</comment>
+        <variable constant="0" name="acaoBola" sid="590493915236453" static="0" type="number">0</variable>
         <event-block sid="704942424572087">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="961560001477127" type="System" />
@@ -100,9 +106,25 @@
                     <param id="0" name="Variable">avancarDialogosCAM</param>
                     <param id="1" name="Value">0</param>
                 </action>
-                <action id="-4" name="Set layer visible" sid="544412279759474" type="System">
+                <action id="-18" name="Set layer opacity" sid="544412279759474" type="System">
                     <param id="0" name="Layer">&quot;PlacarPopup&quot;</param>
-                    <param id="1" name="Visibility">1</param>
+                    <param id="1" name="Opacity">0</param>
+                </action>
+                <action id="3" name="Set visible" sid="283332415054683" type="placarResp1">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="3" name="Set visible" sid="429138983640042" type="placarResp2">
+                    <param id="0" name="Visibility">0</param>
+                </action>
+                <action id="4" name="Set enabled" sid="516783349411242" type="placarResp1">
+                    <param id="0" name="Mode">0</param>
+                </action>
+                <action id="4" name="Set enabled" sid="374960771275013" type="placarResp2">
+                    <param id="0" name="Mode">0</param>
+                </action>
+                <action disabled="1" id="-4" name="Set layer visible" sid="845276823305092" type="System">
+                    <param id="0" name="Layer">&quot;PlacarPopup&quot;</param>
+                    <param id="1" name="Visibility">0</param>
                 </action>
                 <action id="3" name="Set font size" sid="599127348236850" type="botoesTexto">
                     <param id="0" name="Size (pt)">32</param>
@@ -139,7 +161,7 @@
                 </action>
                 <action id="7" name="Set CSS style" sid="326980428138558" type="placarResp1">
                     <param id="0" name="Property name">&quot;font-size&quot;</param>
-                    <param id="1" name="Value">&quot;72px&quot;</param>
+                    <param id="1" name="Value">&quot;80px&quot;</param>
                 </action>
                 <action id="7" name="Set CSS style" sid="791687764833013" type="placarResp1">
                     <param id="0" name="Property name">&quot;font-family&quot;</param>
@@ -155,7 +177,7 @@
                 </action>
                 <action id="7" name="Set CSS style" sid="556242814695902" type="placarResp2">
                     <param id="0" name="Property name">&quot;font-size&quot;</param>
-                    <param id="1" name="Value">&quot;72px&quot;</param>
+                    <param id="1" name="Value">&quot;80px&quot;</param>
                 </action>
                 <action id="7" name="Set CSS style" sid="136117331327202" type="placarResp2">
                     <param id="0" name="Property name">&quot;font-family&quot;</param>
@@ -1077,7 +1099,7 @@
                                             <param id="1" name="Value">4</param>
                                         </action>
                                         <action id="-16" name="Wait" sid="464541097433988" type="System">
-                                            <param id="0" name="Seconds">10.0</param>
+                                            <param id="0" name="Seconds">5.0</param>
                                         </action>
                                         <action id="-12" name="Set group active" sid="372537816893900" type="System">
                                             <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
@@ -1120,7 +1142,7 @@
                                         </action>
                                         <action id="-9" name="Set value" sid="819516269785059" type="System">
                                             <param id="0" name="Variable">tamanhoDialogoCAM</param>
-                                            <param id="1" name="Value">6</param>
+                                            <param id="1" name="Value">7</param>
                                         </action>
                                         <action id="2" name="Stop" sid="302853548186654" type="playerAnim" />
                                         <action id="-12" name="Set group active" sid="138079338376920" type="System">
@@ -1141,46 +1163,52 @@
                                 <condition id="-14" name="Compare variable" sid="390363390137536" type="System">
                                     <param id="0" name="Variable">fraseAtualCAM</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">7</param>
+                                    <param id="2" name="Value">8</param>
                                 </condition>
                                 <condition id="2" name="Key is down" sid="564568563446458" type="Keyboard">
                                     <param id="0" name="Key">69</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-18" name="Rotate clockwise" sid="679786215036444" type="campoBola">
+                                <action disabled="1" id="-18" name="Rotate clockwise" sid="679786215036444" type="campoBola">
                                     <param id="0" name="Degrees">270</param>
                                 </action>
-                                <action behavior="Bullet" id="5" name="Set enabled" sid="206766382414545" type="campoBola">
+                                <action behavior="Bullet" disabled="1" id="5" name="Set enabled" sid="206766382414545" type="campoBola">
                                     <param id="0" name="State">1</param>
                                 </action>
+                                <action id="-9" name="Set value" sid="314473622689565" type="System">
+                                    <param id="0" name="Variable">controlePlacar</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="297053448021333" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
                             </actions>
-                            <sub-events>
-                                <event-block disabled="1" sid="921029651759982">
-                                    <conditions>
-                                        <condition id="-4" name="Trigger once while true" sid="812049136711922" type="System" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="709629340702077" type="System">
-                                            <param id="0" name="Variable">controleDialogoFut</param>
-                                            <param id="1" name="Value">1</param>
-                                        </action>
-                                        <action id="-9" name="Set value" sid="152921779764816" type="System">
-                                            <param id="0" name="Variable">tamanhoDialogoCAM</param>
-                                            <param id="1" name="Value">6</param>
-                                        </action>
-                                        <action id="2" name="Stop" sid="554436932705535" type="playerAnim" />
-                                        <action id="-12" name="Set group active" sid="121332509964147" type="System">
-                                            <param id="0" name="Group name">&quot;playerMove7&quot;</param>
-                                            <param id="1" name="State">0</param>
-                                        </action>
-                                        <action id="-12" name="Set group active" sid="495540908590548" type="System">
-                                            <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Verificar a ação que deve ser feita após o jogador clicar no botão &quot;Chutar!&quot;</comment>
+                <event-block sid="807458221259037">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="518037087901249" type="System">
+                            <param id="0" name="Variable">acaoBola</param>
+                            <param id="1" name="Comparison">1</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <comment>Acertou</comment>
+                        <event-block sid="860109062030698">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="886967804038350" type="System">
+                                    <param id="0" name="Variable">acaoBola</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions />
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -2155,6 +2183,134 @@
         <comment>Controla todas as ações relacionadas com o placar</comment>
         <event-group description="" sid="599576324251404" title="PlacarControle">
             <sub-events>
+                <event-block sid="213273536510115">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="529132293589291" type="System">
+                            <param id="0" name="Variable">controlePlacar</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="759229150034196">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="417271696680816" type="System">
+                                    <param id="0" name="Variable">opacidadeLayer</param>
+                                    <param id="1" name="Comparison">2</param>
+                                    <param id="2" name="Value">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Add to" sid="417898294037601" type="System">
+                                    <param id="0" name="Variable">opacidadeLayer</param>
+                                    <param id="1" name="Value">2.5</param>
+                                </action>
+                                <action id="-18" name="Set layer opacity" sid="651038779905168" type="System">
+                                    <param id="0" name="Layer">&quot;PlacarPopup&quot;</param>
+                                    <param id="1" name="Opacity">opacidadeLayer + 2.5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="455448126735660">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="885467342777425" type="System">
+                                    <param id="0" name="Variable">opacidadeLayer</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="459289302895958" type="System">
+                                    <param id="0" name="Variable">controlePlacar</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="4" name="Set enabled" sid="312478230915705" type="placarResp1">
+                                    <param id="0" name="Mode">1</param>
+                                </action>
+                                <action id="4" name="Set enabled" sid="962946477533417" type="placarResp2">
+                                    <param id="0" name="Mode">1</param>
+                                </action>
+                                <action id="3" name="Set visible" sid="323565907191864" type="placarResp1">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="3" name="Set visible" sid="549731796188729" type="placarResp2">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Descarregar o placar</comment>
+                <event-block sid="913927276403161">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="820805019491227" type="System">
+                            <param id="0" name="Variable">controlePlacar</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">2</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="526335589715545">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="268428064847263" type="System">
+                                    <param id="0" name="Variable">opacidadeLayer</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="3" name="Set visible" sid="388685103706380" type="placarResp1">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="3" name="Set visible" sid="669302171707344" type="placarResp2">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="4" name="Set enabled" sid="960570893681090" type="placarResp1">
+                                    <param id="0" name="Mode">0</param>
+                                </action>
+                                <action id="4" name="Set enabled" sid="779012841482369" type="placarResp2">
+                                    <param id="0" name="Mode">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="859622202729300">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="669802325347625" type="System">
+                                    <param id="0" name="Variable">opacidadeLayer</param>
+                                    <param id="1" name="Comparison">4</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-11" name="Subtract from" sid="525546931241481" type="System">
+                                    <param id="0" name="Variable">opacidadeLayer</param>
+                                    <param id="1" name="Value">2.5</param>
+                                </action>
+                                <action id="-18" name="Set layer opacity" sid="782891359541713" type="System">
+                                    <param id="0" name="Layer">&quot;PlacarPopup&quot;</param>
+                                    <param id="1" name="Opacity">opacidadeLayer - 2.5</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="351396953057548">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="785525217747911" type="System">
+                                    <param id="0" name="Variable">opacidadeLayer</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="942407488714328" type="System">
+                                    <param id="0" name="Variable">controlePlacar</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
                 <comment>Controle do botão de fechar do placar</comment>
                 <event-block sid="435035818663797">
                     <conditions>
@@ -2314,6 +2470,175 @@
                     <actions>
                         <action id="0" name="Set text" sid="861464498044538" type="placarPergunta">
                             <param id="0" name="Text">perguntaFUT &amp; &quot;- &quot; &amp;LoadJSONFUT.GetData(&quot;desafio&quot; &amp; perguntaFUT, 0)</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Controle da posição onde a seta estará localizada</comment>
+                <event-block sid="145679727413096">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="333417791673650" type="System">
+                            <param id="0" name="Variable">perguntaFUT</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Set mirrored" sid="687942087001531" type="placarMudaPergunta">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="281285044803220" type="placarMudaPergunta">
+                            <param id="0" name="X">1118</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="781655231321227">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="366967158925965" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Set mirrored" sid="667174170055801" type="placarMudaPergunta">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="319813857548239" type="placarMudaPergunta">
+                            <param id="0" name="X">162</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Trocar de pergunta</comment>
+                <event-block sid="706768085077301">
+                    <conditions>
+                        <condition id="6" name="On object clicked" sid="512295940529883" type="Mouse">
+                            <param id="0" name="Mouse button">0</param>
+                            <param id="1" name="Click type">0</param>
+                            <param id="2" name="Object clicked">placarMudaPergunta</param>
+                        </condition>
+                        <condition id="-10" name="Compare opacity" sid="518526647609196" type="placarMudaPergunta">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Opacity">100</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Play" sid="235175720447094" type="Audio">
+                            <param id="0" name="Audio file">botoes_menu</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">volSons</param>
+                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="413146427982378">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="381539281349333" type="System">
+                                    <param id="0" name="Variable">perguntaFUT</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="745248650831140" type="System">
+                                    <param id="0" name="Variable">perguntaFUT</param>
+                                    <param id="1" name="Value">2</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="734114149466895">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="151103482526239" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="499011874961615" type="System">
+                                    <param id="0" name="Variable">perguntaFUT</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Verifica as respostas do jogador</comment>
+                <event-block sid="508744792465042">
+                    <conditions>
+                        <condition id="6" name="On object clicked" sid="742960550989282" type="Mouse">
+                            <param id="0" name="Mouse button">0</param>
+                            <param id="1" name="Click type">0</param>
+                            <param id="2" name="Object clicked">placarBotao</param>
+                        </condition>
+                        <condition id="-10" name="Compare opacity" sid="759241288550269" type="placarBotao">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Opacity">100</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Play" sid="275464557105104" type="Audio">
+                            <param id="0" name="Audio file">botoes_menu</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">volSons</param>
+                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="759356707597860" type="System">
+                            <param id="0" name="Variable">controlePlacar</param>
+                            <param id="1" name="Value">2</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="503326685265152">
+                            <conditions>
+                                <condition id="0" name="Compare text" sid="904927173428799" type="placarResp1">
+                                    <param id="0" name="Text">LoadJSONFUT.GetData(&quot;desafio1&quot;,1)</param>
+                                    <param id="1" name="Case">0</param>
+                                </condition>
+                                <condition id="0" name="Compare text" sid="468920655844139" type="placarResp2">
+                                    <param id="0" name="Text">LoadJSONFUT.GetData(&quot;desafio2&quot;,1)</param>
+                                    <param id="1" name="Case">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="726900126288751" type="System">
+                                    <param id="0" name="Variable">acaoBola</param>
+                                    <param id="1" name="Value">2</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="112775577313372" type="selecaoBola" />
+                            </actions>
+                        </event-block>
+                        <event-block sid="947570394100906">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="131502973174690" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="286692160621244" type="System">
+                                    <param id="0" name="Variable">acaoBola</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Verifica as respostas do jogador</comment>
+                <event-block sid="106851211814442">
+                    <conditions>
+                        <condition id="6" name="On object clicked" sid="332692521181355" type="Mouse">
+                            <param id="0" name="Mouse button">0</param>
+                            <param id="1" name="Click type">0</param>
+                            <param id="2" name="Object clicked">placarFechar</param>
+                        </condition>
+                        <condition id="-10" name="Compare opacity" sid="132054189197793" type="placarFechar">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Opacity">100</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Play" sid="840185418206173" type="Audio">
+                            <param id="0" name="Audio file">botoes_menu</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">volSons</param>
+                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="890793152180028" type="System">
+                            <param id="0" name="Variable">controlePlacar</param>
+                            <param id="1" name="Value">2</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="517120329343839" type="System">
+                            <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                            <param id="1" name="State">1</param>
                         </action>
                     </actions>
                 </event-block>
@@ -2655,7 +2980,7 @@
                                             </conditions>
                                             <actions>
                                                 <action id="-16" name="Wait" sid="272009564994529" type="System">
-                                                    <param id="0" name="Seconds">3.0</param>
+                                                    <param id="0" name="Seconds">1.0</param>
                                                 </action>
                                                 <action behavior="Physics" id="27" name="Set enabled" sid="235209531648543" type="campoItens">
                                                     <param id="0" name="Mode">1</param>
@@ -3015,6 +3340,25 @@
                                     <param id="0" name="Time scale">0.0</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="993136948150582">
+                                    <conditions>
+                                        <condition id="-17" name="Compare opacity" sid="870116584179393" type="System">
+                                            <param id="0" name="Layer">&quot;PlacarPopup&quot;</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Opacity">100</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="3" name="Set visible" sid="217824031961437" type="placarResp1">
+                                            <param id="0" name="Visibility">0</param>
+                                        </action>
+                                        <action id="3" name="Set visible" sid="256667357671942" type="placarResp2">
+                                            <param id="0" name="Visibility">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -3077,6 +3421,25 @@
                                     <param id="1" name="State">1</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="677086288210965">
+                                    <conditions>
+                                        <condition id="-17" name="Compare opacity" sid="519811428698115" type="System">
+                                            <param id="0" name="Layer">&quot;PlacarPopup&quot;</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Opacity">100</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="3" name="Set visible" sid="484022523897879" type="placarResp1">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                        <action id="3" name="Set visible" sid="486184974922485" type="placarResp2">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <comment>Comportamento do menu convencional</comment>
                         <event-block sid="784514830815688">
@@ -3836,6 +4199,25 @@
                                     <param id="1" name="State">1</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="644158719378510">
+                                    <conditions>
+                                        <condition id="-17" name="Compare opacity" sid="433362432526501" type="System">
+                                            <param id="0" name="Layer">&quot;PlacarPopup&quot;</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Opacity">100</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="3" name="Set visible" sid="976370541916853" type="placarResp1">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                        <action id="3" name="Set visible" sid="314092334139197" type="placarResp2">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <comment>Ação do botão &quot;Salvar&quot;</comment>
                         <event-block sid="572566995654625">
@@ -3881,6 +4263,25 @@
                                     <param id="0" name="Seconds">0.0001</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="628074324389498">
+                                    <conditions>
+                                        <condition id="-17" name="Compare opacity" sid="534438775902808" type="System">
+                                            <param id="0" name="Layer">&quot;PlacarPopup&quot;</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Opacity">100</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="3" name="Set visible" sid="242431353869662" type="placarResp1">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                        <action id="3" name="Set visible" sid="101432091107026" type="placarResp2">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <comment>Ação do botão &quot;Recomeçar&quot;</comment>
                         <event-block sid="527313509693635">
