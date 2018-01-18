@@ -118,10 +118,6 @@
                 <action id="4" name="Set enabled" sid="374960771275013" type="placarResp2">
                     <param id="0" name="Mode">0</param>
                 </action>
-                <action disabled="1" id="-4" name="Set layer visible" sid="845276823305092" type="System">
-                    <param id="0" name="Layer">&quot;PlacarPopup&quot;</param>
-                    <param id="1" name="Visibility">0</param>
-                </action>
                 <action id="3" name="Set font size" sid="599127348236850" type="botoesTexto">
                     <param id="0" name="Size (pt)">32</param>
                 </action>
@@ -324,6 +320,10 @@
                 </action>
                 <action id="-12" name="Set group active" sid="261541074159230" type="System">
                     <param id="0" name="Group name">&quot;ArremecoObjetos&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="731469644596268" type="System">
+                    <param id="0" name="Group name">&quot;PlacarControle&quot;</param>
                     <param id="1" name="State">0</param>
                 </action>
                 <action behavior="8Direction" id="0" name="Stop" sid="372724120982335" type="player" />
@@ -859,6 +859,96 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
+                        <comment>Efeito para fazer a bola ficar mais certinha no gol, alterando sua posição na camada em que pertence</comment>
+                        <event-block sid="489462416590158">
+                            <conditions>
+                                <condition id="-2" name="Compare Y" sid="641282086300491" type="campoBola">
+                                    <param id="0" name="Comparison">3</param>
+                                    <param id="1" name="Y co-ordinate">230</param>
+                                </condition>
+                                <condition id="-14" name="Compare variable" sid="216699385488665" type="System">
+                                    <param id="0" name="Variable">fraseAtualCAM</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">8</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="555238447642394">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="673902280409153" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-29" name="Move to object" sid="272070280507699" type="campoBola">
+                                            <param id="0" name="Where">1</param>
+                                            <param id="1" name="Object">goleiro</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment>Fazer a bola parar dentro do gol</comment>
+                        <event-block sid="757404560399399">
+                            <conditions>
+                                <condition behavior="Bullet" id="1" name="Compare distance travelled" sid="796554273756033" type="campoBola">
+                                    <param id="0" name="Comparison">5</param>
+                                    <param id="1" name="Distance">570</param>
+                                </condition>
+                                <condition id="-1" name="Compare X" sid="663327814879421" type="campoBola">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="X co-ordinate">570</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="Bullet" id="5" name="Set enabled" sid="113841745738688" type="campoBola">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>Destroi a bola chutada para fora e joga uma nova - CONSERTAR</comment>
+                        <event-block sid="513024080535198">
+                            <conditions>
+                                <condition behavior="Bullet" id="0" name="Compare speed" sid="527527312070761" type="campoBola">
+                                    <param id="0" name="Comparison">2</param>
+                                    <param id="1" name="Speed">10</param>
+                                </condition>
+                                <condition id="-1" name="Compare X" sid="876658954946583" type="campoBola">
+                                    <param id="0" name="Comparison">3</param>
+                                    <param id="1" name="X co-ordinate">570</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Destroy" sid="949570021011098" type="campoBola" />
+                                <action id="-16" name="Wait" sid="980075862862387" type="System">
+                                    <param id="0" name="Seconds">0.5</param>
+                                </action>
+                                <action id="-3" name="Create object" sid="669670742760387" type="System">
+                                    <param id="0" name="Object to create">campoBola</param>
+                                    <param id="1" name="Layer">&quot;Cenario1&quot;</param>
+                                    <param id="2" name="X">866</param>
+                                    <param id="3" name="Y">70</param>
+                                </action>
+                                <action id="-3" name="Create object" sid="919678252610042" type="System">
+                                    <param id="0" name="Object to create">campoBola</param>
+                                    <param id="1" name="Layer">&quot;Cenario2&quot;</param>
+                                    <param id="2" name="X">866</param>
+                                    <param id="3" name="Y">70</param>
+                                </action>
+                                <action behavior="Pin" id="0" name="Pin to object" sid="587767200253342" type="campoBola">
+                                    <param id="0" name="Pin to">campoBola</param>
+                                    <param id="1" name="Mode">0</param>
+                                </action>
+                                <action behavior="Bullet" disabled="1" id="5" name="Set enabled" sid="187539127467091" type="campoBola">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action behavior="Bullet" disabled="1" id="3" name="Set angle of motion" sid="425947180992138" type="campoBola">
+                                    <param id="0" name="Angle">240</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="530496144860970" type="campoBola">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
                     </sub-events>
                 </event-block>
             </sub-events>
@@ -1190,6 +1280,7 @@
                 </event-block>
             </sub-events>
         </event-group>
+        <comment>Controla triggers que ocorrem durante a fase</comment>
         <event-group description="" sid="728420954686320" title="Acoes7">
             <sub-events>
                 <comment>Ação de pegar a recompensa</comment>
@@ -1507,6 +1598,10 @@
                                     <param id="1" name="State">0</param>
                                 </action>
                                 <action id="2" name="Stop" sid="539406977951865" type="playerAnim" />
+                                <action id="-12" name="Set group active" sid="405687521991941" type="System">
+                                    <param id="0" name="Group name">&quot;PlacarControle&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
                             </actions>
                         </event-block>
                     </sub-events>
@@ -1519,9 +1614,15 @@
                             <param id="1" name="Comparison">1</param>
                             <param id="2" name="Value">0</param>
                         </condition>
+                        <condition id="-14" name="Compare variable" sid="959743236300886" type="System">
+                            <param id="0" name="Variable">opacidadeLayer</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
                     </conditions>
                     <actions />
                     <sub-events>
+                        <comment>Retira a seleção da bola para que o placar não seja aberto antes de terminar as ações. Além disso, é deletada a bola usada como enfeite e cria uma para chutar</comment>
                         <event-block sid="768564510018919">
                             <conditions>
                                 <condition id="-4" name="Trigger once while true" sid="228812465766563" type="System" />
@@ -1530,6 +1631,7 @@
                                 <action id="-1" name="Set X" sid="215339040438340" type="selecaoBola">
                                     <param id="0" name="X">66</param>
                                 </action>
+                                <action id="-9" name="Destroy" sid="227369530779214" type="campoBola" />
                             </actions>
                             <sub-events>
                                 <comment>Errou - Primeiro ocorre o chute para fora (1 segundo) e a vaia da torcida (5 segundos), depois o mascote fala</comment>
@@ -1546,11 +1648,20 @@
                                             <param id="0" name="Variable">acaoBola</param>
                                             <param id="1" name="Value">0</param>
                                         </action>
-                                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="339551766344132" type="campoBola">
+                                        <action id="-3" name="Create object" sid="201335813041537" type="System">
+                                            <param id="0" name="Object to create">campoBola</param>
+                                            <param id="1" name="Layer">&quot;Cenario1&quot;</param>
+                                            <param id="2" name="X">866</param>
+                                            <param id="3" name="Y">630</param>
+                                        </action>
+                                        <action behavior="Bullet" id="5" name="Set enabled" sid="398646252915405" type="campoBola">
+                                            <param id="0" name="State">1</param>
+                                        </action>
+                                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="973137397592912" type="campoBola">
                                             <param id="0" name="Angle">240</param>
                                         </action>
-                                        <action behavior="Bullet" id="5" name="Set enabled" sid="794888636049287" type="campoBola">
-                                            <param id="0" name="State">1</param>
+                                        <action id="-15" name="Set visible" sid="170101381817884" type="campoBola">
+                                            <param id="0" name="Visibility">1</param>
                                         </action>
                                         <action id="-16" name="Wait" sid="963294889770696" type="System">
                                             <param id="0" name="Seconds">1.0</param>
@@ -1575,6 +1686,35 @@
                                             <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
                                             <param id="1" name="State">1</param>
                                         </action>
+                                        <action id="-10" name="Add to" sid="869697128072479" type="System">
+                                            <param id="0" name="Variable">pontos</param>
+                                            <param id="1" name="Value">-50</param>
+                                        </action>
+                                        <action id="0" name="Set text" sid="232954136915703" type="pontoTexto">
+                                            <param id="0" name="Text">&quot;-50&quot;</param>
+                                        </action>
+                                        <action id="4" name="Set font color" sid="841463980162653" type="pontoTexto">
+                                            <param id="0" name="Color">rgb(235, 17, 53)</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="648366579314270" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao7b&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="225229241850525" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao7a&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="493056578040347" type="System">
+                                            <param id="0" name="Seconds">4</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="979142305097015" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao7a&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="342535441476203" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao7b&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
                                     </actions>
                                 </event-block>
                                 <comment>Acertou - Primeiro ocorre o chute pro gol (1 segundo) e a comemoração da torcida (5 segundos), depois o mascote fala</comment>
@@ -1587,11 +1727,23 @@
                                             <param id="0" name="Variable">acaoBola</param>
                                             <param id="1" name="Value">0</param>
                                         </action>
-                                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="149826720790345" type="campoBola">
+                                        <action id="-3" name="Create object" sid="864119580119986" type="System">
+                                            <param id="0" name="Object to create">campoBola</param>
+                                            <param id="1" name="Layer">&quot;Cenario1&quot;</param>
+                                            <param id="2" name="X">866</param>
+                                            <param id="3" name="Y">630</param>
+                                        </action>
+                                        <action behavior="Bullet" id="5" name="Set enabled" sid="783847994494952" type="campoBola">
+                                            <param id="0" name="State">1</param>
+                                        </action>
+                                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="476587687270601" type="campoBola">
                                             <param id="0" name="Angle">260</param>
                                         </action>
-                                        <action behavior="Bullet" id="5" name="Set enabled" sid="435808492871555" type="campoBola">
-                                            <param id="0" name="State">1</param>
+                                        <action behavior="Bullet" id="2" name="Set gravity" sid="933692683159713" type="campoBola">
+                                            <param id="0" name="Gravity">250</param>
+                                        </action>
+                                        <action id="-15" name="Set visible" sid="999463843328675" type="campoBola">
+                                            <param id="0" name="Visibility">1</param>
                                         </action>
                                         <action id="-16" name="Wait" sid="872938239015351" type="System">
                                             <param id="0" name="Seconds">1.0</param>
@@ -1807,6 +1959,10 @@
                                 <action id="-9" name="Set value" sid="942407488714328" type="System">
                                     <param id="0" name="Variable">controlePlacar</param>
                                     <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="283783833077202" type="System">
+                                    <param id="0" name="Group name">&quot;PlacarControle&quot;</param>
+                                    <param id="1" name="State">0</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2097,6 +2253,9 @@
                                     <param id="0" name="Variable">acaoBola</param>
                                     <param id="1" name="Value">2</param>
                                 </action>
+                                <action behavior="Bullet" disabled="1" id="3" name="Set angle of motion" sid="415972745019767" type="campoBola">
+                                    <param id="0" name="Angle">260</param>
+                                </action>
                                 <action id="-9" name="Destroy" sid="112775577313372" type="selecaoBola" />
                             </actions>
                         </event-block>
@@ -2109,11 +2268,14 @@
                                     <param id="0" name="Variable">acaoBola</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
+                                <action behavior="Bullet" disabled="1" id="3" name="Set angle of motion" sid="344467551756712" type="campoBola">
+                                    <param id="0" name="Angle">240</param>
+                                </action>
                             </actions>
                         </event-block>
                     </sub-events>
                 </event-block>
-                <comment>Verifica as respostas do jogador</comment>
+                <comment>Fecha o placar</comment>
                 <event-block sid="106851211814442">
                     <conditions>
                         <condition id="6" name="On object clicked" sid="332692521181355" type="Mouse">
