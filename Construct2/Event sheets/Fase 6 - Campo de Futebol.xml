@@ -719,6 +719,30 @@
                 </action>
             </actions>
         </event-block>
+        <comment>Evento de final de fase</comment>
+        <event-block sid="718593871560754">
+            <conditions>
+                <condition id="0" name="On collision with another object" sid="166104616400634" type="player">
+                    <param id="0" name="Object">saida6</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-9" name="Set value" sid="354398642542479" type="System">
+                    <param id="0" name="Variable">tempoFinal</param>
+                    <param id="1" name="Value">time</param>
+                </action>
+                <action disabled="1" id="0" name="Execute" sid="106637138277490" type="StatsJS">
+                    <param id="0" name="Value">&quot;sendTimeData(&quot; &amp; tempoFinal - tempoInicial &amp; &quot;)&quot;</param>
+                </action>
+                <action id="-9" name="Set value" sid="365970126616689" type="System">
+                    <param id="0" name="Variable">tempoInicial</param>
+                    <param id="1" name="Value">time</param>
+                </action>
+                <action id="-2" name="Go to layout" sid="675006526284053" type="System">
+                    <param id="0" name="Layout">Fase 3</param>
+                </action>
+            </actions>
+        </event-block>
         <event-group description="" sid="209776587683081" title="Efeitos6">
             <sub-events>
                 <event-block sid="205054220779577">
@@ -871,6 +895,10 @@
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">8</param>
                                 </condition>
+                                <condition behavior="Bullet" id="1" name="Compare distance travelled" sid="702667297733500" type="campoBola">
+                                    <param id="0" name="Comparison">5</param>
+                                    <param id="1" name="Distance">350</param>
+                                </condition>
                             </conditions>
                             <actions />
                             <sub-events>
@@ -910,7 +938,7 @@
                             <conditions>
                                 <condition behavior="Bullet" id="0" name="Compare speed" sid="527527312070761" type="campoBola">
                                     <param id="0" name="Comparison">2</param>
-                                    <param id="1" name="Speed">10</param>
+                                    <param id="1" name="Speed">50</param>
                                 </condition>
                                 <condition id="-1" name="Compare X" sid="876658954946583" type="campoBola">
                                     <param id="0" name="Comparison">3</param>
@@ -922,30 +950,66 @@
                                 <action id="-16" name="Wait" sid="980075862862387" type="System">
                                     <param id="0" name="Seconds">0.5</param>
                                 </action>
-                                <action id="-3" name="Create object" sid="669670742760387" type="System">
-                                    <param id="0" name="Object to create">campoBola</param>
-                                    <param id="1" name="Layer">&quot;Cenario1&quot;</param>
-                                    <param id="2" name="X">866</param>
-                                    <param id="3" name="Y">70</param>
-                                </action>
                                 <action id="-3" name="Create object" sid="919678252610042" type="System">
                                     <param id="0" name="Object to create">campoBola</param>
                                     <param id="1" name="Layer">&quot;Cenario2&quot;</param>
                                     <param id="2" name="X">866</param>
                                     <param id="3" name="Y">70</param>
                                 </action>
-                                <action behavior="Pin" id="0" name="Pin to object" sid="587767200253342" type="campoBola">
+                                <action id="-15" name="Set visible" sid="441287119823085" type="campoBola">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action behavior="Pin" disabled="1" id="0" name="Pin to object" sid="587767200253342" type="campoBola">
                                     <param id="0" name="Pin to">campoBola</param>
                                     <param id="1" name="Mode">0</param>
                                 </action>
-                                <action behavior="Bullet" disabled="1" id="5" name="Set enabled" sid="187539127467091" type="campoBola">
+                                <action behavior="Bullet" id="5" name="Set enabled" sid="187539127467091" type="campoBola">
                                     <param id="0" name="State">1</param>
                                 </action>
-                                <action behavior="Bullet" disabled="1" id="3" name="Set angle of motion" sid="425947180992138" type="campoBola">
-                                    <param id="0" name="Angle">240</param>
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="935232620779297" type="campoBola">
+                                    <param id="0" name="Angle">270</param>
                                 </action>
-                                <action id="-15" name="Set visible" sid="530496144860970" type="campoBola">
+                                <action behavior="Bullet" id="0" name="Set speed" sid="851825659798314" type="campoBola">
+                                    <param id="0" name="Speed">50</param>
+                                </action>
+                                <action behavior="Bullet" id="2" name="Set gravity" sid="876615730755606" type="campoBola">
+                                    <param id="0" name="Gravity">200</param>
+                                </action>
+                                <action disabled="1" id="-15" name="Set visible" sid="530496144860970" type="campoBola">
                                     <param id="0" name="Visibility">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>Melhoria no efeito de profundidade da bola sendo jogada de volta pro jogador após um erro</comment>
+                        <event-block sid="760383970709364">
+                            <conditions>
+                                <condition behavior="Bullet" id="1" name="Compare distance travelled" sid="227853262836974" type="campoBola">
+                                    <param id="0" name="Comparison">2</param>
+                                    <param id="1" name="Distance">130</param>
+                                </condition>
+                                <condition id="-2" name="Compare Y" sid="367405500463718" type="campoBola">
+                                    <param id="0" name="Comparison">2</param>
+                                    <param id="1" name="Y co-ordinate">190</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-29" name="Move to object" sid="472929048830243" type="campoBola">
+                                    <param id="0" name="Where">0</param>
+                                    <param id="1" name="Object">goleiro</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>Faz a bola que foi lançada parar</comment>
+                        <event-block sid="901174540139910">
+                            <conditions>
+                                <condition id="-2" name="Compare Y" sid="109984445675014" type="campoBola">
+                                    <param id="0" name="Comparison">5</param>
+                                    <param id="1" name="Y co-ordinate">630</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="Bullet" id="5" name="Set enabled" sid="687857893561616" type="campoBola">
+                                    <param id="0" name="State">0</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1807,26 +1871,41 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <event-block disabled="1" sid="210052716306670">
+                <event-block sid="332707299507923">
                     <conditions>
-                        <condition id="-14" name="Compare variable" sid="448135696339567" type="System">
-                            <param id="0" name="Variable">controleItens</param>
+                        <condition id="-14" name="Compare variable" sid="739595293571866" type="System">
+                            <param id="0" name="Variable">fraseAtualCAM</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">1</param>
+                            <param id="2" name="Value">10</param>
                         </condition>
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block disabled="1" sid="623197607815745">
+                        <comment>Abre a torcida</comment>
+                        <event-block sid="592320513140216">
                             <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="638441780189891" type="campoItens">
-                                    <param id="0" name="Unique ID">685</param>
+                                <condition id="-1" name="Compare X" sid="934102079734130" type="animacaoTorcidaEsq">
+                                    <param id="0" name="Comparison">2</param>
+                                    <param id="1" name="X co-ordinate">0</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action behavior="Physics" id="27" name="Set enabled" sid="320794064614705" type="campoItens">
-                                    <param id="0" name="Mode">1</param>
+                                <action id="-1" name="Set X" sid="476418811618007" type="animacaoTorcidaDir">
+                                    <param id="0" name="X">animacaoTorcidaDir.X - 3</param>
                                 </action>
+                                <action id="-1" name="Set X" sid="677842025306204" type="animacaoTorcidaEsq">
+                                    <param id="0" name="X">animacaoTorcidaEsq.X - 3</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>Destroi elas, pois não é mais necessário</comment>
+                        <event-block sid="830682364580811">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="503861550968751" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Destroy" sid="360829612854758" type="animacaoTorcidaDir" />
+                                <action id="-9" name="Destroy" sid="664160541312071" type="animacaoTorcidaEsq" />
                             </actions>
                         </event-block>
                     </sub-events>
@@ -2679,13 +2758,39 @@
                                         </condition>
                                     </conditions>
                                     <actions>
+                                        <action id="-12" name="Set group active" sid="113540461006142" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
                                         <action id="-9" name="Set value" sid="869245462736648" type="System">
                                             <param id="0" name="Variable">fraseAtualCAM</param>
                                             <param id="1" name="Value">8</param>
                                         </action>
-                                        <action id="-1" name="Set X" sid="380402640393952" type="selecaoBola">
+                                        <action disabled="1" id="-1" name="Set X" sid="380402640393952" type="selecaoBola">
                                             <param id="0" name="X">866</param>
                                         </action>
+                                        <action id="-9" name="Set value" sid="189665428004738" type="System">
+                                            <param id="0" name="Variable">controlePlacar</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="873089171924166" type="System">
+                                            <param id="0" name="Group name">&quot;PlacarControle&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>Prepara o início da animação onde a torcida libera a saída</comment>
+                                <event-block sid="391338014361327">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="577577262839476" type="System">
+                                            <param id="0" name="Variable">fraseAtualCAM</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">10</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Destroy" sid="389101765789097" type="bandeiras" />
+                                        <action id="-9" name="Destroy" sid="452600170248835" type="plateia" />
                                     </actions>
                                 </event-block>
                             </sub-events>
