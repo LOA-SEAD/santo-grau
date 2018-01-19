@@ -7,6 +7,9 @@
         <variable constant="0" name="volPassosMax" sid="619914472349410" static="0" type="number">0</variable>
         <variable constant="0" name="volPassosMin" sid="155369295873792" static="0" type="number">-14</variable>
         <variable constant="0" name="volPassos" sid="203577669083317" static="0" type="number">0</variable>
+        <variable constant="0" name="volTorcida" sid="779977144613820" static="0" type="number">0</variable>
+        <comment>Variável utilizada para criar o efeito de fade out na torcida</comment>
+        <variable constant="0" name="fadeOutTorcida" sid="231606468346778" static="0" type="number">0</variable>
         <comment>Auxilia na criação dos objetos</comment>
         <variable constant="0" name="auxiliaRandomObjetos" sid="186967823184162" static="0" type="number">0</variable>
         <comment>Para limitar o número de objetos jogados no campo</comment>
@@ -31,7 +34,7 @@
         <variable constant="0" name="opacidadeLayer" sid="866305535968068" static="0" type="number">0</variable>
         <comment>Serve para carregar e descarregar o placar quando a variável possuir os valores 1 e 2, respectivamente</comment>
         <variable constant="0" name="controlePlacar" sid="224327238695947" static="0" type="number">0</variable>
-        <comment>Controla o que ocoore com a bola após o placar seja fechado, seja utilizando o botão de X ou clicando no botão &quot;Chutar&quot;.&#x0D;&#x0A;0- Não faz nada (ação do botão fechar) / 1- Chuta para fora (errou totalmente ou parcialmente as respostas) / 2- Faz o gol (acertou as respostas</comment>
+        <comment>Controla o que ocoore com a bola após o placar seja fechado, seja utilizando o botão de X ou clicando no botão &quot;Chutar&quot;.&#x0D;&#x0A;0- Não faz nada (ação do botão fechar) / 1- Chuta para fora (errou totalmente ou parcialmente as respostas) / 2- Faz o gol (acertou as respostas)</comment>
         <variable constant="0" name="acaoBola" sid="590493915236453" static="0" type="number">0</variable>
         <event-block sid="704942424572087">
             <conditions>
@@ -42,6 +45,15 @@
                 <action id="0" name="Load JSON" sid="334745917279527" type="FasesJSON" />
                 <action id="0" name="Load JSON" sid="225598662008420" type="LoadJSONFUT" />
                 <action id="33" name="Stop all" sid="772298769575832" type="Audio" />
+                <action id="4" name="Preload" sid="583599466545606" type="Audio">
+                    <param id="0" name="Audio file">chutando_bola</param>
+                </action>
+                <action id="4" name="Preload" sid="412795741924558" type="Audio">
+                    <param id="0" name="Audio file">torcida_estadio_loop</param>
+                </action>
+                <action id="4" name="Preload" sid="971677116433809" type="Audio">
+                    <param id="0" name="Audio file">vaias_torcida</param>
+                </action>
                 <action id="-9" name="Set value" sid="358939320709451" type="System">
                     <param id="0" name="Variable">pause</param>
                     <param id="1" name="Value">0</param>
@@ -758,6 +770,10 @@
                             <param id="0" name="Width">(1-((612-Player.Y)*0.0009263322))*122</param>
                             <param id="1" name="Height">(1-((612-Player.Y)*0.0009263322))*215</param>
                         </action>
+                        <action id="-7" name="Set size" sid="498670950471815" type="campoItens">
+                            <param id="0" name="Width">((campoItens.Bullet.DistanceTravelled*43.3333)/800)+53.3333</param>
+                            <param id="1" name="Height">((campoItens.Bullet.DistanceTravelled*45)/800)+55</param>
+                        </action>
                         <action id="0" name="Set text" sid="462111228440910" type="pontuacaoTexto">
                             <param id="0" name="Text">pontos</param>
                         </action>
@@ -773,8 +789,32 @@
                             <param id="0" name="Tag">&quot;passos&quot;</param>
                             <param id="1" name="dB">volPassos</param>
                         </action>
+                        <action id="3" name="Set volume" sid="839248428101104" type="Audio">
+                            <param id="0" name="Tag">&quot;torcida&quot;</param>
+                            <param id="1" name="dB">volTorcida</param>
+                        </action>
                     </actions>
                     <sub-events>
+                        <comment>Controle do tamanho da bola, exceto no momento do gol, pois a ideia ali é manter o mesmo tamanho da bola</comment>
+                        <event-block sid="677853269335522">
+                            <conditions>
+                                <condition behavior="Bullet" id="1" inverted="1" name="Compare distance travelled" sid="875777687948478" type="campoBola">
+                                    <param id="0" name="Comparison">5</param>
+                                    <param id="1" name="Distance">450</param>
+                                </condition>
+                                <condition id="-14" inverted="1" name="Compare variable" sid="337387813491786" type="System">
+                                    <param id="0" name="Variable">acaoBola</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-7" name="Set size" sid="764732721278681" type="campoBola">
+                                    <param id="0" name="Width">((campoBola.Y*31)/633)+30</param>
+                                    <param id="1" name="Height">((campoBola.Y*31)/633)+30</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <event-block sid="605368073253987">
                             <conditions>
                                 <condition id="-14" name="Compare variable" sid="507827741229028" type="System">
@@ -803,13 +843,12 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <comment>VOLTAR PARA 15 NO ORIGINAL</comment>
                         <event-block sid="625138858488141">
                             <conditions>
                                 <condition id="-14" name="Compare variable" sid="206769667316332" type="System">
                                     <param id="0" name="Variable">numeroObjetosAtirados</param>
-                                    <param id="1" name="Comparison">5</param>
-                                    <param id="2" name="Value">5</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">15</param>
                                 </condition>
                             </conditions>
                             <actions />
@@ -959,10 +998,6 @@
                                 <action id="-15" name="Set visible" sid="441287119823085" type="campoBola">
                                     <param id="0" name="Visibility">1</param>
                                 </action>
-                                <action behavior="Pin" disabled="1" id="0" name="Pin to object" sid="587767200253342" type="campoBola">
-                                    <param id="0" name="Pin to">campoBola</param>
-                                    <param id="1" name="Mode">0</param>
-                                </action>
                                 <action behavior="Bullet" id="5" name="Set enabled" sid="187539127467091" type="campoBola">
                                     <param id="0" name="State">1</param>
                                 </action>
@@ -975,9 +1010,6 @@
                                 <action behavior="Bullet" id="2" name="Set gravity" sid="876615730755606" type="campoBola">
                                     <param id="0" name="Gravity">200</param>
                                 </action>
-                                <action disabled="1" id="-15" name="Set visible" sid="530496144860970" type="campoBola">
-                                    <param id="0" name="Visibility">1</param>
-                                </action>
                             </actions>
                         </event-block>
                         <comment>Melhoria no efeito de profundidade da bola sendo jogada de volta pro jogador após um erro</comment>
@@ -988,6 +1020,10 @@
                                     <param id="1" name="Distance">130</param>
                                 </condition>
                                 <condition id="-2" name="Compare Y" sid="367405500463718" type="campoBola">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Y co-ordinate">185</param>
+                                </condition>
+                                <condition id="-2" name="Compare Y" sid="878796326783397" type="campoBola">
                                     <param id="0" name="Comparison">2</param>
                                     <param id="1" name="Y co-ordinate">190</param>
                                 </condition>
@@ -1010,6 +1046,83 @@
                             <actions>
                                 <action behavior="Bullet" id="5" name="Set enabled" sid="687857893561616" type="campoBola">
                                     <param id="0" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Inicia a fuga do diploma</comment>
+                <event-block sid="983220918625831">
+                    <conditions>
+                        <condition id="-1" name="Compare X" sid="208013852504234" type="animacaoTorcidaEsq">
+                            <param id="0" name="Comparison">2</param>
+                            <param id="1" name="X co-ordinate">0</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="749112482529533">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="320112872447970" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-8" name="Set angle" sid="204704020880362" type="AndaParaCimaDiploma">
+                                    <param id="0" name="Angle">270</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="415413605303742" type="System">
+                                    <param id="0" name="Seconds">0.1</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="401294660504009" type="AnimacaoDiploma">
+                                    <param id="0" name="Frame number">3</param>
+                                </action>
+                                <action behavior="Bullet" id="5" name="Set enabled" sid="843200887851150" type="AndaParaCimaDiploma">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Destrói o diploma</comment>
+                <event-block sid="208590973028472">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="393680945174355" type="AndaParaCimaDiploma">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Y co-ordinate">210</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="172970554147841">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="631408824408943" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Destroy" sid="171898212961050" type="AnimacaoDiploma" />
+                                <action id="-9" name="Destroy" sid="256105350480788" type="AndaParaCimaDiploma" />
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Diminui o som da torcida</comment>
+                <event-block sid="699764471612703">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="310055470008585" type="System">
+                            <param id="0" name="Variable">fadeOutTorcida</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <comment>Reduz 10 unidades por segundo, deixando -20 de volume no fim</comment>
+                        <event-block sid="888946743661861">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="961707083914833" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="375177884339746" type="System">
+                                    <param id="0" name="Variable">volTorcida</param>
+                                    <param id="1" name="Value">volTorcida - (10 * dt)</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1437,10 +1550,34 @@
                                     <param id="0" name="Group name">&quot;playerMove7&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
+                                <action id="6" name="Stop" sid="112469240353805" type="Audio">
+                                    <param id="0" name="Tag">&quot;torcida&quot;</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="512856220770357" type="System">
+                                    <param id="0" name="Variable">volTorcida</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="0" name="Play" sid="210349283791383" type="Audio">
+                                    <param id="0" name="Audio file">torcida_estadio_loop</param>
+                                    <param id="2" name="Loop">1</param>
+                                    <param id="3" name="Volume">volTorcida</param>
+                                    <param id="1" name="Tag (optional)">&quot;torcida&quot;</param>
+                                </action>
                                 <action id="-16" name="Wait" sid="183495590778170" type="System">
-                                    <param id="0" name="Seconds">4.0</param>
+                                    <param id="0" name="Seconds">3.0</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="872900072852423" type="System">
+                                    <param id="0" name="Variable">fadeOutTorcida</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="488224121884240" type="System">
+                                    <param id="0" name="Seconds">2.0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="703451780581635" type="System">
+                                    <param id="0" name="Variable">fadeOutTorcida</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="798562056353113" type="System">
                                     <param id="0" name="Variable">tamanhoDialogoCAM</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
@@ -1568,8 +1705,32 @@
                                             <param id="1" name="State">0</param>
                                         </action>
                                         <action id="2" name="Stop" sid="322174218014424" type="playerAnim" />
-                                        <action id="-16" name="Wait" sid="359649330977694" type="System">
-                                            <param id="0" name="Seconds">5.0</param>
+                                        <action id="6" name="Stop" sid="291223164954779" type="Audio">
+                                            <param id="0" name="Tag">&quot;torcida&quot;</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="395028445380580" type="System">
+                                            <param id="0" name="Variable">volTorcida</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="0" name="Play" sid="939014448086582" type="Audio">
+                                            <param id="0" name="Audio file">vaias_torcida</param>
+                                            <param id="2" name="Loop">1</param>
+                                            <param id="3" name="Volume">volTorcida</param>
+                                            <param id="1" name="Tag (optional)">&quot;torcida&quot;</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="558050421425263" type="System">
+                                            <param id="0" name="Seconds">3.0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="483049511335916" type="System">
+                                            <param id="0" name="Variable">fadeOutTorcida</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="467555057360959" type="System">
+                                            <param id="0" name="Seconds">2.0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="501047272091904" type="System">
+                                            <param id="0" name="Variable">fadeOutTorcida</param>
+                                            <param id="1" name="Value">0</param>
                                         </action>
                                         <action id="-9" name="Set value" sid="739635672247395" type="System">
                                             <param id="0" name="Variable">controleDialogoFut</param>
@@ -1698,7 +1859,7 @@
                                 <action id="-9" name="Destroy" sid="227369530779214" type="campoBola" />
                             </actions>
                             <sub-events>
-                                <comment>Errou - Primeiro ocorre o chute para fora (1 segundo) e a vaia da torcida (5 segundos), depois o mascote fala</comment>
+                                <comment>Errou - Primeiro ocorre o chute para fora (1.5 segundos) e a vaia da torcida (5 segundos), depois o mascote fala</comment>
                                 <event-block sid="860109062030698">
                                     <conditions>
                                         <condition id="-14" name="Compare variable" sid="886967804038350" type="System">
@@ -1721,6 +1882,12 @@
                                         <action behavior="Bullet" id="5" name="Set enabled" sid="398646252915405" type="campoBola">
                                             <param id="0" name="State">1</param>
                                         </action>
+                                        <action id="0" name="Play" sid="802587486816555" type="Audio">
+                                            <param id="0" name="Audio file">chutando_bola</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
                                         <action behavior="Bullet" id="3" name="Set angle of motion" sid="973137397592912" type="campoBola">
                                             <param id="0" name="Angle">240</param>
                                         </action>
@@ -1728,10 +1895,34 @@
                                             <param id="0" name="Visibility">1</param>
                                         </action>
                                         <action id="-16" name="Wait" sid="963294889770696" type="System">
-                                            <param id="0" name="Seconds">1.0</param>
+                                            <param id="0" name="Seconds">1.5</param>
                                         </action>
-                                        <action id="-16" name="Wait" sid="464541097433988" type="System">
-                                            <param id="0" name="Seconds">5.0</param>
+                                        <action id="6" name="Stop" sid="694747443167762" type="Audio">
+                                            <param id="0" name="Tag">&quot;torcida&quot;</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="565889042665509" type="System">
+                                            <param id="0" name="Variable">volTorcida</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="0" name="Play" sid="641937612657819" type="Audio">
+                                            <param id="0" name="Audio file">vaias_torcida</param>
+                                            <param id="2" name="Loop">1</param>
+                                            <param id="3" name="Volume">volTorcida</param>
+                                            <param id="1" name="Tag (optional)">&quot;torcida&quot;</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="880958997427260" type="System">
+                                            <param id="0" name="Seconds">3.0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="878440229188895" type="System">
+                                            <param id="0" name="Variable">fadeOutTorcida</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="921570717468496" type="System">
+                                            <param id="0" name="Seconds">2.0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="213311105111244" type="System">
+                                            <param id="0" name="Variable">fadeOutTorcida</param>
+                                            <param id="1" name="Value">0</param>
                                         </action>
                                         <action id="-9" name="Set value" sid="277989261369935" type="System">
                                             <param id="0" name="Variable">controleDialogoFut</param>
@@ -1781,7 +1972,7 @@
                                         </action>
                                     </actions>
                                 </event-block>
-                                <comment>Acertou - Primeiro ocorre o chute pro gol (1 segundo) e a comemoração da torcida (5 segundos), depois o mascote fala</comment>
+                                <comment>Acertou - Primeiro ocorre o chute pro gol (1.5 segundos) e a comemoração da torcida (5 segundos), depois o mascote fala</comment>
                                 <event-block sid="214961661550687">
                                     <conditions>
                                         <condition id="-22" name="Else" sid="998563170150686" type="System" />
@@ -1800,6 +1991,12 @@
                                         <action behavior="Bullet" id="5" name="Set enabled" sid="783847994494952" type="campoBola">
                                             <param id="0" name="State">1</param>
                                         </action>
+                                        <action id="0" name="Play" sid="825271527594936" type="Audio">
+                                            <param id="0" name="Audio file">chutando_bola</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
                                         <action behavior="Bullet" id="3" name="Set angle of motion" sid="476587687270601" type="campoBola">
                                             <param id="0" name="Angle">260</param>
                                         </action>
@@ -1810,10 +2007,34 @@
                                             <param id="0" name="Visibility">1</param>
                                         </action>
                                         <action id="-16" name="Wait" sid="872938239015351" type="System">
-                                            <param id="0" name="Seconds">1.0</param>
+                                            <param id="0" name="Seconds">1.5</param>
                                         </action>
-                                        <action id="-16" name="Wait" sid="718979483568070" type="System">
-                                            <param id="0" name="Seconds">5.0</param>
+                                        <action id="6" name="Stop" sid="718403041541900" type="Audio">
+                                            <param id="0" name="Tag">&quot;torcida&quot;</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="228784418197533" type="System">
+                                            <param id="0" name="Variable">volTorcida</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="0" name="Play" sid="961145416511614" type="Audio">
+                                            <param id="0" name="Audio file">torcida_estadio_loop</param>
+                                            <param id="2" name="Loop">1</param>
+                                            <param id="3" name="Volume">volTorcida</param>
+                                            <param id="1" name="Tag (optional)">&quot;torcida&quot;</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="186743032502221" type="System">
+                                            <param id="0" name="Seconds">3.0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="654808124464025" type="System">
+                                            <param id="0" name="Variable">fadeOutTorcida</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="230264803514121" type="System">
+                                            <param id="0" name="Seconds">2.0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="484856147985067" type="System">
+                                            <param id="0" name="Variable">fadeOutTorcida</param>
+                                            <param id="1" name="Value">0</param>
                                         </action>
                                         <action id="-9" name="Set value" sid="490209828667230" type="System">
                                             <param id="0" name="Variable">controleDialogoFut</param>
@@ -1885,13 +2106,13 @@
                         <event-block sid="592320513140216">
                             <conditions>
                                 <condition id="-1" name="Compare X" sid="934102079734130" type="animacaoTorcidaEsq">
-                                    <param id="0" name="Comparison">2</param>
-                                    <param id="1" name="X co-ordinate">0</param>
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="X co-ordinate">-347</param>
                                 </condition>
                             </conditions>
                             <actions>
                                 <action id="-1" name="Set X" sid="476418811618007" type="animacaoTorcidaDir">
-                                    <param id="0" name="X">animacaoTorcidaDir.X - 3</param>
+                                    <param id="0" name="X">animacaoTorcidaDir.X + 3</param>
                                 </action>
                                 <action id="-1" name="Set X" sid="677842025306204" type="animacaoTorcidaEsq">
                                     <param id="0" name="X">animacaoTorcidaEsq.X - 3</param>
@@ -2332,9 +2553,6 @@
                                     <param id="0" name="Variable">acaoBola</param>
                                     <param id="1" name="Value">2</param>
                                 </action>
-                                <action behavior="Bullet" disabled="1" id="3" name="Set angle of motion" sid="415972745019767" type="campoBola">
-                                    <param id="0" name="Angle">260</param>
-                                </action>
                                 <action id="-9" name="Destroy" sid="112775577313372" type="selecaoBola" />
                             </actions>
                         </event-block>
@@ -2346,9 +2564,6 @@
                                 <action id="-9" name="Set value" sid="286692160621244" type="System">
                                     <param id="0" name="Variable">acaoBola</param>
                                     <param id="1" name="Value">1</param>
-                                </action>
-                                <action behavior="Bullet" disabled="1" id="3" name="Set angle of motion" sid="344467551756712" type="campoBola">
-                                    <param id="0" name="Angle">240</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2791,6 +3006,7 @@
                                     <actions>
                                         <action id="-9" name="Destroy" sid="389101765789097" type="bandeiras" />
                                         <action id="-9" name="Destroy" sid="452600170248835" type="plateia" />
+                                        <action id="-9" name="Destroy" sid="642126448964153" type="placa" />
                                     </actions>
                                 </event-block>
                             </sub-events>
@@ -2847,7 +3063,7 @@
                         <condition id="-14" name="Compare variable" sid="811028875326610" type="System">
                             <param id="0" name="Variable">numeroObjetosAtirados</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">5</param>
+                            <param id="2" name="Value">15</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -2894,7 +3110,10 @@
                                     <param id="0" name="State">1</param>
                                 </action>
                                 <action behavior="Bullet" id="3" name="Set angle of motion" sid="134436087679638" type="campoItens">
-                                    <param id="0" name="Angle">270</param>
+                                    <param id="0" name="Angle">270 + round(random(0,60)) - 30</param>
+                                </action>
+                                <action behavior="Bullet" id="2" name="Set gravity" sid="436876093157036" type="campoItens">
+                                    <param id="0" name="Gravity">120 + (floor((numeroObjetosAtirados + 1)/5) * 50)</param>
                                 </action>
                                 <action id="-15" name="Set visible" sid="471233574798529" type="campoItens">
                                     <param id="0" name="Visibility">1</param>
@@ -2934,13 +3153,12 @@
                     </sub-events>
                 </event-block>
                 <comment>Para de arremeçar objetos</comment>
-                <comment>VOLTAR PARA 14 NO ORIGINAL</comment>
                 <event-block sid="724016178930594">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="137963636226292" type="System">
                             <param id="0" name="Variable">numeroObjetosAtirados</param>
-                            <param id="1" name="Comparison">5</param>
-                            <param id="2" name="Value">4</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">14</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -2961,14 +3179,12 @@
         </event-group>
         <event-group description="" sid="120858864474595" title="FisicaBola">
             <sub-events>
-                <comment>MELHORAR</comment>
-                <comment>VOLTAR PARA 15 NO ORIGINAL</comment>
                 <event-block sid="722245850582271">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="465455008769872" type="System">
                             <param id="0" name="Variable">numeroObjetosAtirados</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">5</param>
+                            <param id="2" name="Value">15</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -2982,7 +3198,7 @@
                             </conditions>
                             <actions>
                                 <action id="-2" name="Set Y" sid="671678536029533" type="campoBola">
-                                    <param id="0" name="Y">campoBola.Y + 2</param>
+                                    <param id="0" name="Y">campoBola.Y + (campoBola.Y / 126)</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2997,6 +3213,9 @@
                         </condition>
                     </conditions>
                     <actions>
+                        <action behavior="Bullet" id="5" name="Set enabled" sid="375206504012299" type="campoBola">
+                            <param id="0" name="State">0</param>
+                        </action>
                         <action id="-9" name="Set value" sid="524250548482790" type="System">
                             <param id="0" name="Variable">controleDialogoFut</param>
                             <param id="1" name="Value">1</param>

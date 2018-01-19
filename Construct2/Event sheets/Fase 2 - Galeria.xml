@@ -2280,6 +2280,7 @@
         <comment>Controla os diálogos entre a personagem e Einstein</comment>
         <event-group description="" sid="1573909898037785" title="dialogoGaleria">
             <sub-events>
+                <comment>Marca quem fala e a posição do balão</comment>
                 <event-block sid="1884421490486591">
                     <conditions />
                     <actions>
@@ -2288,7 +2289,6 @@
                         </action>
                     </actions>
                     <sub-events>
-                        <comment>Fala Einstein</comment>
                         <event-block sid="9047234160619637">
                             <conditions>
                                 <condition id="0" name="Compare text" sid="373046817279581" type="DialogoPersonagem">
@@ -2311,7 +2311,6 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <comment>Fala Personagem</comment>
                         <event-block sid="2757364721462507">
                             <conditions>
                                 <condition id="0" name="Compare text" sid="3316282211951495" type="DialogoPersonagem">
@@ -2336,6 +2335,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment>Carrega o balão caso ele não esteja ativo e libera a inserção do diálogo</comment>
                 <event-block sid="7864321511827534">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="6139243193522705" type="System">
@@ -2380,6 +2380,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment>Insere a fala do personagem</comment>
                 <event-block sid="4212819327572353">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="1978286095861282" type="System">
@@ -2402,6 +2403,7 @@
                         </action>
                     </actions>
                 </event-block>
+                <comment>Carrega o texto no balão e libera pro jogador avançar com a tecla E</comment>
                 <event-block sid="6562674761415342">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="2057155147115209" type="System">
@@ -2449,6 +2451,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment>Avança o diálogo</comment>
                 <event-block sid="6012476314306541">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="993470401340621" type="System">
@@ -2481,6 +2484,7 @@
                                 </action>
                             </actions>
                             <sub-events>
+                                <comment>Verifica se terminou todos os diálogos reservados para aquele momento</comment>
                                 <event-block sid="793431210692012">
                                     <conditions>
                                         <condition id="-8" name="Compare two values" sid="992199962546976" type="System">
@@ -2496,6 +2500,7 @@
                                         </action>
                                     </actions>
                                 </event-block>
+                                <comment>Se não terminou, repete o loop</comment>
                                 <event-block sid="5630013193041494">
                                     <conditions>
                                         <condition id="-22" name="Else" sid="3794480225929178" type="System" />
@@ -2515,6 +2520,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment>Descarrega os diálogos</comment>
                 <event-block sid="3684460480267711">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="6643990683784331" type="System">
@@ -2706,37 +2712,6 @@
                                             <param id="1" name="State">1</param>
                                         </action>
                                     </actions>
-                                </event-block>
-                                <event-block disabled="1" sid="1655110943677482">
-                                    <conditions>
-                                        <condition id="-8" name="Compare two values" sid="8281589974273678" type="System">
-                                            <param id="0" name="First value">fraseAtualGAL</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Second value">tamanhoDialogoGAL</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions />
-                                    <sub-events>
-                                        <event-block disabled="1" sid="8780816480840603">
-                                            <conditions>
-                                                <condition id="-1" name="Every tick" sid="8648319375542872" type="System" />
-                                                <condition id="-10" name="Compare opacity" sid="4855550661841529" type="BalaoDialogo">
-                                                    <param id="0" name="Comparison">4</param>
-                                                    <param id="1" name="Opacity">0</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions />
-                                        </event-block>
-                                        <event-block disabled="1" sid="8636057356561711">
-                                            <conditions>
-                                                <condition id="-10" name="Compare opacity" sid="9125666550510349" type="BalaoDialogo">
-                                                    <param id="0" name="Comparison">0</param>
-                                                    <param id="1" name="Opacity">0</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions />
-                                        </event-block>
-                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
