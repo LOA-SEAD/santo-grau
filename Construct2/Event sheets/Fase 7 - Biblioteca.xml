@@ -12,6 +12,11 @@
         <variable constant="0" name="tamanhoDialogoBIB" sid="270380389239217" static="0" type="number">0</variable>
         <comment>Livro que está sendo procurado</comment>
         <variable constant="0" name="livroAtual" sid="961379846391906" static="0" type="number">0</variable>
+        <variable constant="1" name="livrostotal" sid="949680917452509" static="0" type="number">3</variable>
+        <comment>Número de dicas reveladas</comment>
+        <variable constant="0" name="contadorDicas" sid="155701951683189" static="0" type="number">0</variable>
+        <variable constant="0" name="revelado1" sid="646006965001684" static="0" type="number">0</variable>
+        <variable constant="0" name="revelado2" sid="956039330320703" static="0" type="number">0</variable>
         <event-block sid="900782436585763">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="974973112681185" type="System" />
@@ -3170,51 +3175,573 @@
             </sub-events>
         </event-group>
         <event-group description="" inactive="1" sid="830813109095841" title="Saida8" />
-        <event-group description="Spawna os livros invisíveis em posições possíveis" sid="567134998290318" title="SpawnLivrosInvisíveis">
+        <event-group description="Grupo que define todas as funcionalidades dos livros invisíveis e suas mecânicas. Quando chamado, spawna o primeiro livro." sid="471477154081207" title="LivrosInvisiveis">
             <sub-events>
-                <event-block sid="787295182060412">
-                    <conditions>
-                        <condition id="-4" name="Trigger once while true" sid="724263856304035" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="-3" name="Set position" sid="296591637123883" type="selecaoLivro">
-                            <param id="0" name="X">round(random(0, 945))</param>
-                            <param id="1" name="Y">round(random(152, LayoutHeight))</param>
-                        </action>
-                    </actions>
+                <event-group description="Spawna os livros invisíveis em posições possíveis" sid="567134998290318" title="SpawnLivrosInvisiveis">
                     <sub-events>
-                        <event-block sid="392454894348476">
+                        <event-block sid="787295182060412">
                             <conditions>
-                                <condition id="-23" name="While" sid="420180933005445" type="System" />
-                                <condition id="1" name="Is overlapping another object" sid="579291188253630" type="selecaoLivro">
-                                    <param id="0" name="Object">player</param>
-                                </condition>
-                                <condition id="1" name="Is overlapping another object" sid="626561223753647" type="selecaoLivro">
-                                    <param id="0" name="Object">bibMesa</param>
-                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="724263856304035" type="System" />
                             </conditions>
                             <actions>
-                                <action id="-3" name="Set position" sid="415745101907153" type="selecaoLivro">
+                                <action id="-3" name="Set position" sid="296591637123883" type="selecaoLivro">
                                     <param id="0" name="X">round(random(0, 945))</param>
                                     <param id="1" name="Y">round(random(152, LayoutHeight))</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="392454894348476">
+                                    <conditions>
+                                        <condition id="-23" name="While" sid="420180933005445" type="System" />
+                                        <condition id="1" name="Is overlapping another object" sid="579291188253630" type="selecaoLivro">
+                                            <param id="0" name="Object">player</param>
+                                        </condition>
+                                        <condition id="1" name="Is overlapping another object" sid="626561223753647" type="selecaoLivro">
+                                            <param id="0" name="Object">bibMesa</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="415745101907153" type="selecaoLivro">
+                                            <param id="0" name="X">round(random(0, 945))</param>
+                                            <param id="1" name="Y">round(random(152, LayoutHeight))</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="276157856422662">
+                                    <conditions />
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="531764653298533" type="System">
+                                            <param id="0" name="Group name">&quot;MecanicaLivros&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="301549761766851" type="System">
+                                            <param id="0" name="Group name">&quot;SpawnLivrosInvisiveis&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
-                </event-block>
+                </event-group>
+                <event-group description="Controla as mecânicas do guia sonoro e habilita as dicas após encontrar o livro" inactive="1" sid="499191236958555" title="MecanicaLivros">
+                    <sub-events>
+                        <event-block sid="273376100395075">
+                            <conditions>
+                                <condition id="1" name="Is overlapping another object" sid="959491482163982" type="selecaoLivro">
+                                    <param id="0" name="Object">player</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="535663600022144" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="826198437083025" type="System">
+                                    <param id="0" name="Group name">&quot;EncontrouLivro&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <variable constant="0" name="opacidadeMax" sid="561917690284664" static="0" type="number">90</variable>
+                        <variable constant="0" name="opacidadeMin" sid="214921210845871" static="0" type="number">5</variable>
+                        <comment>Torna visível os elementos do guia</comment>
+                        <event-block sid="355516824861242">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="993395872383854" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="876848651959199" type="System">
+                                    <param id="0" name="Group name">&quot;ControleGuiaMagico&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-group description="Controla o comportamento dos guias sonoro e visual enquanto estiver ativo" inactive="1" sid="550398667162211" title="ControleGuiaMagico">
+                            <sub-events>
+                                <comment>Controle do Guia Visual</comment>
+                                <event-block sid="518022044846579">
+                                    <conditions />
+                                    <actions>
+                                        <action id="-15" name="Set visible" sid="928388348039171" type="GuiaVisual">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="166792875607084">
+                                    <conditions>
+                                        <condition id="-1" name="Every tick" sid="569906855544959" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-16" name="Set opacity" sid="839493272366386" type="GuiaVisual">
+                                            <param id="0" name="Opacity">((opacidadeMax-opacidadeMin)*(distance(player.X, player.Y, selecaoLivro.X, selecaoLivro.Y) -sqrt(945*945+ 568*568)))/(-sqrt(945*945+ 568*568))+ opacidadeMin</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>Controle do Guia Sonoro</comment>
+                            </sub-events>
+                        </event-group>
+                        <event-group description="Desativa os guias sonoro e visual e desabilita a mecânica dos livros invisíveis" inactive="1" sid="452611207448470" title="DesativaGuiaMagico">
+                            <sub-events>
+                                <event-block sid="216120231513304">
+                                    <conditions />
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="669663431127038" type="System">
+                                            <param id="0" name="Group name">&quot;SpawnLivrosInvisiveis&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="822641085779103">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="517380794703340" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-15" name="Set visible" sid="610174127948481" type="GuiaVisual">
+                                            <param id="0" name="Visibility">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="360645794374151" type="System">
+                                            <param id="0" name="Group name">&quot;MecanicaLivros&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="561185439914723" type="System">
+                                            <param id="0" name="Group name">&quot;DesativaGuiaMagico&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-group>
+                        <event-group description="Quando o livro é encontrado, a UI de palavras mágicas é ativada e o guia mágico é desabilitado" inactive="1" sid="518665976366464" title="EncontrouLivro">
+                            <sub-events>
+                                <comment>Torna invisível os efeitos visuais e desabilita o efeito sonoro</comment>
+                                <event-block sid="432607391847065">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="430126300835425" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="678825477239870" type="System">
+                                            <param id="0" name="Group name">&quot;DesativaGuiaMagico&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="933309751093626" type="System">
+                                            <param id="0" name="Group name">&quot;PalavrasMagicas&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>Diálogo de quando o livro é encontrado</comment>
+                                <event-block sid="811197509306281">
+                                    <conditions />
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="402735213569212" type="System">
+                                            <param id="0" name="Group name">&quot;EncontrouLivro&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-group>
+                    </sub-events>
+                </event-group>
             </sub-events>
         </event-group>
-        <event-group description="Controla a mecânica de dicas após encontrar o livro" sid="499191236958555" title="ControleDicasLivro">
+        <event-group description="Controla as funcionalidades da tela de dicas. Quando ativado, habilita as dicas baseadas no livro atual" inactive="1" sid="913819566284516" title="PalavrasMagicas">
             <sub-events>
-                <event-block sid="273376100395075">
+                <event-block sid="721271158368987">
                     <conditions>
-                        <condition id="1" name="Is overlapping another object" sid="959491482163982" type="selecaoLivro">
-                            <param id="0" name="Object">player</param>
-                        </condition>
-                        <condition id="-4" name="Trigger once while true" sid="597396715675751" type="System" />
+                        <condition id="-4" name="Trigger once while true" sid="515534430883823" type="System" />
                     </conditions>
-                    <actions />
+                    <actions>
+                        <action id="-4" name="Set layer visible" sid="388830370042003" type="System">
+                            <param id="0" name="Layer">5</param>
+                            <param id="1" name="Visibility">1</param>
+                        </action>
+                    </actions>
                 </event-block>
+                <event-group description="Controla a funcionalidade dos botões da UI das palavra mágicas" sid="464408669515198" title="ControleUIPalavrasMagicas">
+                    <sub-events>
+                        <event-group description="" sid="368003607042864" title="ControleClicks">
+                            <sub-events>
+                                <event-block sid="370440993767784">
+                                    <conditions>
+                                        <condition id="6" name="On object clicked" sid="331959413926242" type="Mouse">
+                                            <param id="0" name="Mouse button">0</param>
+                                            <param id="1" name="Click type">0</param>
+                                            <param id="2" name="Object clicked">botaoFechar2</param>
+                                        </condition>
+                                        <condition id="-9" name="Layer is visible" sid="476431767655521" type="System">
+                                            <param id="0" name="Layer">5</param>
+                                        </condition>
+                                        <condition id="-14" name="Pick by unique ID" sid="146090829745860" type="botaoFechar2">
+                                            <param id="0" name="Unique ID">780</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="929817030787982" type="System">
+                                            <param id="0" name="Group name">&quot;FecharUIPalavrasMagicas&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <comment>if(Clicka no botão) setta frame pra 1, torna texto da dica visível, contadorDicas++</comment>
+                                <event-block sid="124161120644548">
+                                    <conditions>
+                                        <condition id="6" name="On object clicked" sid="837741284913961" type="Mouse">
+                                            <param id="0" name="Mouse button">0</param>
+                                            <param id="1" name="Click type">0</param>
+                                            <param id="2" name="Object clicked">botaoDica</param>
+                                        </condition>
+                                        <condition id="-9" name="Layer is visible" sid="593029328275238" type="System">
+                                            <param id="0" name="Layer">5</param>
+                                        </condition>
+                                        <condition id="-14" name="Pick by unique ID" sid="404489314121909" type="botaoDica">
+                                            <param id="0" name="Unique ID">783</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="5" name="Set frame" sid="595785815139810" type="botaoDica">
+                                            <param id="0" name="Frame number">0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="430848478058190" type="System">
+                                            <param id="0" name="Variable">revelado1</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-10" name="Add to" sid="585773844335126" type="System">
+                                            <param id="0" name="Variable">contadorDicas</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="955439366937498">
+                                    <conditions>
+                                        <condition id="6" name="On object clicked" sid="444012729627272" type="Mouse">
+                                            <param id="0" name="Mouse button">0</param>
+                                            <param id="1" name="Click type">0</param>
+                                            <param id="2" name="Object clicked">botaoDica</param>
+                                        </condition>
+                                        <condition id="-9" name="Layer is visible" sid="423868076499076" type="System">
+                                            <param id="0" name="Layer">5</param>
+                                        </condition>
+                                        <condition id="-14" name="Pick by unique ID" sid="909729239249867" type="botaoDica">
+                                            <param id="0" name="Unique ID">784</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="5" name="Set frame" sid="346401952892036" type="botaoDica">
+                                            <param id="0" name="Frame number">0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="390817162492209" type="System">
+                                            <param id="0" name="Variable">revelado2</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-10" name="Add to" sid="128173964750686" type="System">
+                                            <param id="0" name="Variable">contadorDicas</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="884790678364680">
+                                    <conditions>
+                                        <condition id="6" name="On object clicked" sid="717028115793081" type="Mouse">
+                                            <param id="0" name="Mouse button">0</param>
+                                            <param id="1" name="Click type">0</param>
+                                            <param id="2" name="Object clicked">botaoDica</param>
+                                        </condition>
+                                        <condition id="-9" name="Layer is visible" sid="948067715005466" type="System">
+                                            <param id="0" name="Layer">5</param>
+                                        </condition>
+                                        <condition id="-14" name="Pick by unique ID" sid="668645492972828" type="botaoEnviar">
+                                            <param id="0" name="Unique ID">785</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="5" name="Set frame" sid="465554459644856" type="botaoDica">
+                                            <param id="0" name="Frame number">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-group>
+                        <event-group description="" sid="371890077845540" title="ControleHovers">
+                            <sub-events>
+                                <event-block sid="509161740981527">
+                                    <conditions>
+                                        <condition id="7" name="Cursor is over object" sid="645945169634873" type="Mouse">
+                                            <param id="0" name="Object">botaoFechar2</param>
+                                        </condition>
+                                        <condition id="-9" name="Layer is visible" sid="831386519847239" type="System">
+                                            <param id="0" name="Layer">5</param>
+                                        </condition>
+                                        <condition id="-14" name="Pick by unique ID" sid="735610702194963" type="botaoFechar2">
+                                            <param id="0" name="Unique ID">780</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="5" name="Set frame" sid="180336196280832" type="botaoFechar2">
+                                            <param id="0" name="Frame number">1</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="799795153991616">
+                                            <conditions>
+                                                <condition id="-4" name="Trigger once while true" sid="513354147825845" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Play" sid="484939082931641" type="Audio">
+                                                    <param id="0" name="Audio file">sobre_botao</param>
+                                                    <param id="2" name="Loop">0</param>
+                                                    <param id="3" name="Volume">volSons</param>
+                                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="749631277492373">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="201808337916206" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="5" name="Set frame" sid="782222522017366" type="botaoFechar2">
+                                            <param id="0" name="Frame number">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="862858052204383">
+                                    <conditions>
+                                        <condition id="7" name="Cursor is over object" sid="754406662954449" type="Mouse">
+                                            <param id="0" name="Object">botaoDica</param>
+                                        </condition>
+                                        <condition id="-9" name="Layer is visible" sid="512846911334231" type="System">
+                                            <param id="0" name="Layer">5</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="161890193021898">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="676521006128815" type="botaoDica">
+                                                    <param id="0" name="Unique ID">783</param>
+                                                </condition>
+                                                <condition id="-14" name="Compare variable" sid="122735964384384" type="System">
+                                                    <param id="0" name="Variable">revelado1</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="5" name="Set frame" sid="416209723793335" type="botaoDica">
+                                                    <param id="0" name="Frame number">2</param>
+                                                </action>
+                                            </actions>
+                                            <sub-events>
+                                                <event-block sid="605527774086632">
+                                                    <conditions>
+                                                        <condition id="-4" name="Trigger once while true" sid="378254038605867" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="0" name="Play" sid="885549874602627" type="Audio">
+                                                            <param id="0" name="Audio file">sobre_botao</param>
+                                                            <param id="2" name="Loop">0</param>
+                                                            <param id="3" name="Volume">volSons</param>
+                                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                        <event-block sid="865663563439153">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="264576582834193" type="botaoDica">
+                                                    <param id="0" name="Unique ID">784</param>
+                                                </condition>
+                                                <condition id="-14" name="Compare variable" sid="132471471789586" type="System">
+                                                    <param id="0" name="Variable">revelado2</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="5" name="Set frame" sid="658408506504660" type="botaoDica">
+                                                    <param id="0" name="Frame number">2</param>
+                                                </action>
+                                            </actions>
+                                            <sub-events>
+                                                <event-block sid="657813527825170">
+                                                    <conditions>
+                                                        <condition id="-4" name="Trigger once while true" sid="671873085859503" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="0" name="Play" sid="344292752896071" type="Audio">
+                                                            <param id="0" name="Audio file">sobre_botao</param>
+                                                            <param id="2" name="Loop">0</param>
+                                                            <param id="3" name="Volume">volSons</param>
+                                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="954713729732043">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="164778331795890" type="System" />
+                                        <condition id="-9" name="Layer is visible" sid="246028409180061" type="System">
+                                            <param id="0" name="Layer">5</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="312886125739090">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="202842769555356" type="botaoDica">
+                                                    <param id="0" name="Unique ID">783</param>
+                                                </condition>
+                                                <condition id="-14" name="Compare variable" sid="207808985180404" type="System">
+                                                    <param id="0" name="Variable">revelado1</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="5" name="Set frame" sid="790713707014794" type="botaoDica">
+                                                    <param id="0" name="Frame number">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="787564343143258">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="329926770248767" type="botaoDica">
+                                                    <param id="0" name="Unique ID">784</param>
+                                                </condition>
+                                                <condition id="-14" name="Compare variable" sid="391091891404565" type="System">
+                                                    <param id="0" name="Variable">revelado2</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="5" name="Set frame" sid="918718734065724" type="botaoDica">
+                                                    <param id="0" name="Frame number">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="466487148466682">
+                                    <conditions>
+                                        <condition id="7" name="Cursor is over object" sid="399212339859234" type="Mouse">
+                                            <param id="0" name="Object">botaoEnviar</param>
+                                        </condition>
+                                        <condition id="-9" name="Layer is visible" sid="147931617964513" type="System">
+                                            <param id="0" name="Layer">5</param>
+                                        </condition>
+                                        <condition id="-14" name="Pick by unique ID" sid="146812231202263" type="botaoEnviar">
+                                            <param id="0" name="Unique ID">785</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="5" name="Set frame" sid="777355800567500" type="botaoEnviar">
+                                            <param id="0" name="Frame number">1</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="741424487933732">
+                                            <conditions>
+                                                <condition id="-4" name="Trigger once while true" sid="791981887152708" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Play" sid="966957555863235" type="Audio">
+                                                    <param id="0" name="Audio file">sobre_botao</param>
+                                                    <param id="2" name="Loop">0</param>
+                                                    <param id="3" name="Volume">volSons</param>
+                                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="339015808764799">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="814369245916397" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="5" name="Set frame" sid="435920314221743" type="botaoEnviar">
+                                            <param id="0" name="Frame number">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-group>
+                    </sub-events>
+                </event-group>
+                <event-group description="Reseta os estados dos elementos da interface. Utilizado após uma resposta certa ter sido dada, pra preparar a UI pra próxima palavra mágica" inactive="1" sid="462639080094704" title="ResetUIPalavrasMagicas">
+                    <sub-events>
+                        <event-block sid="563609632544853">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="134178812650294" type="botaoDica">
+                                    <param id="0" name="Unique ID">784</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="5" name="Set frame" sid="844543645989598" type="botaoDica">
+                                    <param id="0" name="Frame number">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="952015288133912">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="397432759327551" type="botaoDica">
+                                    <param id="0" name="Unique ID">785</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="5" name="Set frame" sid="131436690257501" type="botaoDica">
+                                    <param id="0" name="Frame number">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="302683654728240">
+                            <conditions />
+                            <actions>
+                                <action id="-9" name="Set value" sid="759505428645776" type="System">
+                                    <param id="0" name="Variable">revelado1</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="475879535184115" type="System">
+                                    <param id="0" name="Variable">revelado2</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="960483963622469" type="System">
+                                    <param id="0" name="Group name">&quot;ResetUIPalavrasMagicas&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-group>
+                <event-group description="Torna todos os elementos invisíveis" inactive="1" sid="726138320004157" title="FecharUIPalavrasMagicas">
+                    <sub-events>
+                        <event-block sid="737649913777622">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="360933134010924" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-4" name="Set layer visible" sid="749622071359693" type="System">
+                                    <param id="0" name="Layer">5</param>
+                                    <param id="1" name="Visibility">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="115653964568739" type="System">
+                                    <param id="0" name="Group name">&quot;PalavrasMagicas&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="872484622005558" type="System">
+                                    <param id="0" name="Group name">&quot;FecharUIPalavrasMagicas&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-group>
             </sub-events>
         </event-group>
     </events>
