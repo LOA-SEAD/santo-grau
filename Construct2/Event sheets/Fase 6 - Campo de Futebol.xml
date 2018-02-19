@@ -972,7 +972,7 @@
                                 </action>
                             </actions>
                         </event-block>
-                        <comment>Destroi a bola chutada para fora e joga uma nova - CONSERTAR</comment>
+                        <comment>Destroi a bola chutada para fora e joga uma nova</comment>
                         <event-block sid="513024080535198">
                             <conditions>
                                 <condition behavior="Bullet" id="0" name="Compare speed" sid="527527312070761" type="campoBola">
@@ -1008,7 +1008,13 @@
                                     <param id="0" name="Speed">50</param>
                                 </action>
                                 <action behavior="Bullet" id="2" name="Set gravity" sid="876615730755606" type="campoBola">
-                                    <param id="0" name="Gravity">200</param>
+                                    <param id="0" name="Gravity">291</param>
+                                </action>
+                                <action id="0" name="Play" sid="293755065502600" type="Audio">
+                                    <param id="0" name="Audio file">objeto_caindo_medio</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3119,7 +3125,7 @@
                 <event-block sid="996942480875308">
                     <conditions>
                         <condition id="-6" name="Every X seconds" sid="323871159826829" type="System">
-                            <param id="0" name="Interval (seconds)">5.0</param>
+                            <param id="0" name="Interval (seconds)">5.0 - floor((numeroObjetosAtirados + 1)/5)</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -3155,7 +3161,7 @@
                                     <param id="0" name="Angle">270 + round(random(0,60)) - 30</param>
                                 </action>
                                 <action behavior="Bullet" id="2" name="Set gravity" sid="436876093157036" type="campoItens">
-                                    <param id="0" name="Gravity">120 + (floor((numeroObjetosAtirados + 1)/5) * 50)</param>
+                                    <param id="0" name="Gravity">55 + 4^floor((numeroObjetosAtirados + 1)/5) * 59</param>
                                 </action>
                                 <action id="-15" name="Set visible" sid="471233574798529" type="campoItens">
                                     <param id="0" name="Visibility">1</param>
@@ -3175,7 +3181,14 @@
                                     <param id="2" name="Value">5</param>
                                 </condition>
                             </conditions>
-                            <actions />
+                            <actions>
+                                <action id="0" name="Play" sid="570666540712948" type="Audio">
+                                    <param id="0" name="Audio file">objeto_caindo_devagar</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                            </actions>
                         </event-block>
                         <comment>Efeito sonoro médio dos objetos caindo</comment>
                         <event-block sid="543374101348720">
@@ -3191,7 +3204,14 @@
                                     <param id="2" name="Value">9</param>
                                 </condition>
                             </conditions>
-                            <actions />
+                            <actions>
+                                <action id="0" name="Play" sid="674964032213588" type="Audio">
+                                    <param id="0" name="Audio file">objeto_caindo_medio</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                            </actions>
                         </event-block>
                         <comment>Efeito sonoro rápido dos objetos caindo</comment>
                         <event-block sid="764831576689673">
@@ -3207,7 +3227,14 @@
                                     <param id="2" name="Value">14</param>
                                 </condition>
                             </conditions>
-                            <actions />
+                            <actions>
+                                <action id="0" name="Play" sid="270705286977250" type="Audio">
+                                    <param id="0" name="Audio file">objeto_caindo_rapido</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                            </actions>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -3264,6 +3291,7 @@
         </event-group>
         <event-group description="" sid="120858864474595" title="FisicaBola">
             <sub-events>
+                <comment>Joga a bola com efeito sonoro </comment>
                 <event-block sid="722245850582271">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="465455008769872" type="System">
@@ -3274,6 +3302,19 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <event-block sid="823321504090372">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="950570791683591" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Play" sid="573982720796685" type="Audio">
+                                    <param id="0" name="Audio file">objeto_caindo_medio</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <event-block sid="117091263820934">
                             <conditions>
                                 <condition id="-2" name="Compare Y" sid="596164635522416" type="campoBola">
@@ -3283,7 +3324,7 @@
                             </conditions>
                             <actions>
                                 <action id="-2" name="Set Y" sid="671678536029533" type="campoBola">
-                                    <param id="0" name="Y">campoBola.Y + (campoBola.Y / 126)</param>
+                                    <param id="0" name="Y">campoBola.Y + (campoBola.Y / 70)</param>
                                 </action>
                             </actions>
                         </event-block>
