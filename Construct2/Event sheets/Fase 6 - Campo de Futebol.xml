@@ -36,6 +36,8 @@
         <variable constant="0" name="controlePlacar" sid="224327238695947" static="0" type="number">0</variable>
         <comment>Controla o que ocoore com a bola após o placar seja fechado, seja utilizando o botão de X ou clicando no botão &quot;Chutar&quot;.&#x0D;&#x0A;0- Não faz nada (ação do botão fechar) / 1- Chuta para fora (errou totalmente ou parcialmente as respostas) / 2- Faz o gol (acertou as respostas)</comment>
         <variable constant="0" name="acaoBola" sid="590493915236453" static="0" type="number">0</variable>
+        <comment>Serve para controlar o volume da torcida para orientar Ariel a chegar na bola</comment>
+        <variable constant="0" name="efeitoTorcidaBola" sid="814090081503031" static="0" type="number">0</variable>
         <event-block sid="704942424572087">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="961560001477127" type="System" />
@@ -53,6 +55,51 @@
                 </action>
                 <action id="4" name="Preload" sid="971677116433809" type="Audio">
                     <param id="0" name="Audio file">vaias_torcida</param>
+                </action>
+                <action id="4" name="Preload" sid="565462653692306" type="Audio">
+                    <param id="0" name="Audio file">objeto_caindo_devagar</param>
+                </action>
+                <action id="4" name="Preload" sid="783853080119999" type="Audio">
+                    <param id="0" name="Audio file">objeto_caindo_medio</param>
+                </action>
+                <action id="4" name="Preload" sid="984256682788432" type="Audio">
+                    <param id="0" name="Audio file">objeto_caindo_rapido</param>
+                </action>
+                <action id="4" name="Preload" sid="759342988342533" type="Audio">
+                    <param id="0" name="Audio file">risada_diploma</param>
+                </action>
+                <action id="4" name="Preload" sid="472335262989224" type="Audio">
+                    <param id="0" name="Audio file">capivara_1</param>
+                </action>
+                <action id="4" name="Preload" sid="926844824749255" type="Audio">
+                    <param id="0" name="Audio file">capivara_2_aqui</param>
+                </action>
+                <action id="4" name="Preload" sid="742945018238907" type="Audio">
+                    <param id="0" name="Audio file">capivara_2_hey</param>
+                </action>
+                <action id="4" name="Preload" sid="674667634909739" type="Audio">
+                    <param id="0" name="Audio file">capivara_2_psiu</param>
+                </action>
+                <action id="4" name="Preload" sid="451633216472605" type="Audio">
+                    <param id="0" name="Audio file">capivara_3</param>
+                </action>
+                <action id="4" name="Preload" sid="935754270686952" type="Audio">
+                    <param id="0" name="Audio file">capivara_4</param>
+                </action>
+                <action id="4" name="Preload" sid="395956555864395" type="Audio">
+                    <param id="0" name="Audio file">capivara_5</param>
+                </action>
+                <action id="4" name="Preload" sid="698644072901849" type="Audio">
+                    <param id="0" name="Audio file">capivara_6</param>
+                </action>
+                <action id="4" name="Preload" sid="327352309012546" type="Audio">
+                    <param id="0" name="Audio file">capivara_7</param>
+                </action>
+                <action id="4" name="Preload" sid="513275925034967" type="Audio">
+                    <param id="0" name="Audio file">capivara_8</param>
+                </action>
+                <action id="4" name="Preload" sid="707551342868360" type="Audio">
+                    <param id="0" name="Audio file">capivara_9</param>
                 </action>
                 <action id="-9" name="Set value" sid="358939320709451" type="System">
                     <param id="0" name="Variable">pause</param>
@@ -112,6 +159,10 @@
                 </action>
                 <action id="-9" name="Set value" sid="828801402040640" type="System">
                     <param id="0" name="Variable">avancarDialogosCAM</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="713386264335775" type="System">
+                    <param id="0" name="Variable">efeitoTorcidaBola</param>
                     <param id="1" name="Value">0</param>
                 </action>
                 <action id="-18" name="Set layer opacity" sid="544412279759474" type="System">
@@ -449,7 +500,7 @@
                 </condition>
             </conditions>
             <actions>
-                <action id="25" name="Play at object" sid="308119059164586" type="Audio">
+                <action disabled="1" id="25" name="Play at object" sid="308119059164586" type="Audio">
                     <param id="0" name="Audio file">Hello</param>
                     <param id="1" name="Loop">0</param>
                     <param id="2" name="Volume">5-(((sqrt((player.X-capivara.X)^2+(player.Y-capivara.Y)^2))-150)/29)</param>
@@ -458,6 +509,17 @@
                     <param id="5" name="Outer angle">45</param>
                     <param id="6" name="Outer gain">100</param>
                     <param id="7" name="Tag (optional)">&quot;capivara&quot;</param>
+                </action>
+                <action id="28" name="Play at object (by name)" sid="230695597981503" type="Audio">
+                    <param id="0" name="Folder">0</param>
+                    <param id="1" name="Audio file name">choose(&quot;capivara_2_aqui&quot;, &quot;capivara_2_hey&quot;, &quot;capivara_2_psiu&quot;)</param>
+                    <param id="2" name="Loop">0</param>
+                    <param id="3" name="Volume">5-(((sqrt((player.X-capivara.X)^2+(player.Y-capivara.Y)^2))-150)/29)</param>
+                    <param id="4" name="Object">capivara</param>
+                    <param id="5" name="Inner angle">45</param>
+                    <param id="6" name="Outer angle">45</param>
+                    <param id="7" name="Outer gain">100</param>
+                    <param id="8" name="Tag (optional)">&quot;capivara&quot;</param>
                 </action>
             </actions>
         </event-block>
@@ -1060,9 +1122,13 @@
                 <comment>Inicia a fuga do diploma</comment>
                 <event-block sid="983220918625831">
                     <conditions>
-                        <condition id="-1" name="Compare X" sid="208013852504234" type="animacaoTorcidaEsq">
-                            <param id="0" name="Comparison">2</param>
-                            <param id="1" name="X co-ordinate">0</param>
+                        <condition id="-14" name="Compare variable" sid="208013852504234" type="System">
+                            <param id="0" name="Variable">fraseAtualCAM</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">11</param>
+                        </condition>
+                        <condition id="1" name="Is overlapping another object" sid="788310012673603" type="player">
+                            <param id="0" name="Object">colisaoDiploma</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -1133,6 +1199,115 @@
                             </actions>
                         </event-block>
                     </sub-events>
+                </event-block>
+                <comment>Controla o volume da torcida conforme a aproximação da Ariel na bola - IMPLEMENTAR</comment>
+                <event-block sid="242373548662292">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="877693446704700" type="System">
+                            <param id="0" name="Variable">efeitoTorcidaBola</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <comment>Reduz 10 unidades por segundo, deixando -20 de volume no fim</comment>
+                        <event-block sid="507784983971870">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="970412254678133" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="362317492512495" type="System">
+                                    <param id="0" name="Variable">volTorcida</param>
+                                    <param id="1" name="Value">volTorcida</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Executar o áudio do diploma chamando - FALTA DAR ACESSIBILIDADE</comment>
+                <event-block sid="505816371524429">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="100561372251549" type="System">
+                            <param id="0" name="Variable">fraseAtualCAM</param>
+                            <param id="1" name="Comparison">4</param>
+                            <param id="2" name="Value">9</param>
+                        </condition>
+                        <condition id="-3" name="Is on-screen" sid="434034403510918" type="AndaParaCimaDiploma" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="936908213442996">
+                            <conditions>
+                                <condition id="-6" name="Every X seconds" sid="474898667684470" type="System">
+                                    <param id="0" name="Interval (seconds)">3.0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Play" sid="719910637984833" type="Audio">
+                                    <param id="0" name="Audio file">risada_diploma</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Dano Causado por um objeto atingir a personagem</comment>
+                <event-block sid="161410231677077">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="569544519878287" type="player">
+                            <param id="0" name="Object">campoItens</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="6" name="Stop" sid="129893649544231" type="Audio">
+                            <param id="0" name="Tag">&quot;&quot;</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="817283253147164" type="campoItens" />
+                        <action id="7" name="Play (by name)" sid="508558289772212" type="Audio">
+                            <param id="0" name="Folder">0</param>
+                            <param id="1" name="Audio file name">choose(&quot;dano1&quot;, &quot;dano2&quot;, &quot;dano3&quot;)</param>
+                            <param id="3" name="Loop">0</param>
+                            <param id="4" name="Volume">volSons</param>
+                            <param id="2" name="Tag (optional)">&quot;sons&quot;</param>
+                        </action>
+                        <action behavior="Flash" id="0" name="Flash" sid="322468234077884" type="playerAnim">
+                            <param id="0" name="&apos;On&apos; time">0.1</param>
+                            <param id="1" name="&apos;Off&apos; time">0.1</param>
+                            <param id="2" name="Duration">1.2</param>
+                        </action>
+                        <action id="-10" name="Add to" sid="822771006002674" type="System">
+                            <param id="0" name="Variable">pontos</param>
+                            <param id="1" name="Value">-50</param>
+                        </action>
+                        <action id="0" name="Set text" sid="535642108303042" type="pontoTexto">
+                            <param id="0" name="Text">&quot;-50&quot;</param>
+                        </action>
+                        <action id="4" name="Set font color" sid="222130402232272" type="pontoTexto">
+                            <param id="0" name="Color">rgb(235, 17, 53)</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="839727700913697" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao7b&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="588466550627376" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao7a&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="833149225710400" type="System">
+                            <param id="0" name="Seconds">4</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="629929959945501" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao7a&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="948512503356626" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao7b&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
                 </event-block>
             </sub-events>
         </event-group>
@@ -1765,7 +1940,7 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <comment>Ação para disparar o dialogo do mascote pedindo para a bola ser chutada</comment>
+                        <comment>Ação para disparar o dialogo do mascote pedindo para a bola ser chutada, além de não mais ficar alterando o volume da torcida</comment>
                         <event-block sid="148487420197088">
                             <conditions>
                                 <condition id="-14" name="Compare variable" sid="732196549639122" type="System">
@@ -1781,6 +1956,10 @@
                                         <condition id="-4" name="Trigger once while true" sid="715408790327227" type="System" />
                                     </conditions>
                                     <actions>
+                                        <action id="-9" name="Set value" sid="567197777070917" type="System">
+                                            <param id="0" name="Variable">efeitoTorcidaBola</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
                                         <action id="-9" name="Set value" sid="222780926405144" type="System">
                                             <param id="0" name="Variable">controleDialogoFut</param>
                                             <param id="1" name="Value">1</param>
@@ -2996,6 +3175,12 @@
                                                 <action id="-15" name="Set visible" sid="272085346701447" type="campoItens">
                                                     <param id="0" name="Visibility">1</param>
                                                 </action>
+                                                <action id="0" name="Play" sid="371496712032854" type="Audio">
+                                                    <param id="0" name="Audio file">objeto_caindo_devagar</param>
+                                                    <param id="2" name="Loop">0</param>
+                                                    <param id="3" name="Volume">volSons</param>
+                                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                                </action>
                                                 <action id="-16" name="Wait" sid="820096687556560" type="System">
                                                     <param id="0" name="Seconds">5.0</param>
                                                 </action>
@@ -3006,6 +3191,35 @@
                                             </actions>
                                         </event-block>
                                     </sub-events>
+                                </event-block>
+                                <comment>Volta para a torcida normal, com o volume sendo controlado conforme a proximidade da Ariel com a bola</comment>
+                                <event-block sid="763926716411792">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="297471086558484" type="System">
+                                            <param id="0" name="Variable">fraseAtualCAM</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">6</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="6" name="Stop" sid="758075137311307" type="Audio">
+                                            <param id="0" name="Tag">&quot;torcida&quot;</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="725605131847934" type="System">
+                                            <param id="0" name="Variable">volTorcida</param>
+                                            <param id="1" name="Value">-20</param>
+                                        </action>
+                                        <action id="0" name="Play" sid="500339701439135" type="Audio">
+                                            <param id="0" name="Audio file">torcida_estadio_loop</param>
+                                            <param id="2" name="Loop">1</param>
+                                            <param id="3" name="Volume">volTorcida</param>
+                                            <param id="1" name="Tag (optional)">&quot;torcida&quot;</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="960356482207455" type="System">
+                                            <param id="0" name="Variable">efeitoTorcidaBola</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
                                 </event-block>
                                 <comment>Avisa que o jogador errou e libera para que ele tente outra vez os desafios</comment>
                                 <event-block sid="850841652449385">
@@ -3279,7 +3493,7 @@
                             <param id="1" name="State">0</param>
                         </action>
                         <action id="-16" name="Wait" sid="837259427823450" type="System">
-                            <param id="0" name="Seconds">5.0</param>
+                            <param id="0" name="Seconds">3.0</param>
                         </action>
                         <action id="-10" name="Add to" sid="173069145984750" type="System">
                             <param id="0" name="Variable">numeroObjetosAtirados</param>
