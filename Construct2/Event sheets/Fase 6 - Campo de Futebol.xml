@@ -68,37 +68,37 @@
                 <action id="4" name="Preload" sid="759342988342533" type="Audio">
                     <param id="0" name="Audio file">risada_diploma</param>
                 </action>
-                <action id="4" name="Preload" sid="472335262989224" type="Audio">
+                <action disabled="1" id="4" name="Preload" sid="472335262989224" type="Audio">
                     <param id="0" name="Audio file">capivara_1</param>
                 </action>
-                <action id="4" name="Preload" sid="926844824749255" type="Audio">
+                <action disabled="1" id="4" name="Preload" sid="926844824749255" type="Audio">
                     <param id="0" name="Audio file">capivara_2_aqui</param>
                 </action>
-                <action id="4" name="Preload" sid="742945018238907" type="Audio">
+                <action disabled="1" id="4" name="Preload" sid="742945018238907" type="Audio">
                     <param id="0" name="Audio file">capivara_2_hey</param>
                 </action>
-                <action id="4" name="Preload" sid="674667634909739" type="Audio">
+                <action disabled="1" id="4" name="Preload" sid="674667634909739" type="Audio">
                     <param id="0" name="Audio file">capivara_2_psiu</param>
                 </action>
-                <action id="4" name="Preload" sid="451633216472605" type="Audio">
+                <action disabled="1" id="4" name="Preload" sid="451633216472605" type="Audio">
                     <param id="0" name="Audio file">capivara_3</param>
                 </action>
-                <action id="4" name="Preload" sid="935754270686952" type="Audio">
+                <action disabled="1" id="4" name="Preload" sid="935754270686952" type="Audio">
                     <param id="0" name="Audio file">capivara_4</param>
                 </action>
-                <action id="4" name="Preload" sid="395956555864395" type="Audio">
+                <action disabled="1" id="4" name="Preload" sid="395956555864395" type="Audio">
                     <param id="0" name="Audio file">capivara_5</param>
                 </action>
-                <action id="4" name="Preload" sid="698644072901849" type="Audio">
+                <action disabled="1" id="4" name="Preload" sid="698644072901849" type="Audio">
                     <param id="0" name="Audio file">capivara_6</param>
                 </action>
-                <action id="4" name="Preload" sid="327352309012546" type="Audio">
+                <action disabled="1" id="4" name="Preload" sid="327352309012546" type="Audio">
                     <param id="0" name="Audio file">capivara_7</param>
                 </action>
-                <action id="4" name="Preload" sid="513275925034967" type="Audio">
+                <action disabled="1" id="4" name="Preload" sid="513275925034967" type="Audio">
                     <param id="0" name="Audio file">capivara_8</param>
                 </action>
-                <action id="4" name="Preload" sid="707551342868360" type="Audio">
+                <action disabled="1" id="4" name="Preload" sid="707551342868360" type="Audio">
                     <param id="0" name="Audio file">capivara_9</param>
                 </action>
                 <action id="-9" name="Set value" sid="358939320709451" type="System">
@@ -630,17 +630,6 @@
                 </event-block>
             </sub-events>
         </event-block>
-        <event-block disabled="1" sid="226083838291973">
-            <conditions />
-            <actions>
-                <action id="-16" name="Wait" sid="801798339569894" type="System">
-                    <param id="0" name="Seconds">0.1</param>
-                </action>
-                <action id="5" name="Set frame" sid="773962924531336" type="AnimacaoDiploma">
-                    <param id="0" name="Frame number">3</param>
-                </action>
-            </actions>
-        </event-block>
         <event-block sid="832918822339821">
             <conditions>
                 <condition id="-28" name="On save complete" sid="738506337541574" type="System" />
@@ -767,18 +756,6 @@
                 <action id="-2" name="Go to layout" sid="855206006951768" type="System">
                     <param id="0" name="Layout">Tela Gameover</param>
                 </action>
-            </actions>
-        </event-block>
-        <comment>Para destruir o objeto depois dele ter sido jogado</comment>
-        <event-block sid="436326695648630">
-            <conditions>
-                <condition id="-2" name="Compare Y" sid="985072625411531" type="campoItens">
-                    <param id="0" name="Comparison">4</param>
-                    <param id="1" name="Y co-ordinate">850</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="-9" name="Destroy" sid="801577099352038" type="campoItens" />
             </actions>
         </event-block>
         <comment>Para a animação do diploma fugindo</comment>
@@ -1254,7 +1231,19 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <comment>Dano Causado por um objeto atingir a personagem</comment>
+                <comment>Para destruir o objeto depois dele ter sido jogado</comment>
+                <event-block sid="436326695648630">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="985072625411531" type="campoItens">
+                            <param id="0" name="Comparison">4</param>
+                            <param id="1" name="Y co-ordinate">850</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="801577099352038" type="campoItens" />
+                    </actions>
+                </event-block>
+                <comment>Dano Causado por um objeto atingir a personagem, Stop sem áudio definido para ele parar o último efeito sonoro tocado, no caso o do objeto caindo</comment>
                 <event-block sid="161410231677077">
                     <conditions>
                         <condition id="1" name="Is overlapping another object" sid="569544519878287" type="player">
@@ -1731,6 +1720,7 @@
                                     <param id="0" name="Group name">&quot;playerMove7&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
+                                <action id="2" name="Stop" sid="790143678397783" type="playerAnim" />
                                 <action id="6" name="Stop" sid="112469240353805" type="Audio">
                                     <param id="0" name="Tag">&quot;torcida&quot;</param>
                                 </action>
@@ -1766,7 +1756,6 @@
                                     <param id="0" name="Variable">controleDialogoFut</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
-                                <action id="2" name="Stop" sid="790143678397783" type="playerAnim" />
                                 <action id="-12" name="Set group active" sid="769287980475411" type="System">
                                     <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
                                     <param id="1" name="State">1</param>
@@ -2645,7 +2634,7 @@
                         </action>
                     </actions>
                 </event-block>
-                <comment>Controle da posição onde a seta estará localizada</comment>
+                <comment>Controle da posição onde a seta estará localizada, além de também impedir que o usuário digite no campo errado</comment>
                 <event-block sid="145679727413096">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="333417791673650" type="System">
@@ -2661,6 +2650,14 @@
                         <action id="-1" name="Set X" sid="281285044803220" type="placarMudaPergunta">
                             <param id="0" name="X">1118</param>
                         </action>
+                        <action id="5" name="Set read-only" sid="892607731525462" type="placarResp1">
+                            <param id="0" name="Mode">1</param>
+                        </action>
+                        <action id="6" name="Set focused" sid="536217241488111" type="placarResp1" />
+                        <action id="8" name="Set unfocused" sid="991072110011660" type="placarResp2" />
+                        <action id="5" name="Set read-only" sid="732811729822193" type="placarResp2">
+                            <param id="0" name="Mode">0</param>
+                        </action>
                     </actions>
                 </event-block>
                 <event-block sid="781655231321227">
@@ -2673,6 +2670,14 @@
                         </action>
                         <action id="-1" name="Set X" sid="319813857548239" type="placarMudaPergunta">
                             <param id="0" name="X">162</param>
+                        </action>
+                        <action id="5" name="Set read-only" sid="249773385858497" type="placarResp1">
+                            <param id="0" name="Mode">0</param>
+                        </action>
+                        <action id="8" name="Set unfocused" sid="875182516329102" type="placarResp1" />
+                        <action id="6" name="Set focused" sid="396169710658340" type="placarResp2" />
+                        <action id="5" name="Set read-only" sid="978476643260437" type="placarResp2">
+                            <param id="0" name="Mode">1</param>
                         </action>
                     </actions>
                 </event-block>
@@ -3267,6 +3272,7 @@
                                             <param id="1" name="State">0</param>
                                         </action>
                                         <action id="-9" name="Destroy" sid="389101765789097" type="bandeiras1" />
+                                        <action id="-9" name="Destroy" sid="980751976422944" type="bandeiras2" />
                                         <action id="-9" name="Destroy" sid="452600170248835" type="plateia" />
                                         <action id="-9" name="Destroy" sid="642126448964153" type="placa" />
                                     </actions>
