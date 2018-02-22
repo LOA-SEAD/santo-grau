@@ -10,11 +10,14 @@
         <variable constant="0" name="fraseAtualBIB" sid="791044596541860" static="0" type="number">0</variable>
         <comment>Serve para marcar o tamanho do diálogo que irá ocorrer naquele momento para saber quantas vezes será lido falas no arquivo .json</comment>
         <variable constant="0" name="tamanhoDialogoBIB" sid="270380389239217" static="0" type="number">0</variable>
+        <comment>Marca o ponto inicial do diálogo, indicando a primeira frase lida do arquivo .json</comment>
+        <variable constant="0" name="inicioDialogoBIB" sid="949246382407252" static="0" type="number">0</variable>
         <comment>Livro que está sendo procurado</comment>
         <variable constant="0" name="livroAtual" sid="961379846391906" static="0" type="number">1</variable>
         <variable constant="1" name="livrostotal" sid="949680917452509" static="0" type="number">3</variable>
         <comment>Número de dicas reveladas</comment>
         <variable constant="0" name="contadorDicas" sid="155701951683189" static="0" type="number">0</variable>
+        <comment>Variáveis de controle para saber qual botão de dica foi revelado</comment>
         <variable constant="0" name="revelado1" sid="646006965001684" static="0" type="number">0</variable>
         <variable constant="0" name="revelado2" sid="956039330320703" static="0" type="number">0</variable>
         <event-block sid="900782436585763">
@@ -884,22 +887,35 @@
                         </action>
                     </actions>
                 </event-block>
+                <event-block sid="923150781268606">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="119886158924902" type="Keyboard">
+                            <param id="0" name="Key">69</param>
+                        </condition>
+                        <condition id="1" name="Is overlapping another object" sid="493044299848606" type="selecaoLivro">
+                            <param id="0" name="Object">player</param>
+                        </condition>
+                        <condition id="-9" name="Is visible" sid="987745019158233" type="selecaoLivro" />
+                        <condition id="-15" inverted="1" name="Is group active" sid="696989938386137" type="System">
+                            <param id="0" name="Group name">&quot;DialogoMago&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="670790469018543" type="System">
+                            <param id="0" name="Group name">&quot;PalavrasMagicas&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <event-group description="Controle da timeline de conversas com o Mago" sid="350252729508776" title="ConversasComMago">
                     <sub-events>
                         <event-group description="" sid="739280398514107" title="DialogoInicialMago">
                             <sub-events>
+                                <comment>Triggers para o início do diálogo</comment>
                                 <event-block sid="121666314486217">
                                     <conditions>
                                         <condition id="0" name="On key pressed" sid="199388760663222" type="Keyboard">
                                             <param id="0" name="Key">69</param>
-                                        </condition>
-                                        <condition id="-8" name="Compare two values" sid="214139745082632" type="System">
-                                            <param id="0" name="First value">pause</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Second value">0</param>
-                                        </condition>
-                                        <condition id="1" name="Is overlapping another object" sid="496320327708478" type="player">
-                                            <param id="0" name="Object">selecaoMago</param>
                                         </condition>
                                         <condition id="-14" name="Compare variable" sid="994089419399029" type="System">
                                             <param id="0" name="Variable">controleFase8</param>
@@ -911,9 +927,20 @@
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">0</param>
                                         </condition>
+                                        <condition id="-15" inverted="1" name="Is group active" sid="347618227361026" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoMago&quot;</param>
+                                        </condition>
+                                        <condition id="1" name="Is overlapping another object" sid="496320327708478" type="player">
+                                            <param id="0" name="Object">selecaoMago</param>
+                                        </condition>
                                         <condition behavior="8Direction" id="1" name="Compare speed" sid="925942946562189" type="player">
                                             <param id="0" name="Comparison">3</param>
                                             <param id="1" name="Speed">0.1</param>
+                                        </condition>
+                                        <condition id="-8" name="Compare two values" sid="214139745082632" type="System">
+                                            <param id="0" name="First value">pause</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">0</param>
                                         </condition>
                                     </conditions>
                                     <actions />
@@ -924,8 +951,12 @@
                                             </conditions>
                                             <actions>
                                                 <action id="-9" name="Set value" sid="404256621474100" type="System">
-                                                    <param id="0" name="Variable">fraseAtualBIB</param>
+                                                    <param id="0" name="Variable">inicioDialogoBIB</param>
                                                     <param id="1" name="Value">0</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="806155073411423" type="System">
+                                                    <param id="0" name="Variable">fraseAtualBIB</param>
+                                                    <param id="1" name="Value">inicioDialogoBIB</param>
                                                 </action>
                                                 <action id="-9" name="Set value" sid="833428163872696" type="System">
                                                     <param id="0" name="Variable">tamanhoDialogoBIB</param>
@@ -952,31 +983,478 @@
                                                     <param id="0" name="Group name">&quot;CarregaBalaoDialogo8&quot;</param>
                                                     <param id="1" name="State">1</param>
                                                 </action>
-                                                <action id="-12" name="Set group active" sid="838640960188274" type="System">
-                                                    <param id="0" name="Group name">&quot;DialogoInicialMago&quot;</param>
-                                                    <param id="1" name="State">0</param>
+                                                <action id="-10" name="Add to" sid="523315649345987" type="System">
+                                                    <param id="0" name="Variable">controleFase8</param>
+                                                    <param id="1" name="Value">1</param>
                                                 </action>
                                             </actions>
                                         </event-block>
                                     </sub-events>
                                 </event-block>
+                                <comment>Triggers ao diálogo terminar</comment>
+                                <event-block sid="642612961926589">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="114927552796239" type="System">
+                                            <param id="0" name="Variable">controleFase8</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                        <condition id="-15" inverted="1" name="Is group active" sid="197736352776685" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoMago&quot;</param>
+                                        </condition>
+                                        <condition id="-14" name="Pick by unique ID" sid="294905639236777" type="livro">
+                                            <param id="0" name="Unique ID">741</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="237400668371429" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoInicialMago&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action behavior="Pin" id="0" name="Pin to object" sid="778380008933306" type="livro">
+                                            <param id="0" name="Pin to">selecaoLivro</param>
+                                            <param id="1" name="Mode">0</param>
+                                        </action>
+                                        <action id="-15" name="Set visible" sid="888534411326724" type="livro">
+                                            <param id="0" name="Visibility">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="179660827944998" type="System">
+                                            <param id="0" name="Group name">&quot;LivrosInvisiveis&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action disabled="1" id="-12" name="Set group active" sid="937155608620724" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoLivro1&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="658024378708238" type="System">
+                                            <param id="0" name="Variable">controleDialogos8</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                             </sub-events>
                         </event-group>
                         <comment>Diálogo ao encontrar o primeiro livro</comment>
-                        <event-group description="" inactive="1" sid="407432299477198" title="FalaEncontrouLivro1">
+                        <event-group description="" inactive="1" sid="407432299477198" title="DialogoLivro1">
                             <sub-events>
-                                <event-block sid="998749109436079">
-                                    <conditions />
-                                    <actions />
+                                <event-block sid="867927970686948">
+                                    <conditions>
+                                        <condition disabled="1" id="-14" name="Compare variable" sid="955327756018833" type="System">
+                                            <param id="0" name="Variable">controleFase8</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                        <condition disabled="1" id="-15" inverted="1" name="Is group active" sid="276887155577199" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoMago&quot;</param>
+                                        </condition>
+                                        <condition disabled="1" id="-14" name="Compare variable" sid="268069119142820" type="System">
+                                            <param id="0" name="Variable">controleDialogos8</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                        <condition disabled="1" id="-8" name="Compare two values" sid="854337174509335" type="System">
+                                            <param id="0" name="First value">pause</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">0</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="212076670564069" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="744594837718083" type="System">
+                                            <param id="0" name="Variable">inicioDialogoBIB</param>
+                                            <param id="1" name="Value">7</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="356565235452932" type="System">
+                                            <param id="0" name="Variable">tamanhoDialogoBIB</param>
+                                            <param id="1" name="Value">2</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="127210798769606" type="System">
+                                            <param id="0" name="Variable">fraseAtualBIB</param>
+                                            <param id="1" name="Value">inicioDialogoBIB</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="224373363477653" type="System">
+                                            <param id="0" name="Variable">controleDialogos8</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="2" name="Stop" sid="704375867512993" type="playerAnim" />
+                                        <action id="-12" name="Set group active" sid="187528383025023" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove8&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="930659795893094" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoMago&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="431151911362255" type="System">
+                                            <param id="0" name="Group name">&quot;MarcaLocutor8&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="169986819797309" type="System">
+                                            <param id="0" name="Group name">&quot;CarregaBalaoDialogo8&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-10" name="Add to" sid="957827879050608" type="System">
+                                            <param id="0" name="Variable">controleFase8</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="308798398376107">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="943883142230381" type="livro">
+                                                    <param id="0" name="Unique ID">741</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action behavior="Pin" id="1" name="Unpin" sid="610177326108719" type="livro" />
+                                                <action id="-15" name="Set visible" sid="448317767986442" type="livro">
+                                                    <param id="0" name="Visibility">1</param>
+                                                </action>
+                                                <action id="-1" name="Set X" sid="871741271828902" type="selecaoLivro">
+                                                    <param id="0" name="X">-20</param>
+                                                </action>
+                                                <action id="-2" name="Set Y" sid="928659665466440" type="selecaoLivro">
+                                                    <param id="0" name="Y">-20</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="628878463689206">
+                                    <conditions>
+                                        <condition disabled="1" id="-14" name="Compare variable" sid="607603154125967" type="System">
+                                            <param id="0" name="Variable">controleFase8</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">2</param>
+                                        </condition>
+                                        <condition id="-15" inverted="1" name="Is group active" sid="557154169503148" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoMago&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="662306396945751" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoLivro1&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="493249154902857" type="System">
+                                            <param id="0" name="Variable">controleDialogos8</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="633069937555386" type="System">
+                                            <param id="0" name="Group name">&quot;PalavrasMagicas&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-group>
+                        <comment>Diálogo ao acertar a primeira palavra mágica</comment>
+                        <event-group description="" inactive="1" sid="252590880998856" title="DialogoPalavraMagica1">
+                            <sub-events>
+                                <event-block sid="306681565798432">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="841459565532219" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="420676649310159" type="System">
+                                            <param id="0" name="Variable">inicioDialogoBIB</param>
+                                            <param id="1" name="Value">9</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="384367859219357" type="System">
+                                            <param id="0" name="Variable">tamanhoDialogoBIB</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="347569094280848" type="System">
+                                            <param id="0" name="Variable">fraseAtualBIB</param>
+                                            <param id="1" name="Value">inicioDialogoBIB</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="497960478565558" type="System">
+                                            <param id="0" name="Variable">controleDialogos8</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="2" name="Stop" sid="668387186431491" type="playerAnim" />
+                                        <action id="-12" name="Set group active" sid="712899065543898" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove8&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="701771700363649" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoMago&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="388078331080971" type="System">
+                                            <param id="0" name="Group name">&quot;MarcaLocutor8&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="107098487412814" type="System">
+                                            <param id="0" name="Group name">&quot;CarregaBalaoDialogo8&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-10" name="Add to" sid="653089998700027" type="System">
+                                            <param id="0" name="Variable">controleFase8</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="831116538931333">
+                                    <conditions>
+                                        <condition disabled="1" id="-14" name="Compare variable" sid="538268499159947" type="System">
+                                            <param id="0" name="Variable">controleFase8</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">3</param>
+                                        </condition>
+                                        <condition id="-15" inverted="1" name="Is group active" sid="553182064023051" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoMago&quot;</param>
+                                        </condition>
+                                        <condition id="-14" name="Pick by unique ID" sid="361082547801709" type="livro">
+                                            <param id="0" name="Unique ID">747</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="326730467881649" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoPalavraMagica1&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action behavior="Pin" id="0" name="Pin to object" sid="369439039174703" type="livro">
+                                            <param id="0" name="Pin to">selecaoLivro</param>
+                                            <param id="1" name="Mode">0</param>
+                                        </action>
+                                        <action disabled="1" id="-15" name="Set visible" sid="424299511405373" type="livro">
+                                            <param id="0" name="Visibility">0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="898168921757202" type="System">
+                                            <param id="0" name="Variable">controleDialogos8</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="361187309309930" type="System">
+                                            <param id="0" name="Group name">&quot;LivrosInvisiveis&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="884547600682818" type="System">
+                                            <param id="0" name="Group name">&quot;SpawnLivrosInvisiveis&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action disabled="1" id="-12" name="Set group active" sid="425842896034473" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoLivro2&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
                                 </event-block>
                             </sub-events>
                         </event-group>
                         <comment>Ao encontrar o segundo livro</comment>
-                        <event-group description="" inactive="1" sid="742292787850782" title="FalaEncontrouLivro2" />
+                        <event-group description="" inactive="1" sid="742292787850782" title="DialogoLivro2">
+                            <sub-events>
+                                <event-block sid="345775032896545">
+                                    <conditions>
+                                        <condition disabled="1" id="-14" name="Compare variable" sid="938738149803613" type="System">
+                                            <param id="0" name="Variable">controleFase8</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">3</param>
+                                        </condition>
+                                        <condition disabled="1" id="-15" inverted="1" name="Is group active" sid="844506966616279" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoMago&quot;</param>
+                                        </condition>
+                                        <condition disabled="1" id="-14" name="Compare variable" sid="954502279302239" type="System">
+                                            <param id="0" name="Variable">controleDialogos8</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                        <condition disabled="1" id="-8" name="Compare two values" sid="267789136018155" type="System">
+                                            <param id="0" name="First value">pause</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">0</param>
+                                        </condition>
+                                        <condition id="-4" name="Trigger once while true" sid="878982914306372" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="877026966306902" type="System">
+                                            <param id="0" name="Variable">inicioDialogoBIB</param>
+                                            <param id="1" name="Value">10</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="124498539390734" type="System">
+                                            <param id="0" name="Variable">fraseAtualBIB</param>
+                                            <param id="1" name="Value">inicioDialogoBIB</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="174296455558970" type="System">
+                                            <param id="0" name="Variable">tamanhoDialogoBIB</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="683651984256298" type="System">
+                                            <param id="0" name="Variable">controleDialogos8</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="2" name="Stop" sid="319234303164239" type="playerAnim" />
+                                        <action id="-12" name="Set group active" sid="295661120977060" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove8&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="282616112217962" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoMago&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="859798921032474" type="System">
+                                            <param id="0" name="Group name">&quot;MarcaLocutor8&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="762151560196611" type="System">
+                                            <param id="0" name="Group name">&quot;CarregaBalaoDialogo8&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-10" name="Add to" sid="516480684519625" type="System">
+                                            <param id="0" name="Variable">controleFase8</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="564038719925572">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="354365334856574" type="livro">
+                                                    <param id="0" name="Unique ID">747</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action behavior="Pin" id="1" name="Unpin" sid="345841278702519" type="livro" />
+                                                <action id="-15" name="Set visible" sid="563565993447904" type="livro">
+                                                    <param id="0" name="Visibility">1</param>
+                                                </action>
+                                                <action id="-1" name="Set X" sid="520167867485237" type="selecaoLivro">
+                                                    <param id="0" name="X">-20</param>
+                                                </action>
+                                                <action id="-2" name="Set Y" sid="886434116984808" type="selecaoLivro">
+                                                    <param id="0" name="Y">-20</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="852810315627893">
+                                    <conditions>
+                                        <condition disabled="1" id="-14" name="Compare variable" sid="563027153691174" type="System">
+                                            <param id="0" name="Variable">controleFase8</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">3</param>
+                                        </condition>
+                                        <condition id="-15" inverted="1" name="Is group active" sid="845626909092450" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoMago&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="195016914373630" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoLivro2&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="727883972842625" type="System">
+                                            <param id="0" name="Variable">controleDialogos8</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="696696494672362" type="System">
+                                            <param id="0" name="Group name">&quot;PalavrasMagicas&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-group>
+                        <comment>Diálogo ao acertar a segunda palavra mágica</comment>
+                        <event-group description="" inactive="1" sid="672824899671985" title="DialogoPalavraMagica2">
+                            <sub-events>
+                                <event-block sid="631195261950078">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="257783237400345" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="181215828096365" type="System">
+                                            <param id="0" name="Variable">inicioDialogoBIB</param>
+                                            <param id="1" name="Value">11</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="305918212775669" type="System">
+                                            <param id="0" name="Variable">tamanhoDialogoBIB</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="897646651309016" type="System">
+                                            <param id="0" name="Variable">fraseAtualBIB</param>
+                                            <param id="1" name="Value">inicioDialogoBIB</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="409039934843357" type="System">
+                                            <param id="0" name="Variable">controleDialogos8</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="2" name="Stop" sid="422847497492234" type="playerAnim" />
+                                        <action id="-12" name="Set group active" sid="414189189129034" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove8&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="564011678860474" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoMago&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="649580387724409" type="System">
+                                            <param id="0" name="Group name">&quot;MarcaLocutor8&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="890185613119082" type="System">
+                                            <param id="0" name="Group name">&quot;CarregaBalaoDialogo8&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-10" name="Add to" sid="368020863410708" type="System">
+                                            <param id="0" name="Variable">controleFase8</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="224199587786694">
+                                    <conditions>
+                                        <condition disabled="1" id="-14" name="Compare variable" sid="778466879467446" type="System">
+                                            <param id="0" name="Variable">controleFase8</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">3</param>
+                                        </condition>
+                                        <condition id="-15" inverted="1" name="Is group active" sid="214997436721668" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoMago&quot;</param>
+                                        </condition>
+                                        <condition id="-14" name="Pick by unique ID" sid="907267698459851" type="livro">
+                                            <param id="0" name="Unique ID">747</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="223682043132649" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoPalavraMagica1&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action behavior="Pin" id="0" name="Pin to object" sid="288284082733013" type="livro">
+                                            <param id="0" name="Pin to">selecaoLivro</param>
+                                            <param id="1" name="Mode">0</param>
+                                        </action>
+                                        <action disabled="1" id="-15" name="Set visible" sid="692885741678104" type="livro">
+                                            <param id="0" name="Visibility">0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="865143744787534" type="System">
+                                            <param id="0" name="Variable">controleDialogos8</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="449899347457273" type="System">
+                                            <param id="0" name="Group name">&quot;LivrosInvisiveis&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="971149583400377" type="System">
+                                            <param id="0" name="Group name">&quot;SpawnLivrosInvisiveis&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action disabled="1" id="-12" name="Set group active" sid="788363828575020" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoLivro3&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-group>
                         <comment>Ao encontrar o terceiro livro</comment>
-                        <event-group description="" inactive="1" sid="646601216359900" title="FalaEncontrouLivro3" />
+                        <event-group description="" inactive="1" sid="273473951184344" title="DialogoLivro3" />
+                        <comment>Diálogo ao acertar a terceira palavra mágica</comment>
+                        <event-group description="" inactive="1" sid="888888874432834" title="DialogoPalavraMagica3" />
                         <comment>Ao apertar Q depois do primeiro diálogo</comment>
                         <comment>Ao errar a palavra mágica</comment>
+                        <event-group description="" inactive="1" sid="105038381779025" title="DialogoRespostaErrada" />
                         <comment>Ao bater nas paredes</comment>
                     </sub-events>
                 </event-group>
@@ -3011,7 +3489,7 @@
                                         <condition id="-8" name="Compare two values" sid="349998039262521" type="System">
                                             <param id="0" name="First value">fraseAtualBIB</param>
                                             <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Second value">tamanhoDialogoBIB-1</param>
+                                            <param id="2" name="Second value">inicioDialogoBIB + tamanhoDialogoBIB-1</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -3079,7 +3557,7 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
-                        <comment>Embora será fechada a caixa de diálogo, adiciona-se um no indice da frase pois podem ter mais diálogos depois</comment>
+                        <comment>Embora será fechada a caixa de diálogo, reseta o valor de fraseAtualBIB para 0, preparando o grupo pra um possível próximo diálogo</comment>
                         <event-block sid="860069956616982">
                             <conditions>
                                 <condition id="-10" name="Compare opacity" sid="903142320715276" type="Dialogos">
@@ -3099,7 +3577,7 @@
                                         <condition id="-14" name="Compare variable" sid="795381259199752" type="System">
                                             <param id="0" name="Variable">fraseAtualBIB</param>
                                             <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">tamanhoDialogoBIB</param>
+                                            <param id="2" name="Value">tamanhoDialogoBIB + inicioDialogoBIB</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -3115,13 +3593,9 @@
                                             <param id="0" name="Group name">&quot;DialogoMago&quot;</param>
                                             <param id="1" name="State">0</param>
                                         </action>
-                                        <action id="-12" name="Set group active" sid="204485300675769" type="System">
-                                            <param id="0" name="Group name">&quot;ConversarComMago&quot;</param>
-                                            <param id="1" name="State">0</param>
-                                        </action>
-                                        <action id="-12" name="Set group active" sid="270098168238741" type="System">
-                                            <param id="0" name="Group name">&quot;SpawnLivrosInvisíveis&quot;</param>
-                                            <param id="1" name="State">1</param>
+                                        <action id="-9" name="Set value" sid="359121779031682" type="System">
+                                            <param id="0" name="Variable">fraseAtualBIB</param>
+                                            <param id="1" name="Value">0</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -3131,7 +3605,7 @@
                 </event-group>
             </sub-events>
         </event-group>
-        <event-group description="Grupo que define todas as funcionalidades dos livros invisíveis e suas mecânicas. Quando chamado, spawna o primeiro livro." sid="471477154081207" title="LivrosInvisiveis">
+        <event-group description="Grupo que define todas as funcionalidades dos livros invisíveis e suas mecânicas. Quando chamado, spawna o primeiro livro." inactive="1" sid="471477154081207" title="LivrosInvisiveis">
             <sub-events>
                 <event-group description="Spawna os livros invisíveis em posições possíveis" sid="567134998290318" title="SpawnLivrosInvisiveis">
                     <sub-events>
@@ -3143,6 +3617,9 @@
                                 <action id="-3" name="Set position" sid="296591637123883" type="selecaoLivro">
                                     <param id="0" name="X">round(random(0, 945))</param>
                                     <param id="1" name="Y">round(random(152, LayoutHeight))</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="290916406447554" type="selecaoLivro">
+                                    <param id="0" name="Visibility">0</param>
                                 </action>
                             </actions>
                             <sub-events>
@@ -3187,6 +3664,7 @@
                                 <condition id="1" name="Is overlapping another object" sid="959491482163982" type="selecaoLivro">
                                     <param id="0" name="Object">player</param>
                                 </condition>
+                                <condition id="-9" inverted="1" name="Is visible" sid="350560082682499" type="selecaoLivro" />
                                 <condition id="-4" name="Trigger once while true" sid="535663600022144" type="System" />
                             </conditions>
                             <actions>
@@ -3205,7 +3683,7 @@
                             </conditions>
                             <actions>
                                 <action id="-12" name="Set group active" sid="876848651959199" type="System">
-                                    <param id="0" name="Group name">&quot;ControleGuiaMagico&quot;</param>
+                                    <param id="0" name="Group name">&quot;AtivaGuiaMagico&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
                             </actions>
@@ -3213,14 +3691,6 @@
                         <event-group description="Controla o comportamento dos guias sonoro e visual enquanto estiver ativo" inactive="1" sid="550398667162211" title="ControleGuiaMagico">
                             <sub-events>
                                 <comment>Controle do Guia Visual</comment>
-                                <event-block sid="518022044846579">
-                                    <conditions />
-                                    <actions>
-                                        <action id="-15" name="Set visible" sid="928388348039171" type="GuiaVisual">
-                                            <param id="0" name="Visibility">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
                                 <event-block sid="166792875607084">
                                     <conditions>
                                         <condition id="-1" name="Every tick" sid="569906855544959" type="System" />
@@ -3234,17 +3704,30 @@
                                 <comment>Controle do Guia Sonoro</comment>
                             </sub-events>
                         </event-group>
-                        <event-group description="Desativa os guias sonoro e visual e desabilita a mecânica dos livros invisíveis" inactive="1" sid="452611207448470" title="DesativaGuiaMagico">
+                        <event-group description="Ativa os guias sonoro e visual e desabilita a mecânica dos livros invisíveis" inactive="1" sid="724983019041393" title="AtivaGuiaMagico">
                             <sub-events>
-                                <event-block sid="216120231513304">
-                                    <conditions />
+                                <event-block sid="964342606018205">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="567855310625154" type="System" />
+                                    </conditions>
                                     <actions>
-                                        <action id="-12" name="Set group active" sid="669663431127038" type="System">
-                                            <param id="0" name="Group name">&quot;SpawnLivrosInvisiveis&quot;</param>
+                                        <action id="-15" name="Set visible" sid="205391720560630" type="GuiaVisual">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="585099975482050" type="System">
+                                            <param id="0" name="Group name">&quot;ControleGuiaMagico&quot;</param>
                                             <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="675008565140282" type="System">
+                                            <param id="0" name="Group name">&quot;AtivaGuiaMagico&quot;</param>
+                                            <param id="1" name="State">0</param>
                                         </action>
                                     </actions>
                                 </event-block>
+                            </sub-events>
+                        </event-group>
+                        <event-group description="Desativa os guias sonoro e visual e desabilita a mecânica dos livros invisíveis" inactive="1" sid="452611207448470" title="DesativaGuiaMagico">
+                            <sub-events>
                                 <event-block sid="822641085779103">
                                     <conditions>
                                         <condition id="-4" name="Trigger once while true" sid="517380794703340" type="System" />
@@ -3254,7 +3737,7 @@
                                             <param id="0" name="Visibility">0</param>
                                         </action>
                                         <action id="-12" name="Set group active" sid="360645794374151" type="System">
-                                            <param id="0" name="Group name">&quot;MecanicaLivros&quot;</param>
+                                            <param id="0" name="Group name">&quot;ControleGuiaMagico&quot;</param>
                                             <param id="1" name="State">0</param>
                                         </action>
                                         <action id="-12" name="Set group active" sid="561185439914723" type="System">
@@ -3267,31 +3750,36 @@
                         </event-group>
                         <event-group description="Quando o livro é encontrado, a UI de palavras mágicas é ativada e o guia mágico é desabilitado" inactive="1" sid="518665976366464" title="EncontrouLivro">
                             <sub-events>
-                                <comment>Torna invisível os efeitos visuais e desabilita o efeito sonoro</comment>
                                 <event-block sid="432607391847065">
                                     <conditions>
                                         <condition id="-4" name="Trigger once while true" sid="430126300835425" type="System" />
                                     </conditions>
                                     <actions>
+                                        <action id="-15" name="Set visible" sid="300788690583854" type="selecaoLivro">
+                                            <param id="0" name="Visibility">1</param>
+                                        </action>
                                         <action id="-12" name="Set group active" sid="678825477239870" type="System">
                                             <param id="0" name="Group name">&quot;DesativaGuiaMagico&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
-                                        <action id="-12" name="Set group active" sid="422002214091608" type="System">
-                                            <param id="0" name="Group name">&quot;FalaEncontrouLivro&quot;&amp;livroAtual</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
-                                        <action id="-12" name="Set group active" sid="621558228479297" type="System">
-                                            <param id="0" name="Group name">&quot;PalavrasMagicas&quot;</param>
                                             <param id="1" name="State">1</param>
                                         </action>
                                         <action id="-12" name="Set group active" sid="402735213569212" type="System">
                                             <param id="0" name="Group name">&quot;EncontrouLivro&quot;</param>
                                             <param id="1" name="State">0</param>
                                         </action>
+                                        <action id="-12" name="Set group active" sid="962682956657211" type="System">
+                                            <param id="0" name="Group name">&quot;MecanicaLivros&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="678813259707859" type="System">
+                                            <param id="0" name="Group name">&quot;LivrosInvisiveis&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="123627469662283" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoLivro&quot; &amp; livroAtual</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
                                     </actions>
                                 </event-block>
-                                <comment>Diálogo de quando o livro é encontrado</comment>
                             </sub-events>
                         </event-group>
                     </sub-events>
@@ -3365,7 +3853,7 @@
                                                     <param id="0" name="Unique ID">783</param>
                                                 </condition>
                                                 <condition id="-14" name="Pick by unique ID" sid="279604738117680" type="Dica">
-                                                    <param id="0" name="Unique ID">787</param>
+                                                    <param id="0" name="Unique ID">714</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -3641,7 +4129,7 @@
                                                     <param id="0" name="Unique ID">785</param>
                                                 </condition>
                                                 <condition id="-14" name="Pick by unique ID" sid="498538417754241" type="botoesTexto">
-                                                    <param id="0" name="Unique ID">778</param>
+                                                    <param id="0" name="Unique ID">715</param>
                                                 </condition>
                                             </conditions>
                                             <actions />
@@ -3711,10 +4199,7 @@
                 </event-group>
                 <event-group description="Utilizado para a verificação da resposta do jogador. " inactive="1" sid="458722143144397" title="VerificarResposta">
                     <sub-events>
-                        <comment>Soma pontuação</comment>
-                        <comment>Soma um a livroAtual</comment>
-                        <comment>Reseta e fecha palavras mágicas</comment>
-                        <comment>Dispara próximo diálogo com mago</comment>
+                        <comment>MUDAR PRA PONTUAÇÃO CORRETA</comment>
                         <event-block sid="195913215497122">
                             <conditions>
                                 <condition id="0" name="Compare text" sid="619125256866500" type="RespostaBIB">
@@ -3723,9 +4208,27 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-10" name="Add to" sid="150417700327341" type="System">
-                                    <param id="0" name="Variable">livroAtual</param>
-                                    <param id="1" name="Value">1</param>
+                                <action id="-12" name="Set group active" sid="879319820528536" type="System">
+                                    <param id="0" name="Group name">&quot;VerificarResposta&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-10" name="Add to" sid="426343466695120" type="System">
+                                    <param id="0" name="Variable">pontos</param>
+                                    <param id="1" name="Value">100</param>
+                                </action>
+                                <action id="0" name="Set text" sid="715250318011643" type="pontoTexto">
+                                    <param id="0" name="Text">&quot;+100&quot;</param>
+                                </action>
+                                <action id="4" name="Set font color" sid="754437406041227" type="pontoTexto">
+                                    <param id="0" name="Color">rgb(41, 90, 165)</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="127726426025389" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao8b&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="124513491179460" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao8a&quot;</param>
+                                    <param id="1" name="State">1</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="204786177067941" type="System">
                                     <param id="0" name="Group name">&quot;ResetUIPalavrasMagicas&quot;</param>
@@ -3735,18 +4238,86 @@
                                     <param id="0" name="Group name">&quot;FecharUIPalavrasMagicas&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
-                                <action id="-12" name="Set group active" sid="879319820528536" type="System">
-                                    <param id="0" name="Group name">&quot;VerificarResposta&quot;</param>
+                                <action id="-12" name="Set group active" sid="116178823045476" type="System">
+                                    <param id="0" name="Group name">&quot;DialogoPalavraMagica&quot;&amp;livroAtual</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="663285346177257" type="System">
+                                    <param id="0" name="Seconds">3</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="678308850950618" type="System">
+                                    <param id="0" name="Seconds">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="509315155716868" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao8a&quot;</param>
                                     <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="703300036191121" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao8b&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-10" name="Add to" sid="150417700327341" type="System">
+                                    <param id="0" name="Variable">livroAtual</param>
+                                    <param id="1" name="Value">1</param>
                                 </action>
                             </actions>
                         </event-block>
                         <comment>Subtrai pontuação</comment>
+                        <comment>MUDAR PRA PONTUAÇÃO CORRETA</comment>
                         <event-block sid="178287181137892">
                             <conditions>
                                 <condition id="-22" name="Else" sid="813174886541210" type="System" />
                             </conditions>
-                            <actions />
+                            <actions>
+                                <action id="-12" name="Set group active" sid="354950065021798" type="System">
+                                    <param id="0" name="Group name">&quot;VerificarResposta&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-11" name="Subtract from" sid="593066435794027" type="System">
+                                    <param id="0" name="Variable">pontos</param>
+                                    <param id="1" name="Value">100</param>
+                                </action>
+                                <action id="0" name="Set text" sid="382165278329239" type="pontoTexto">
+                                    <param id="0" name="Text">&quot;-100&quot;</param>
+                                </action>
+                                <action id="4" name="Set font color" sid="878326780791397" type="pontoTexto">
+                                    <param id="0" name="Color">rgb(41, 90, 165)</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="266640051472384" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao8b&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="316000671840034" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao8a&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="696028001173668" type="System">
+                                    <param id="0" name="Seconds">3</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="810693461394905" type="System">
+                                    <param id="0" name="Seconds">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="536215893090465" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao8a&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="663737114067269" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao8b&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="290523653747061" type="System">
+                                    <param id="0" name="Group name">&quot;ResetUIPalavrasMagicas&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="922483943945534" type="System">
+                                    <param id="0" name="Group name">&quot;FecharUIPalavrasMagicas&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="637968928577418" type="System">
+                                    <param id="0" name="Group name">&quot;DialogoRespostaErrada&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
                         </event-block>
                     </sub-events>
                 </event-group>
@@ -3755,7 +4326,7 @@
                         <event-block sid="563609632544853">
                             <conditions>
                                 <condition id="-14" name="Pick by unique ID" sid="134178812650294" type="botaoDica">
-                                    <param id="0" name="Unique ID">784</param>
+                                    <param id="0" name="Unique ID">783</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -3767,7 +4338,7 @@
                         <event-block sid="952015288133912">
                             <conditions>
                                 <condition id="-14" name="Pick by unique ID" sid="397432759327551" type="botaoDica">
-                                    <param id="0" name="Unique ID">785</param>
+                                    <param id="0" name="Unique ID">784</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -3779,7 +4350,7 @@
                         <event-block sid="128673630427699">
                             <conditions>
                                 <condition id="-14" name="Pick by unique ID" sid="779151883109142" type="Dica">
-                                    <param id="0" name="Unique ID">786</param>
+                                    <param id="0" name="Unique ID">567</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -3791,7 +4362,7 @@
                         <event-block sid="232067594823364">
                             <conditions>
                                 <condition id="-14" name="Pick by unique ID" sid="385676718307316" type="Dica">
-                                    <param id="0" name="Unique ID">787</param>
+                                    <param id="0" name="Unique ID">714</param>
                                 </condition>
                             </conditions>
                             <actions>
