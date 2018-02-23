@@ -211,7 +211,7 @@
                     <param id="0" name="Pin to">player</param>
                     <param id="1" name="Mode">0</param>
                 </action>
-                <action behavior="Pin" disabled="1" id="0" name="Pin to object" sid="895835924230476" type="AnimacaoDiploma">
+                <action behavior="Pin" id="0" name="Pin to object" sid="895835924230476" type="AnimacaoDiploma">
                     <param id="0" name="Pin to">AndaParaCimaDiploma</param>
                     <param id="1" name="Mode">1</param>
                 </action>
@@ -221,11 +221,11 @@
                 <action behavior="Bullet" id="1" name="Set acceleration" sid="857490682842116" type="AnimacaoDiploma">
                     <param id="0" name="Acceleration">0</param>
                 </action>
+                <action behavior="Bullet" id="1" name="Set acceleration" sid="378798958851178" type="AndaParaCimaDiploma">
+                    <param id="0" name="Acceleration">0</param>
+                </action>
                 <action id="-16" name="Set opacity" sid="621851700477716" type="feedback">
                     <param id="0" name="Opacity">0</param>
-                </action>
-                <action id="-8" name="Set angle" sid="164505936120663" type="AndaParaCimaDiploma">
-                    <param id="0" name="Angle">270</param>
                 </action>
                 <action behavior="8Direction" id="0" name="Stop" sid="727434961056368" type="player" />
                 <action id="-16" name="Wait" sid="583188864787678" type="System">
@@ -619,7 +619,6 @@
                 </action>
             </actions>
         </event-block>
-        <event-group description="" inactive="1" sid="859807211236300" title="SaidaDiploma8" />
         <event-group description="" inactive="1" sid="742223392847084" title="Pontuacao8a">
             <sub-events>
                 <event-block sid="332971556299704">
@@ -755,6 +754,12 @@
                 </event-group>
                 <event-group description="Controla o efeito de abrir a porta" inactive="1" sid="877994095317789" title="AbrirPorta">
                     <sub-events>
+                        <event-block sid="984417413765162">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="468683746554508" type="System" />
+                            </conditions>
+                            <actions />
+                        </event-block>
                         <event-block sid="472190763651563">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="678543101859147" type="System" />
@@ -794,10 +799,63 @@
                                     <param id="0" name="Group name">&quot;DialogoDiplomaChamando&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
+                                <action id="-9" name="Destroy" sid="305572527576676" type="bibPortaFogo" />
                             </actions>
                         </event-block>
                     </sub-events>
                 </event-group>
+                <event-group description="" inactive="1" sid="859807211236300" title="SaidaDiploma8">
+                    <sub-events>
+                        <event-block sid="858128130940164">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="608671784582274" type="System" />
+                            </conditions>
+                            <actions>
+                                <action behavior="Bullet" id="1" name="Set acceleration" sid="694637018826323" type="AndaParaCimaDiploma">
+                                    <param id="0" name="Acceleration">50</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="992020576171834" type="AnimacaoDiploma">
+                                    <param id="0" name="Frame number">3</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="880824387534827">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="815395847057600" type="System" />
+                                <condition id="-13" name="Is between angles" sid="712817000419962" type="AndaParaCimaDiploma">
+                                    <param id="0" name="First angle">180</param>
+                                    <param id="1" name="Second angle">150</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-19" name="Rotate counter-clockwise" sid="662934139807555" type="AndaParaCimaDiploma">
+                                    <param id="0" name="Degrees">2</param>
+                                </action>
+                                <action id="-7" name="Set size" sid="662485685392029" type="AnimacaoDiploma">
+                                    <param id="0" name="Width">AnimacaoDiploma.Width*0.998</param>
+                                    <param id="1" name="Height">AnimacaoDiploma.Height*0.998</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="509046429337549">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="801801523596622" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Wait" sid="634859601682017" type="System">
+                                    <param id="0" name="Seconds">0.7</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="554179752846772" type="AndaParaCimaDiploma" />
+                                <action id="-9" name="Destroy" sid="803219960971440" type="AnimacaoDiploma" />
+                                <action id="-12" name="Set group active" sid="897918917086573" type="System">
+                                    <param id="0" name="Group name">&quot;SaidaDiploma8&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-group>
+                <event-group description="" inactive="1" sid="407852949007690" title="Efeito3DColuna" />
             </sub-events>
         </event-group>
         <event-group description="Grupo com ações de trigger da fase" sid="387926486040169" title="Acoes8">
@@ -1587,9 +1645,43 @@
                                             <param id="0" name="Group name">&quot;DialogoDiplomaChamando&quot;</param>
                                             <param id="1" name="State">0</param>
                                         </action>
+                                        <action id="-12" name="Set group active" sid="472798310709443" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoDiplomaChamando&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
                                         <action id="-9" name="Set value" sid="636034568906618" type="System">
                                             <param id="0" name="Variable">controleDialogos8</param>
                                             <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-group>
+                        <event-group description="" inactive="1" sid="275145656745306" title="TriggerSaidaDiploma">
+                            <sub-events>
+                                <event-block sid="785816103359914">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="739622849845374" type="player">
+                                            <param id="0" name="Comparison">3</param>
+                                            <param id="1" name="Y co-ordinate">225</param>
+                                        </condition>
+                                        <condition id="-1" name="Compare X" sid="760807199196833" type="player">
+                                            <param id="0" name="Comparison">3</param>
+                                            <param id="1" name="X co-ordinate">760</param>
+                                        </condition>
+                                        <condition id="-1" name="Compare X" sid="223989027223923" type="player">
+                                            <param id="0" name="Comparison">5</param>
+                                            <param id="1" name="X co-ordinate">480</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="716481241413618" type="System">
+                                            <param id="0" name="Group name">&quot;SaidaDiploma8&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="814395953326431" type="System">
+                                            <param id="0" name="Group name">&quot;TriggerSaidaDiploma&quot;</param>
+                                            <param id="1" name="State">0</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -4664,6 +4756,6 @@
                 </event-group>
             </sub-events>
         </event-group>
-        <event-group description="" inactive="1" sid="830813109095841" title="Saida8" />
+        <event-group description="Saida do diploma" inactive="1" sid="830813109095841" title="Saida8" />
     </events>
 </c2eventsheet>
