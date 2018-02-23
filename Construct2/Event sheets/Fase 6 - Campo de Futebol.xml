@@ -1798,7 +1798,7 @@
                 <comment>Ação de ativação da Capivara após o chamado dela</comment>
                 <event-block sid="318777205670032">
                     <conditions>
-                        <condition id="2" name="Key is down" sid="491254991917059" type="Keyboard">
+                        <condition disabled="1" id="2" name="Key is down" sid="491254991917059" type="Keyboard">
                             <param id="0" name="Key">69</param>
                         </condition>
                         <condition id="-14" name="Compare variable" sid="663696591531424" type="System">
@@ -1837,6 +1837,7 @@
                                     <param id="0" name="Variable">tamanhoDialogoCAM</param>
                                     <param id="1" name="Value">3</param>
                                 </action>
+                                <action behavior="8Direction" id="0" name="Stop" sid="488534266732434" type="player" />
                                 <action id="-12" name="Set group active" sid="564779420568208" type="System">
                                     <param id="0" name="Group name">&quot;playerMove7&quot;</param>
                                     <param id="1" name="State">0</param>
@@ -2027,7 +2028,8 @@
                                     <param id="0" name="Group name">&quot;playerMove7&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
-                                <action id="2" name="Stop" sid="539406977951865" type="playerAnim" />
+                                <action disabled="1" id="2" name="Stop" sid="539406977951865" type="playerAnim" />
+                                <action behavior="8Direction" id="0" name="Stop" sid="472392857645804" type="player" />
                                 <action id="-12" name="Set group active" sid="405687521991941" type="System">
                                     <param id="0" name="Group name">&quot;PlacarControle&quot;</param>
                                     <param id="1" name="State">1</param>
@@ -2305,11 +2307,6 @@
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">10</param>
                         </condition>
-                        <condition id="-14" name="Compare variable" sid="991234122828745" type="System">
-                            <param id="0" name="Variable">tamanhoDialogoCAM</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">10</param>
-                        </condition>
                     </conditions>
                     <actions />
                     <sub-events>
@@ -2337,6 +2334,18 @@
                                 </action>
                             </actions>
                         </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="351570789808732">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="991234122828745" type="System">
+                            <param id="0" name="Variable">tamanhoDialogoCAM</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">10</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
                         <comment>Abre a torcida</comment>
                         <event-block sid="592320513140216">
                             <conditions>
@@ -3308,6 +3317,22 @@
                                         <action id="-9" name="Destroy" sid="642126448964153" type="placa" />
                                     </actions>
                                 </event-block>
+                                <comment>Altera tamanhoDialogo para que não dê bug no final, soltando diálogos infinitos</comment>
+                                <event-block sid="222714940399344">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="313037924860020" type="System">
+                                            <param id="0" name="Variable">fraseAtualCAM</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">11</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="195363215909135" type="System">
+                                            <param id="0" name="Variable">tamanhoDialogoCAM</param>
+                                            <param id="1" name="Value">11</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                             </sub-events>
                         </event-block>
                     </sub-events>
@@ -3789,16 +3814,25 @@
                                     <param id="0" name="Group name">&quot;Pontuacao7a&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
-                                <action id="-12" name="Set group active" sid="180968969011482" type="System">
-                                    <param id="0" name="Group name">&quot;playerMove7&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
                                 <action id="-12" name="Set group active" sid="737842264073869" type="System">
                                     <param id="0" name="Group name">&quot;Pontuacao7b&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
                             </actions>
                             <sub-events>
+                                <event-block sid="210337396004327">
+                                    <conditions>
+                                        <condition id="-15" inverted="1" name="Is group active" sid="963221943581207" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="180968969011482" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                                 <event-block sid="677086288210965">
                                     <conditions>
                                         <condition id="-17" name="Compare opacity" sid="519811428698115" type="System">
@@ -4563,16 +4597,25 @@
                                     <param id="0" name="Group name">&quot;Pontuacao7a&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
-                                <action id="-12" name="Set group active" sid="617727690296125" type="System">
-                                    <param id="0" name="Group name">&quot;playerMove7&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
                                 <action id="-12" name="Set group active" sid="666812929864688" type="System">
                                     <param id="0" name="Group name">&quot;Pontuacao7b&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
                             </actions>
                             <sub-events>
+                                <event-block sid="310039780584823">
+                                    <conditions>
+                                        <condition id="-15" inverted="1" name="Is group active" sid="397681944197808" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="543555767946631" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                                 <event-block sid="644158719378510">
                                     <conditions>
                                         <condition id="-17" name="Compare opacity" sid="433362432526501" type="System">
@@ -4617,10 +4660,6 @@
                                     <param id="0" name="Group name">&quot;Pontuacao7a&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
-                                <action id="-12" name="Set group active" sid="893821179874592" type="System">
-                                    <param id="0" name="Group name">&quot;playerMove7&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
                                 <action id="-12" name="Set group active" sid="561914505542631" type="System">
                                     <param id="0" name="Group name">&quot;Pontuacao7b&quot;</param>
                                     <param id="1" name="State">1</param>
@@ -4633,6 +4672,19 @@
                                 </action>
                             </actions>
                             <sub-events>
+                                <event-block sid="598332362763939">
+                                    <conditions>
+                                        <condition id="-15" inverted="1" name="Is group active" sid="736109731302654" type="System">
+                                            <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="441074600151546" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                                 <event-block sid="628074324389498">
                                     <conditions>
                                         <condition id="-17" name="Compare opacity" sid="534438775902808" type="System">
@@ -4826,10 +4878,6 @@
                                             <param id="0" name="Group name">&quot;Pontuacao7a&quot;</param>
                                             <param id="1" name="State">0</param>
                                         </action>
-                                        <action id="-12" name="Set group active" sid="470975794601983" type="System">
-                                            <param id="0" name="Group name">&quot;playerMove7&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
                                         <action id="-12" name="Set group active" sid="442787649004780" type="System">
                                             <param id="0" name="Group name">&quot;Pontuacao7b&quot;</param>
                                             <param id="1" name="State">1</param>
@@ -4842,6 +4890,21 @@
                                             <param id="0" name="Layout">Menu</param>
                                         </action>
                                     </actions>
+                                    <sub-events>
+                                        <event-block sid="812316210814695">
+                                            <conditions>
+                                                <condition id="-15" inverted="1" name="Is group active" sid="698944991823672" type="System">
+                                                    <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="444643211675485" type="System">
+                                                    <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
