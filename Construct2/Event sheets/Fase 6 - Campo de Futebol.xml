@@ -8,6 +8,7 @@
         <variable constant="0" name="volPassosMin" sid="155369295873792" static="0" type="number">-14</variable>
         <variable constant="0" name="volPassos" sid="203577669083317" static="0" type="number">0</variable>
         <variable constant="0" name="volTorcida" sid="779977144613820" static="0" type="number">0</variable>
+        <variable constant="0" name="volCapivara" sid="233476774594495" static="0" type="number">0</variable>
         <comment>Variável utilizada para criar o efeito de fade out na torcida</comment>
         <variable constant="0" name="fadeOutTorcida" sid="231606468346778" static="0" type="number">0</variable>
         <comment>Auxilia na criação dos objetos</comment>
@@ -38,6 +39,8 @@
         <variable constant="0" name="acaoBola" sid="590493915236453" static="0" type="number">0</variable>
         <comment>Serve para controlar o volume da torcida para orientar Ariel a chegar na bola</comment>
         <variable constant="0" name="efeitoTorcidaBola" sid="814090081503031" static="0" type="number">0</variable>
+        <comment>Variável criada para controlar em qual animação o mascote está</comment>
+        <variable constant="0" name="frameCapivara" sid="176182461252024" static="0" type="number">0</variable>
         <event-block sid="704942424572087">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="961560001477127" type="System" />
@@ -68,38 +71,56 @@
                 <action id="4" name="Preload" sid="759342988342533" type="Audio">
                     <param id="0" name="Audio file">risada_diploma</param>
                 </action>
-                <action disabled="1" id="4" name="Preload" sid="472335262989224" type="Audio">
+                <action id="4" name="Preload" sid="248824367381730" type="Audio">
+                    <param id="0" name="Audio file">capivara_0</param>
+                </action>
+                <action id="4" name="Preload" sid="265017923479469" type="Audio">
                     <param id="0" name="Audio file">capivara_1</param>
                 </action>
-                <action disabled="1" id="4" name="Preload" sid="926844824749255" type="Audio">
-                    <param id="0" name="Audio file">capivara_2_aqui</param>
+                <action id="4" name="Preload" sid="986952731551523" type="Audio">
+                    <param id="0" name="Audio file">capivara_2</param>
                 </action>
-                <action disabled="1" id="4" name="Preload" sid="742945018238907" type="Audio">
-                    <param id="0" name="Audio file">capivara_2_hey</param>
-                </action>
-                <action disabled="1" id="4" name="Preload" sid="674667634909739" type="Audio">
-                    <param id="0" name="Audio file">capivara_2_psiu</param>
-                </action>
-                <action disabled="1" id="4" name="Preload" sid="451633216472605" type="Audio">
+                <action id="4" name="Preload" sid="511987904719178" type="Audio">
                     <param id="0" name="Audio file">capivara_3</param>
                 </action>
-                <action disabled="1" id="4" name="Preload" sid="935754270686952" type="Audio">
+                <action id="4" name="Preload" sid="225409358358558" type="Audio">
                     <param id="0" name="Audio file">capivara_4</param>
                 </action>
-                <action disabled="1" id="4" name="Preload" sid="395956555864395" type="Audio">
+                <action id="4" name="Preload" sid="302537331926539" type="Audio">
                     <param id="0" name="Audio file">capivara_5</param>
                 </action>
-                <action disabled="1" id="4" name="Preload" sid="698644072901849" type="Audio">
+                <action id="4" name="Preload" sid="906770158598529" type="Audio">
                     <param id="0" name="Audio file">capivara_6</param>
                 </action>
-                <action disabled="1" id="4" name="Preload" sid="327352309012546" type="Audio">
+                <action id="4" name="Preload" sid="500763755340224" type="Audio">
                     <param id="0" name="Audio file">capivara_7</param>
                 </action>
-                <action disabled="1" id="4" name="Preload" sid="513275925034967" type="Audio">
+                <action id="4" name="Preload" sid="264954197856433" type="Audio">
                     <param id="0" name="Audio file">capivara_8</param>
                 </action>
-                <action disabled="1" id="4" name="Preload" sid="707551342868360" type="Audio">
+                <action id="4" name="Preload" sid="577454681500889" type="Audio">
                     <param id="0" name="Audio file">capivara_9</param>
+                </action>
+                <action id="4" name="Preload" sid="348096671176425" type="Audio">
+                    <param id="0" name="Audio file">capivara_10</param>
+                </action>
+                <action id="4" name="Preload" sid="418841720265767" type="Audio">
+                    <param id="0" name="Audio file">capivara_11</param>
+                </action>
+                <action id="4" name="Preload" sid="850080708800781" type="Audio">
+                    <param id="0" name="Audio file">capivara_12</param>
+                </action>
+                <action id="4" name="Preload" sid="376207327730452" type="Audio">
+                    <param id="0" name="Audio file">capivara_13</param>
+                </action>
+                <action id="4" name="Preload" sid="744787868920478" type="Audio">
+                    <param id="0" name="Audio file">capivara_14</param>
+                </action>
+                <action id="4" name="Preload" sid="697384358216579" type="Audio">
+                    <param id="0" name="Audio file">capivara_15</param>
+                </action>
+                <action id="4" name="Preload" sid="810423607658400" type="Audio">
+                    <param id="0" name="Audio file">encosta_parede</param>
                 </action>
                 <action id="-9" name="Set value" sid="358939320709451" type="System">
                     <param id="0" name="Variable">pause</param>
@@ -353,6 +374,9 @@
                 <action id="5" name="Set frame" sid="659212649605458" type="AnimacaoDiploma">
                     <param id="0" name="Frame number">0</param>
                 </action>
+                <action id="5" name="Set frame" sid="809476266758546" type="capivara">
+                    <param id="0" name="Frame number">frameCapivara</param>
+                </action>
                 <action id="-8" name="Set angle" sid="648346069534115" type="AndaParaCimaDiploma">
                     <param id="0" name="Angle">270</param>
                 </action>
@@ -521,10 +545,35 @@
                 </event-block>
             </sub-events>
         </event-block>
+        <comment>Chamado da Capivara com um áudio posicionado, embora isso apenas será permitido caso ela não esteja produzindo qualquer outro som</comment>
         <event-block sid="818361537820909">
             <conditions>
                 <condition id="0" name="On key pressed" sid="604553403252939" type="Keyboard">
                     <param id="0" name="Key">81</param>
+                </condition>
+                <condition id="5" inverted="1" name="Is tag playing" sid="350793453759409" type="Audio">
+                    <param id="0" name="Tag">&quot;capivara&quot;</param>
+                </condition>
+                <condition id="-15" inverted="1" name="Is group active" sid="344731837072745" type="System">
+                    <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
+                </condition>
+                <condition id="-15" inverted="1" name="Is group active" sid="179644626579658" type="System">
+                    <param id="0" name="Group name">&quot;PlacarControle&quot;</param>
+                </condition>
+                <condition id="-14" inverted="1" name="Compare variable" sid="520607082353843" type="System">
+                    <param id="0" name="Variable">volTorcida</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Value">0</param>
+                </condition>
+                <condition id="-14" inverted="1" name="Compare variable" sid="150511121583851" type="System">
+                    <param id="0" name="Variable">fadeOutTorcida</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Value">1</param>
+                </condition>
+                <condition id="-14" inverted="1" name="Compare variable" sid="543251359762249" type="System">
+                    <param id="0" name="Variable">pause</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Value">1</param>
                 </condition>
             </conditions>
             <actions>
@@ -540,7 +589,18 @@
                 </action>
                 <action id="28" name="Play at object (by name)" sid="230695597981503" type="Audio">
                     <param id="0" name="Folder">0</param>
-                    <param id="1" name="Audio file name">choose(&quot;capivara_2_aqui&quot;, &quot;capivara_2_hey&quot;, &quot;capivara_2_psiu&quot;)</param>
+                    <param id="1" name="Audio file name">choose(&quot;capivara_11&quot;, &quot;capivara_12&quot;, &quot;capivara_13&quot;, &quot;capivara_14&quot;)</param>
+                    <param id="2" name="Loop">0</param>
+                    <param id="3" name="Volume">5-(((sqrt((player.X-capivara.X)^2+(player.Y-capivara.Y)^2))-150)/29)</param>
+                    <param id="4" name="Object">capivara</param>
+                    <param id="5" name="Inner angle">45</param>
+                    <param id="6" name="Outer angle">45</param>
+                    <param id="7" name="Outer gain">100</param>
+                    <param id="8" name="Tag (optional)">&quot;capivara&quot;</param>
+                </action>
+                <action disabled="1" id="28" name="Play at object (by name)" sid="415053703696391" type="Audio">
+                    <param id="0" name="Folder">0</param>
+                    <param id="1" name="Audio file name">&quot;capivara_11&quot;</param>
                     <param id="2" name="Loop">0</param>
                     <param id="3" name="Volume">5-(((sqrt((player.X-capivara.X)^2+(player.Y-capivara.Y)^2))-150)/29)</param>
                     <param id="4" name="Object">capivara</param>
@@ -859,6 +919,10 @@
                         <action id="3" name="Set volume" sid="839248428101104" type="Audio">
                             <param id="0" name="Tag">&quot;torcida&quot;</param>
                             <param id="1" name="dB">volTorcida</param>
+                        </action>
+                        <action id="3" name="Set volume" sid="978514207956938" type="Audio">
+                            <param id="0" name="Tag">&quot;capivara&quot;</param>
+                            <param id="1" name="dB">volCapivara</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -2929,6 +2993,79 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment>Arruma os frames do mascote conforme a fala (Condicional 1: Ele triste; Condicional 2: Ele feliz; Else: Ele neutro)</comment>
+                <event-block any="1" sid="967993441638142">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="318487490860537" type="System">
+                            <param id="0" name="Variable">fraseAtualCAM</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">3</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="787066987787777" type="System">
+                            <param id="0" name="Variable">fraseAtualCAM</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">8</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="429633804749208" type="System">
+                            <param id="0" name="Variable">frameCapivara</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="626711412661169">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="157747314956129" type="System" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block any="1" sid="340922018688573">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="282738372837629" type="System">
+                                    <param id="0" name="Variable">fraseAtualCAM</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                                <condition id="-14" name="Compare variable" sid="474643194877371" type="System">
+                                    <param id="0" name="Variable">fraseAtualCAM</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">6</param>
+                                </condition>
+                                <condition id="-14" name="Compare variable" sid="134061618861084" type="System">
+                                    <param id="0" name="Variable">fraseAtualCAM</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">9</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="189605337178208" type="System">
+                                    <param id="0" name="Variable">frameCapivara</param>
+                                    <param id="1" name="Value">2</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="212183092425138">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="990907944483034" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="970620826715429" type="System">
+                                    <param id="0" name="Variable">frameCapivara</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="451844380188531">
+                    <conditions />
+                    <actions>
+                        <action id="5" name="Set frame" sid="407260813854005" type="capivara">
+                            <param id="0" name="Frame number">frameCapivara</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <comment>Carrega o balão caso ele não esteja ativo e libera a inserção do diálogo</comment>
                 <event-block sid="839103387711190">
                     <conditions>
@@ -3033,6 +3170,13 @@
                                 </condition>
                             </conditions>
                             <actions>
+                                <action id="7" name="Play (by name)" sid="674394869965125" type="Audio">
+                                    <param id="0" name="Folder">0</param>
+                                    <param id="1" name="Audio file name">&quot;capivara_&quot; &amp; fraseAtualCAM</param>
+                                    <param id="3" name="Loop">0</param>
+                                    <param id="4" name="Volume">volCapivara</param>
+                                    <param id="2" name="Tag (optional)">&quot;capivara&quot;</param>
+                                </action>
                                 <action id="-9" name="Set value" sid="927230485316822" type="System">
                                     <param id="0" name="Variable">avancarDialogosCAM</param>
                                     <param id="1" name="Value">1</param>
@@ -3045,7 +3189,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <comment>Avança o diálogo</comment>
+                <comment>Avança o diálogo, cortando a frase da capivara caso ainda esteja falando</comment>
                 <event-block sid="128646145003381">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="546754884555188" type="System">
@@ -3063,6 +3207,9 @@
                                 </condition>
                             </conditions>
                             <actions>
+                                <action id="6" name="Stop" sid="932692750219817" type="Audio">
+                                    <param id="0" name="Tag">&quot;capivara&quot;</param>
+                                </action>
                                 <action id="0" name="Play" sid="235534774182178" type="Audio">
                                     <param id="0" name="Audio file">passar_dialogo</param>
                                     <param id="2" name="Loop">0</param>
@@ -3824,6 +3971,19 @@
                                     <conditions>
                                         <condition id="-15" inverted="1" name="Is group active" sid="963221943581207" type="System">
                                             <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
+                                        </condition>
+                                        <condition id="-15" inverted="1" name="Is group active" sid="852209428669205" type="System">
+                                            <param id="0" name="Group name">&quot;PlacarControle&quot;</param>
+                                        </condition>
+                                        <condition id="-14" inverted="1" name="Compare variable" sid="257691558104996" type="System">
+                                            <param id="0" name="Variable">volTorcida</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                        <condition id="-14" inverted="1" name="Compare variable" sid="965186746842078" type="System">
+                                            <param id="0" name="Variable">fadeOutTorcida</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -4608,6 +4768,19 @@
                                         <condition id="-15" inverted="1" name="Is group active" sid="397681944197808" type="System">
                                             <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
                                         </condition>
+                                        <condition id="-15" inverted="1" name="Is group active" sid="414201982465441" type="System">
+                                            <param id="0" name="Group name">&quot;PlacarControle&quot;</param>
+                                        </condition>
+                                        <condition id="-14" inverted="1" name="Compare variable" sid="646101307633767" type="System">
+                                            <param id="0" name="Variable">volTorcida</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                        <condition id="-14" inverted="1" name="Compare variable" sid="952973581722851" type="System">
+                                            <param id="0" name="Variable">fadeOutTorcida</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
                                     </conditions>
                                     <actions>
                                         <action id="-12" name="Set group active" sid="543555767946631" type="System">
@@ -4676,6 +4849,19 @@
                                     <conditions>
                                         <condition id="-15" inverted="1" name="Is group active" sid="736109731302654" type="System">
                                             <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
+                                        </condition>
+                                        <condition id="-15" inverted="1" name="Is group active" sid="462860079610160" type="System">
+                                            <param id="0" name="Group name">&quot;PlacarControle&quot;</param>
+                                        </condition>
+                                        <condition id="-14" inverted="1" name="Compare variable" sid="759924921432659" type="System">
+                                            <param id="0" name="Variable">volTorcida</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                        <condition id="-14" inverted="1" name="Compare variable" sid="348234629296180" type="System">
+                                            <param id="0" name="Variable">fadeOutTorcida</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -4895,6 +5081,19 @@
                                             <conditions>
                                                 <condition id="-15" inverted="1" name="Is group active" sid="698944991823672" type="System">
                                                     <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
+                                                </condition>
+                                                <condition id="-15" inverted="1" name="Is group active" sid="674541458727224" type="System">
+                                                    <param id="0" name="Group name">&quot;PlacarControle&quot;</param>
+                                                </condition>
+                                                <condition id="-14" inverted="1" name="Compare variable" sid="273030495097019" type="System">
+                                                    <param id="0" name="Variable">volTorcida</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">0</param>
+                                                </condition>
+                                                <condition id="-14" inverted="1" name="Compare variable" sid="824339981293511" type="System">
+                                                    <param id="0" name="Variable">fadeOutTorcida</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">1</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
