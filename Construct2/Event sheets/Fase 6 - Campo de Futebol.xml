@@ -2168,6 +2168,13 @@
                                         <action id="-16" name="Wait" sid="963294889770696" type="System">
                                             <param id="0" name="Seconds">1.5</param>
                                         </action>
+                                        <action id="-9" name="Set value" sid="649784444049173" type="System">
+                                            <param id="0" name="Variable">frameCapivara</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="5" name="Set frame" sid="612074654644577" type="capivara">
+                                            <param id="0" name="Frame number">frameCapivara</param>
+                                        </action>
                                         <action id="6" name="Stop" sid="694747443167762" type="Audio">
                                             <param id="0" name="Tag">&quot;torcida&quot;</param>
                                         </action>
@@ -2279,6 +2286,13 @@
                                         </action>
                                         <action id="-16" name="Wait" sid="872938239015351" type="System">
                                             <param id="0" name="Seconds">1.5</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="242466238235161" type="System">
+                                            <param id="0" name="Variable">frameCapivara</param>
+                                            <param id="1" name="Value">2</param>
+                                        </action>
+                                        <action id="5" name="Set frame" sid="429263975888356" type="capivara">
+                                            <param id="0" name="Frame number">frameCapivara</param>
                                         </action>
                                         <action id="6" name="Stop" sid="718403041541900" type="Audio">
                                             <param id="0" name="Tag">&quot;torcida&quot;</param>
@@ -2621,7 +2635,7 @@
                         </action>
                     </actions>
                     <sub-events>
-                        <comment>Controle do botão de chutar</comment>
+                        <comment>Controle do botão de chutar, liberando qualquer ação ou alteração ali após os dois campos estiverem preenchidos</comment>
                         <event-block sid="562955876558822">
                             <conditions>
                                 <condition id="7" name="Cursor is over object" sid="748532201329962" type="Mouse">
@@ -2630,6 +2644,14 @@
                                 <condition id="-10" name="Compare opacity" sid="342676294949905" type="placarBotao">
                                     <param id="0" name="Comparison">0</param>
                                     <param id="1" name="Opacity">100</param>
+                                </condition>
+                                <condition id="0" inverted="1" name="Compare text" sid="222245519997916" type="placarResp1">
+                                    <param id="0" name="Text">&quot;&quot;</param>
+                                    <param id="1" name="Case">0</param>
+                                </condition>
+                                <condition id="0" inverted="1" name="Compare text" sid="112014703696660" type="placarResp2">
+                                    <param id="0" name="Text">&quot;&quot;</param>
+                                    <param id="1" name="Case">0</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -2738,6 +2760,34 @@
                         </action>
                     </actions>
                 </event-block>
+                <comment>Verifica se as duas caixas de texto estão preenchidas, permitindo o chute</comment>
+                <event-block sid="152773458688812">
+                    <conditions>
+                        <condition id="0" inverted="1" name="Compare text" sid="502939134267483" type="placarResp1">
+                            <param id="0" name="Text">&quot;&quot;</param>
+                            <param id="1" name="Case">0</param>
+                        </condition>
+                        <condition id="0" inverted="1" name="Compare text" sid="347056890174445" type="placarResp2">
+                            <param id="0" name="Text">&quot;&quot;</param>
+                            <param id="1" name="Case">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="844890853439766" type="botao_desabilitado">
+                            <param id="0" name="Y">927</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="549922588384903">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="742290791597869" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="832866431676697" type="botao_desabilitado">
+                            <param id="0" name="Y">627</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <comment>Controle da posição onde a seta estará localizada, além de também impedir que o usuário digite no campo errado</comment>
                 <event-block sid="145679727413096">
                     <conditions>
@@ -2835,7 +2885,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <comment>Verifica as respostas do jogador</comment>
+                <comment>Verifica as respostas do jogador, liberando o envio delas após os dois campos estiverem preenchidos</comment>
                 <event-block sid="508744792465042">
                     <conditions>
                         <condition id="6" name="On object clicked" sid="742960550989282" type="Mouse">
@@ -2846,6 +2896,14 @@
                         <condition id="-10" name="Compare opacity" sid="759241288550269" type="placarBotao">
                             <param id="0" name="Comparison">0</param>
                             <param id="1" name="Opacity">100</param>
+                        </condition>
+                        <condition id="0" inverted="1" name="Compare text" sid="788856015392854" type="placarResp1">
+                            <param id="0" name="Text">&quot;&quot;</param>
+                            <param id="1" name="Case">0</param>
+                        </condition>
+                        <condition id="0" inverted="1" name="Compare text" sid="368544225956166" type="placarResp2">
+                            <param id="0" name="Text">&quot;&quot;</param>
+                            <param id="1" name="Case">0</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -3000,11 +3058,6 @@
                             <param id="0" name="Variable">fraseAtualCAM</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">3</param>
-                        </condition>
-                        <condition id="-14" name="Compare variable" sid="787066987787777" type="System">
-                            <param id="0" name="Variable">fraseAtualCAM</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">8</param>
                         </condition>
                     </conditions>
                     <actions>
