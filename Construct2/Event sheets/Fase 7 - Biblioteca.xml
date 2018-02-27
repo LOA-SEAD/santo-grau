@@ -22,6 +22,7 @@
         <variable constant="0" name="revelado2" sid="956039330320703" static="0" type="number">0</variable>
         <comment>Usado para controlar se o livro foi encontrado ou não</comment>
         <variable constant="0" name="livroEncontrado" sid="194816066682414" static="0" type="number">0</variable>
+        <variable constant="0" name="hueValue" sid="773163818114089" static="0" type="number">-100</variable>
         <event-block sid="900782436585763">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="974973112681185" type="System" />
@@ -549,16 +550,9 @@
                 </action>
             </actions>
         </event-block>
-        <comment>Para a animação do diploma fugindo</comment>
-        <event-block sid="855162841155134">
-            <conditions>
-                <condition id="-19" name="On destroyed" sid="180461819625930" type="AnimacaoDiploma" />
-            </conditions>
-            <actions />
-        </event-block>
         <event-block sid="691290548044024">
             <conditions>
-                <condition disabled="1" id="5" name="Is tag playing" sid="984670279022071" type="Audio">
+                <condition id="5" name="Is tag playing" sid="984670279022071" type="Audio">
                     <param id="0" name="Tag">&quot;sons&quot;</param>
                 </condition>
             </conditions>
@@ -589,6 +583,46 @@
                     </conditions>
                     <actions>
                         <action id="22" name="Set paused" sid="752637247506602" type="Audio">
+                            <param id="0" name="Tag">&quot;sons&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="861261773782471">
+            <conditions>
+                <condition id="5" name="Is tag playing" sid="197345542564878" type="Audio">
+                    <param id="0" name="Tag">&quot;magia&quot;</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="317575511484747">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="269834372994364" type="System">
+                            <param id="0" name="Variable">pause</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="22" name="Set paused" sid="264967878122187" type="Audio">
+                            <param id="0" name="Tag">&quot;sons&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="728000987183787">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="235565529825259" type="System">
+                            <param id="0" name="Variable">pause</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="22" name="Set paused" sid="908125006564025" type="Audio">
                             <param id="0" name="Tag">&quot;sons&quot;</param>
                             <param id="1" name="State">0</param>
                         </action>
@@ -661,7 +695,7 @@
                             <param id="0" name="Key">69</param>
                         </condition>
                         <condition id="1" name="Is overlapping another object" sid="851758559473053" type="player">
-                            <param id="0" name="Object">recompensa</param>
+                            <param id="0" name="Object">recompensaSelecao</param>
                         </condition>
                         <condition id="-14" name="Compare variable" sid="720797040646048" type="System">
                             <param id="0" name="Variable">pause</param>
@@ -671,6 +705,7 @@
                     </conditions>
                     <actions>
                         <action id="-9" name="Destroy" sid="462854924842156" type="recompensa" />
+                        <action id="-9" name="Destroy" sid="886293162216527" type="recompensaSelecao" />
                         <action id="-9" name="Set value" sid="338801898504622" type="System">
                             <param id="0" name="Variable">recompensa2</param>
                             <param id="1" name="Value">1</param>
@@ -704,6 +739,10 @@
                         <action id="-12" name="Set group active" sid="248391888546329" type="System">
                             <param id="0" name="Group name">&quot;Pontuacao8a&quot;</param>
                             <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="147598273620882" type="System">
+                            <param id="0" name="Group name">&quot;EfeitoCorRecompensa&quot;</param>
+                            <param id="1" name="State">0</param>
                         </action>
                         <action id="-16" name="Wait" sid="754624146292473" type="System">
                             <param id="0" name="Seconds">3</param>
@@ -1648,7 +1687,7 @@
                 </event-group>
             </sub-events>
         </event-group>
-        <event-group description="" sid="429907656460125" title="Efeitos8">
+        <event-group description="Efeitos relativos ao ambiente da biblioteca" sid="429907656460125" title="Efeitos8">
             <sub-events>
                 <event-block sid="281523341830373">
                     <conditions>
@@ -1806,7 +1845,7 @@
                         </event-block>
                     </sub-events>
                 </event-group>
-                <event-group description="" inactive="1" sid="859807211236300" title="SaidaDiploma8">
+                <event-group description="Animação de saída do diploma" inactive="1" sid="859807211236300" title="SaidaDiploma8">
                     <sub-events>
                         <event-block sid="858128130940164">
                             <conditions>
@@ -1857,7 +1896,43 @@
                         </event-block>
                     </sub-events>
                 </event-group>
-                <event-group description="" inactive="1" sid="407852949007690" title="Efeito3DColuna" />
+                <event-group description="Controla o efeito da mudança de cor da recompensa" sid="385000922253333" title="EfeitoCorRecompensa">
+                    <sub-events>
+                        <event-block sid="354835021938631">
+                            <conditions>
+                                <condition id="-1" name="Every tick" sid="858666888336272" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Add to" sid="140486065678013" type="System">
+                                    <param id="0" name="Variable">hueValue</param>
+                                    <param id="1" name="Value">0.01</param>
+                                </action>
+                                <action id="-28" name="Set effect parameter" sid="832854815869514" type="recompensa">
+                                    <param id="0" name="Effect">&quot;AdjustHSL&quot;</param>
+                                    <param id="1" name="Parameter index">0</param>
+                                    <param id="2" name="Value">hueValue</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="669426924684351">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="922818641426904" type="System">
+                                            <param id="0" name="Variable">hueValue</param>
+                                            <param id="1" name="Comparison">5</param>
+                                            <param id="2" name="Value">100</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="463920202801097" type="System">
+                                            <param id="0" name="Variable">hueValue</param>
+                                            <param id="1" name="Value">-100</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-group>
             </sub-events>
         </event-group>
         <event-group description="Grupo que controla a movimentação do jogador" sid="254005631517636" title="playerMove8">
