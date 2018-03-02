@@ -46,6 +46,9 @@
                 <action id="5" name="Set frame" sid="127337407664356" type="AnimacaoDiploma">
                     <param id="0" name="Frame number">0</param>
                 </action>
+                <action id="-15" name="Set visible" sid="892417516186791" type="Zonas">
+                    <param id="0" name="Visibility">0</param>
+                </action>
                 <action id="-4" name="Set position to another object" sid="3380644162080405" type="playerAnim">
                     <param id="0" name="Object">player</param>
                     <param id="1" name="Image point (optional)">0</param>
@@ -97,6 +100,10 @@
                     <param id="0" name="Group name">&quot;inicioPerguntasFFBN&quot;</param>
                     <param id="1" name="State">1</param>
                 </action>
+                <action id="-12" name="Set group active" sid="156911577281483" type="System">
+                    <param id="0" name="Group name">&quot;ScrollBlocosGelo&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
                 <action id="0" name="Load JSON" sid="9328277791879841" type="LoadJSONBN" />
                 <action id="-3" name="Set position" sid="855694068260151" type="pontuacao">
                     <param id="0" name="X">640</param>
@@ -117,7 +124,7 @@
                     <param id="0" name="Opacity">0</param>
                 </action>
                 <action id="0" name="Set text" sid="1357049657443647" type="textoPerguntas">
-                    <param id="0" name="Text">&quot;Após ler a pergunta e suas alternativas, pressione a tecla &apos;E&apos; e use a ponte que corresponde à alternativa correta&quot;</param>
+                    <param id="0" name="Text">&quot;Após ler a pergunta e suas alternativas, encoste no bloco que contém a resposta correta e     responda a proxima pergunta na sala à direita. Pressione a tecla E para continuar.&quot;</param>
                 </action>
                 <action id="-16" name="Set opacity" sid="3793970731779964" type="textoRespostas">
                     <param id="0" name="Opacity">0</param>
@@ -740,6 +747,199 @@
                 </action>
             </actions>
         </event-block>
+        <comment>Grupo destinado para tratar do scroll entre as salas</comment>
+        <event-group description="" sid="526424471637429" title="ScrollBlocosGelo">
+            <sub-events>
+                <comment>- Método de transição de salas no estilo de jogo &quot;The Legend of Zelda - A Link to the Past (SNES)&quot;. Feito com base no projeto ZoneCameraScroll.&#x0D;&#x0A;- Funções Principais:&#x0D;&#x0A;    * lerp(a, b, x) Linear interpolation of a to b by x. Calculates a + x * (b - a).&#x0D;&#x0A;    * clamp(x, lower, upper) Return lower if x is less than lower, upper if x is greater than upper, else return x.&#x0D;&#x0A;- A ideia é a camera se adaptar na zona onde o jogador está, levando exato 1 segundo, independente da máquina, para fazer a transição. O clamp possui 2 parâmetros iguais porque o terceiro leva em conta salas maiores do que a margem, o que não ocorre aqui</comment>
+                <event-block sid="971604231015907">
+                    <conditions>
+                        <condition id="-1" name="Every tick" sid="690678350914108" type="System" />
+                        <condition id="1" name="Is overlapping another object" sid="314193373127804" type="Zonas">
+                            <param id="0" name="Object">player</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-5" name="Scroll to X" sid="502279434158951" type="System">
+                            <param id="0" name="X">lerp(scrollx,(clamp(player.X,Zonas.X,Zonas.X)),0.1*60*dt)</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <comment>Remove provisoriamente as stalactites que bloqueiam o caminho, para os blocos e permite a passagem da personagem</comment>
+                        <event-block sid="930673957852919">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="436513579959117" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-15" name="Set visible" sid="395394584340180" type="Stalactites_block">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action behavior="Solid" id="0" name="Set enabled" sid="127592569611570" type="Stalactites_block">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                                <action behavior="Bullet" id="5" name="Set enabled" sid="332478580358002" type="selAlternativa1">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                                <action behavior="Bullet" id="5" name="Set enabled" sid="393726315123518" type="selAlternativa2">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                                <action behavior="Bullet" id="5" name="Set enabled" sid="679895662303805" type="selAlternativa3">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                                <action behavior="Solid" id="0" name="Set enabled" sid="723223993513419" type="selAlternativa1">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                                <action behavior="Solid" id="0" name="Set enabled" sid="863952200588227" type="selAlternativa2">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                                <action behavior="Solid" id="0" name="Set enabled" sid="304671687744126" type="selAlternativa3">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                                <action behavior="Solid" id="0" name="Set enabled" sid="668365462691714" type="selAlternativa3">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Quando verificar que iniciou o movimento, indicado pelo scroll está maior do que deveria ser naquela pergunta</comment>
+                <event-block sid="194872675084288">
+                    <conditions>
+                        <condition id="-8" name="Compare two values" sid="933352126155197" type="System">
+                            <param id="0" name="First value">((perguntaBN - 1) * 1280) - 635</param>
+                            <param id="1" name="Comparison">2</param>
+                            <param id="2" name="Second value">scrollx</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <comment>Torna todos os objetos invisíveis e freia a personagem</comment>
+                        <event-block sid="990932798752495">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="770338116578072" type="System" />
+                            </conditions>
+                            <actions>
+                                <action behavior="8Direction" id="0" name="Stop" sid="666469466094324" type="player" />
+                                <action id="-12" name="Set group active" sid="328105007381736" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove5&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="320234994720404" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove5&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="120511536983418" type="Cubo1">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="948436129999922" type="Cubo2">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="333870375435084" type="Cubo3">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="257855621610534" type="Stalactites">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="313357598500218" type="cafe">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="345796235623748" type="lasanha">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="912136202462621" type="recompensa">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Quando esta bem próximo de terminar o scroll</comment>
+                <event-block sid="553614459456242">
+                    <conditions>
+                        <condition id="-8" name="Compare two values" sid="970364410096502" type="System">
+                            <param id="0" name="First value">(perguntaBN * 1280) - 641</param>
+                            <param id="1" name="Comparison">2</param>
+                            <param id="2" name="Second value">scrollx</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <comment>Volta tudo ao normal</comment>
+                        <event-block sid="979789718338145">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="423029264174594" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-15" name="Set visible" sid="563947660901941" type="Cubo1">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="290737632714688" type="Cubo2">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="939921182756049" type="Cubo3">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="517743809919718" type="Stalactites">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="855204908389980" type="cafe">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="859909640869605" type="lasanha">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="394662376542798" type="recompensa">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="662224668332867" type="selAlternativa1">
+                                    <param id="0" name="Angle">round(random(0, 181)) - 90</param>
+                                </action>
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="804939620946093" type="selAlternativa2">
+                                    <param id="0" name="Angle">round(random(0, 181)) - 90</param>
+                                </action>
+                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="278086315923453" type="selAlternativa3">
+                                    <param id="0" name="Angle">round(random(0, 181)) - 90</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="590214177312965" type="Stalactites_block">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action behavior="Solid" id="0" name="Set enabled" sid="489479818240516" type="Stalactites_block">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action behavior="Bullet" id="5" name="Set enabled" sid="266291392698687" type="selAlternativa1">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action behavior="Bullet" id="5" name="Set enabled" sid="743934769936193" type="selAlternativa2">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action behavior="Bullet" id="5" name="Set enabled" sid="994635162363378" type="selAlternativa3">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action behavior="Solid" id="0" name="Set enabled" sid="263874061222183" type="selAlternativa1">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action behavior="Solid" id="0" name="Set enabled" sid="760141035582395" type="selAlternativa2">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action behavior="Solid" id="0" name="Set enabled" sid="904191852245107" type="selAlternativa3">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="168215397242470" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove5&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="924190973092082" type="System">
+                                    <param id="0" name="Group name">&quot;ScrollBlocosGelo&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-5" name="Scroll to X" sid="999508810559880" type="System">
+                                    <param id="0" name="X">(perguntaBN * 1280) - 640 </param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
         <event-group description="" inactive="1" sid="3156087337750594" title="Pontuacao5a">
             <sub-events>
                 <event-block sid="3544968347758162">
@@ -1342,7 +1542,7 @@
                                 <action id="-16" name="Set opacity" sid="134083781459365" type="textoRespostas">
                                     <param id="0" name="Opacity">textoRespostas.Opacity + 2.5</param>
                                 </action>
-                                <action id="-16" name="Set opacity" sid="259578507234533" type="BotaoE">
+                                <action disabled="1" id="-16" name="Set opacity" sid="259578507234533" type="BotaoE">
                                     <param id="0" name="Opacity">BotaoE.Opacity + 2.5</param>
                                 </action>
                             </actions>
@@ -1364,8 +1564,8 @@
                                     <param id="0" name="Variable">leuPergunta</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
-                                <action behavior="8Direction" id="0" name="Stop" sid="370558102439152" type="player" />
-                                <action id="-12" name="Set group active" sid="670736484508487" type="System">
+                                <action behavior="8Direction" disabled="1" id="0" name="Stop" sid="370558102439152" type="player" />
+                                <action disabled="1" id="-12" name="Set group active" sid="670736484508487" type="System">
                                     <param id="0" name="Group name">&quot;playerMove5&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
@@ -1418,6 +1618,9 @@
                                 <condition id="2" name="Key is down" sid="827217363062712" type="Keyboard">
                                     <param id="0" name="Key">39</param>
                                 </condition>
+                                <condition id="2" name="Key is down" sid="703938800006992" type="Keyboard">
+                                    <param id="0" name="Key">69</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="-9" name="Set value" sid="430482660238880" type="System">
@@ -1430,12 +1633,9 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <comment>Caso volte o efeito de apertar o E, é só descer o comando &quot;E is down&quot; aqui</comment>
                         <event-block any="1" sid="277761357666538">
-                            <conditions>
-                                <condition id="2" name="Key is down" sid="703938800006992" type="Keyboard">
-                                    <param id="0" name="Key">69</param>
-                                </condition>
-                            </conditions>
+                            <conditions />
                             <actions>
                                 <action id="-9" name="Set value" sid="161779347602101" type="System">
                                     <param id="0" name="Variable">leuPergunta</param>
@@ -1482,7 +1682,7 @@
                                 <action id="-13" name="Set time scale" sid="326498824217762" type="System">
                                     <param id="0" name="Time scale">1.0</param>
                                 </action>
-                                <action id="-12" name="Set group active" sid="755693639397886" type="System">
+                                <action disabled="1" id="-12" name="Set group active" sid="755693639397886" type="System">
                                     <param id="0" name="Group name">&quot;playerMove5&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
@@ -1701,80 +1901,93 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="1699590853007916">
+                        <comment>Só coleta a alternativa caso o movimento de scroll já tenha sido feito</comment>
+                        <event-block sid="573953265620596">
                             <conditions>
-                                <condition id="0" name="On collision with another object" sid="3214732951497474" type="player">
-                                    <param id="0" name="Object">selAlternativa1</param>
+                                <condition id="-8" name="Compare two values" sid="310260212976681" type="System">
+                                    <param id="0" name="First value">(perguntaBN * 1280) - 645</param>
+                                    <param id="1" name="Comparison">2</param>
+                                    <param id="2" name="Second value">scrollx</param>
                                 </condition>
                             </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="9233118113383888" type="System">
-                                    <param id="0" name="Variable">alternativaBN</param>
-                                    <param id="1" name="Value">&quot;A&quot;</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="613114380259253" type="System">
-                                    <param id="0" name="Variable">obterAlternativaBN</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="8922086600711869" type="System">
-                                    <param id="0" name="Variable">verificarAlternativaBN</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="520006215056770" type="System">
-                                    <param id="0" name="Variable">textoRespostaEscolhida</param>
-                                    <param id="1" name="Value">&quot;&apos;&quot; &amp; replace(LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1), OrdemAlternativas.At(0)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="7120762420533665">
-                            <conditions>
-                                <condition id="0" name="On collision with another object" sid="9155256091253734" type="player">
-                                    <param id="0" name="Object">selAlternativa2</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="2493171234425699" type="System">
-                                    <param id="0" name="Variable">alternativaBN</param>
-                                    <param id="1" name="Value">&quot;B&quot;</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="6089430523530524" type="System">
-                                    <param id="0" name="Variable">obterAlternativaBN</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="64905050103727" type="System">
-                                    <param id="0" name="Variable">verificarAlternativaBN</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="406378705379996" type="System">
-                                    <param id="0" name="Variable">textoRespostaEscolhida</param>
-                                    <param id="1" name="Value">&quot;&apos;&quot; &amp; replace(LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1), OrdemAlternativas.At(1)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="2870282095673449">
-                            <conditions>
-                                <condition id="0" name="On collision with another object" sid="8310600895650243" type="player">
-                                    <param id="0" name="Object">selAlternativa3</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="5019291057760957" type="System">
-                                    <param id="0" name="Variable">alternativaBN</param>
-                                    <param id="1" name="Value">&quot;C&quot;</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="4185587398187072" type="System">
-                                    <param id="0" name="Variable">obterAlternativaBN</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="2895808032803518" type="System">
-                                    <param id="0" name="Variable">verificarAlternativaBN</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="494239871564541" type="System">
-                                    <param id="0" name="Variable">textoRespostaEscolhida</param>
-                                    <param id="1" name="Value">&quot;&apos;&quot; &amp; replace(LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1), OrdemAlternativas.At(2)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&quot;</param>
-                                </action>
-                            </actions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="1699590853007916">
+                                    <conditions>
+                                        <condition id="0" name="On collision with another object" sid="3214732951497474" type="player">
+                                            <param id="0" name="Object">selAlternativa1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="9233118113383888" type="System">
+                                            <param id="0" name="Variable">alternativaBN</param>
+                                            <param id="1" name="Value">&quot;A&quot;</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="613114380259253" type="System">
+                                            <param id="0" name="Variable">obterAlternativaBN</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="8922086600711869" type="System">
+                                            <param id="0" name="Variable">verificarAlternativaBN</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="520006215056770" type="System">
+                                            <param id="0" name="Variable">textoRespostaEscolhida</param>
+                                            <param id="1" name="Value">&quot;&apos;&quot; &amp; replace(LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1), OrdemAlternativas.At(0)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="7120762420533665">
+                                    <conditions>
+                                        <condition id="0" name="On collision with another object" sid="9155256091253734" type="player">
+                                            <param id="0" name="Object">selAlternativa2</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="2493171234425699" type="System">
+                                            <param id="0" name="Variable">alternativaBN</param>
+                                            <param id="1" name="Value">&quot;B&quot;</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="6089430523530524" type="System">
+                                            <param id="0" name="Variable">obterAlternativaBN</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="64905050103727" type="System">
+                                            <param id="0" name="Variable">verificarAlternativaBN</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="406378705379996" type="System">
+                                            <param id="0" name="Variable">textoRespostaEscolhida</param>
+                                            <param id="1" name="Value">&quot;&apos;&quot; &amp; replace(LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1), OrdemAlternativas.At(1)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="2870282095673449">
+                                    <conditions>
+                                        <condition id="0" name="On collision with another object" sid="8310600895650243" type="player">
+                                            <param id="0" name="Object">selAlternativa3</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="5019291057760957" type="System">
+                                            <param id="0" name="Variable">alternativaBN</param>
+                                            <param id="1" name="Value">&quot;C&quot;</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="4185587398187072" type="System">
+                                            <param id="0" name="Variable">obterAlternativaBN</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="2895808032803518" type="System">
+                                            <param id="0" name="Variable">verificarAlternativaBN</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="494239871564541" type="System">
+                                            <param id="0" name="Variable">textoRespostaEscolhida</param>
+                                            <param id="1" name="Value">&quot;&apos;&quot; &amp; replace(LoadJSONBN.GetData(OrdemQuestoes.At(perguntaBN-1), OrdemAlternativas.At(2)), &quot;&apos;&quot;, &quot;\&apos;&quot;) &amp; &quot;&apos;,&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -1839,6 +2052,10 @@
                         <action id="0" name="Execute" sid="500511752396771" type="StatsJS">
                             <param id="0" name="Value">&quot;sendDataFinalLevel(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
                         </action>
+                        <action id="-12" name="Set group active" sid="600089514527836" type="System">
+                            <param id="0" name="Group name">&quot;ScrollBlocosGelo&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
                         <action id="-10" name="Add to" sid="4368475574908269" type="System">
                             <param id="0" name="Variable">pontos</param>
                             <param id="1" name="Value">100</param>
@@ -1874,7 +2091,7 @@
                         <event-block sid="493370773427510">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="491337165811892" type="System">
-                                    <param id="0" name="First value">round(random(0, 2))</param>
+                                    <param id="0" name="First value">choose(0, 1)</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Second value">1</param>
                                 </condition>
@@ -2027,6 +2244,108 @@
                         <action id="-9" name="Set value" sid="437989187981065" type="System">
                             <param id="0" name="Variable">verificarAlternativaBN</param>
                             <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="902272408212746">
+            <conditions>
+                <condition id="0" name="On collision with another object" sid="173918778940996" type="selAlternativa1">
+                    <param id="0" name="Object">AreaSeguranca</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="233340411269298">
+                    <conditions>
+                        <condition id="-8" name="Compare two values" sid="792712274884256" type="System">
+                            <param id="0" name="First value">selAlternativa1.Angle</param>
+                            <param id="1" name="Comparison">4</param>
+                            <param id="2" name="Second value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="572704871304263" type="selAlternativa1">
+                            <param id="0" name="Angle">180 - selAlternativa1.Angle</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="967466119041453">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="146454920966355" type="System" />
+                    </conditions>
+                    <actions>
+                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="475821706716224" type="selAlternativa1">
+                            <param id="0" name="Angle">-180 - selAlternativa1.Angle</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="555127894862701">
+            <conditions>
+                <condition id="0" name="On collision with another object" sid="981195203547329" type="selAlternativa2">
+                    <param id="0" name="Object">AreaSeguranca</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="130786469297799">
+                    <conditions>
+                        <condition id="-8" name="Compare two values" sid="748093196468679" type="System">
+                            <param id="0" name="First value">selAlternativa1.Angle</param>
+                            <param id="1" name="Comparison">4</param>
+                            <param id="2" name="Second value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="725821739810911" type="selAlternativa2">
+                            <param id="0" name="Angle">180 - selAlternativa2.Angle</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="324105932613941">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="905461032996154" type="System" />
+                    </conditions>
+                    <actions>
+                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="322017233507263" type="selAlternativa2">
+                            <param id="0" name="Angle">-180 - selAlternativa2.Angle</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="244370801292878">
+            <conditions>
+                <condition id="0" name="On collision with another object" sid="586580512399062" type="selAlternativa3">
+                    <param id="0" name="Object">AreaSeguranca</param>
+                </condition>
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="543565871577959">
+                    <conditions>
+                        <condition id="-8" name="Compare two values" sid="929150083505805" type="System">
+                            <param id="0" name="First value">selAlternativa1.Angle</param>
+                            <param id="1" name="Comparison">4</param>
+                            <param id="2" name="Second value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="925877481373293" type="selAlternativa3">
+                            <param id="0" name="Angle">180 - selAlternativa3.Angle</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="592663822197831">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="981393022625167" type="System" />
+                    </conditions>
+                    <actions>
+                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="551310041238758" type="selAlternativa3">
+                            <param id="0" name="Angle">-180 - selAlternativa3.Angle</param>
                         </action>
                     </actions>
                 </event-block>
