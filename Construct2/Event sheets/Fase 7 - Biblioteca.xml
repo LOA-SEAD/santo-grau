@@ -1832,6 +1832,9 @@
                                 <condition id="-22" name="Else" sid="796531145111837" type="System" />
                             </conditions>
                             <actions>
+                                <action id="-2" name="Set Y" sid="137111356302928" type="bibPortaFogo">
+                                    <param id="0" name="Y">86</param>
+                                </action>
                                 <action id="-12" name="Set group active" sid="344918994968040" type="System">
                                     <param id="0" name="Group name">&quot;FecharPorta&quot;</param>
                                     <param id="1" name="State">0</param>
@@ -4491,8 +4494,8 @@
                 </event-group>
                 <event-group description="Controla as mecânicas do guia sonoro e habilita as dicas após encontrar o livro" sid="499191236958555" title="MecanicaLivros">
                     <sub-events>
-                        <variable constant="0" name="opacidadeMax" sid="561917690284664" static="0" type="number">90</variable>
-                        <variable constant="0" name="opacidadeMin" sid="214921210845871" static="0" type="number">5</variable>
+                        <variable constant="0" name="opacidadeMax" sid="561917690284664" static="0" type="number">75</variable>
+                        <variable constant="0" name="opacidadeMin" sid="214921210845871" static="0" type="number">-10</variable>
                         <variable constant="0" name="volMax" sid="648581825251438" static="0" type="number">0</variable>
                         <variable constant="0" name="volMin" sid="197111304160079" static="0" type="number">-40</variable>
                         <event-block sid="273376100395075">
@@ -4554,6 +4557,11 @@
                                     <actions>
                                         <action id="-16" name="Set opacity" sid="839493272366386" type="GuiaVisual">
                                             <param id="0" name="Opacity">((opacidadeMax-opacidadeMin)*(distance(player.X, player.Y, selecaoLivro.X, selecaoLivro.Y) -sqrt(945*945+ 568*568)))/(-sqrt(945*945+ 568*568))+ opacidadeMin</param>
+                                        </action>
+                                        <action id="-28" name="Set effect parameter" sid="447485534805149" type="GuiaVisual">
+                                            <param id="0" name="Effect">&quot;AdjustHSL&quot;</param>
+                                            <param id="1" name="Parameter index">0</param>
+                                            <param id="2" name="Value">hueValue</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -5190,10 +5198,10 @@
                                 </action>
                                 <action id="-11" name="Subtract from" sid="593066435794027" type="System">
                                     <param id="0" name="Variable">pontos</param>
-                                    <param id="1" name="Value">1000</param>
+                                    <param id="1" name="Value">50</param>
                                 </action>
                                 <action id="0" name="Set text" sid="382165278329239" type="pontoTexto">
-                                    <param id="0" name="Text">&quot;-1000&quot;</param>
+                                    <param id="0" name="Text">&quot;-50&quot;</param>
                                 </action>
                                 <action id="4" name="Set font color" sid="960140051664702" type="pontoTexto">
                                     <param id="0" name="Color">rgb(235, 17, 53)</param>
