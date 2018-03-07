@@ -2790,9 +2790,10 @@
                         <condition id="7" name="Cursor is over object" sid="189840952648780" type="Mouse">
                             <param id="0" name="Object">placarFechar</param>
                         </condition>
-                        <condition id="-10" name="Compare opacity" sid="443843980510385" type="placarFechar">
-                            <param id="0" name="Comparison">0</param>
-                            <param id="1" name="Opacity">100</param>
+                        <condition id="-14" name="Compare variable" sid="852135221426518" type="System">
+                            <param id="0" name="Variable">opacidadeLayer</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">100</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -2835,10 +2836,6 @@
                                 <condition id="7" name="Cursor is over object" sid="748532201329962" type="Mouse">
                                     <param id="0" name="Object">placarBotao</param>
                                 </condition>
-                                <condition id="-10" name="Compare opacity" sid="342676294949905" type="placarBotao">
-                                    <param id="0" name="Comparison">0</param>
-                                    <param id="1" name="Opacity">100</param>
-                                </condition>
                                 <condition id="0" inverted="1" name="Compare text" sid="222245519997916" type="placarResp1">
                                     <param id="0" name="Text">&quot;&quot;</param>
                                     <param id="1" name="Case">0</param>
@@ -2846,6 +2843,11 @@
                                 <condition id="0" inverted="1" name="Compare text" sid="112014703696660" type="placarResp2">
                                     <param id="0" name="Text">&quot;&quot;</param>
                                     <param id="1" name="Case">0</param>
+                                </condition>
+                                <condition id="-14" name="Compare variable" sid="148769628670365" type="System">
+                                    <param id="0" name="Variable">opacidadeLayer</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">100</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -2900,9 +2902,10 @@
                                         <condition id="7" name="Cursor is over object" sid="327494164128399" type="Mouse">
                                             <param id="0" name="Object">placarMudaPergunta</param>
                                         </condition>
-                                        <condition id="-10" name="Compare opacity" sid="701743566455654" type="placarMudaPergunta">
-                                            <param id="0" name="Comparison">0</param>
-                                            <param id="1" name="Opacity">100</param>
+                                        <condition id="-14" name="Compare variable" sid="889961985759567" type="System">
+                                            <param id="0" name="Variable">opacidadeLayer</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">100</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -3037,9 +3040,10 @@
                             <param id="1" name="Click type">0</param>
                             <param id="2" name="Object clicked">placarMudaPergunta</param>
                         </condition>
-                        <condition id="-10" name="Compare opacity" sid="518526647609196" type="placarMudaPergunta">
-                            <param id="0" name="Comparison">0</param>
-                            <param id="1" name="Opacity">100</param>
+                        <condition id="-14" name="Compare variable" sid="409186977308147" type="System">
+                            <param id="0" name="Variable">opacidadeLayer</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">100</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -3079,17 +3083,13 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <comment>Verifica as respostas do jogador, liberando o envio delas após os dois campos estiverem preenchidos</comment>
+                <comment>Verifica as respostas do jogador por meio do clique do botão, liberando o envio delas após os dois campos estiverem preenchidos</comment>
                 <event-block sid="508744792465042">
                     <conditions>
                         <condition id="6" name="On object clicked" sid="742960550989282" type="Mouse">
                             <param id="0" name="Mouse button">0</param>
                             <param id="1" name="Click type">0</param>
                             <param id="2" name="Object clicked">placarBotao</param>
-                        </condition>
-                        <condition id="-10" name="Compare opacity" sid="759241288550269" type="placarBotao">
-                            <param id="0" name="Comparison">0</param>
-                            <param id="1" name="Opacity">100</param>
                         </condition>
                         <condition id="0" inverted="1" name="Compare text" sid="788856015392854" type="placarResp1">
                             <param id="0" name="Text">&quot;&quot;</param>
@@ -3098,6 +3098,11 @@
                         <condition id="0" inverted="1" name="Compare text" sid="368544225956166" type="placarResp2">
                             <param id="0" name="Text">&quot;&quot;</param>
                             <param id="1" name="Case">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="227634538844163" type="System">
+                            <param id="0" name="Variable">opacidadeLayer</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">100</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -3153,6 +3158,79 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment>Verifica as respostas do jogador por meio de apertar enter. Não sei o motivo do Enter não funcionar junto com o mouse...</comment>
+                <event-block sid="580364003107743">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="205299463877366" type="Keyboard">
+                            <param id="0" name="Key">13</param>
+                        </condition>
+                        <condition id="0" inverted="1" name="Compare text" sid="633412891485831" type="placarResp1">
+                            <param id="0" name="Text">&quot;&quot;</param>
+                            <param id="1" name="Case">0</param>
+                        </condition>
+                        <condition id="0" inverted="1" name="Compare text" sid="155103914221196" type="placarResp2">
+                            <param id="0" name="Text">&quot;&quot;</param>
+                            <param id="1" name="Case">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="551933077289629" type="System">
+                            <param id="0" name="Variable">opacidadeLayer</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">100</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Play" sid="639766820768989" type="Audio">
+                            <param id="0" name="Audio file">botoes_menu</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">volSons</param>
+                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="371329457631422" type="System">
+                            <param id="0" name="Variable">controlePlacar</param>
+                            <param id="1" name="Value">2</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <comment>Ativa as ações de quando alguém acerta</comment>
+                        <event-block sid="236397556521415">
+                            <conditions>
+                                <condition id="0" name="Compare text" sid="621989209573501" type="placarResp1">
+                                    <param id="0" name="Text">LoadJSONFUT.GetData(&quot;desafio1&quot;,1)</param>
+                                    <param id="1" name="Case">0</param>
+                                </condition>
+                                <condition id="0" name="Compare text" sid="650036695196271" type="placarResp2">
+                                    <param id="0" name="Text">LoadJSONFUT.GetData(&quot;desafio2&quot;,1)</param>
+                                    <param id="1" name="Case">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="107039119628289" type="System">
+                                    <param id="0" name="Variable">acaoBola</param>
+                                    <param id="1" name="Value">2</param>
+                                </action>
+                                <action id="0" name="Play" sid="712602083575262" type="Audio">
+                                    <param id="0" name="Audio file">acerto</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="785312371416209" type="selecaoBola" />
+                            </actions>
+                        </event-block>
+                        <comment>Ativa as ações de quando alguém erra</comment>
+                        <event-block sid="166444255642618">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="839414221301615" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="871042809974873" type="System">
+                                    <param id="0" name="Variable">acaoBola</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
                 <comment>Fecha o placar</comment>
                 <event-block sid="106851211814442">
                     <conditions>
@@ -3161,9 +3239,10 @@
                             <param id="1" name="Click type">0</param>
                             <param id="2" name="Object clicked">placarFechar</param>
                         </condition>
-                        <condition id="-10" name="Compare opacity" sid="132054189197793" type="placarFechar">
-                            <param id="0" name="Comparison">0</param>
-                            <param id="1" name="Opacity">100</param>
+                        <condition id="-14" name="Compare variable" sid="387858010009365" type="System">
+                            <param id="0" name="Variable">opacidadeLayer</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">100</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -3831,7 +3910,7 @@
                                     <param id="0" name="State">1</param>
                                 </action>
                                 <action behavior="Bullet" id="3" name="Set angle of motion" sid="134436087679638" type="campoItens">
-                                    <param id="0" name="Angle">270 + round(random(0,60)) - 30</param>
+                                    <param id="0" name="Angle">270 + round(random(0,80)) - 40</param>
                                 </action>
                                 <action behavior="Bullet" id="2" name="Set gravity" sid="436876093157036" type="campoItens">
                                     <param id="0" name="Gravity">55 + 4^floor((numeroObjetosAtirados + 1)/5) * 59</param>
