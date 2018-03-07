@@ -806,10 +806,39 @@
                     <param id="0" name="Variable">tempoInicial</param>
                     <param id="1" name="Value">time</param>
                 </action>
-                <action id="-2" name="Go to layout" sid="523440523711864" type="System">
-                    <param id="0" name="Layout">Fase 3</param>
-                </action>
             </actions>
+            <sub-events>
+                <comment>Verifica se já passou por todas as fases customizaveis</comment>
+                <event-block sid="777802666740953">
+                    <conditions>
+                        <condition id="-8" name="Compare two values" sid="487376500938684" type="System">
+                            <param id="0" name="First value">int(FasesJSON.GetData(&quot;quantidade&quot;, 0))</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Second value">fasesOpcionais</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Go to layout" sid="555738526848740" type="System">
+                            <param id="0" name="Layout">Fase 3</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Caso contrario, carrega a fase correspondente</comment>
+                <event-block sid="208224868040898">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="836978494663384" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Add to" sid="833432006560813" type="System">
+                            <param id="0" name="Variable">fasesOpcionais</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-25" name="Go to layout (by name)" sid="515000308436936" type="System">
+                            <param id="0" name="Layout">&quot;Fase &quot; &amp; FasesJSON.GetData(&quot;fases&quot;, fasesOpcionais-1)</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
         </event-block>
         <event-group description="" inactive="1" sid="742223392847084" title="Pontuacao8a">
             <sub-events>
