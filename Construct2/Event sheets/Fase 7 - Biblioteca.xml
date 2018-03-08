@@ -29,7 +29,13 @@
             </conditions>
             <actions>
                 <action id="4" name="Preload" sid="557687433950682" type="Audio">
-                    <param id="0" name="Audio file">acerto</param>
+                    <param id="0" name="Audio file">acerto8</param>
+                </action>
+                <action id="4" name="Preload" sid="651423055520957" type="Audio">
+                    <param id="0" name="Audio file">andando_carpete</param>
+                </action>
+                <action id="4" name="Preload" sid="799791449331673" type="Audio">
+                    <param id="0" name="Audio file">andando_sem_carpete</param>
                 </action>
                 <action id="4" name="Preload" sid="403204511373814" type="Audio">
                     <param id="0" name="Audio file">colecionavel</param>
@@ -104,6 +110,10 @@
                     <param id="0" name="Audio file">mago_21</param>
                 </action>
                 <action id="33" name="Stop all" sid="701910513711929" type="Audio" />
+                <action id="-9" name="Set value" sid="702198802774596" type="System">
+                    <param id="0" name="Variable">volMusica</param>
+                    <param id="1" name="Value">volMusica - 20</param>
+                </action>
                 <action id="0" name="Play" sid="475133934047342" type="Audio">
                     <param id="0" name="Audio file">OSantoJoGrau</param>
                     <param id="2" name="Loop">1</param>
@@ -1026,7 +1036,7 @@
                                                 </action>
                                                 <action id="-9" name="Set value" sid="833428163872696" type="System">
                                                     <param id="0" name="Variable">tamanhoDialogoBIB</param>
-                                                    <param id="1" name="Value">8</param>
+                                                    <param id="1" name="Value">9</param>
                                                 </action>
                                                 <action id="-9" name="Set value" sid="470482170490692" type="System">
                                                     <param id="0" name="Variable">controleDialogos8</param>
@@ -2324,6 +2334,163 @@
                             <param id="1" name="From">1</param>
                         </action>
                     </actions>
+                </event-block>
+                <event-block any="1" sid="199818841079278">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="472987415819362" type="Keyboard">
+                            <param id="0" name="Key">87</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="754934022717638" type="Keyboard">
+                            <param id="0" name="Key">83</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="579022639906828" type="Keyboard">
+                            <param id="0" name="Key">68</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="941048714861134" type="Keyboard">
+                            <param id="0" name="Key">65</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="204373648899913" type="Keyboard">
+                            <param id="0" name="Key">37</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="653064404289959" type="Keyboard">
+                            <param id="0" name="Key">39</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="233415764482453" type="Keyboard">
+                            <param id="0" name="Key">38</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="448865790573976" type="Keyboard">
+                            <param id="0" name="Key">40</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="702028568725603" type="System">
+                            <param id="0" name="Variable">volPassos</param>
+                            <param id="1" name="Value">((Player.Y*(volPassosMax - volPassosMin)/(WindowHeight) ) + volPassosMin)</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <comment>Controle de qual som de passos será usado</comment>
+                        <event-block sid="514178675842780">
+                            <conditions>
+                                <condition id="1" name="Is overlapping another object" sid="741422157131451" type="player">
+                                    <param id="0" name="Object">bibliotecaChao</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="717288845319583">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="770341673552704" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="6" name="Stop" sid="127217985736942" type="Audio">
+                                            <param id="0" name="Tag">&quot;passos&quot;</param>
+                                        </action>
+                                        <action id="25" name="Play at object" sid="905212338616786" type="Audio">
+                                            <param id="0" name="Audio file">andando_carpete</param>
+                                            <param id="1" name="Loop">1</param>
+                                            <param id="2" name="Volume">((Player.Y*(volPassosMax - volPassosMin)/(WindowHeight) ) + volPassosMin)</param>
+                                            <param id="3" name="Object">ReceptorAudio</param>
+                                            <param id="4" name="Inner angle">45</param>
+                                            <param id="5" name="Outer angle">45</param>
+                                            <param id="6" name="Outer gain">100</param>
+                                            <param id="7" name="Tag (optional)">&quot;passos&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="980330310876995">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="692966891745013" type="System" />
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="585877352472138">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="198813914716483" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="6" name="Stop" sid="751108853424265" type="Audio">
+                                            <param id="0" name="Tag">&quot;passos&quot;</param>
+                                        </action>
+                                        <action id="25" name="Play at object" sid="486755896639999" type="Audio">
+                                            <param id="0" name="Audio file">andando_sem_carpete</param>
+                                            <param id="1" name="Loop">1</param>
+                                            <param id="2" name="Volume">((Player.Y*(volPassosMax - volPassosMin)/(WindowHeight) ) + volPassosMin)</param>
+                                            <param id="3" name="Object">ReceptorAudio</param>
+                                            <param id="4" name="Inner angle">45</param>
+                                            <param id="5" name="Outer angle">45</param>
+                                            <param id="6" name="Outer gain">100</param>
+                                            <param id="7" name="Tag (optional)">&quot;passos&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="248461699075482">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="378044131701955" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="6" name="Stop" sid="988100579864153" type="Audio">
+                            <param id="0" name="Tag">&quot;passos&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="489285768830467">
+                    <conditions>
+                        <condition id="5" inverted="1" name="Is tag playing" sid="404205906227678" type="Audio">
+                            <param id="0" name="Tag">&quot;passos&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block any="1" sid="144811740838197">
+                            <conditions>
+                                <condition id="0" name="On key pressed" sid="822268197329875" type="Keyboard">
+                                    <param id="0" name="Key">40</param>
+                                </condition>
+                                <condition id="0" name="On key pressed" sid="483851339959104" type="Keyboard">
+                                    <param id="0" name="Key">38</param>
+                                </condition>
+                                <condition id="0" name="On key pressed" sid="692338774451508" type="Keyboard">
+                                    <param id="0" name="Key">39</param>
+                                </condition>
+                                <condition id="0" name="On key pressed" sid="931840343475959" type="Keyboard">
+                                    <param id="0" name="Key">37</param>
+                                </condition>
+                                <condition id="0" name="On key pressed" sid="420214250867049" type="Keyboard">
+                                    <param id="0" name="Key">87</param>
+                                </condition>
+                                <condition id="0" name="On key pressed" sid="247553002839612" type="Keyboard">
+                                    <param id="0" name="Key">65</param>
+                                </condition>
+                                <condition id="0" name="On key pressed" sid="281604899581628" type="Keyboard">
+                                    <param id="0" name="Key">68</param>
+                                </condition>
+                                <condition id="0" name="On key pressed" sid="450726821548480" type="Keyboard">
+                                    <param id="0" name="Key">83</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="6" name="Stop" sid="502334156326370" type="Audio">
+                                    <param id="0" name="Tag">&quot;andando_carpete&quot;</param>
+                                </action>
+                                <action id="6" name="Stop" sid="193179049813530" type="Audio">
+                                    <param id="0" name="Tag">&quot;andando_sem_carpete&quot;</param>
+                                </action>
+                                <action disabled="1" id="0" name="Play" sid="576605358584610" type="Audio">
+                                    <param id="0" name="Audio file">passo_grama</param>
+                                    <param id="2" name="Loop">1</param>
+                                    <param id="3" name="Volume">((Player.Y*(volPassosMax - volPassosMin)/(WindowHeight) ) + volPassosMin)</param>
+                                    <param id="1" name="Tag (optional)">&quot;passos&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
@@ -5256,6 +5423,12 @@
                                 <action id="-12" name="Set group active" sid="879319820528536" type="System">
                                     <param id="0" name="Group name">&quot;VerificarResposta&quot;</param>
                                     <param id="1" name="State">0</param>
+                                </action>
+                                <action id="0" name="Play" sid="622724785317528" type="Audio">
+                                    <param id="0" name="Audio file">acerto8</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">0</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                 </action>
                                 <action id="-10" name="Add to" sid="426343466695120" type="System">
                                     <param id="0" name="Variable">pontos</param>
