@@ -548,6 +548,9 @@
                 <condition id="5" inverted="1" name="Is tag playing" sid="350793453759409" type="Audio">
                     <param id="0" name="Tag">&quot;capivara&quot;</param>
                 </condition>
+                <condition id="5" inverted="1" name="Is tag playing" sid="388654439367006" type="Audio">
+                    <param id="0" name="Tag">&quot;cuidado&quot;</param>
+                </condition>
                 <condition id="-15" inverted="1" name="Is group active" sid="344731837072745" type="System">
                     <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
                 </condition>
@@ -989,6 +992,11 @@
                 <variable constant="0" name="Xmin1" sid="311244082427711" static="0" type="number">54</variable>
                 <variable constant="0" name="Xmax2" sid="707772484696444" static="0" type="number">46</variable>
                 <variable constant="0" name="Xmin2" sid="989701710549975" static="0" type="number">62</variable>
+                <comment>O intervalo (Xmax3, Xmax4) define o limite direito superior da tela onde a personagem não pode andar. O intervalo (Xmin3, Xmin4) define o limite direito inferior da tela onde a personagem não pode andar. A fórmula linear dentro dos condicionais abaixo definem a toda a região direita da tela onde a personagem não pode andar.</comment>
+                <variable constant="0" name="Xmax3" sid="743210884596788" static="0" type="number">1234</variable>
+                <variable constant="0" name="Xmin3" sid="148158514584108" static="0" type="number">1218</variable>
+                <variable constant="0" name="Xmax4" sid="843561672701587" static="0" type="number">1238</variable>
+                <variable constant="0" name="Xmin4" sid="683041822130478" static="0" type="number">1223</variable>
                 <event-block sid="868957502506173">
                     <conditions>
                         <condition id="-1" name="Compare X" sid="550003829321818" type="player">
@@ -1040,6 +1048,9 @@
                                                 <condition id="5" inverted="1" name="Is tag playing" sid="305013714599597" type="Audio">
                                                     <param id="0" name="Tag">&quot;cuidado&quot;</param>
                                                 </condition>
+                                                <condition id="5" inverted="1" name="Is tag playing" sid="834353803299382" type="Audio">
+                                                    <param id="0" name="Tag">&quot;capivara&quot;</param>
+                                                </condition>
                                             </conditions>
                                             <actions>
                                                 <action id="0" name="Play" sid="883381034451413" type="Audio">
@@ -1071,56 +1082,145 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <event-block sid="122385121902278">
+                <event-block sid="882684439178858">
                     <conditions>
-                        <condition id="-22" name="Else" sid="974124684461077" type="System" />
+                        <condition id="-1" name="Compare X" sid="669230381037011" type="player">
+                            <param id="0" name="Comparison">5</param>
+                            <param id="1" name="X co-ordinate">(((Xmin3-Xmax3)/278)*(Player.Y-613))+Xmin3</param>
+                        </condition>
+                        <condition id="-1" name="Compare X" sid="274286392851681" type="player">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="X co-ordinate">(((Xmin4-Xmax4)/278)*(Player.Y-613))+Xmin4</param>
+                        </condition>
                     </conditions>
                     <actions />
                     <sub-events>
-                        <comment>O intervalo (Xmax3, Xmax4) define o limite direito superior da tela onde a personagem não pode andar. O intervalo (Xmin3, Xmin4) define o limite direito inferior da tela onde a personagem não pode andar. A fórmula linear dentro dos condicionais abaixo definem a toda a região direita da tela onde a personagem não pode andar.</comment>
-                        <variable constant="0" name="Xmax3" sid="743210884596788" static="0" type="number">1234</variable>
-                        <variable constant="0" name="Xmin3" sid="148158514584108" static="0" type="number">1218</variable>
-                        <variable constant="0" name="Xmax4" sid="843561672701587" static="0" type="number">1238</variable>
-                        <variable constant="0" name="Xmin4" sid="683041822130478" static="0" type="number">1223</variable>
-                        <event-block sid="882684439178858">
+                        <event-block any="1" sid="932811649508577">
                             <conditions>
-                                <condition id="-1" name="Compare X" sid="669230381037011" type="player">
-                                    <param id="0" name="Comparison">5</param>
-                                    <param id="1" name="X co-ordinate">(((Xmin3-Xmax3)/278)*(Player.Y-613))+Xmin3</param>
+                                <condition id="2" name="Key is down" sid="524436340766341" type="Keyboard">
+                                    <param id="0" name="Key">39</param>
                                 </condition>
-                                <condition id="-1" name="Compare X" sid="274286392851681" type="player">
-                                    <param id="0" name="Comparison">3</param>
-                                    <param id="1" name="X co-ordinate">(((Xmin4-Xmax4)/278)*(Player.Y-613))+Xmin4</param>
+                                <condition id="2" name="Key is down" sid="827419756895946" type="Keyboard">
+                                    <param id="0" name="Key">68</param>
                                 </condition>
                             </conditions>
-                            <actions />
+                            <actions>
+                                <action id="2" name="Set muted" sid="903659008975007" type="Audio">
+                                    <param id="0" name="Tag">&quot;passos&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="667598058958926" type="System">
+                                    <param id="0" name="Variable">limiteLayout</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
                             <sub-events>
-                                <event-block any="1" sid="932811649508577">
+                                <event-block sid="782832494367633">
                                     <conditions>
-                                        <condition id="2" name="Key is down" sid="524436340766341" type="Keyboard">
-                                            <param id="0" name="Key">39</param>
+                                        <condition id="-4" name="Trigger once while true" sid="150422043010662" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Play" sid="656221378545351" type="Audio">
+                                            <param id="0" name="Audio file">encosta_parede</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">0</param>
+                                            <param id="1" name="Tag (optional)">&quot;parede&quot;</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="479848506911749">
+                                            <conditions>
+                                                <condition id="5" inverted="1" name="Is tag playing" sid="191054334243304" type="Audio">
+                                                    <param id="0" name="Tag">&quot;cuidado&quot;</param>
+                                                </condition>
+                                                <condition id="5" inverted="1" name="Is tag playing" sid="472607486951039" type="Audio">
+                                                    <param id="0" name="Tag">&quot;capivara&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Play" sid="478664532935577" type="Audio">
+                                                    <param id="0" name="Audio file">capivara_15</param>
+                                                    <param id="2" name="Loop">0</param>
+                                                    <param id="3" name="Volume">0</param>
+                                                    <param id="1" name="Tag (optional)">&quot;cuidado&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="203771184504865">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="286170186298027" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Set muted" sid="602319543747953" type="Audio">
+                                    <param id="0" name="Tag">&quot;passos&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="348303999620283" type="System">
+                                    <param id="0" name="Variable">limiteLayout</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="908694909831741">
+                    <conditions>
+                        <condition disabled="1" id="-2" name="Compare Y" sid="146208361337698" type="player">
+                            <param id="0" name="Comparison">5</param>
+                            <param id="1" name="Y co-ordinate">334</param>
+                        </condition>
+                        <condition id="-2" name="Compare Y" sid="756256261027857" type="player">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Y co-ordinate">336</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block any="1" sid="182025949078967">
+                            <conditions>
+                                <condition id="2" name="Key is down" sid="414129445358351" type="Keyboard">
+                                    <param id="0" name="Key">38</param>
+                                </condition>
+                                <condition id="2" name="Key is down" sid="144583510958988" type="Keyboard">
+                                    <param id="0" name="Key">87</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Set muted" sid="269808000000462" type="Audio">
+                                    <param id="0" name="Tag">&quot;passos&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <comment>No caso da parte final da fase, o caminho para o jogador sair precisa estar aberto</comment>
+                                <event-block any="1" sid="841013184908040">
+                                    <conditions>
+                                        <condition id="0" name="On collision with another object" sid="163006578760712" type="player">
+                                            <param id="0" name="Object">saidaCampo</param>
                                         </condition>
-                                        <condition id="2" name="Key is down" sid="827419756895946" type="Keyboard">
-                                            <param id="0" name="Key">68</param>
+                                        <condition id="-14" inverted="1" name="Compare variable" sid="248899649156246" type="System">
+                                            <param id="0" name="Variable">fraseAtualCAM</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">11</param>
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="2" name="Set muted" sid="903659008975007" type="Audio">
-                                            <param id="0" name="Tag">&quot;passos&quot;</param>
-                                            <param id="1" name="State">0</param>
-                                        </action>
-                                        <action id="-9" name="Set value" sid="667598058958926" type="System">
+                                        <action id="-9" name="Set value" sid="219591012169569" type="System">
                                             <param id="0" name="Variable">limiteLayout</param>
                                             <param id="1" name="Value">1</param>
                                         </action>
                                     </actions>
                                     <sub-events>
-                                        <event-block sid="782832494367633">
+                                        <event-block sid="356614402545544">
                                             <conditions>
-                                                <condition id="-4" name="Trigger once while true" sid="150422043010662" type="System" />
+                                                <condition id="-4" name="Trigger once while true" sid="259803527876704" type="System" />
                                             </conditions>
                                             <actions>
-                                                <action id="0" name="Play" sid="656221378545351" type="Audio">
+                                                <action id="0" name="Play" sid="238307819230443" type="Audio">
                                                     <param id="0" name="Audio file">encosta_parede</param>
                                                     <param id="2" name="Loop">0</param>
                                                     <param id="3" name="Volume">0</param>
@@ -1128,14 +1228,17 @@
                                                 </action>
                                             </actions>
                                             <sub-events>
-                                                <event-block sid="479848506911749">
+                                                <event-block sid="402654518501901">
                                                     <conditions>
-                                                        <condition id="5" inverted="1" name="Is tag playing" sid="191054334243304" type="Audio">
+                                                        <condition id="5" inverted="1" name="Is tag playing" sid="626745372388791" type="Audio">
                                                             <param id="0" name="Tag">&quot;cuidado&quot;</param>
+                                                        </condition>
+                                                        <condition id="5" inverted="1" name="Is tag playing" sid="342835876946285" type="Audio">
+                                                            <param id="0" name="Tag">&quot;capivara&quot;</param>
                                                         </condition>
                                                     </conditions>
                                                     <actions>
-                                                        <action id="0" name="Play" sid="478664532935577" type="Audio">
+                                                        <action id="0" name="Play" sid="952241863278838" type="Audio">
                                                             <param id="0" name="Audio file">capivara_15</param>
                                                             <param id="2" name="Loop">0</param>
                                                             <param id="3" name="Volume">0</param>
@@ -1147,222 +1250,127 @@
                                         </event-block>
                                     </sub-events>
                                 </event-block>
-                                <event-block sid="203771184504865">
-                                    <conditions>
-                                        <condition id="-22" name="Else" sid="286170186298027" type="System" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="2" name="Set muted" sid="602319543747953" type="Audio">
-                                            <param id="0" name="Tag">&quot;passos&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
-                                        <action id="-9" name="Set value" sid="348303999620283" type="System">
-                                            <param id="0" name="Variable">limiteLayout</param>
-                                            <param id="1" name="Value">0</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
                             </sub-events>
                         </event-block>
-                        <event-block sid="953624754094418">
+                        <event-block sid="435700627126347">
                             <conditions>
-                                <condition id="-22" name="Else" sid="711660239443079" type="System" />
+                                <condition id="-22" name="Else" sid="250963470670646" type="System" />
                             </conditions>
-                            <actions />
-                            <sub-events>
-                                <event-block sid="908694909831741">
-                                    <conditions>
-                                        <condition id="-2" name="Compare Y" sid="146208361337698" type="player">
-                                            <param id="0" name="Comparison">5</param>
-                                            <param id="1" name="Y co-ordinate">334</param>
-                                        </condition>
-                                        <condition id="-2" name="Compare Y" sid="756256261027857" type="player">
-                                            <param id="0" name="Comparison">3</param>
-                                            <param id="1" name="Y co-ordinate">336</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions />
-                                    <sub-events>
-                                        <event-block any="1" sid="182025949078967">
-                                            <conditions>
-                                                <condition id="2" name="Key is down" sid="414129445358351" type="Keyboard">
-                                                    <param id="0" name="Key">38</param>
-                                                </condition>
-                                                <condition id="2" name="Key is down" sid="144583510958988" type="Keyboard">
-                                                    <param id="0" name="Key">87</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="2" name="Set muted" sid="269808000000462" type="Audio">
-                                                    <param id="0" name="Tag">&quot;passos&quot;</param>
-                                                    <param id="1" name="State">0</param>
-                                                </action>
-                                                <action id="-9" name="Set value" sid="219591012169569" type="System">
-                                                    <param id="0" name="Variable">limiteLayout</param>
-                                                    <param id="1" name="Value">1</param>
-                                                </action>
-                                            </actions>
-                                            <sub-events>
-                                                <event-block sid="356614402545544">
-                                                    <conditions>
-                                                        <condition id="-4" name="Trigger once while true" sid="259803527876704" type="System" />
-                                                    </conditions>
-                                                    <actions>
-                                                        <action id="0" name="Play" sid="238307819230443" type="Audio">
-                                                            <param id="0" name="Audio file">encosta_parede</param>
-                                                            <param id="2" name="Loop">0</param>
-                                                            <param id="3" name="Volume">0</param>
-                                                            <param id="1" name="Tag (optional)">&quot;parede&quot;</param>
-                                                        </action>
-                                                    </actions>
-                                                    <sub-events>
-                                                        <event-block sid="402654518501901">
-                                                            <conditions>
-                                                                <condition id="5" inverted="1" name="Is tag playing" sid="626745372388791" type="Audio">
-                                                                    <param id="0" name="Tag">&quot;cuidado&quot;</param>
-                                                                </condition>
-                                                            </conditions>
-                                                            <actions>
-                                                                <action id="0" name="Play" sid="952241863278838" type="Audio">
-                                                                    <param id="0" name="Audio file">capivara_15</param>
-                                                                    <param id="2" name="Loop">0</param>
-                                                                    <param id="3" name="Volume">0</param>
-                                                                    <param id="1" name="Tag (optional)">&quot;cuidado&quot;</param>
-                                                                </action>
-                                                            </actions>
-                                                        </event-block>
-                                                    </sub-events>
-                                                </event-block>
-                                            </sub-events>
-                                        </event-block>
-                                        <event-block sid="435700627126347">
-                                            <conditions>
-                                                <condition id="-22" name="Else" sid="250963470670646" type="System" />
-                                            </conditions>
-                                            <actions>
-                                                <action id="2" name="Set muted" sid="909391932437196" type="Audio">
-                                                    <param id="0" name="Tag">&quot;passos&quot;</param>
-                                                    <param id="1" name="State">1</param>
-                                                </action>
-                                                <action id="-9" name="Set value" sid="717350905633926" type="System">
-                                                    <param id="0" name="Variable">limiteLayout</param>
-                                                    <param id="1" name="Value">0</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
-                                </event-block>
-                                <event-block sid="893763210159453">
-                                    <conditions>
-                                        <condition id="-22" name="Else" sid="725235336537754" type="System" />
-                                    </conditions>
-                                    <actions />
-                                    <sub-events>
-                                        <event-block sid="511767037563081">
-                                            <conditions>
-                                                <condition id="-2" name="Compare Y" sid="269469243614611" type="player">
-                                                    <param id="0" name="Comparison">5</param>
-                                                    <param id="1" name="Y co-ordinate">611</param>
-                                                </condition>
-                                                <condition id="-2" name="Compare Y" sid="267254616280779" type="player">
-                                                    <param id="0" name="Comparison">3</param>
-                                                    <param id="1" name="Y co-ordinate">616</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions />
-                                            <sub-events>
-                                                <event-block any="1" sid="833637112956906">
-                                                    <conditions>
-                                                        <condition id="2" name="Key is down" sid="852070628504075" type="Keyboard">
-                                                            <param id="0" name="Key">40</param>
-                                                        </condition>
-                                                        <condition id="2" name="Key is down" sid="723850678811737" type="Keyboard">
-                                                            <param id="0" name="Key">83</param>
-                                                        </condition>
-                                                    </conditions>
-                                                    <actions>
-                                                        <action id="2" name="Set muted" sid="577891492186520" type="Audio">
-                                                            <param id="0" name="Tag">&quot;passos&quot;</param>
-                                                            <param id="1" name="State">0</param>
-                                                        </action>
-                                                        <action id="-9" name="Set value" sid="873989726968766" type="System">
-                                                            <param id="0" name="Variable">limiteLayout</param>
-                                                            <param id="1" name="Value">1</param>
-                                                        </action>
-                                                    </actions>
-                                                    <sub-events>
-                                                        <event-block sid="478064377563598">
-                                                            <conditions>
-                                                                <condition id="-4" name="Trigger once while true" sid="991985047333096" type="System" />
-                                                            </conditions>
-                                                            <actions>
-                                                                <action id="0" name="Play" sid="393561433798558" type="Audio">
-                                                                    <param id="0" name="Audio file">encosta_parede</param>
-                                                                    <param id="2" name="Loop">0</param>
-                                                                    <param id="3" name="Volume">0</param>
-                                                                    <param id="1" name="Tag (optional)">&quot;parede&quot;</param>
-                                                                </action>
-                                                            </actions>
-                                                            <sub-events>
-                                                                <event-block sid="351893097162806">
-                                                                    <conditions>
-                                                                        <condition id="5" inverted="1" name="Is tag playing" sid="287815491461161" type="Audio">
-                                                                            <param id="0" name="Tag">&quot;cuidado&quot;</param>
-                                                                        </condition>
-                                                                    </conditions>
-                                                                    <actions>
-                                                                        <action id="0" name="Play" sid="933068611133079" type="Audio">
-                                                                            <param id="0" name="Audio file">capivara_15</param>
-                                                                            <param id="2" name="Loop">0</param>
-                                                                            <param id="3" name="Volume">0</param>
-                                                                            <param id="1" name="Tag (optional)">&quot;cuidado&quot;</param>
-                                                                        </action>
-                                                                    </actions>
-                                                                </event-block>
-                                                            </sub-events>
-                                                        </event-block>
-                                                    </sub-events>
-                                                </event-block>
-                                                <event-block sid="702432750788915">
-                                                    <conditions>
-                                                        <condition id="-22" name="Else" sid="964171321700185" type="System" />
-                                                    </conditions>
-                                                    <actions>
-                                                        <action id="2" name="Set muted" sid="691472608773426" type="Audio">
-                                                            <param id="0" name="Tag">&quot;passos&quot;</param>
-                                                            <param id="1" name="State">1</param>
-                                                        </action>
-                                                        <action id="-9" name="Set value" sid="820448464296914" type="System">
-                                                            <param id="0" name="Variable">limiteLayout</param>
-                                                            <param id="1" name="Value">0</param>
-                                                        </action>
-                                                    </actions>
-                                                </event-block>
-                                            </sub-events>
-                                        </event-block>
-                                        <event-block sid="793660741144052">
-                                            <conditions>
-                                                <condition id="-22" name="Else" sid="493427646938924" type="System" />
-                                            </conditions>
-                                            <actions>
-                                                <action id="2" name="Set muted" sid="362508309167814" type="Audio">
-                                                    <param id="0" name="Tag">&quot;passos&quot;</param>
-                                                    <param id="1" name="State">1</param>
-                                                </action>
-                                                <action id="6" name="Stop" sid="300056268557570" type="Audio">
-                                                    <param id="0" name="Tag">&quot;parede&quot;</param>
-                                                </action>
-                                                <action id="-9" name="Set value" sid="210514094634865" type="System">
-                                                    <param id="0" name="Variable">limiteLayout</param>
-                                                    <param id="1" name="Value">0</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
-                                </event-block>
-                            </sub-events>
+                            <actions>
+                                <action id="2" name="Set muted" sid="909391932437196" type="Audio">
+                                    <param id="0" name="Tag">&quot;passos&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="717350905633926" type="System">
+                                    <param id="0" name="Variable">limiteLayout</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
                         </event-block>
                     </sub-events>
+                </event-block>
+                <event-block sid="511767037563081">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="269469243614611" type="player">
+                            <param id="0" name="Comparison">5</param>
+                            <param id="1" name="Y co-ordinate">611</param>
+                        </condition>
+                        <condition id="-2" name="Compare Y" sid="267254616280779" type="player">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Y co-ordinate">616</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block any="1" sid="833637112956906">
+                            <conditions>
+                                <condition id="2" name="Key is down" sid="852070628504075" type="Keyboard">
+                                    <param id="0" name="Key">40</param>
+                                </condition>
+                                <condition id="2" name="Key is down" sid="723850678811737" type="Keyboard">
+                                    <param id="0" name="Key">83</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Set muted" sid="577891492186520" type="Audio">
+                                    <param id="0" name="Tag">&quot;passos&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="873989726968766" type="System">
+                                    <param id="0" name="Variable">limiteLayout</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="478064377563598">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="991985047333096" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Play" sid="393561433798558" type="Audio">
+                                            <param id="0" name="Audio file">encosta_parede</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">0</param>
+                                            <param id="1" name="Tag (optional)">&quot;parede&quot;</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="351893097162806">
+                                            <conditions>
+                                                <condition id="5" inverted="1" name="Is tag playing" sid="287815491461161" type="Audio">
+                                                    <param id="0" name="Tag">&quot;cuidado&quot;</param>
+                                                </condition>
+                                                <condition id="5" inverted="1" name="Is tag playing" sid="911953154478587" type="Audio">
+                                                    <param id="0" name="Tag">&quot;capivara&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Play" sid="933068611133079" type="Audio">
+                                                    <param id="0" name="Audio file">capivara_15</param>
+                                                    <param id="2" name="Loop">0</param>
+                                                    <param id="3" name="Volume">0</param>
+                                                    <param id="1" name="Tag (optional)">&quot;cuidado&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="702432750788915">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="964171321700185" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Set muted" sid="691472608773426" type="Audio">
+                                    <param id="0" name="Tag">&quot;passos&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="820448464296914" type="System">
+                                    <param id="0" name="Variable">limiteLayout</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block disabled="1" sid="793660741144052">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="493427646938924" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="2" name="Set muted" sid="362508309167814" type="Audio">
+                            <param id="0" name="Tag">&quot;passos&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="6" name="Stop" sid="300056268557570" type="Audio">
+                            <param id="0" name="Tag">&quot;parede&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="210514094634865" type="System">
+                            <param id="0" name="Variable">limiteLayout</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
                 </event-block>
             </sub-events>
         </event-group>
@@ -3883,6 +3891,9 @@
                             <actions>
                                 <action id="6" name="Stop" sid="489578435770193" type="Audio">
                                     <param id="0" name="Tag">&quot;capivara&quot;</param>
+                                </action>
+                                <action id="6" name="Stop" sid="333909940764626" type="Audio">
+                                    <param id="0" name="Tag">&quot;cuidado&quot;</param>
                                 </action>
                                 <action id="7" name="Play (by name)" sid="674394869965125" type="Audio">
                                     <param id="0" name="Folder">0</param>
