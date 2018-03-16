@@ -1477,6 +1477,7 @@
                 </event-block>
             </sub-events>
         </event-group>
+        <variable constant="0" name="scale" sid="909763462735326" static="0" type="number">1.01</variable>
         <event-group description="" sid="209776587683081" title="Efeitos6">
             <sub-events>
                 <event-block sid="205054220779577">
@@ -1491,10 +1492,6 @@
                         <action id="-7" name="Set size" sid="689711524640290" type="playerAnim">
                             <param id="0" name="Width">(1-((612-Player.Y)*0.0009263322))*122</param>
                             <param id="1" name="Height">(1-((612-Player.Y)*0.0009263322))*215</param>
-                        </action>
-                        <action id="-7" name="Set size" sid="498670950471815" type="campoItens">
-                            <param id="0" name="Width">((campoItens.Bullet.DistanceTravelled*43.3333)/800)+53.3333</param>
-                            <param id="1" name="Height">((campoItens.Bullet.DistanceTravelled*45)/800)+55</param>
                         </action>
                         <action id="0" name="Set text" sid="462111228440910" type="pontuacaoTexto">
                             <param id="0" name="Text">pontos</param>
@@ -1947,10 +1944,7 @@
                 <comment>Para destruir o objeto depois dele ter sido jogado</comment>
                 <event-block sid="436326695648630">
                     <conditions>
-                        <condition id="-2" name="Compare Y" sid="985072625411531" type="campoItens">
-                            <param id="0" name="Comparison">4</param>
-                            <param id="1" name="Y co-ordinate">850</param>
-                        </condition>
+                        <condition id="-4" name="Is outside layout" sid="985072625411531" type="campoItens" />
                     </conditions>
                     <actions>
                         <action id="-9" name="Destroy" sid="801577099352038" type="campoItens" />
@@ -2008,6 +2002,21 @@
                         <action id="-12" name="Set group active" sid="948512503356626" type="System">
                             <param id="0" name="Group name">&quot;Pontuacao7b&quot;</param>
                             <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="205393557817240">
+                    <conditions>
+                        <condition id="-9" name="Is visible" sid="940974035394998" type="campoItens" />
+                        <condition behavior="Physics" id="4" inverted="1" name="Is enabled" sid="796507077480265" type="campoItens" />
+                    </conditions>
+                    <actions>
+                        <action id="-7" name="Set size" sid="716960496027655" type="campoItens">
+                            <param id="0" name="Width">campoItens.Width*scale</param>
+                            <param id="1" name="Height">campoItens.Height*scale</param>
+                        </action>
+                        <action id="-8" name="Set angle" sid="893816140700642" type="campoItens">
+                            <param id="0" name="Angle">angle(campoItens.X, campoItens.Y, player.X, player.Y)</param>
                         </action>
                     </actions>
                 </event-block>
@@ -4205,6 +4214,12 @@
                                                 <action id="-16" name="Wait" sid="300514194734893" type="System">
                                                     <param id="0" name="Seconds">1.0</param>
                                                 </action>
+                                                <action id="-15" name="Set visible" sid="272085346701447" type="campoItens">
+                                                    <param id="0" name="Visibility">1</param>
+                                                </action>
+                                                <action id="-16" name="Wait" sid="535586295120917" type="System">
+                                                    <param id="0" name="Seconds">2</param>
+                                                </action>
                                                 <action behavior="Physics" id="27" name="Set enabled" sid="558305225932900" type="campoItens">
                                                     <param id="0" name="Mode">1</param>
                                                 </action>
@@ -4212,10 +4227,7 @@
                                                     <param id="0" name="State">1</param>
                                                 </action>
                                                 <action behavior="Bullet" id="3" name="Set angle of motion" sid="781858171024914" type="campoItens">
-                                                    <param id="0" name="Angle">270</param>
-                                                </action>
-                                                <action id="-15" name="Set visible" sid="272085346701447" type="campoItens">
-                                                    <param id="0" name="Visibility">1</param>
+                                                    <param id="0" name="Angle">angle(campoItens.X, campoItens.Y, player.X, player.Y)</param>
                                                 </action>
                                                 <action id="0" name="Play" sid="371496712032854" type="Audio">
                                                     <param id="0" name="Audio file">objeto_caindo_devagar</param>
@@ -4416,20 +4428,9 @@
                         <action id="5" name="Set frame" sid="974221503882596" type="campoItens">
                             <param id="0" name="Frame number">round(random(0,4))</param>
                         </action>
-                        <action behavior="Physics" id="27" name="Set enabled" sid="593082401420068" type="campoItens">
-                            <param id="0" name="Mode">1</param>
-                        </action>
-                        <action behavior="Bullet" id="5" name="Set enabled" sid="688873978205694" type="campoItens">
-                            <param id="0" name="State">1</param>
-                        </action>
-                        <action behavior="Bullet" disabled="1" id="3" name="Set angle of motion" sid="459266458555768" type="campoItens">
-                            <param id="0" name="Angle">270 + round(random(0,80)) - 40</param>
-                        </action>
-                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="134436087679638" type="campoItens">
-                            <param id="0" name="Angle">angle(campoItens.X, campoItens.Y, player.X, player.Y)</param>
-                        </action>
-                        <action behavior="Bullet" disabled="1" id="2" name="Set gravity" sid="436876093157036" type="campoItens">
-                            <param id="0" name="Gravity">55 + 4^floor((numeroObjetosAtirados + 1)/5) * 59</param>
+                        <action id="-7" name="Set size" sid="691904008634618" type="campoItens">
+                            <param id="0" name="Width">28</param>
+                            <param id="1" name="Height">29</param>
                         </action>
                         <action id="-15" name="Set visible" sid="471233574798529" type="campoItens">
                             <param id="0" name="Visibility">1</param>
@@ -4437,6 +4438,35 @@
                         <action id="-10" name="Add to" sid="658861097501870" type="System">
                             <param id="0" name="Variable">numeroObjetosAtirados</param>
                             <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="590893513950173">
+                    <conditions>
+                        <condition id="-18" name="On created" sid="394797993094092" type="campoItens" />
+                    </conditions>
+                    <actions>
+                        <action id="-7" name="Set size" sid="448843746095118" type="campoItens">
+                            <param id="0" name="Width">28</param>
+                            <param id="1" name="Height">29</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="290515481173249" type="System">
+                            <param id="0" name="Seconds">2</param>
+                        </action>
+                        <action behavior="Physics" id="27" name="Set enabled" sid="356889913845577" type="campoItens">
+                            <param id="0" name="Mode">1</param>
+                        </action>
+                        <action behavior="Bullet" id="5" name="Set enabled" sid="677234147583587" type="campoItens">
+                            <param id="0" name="State">1</param>
+                        </action>
+                        <action behavior="Bullet" disabled="1" id="3" name="Set angle of motion" sid="760592488180884" type="campoItens">
+                            <param id="0" name="Angle">270 + round(random(0,80)) - 40</param>
+                        </action>
+                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="375283016239004" type="campoItens">
+                            <param id="0" name="Angle">angle(campoItens.X, campoItens.Y, player.X, player.Y)</param>
+                        </action>
+                        <action behavior="Bullet" disabled="1" id="2" name="Set gravity" sid="587659384072584" type="campoItens">
+                            <param id="0" name="Gravity">55 + 4^floor((numeroObjetosAtirados + 1)/5) * 59</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -4627,23 +4657,6 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <event-group description="" inactive="1" sid="908285297592713" title="Pontuacao7b">
-            <sub-events>
-                <event-block sid="516393436240119">
-                    <conditions>
-                        <condition id="-2" name="Compare Y" sid="210488477945115" type="pontuacao">
-                            <param id="0" name="Comparison">3</param>
-                            <param id="1" name="Y co-ordinate">786</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-2" name="Set Y" sid="509125927429936" type="pontuacao">
-                            <param id="0" name="Y">pontuacao.Y+3</param>
-                        </action>
-                    </actions>
-                </event-block>
-            </sub-events>
-        </event-group>
         <event-group description="" inactive="1" sid="665805584817953" title="SaidaDiploma6" />
         <event-group description="" inactive="1" sid="593941000854643" title="Saida6" />
         <event-group description="" inactive="1" sid="832931029807796" title="Pontuacao7a">
@@ -4658,6 +4671,23 @@
                     <actions>
                         <action id="-2" name="Set Y" sid="496504639960376" type="pontuacao">
                             <param id="0" name="Y">pontuacao.Y-3</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" inactive="1" sid="908285297592713" title="Pontuacao7b">
+            <sub-events>
+                <event-block sid="516393436240119">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="210488477945115" type="pontuacao">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Y co-ordinate">786</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="509125927429936" type="pontuacao">
+                            <param id="0" name="Y">pontuacao.Y+3</param>
                         </action>
                     </actions>
                 </event-block>
