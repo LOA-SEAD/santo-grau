@@ -388,6 +388,36 @@
                 <action behavior="8Direction" id="0" name="Stop" sid="931787032620698" type="player" />
             </actions>
             <sub-events>
+                <comment>Ativa ou desativa (evento Else abaixo) os botões de mobile dependendo do dispositivo onde está sendo jogado</comment>
+                <event-block sid="985514913724662">
+                    <conditions>
+                        <condition id="-20" name="Is on mobile device" sid="203102899874498" type="System" />
+                    </conditions>
+                    <actions>
+                        <action disabled="1" id="-12" name="Set group active" sid="281864596562729" type="System">
+                            <param id="0" name="Group name">&quot;Mobile3&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="627454463279327" type="System">
+                            <param id="0" name="Group name">&quot;playerMove3&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="407199963536796">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="421334729877443" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="141485223853263" type="System">
+                            <param id="0" name="Group name">&quot;Mobile3&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="790760048461355" type="BtnDirecional" />
+                        <action id="-9" name="Destroy" sid="289551641429298" type="BtnInteragir" />
+                        <action id="-9" name="Destroy" sid="577758589561766" type="HitboxDir" />
+                    </actions>
+                </event-block>
                 <event-block sid="287946371448025">
                     <conditions>
                         <condition id="-14" name="Pick by unique ID" sid="553932102279407" type="selecaoComida">
@@ -665,10 +695,6 @@
                 <condition id="-19" name="On destroyed" sid="868726520411591" type="AnimacaoDiploma" />
             </conditions>
             <actions>
-                <action id="-12" name="Set group active" sid="464944756950103" type="System">
-                    <param id="0" name="Group name">&quot;playerMove3&quot;</param>
-                    <param id="1" name="State">1</param>
-                </action>
                 <action id="0" name="Play" sid="224767558471451" type="Audio">
                     <param id="0" name="Audio file">passagem_subindo</param>
                     <param id="2" name="Loop">0</param>
@@ -680,6 +706,30 @@
                     <param id="1" name="State">1</param>
                 </action>
             </actions>
+            <sub-events>
+                <event-block sid="163498752177565">
+                    <conditions>
+                        <condition id="-20" name="Is on mobile device" sid="501803445402262" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="400739309079101" type="System">
+                            <param id="0" name="Group name">&quot;Mobile3&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="875076263690961">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="445116704422344" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="212448909113118" type="System">
+                            <param id="0" name="Group name">&quot;playerMove3&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
         </event-block>
         <comment>Einstein é visível</comment>
         <event-block sid="4841051601009874">
@@ -832,34 +882,44 @@
             </sub-events>
         </event-block>
         <comment>Ação para o jogador abrir o armário e pegar a recompensa</comment>
-        <event-block sid="544527834019890">
+        <event-block any="1" sid="544527834019890">
             <conditions>
-                <condition id="1" name="Is overlapping another object" sid="464702853105520" type="player">
-                    <param id="0" name="Object">AbreArmario</param>
-                </condition>
                 <condition id="2" name="Key is down" sid="681928718586127" type="Keyboard">
                     <param id="0" name="Key">69</param>
                 </condition>
-                <condition id="2" name="Is playing" sid="690854542172808" type="playerAnim">
-                    <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                <condition id="17" name="On tap object" sid="558517877938548" type="Touch">
+                    <param id="0" name="Object">BtnInteragir</param>
                 </condition>
             </conditions>
-            <actions>
-                <action id="0" name="Play" sid="921241955817236" type="Audio">
-                    <param id="0" name="Audio file">porta_armario</param>
-                    <param id="2" name="Loop">0</param>
-                    <param id="3" name="Volume">volSons</param>
-                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                </action>
-                <action id="5" name="Set frame" sid="634280041491894" type="Armario">
-                    <param id="0" name="Frame number">1</param>
-                </action>
-                <action id="-9" name="Destroy" sid="531783168521912" type="AbreArmario" />
-                <action id="-3" name="Set position" sid="556394538615453" type="recompensa">
-                    <param id="0" name="X">249</param>
-                    <param id="1" name="Y">120</param>
-                </action>
-            </actions>
+            <actions />
+            <sub-events>
+                <event-block sid="189799618928166">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="464702853105520" type="player">
+                            <param id="0" name="Object">AbreArmario</param>
+                        </condition>
+                        <condition id="2" name="Is playing" sid="690854542172808" type="playerAnim">
+                            <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Play" sid="921241955817236" type="Audio">
+                            <param id="0" name="Audio file">porta_armario</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">volSons</param>
+                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                        </action>
+                        <action id="5" name="Set frame" sid="634280041491894" type="Armario">
+                            <param id="0" name="Frame number">1</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="531783168521912" type="AbreArmario" />
+                        <action id="-3" name="Set position" sid="556394538615453" type="recompensa">
+                            <param id="0" name="X">249</param>
+                            <param id="1" name="Y">120</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
         </event-block>
         <comment>Ação de pegar o easterEgg3</comment>
         <event-block sid="211945518311640">
@@ -870,27 +930,37 @@
             </conditions>
             <actions />
             <sub-events>
-                <event-block sid="531733259684070">
+                <event-block any="1" sid="531733259684070">
                     <conditions>
                         <condition id="0" name="On key pressed" sid="410705206418778" type="Keyboard">
                             <param id="0" name="Key">69</param>
                         </condition>
-                        <condition id="-14" name="Compare variable" sid="305880224376815" type="System">
-                            <param id="0" name="Variable">pause</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
-                        <condition id="2" name="Is playing" sid="637649485009187" type="playerAnim">
-                            <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                        <condition id="17" name="On tap object" sid="849398763649754" type="Touch">
+                            <param id="0" name="Object">BtnInteragir</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="-9" name="Set value" sid="510266785916422" type="System">
-                            <param id="0" name="Variable">recompensa3</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                        <action id="-9" name="Destroy" sid="431535413505808" type="recompensa" />
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="909000862005643">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="305880224376815" type="System">
+                                    <param id="0" name="Variable">pause</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="2" name="Is playing" sid="637649485009187" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="510266785916422" type="System">
+                                    <param id="0" name="Variable">recompensa3</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="431535413505808" type="recompensa" />
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-block>
@@ -1049,44 +1119,74 @@
                     </sub-events>
                 </event-block>
                 <comment>Hey, Einstein! I&apos;m on your side!</comment>
-                <event-block sid="6062525126708422">
+                <event-block any="1" sid="6062525126708422">
                     <conditions>
-                        <condition id="1" name="Is overlapping another object" sid="5426140650707876" type="player">
-                            <param id="0" name="Object">SelecaoEinstein</param>
-                        </condition>
                         <condition id="2" name="Key is down" sid="1161521404134509" type="Keyboard">
                             <param id="0" name="Key">69</param>
                         </condition>
-                        <condition id="2" name="Is playing" sid="4623048803601847" type="playerAnim">
-                            <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                        <condition id="17" name="On tap object" sid="676924442908814" type="Touch">
+                            <param id="0" name="Object">BtnInteragir</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="-9" name="Set value" sid="3847613789192533" type="System">
-                            <param id="0" name="Variable">tamanhoDialogoGAL</param>
-                            <param id="1" name="Value">4</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="7926800931931627" type="System">
-                            <param id="0" name="Variable">carregarDialogoChave</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                        <action id="2" name="Stop" sid="2950220598687543" type="playerAnim" />
-                        <action id="-12" name="Set group active" sid="9391033416436006" type="System">
-                            <param id="0" name="Group name">&quot;playerMove3&quot;</param>
-                            <param id="1" name="State">0</param>
-                        </action>
-                        <action id="0" name="Play" sid="630564296322413" type="Audio">
-                            <param id="0" name="Audio file">tossindo</param>
-                            <param id="2" name="Loop">0</param>
-                            <param id="3" name="Volume">volSons</param>
-                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="5040351626937007" type="System">
-                            <param id="0" name="Group name">&quot;dialogoGaleria&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                        <action id="-9" name="Destroy" sid="5328791875943443" type="SelecaoEinstein" />
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="915973830968069">
+                            <conditions>
+                                <condition id="1" name="Is overlapping another object" sid="5426140650707876" type="player">
+                                    <param id="0" name="Object">SelecaoEinstein</param>
+                                </condition>
+                                <condition id="2" name="Is playing" sid="4623048803601847" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="3847613789192533" type="System">
+                                    <param id="0" name="Variable">tamanhoDialogoGAL</param>
+                                    <param id="1" name="Value">4</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="7926800931931627" type="System">
+                                    <param id="0" name="Variable">carregarDialogoChave</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="2" name="Stop" sid="2950220598687543" type="playerAnim" />
+                                <action id="0" name="Play" sid="630564296322413" type="Audio">
+                                    <param id="0" name="Audio file">tossindo</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="5040351626937007" type="System">
+                                    <param id="0" name="Group name">&quot;dialogoGaleria&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="5328791875943443" type="SelecaoEinstein" />
+                            </actions>
+                            <sub-events>
+                                <event-block sid="975118245491755">
+                                    <conditions>
+                                        <condition id="-20" name="Is on mobile device" sid="648724312409953" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="384417106948690" type="System">
+                                            <param id="0" name="Group name">&quot;Mobile3&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="732955612362768">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="550345253515461" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="539765860215356" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove3&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <comment>Sobe dica para ordenar os quadros</comment>
                 <event-block sid="343906429276003">
@@ -1153,51 +1253,81 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <event-block sid="7454483833152009">
+                <event-block any="1" sid="7454483833152009">
                     <conditions>
-                        <condition id="1" name="Is overlapping another object" sid="2222609733822314" type="player">
-                            <param id="0" name="Object">selecaoComida</param>
-                        </condition>
                         <condition id="2" name="Key is down" sid="6256006701647014" type="Keyboard">
                             <param id="0" name="Key">69</param>
                         </condition>
-                        <condition id="-10" name="Compare opacity" sid="4539723784871463" type="BalaoDialogo">
-                            <param id="0" name="Comparison">0</param>
-                            <param id="1" name="Opacity">0</param>
-                        </condition>
-                        <condition id="2" name="Is playing" sid="9969562668928525" type="playerAnim">
-                            <param id="0" name="Animation">&quot;TrasParado&quot;</param>
-                        </condition>
-                        <condition id="-10" name="Compare opacity" sid="707346564766230" type="MuralQuadros">
-                            <param id="0" name="Comparison">0</param>
-                            <param id="1" name="Opacity">0</param>
+                        <condition id="17" name="On tap object" sid="359967636511553" type="Touch">
+                            <param id="0" name="Object">BtnInteragir</param>
                         </condition>
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="2760115659530621">
+                        <event-block sid="634153926378233">
                             <conditions>
-                                <condition id="-14" name="Compare variable" sid="9032575874006345" type="System">
-                                    <param id="0" name="Variable">fraseAtualGAL</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">5</param>
+                                <condition id="1" name="Is overlapping another object" sid="2222609733822314" type="player">
+                                    <param id="0" name="Object">selecaoComida</param>
+                                </condition>
+                                <condition id="-10" name="Compare opacity" sid="4539723784871463" type="BalaoDialogo">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                                <condition id="2" name="Is playing" sid="9969562668928525" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                                </condition>
+                                <condition id="-10" name="Compare opacity" sid="707346564766230" type="MuralQuadros">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Opacity">0</param>
                                 </condition>
                             </conditions>
-                            <actions>
-                                <action id="-12" name="Set group active" sid="760445540358819" type="System">
-                                    <param id="0" name="Group name">&quot;animacaoOrdenaQuadros&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
-                                <action id="2" name="Stop" sid="565313019397246" type="playerAnim" />
-                                <action id="-12" name="Set group active" sid="9702621905499418" type="System">
-                                    <param id="0" name="Group name">&quot;playerMove3&quot;</param>
-                                    <param id="1" name="State">0</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="351805240014108" type="System">
-                                    <param id="0" name="Group name">&quot;carregarQuadros&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
-                            </actions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="2760115659530621">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="9032575874006345" type="System">
+                                            <param id="0" name="Variable">fraseAtualGAL</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">5</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="760445540358819" type="System">
+                                            <param id="0" name="Group name">&quot;animacaoOrdenaQuadros&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="2" name="Stop" sid="565313019397246" type="playerAnim" />
+                                        <action id="-12" name="Set group active" sid="351805240014108" type="System">
+                                            <param id="0" name="Group name">&quot;carregarQuadros&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="855558111542639">
+                                            <conditions>
+                                                <condition id="-20" name="Is on mobile device" sid="932327276720208" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="811574711636931" type="System">
+                                                    <param id="0" name="Group name">&quot;Mobile3&quot;</param>
+                                                    <param id="1" name="State">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="368965555821377">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="191082926582673" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="469199936679430" type="System">
+                                                    <param id="0" name="Group name">&quot;playerMove3&quot;</param>
+                                                    <param id="1" name="State">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -1687,10 +1817,8 @@
                 <comment>Caso o jogador possa sair da ordenação de quadros é só modificar e descomentar essa parte</comment>
                 <event-block sid="1985184831597969">
                     <conditions>
-                        <condition id="6" name="On object clicked" sid="4752721050209126" type="Mouse">
-                            <param id="0" name="Mouse button">0</param>
-                            <param id="1" name="Click type">0</param>
-                            <param id="2" name="Object clicked">popupFechar</param>
+                        <condition id="17" name="On tap object" sid="4752721050209126" type="Touch">
+                            <param id="0" name="Object">popupFechar</param>
                         </condition>
                         <condition id="-10" name="Compare opacity" sid="9244725577974001" type="MuralQuadros">
                             <param id="0" name="Comparison">0</param>
@@ -2462,10 +2590,13 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="967206266723503">
+                        <event-block any="1" sid="967206266723503">
                             <conditions>
                                 <condition id="2" name="Key is down" sid="7262807909701723" type="Keyboard">
                                     <param id="0" name="Key">69</param>
+                                </condition>
+                                <condition id="17" name="On tap object" sid="110905010603623" type="Touch">
+                                    <param id="0" name="Object">BtnInteragir</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -2590,12 +2721,30 @@
                                     <param id="0" name="Group name">&quot;dialogoGaleria&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
-                                <action id="-12" name="Set group active" sid="4849866285031774" type="System">
-                                    <param id="0" name="Group name">&quot;playerMove3&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
                             </actions>
                             <sub-events>
+                                <event-block sid="575801383577941">
+                                    <conditions>
+                                        <condition id="-20" name="Is on mobile device" sid="586927998992376" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="176147851777360" type="System">
+                                            <param id="0" name="Group name">&quot;Mobile3&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="522586512241648">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="238007398697142" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="468664697506642" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove3&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                                 <comment>Ativar a parte escura e executa o javascript de playData da Galeria, apenas para que o REMAR tenha como pegar o timestamp do momento em que se iniciou a busca pela chave</comment>
                                 <event-block sid="6260428200640797">
                                     <conditions>
@@ -2609,6 +2758,13 @@
                                         <action id="-4" name="Set layer visible" sid="4660890779684976" type="System">
                                             <param id="0" name="Layer">&quot;EfeitoEscuro&quot;</param>
                                             <param id="1" name="Visibility">1</param>
+                                        </action>
+                                        <action id="5" name="Set frame" sid="658903592391899" type="BtnDirecional">
+                                            <param id="0" name="Frame number">1</param>
+                                        </action>
+                                        <action id="4" name="Set animation" sid="340057043601355" type="BtnInteragir">
+                                            <param id="0" name="Animation">&quot;SalaEscura&quot;</param>
+                                            <param id="1" name="From">1</param>
                                         </action>
                                         <action id="0" name="Play" sid="814347881711170" type="Audio">
                                             <param id="0" name="Audio file">risada_maligna</param>
@@ -2756,7 +2912,7 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <comment>Usado para esconder os quadros quando o zoom na parade onde eles estão é desativado</comment>
+        <comment>Usado para esconder os quadros quando o zoom na parede onde eles estão é desativado</comment>
         <event-group description="" sid="9559341389909905" title="esconderQuadros">
             <sub-events>
                 <event-block sid="9104870988701179">
@@ -3603,91 +3759,108 @@
                     </actions>
                 </event-block>
                 <comment>Desativar a parte escura e novamente executa o javascript de playData da Galeria, mostrando que o jogador concluiu a procura da chave e a quantidade de danos que ele sofreu durante isso</comment>
-                <event-block sid="8178138007196533">
+                <event-block any="1" sid="8178138007196533">
                     <conditions>
                         <condition id="0" name="On key pressed" sid="1968584531883091" type="Keyboard">
                             <param id="0" name="Key">69</param>
                         </condition>
-                        <condition id="1" name="Is overlapping another object" sid="6175167707911985" type="player">
-                            <param id="0" name="Object">SelecaoChave</param>
+                        <condition id="17" name="On tap object" sid="582505623397442" type="Touch">
+                            <param id="0" name="Object">BtnInteragir</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="6" name="Stop" sid="382422753854971" type="Audio">
-                            <param id="0" name="Tag">&quot;sons&quot;</param>
-                        </action>
-                        <action id="0" name="Play" sid="170004080196678" type="Audio">
-                            <param id="0" name="Audio file">assopro</param>
-                            <param id="2" name="Loop">0</param>
-                            <param id="3" name="Volume">volSons</param>
-                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                        </action>
-                        <action id="0" name="Play" sid="837996007695531" type="Audio">
-                            <param id="0" name="Audio file">OSantoTiGrau</param>
-                            <param id="2" name="Loop">1</param>
-                            <param id="3" name="Volume">volMusica</param>
-                            <param id="1" name="Tag (optional)">&quot;musica&quot;</param>
-                        </action>
-                        <action id="-9" name="Destroy" sid="2433062249916656" type="Chave" />
-                        <action id="-9" name="Destroy" sid="1765500496901364" type="SelecaoChave" />
-                        <action id="-9" name="Destroy" sid="2322279731337848" type="Fantasmas" />
-                        <action id="-9" name="Destroy" sid="125905918515825" type="lasanha" />
-                        <action id="-9" name="Destroy" sid="545243293594186" type="cafe" />
-                        <action id="-9" name="Destroy" sid="876975913492331" type="selecaoComida" />
-                        <action id="-4" name="Set layer visible" sid="3647425600807111" type="System">
-                            <param id="0" name="Layer">&quot;EfeitoEscuro&quot;</param>
-                            <param id="1" name="Visibility">0</param>
-                        </action>
-                        <action id="11" name="Set collisions enabled" sid="9171524106194535" type="saida3">
-                            <param id="0" name="Collisions">1</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="191738463162011" type="System">
-                            <param id="0" name="Variable">sendJS</param>
-                            <param id="1" name="Value">&quot;&apos;true&apos;,&apos;&quot; &amp; numeroDanosJS &amp; &quot;&apos;&quot;</param>
-                        </action>
-                        <action id="0" name="Execute" sid="679513122054185" type="StatsJS">
-                            <param id="0" name="Value">&quot;sendPlayDataGallery(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
-                        </action>
-                        <action id="-10" name="Add to" sid="7453172238563238" type="System">
-                            <param id="0" name="Variable">pontos</param>
-                            <param id="1" name="Value">100</param>
-                        </action>
-                        <action id="0" name="Set text" sid="9617344024946068" type="pontoTexto">
-                            <param id="0" name="Text">&quot;+100&quot;</param>
-                        </action>
-                        <action id="4" name="Set font color" sid="1850660752922502" type="pontoTexto">
-                            <param id="0" name="Color">rgb(41, 90, 165)</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="287380949986378" type="System">
-                            <param id="0" name="Group name">&quot;Pontuacao3b&quot;</param>
-                            <param id="1" name="State">0</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="754439252126982" type="System">
-                            <param id="0" name="Group name">&quot;Pontuacao3a&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                        <action id="-16" name="Wait" sid="458622226825664" type="System">
-                            <param id="0" name="Seconds">4</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="934436991454137" type="System">
-                            <param id="0" name="Group name">&quot;Pontuacao3a&quot;</param>
-                            <param id="1" name="State">0</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="852552821353202" type="System">
-                            <param id="0" name="Group name">&quot;Pontuacao3b&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="977371892841502" type="System">
-                            <param id="0" name="Group name">&quot;Saida3&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                        <action id="0" name="Play" sid="610091136066403" type="Audio">
-                            <param id="0" name="Audio file">passagem_subindo</param>
-                            <param id="2" name="Loop">0</param>
-                            <param id="3" name="Volume">volSons</param>
-                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="855376956554318">
+                            <conditions>
+                                <condition id="1" name="Is overlapping another object" sid="6175167707911985" type="player">
+                                    <param id="0" name="Object">SelecaoChave</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="6" name="Stop" sid="382422753854971" type="Audio">
+                                    <param id="0" name="Tag">&quot;sons&quot;</param>
+                                </action>
+                                <action id="0" name="Play" sid="170004080196678" type="Audio">
+                                    <param id="0" name="Audio file">assopro</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="0" name="Play" sid="837996007695531" type="Audio">
+                                    <param id="0" name="Audio file">OSantoTiGrau</param>
+                                    <param id="2" name="Loop">1</param>
+                                    <param id="3" name="Volume">volMusica</param>
+                                    <param id="1" name="Tag (optional)">&quot;musica&quot;</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="2433062249916656" type="Chave" />
+                                <action id="-9" name="Destroy" sid="1765500496901364" type="SelecaoChave" />
+                                <action id="-9" name="Destroy" sid="2322279731337848" type="Fantasmas" />
+                                <action id="-9" name="Destroy" sid="125905918515825" type="lasanha" />
+                                <action id="-9" name="Destroy" sid="545243293594186" type="cafe" />
+                                <action id="-9" name="Destroy" sid="876975913492331" type="selecaoComida" />
+                                <action id="5" name="Set frame" sid="921769276962248" type="BtnDirecional">
+                                    <param id="0" name="Frame number">0</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="831720390013925" type="BtnInteragir">
+                                    <param id="0" name="Animation">&quot;Default&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                                <action id="-4" name="Set layer visible" sid="3647425600807111" type="System">
+                                    <param id="0" name="Layer">&quot;EfeitoEscuro&quot;</param>
+                                    <param id="1" name="Visibility">0</param>
+                                </action>
+                                <action id="11" name="Set collisions enabled" sid="9171524106194535" type="saida3">
+                                    <param id="0" name="Collisions">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="191738463162011" type="System">
+                                    <param id="0" name="Variable">sendJS</param>
+                                    <param id="1" name="Value">&quot;&apos;true&apos;,&apos;&quot; &amp; numeroDanosJS &amp; &quot;&apos;&quot;</param>
+                                </action>
+                                <action id="0" name="Execute" sid="679513122054185" type="StatsJS">
+                                    <param id="0" name="Value">&quot;sendPlayDataGallery(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
+                                </action>
+                                <action id="-10" name="Add to" sid="7453172238563238" type="System">
+                                    <param id="0" name="Variable">pontos</param>
+                                    <param id="1" name="Value">100</param>
+                                </action>
+                                <action id="0" name="Set text" sid="9617344024946068" type="pontoTexto">
+                                    <param id="0" name="Text">&quot;+100&quot;</param>
+                                </action>
+                                <action id="4" name="Set font color" sid="1850660752922502" type="pontoTexto">
+                                    <param id="0" name="Color">rgb(41, 90, 165)</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="287380949986378" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao3b&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="754439252126982" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao3a&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="458622226825664" type="System">
+                                    <param id="0" name="Seconds">4</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="934436991454137" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao3a&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="852552821353202" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao3b&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="977371892841502" type="System">
+                                    <param id="0" name="Group name">&quot;Saida3&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="0" name="Play" sid="610091136066403" type="Audio">
+                                    <param id="0" name="Audio file">passagem_subindo</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
@@ -4196,107 +4369,117 @@
                                 </action>
                             </actions>
                             <sub-events>
-                                <event-block sid="685572960630251">
+                                <event-block any="1" sid="685572960630251">
                                     <conditions>
                                         <condition id="0" name="On key pressed" sid="824025174866338" type="Keyboard">
                                             <param id="0" name="Key">69</param>
                                         </condition>
-                                        <condition id="-14" name="Compare variable" sid="576498423019809" type="System">
-                                            <param id="0" name="Variable">pause</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">0</param>
+                                        <condition id="17" name="On tap object" sid="100479190141195" type="Touch">
+                                            <param id="0" name="Object">BtnInteragir</param>
                                         </condition>
                                     </conditions>
-                                    <actions>
-                                        <action id="-9" name="Destroy" sid="273335518905352" type="lasanha" />
-                                        <action id="-9" name="Destroy" sid="390390067375016" type="selecaoComida" />
-                                        <action id="0" name="Play" sid="269419423605824" type="Audio">
-                                            <param id="0" name="Audio file">coletando_lasanha</param>
-                                            <param id="2" name="Loop">0</param>
-                                            <param id="3" name="Volume">volSons</param>
-                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                        </action>
-                                        <action behavior="Pathfinding" id="7" name="Set max speed" sid="198488015231712" type="Fantasmas">
-                                            <param id="0" name="Speed">30</param>
-                                        </action>
-                                        <action behavior="Pathfinding" id="8" name="Set acceleration" sid="238827008105268" type="Fantasmas">
-                                            <param id="0" name="Acceleration">45</param>
-                                        </action>
-                                        <action behavior="Pathfinding" id="10" name="Set rotate speed" sid="354866550920094" type="Fantasmas">
-                                            <param id="0" name="Rotate speed">30</param>
-                                        </action>
-                                        <action id="5" name="Set playback rate" sid="211815938453560" type="Audio">
-                                            <param id="0" name="Tag">&quot;musica&quot;</param>
-                                            <param id="1" name="Playback rate">0.5</param>
-                                        </action>
-                                        <action id="-16" name="Wait" sid="479859635478526" type="System">
-                                            <param id="0" name="Seconds">20</param>
-                                        </action>
-                                        <action id="5" name="Set playback rate" sid="478213666937138" type="Audio">
-                                            <param id="0" name="Tag">&quot;musica&quot;</param>
-                                            <param id="1" name="Playback rate">1</param>
-                                        </action>
-                                        <action behavior="Pathfinding" id="7" name="Set max speed" sid="141694303447920" type="Fantasmas">
-                                            <param id="0" name="Speed">200</param>
-                                        </action>
-                                        <action behavior="Pathfinding" id="8" name="Set acceleration" sid="389278244940478" type="Fantasmas">
-                                            <param id="0" name="Acceleration">300</param>
-                                        </action>
-                                        <action behavior="Pathfinding" id="10" name="Set rotate speed" sid="150545008735856" type="Fantasmas">
-                                            <param id="0" name="Rotate speed">200</param>
-                                        </action>
-                                    </actions>
+                                    <actions />
                                     <sub-events>
-                                        <event-block disabled="1" sid="256665349681906">
+                                        <event-block sid="869999261168177">
                                             <conditions>
-                                                <condition id="-14" name="Pick by unique ID" sid="505908165428342" type="selecaoComida">
-                                                    <param id="0" name="Unique ID">419</param>
+                                                <condition id="-14" name="Compare variable" sid="576498423019809" type="System">
+                                                    <param id="0" name="Variable">pause</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">0</param>
                                                 </condition>
-                                                <condition id="-4" inverted="1" name="Is outside layout" sid="871604562256520" type="lasanha" />
                                             </conditions>
                                             <actions>
-                                                <action id="-1" name="Set X" sid="927780729607868" type="lasanha">
-                                                    <param id="0" name="X">-157</param>
-                                                </action>
-                                                <action id="0" name="Play" sid="451938068107418" type="Audio">
+                                                <action id="-9" name="Destroy" sid="273335518905352" type="lasanha" />
+                                                <action id="-9" name="Destroy" sid="390390067375016" type="selecaoComida" />
+                                                <action id="0" name="Play" sid="269419423605824" type="Audio">
                                                     <param id="0" name="Audio file">coletando_lasanha</param>
                                                     <param id="2" name="Loop">0</param>
                                                     <param id="3" name="Volume">volSons</param>
                                                     <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                                 </action>
-                                                <action behavior="Pathfinding" id="7" name="Set max speed" sid="802252346431306" type="Fantasmas">
+                                                <action behavior="Pathfinding" id="7" name="Set max speed" sid="198488015231712" type="Fantasmas">
                                                     <param id="0" name="Speed">30</param>
                                                 </action>
-                                                <action behavior="Pathfinding" id="8" name="Set acceleration" sid="758953748366490" type="Fantasmas">
+                                                <action behavior="Pathfinding" id="8" name="Set acceleration" sid="238827008105268" type="Fantasmas">
                                                     <param id="0" name="Acceleration">45</param>
                                                 </action>
-                                                <action behavior="Pathfinding" id="10" name="Set rotate speed" sid="905050970820229" type="Fantasmas">
+                                                <action behavior="Pathfinding" id="10" name="Set rotate speed" sid="354866550920094" type="Fantasmas">
                                                     <param id="0" name="Rotate speed">30</param>
                                                 </action>
-                                                <action id="5" name="Set playback rate" sid="741298233246507" type="Audio">
+                                                <action id="5" name="Set playback rate" sid="211815938453560" type="Audio">
                                                     <param id="0" name="Tag">&quot;musica&quot;</param>
                                                     <param id="1" name="Playback rate">0.5</param>
                                                 </action>
-                                                <action id="-16" name="Wait" sid="979659777715619" type="System">
+                                                <action id="-16" name="Wait" sid="479859635478526" type="System">
                                                     <param id="0" name="Seconds">20</param>
                                                 </action>
-                                                <action id="5" name="Set playback rate" sid="394895618901069" type="Audio">
+                                                <action id="5" name="Set playback rate" sid="478213666937138" type="Audio">
                                                     <param id="0" name="Tag">&quot;musica&quot;</param>
                                                     <param id="1" name="Playback rate">1</param>
                                                 </action>
-                                                <action behavior="Pathfinding" id="7" name="Set max speed" sid="913371470888927" type="Fantasmas">
+                                                <action behavior="Pathfinding" id="7" name="Set max speed" sid="141694303447920" type="Fantasmas">
                                                     <param id="0" name="Speed">200</param>
                                                 </action>
-                                                <action behavior="Pathfinding" id="8" name="Set acceleration" sid="213992529263205" type="Fantasmas">
+                                                <action behavior="Pathfinding" id="8" name="Set acceleration" sid="389278244940478" type="Fantasmas">
                                                     <param id="0" name="Acceleration">300</param>
                                                 </action>
-                                                <action behavior="Pathfinding" id="10" name="Set rotate speed" sid="192809594136431" type="Fantasmas">
+                                                <action behavior="Pathfinding" id="10" name="Set rotate speed" sid="150545008735856" type="Fantasmas">
                                                     <param id="0" name="Rotate speed">200</param>
                                                 </action>
-                                                <action id="-1" name="Set X" sid="940941274791774" type="lasanha">
-                                                    <param id="0" name="X">157</param>
-                                                </action>
                                             </actions>
+                                            <sub-events>
+                                                <event-block disabled="1" sid="256665349681906">
+                                                    <conditions>
+                                                        <condition id="-14" name="Pick by unique ID" sid="505908165428342" type="selecaoComida">
+                                                            <param id="0" name="Unique ID">419</param>
+                                                        </condition>
+                                                        <condition id="-4" inverted="1" name="Is outside layout" sid="871604562256520" type="lasanha" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-1" name="Set X" sid="927780729607868" type="lasanha">
+                                                            <param id="0" name="X">-157</param>
+                                                        </action>
+                                                        <action id="0" name="Play" sid="451938068107418" type="Audio">
+                                                            <param id="0" name="Audio file">coletando_lasanha</param>
+                                                            <param id="2" name="Loop">0</param>
+                                                            <param id="3" name="Volume">volSons</param>
+                                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                                        </action>
+                                                        <action behavior="Pathfinding" id="7" name="Set max speed" sid="802252346431306" type="Fantasmas">
+                                                            <param id="0" name="Speed">30</param>
+                                                        </action>
+                                                        <action behavior="Pathfinding" id="8" name="Set acceleration" sid="758953748366490" type="Fantasmas">
+                                                            <param id="0" name="Acceleration">45</param>
+                                                        </action>
+                                                        <action behavior="Pathfinding" id="10" name="Set rotate speed" sid="905050970820229" type="Fantasmas">
+                                                            <param id="0" name="Rotate speed">30</param>
+                                                        </action>
+                                                        <action id="5" name="Set playback rate" sid="741298233246507" type="Audio">
+                                                            <param id="0" name="Tag">&quot;musica&quot;</param>
+                                                            <param id="1" name="Playback rate">0.5</param>
+                                                        </action>
+                                                        <action id="-16" name="Wait" sid="979659777715619" type="System">
+                                                            <param id="0" name="Seconds">20</param>
+                                                        </action>
+                                                        <action id="5" name="Set playback rate" sid="394895618901069" type="Audio">
+                                                            <param id="0" name="Tag">&quot;musica&quot;</param>
+                                                            <param id="1" name="Playback rate">1</param>
+                                                        </action>
+                                                        <action behavior="Pathfinding" id="7" name="Set max speed" sid="913371470888927" type="Fantasmas">
+                                                            <param id="0" name="Speed">200</param>
+                                                        </action>
+                                                        <action behavior="Pathfinding" id="8" name="Set acceleration" sid="213992529263205" type="Fantasmas">
+                                                            <param id="0" name="Acceleration">300</param>
+                                                        </action>
+                                                        <action behavior="Pathfinding" id="10" name="Set rotate speed" sid="192809594136431" type="Fantasmas">
+                                                            <param id="0" name="Rotate speed">200</param>
+                                                        </action>
+                                                        <action id="-1" name="Set X" sid="940941274791774" type="lasanha">
+                                                            <param id="0" name="X">157</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
                                         </event-block>
                                     </sub-events>
                                 </event-block>
@@ -4508,119 +4691,129 @@
                                 </action>
                             </actions>
                             <sub-events>
-                                <event-block sid="468677481137987">
+                                <event-block any="1" sid="468677481137987">
                                     <conditions>
                                         <condition id="0" name="On key pressed" sid="494022560612280" type="Keyboard">
                                             <param id="0" name="Key">69</param>
                                         </condition>
-                                        <condition id="-14" name="Compare variable" sid="768814643899691" type="System">
-                                            <param id="0" name="Variable">pause</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">0</param>
+                                        <condition id="17" name="On tap object" sid="229510843284104" type="Touch">
+                                            <param id="0" name="Object">BtnInteragir</param>
                                         </condition>
                                     </conditions>
-                                    <actions>
-                                        <action id="-9" name="Destroy" sid="159534690167648" type="cafe" />
-                                        <action id="-9" name="Destroy" sid="862052987131529" type="selecaoComida" />
-                                        <action id="0" name="Play" sid="396652056396046" type="Audio">
-                                            <param id="0" name="Audio file">coletar_cafe</param>
-                                            <param id="2" name="Loop">0</param>
-                                            <param id="3" name="Volume">volSons</param>
-                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                        </action>
-                                        <action behavior="8Direction" id="4" name="Set max speed" sid="534673282183579" type="player">
-                                            <param id="0" name="Max Speed">900</param>
-                                        </action>
-                                        <action behavior="8Direction" id="5" name="Set acceleration" sid="284416297097458" type="player">
-                                            <param id="0" name="Acceleration">999999999999999</param>
-                                        </action>
-                                        <action behavior="8Direction" id="6" name="Set deceleration" sid="534580548897492" type="player">
-                                            <param id="0" name="Deceleration">999999999999999</param>
-                                        </action>
-                                        <action id="6" name="Set speed" sid="920350130790407" type="playerAnim">
-                                            <param id="0" name="Speed">10</param>
-                                        </action>
-                                        <action id="5" name="Set playback rate" sid="944289225098360" type="Audio">
-                                            <param id="0" name="Tag">&quot;musica&quot;</param>
-                                            <param id="1" name="Playback rate">2.0</param>
-                                        </action>
-                                        <action id="-16" name="Wait" sid="305883044601595" type="System">
-                                            <param id="0" name="Seconds">20</param>
-                                        </action>
-                                        <action id="5" name="Set playback rate" sid="386513268540093" type="Audio">
-                                            <param id="0" name="Tag">&quot;musica&quot;</param>
-                                            <param id="1" name="Playback rate">1</param>
-                                        </action>
-                                        <action id="6" name="Set speed" sid="806324470364630" type="playerAnim">
-                                            <param id="0" name="Speed">0</param>
-                                        </action>
-                                        <action behavior="8Direction" id="4" name="Set max speed" sid="613205765889430" type="player">
-                                            <param id="0" name="Max Speed">200</param>
-                                        </action>
-                                        <action behavior="8Direction" id="5" name="Set acceleration" sid="426235609530052" type="player">
-                                            <param id="0" name="Acceleration">600</param>
-                                        </action>
-                                        <action behavior="8Direction" id="6" name="Set deceleration" sid="721262215164898" type="player">
-                                            <param id="0" name="Deceleration">1000</param>
-                                        </action>
-                                    </actions>
+                                    <actions />
                                     <sub-events>
-                                        <event-block disabled="1" sid="886697856946876">
+                                        <event-block sid="309303133770418">
                                             <conditions>
-                                                <condition id="-14" name="Pick by unique ID" sid="910846308046376" type="selecaoComida">
-                                                    <param id="0" name="Unique ID">420</param>
+                                                <condition id="-14" name="Compare variable" sid="768814643899691" type="System">
+                                                    <param id="0" name="Variable">pause</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">0</param>
                                                 </condition>
-                                                <condition id="-4" inverted="1" name="Is outside layout" sid="967175584370637" type="cafe" />
                                             </conditions>
                                             <actions>
-                                                <action id="-1" name="Set X" sid="506346076019640" type="cafe">
-                                                    <param id="0" name="X">1350</param>
-                                                </action>
-                                                <action id="0" name="Play" sid="619629982216287" type="Audio">
+                                                <action id="-9" name="Destroy" sid="159534690167648" type="cafe" />
+                                                <action id="-9" name="Destroy" sid="862052987131529" type="selecaoComida" />
+                                                <action id="0" name="Play" sid="396652056396046" type="Audio">
                                                     <param id="0" name="Audio file">coletar_cafe</param>
                                                     <param id="2" name="Loop">0</param>
                                                     <param id="3" name="Volume">volSons</param>
                                                     <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                                 </action>
-                                                <action behavior="8Direction" id="4" name="Set max speed" sid="407395871342713" type="player">
+                                                <action behavior="8Direction" id="4" name="Set max speed" sid="534673282183579" type="player">
                                                     <param id="0" name="Max Speed">900</param>
                                                 </action>
-                                                <action behavior="8Direction" id="5" name="Set acceleration" sid="746392278724775" type="player">
+                                                <action behavior="8Direction" id="5" name="Set acceleration" sid="284416297097458" type="player">
                                                     <param id="0" name="Acceleration">999999999999999</param>
                                                 </action>
-                                                <action behavior="8Direction" id="6" name="Set deceleration" sid="530758050688043" type="player">
+                                                <action behavior="8Direction" id="6" name="Set deceleration" sid="534580548897492" type="player">
                                                     <param id="0" name="Deceleration">999999999999999</param>
                                                 </action>
-                                                <action id="6" name="Set speed" sid="871219143991093" type="playerAnim">
+                                                <action id="6" name="Set speed" sid="920350130790407" type="playerAnim">
                                                     <param id="0" name="Speed">10</param>
                                                 </action>
-                                                <action id="5" name="Set playback rate" sid="964646912178585" type="Audio">
+                                                <action id="5" name="Set playback rate" sid="944289225098360" type="Audio">
                                                     <param id="0" name="Tag">&quot;musica&quot;</param>
                                                     <param id="1" name="Playback rate">2.0</param>
                                                 </action>
-                                                <action id="-16" name="Wait" sid="425460209705903" type="System">
+                                                <action id="-16" name="Wait" sid="305883044601595" type="System">
                                                     <param id="0" name="Seconds">20</param>
                                                 </action>
-                                                <action id="5" name="Set playback rate" sid="454427166111513" type="Audio">
+                                                <action id="5" name="Set playback rate" sid="386513268540093" type="Audio">
                                                     <param id="0" name="Tag">&quot;musica&quot;</param>
                                                     <param id="1" name="Playback rate">1</param>
                                                 </action>
-                                                <action behavior="8Direction" id="4" name="Set max speed" sid="220106621562005" type="player">
-                                                    <param id="0" name="Max Speed">200</param>
-                                                </action>
-                                                <action behavior="8Direction" id="5" name="Set acceleration" sid="822922733976123" type="player">
-                                                    <param id="0" name="Acceleration">600</param>
-                                                </action>
-                                                <action behavior="8Direction" id="6" name="Set deceleration" sid="294095106563294" type="player">
-                                                    <param id="0" name="Deceleration">1000</param>
-                                                </action>
-                                                <action id="-1" name="Set X" sid="404853185504299" type="cafe">
-                                                    <param id="0" name="X">1109</param>
-                                                </action>
-                                                <action id="6" name="Set speed" sid="452995657100621" type="playerAnim">
+                                                <action id="6" name="Set speed" sid="806324470364630" type="playerAnim">
                                                     <param id="0" name="Speed">0</param>
                                                 </action>
+                                                <action behavior="8Direction" id="4" name="Set max speed" sid="613205765889430" type="player">
+                                                    <param id="0" name="Max Speed">200</param>
+                                                </action>
+                                                <action behavior="8Direction" id="5" name="Set acceleration" sid="426235609530052" type="player">
+                                                    <param id="0" name="Acceleration">600</param>
+                                                </action>
+                                                <action behavior="8Direction" id="6" name="Set deceleration" sid="721262215164898" type="player">
+                                                    <param id="0" name="Deceleration">1000</param>
+                                                </action>
                                             </actions>
+                                            <sub-events>
+                                                <event-block disabled="1" sid="886697856946876">
+                                                    <conditions>
+                                                        <condition id="-14" name="Pick by unique ID" sid="910846308046376" type="selecaoComida">
+                                                            <param id="0" name="Unique ID">420</param>
+                                                        </condition>
+                                                        <condition id="-4" inverted="1" name="Is outside layout" sid="967175584370637" type="cafe" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-1" name="Set X" sid="506346076019640" type="cafe">
+                                                            <param id="0" name="X">1350</param>
+                                                        </action>
+                                                        <action id="0" name="Play" sid="619629982216287" type="Audio">
+                                                            <param id="0" name="Audio file">coletar_cafe</param>
+                                                            <param id="2" name="Loop">0</param>
+                                                            <param id="3" name="Volume">volSons</param>
+                                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                                        </action>
+                                                        <action behavior="8Direction" id="4" name="Set max speed" sid="407395871342713" type="player">
+                                                            <param id="0" name="Max Speed">900</param>
+                                                        </action>
+                                                        <action behavior="8Direction" id="5" name="Set acceleration" sid="746392278724775" type="player">
+                                                            <param id="0" name="Acceleration">999999999999999</param>
+                                                        </action>
+                                                        <action behavior="8Direction" id="6" name="Set deceleration" sid="530758050688043" type="player">
+                                                            <param id="0" name="Deceleration">999999999999999</param>
+                                                        </action>
+                                                        <action id="6" name="Set speed" sid="871219143991093" type="playerAnim">
+                                                            <param id="0" name="Speed">10</param>
+                                                        </action>
+                                                        <action id="5" name="Set playback rate" sid="964646912178585" type="Audio">
+                                                            <param id="0" name="Tag">&quot;musica&quot;</param>
+                                                            <param id="1" name="Playback rate">2.0</param>
+                                                        </action>
+                                                        <action id="-16" name="Wait" sid="425460209705903" type="System">
+                                                            <param id="0" name="Seconds">20</param>
+                                                        </action>
+                                                        <action id="5" name="Set playback rate" sid="454427166111513" type="Audio">
+                                                            <param id="0" name="Tag">&quot;musica&quot;</param>
+                                                            <param id="1" name="Playback rate">1</param>
+                                                        </action>
+                                                        <action behavior="8Direction" id="4" name="Set max speed" sid="220106621562005" type="player">
+                                                            <param id="0" name="Max Speed">200</param>
+                                                        </action>
+                                                        <action behavior="8Direction" id="5" name="Set acceleration" sid="822922733976123" type="player">
+                                                            <param id="0" name="Acceleration">600</param>
+                                                        </action>
+                                                        <action behavior="8Direction" id="6" name="Set deceleration" sid="294095106563294" type="player">
+                                                            <param id="0" name="Deceleration">1000</param>
+                                                        </action>
+                                                        <action id="-1" name="Set X" sid="404853185504299" type="cafe">
+                                                            <param id="0" name="X">1109</param>
+                                                        </action>
+                                                        <action id="6" name="Set speed" sid="452995657100621" type="playerAnim">
+                                                            <param id="0" name="Speed">0</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
                                         </event-block>
                                     </sub-events>
                                 </event-block>
@@ -4665,10 +4858,8 @@
                                 <condition id="0" name="On key pressed" sid="707457567318457" type="Keyboard">
                                     <param id="0" name="Key">27</param>
                                 </condition>
-                                <condition id="6" name="On object clicked" sid="586221358657978" type="Mouse">
-                                    <param id="0" name="Mouse button">0</param>
-                                    <param id="1" name="Click type">0</param>
-                                    <param id="2" name="Object clicked">menuOpcoes</param>
+                                <condition id="17" name="On tap object" sid="712591644246063" type="Touch">
+                                    <param id="0" name="Object">menuOpcoes</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -4696,14 +4887,34 @@
                                     <param id="0" name="Group name">&quot;Pontuacao3a&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
-                                <action id="-12" name="Set group active" sid="322951601987338" type="System">
-                                    <param id="0" name="Group name">&quot;playerMove3&quot;</param>
-                                    <param id="1" name="State">0</param>
-                                </action>
                                 <action id="-13" name="Set time scale" sid="816266558728578" type="System">
                                     <param id="0" name="Time scale">0.0</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="999088464835888">
+                                    <conditions>
+                                        <condition id="-20" name="Is on mobile device" sid="754815445643776" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="183567095603512" type="System">
+                                            <param id="0" name="Group name">&quot;Mobile3&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="974143209705610">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="119094364062005" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="963745608311724" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove3&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -4726,10 +4937,8 @@
                                 <condition id="0" name="On key pressed" sid="712636436937267" type="Keyboard">
                                     <param id="0" name="Key">32</param>
                                 </condition>
-                                <condition id="6" name="On object clicked" sid="835409948207056" type="Mouse">
-                                    <param id="0" name="Mouse button">0</param>
-                                    <param id="1" name="Click type">0</param>
-                                    <param id="2" name="Object clicked">menuOpcoesX</param>
+                                <condition id="17" name="On tap object" sid="586062291123530" type="Touch">
+                                    <param id="0" name="Object">menuOpcoesX</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -4771,12 +4980,31 @@
                                             <param id="0" name="Group name">&quot;operacoesQuadros&quot;</param>
                                         </condition>
                                     </conditions>
-                                    <actions>
-                                        <action id="-12" name="Set group active" sid="999630585162733" type="System">
-                                            <param id="0" name="Group name">&quot;playerMove3&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
-                                    </actions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="150989275974787">
+                                            <conditions>
+                                                <condition id="-20" name="Is on mobile device" sid="587650366505293" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="769973921641604" type="System">
+                                                    <param id="0" name="Group name">&quot;Mobile3&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="156046823402603">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="938403351842995" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="136791353120105" type="System">
+                                                    <param id="0" name="Group name">&quot;playerMove3&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -5488,10 +5716,8 @@
                 </event-block>
                 <event-block sid="742877609861897">
                     <conditions>
-                        <condition id="6" name="On object clicked" sid="634723106154582" type="Mouse">
-                            <param id="0" name="Mouse button">0</param>
-                            <param id="1" name="Click type">0</param>
-                            <param id="2" name="Object clicked">botoes</param>
+                        <condition id="17" name="On tap object" sid="482385917049877" type="Touch">
+                            <param id="0" name="Object">botoes</param>
                         </condition>
                         <condition id="-10" name="Compare opacity" sid="882327227871422" type="popup">
                             <param id="0" name="Comparison">0</param>
@@ -5543,12 +5769,31 @@
                                             <param id="0" name="Group name">&quot;operacoesQuadros&quot;</param>
                                         </condition>
                                     </conditions>
-                                    <actions>
-                                        <action id="-12" name="Set group active" sid="991701507797080" type="System">
-                                            <param id="0" name="Group name">&quot;playerMove3&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
-                                    </actions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="720271169312633">
+                                            <conditions>
+                                                <condition id="-20" name="Is on mobile device" sid="666331276629111" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="994784416014774" type="System">
+                                                    <param id="0" name="Group name">&quot;Mobile3&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="213125539508142">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="659601443442843" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="731253050703742" type="System">
+                                                    <param id="0" name="Group name">&quot;playerMove3&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -5601,12 +5846,31 @@
                                             <param id="0" name="Group name">&quot;operacoesQuadros&quot;</param>
                                         </condition>
                                     </conditions>
-                                    <actions>
-                                        <action id="-12" name="Set group active" sid="190676782073006" type="System">
-                                            <param id="0" name="Group name">&quot;playerMove3&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
-                                    </actions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="195317471555161">
+                                            <conditions>
+                                                <condition id="-20" name="Is on mobile device" sid="564075598451946" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="364970617885286" type="System">
+                                                    <param id="0" name="Group name">&quot;Mobile3&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="341971775217161">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="445766168007724" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="552836526708377" type="System">
+                                                    <param id="0" name="Group name">&quot;playerMove3&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -5708,10 +5972,8 @@
                 </event-block>
                 <event-block sid="113909301166565">
                     <conditions>
-                        <condition id="6" name="On object clicked" sid="838737827053900" type="Mouse">
-                            <param id="0" name="Mouse button">0</param>
-                            <param id="1" name="Click type">0</param>
-                            <param id="2" name="Object clicked">botoes</param>
+                        <condition id="17" name="On tap object" sid="576806028502613" type="Touch">
+                            <param id="0" name="Object">botoes</param>
                         </condition>
                         <condition id="-10" name="Compare opacity" sid="345967817771566" type="popup">
                             <param id="0" name="Comparison">0</param>
@@ -5809,12 +6071,31 @@
                                                     <param id="0" name="Group name">&quot;operacoesQuadros&quot;</param>
                                                 </condition>
                                             </conditions>
-                                            <actions>
-                                                <action id="-12" name="Set group active" sid="268925512893435" type="System">
-                                                    <param id="0" name="Group name">&quot;playerMove3&quot;</param>
-                                                    <param id="1" name="State">1</param>
-                                                </action>
-                                            </actions>
+                                            <actions />
+                                            <sub-events>
+                                                <event-block sid="548297254396528">
+                                                    <conditions>
+                                                        <condition id="-20" name="Is on mobile device" sid="473789584172465" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-12" name="Set group active" sid="492675436323593" type="System">
+                                                            <param id="0" name="Group name">&quot;Mobile3&quot;</param>
+                                                            <param id="1" name="State">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="849670081533063">
+                                                    <conditions>
+                                                        <condition id="-22" name="Else" sid="791163219300629" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-12" name="Set group active" sid="855572298651120" type="System">
+                                                            <param id="0" name="Group name">&quot;playerMove3&quot;</param>
+                                                            <param id="1" name="State">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
                                         </event-block>
                                     </sub-events>
                                 </event-block>
@@ -5824,10 +6105,8 @@
                 </event-block>
                 <event-block sid="857135475352592">
                     <conditions>
-                        <condition id="6" name="On object clicked" sid="931162097295825" type="Mouse">
-                            <param id="0" name="Mouse button">0</param>
-                            <param id="1" name="Click type">0</param>
-                            <param id="2" name="Object clicked">botaoFechar</param>
+                        <condition id="17" name="On tap object" sid="167985795364292" type="Touch">
+                            <param id="0" name="Object">botaoFechar</param>
                         </condition>
                         <condition id="-10" name="Compare opacity" sid="643429420992722" type="botaoFechar">
                             <param id="0" name="Comparison">0</param>
@@ -5857,10 +6136,8 @@
                 </event-block>
                 <event-block sid="539954535438996">
                     <conditions>
-                        <condition id="6" name="On object clicked" sid="897976082431090" type="Mouse">
-                            <param id="0" name="Mouse button">0</param>
-                            <param id="1" name="Click type">0</param>
-                            <param id="2" name="Object clicked">controleAudio</param>
+                        <condition id="17" name="On tap object" sid="602267384040401" type="Touch">
+                            <param id="0" name="Object">controleAudio</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -6116,6 +6393,337 @@
                             <param id="0" name="Frame number">0</param>
                         </action>
                     </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="Grupo responsável por controlar os botões na versão mobile" sid="851087535923816" title="Mobile3">
+            <sub-events>
+                <comment>Definição de qual frame estará o botão de interagir</comment>
+                <event-block sid="871134010589806">
+                    <conditions>
+                        <condition id="4" name="Is touching object" sid="139871509741599" type="Touch">
+                            <param id="0" name="Object">BtnInteragir</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="685170473322639" type="BtnInteragir">
+                            <param id="0" name="Frame number">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="248896756718260">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="720508537841935" type="System" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="238152870256546">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="705107429794251" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="5" name="Set frame" sid="492785850684132" type="BtnInteragir">
+                                    <param id="0" name="Frame number">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Processo de arrastar o direcional para o personagem se movimentar</comment>
+                <event-block sid="293020349554538">
+                    <conditions>
+                        <condition behavior="DragDrop" id="0" name="Is dragging" sid="809421532804307" type="HitboxDir" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <comment>Caso o jogador arrastou o direcional além da região delimitada, o círculo fica na borda desse espaço</comment>
+                        <event-block sid="307355229715284">
+                            <conditions>
+                                <condition id="9" inverted="1" name="Is overlapping at offset" sid="882050176441432" type="HitboxDir">
+                                    <param id="0" name="Object">EstruturaDir</param>
+                                    <param id="1" name="Offset X">HitboxDir.X - EstruturaDir.X</param>
+                                    <param id="2" name="Offset Y">HitboxDir.Y - EstruturaDir.Y</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <comment>Enquanto o jogador não mover seu dedo para dentro da região, o circulo continuará travado na borda, sendo calculada sua posição baseado no ângulo que o touch estiver (constante 76 é a maior distância possível que o direcional fica do centro)</comment>
+                                <event-block sid="922361606904045">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="310164174662978" type="System">
+                                            <param id="0" name="First value">HitboxDir.X</param>
+                                            <param id="1" name="Comparison">4</param>
+                                            <param id="2" name="Second value">EstruturaDir.X</param>
+                                        </condition>
+                                        <condition id="-8" name="Compare two values" sid="500039891914716" type="System">
+                                            <param id="0" name="First value">HitboxDir.Y</param>
+                                            <param id="1" name="Comparison">4</param>
+                                            <param id="2" name="Second value">EstruturaDir.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="925357521196725" type="BtnDirecional">
+                                            <param id="0" name="X">EstruturaDir.X + (76 * (distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, HitboxDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                            <param id="1" name="Y">EstruturaDir.Y + (76 * (distance (HitboxDir.X, HitboxDir.Y, HitboxDir.X, EstruturaDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="665904900583489">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="120075858412445" type="System">
+                                            <param id="0" name="First value">HitboxDir.X</param>
+                                            <param id="1" name="Comparison">2</param>
+                                            <param id="2" name="Second value">EstruturaDir.X</param>
+                                        </condition>
+                                        <condition id="-8" name="Compare two values" sid="709687297068652" type="System">
+                                            <param id="0" name="First value">HitboxDir.Y</param>
+                                            <param id="1" name="Comparison">2</param>
+                                            <param id="2" name="Second value">EstruturaDir.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="502837949025513" type="BtnDirecional">
+                                            <param id="0" name="X">EstruturaDir.X - (76 * (distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, HitboxDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                            <param id="1" name="Y">EstruturaDir.Y - (76 * (distance (HitboxDir.X, HitboxDir.Y, HitboxDir.X, EstruturaDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="423649452917483">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="931930796249917" type="System">
+                                            <param id="0" name="First value">HitboxDir.X</param>
+                                            <param id="1" name="Comparison">4</param>
+                                            <param id="2" name="Second value">EstruturaDir.X</param>
+                                        </condition>
+                                        <condition id="-8" name="Compare two values" sid="977106327452654" type="System">
+                                            <param id="0" name="First value">HitboxDir.Y</param>
+                                            <param id="1" name="Comparison">2</param>
+                                            <param id="2" name="Second value">EstruturaDir.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="715961537306791" type="BtnDirecional">
+                                            <param id="0" name="X">EstruturaDir.X + (76 * (distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, HitboxDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                            <param id="1" name="Y">EstruturaDir.Y - (76 * (distance (HitboxDir.X, HitboxDir.Y, HitboxDir.X, EstruturaDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="525494049747122">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="323210017310711" type="System">
+                                            <param id="0" name="First value">HitboxDir.X</param>
+                                            <param id="1" name="Comparison">2</param>
+                                            <param id="2" name="Second value">EstruturaDir.X</param>
+                                        </condition>
+                                        <condition id="-8" name="Compare two values" sid="967006777404185" type="System">
+                                            <param id="0" name="First value">HitboxDir.Y</param>
+                                            <param id="1" name="Comparison">4</param>
+                                            <param id="2" name="Second value">EstruturaDir.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="724146881893046" type="BtnDirecional">
+                                            <param id="0" name="X">EstruturaDir.X - (76 * (distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, HitboxDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                            <param id="1" name="Y">EstruturaDir.Y + (76 * (distance (HitboxDir.X, HitboxDir.Y, HitboxDir.X, EstruturaDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment>Não saiu de dentro da estrutura, então coloca o direcional na posição onde está seu dedo</comment>
+                        <event-block sid="397670544806869">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="278895975403916" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-4" name="Set position to another object" sid="284035197221120" type="BtnDirecional">
+                                    <param id="0" name="Object">HitboxDir</param>
+                                    <param id="1" name="Image point (optional)">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Caso o jogador solte o touch, o direcional volta para sua posição de descanso</comment>
+                <event-block sid="946634781603860">
+                    <conditions>
+                        <condition id="4" inverted="1" name="Is touching object" sid="258110561009671" type="Touch">
+                            <param id="0" name="Object">HitboxDir</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-4" name="Set position to another object" sid="559395413055543" type="HitboxDir">
+                            <param id="0" name="Object">EstruturaDir</param>
+                            <param id="1" name="Image point (optional)">0</param>
+                        </action>
+                        <action id="-4" name="Set position to another object" sid="247627486187584" type="BtnDirecional">
+                            <param id="0" name="Object">HitboxDir</param>
+                            <param id="1" name="Image point (optional)">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>A partir de uma distância de 10 entre o centro da estrutura e o direcional já é possível realizar alguma ação</comment>
+                <event-block sid="528334164647733">
+                    <conditions>
+                        <condition id="-8" name="Compare two values" sid="454817717665548" type="System">
+                            <param id="0" name="First value">distance(BtnDirecional.X, BtnDirecional.Y, EstruturaDir.X, EstruturaDir.Y)</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Second value">19</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <comment>Controle da distância que ativará a direção que o jogador está indo. Optei por 19 (1/4 de 76, a distância máxima que é possível ir com o direcional) para não deixar muito sensível</comment>
+                        <event-block sid="181226710776529">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="388090703709698" type="System">
+                                    <param id="0" name="First value">BtnDirecional.X</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Second value">EstruturaDir.X + 19</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Set mirrored" sid="689330970722120" type="playerAnim">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="855225646487643" type="player">
+                                    <param id="0" name="Control">1</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="940309317860993" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="134527025441688">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="985568969450900" type="System">
+                                    <param id="0" name="First value">BtnDirecional.X</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Second value">EstruturaDir.X - 19</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Set mirrored" sid="137985769251250" type="playerAnim">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="265277138914254" type="player">
+                                    <param id="0" name="Control">0</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="297059126047812" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="640518941618715">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="542463348768573" type="System">
+                                    <param id="0" name="First value">BtnDirecional.Y</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Second value">EstruturaDir.Y + 19</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Set mirrored" sid="217970390583734" type="playerAnim">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="785548942123037" type="player">
+                                    <param id="0" name="Control">3</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="632953333570168" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;FrenteAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="785332872446556">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="617745537213153" type="System">
+                                    <param id="0" name="First value">BtnDirecional.Y</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Second value">EstruturaDir.Y - 19</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Set mirrored" sid="879299945474900" type="playerAnim">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="845411914830429" type="player">
+                                    <param id="0" name="Control">2</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="454806512097303" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;TrasAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Parar as animações no moneto que o jogador parar seu movimento</comment>
+                <event-block sid="317088827867425">
+                    <conditions>
+                        <condition behavior="DragDrop" id="2" name="On drop" sid="434028335386082" type="HitboxDir" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="931724576112721">
+                            <conditions>
+                                <condition id="7" inverted="1" name="Is mirrored" sid="905810564938312" type="playerAnim" />
+                                <condition id="2" name="Is playing" sid="843712144406126" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="108300708884277" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;DireitaParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="500483574485841">
+                            <conditions>
+                                <condition id="7" name="Is mirrored" sid="555953038618543" type="playerAnim" />
+                                <condition id="2" name="Is playing" sid="847331270778026" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="326763335737605" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;EsquerdaParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="192369082900954">
+                            <conditions>
+                                <condition id="7" inverted="1" name="Is mirrored" sid="838807984390601" type="playerAnim" />
+                                <condition id="2" name="Is playing" sid="949461882742629" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;FrenteAndando&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="913321908538052" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="123715735667461">
+                            <conditions>
+                                <condition id="7" inverted="1" name="Is mirrored" sid="293599284480391" type="playerAnim" />
+                                <condition id="2" name="Is playing" sid="328073550386497" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;TrasAndando&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="670840845465824" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>

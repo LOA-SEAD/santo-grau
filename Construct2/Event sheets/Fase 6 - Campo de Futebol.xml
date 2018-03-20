@@ -453,6 +453,36 @@
                 </action>
             </actions>
             <sub-events>
+                <comment>Ativa ou desativa (evento Else abaixo) os botões de mobile dependendo do dispositivo onde está sendo jogado</comment>
+                <event-block sid="440891290523682">
+                    <conditions>
+                        <condition id="-20" name="Is on mobile device" sid="909427723569069" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="597625885732163" type="System">
+                            <param id="0" name="Group name">&quot;Mobile7&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="491445113578415" type="System">
+                            <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="750154793521309">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="632049855844601" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="965083121970350" type="System">
+                            <param id="0" name="Group name">&quot;Mobile7&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="272370517422305" type="BtnDirecional" />
+                        <action id="-9" name="Destroy" sid="710576622568699" type="BtnInteragir" />
+                        <action id="-9" name="Destroy" sid="256237045867099" type="HitboxDir" />
+                    </actions>
+                </event-block>
                 <event-block sid="370414961365161">
                     <conditions>
                         <condition id="-14" name="Pick by unique ID" sid="437340855310988" type="botoes">
@@ -3564,10 +3594,8 @@
                 <comment>Trocar de pergunta</comment>
                 <event-block sid="706768085077301">
                     <conditions>
-                        <condition id="6" name="On object clicked" sid="512295940529883" type="Mouse">
-                            <param id="0" name="Mouse button">0</param>
-                            <param id="1" name="Click type">0</param>
-                            <param id="2" name="Object clicked">placarMudaPergunta</param>
+                        <condition id="17" name="On tap object" sid="512295940529883" type="Touch">
+                            <param id="0" name="Object">placarMudaPergunta</param>
                         </condition>
                         <condition id="-14" name="Compare variable" sid="409186977308147" type="System">
                             <param id="0" name="Variable">opacidadeLayer</param>
@@ -3627,10 +3655,8 @@
                 <comment>Verifica as respostas do jogador por meio do clique do botão, liberando o envio delas após os dois campos estiverem preenchidos</comment>
                 <event-block sid="508744792465042">
                     <conditions>
-                        <condition id="6" name="On object clicked" sid="742960550989282" type="Mouse">
-                            <param id="0" name="Mouse button">0</param>
-                            <param id="1" name="Click type">0</param>
-                            <param id="2" name="Object clicked">placarBotao</param>
+                        <condition id="17" name="On tap object" sid="742960550989282" type="Touch">
+                            <param id="0" name="Object">placarBotao</param>
                         </condition>
                         <condition id="0" inverted="1" name="Compare text" sid="788856015392854" type="placarResp1">
                             <param id="0" name="Text">&quot;&quot;</param>
@@ -3775,10 +3801,8 @@
                 <comment>Fecha o placar</comment>
                 <event-block sid="106851211814442">
                     <conditions>
-                        <condition id="6" name="On object clicked" sid="332692521181355" type="Mouse">
-                            <param id="0" name="Mouse button">0</param>
-                            <param id="1" name="Click type">0</param>
-                            <param id="2" name="Object clicked">placarFechar</param>
+                        <condition id="17" name="On tap object" sid="332692521181355" type="Touch">
+                            <param id="0" name="Object">placarFechar</param>
                         </condition>
                         <condition id="-14" name="Compare variable" sid="387858010009365" type="System">
                             <param id="0" name="Variable">opacidadeLayer</param>
@@ -4738,10 +4762,8 @@
                                 <condition id="0" name="On key pressed" sid="968610653415173" type="Keyboard">
                                     <param id="0" name="Key">27</param>
                                 </condition>
-                                <condition id="6" name="On object clicked" sid="156027911594162" type="Mouse">
-                                    <param id="0" name="Mouse button">0</param>
-                                    <param id="1" name="Click type">0</param>
-                                    <param id="2" name="Object clicked">menuOpcoes</param>
+                                <condition id="17" name="On tap object" sid="620575095885161" type="Touch">
+                                    <param id="0" name="Object">menuOpcoes</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -4818,10 +4840,8 @@
                                 <condition id="0" name="On key pressed" sid="863188461392631" type="Keyboard">
                                     <param id="0" name="Key">32</param>
                                 </condition>
-                                <condition id="6" name="On object clicked" sid="574226814935230" type="Mouse">
-                                    <param id="0" name="Mouse button">0</param>
-                                    <param id="1" name="Click type">0</param>
-                                    <param id="2" name="Object clicked">menuOpcoesX</param>
+                                <condition id="17" name="On tap object" sid="113233886929130" type="Touch">
+                                    <param id="0" name="Object">menuOpcoesX</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -5604,10 +5624,8 @@
                 </event-block>
                 <event-block sid="849685780820637">
                     <conditions>
-                        <condition id="6" name="On object clicked" sid="372249998723714" type="Mouse">
-                            <param id="0" name="Mouse button">0</param>
-                            <param id="1" name="Click type">0</param>
-                            <param id="2" name="Object clicked">botoes</param>
+                        <condition id="17" name="On tap object" sid="690101731030166" type="Touch">
+                            <param id="0" name="Object">botoes</param>
                         </condition>
                         <condition id="-10" name="Compare opacity" sid="411745491945513" type="popup">
                             <param id="0" name="Comparison">0</param>
@@ -5872,10 +5890,8 @@
                 </event-block>
                 <event-block sid="344359786802763">
                     <conditions>
-                        <condition id="6" name="On object clicked" sid="659276529427589" type="Mouse">
-                            <param id="0" name="Mouse button">0</param>
-                            <param id="1" name="Click type">0</param>
-                            <param id="2" name="Object clicked">botoes</param>
+                        <condition id="17" name="On tap object" sid="968640884839304" type="Touch">
+                            <param id="0" name="Object">botoes</param>
                         </condition>
                         <condition id="-10" name="Compare opacity" sid="724589960344031" type="popup">
                             <param id="0" name="Comparison">0</param>
@@ -5995,10 +6011,8 @@
                 </event-block>
                 <event-block sid="460168813050499">
                     <conditions>
-                        <condition id="6" name="On object clicked" sid="413836512266691" type="Mouse">
-                            <param id="0" name="Mouse button">0</param>
-                            <param id="1" name="Click type">0</param>
-                            <param id="2" name="Object clicked">botaoFechar</param>
+                        <condition id="17" name="On tap object" sid="623854853608762" type="Touch">
+                            <param id="0" name="Object">botaoFechar</param>
                         </condition>
                         <condition id="-10" name="Compare opacity" sid="569777371057150" type="botaoFechar">
                             <param id="0" name="Comparison">0</param>
@@ -6028,10 +6042,8 @@
                 </event-block>
                 <event-block sid="325985139081386">
                     <conditions>
-                        <condition id="6" name="On object clicked" sid="421016660308934" type="Mouse">
-                            <param id="0" name="Mouse button">0</param>
-                            <param id="1" name="Click type">0</param>
-                            <param id="2" name="Object clicked">controleAudio</param>
+                        <condition id="17" name="On tap object" sid="494671838916540" type="Touch">
+                            <param id="0" name="Object">controleAudio</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -6287,6 +6299,337 @@
                             <param id="0" name="Frame number">0</param>
                         </action>
                     </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="Grupo responsável por controlar os botões na versão mobile" sid="630180309724231" title="Mobile7">
+            <sub-events>
+                <comment>Definição de qual frame estará o botão de interagir</comment>
+                <event-block sid="239325421655884">
+                    <conditions>
+                        <condition id="4" name="Is touching object" sid="558524614549293" type="Touch">
+                            <param id="0" name="Object">BtnInteragir</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="274954861593365" type="BtnInteragir">
+                            <param id="0" name="Frame number">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="451321331497329">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="730417203399710" type="System" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="250919962666327">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="908797234622180" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="5" name="Set frame" sid="353664116539074" type="BtnInteragir">
+                                    <param id="0" name="Frame number">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Processo de arrastar o direcional para o personagem se movimentar</comment>
+                <event-block sid="407968274282269">
+                    <conditions>
+                        <condition behavior="DragDrop" id="0" name="Is dragging" sid="330566869893709" type="HitboxDir" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <comment>Caso o jogador arrastou o direcional além da região delimitada, o círculo fica na borda desse espaço</comment>
+                        <event-block sid="438084104242896">
+                            <conditions>
+                                <condition id="9" inverted="1" name="Is overlapping at offset" sid="685033223844336" type="HitboxDir">
+                                    <param id="0" name="Object">EstruturaDir</param>
+                                    <param id="1" name="Offset X">HitboxDir.X - EstruturaDir.X</param>
+                                    <param id="2" name="Offset Y">HitboxDir.Y - EstruturaDir.Y</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <comment>Enquanto o jogador não mover seu dedo para dentro da região, o circulo continuará travado na borda, sendo calculada sua posição baseado no ângulo que o touch estiver (constante 76 é a maior distância possível que o direcional fica do centro)</comment>
+                                <event-block sid="819963018402395">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="446552366594891" type="System">
+                                            <param id="0" name="First value">HitboxDir.X</param>
+                                            <param id="1" name="Comparison">4</param>
+                                            <param id="2" name="Second value">EstruturaDir.X</param>
+                                        </condition>
+                                        <condition id="-8" name="Compare two values" sid="176958608246971" type="System">
+                                            <param id="0" name="First value">HitboxDir.Y</param>
+                                            <param id="1" name="Comparison">4</param>
+                                            <param id="2" name="Second value">EstruturaDir.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="337984336475491" type="BtnDirecional">
+                                            <param id="0" name="X">EstruturaDir.X + (76 * (distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, HitboxDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                            <param id="1" name="Y">EstruturaDir.Y + (76 * (distance (HitboxDir.X, HitboxDir.Y, HitboxDir.X, EstruturaDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="727284769686138">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="741705895887781" type="System">
+                                            <param id="0" name="First value">HitboxDir.X</param>
+                                            <param id="1" name="Comparison">2</param>
+                                            <param id="2" name="Second value">EstruturaDir.X</param>
+                                        </condition>
+                                        <condition id="-8" name="Compare two values" sid="118732147404073" type="System">
+                                            <param id="0" name="First value">HitboxDir.Y</param>
+                                            <param id="1" name="Comparison">2</param>
+                                            <param id="2" name="Second value">EstruturaDir.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="924507593147101" type="BtnDirecional">
+                                            <param id="0" name="X">EstruturaDir.X - (76 * (distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, HitboxDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                            <param id="1" name="Y">EstruturaDir.Y - (76 * (distance (HitboxDir.X, HitboxDir.Y, HitboxDir.X, EstruturaDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="593150673984069">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="603774152666098" type="System">
+                                            <param id="0" name="First value">HitboxDir.X</param>
+                                            <param id="1" name="Comparison">4</param>
+                                            <param id="2" name="Second value">EstruturaDir.X</param>
+                                        </condition>
+                                        <condition id="-8" name="Compare two values" sid="218103882286560" type="System">
+                                            <param id="0" name="First value">HitboxDir.Y</param>
+                                            <param id="1" name="Comparison">2</param>
+                                            <param id="2" name="Second value">EstruturaDir.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="752439296459982" type="BtnDirecional">
+                                            <param id="0" name="X">EstruturaDir.X + (76 * (distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, HitboxDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                            <param id="1" name="Y">EstruturaDir.Y - (76 * (distance (HitboxDir.X, HitboxDir.Y, HitboxDir.X, EstruturaDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="409835257974932">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="482658939863287" type="System">
+                                            <param id="0" name="First value">HitboxDir.X</param>
+                                            <param id="1" name="Comparison">2</param>
+                                            <param id="2" name="Second value">EstruturaDir.X</param>
+                                        </condition>
+                                        <condition id="-8" name="Compare two values" sid="345987066415555" type="System">
+                                            <param id="0" name="First value">HitboxDir.Y</param>
+                                            <param id="1" name="Comparison">4</param>
+                                            <param id="2" name="Second value">EstruturaDir.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="424448369799934" type="BtnDirecional">
+                                            <param id="0" name="X">EstruturaDir.X - (76 * (distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, HitboxDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                            <param id="1" name="Y">EstruturaDir.Y + (76 * (distance (HitboxDir.X, HitboxDir.Y, HitboxDir.X, EstruturaDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment>Não saiu de dentro da estrutura, então coloca o direcional na posição onde está seu dedo</comment>
+                        <event-block sid="850946060710501">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="201587667425462" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-4" name="Set position to another object" sid="300143290806461" type="BtnDirecional">
+                                    <param id="0" name="Object">HitboxDir</param>
+                                    <param id="1" name="Image point (optional)">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Caso o jogador solte o touch, o direcional volta para sua posição de descanso</comment>
+                <event-block sid="902666806926745">
+                    <conditions>
+                        <condition id="4" inverted="1" name="Is touching object" sid="266459891999219" type="Touch">
+                            <param id="0" name="Object">HitboxDir</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-4" name="Set position to another object" sid="553745775714228" type="HitboxDir">
+                            <param id="0" name="Object">EstruturaDir</param>
+                            <param id="1" name="Image point (optional)">0</param>
+                        </action>
+                        <action id="-4" name="Set position to another object" sid="928292517673689" type="BtnDirecional">
+                            <param id="0" name="Object">HitboxDir</param>
+                            <param id="1" name="Image point (optional)">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>A partir de uma distância de 10 entre o centro da estrutura e o direcional já é possível realizar alguma ação</comment>
+                <event-block sid="614794576998953">
+                    <conditions>
+                        <condition id="-8" name="Compare two values" sid="948910714161176" type="System">
+                            <param id="0" name="First value">distance(BtnDirecional.X, BtnDirecional.Y, EstruturaDir.X, EstruturaDir.Y)</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Second value">19</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <comment>Controle da distância que ativará a direção que o jogador está indo. Optei por 19 (1/4 de 76, a distância máxima que é possível ir com o direcional) para não deixar muito sensível</comment>
+                        <event-block sid="342404524573934">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="798524042942658" type="System">
+                                    <param id="0" name="First value">BtnDirecional.X</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Second value">EstruturaDir.X + 19</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Set mirrored" sid="792692586353408" type="playerAnim">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="460952484028577" type="player">
+                                    <param id="0" name="Control">1</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="918541020893918" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="248708587529780">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="825835988502373" type="System">
+                                    <param id="0" name="First value">BtnDirecional.X</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Second value">EstruturaDir.X - 19</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Set mirrored" sid="888411895584331" type="playerAnim">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="809942070749613" type="player">
+                                    <param id="0" name="Control">0</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="751548245095524" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="707967119624951">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="210612400915793" type="System">
+                                    <param id="0" name="First value">BtnDirecional.Y</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Second value">EstruturaDir.Y + 19</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Set mirrored" sid="777224551118855" type="playerAnim">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="100378077717316" type="player">
+                                    <param id="0" name="Control">3</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="910737411847541" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;FrenteAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="815439048538577">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="921669979193157" type="System">
+                                    <param id="0" name="First value">BtnDirecional.Y</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Second value">EstruturaDir.Y - 19</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Set mirrored" sid="873207573566710" type="playerAnim">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="792763487912859" type="player">
+                                    <param id="0" name="Control">2</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="270896816357675" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;TrasAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Parar as animações no moneto que o jogador parar seu movimento</comment>
+                <event-block sid="911437176197010">
+                    <conditions>
+                        <condition behavior="DragDrop" id="2" name="On drop" sid="547320754713364" type="HitboxDir" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="719863067491151">
+                            <conditions>
+                                <condition id="7" inverted="1" name="Is mirrored" sid="287036934430212" type="playerAnim" />
+                                <condition id="2" name="Is playing" sid="923027830189985" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="615943896589087" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;DireitaParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="779105433415325">
+                            <conditions>
+                                <condition id="7" name="Is mirrored" sid="401093755892489" type="playerAnim" />
+                                <condition id="2" name="Is playing" sid="968187365237432" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="549475738917883" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;EsquerdaParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="562078582219794">
+                            <conditions>
+                                <condition id="7" inverted="1" name="Is mirrored" sid="471310835416442" type="playerAnim" />
+                                <condition id="2" name="Is playing" sid="576478047417251" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;FrenteAndando&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="126669672607747" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="638854376814928">
+                            <conditions>
+                                <condition id="7" inverted="1" name="Is mirrored" sid="492926471506186" type="playerAnim" />
+                                <condition id="2" name="Is playing" sid="770308979579516" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;TrasAndando&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="502789980491404" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>

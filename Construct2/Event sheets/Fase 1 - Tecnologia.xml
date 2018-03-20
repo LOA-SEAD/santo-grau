@@ -369,6 +369,36 @@
                 </action>
             </actions>
             <sub-events>
+                <comment>Ativa ou desativa (evento Else abaixo) os botões de mobile dependendo do dispositivo onde está sendo jogado</comment>
+                <event-block sid="619754807355004">
+                    <conditions>
+                        <condition id="-20" name="Is on mobile device" sid="763943042648567" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="909667162157155" type="System">
+                            <param id="0" name="Group name">&quot;Mobile2&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="253618947209073" type="System">
+                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="638161357111478">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="290914014655007" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="785121388326088" type="System">
+                            <param id="0" name="Group name">&quot;Mobile2&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="244529065354365" type="BtnDirecional" />
+                        <action id="-9" name="Destroy" sid="400146133270676" type="BtnInteragir" />
+                        <action id="-9" name="Destroy" sid="143376749287157" type="HitboxDir" />
+                    </actions>
+                </event-block>
                 <event-block sid="146829105562562">
                     <conditions>
                         <condition id="-14" name="Pick by unique ID" sid="893401175372031" type="botoes">
@@ -1679,9 +1709,6 @@
                 <comment>Ação de pegar a recompensa</comment>
                 <event-block sid="934833575090739">
                     <conditions>
-                        <condition id="0" name="On key pressed" sid="587212936352965" type="Keyboard">
-                            <param id="0" name="Key">69</param>
-                        </condition>
                         <condition id="1" name="Is overlapping another object" sid="381637143482779" type="player">
                             <param id="0" name="Object">recompensa</param>
                         </condition>
@@ -1691,67 +1718,77 @@
                             <param id="2" name="Value">0</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="-9" name="Destroy" sid="694295402817876" type="recompensa" />
-                        <action id="-9" name="Set value" sid="774987608691134" type="System">
-                            <param id="0" name="Variable">recompensa2</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                        <action id="-10" name="Add to" sid="448420668640835" type="System">
-                            <param id="0" name="Variable">pontos</param>
-                            <param id="1" name="Value">100</param>
-                        </action>
-                        <action id="0" name="Set text" sid="203182447969964" type="feedback">
-                            <param id="0" name="Text">&quot;RECOMPENSA DESBLOQUEADA&quot;</param>
-                        </action>
-                        <action id="-16" name="Set opacity" sid="352355226575588" type="feedback">
-                            <param id="0" name="Opacity">100</param>
-                        </action>
-                        <action id="0" name="Set text" sid="784427084126742" type="pontoTexto">
-                            <param id="0" name="Text">&quot;+100&quot;</param>
-                        </action>
-                        <action id="4" name="Set font color" sid="376575154642691" type="pontoTexto">
-                            <param id="0" name="Color">rgb(41, 90, 165)</param>
-                        </action>
-                        <action id="0" name="Play" sid="768300104421802" type="Audio">
-                            <param id="0" name="Audio file">colecionavel</param>
-                            <param id="2" name="Loop">0</param>
-                            <param id="3" name="Volume">volSons</param>
-                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="874367772547945" type="System">
-                            <param id="0" name="Group name">&quot;Pontuacao2b&quot;</param>
-                            <param id="1" name="State">0</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="930887970245413" type="System">
-                            <param id="0" name="Group name">&quot;Pontuacao2a&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                        <action id="-16" name="Wait" sid="498005341238868" type="System">
-                            <param id="0" name="Seconds">3</param>
-                        </action>
-                        <action id="-16" name="Set opacity" sid="334848888718926" type="feedback">
-                            <param id="0" name="Opacity">0</param>
-                        </action>
-                        <action id="-16" name="Wait" sid="932482662966536" type="System">
-                            <param id="0" name="Seconds">1</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="875007937513364" type="System">
-                            <param id="0" name="Group name">&quot;Pontuacao2a&quot;</param>
-                            <param id="1" name="State">0</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="668805516823044" type="System">
-                            <param id="0" name="Group name">&quot;Pontuacao2b&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block any="1" sid="346331824308169">
+                            <conditions>
+                                <condition id="0" name="On key pressed" sid="587212936352965" type="Keyboard">
+                                    <param id="0" name="Key">69</param>
+                                </condition>
+                                <condition id="17" name="On tap object" sid="998246804227169" type="Touch">
+                                    <param id="0" name="Object">BtnInteragir</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Destroy" sid="694295402817876" type="recompensa" />
+                                <action id="-9" name="Set value" sid="774987608691134" type="System">
+                                    <param id="0" name="Variable">recompensa2</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-10" name="Add to" sid="448420668640835" type="System">
+                                    <param id="0" name="Variable">pontos</param>
+                                    <param id="1" name="Value">100</param>
+                                </action>
+                                <action id="0" name="Set text" sid="203182447969964" type="feedback">
+                                    <param id="0" name="Text">&quot;RECOMPENSA DESBLOQUEADA&quot;</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="352355226575588" type="feedback">
+                                    <param id="0" name="Opacity">100</param>
+                                </action>
+                                <action id="0" name="Set text" sid="784427084126742" type="pontoTexto">
+                                    <param id="0" name="Text">&quot;+100&quot;</param>
+                                </action>
+                                <action id="4" name="Set font color" sid="376575154642691" type="pontoTexto">
+                                    <param id="0" name="Color">rgb(41, 90, 165)</param>
+                                </action>
+                                <action id="0" name="Play" sid="768300104421802" type="Audio">
+                                    <param id="0" name="Audio file">colecionavel</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="874367772547945" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao2b&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="930887970245413" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao2a&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="498005341238868" type="System">
+                                    <param id="0" name="Seconds">3</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="334848888718926" type="feedback">
+                                    <param id="0" name="Opacity">0</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="932482662966536" type="System">
+                                    <param id="0" name="Seconds">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="875007937513364" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao2a&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="668805516823044" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao2b&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <comment>Ação de ativação do Robô na primeira vez</comment>
                 <event-block sid="8784221567555369">
                     <conditions>
-                        <condition id="0" name="On key pressed" sid="3328888553214424" type="Keyboard">
-                            <param id="0" name="Key">69</param>
-                        </condition>
                         <condition id="-14" name="Compare variable" sid="418913620284755" type="System">
                             <param id="0" name="Variable">pause</param>
                             <param id="1" name="Comparison">0</param>
@@ -1774,22 +1811,40 @@
                             <param id="2" name="Value">0</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="-12" name="Set group active" sid="8475161316834703" type="System">
-                            <param id="0" name="Group name">&quot;DialogoRobo&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                        <action id="0" name="Play" sid="678737301136368" type="Audio">
-                            <param id="0" name="Audio file">robo_fala1</param>
-                            <param id="2" name="Loop">0</param>
-                            <param id="3" name="Volume">volSons</param>
-                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block any="1" sid="473809438698431">
+                            <conditions>
+                                <condition id="0" name="On key pressed" sid="3328888553214424" type="Keyboard">
+                                    <param id="0" name="Key">69</param>
+                                </condition>
+                                <condition id="17" name="On tap object" sid="317919794188701" type="Touch">
+                                    <param id="0" name="Object">BtnInteragir</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="8475161316834703" type="System">
+                                    <param id="0" name="Group name">&quot;DialogoRobo&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="0" name="Play" sid="678737301136368" type="Audio">
+                                    <param id="0" name="Audio file">robo_fala1</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <comment>Ação de ativação dos Computadores</comment>
                 <event-block sid="4844050602414782">
                     <conditions>
+                        <condition id="-14" name="Compare variable" sid="429978955615129" type="System">
+                            <param id="0" name="Variable">pause</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
                         <condition id="1" name="Is overlapping another object" sid="2049465120280247" type="player">
                             <param id="0" name="Object">selecaoComputador</param>
                         </condition>
@@ -1801,141 +1856,209 @@
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">1</param>
                         </condition>
-                        <condition id="-15" name="Is group active" sid="247555553650737" type="System">
-                            <param id="0" name="Group name">&quot;PlayerMove2&quot;</param>
-                        </condition>
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="634429020372514">
+                        <event-block any="1" sid="578048745475853">
                             <conditions>
-                                <condition id="0" name="On key pressed" sid="1105672700563034" type="Keyboard">
-                                    <param id="0" name="Key">69</param>
+                                <condition id="-15" name="Is group active" sid="247555553650737" type="System">
+                                    <param id="0" name="Group name">&quot;PlayerMove2&quot;</param>
                                 </condition>
-                                <condition id="-14" name="Compare variable" sid="429978955615129" type="System">
-                                    <param id="0" name="Variable">pause</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
+                                <condition id="-15" name="Is group active" sid="365643123869457" type="System">
+                                    <param id="0" name="Group name">&quot;Mobile2&quot;</param>
                                 </condition>
                             </conditions>
                             <actions />
                             <sub-events>
-                                <comment>Ação de ativação do Computador 1</comment>
-                                <event-block sid="1824292377531059">
+                                <event-block any="1" sid="634429020372514">
                                     <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="5861560966085145" type="selecaoComputador">
-                                            <param id="0" name="Unique ID">199</param>
+                                        <condition id="0" name="On key pressed" sid="1105672700563034" type="Keyboard">
+                                            <param id="0" name="Key">69</param>
+                                        </condition>
+                                        <condition id="17" name="On tap object" sid="249461095771530" type="Touch">
+                                            <param id="0" name="Object">BtnInteragir</param>
                                         </condition>
                                     </conditions>
-                                    <actions>
-                                        <action id="-12" name="Set group active" sid="53997296585529" type="System">
-                                            <param id="0" name="Group name">&quot;Telao&quot;</param>
-                                            <param id="1" name="State">0</param>
-                                        </action>
-                                        <action id="0" name="Set visible" sid="2522010193764276" type="telaoHTML">
-                                            <param id="0" name="Visibility">0</param>
-                                        </action>
-                                        <action id="-9" name="Set value" sid="8566035094067242" type="System">
-                                            <param id="0" name="Variable">controleFase2</param>
-                                            <param id="1" name="Value">4</param>
-                                        </action>
-                                        <action id="-12" name="Set group active" sid="7969553364816318" type="System">
-                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                                            <param id="1" name="State">0</param>
-                                        </action>
-                                        <action id="0" name="Set text" sid="8101207772789168" type="computadorResp">
-                                            <param id="0" name="Text">&quot;&quot;</param>
-                                        </action>
-                                        <action id="-12" name="Set group active" sid="8487189829115734" type="System">
-                                            <param id="0" name="Group name">&quot;Computador1&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
-                                        <action id="0" name="Play" sid="919489070697294" type="Audio">
-                                            <param id="0" name="Audio file">acessando_computador</param>
-                                            <param id="2" name="Loop">0</param>
-                                            <param id="3" name="Volume">volSons</param>
-                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                        </action>
-                                        <action id="6" name="Set focused" sid="928824892105148" type="computadorResp" />
-                                    </actions>
-                                </event-block>
-                                <comment>Ação de ativação do Computador 2</comment>
-                                <event-block sid="3222701955252513">
-                                    <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="7443394009627265" type="selecaoComputador">
-                                            <param id="0" name="Unique ID">200</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-12" name="Set group active" sid="7006905494805387" type="System">
-                                            <param id="0" name="Group name">&quot;Telao&quot;</param>
-                                            <param id="1" name="State">0</param>
-                                        </action>
-                                        <action id="0" name="Set visible" sid="3314126803421173" type="telaoHTML">
-                                            <param id="0" name="Visibility">0</param>
-                                        </action>
-                                        <action id="-9" name="Set value" sid="5942515119247308" type="System">
-                                            <param id="0" name="Variable">controleFase2</param>
-                                            <param id="1" name="Value">4</param>
-                                        </action>
-                                        <action id="-12" name="Set group active" sid="9430508359949126" type="System">
-                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                                            <param id="1" name="State">0</param>
-                                        </action>
-                                        <action id="0" name="Set text" sid="6144597557077133" type="computadorResp">
-                                            <param id="0" name="Text">&quot;&quot;</param>
-                                        </action>
-                                        <action id="-12" name="Set group active" sid="3664612488746282" type="System">
-                                            <param id="0" name="Group name">&quot;Computador2&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
-                                        <action id="0" name="Play" sid="771603050943251" type="Audio">
-                                            <param id="0" name="Audio file">acessando_computador</param>
-                                            <param id="2" name="Loop">0</param>
-                                            <param id="3" name="Volume">volSons</param>
-                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                        </action>
-                                        <action id="6" name="Set focused" sid="381216100005868" type="computadorResp" />
-                                    </actions>
-                                </event-block>
-                                <comment>Ação de ativação do Computador 3</comment>
-                                <event-block sid="6499904279034364">
-                                    <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="9345687952247033" type="selecaoComputador">
-                                            <param id="0" name="Unique ID">201</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-12" name="Set group active" sid="694518869609943" type="System">
-                                            <param id="0" name="Group name">&quot;Telao&quot;</param>
-                                            <param id="1" name="State">0</param>
-                                        </action>
-                                        <action id="0" name="Set visible" sid="373386257265092" type="telaoHTML">
-                                            <param id="0" name="Visibility">0</param>
-                                        </action>
-                                        <action id="-9" name="Set value" sid="6490562038802868" type="System">
-                                            <param id="0" name="Variable">controleFase2</param>
-                                            <param id="1" name="Value">4</param>
-                                        </action>
-                                        <action id="-12" name="Set group active" sid="1829736376237082" type="System">
-                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                                            <param id="1" name="State">0</param>
-                                        </action>
-                                        <action id="0" name="Set text" sid="4655976873761237" type="computadorResp">
-                                            <param id="0" name="Text">&quot;&quot;</param>
-                                        </action>
-                                        <action id="-12" name="Set group active" sid="5685803581100642" type="System">
-                                            <param id="0" name="Group name">&quot;Computador3&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
-                                        <action id="0" name="Play" sid="512653983697317" type="Audio">
-                                            <param id="0" name="Audio file">acessando_computador</param>
-                                            <param id="2" name="Loop">0</param>
-                                            <param id="3" name="Volume">volSons</param>
-                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                        </action>
-                                        <action id="6" name="Set focused" sid="592439456067288" type="computadorResp" />
-                                    </actions>
+                                    <actions />
+                                    <sub-events>
+                                        <comment>Ação de ativação do Computador 1</comment>
+                                        <event-block sid="1824292377531059">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="5861560966085145" type="selecaoComputador">
+                                                    <param id="0" name="Unique ID">199</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="53997296585529" type="System">
+                                                    <param id="0" name="Group name">&quot;Telao&quot;</param>
+                                                    <param id="1" name="State">0</param>
+                                                </action>
+                                                <action id="0" name="Set visible" sid="2522010193764276" type="telaoHTML">
+                                                    <param id="0" name="Visibility">0</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="8566035094067242" type="System">
+                                                    <param id="0" name="Variable">controleFase2</param>
+                                                    <param id="1" name="Value">4</param>
+                                                </action>
+                                                <action id="0" name="Set text" sid="8101207772789168" type="computadorResp">
+                                                    <param id="0" name="Text">&quot;&quot;</param>
+                                                </action>
+                                                <action id="-12" name="Set group active" sid="8487189829115734" type="System">
+                                                    <param id="0" name="Group name">&quot;Computador1&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                                <action id="0" name="Play" sid="919489070697294" type="Audio">
+                                                    <param id="0" name="Audio file">acessando_computador</param>
+                                                    <param id="2" name="Loop">0</param>
+                                                    <param id="3" name="Volume">volSons</param>
+                                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                                </action>
+                                                <action id="6" name="Set focused" sid="928824892105148" type="computadorResp" />
+                                            </actions>
+                                            <sub-events>
+                                                <event-block sid="665195373097159">
+                                                    <conditions>
+                                                        <condition id="-20" name="Is on mobile device" sid="620634679794120" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-12" name="Set group active" sid="744751765224336" type="System">
+                                                            <param id="0" name="Group name">&quot;Mobile2&quot;</param>
+                                                            <param id="1" name="State">0</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="270542659275807">
+                                                    <conditions>
+                                                        <condition id="-22" name="Else" sid="860109324344479" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-12" name="Set group active" sid="7969553364816318" type="System">
+                                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                                            <param id="1" name="State">0</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                        <comment>Ação de ativação do Computador 2</comment>
+                                        <event-block sid="3222701955252513">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="7443394009627265" type="selecaoComputador">
+                                                    <param id="0" name="Unique ID">200</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="7006905494805387" type="System">
+                                                    <param id="0" name="Group name">&quot;Telao&quot;</param>
+                                                    <param id="1" name="State">0</param>
+                                                </action>
+                                                <action id="0" name="Set visible" sid="3314126803421173" type="telaoHTML">
+                                                    <param id="0" name="Visibility">0</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="5942515119247308" type="System">
+                                                    <param id="0" name="Variable">controleFase2</param>
+                                                    <param id="1" name="Value">4</param>
+                                                </action>
+                                                <action id="0" name="Set text" sid="6144597557077133" type="computadorResp">
+                                                    <param id="0" name="Text">&quot;&quot;</param>
+                                                </action>
+                                                <action id="-12" name="Set group active" sid="3664612488746282" type="System">
+                                                    <param id="0" name="Group name">&quot;Computador2&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                                <action id="0" name="Play" sid="771603050943251" type="Audio">
+                                                    <param id="0" name="Audio file">acessando_computador</param>
+                                                    <param id="2" name="Loop">0</param>
+                                                    <param id="3" name="Volume">volSons</param>
+                                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                                </action>
+                                                <action id="6" name="Set focused" sid="381216100005868" type="computadorResp" />
+                                            </actions>
+                                            <sub-events>
+                                                <event-block sid="123529955416097">
+                                                    <conditions>
+                                                        <condition id="-20" name="Is on mobile device" sid="172786621359736" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-12" name="Set group active" sid="630883174490848" type="System">
+                                                            <param id="0" name="Group name">&quot;Mobile2&quot;</param>
+                                                            <param id="1" name="State">0</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="345605164496210">
+                                                    <conditions>
+                                                        <condition id="-22" name="Else" sid="888977210938634" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-12" name="Set group active" sid="144774885026880" type="System">
+                                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                                            <param id="1" name="State">0</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                        <comment>Ação de ativação do Computador 3</comment>
+                                        <event-block sid="6499904279034364">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="9345687952247033" type="selecaoComputador">
+                                                    <param id="0" name="Unique ID">201</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="694518869609943" type="System">
+                                                    <param id="0" name="Group name">&quot;Telao&quot;</param>
+                                                    <param id="1" name="State">0</param>
+                                                </action>
+                                                <action id="0" name="Set visible" sid="373386257265092" type="telaoHTML">
+                                                    <param id="0" name="Visibility">0</param>
+                                                </action>
+                                                <action id="-9" name="Set value" sid="6490562038802868" type="System">
+                                                    <param id="0" name="Variable">controleFase2</param>
+                                                    <param id="1" name="Value">4</param>
+                                                </action>
+                                                <action id="0" name="Set text" sid="4655976873761237" type="computadorResp">
+                                                    <param id="0" name="Text">&quot;&quot;</param>
+                                                </action>
+                                                <action id="-12" name="Set group active" sid="5685803581100642" type="System">
+                                                    <param id="0" name="Group name">&quot;Computador3&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                                <action id="0" name="Play" sid="512653983697317" type="Audio">
+                                                    <param id="0" name="Audio file">acessando_computador</param>
+                                                    <param id="2" name="Loop">0</param>
+                                                    <param id="3" name="Volume">volSons</param>
+                                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                                </action>
+                                                <action id="6" name="Set focused" sid="592439456067288" type="computadorResp" />
+                                            </actions>
+                                            <sub-events>
+                                                <event-block sid="436896809781047">
+                                                    <conditions>
+                                                        <condition id="-20" name="Is on mobile device" sid="743432519812905" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-12" name="Set group active" sid="510138488339004" type="System">
+                                                            <param id="0" name="Group name">&quot;Mobile2&quot;</param>
+                                                            <param id="1" name="State">0</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block sid="347290223969233">
+                                                    <conditions>
+                                                        <condition id="-22" name="Else" sid="788782943246377" type="System" />
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-12" name="Set group active" sid="186392152807149" type="System">
+                                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                                            <param id="1" name="State">0</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -1944,9 +2067,6 @@
                 <comment>Ação de ativação do Telão</comment>
                 <event-block sid="7528183451961258">
                     <conditions>
-                        <condition id="0" name="On key pressed" sid="2943310030689182" type="Keyboard">
-                            <param id="0" name="Key">69</param>
-                        </condition>
                         <condition id="-14" name="Compare variable" sid="894217692114023" type="System">
                             <param id="0" name="Variable">pause</param>
                             <param id="1" name="Comparison">0</param>
@@ -1964,25 +2084,38 @@
                             <param id="2" name="Value">3</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="6" name="Stop" sid="574839408019340" type="Audio">
-                            <param id="0" name="Tag">&quot;sons&quot;</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="6517372003228806" type="System">
-                            <param id="0" name="Variable">telao</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="1319684117656353" type="System">
-                            <param id="0" name="Group name">&quot;Telao&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                        <action id="0" name="Play" sid="964015907316302" type="Audio">
-                            <param id="0" name="Audio file">video</param>
-                            <param id="2" name="Loop">0</param>
-                            <param id="3" name="Volume">volSons</param>
-                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block any="1" sid="307110893016593">
+                            <conditions>
+                                <condition id="0" name="On key pressed" sid="2943310030689182" type="Keyboard">
+                                    <param id="0" name="Key">69</param>
+                                </condition>
+                                <condition id="17" name="On tap object" sid="285059672318563" type="Touch">
+                                    <param id="0" name="Object">BtnInteragir</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="6" name="Stop" sid="574839408019340" type="Audio">
+                                    <param id="0" name="Tag">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="6517372003228806" type="System">
+                                    <param id="0" name="Variable">telao</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="1319684117656353" type="System">
+                                    <param id="0" name="Group name">&quot;Telao&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="0" name="Play" sid="964015907316302" type="Audio">
+                                    <param id="0" name="Audio file">video</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
@@ -2233,15 +2366,35 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-12" name="Set group active" sid="9221779578256253" type="System">
-                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                            <param id="1" name="State">0</param>
-                        </action>
                         <action id="-9" name="Set value" sid="6933490804090591" type="System">
                             <param id="0" name="Variable">controleDialogos2</param>
                             <param id="1" name="Value">1</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="103292262138664">
+                            <conditions>
+                                <condition id="-20" name="Is on mobile device" sid="590434050100932" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="870062832871795" type="System">
+                                    <param id="0" name="Group name">&quot;Mobile2&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="954861129547068">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="958004248350987" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="220350605932322" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="5560370158001905">
                     <conditions>
@@ -2282,9 +2435,6 @@
                 </event-block>
                 <event-block sid="650359922911105">
                     <conditions>
-                        <condition id="0" name="On key pressed" sid="563184899140322" type="Keyboard">
-                            <param id="0" name="Key">69</param>
-                        </condition>
                         <condition id="-14" name="Compare variable" sid="915178543020158" type="System">
                             <param id="0" name="Variable">pause</param>
                             <param id="1" name="Comparison">0</param>
@@ -2293,351 +2443,364 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="3621628196542893">
+                        <event-block any="1" sid="394530912995747">
                             <conditions>
-                                <condition id="-14" name="Compare variable" sid="9864120451447436" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">1</param>
+                                <condition id="0" name="On key pressed" sid="563184899140322" type="Keyboard">
+                                    <param id="0" name="Key">69</param>
+                                </condition>
+                                <condition id="17" name="On tap object" sid="650654789268207" type="Touch">
+                                    <param id="0" name="Object">BtnInteragir</param>
                                 </condition>
                             </conditions>
-                            <actions>
-                                <action id="0" name="Play" sid="820876843263924" type="Audio">
-                                    <param id="0" name="Audio file">passar_dialogo</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="5390151958757511" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">2</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="235495988298150" type="System">
-                                    <param id="0" name="Variable">dialogos2</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="9615891658606623" type="Dialogos">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="6588996735323246" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="9035051204499672" type="BalaoDialogo">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="931161090547931" type="System">
-                                    <param id="0" name="Seconds">0.5</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="2865434530189131" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">3</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="9186617469844399">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="6964061259326994" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">3</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Play" sid="629821161004758" type="Audio">
-                                    <param id="0" name="Audio file">passar_dialogo</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="9265552090130963" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">4</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="630985438054411" type="System">
-                                    <param id="0" name="Variable">dialogos2</param>
-                                    <param id="1" name="Value">2</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="3491769923570581" type="Dialogos">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="1951373427550339" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="534395492648194" type="System">
-                                    <param id="0" name="Seconds">0.5</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="237903004173468" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">5</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="436598972777066">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="3902410817393974" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">5</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Play" sid="768391238818332" type="Audio">
-                                    <param id="0" name="Audio file">passar_dialogo</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="739655657767577" type="System">
-                                    <param id="0" name="Variable">dialogos2</param>
-                                    <param id="1" name="Value">3</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="3626987184183435" type="Dialogos">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="2829149300545668" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="498098628854736" type="System">
-                                    <param id="0" name="Seconds">0.5</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="368192687261928" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">6</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="297571400344737">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="346556743523836" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">6</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Play" sid="552700859083196" type="Audio">
-                                    <param id="0" name="Audio file">passar_dialogo</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="924747654778908" type="System">
-                                    <param id="0" name="Variable">dialogos2</param>
-                                    <param id="1" name="Value">4</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="145649813224251" type="Dialogos">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="647002475708305" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="509726108995179" type="System">
-                                    <param id="0" name="Seconds">0.5</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="909164882092114" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">7</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="1949296904780524">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="2569547126976309" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">7</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Play" sid="522288855575960" type="Audio">
-                                    <param id="0" name="Audio file">passar_dialogo</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="2484863771789092" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">8</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="927384823945909" type="System">
-                                    <param id="0" name="Variable">dialogos2</param>
-                                    <param id="1" name="Value">5</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="2035129854173837" type="Dialogos">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="7934796701899178" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="135351433496654" type="System">
-                                    <param id="0" name="Seconds">0.5</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="190572356192377" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">9</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="1700841749182517">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="6683149871889849" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">9</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Play" sid="126790502613037" type="Audio">
-                                    <param id="0" name="Audio file">passar_dialogo</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="7024443963947798" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">10</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="5100531030234064" type="Dialogos">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="4934722694198708" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="281974471262526">
-                            <conditions>
-                                <condition id="1" name="Is overlapping another object" sid="908951802507779" type="player">
-                                    <param id="0" name="Object">selecaoTelao</param>
-                                </condition>
-                                <condition id="-14" name="Compare variable" sid="824822079911301" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">11</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="674955626685119" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">13</param>
-                                </action>
-                                <action id="6" name="Stop" sid="502297624971146" type="Audio">
-                                    <param id="0" name="Tag">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="567453307812305" type="System">
-                                    <param id="0" name="Variable">telao</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="292314087593645" type="System">
-                                    <param id="0" name="Group name">&quot;Telao&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
-                                <action id="0" name="Play" sid="709446704086040" type="Audio">
-                                    <param id="0" name="Audio file">video</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="826551792771972">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="3368557175454247" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">12</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Play" sid="977507678729132" type="Audio">
-                                    <param id="0" name="Audio file">passar_dialogo</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="6071624206470739" type="Dialogos">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="9001952514691029" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="8155542318605601" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">13</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="3867949297063537">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="6244730467607306" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">15</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Play" sid="178866179817237" type="Audio">
-                                    <param id="0" name="Audio file">passar_dialogo</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="2951920556237946" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">16</param>
-                                </action>
-                                <action id="-3" name="Set position" sid="544699163113571" type="BalaoDialogo">
-                                    <param id="0" name="X">414</param>
-                                    <param id="1" name="Y">100</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="254264962723828" type="System">
-                                    <param id="0" name="Variable">dialogos2</param>
-                                    <param id="1" name="Value">8</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="1539755955706237" type="BalaoDialogo">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="6196890155416033" type="Dialogos">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="5714215516941417" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="815100205810783" type="System">
-                                    <param id="0" name="Seconds">0.5</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="251461077053991" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">17</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="3283537998321969">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="5338611858844552" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">17</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Play" sid="771337856511646" type="Audio">
-                                    <param id="0" name="Audio file">passar_dialogo</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="6612419226474428" type="System">
-                                    <param id="0" name="Variable">controleDialogos2</param>
-                                    <param id="1" name="Value">18</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="5080116676262309" type="Dialogos">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="1148968116197319" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                            </actions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="3621628196542893">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="9864120451447436" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Play" sid="820876843263924" type="Audio">
+                                            <param id="0" name="Audio file">passar_dialogo</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="5390151958757511" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Value">2</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="235495988298150" type="System">
+                                            <param id="0" name="Variable">dialogos2</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="9615891658606623" type="Dialogos">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="6588996735323246" type="DialogoPersonagem">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="9035051204499672" type="BalaoDialogo">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="931161090547931" type="System">
+                                            <param id="0" name="Seconds">0.5</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="2865434530189131" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Value">3</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="9186617469844399">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="6964061259326994" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">3</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Play" sid="629821161004758" type="Audio">
+                                            <param id="0" name="Audio file">passar_dialogo</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="9265552090130963" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Value">4</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="630985438054411" type="System">
+                                            <param id="0" name="Variable">dialogos2</param>
+                                            <param id="1" name="Value">2</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="3491769923570581" type="Dialogos">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="1951373427550339" type="DialogoPersonagem">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="534395492648194" type="System">
+                                            <param id="0" name="Seconds">0.5</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="237903004173468" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Value">5</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="436598972777066">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="3902410817393974" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">5</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Play" sid="768391238818332" type="Audio">
+                                            <param id="0" name="Audio file">passar_dialogo</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="739655657767577" type="System">
+                                            <param id="0" name="Variable">dialogos2</param>
+                                            <param id="1" name="Value">3</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="3626987184183435" type="Dialogos">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="2829149300545668" type="DialogoPersonagem">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="498098628854736" type="System">
+                                            <param id="0" name="Seconds">0.5</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="368192687261928" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Value">6</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="297571400344737">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="346556743523836" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">6</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Play" sid="552700859083196" type="Audio">
+                                            <param id="0" name="Audio file">passar_dialogo</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="924747654778908" type="System">
+                                            <param id="0" name="Variable">dialogos2</param>
+                                            <param id="1" name="Value">4</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="145649813224251" type="Dialogos">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="647002475708305" type="DialogoPersonagem">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="509726108995179" type="System">
+                                            <param id="0" name="Seconds">0.5</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="909164882092114" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Value">7</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="1949296904780524">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="2569547126976309" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">7</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Play" sid="522288855575960" type="Audio">
+                                            <param id="0" name="Audio file">passar_dialogo</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="2484863771789092" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Value">8</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="927384823945909" type="System">
+                                            <param id="0" name="Variable">dialogos2</param>
+                                            <param id="1" name="Value">5</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="2035129854173837" type="Dialogos">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="7934796701899178" type="DialogoPersonagem">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="135351433496654" type="System">
+                                            <param id="0" name="Seconds">0.5</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="190572356192377" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Value">9</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="1700841749182517">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="6683149871889849" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">9</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Play" sid="126790502613037" type="Audio">
+                                            <param id="0" name="Audio file">passar_dialogo</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="7024443963947798" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Value">10</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="5100531030234064" type="Dialogos">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="4934722694198708" type="DialogoPersonagem">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="281974471262526">
+                                    <conditions>
+                                        <condition id="1" name="Is overlapping another object" sid="908951802507779" type="player">
+                                            <param id="0" name="Object">selecaoTelao</param>
+                                        </condition>
+                                        <condition id="-14" name="Compare variable" sid="824822079911301" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">11</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="674955626685119" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Value">13</param>
+                                        </action>
+                                        <action id="6" name="Stop" sid="502297624971146" type="Audio">
+                                            <param id="0" name="Tag">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="567453307812305" type="System">
+                                            <param id="0" name="Variable">telao</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="292314087593645" type="System">
+                                            <param id="0" name="Group name">&quot;Telao&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="0" name="Play" sid="709446704086040" type="Audio">
+                                            <param id="0" name="Audio file">video</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="826551792771972">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="3368557175454247" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">12</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Play" sid="977507678729132" type="Audio">
+                                            <param id="0" name="Audio file">passar_dialogo</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="6071624206470739" type="Dialogos">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="9001952514691029" type="DialogoPersonagem">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="8155542318605601" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Value">13</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="3867949297063537">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="6244730467607306" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">15</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Play" sid="178866179817237" type="Audio">
+                                            <param id="0" name="Audio file">passar_dialogo</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="2951920556237946" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Value">16</param>
+                                        </action>
+                                        <action id="-3" name="Set position" sid="544699163113571" type="BalaoDialogo">
+                                            <param id="0" name="X">414</param>
+                                            <param id="1" name="Y">100</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="254264962723828" type="System">
+                                            <param id="0" name="Variable">dialogos2</param>
+                                            <param id="1" name="Value">8</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="1539755955706237" type="BalaoDialogo">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="6196890155416033" type="Dialogos">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="5714215516941417" type="DialogoPersonagem">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="815100205810783" type="System">
+                                            <param id="0" name="Seconds">0.5</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="251461077053991" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Value">17</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="3283537998321969">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="5338611858844552" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">17</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Play" sid="771337856511646" type="Audio">
+                                            <param id="0" name="Audio file">passar_dialogo</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="6612419226474428" type="System">
+                                            <param id="0" name="Variable">controleDialogos2</param>
+                                            <param id="1" name="Value">18</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="5080116676262309" type="Dialogos">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                        <action id="-16" name="Set opacity" sid="1148968116197319" type="DialogoPersonagem">
+                                            <param id="0" name="Opacity">100</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -2678,10 +2841,6 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-12" name="Set group active" sid="373645530165703" type="System">
-                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
                         <action id="-9" name="Set value" sid="7026710499795135" type="System">
                             <param id="0" name="Variable">dialogos2</param>
                             <param id="1" name="Value">6</param>
@@ -2691,6 +2850,30 @@
                             <param id="1" name="Value">11</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="123553338479180">
+                            <conditions>
+                                <condition id="-20" name="Is on mobile device" sid="693228481811911" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="661358813960826" type="System">
+                                    <param id="0" name="Group name">&quot;Mobile2&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="777262655444468">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="512088556981333" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="666674948647656" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="2861533541251484">
                     <conditions>
@@ -2729,10 +2912,6 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-12" name="Set group active" sid="6257590178839406" type="System">
-                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                            <param id="1" name="State">0</param>
-                        </action>
                         <action id="4" name="Set animation" sid="8421614741113702" type="playerAnim">
                             <param id="0" name="Animation">&quot;Default&quot;</param>
                             <param id="1" name="From">1</param>
@@ -2747,6 +2926,30 @@
                             <param id="0" name="Opacity">BalaoDialogo.Opacity+2</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="480606640775491">
+                            <conditions>
+                                <condition id="-20" name="Is on mobile device" sid="233162020932549" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="386492823982866" type="System">
+                                    <param id="0" name="Group name">&quot;Mobile2&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="756912312188553">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="971204165585125" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="151361853813714" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="4325499883067129">
                     <conditions>
@@ -2785,10 +2988,6 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-12" name="Set group active" sid="3973364470527548" type="System">
-                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
                         <action id="-9" name="Set value" sid="1067806848979432" type="System">
                             <param id="0" name="Variable">controleFase2</param>
                             <param id="1" name="Value">3</param>
@@ -2802,6 +3001,30 @@
                             <param id="1" name="State">0</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="757425222500309">
+                            <conditions>
+                                <condition id="-20" name="Is on mobile device" sid="326769102031392" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="282538918551517" type="System">
+                                    <param id="0" name="Group name">&quot;Mobile2&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="443635463956740">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="932175730709527" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="165650264917338" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="2850964002996042">
                     <conditions>
@@ -2816,10 +3039,6 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-12" name="Set group active" sid="3484517786046486" type="System">
-                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                            <param id="1" name="State">0</param>
-                        </action>
                         <action id="4" name="Set animation" sid="245993844214279" type="playerAnim">
                             <param id="0" name="Animation">&quot;TrasParado&quot;</param>
                             <param id="1" name="From">1</param>
@@ -2834,6 +3053,30 @@
                             <param id="0" name="Opacity">BalaoDialogo.Opacity+2</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="810661465462679">
+                            <conditions>
+                                <condition id="-20" name="Is on mobile device" sid="803600928812828" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="938402624229341" type="System">
+                                    <param id="0" name="Group name">&quot;Mobile2&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="710007045325284">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="923152773359422" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="259021743319460" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="688154493423302">
                     <conditions>
@@ -2912,10 +3155,6 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-12" name="Set group active" sid="3660982012659783" type="System">
-                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
                         <action id="-12" name="Set group active" sid="9450253076648116" type="System">
                             <param id="0" name="Group name">&quot;Saida2&quot;</param>
                             <param id="1" name="State">1</param>
@@ -2931,6 +3170,30 @@
                             <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="673953992515350">
+                            <conditions>
+                                <condition id="-20" name="Is on mobile device" sid="809947688303795" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="987943879850684" type="System">
+                                    <param id="0" name="Group name">&quot;Mobile2&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="846191291300993">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="189040563473327" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="382430464542972" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
@@ -2992,10 +3255,11 @@
                                 <condition id="0" name="On key pressed" sid="1878366157679458" type="Keyboard">
                                     <param id="0" name="Key">13</param>
                                 </condition>
-                                <condition id="6" name="On object clicked" sid="293151069792852" type="Mouse">
-                                    <param id="0" name="Mouse button">0</param>
-                                    <param id="1" name="Click type">0</param>
-                                    <param id="2" name="Object clicked">botaoPopup</param>
+                                <condition id="17" name="On tap object" sid="293151069792852" type="Touch">
+                                    <param id="0" name="Object">botaoPopup</param>
+                                </condition>
+                                <condition id="17" name="On tap object" sid="632668618205744" type="Touch">
+                                    <param id="0" name="Object">BtnInteragir</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -3187,10 +3451,8 @@
                         </event-block>
                         <event-block any="1" sid="897277641330733">
                             <conditions>
-                                <condition id="6" name="On object clicked" sid="7428301160987279" type="Mouse">
-                                    <param id="0" name="Mouse button">0</param>
-                                    <param id="1" name="Click type">0</param>
-                                    <param id="2" name="Object clicked">popupFechar</param>
+                                <condition id="17" name="On tap object" sid="7428301160987279" type="Touch">
+                                    <param id="0" name="Object">popupFechar</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -3244,10 +3506,6 @@
                                 <condition id="-22" name="Else" sid="1507554395968886" type="System" />
                             </conditions>
                             <actions>
-                                <action id="-12" name="Set group active" sid="770197104868309" type="System">
-                                    <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
                                 <action id="-12" name="Set group active" sid="3593452585980663" type="System">
                                     <param id="0" name="Group name">&quot;Computador1&quot;</param>
                                     <param id="1" name="State">0</param>
@@ -3258,6 +3516,28 @@
                                 </action>
                             </actions>
                             <sub-events>
+                                <event-block sid="559664358231017">
+                                    <conditions>
+                                        <condition id="-20" name="Is on mobile device" sid="437598213908660" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="759259228962566" type="System">
+                                            <param id="0" name="Group name">&quot;Mobile2&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="522926064610943">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="806145955014697" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="595045996246643" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                                 <event-block sid="3346580751124091">
                                     <conditions>
                                         <condition id="-14" name="Compare variable" sid="7465103874486403" type="System">
@@ -3336,10 +3616,11 @@
                                 <condition id="0" name="On key pressed" sid="4826153828421658" type="Keyboard">
                                     <param id="0" name="Key">13</param>
                                 </condition>
-                                <condition id="6" name="On object clicked" sid="4300270986985187" type="Mouse">
-                                    <param id="0" name="Mouse button">0</param>
-                                    <param id="1" name="Click type">0</param>
-                                    <param id="2" name="Object clicked">botaoPopup</param>
+                                <condition id="17" name="On tap object" sid="269014405540574" type="Touch">
+                                    <param id="0" name="Object">botaoPopup</param>
+                                </condition>
+                                <condition id="17" name="On tap object" sid="592746726748135" type="Touch">
+                                    <param id="0" name="Object">BtnInteragir</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -3531,10 +3812,8 @@
                         </event-block>
                         <event-block any="1" sid="238914744855934">
                             <conditions>
-                                <condition id="6" name="On object clicked" sid="954478915517210" type="Mouse">
-                                    <param id="0" name="Mouse button">0</param>
-                                    <param id="1" name="Click type">0</param>
-                                    <param id="2" name="Object clicked">popupFechar</param>
+                                <condition id="17" name="On tap object" sid="954478915517210" type="Touch">
+                                    <param id="0" name="Object">popupFechar</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -3588,10 +3867,6 @@
                                 <condition id="-22" name="Else" sid="1507554395968886" type="System" />
                             </conditions>
                             <actions>
-                                <action id="-12" name="Set group active" sid="770197104868309" type="System">
-                                    <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
                                 <action id="-12" name="Set group active" sid="3593452585980663" type="System">
                                     <param id="0" name="Group name">&quot;Computador2&quot;</param>
                                     <param id="1" name="State">0</param>
@@ -3602,6 +3877,28 @@
                                 </action>
                             </actions>
                             <sub-events>
+                                <event-block sid="157431931684667">
+                                    <conditions>
+                                        <condition id="-20" name="Is on mobile device" sid="910007187525751" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="509908358544563" type="System">
+                                            <param id="0" name="Group name">&quot;Mobile2&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="294565957669452">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="584241750222092" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="163918963529748" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                                 <event-block sid="7276389212459927">
                                     <conditions>
                                         <condition id="-14" name="Compare variable" sid="6028993381108198" type="System">
@@ -3680,10 +3977,11 @@
                                 <condition id="0" name="On key pressed" sid="5414230517091749" type="Keyboard">
                                     <param id="0" name="Key">13</param>
                                 </condition>
-                                <condition id="6" name="On object clicked" sid="593571761545263" type="Mouse">
-                                    <param id="0" name="Mouse button">0</param>
-                                    <param id="1" name="Click type">0</param>
-                                    <param id="2" name="Object clicked">botaoPopup</param>
+                                <condition id="17" name="On tap object" sid="278635229324056" type="Touch">
+                                    <param id="0" name="Object">botaoPopup</param>
+                                </condition>
+                                <condition id="17" name="On tap object" sid="300029660171875" type="Touch">
+                                    <param id="0" name="Object">BtnInteragir</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -3875,10 +4173,8 @@
                         </event-block>
                         <event-block any="1" sid="181007866136799">
                             <conditions>
-                                <condition id="6" name="On object clicked" sid="607304235061470" type="Mouse">
-                                    <param id="0" name="Mouse button">0</param>
-                                    <param id="1" name="Click type">0</param>
-                                    <param id="2" name="Object clicked">popupFechar</param>
+                                <condition id="17" name="On tap object" sid="607304235061470" type="Touch">
+                                    <param id="0" name="Object">popupFechar</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -3932,10 +4228,6 @@
                                 <condition id="-22" name="Else" sid="1507554395968886" type="System" />
                             </conditions>
                             <actions>
-                                <action id="-12" name="Set group active" sid="770197104868309" type="System">
-                                    <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
                                 <action id="-12" name="Set group active" sid="3593452585980663" type="System">
                                     <param id="0" name="Group name">&quot;Computador3&quot;</param>
                                     <param id="1" name="State">0</param>
@@ -3946,6 +4238,28 @@
                                 </action>
                             </actions>
                             <sub-events>
+                                <event-block sid="961759114396339">
+                                    <conditions>
+                                        <condition id="-20" name="Is on mobile device" sid="428142382997718" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="232221174514410" type="System">
+                                            <param id="0" name="Group name">&quot;Mobile2&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="980585129080194">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="148682906440033" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="739997451786639" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                                 <event-block sid="5987605597610382">
                                     <conditions>
                                         <condition id="-14" name="Compare variable" sid="9139000794710601" type="System">
@@ -4105,10 +4419,8 @@
                                 <condition id="0" name="On key pressed" sid="936887266300413" type="Keyboard">
                                     <param id="0" name="Key">27</param>
                                 </condition>
-                                <condition id="6" name="On object clicked" sid="540805056154190" type="Mouse">
-                                    <param id="0" name="Mouse button">0</param>
-                                    <param id="1" name="Click type">0</param>
-                                    <param id="2" name="Object clicked">menuOpcoes</param>
+                                <condition id="17" name="On tap object" sid="540805056154190" type="Touch">
+                                    <param id="0" name="Object">menuOpcoes</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -4136,10 +4448,6 @@
                                     <param id="0" name="Group name">&quot;Pontuacao2a&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
-                                <action id="-12" name="Set group active" sid="141424398806837" type="System">
-                                    <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                                    <param id="1" name="State">0</param>
-                                </action>
                                 <action id="-12" name="Set group active" sid="540824578629263" type="System">
                                     <param id="0" name="Group name">&quot;PopupDica2&quot;</param>
                                     <param id="1" name="State">0</param>
@@ -4149,6 +4457,28 @@
                                 </action>
                             </actions>
                             <sub-events>
+                                <event-block sid="365935961465087">
+                                    <conditions>
+                                        <condition id="-20" name="Is on mobile device" sid="353910123213446" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="823293160284146" type="System">
+                                            <param id="0" name="Group name">&quot;Mobile2&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="603418628388584">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="602374851304774" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="470198729694991" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                                 <event-block sid="775737581454717">
                                     <conditions>
                                         <condition id="-14" name="Compare variable" sid="321414885252021" type="System">
@@ -4193,10 +4523,8 @@
                                 <condition id="0" name="On key pressed" sid="494925573940990" type="Keyboard">
                                     <param id="0" name="Key">32</param>
                                 </condition>
-                                <condition id="6" name="On object clicked" sid="364705691907916" type="Mouse">
-                                    <param id="0" name="Mouse button">0</param>
-                                    <param id="1" name="Click type">0</param>
-                                    <param id="2" name="Object clicked">menuOpcoesX</param>
+                                <condition id="17" name="On tap object" sid="364705691907916" type="Touch">
+                                    <param id="0" name="Object">menuOpcoesX</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -4252,12 +4580,31 @@
                                             <param id="1" name="Opacity">0</param>
                                         </condition>
                                     </conditions>
-                                    <actions>
-                                        <action id="-12" name="Set group active" sid="657284607156373" type="System">
-                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
-                                    </actions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="961804796278282">
+                                            <conditions>
+                                                <condition id="-20" name="Is on mobile device" sid="754789585548571" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="495654320796511" type="System">
+                                                    <param id="0" name="Group name">&quot;Mobile2&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="945357830403955">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="666313598727418" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="857884220928224" type="System">
+                                                    <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -4969,10 +5316,8 @@
                 </event-block>
                 <event-block sid="895265612311002">
                     <conditions>
-                        <condition id="6" name="On object clicked" sid="327166751202387" type="Mouse">
-                            <param id="0" name="Mouse button">0</param>
-                            <param id="1" name="Click type">0</param>
-                            <param id="2" name="Object clicked">botoes</param>
+                        <condition id="17" name="On tap object" sid="583479206672640" type="Touch">
+                            <param id="0" name="Object">botoes</param>
                         </condition>
                         <condition id="-10" name="Compare opacity" sid="130026057667728" type="popup">
                             <param id="0" name="Comparison">0</param>
@@ -5053,12 +5398,31 @@
                                             <param id="1" name="Opacity">0</param>
                                         </condition>
                                     </conditions>
-                                    <actions>
-                                        <action id="-12" name="Set group active" sid="458826507231756" type="System">
-                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
-                                    </actions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="235867369428288">
+                                            <conditions>
+                                                <condition id="-20" name="Is on mobile device" sid="261005716952445" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="395530164638397" type="System">
+                                                    <param id="0" name="Group name">&quot;Mobile2&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="214520758533138">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="537228362424104" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="466477142489089" type="System">
+                                                    <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -5125,12 +5489,31 @@
                                             <param id="1" name="Opacity">0</param>
                                         </condition>
                                     </conditions>
-                                    <actions>
-                                        <action id="-12" name="Set group active" sid="306298002466243" type="System">
-                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
-                                    </actions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="785918967438276">
+                                            <conditions>
+                                                <condition id="-20" name="Is on mobile device" sid="775960208494967" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="757361195765755" type="System">
+                                                    <param id="0" name="Group name">&quot;Mobile2&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="814110562930329">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="152749588341708" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="900198853769995" type="System">
+                                                    <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -5163,10 +5546,6 @@
                                     <param id="0" name="Group name">&quot;Pontuacao2a&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
-                                <action id="-12" name="Set group active" sid="721665368002405" type="System">
-                                    <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
                                 <action id="-12" name="Set group active" sid="849178274743352" type="System">
                                     <param id="0" name="Group name">&quot;PopupDica2&quot;</param>
                                     <param id="1" name="State">1</param>
@@ -5181,6 +5560,30 @@
                                 </action>
                                 <action id="-26" name="Restart layout" sid="514592648194535" type="System" />
                             </actions>
+                            <sub-events>
+                                <event-block sid="727045177067311">
+                                    <conditions>
+                                        <condition id="-20" name="Is on mobile device" sid="518791145488612" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="257002782195734" type="System">
+                                            <param id="0" name="Group name">&quot;Mobile2&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="211074169218117">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="712363123177551" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="800811890372115" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <comment>Ação do botão &quot;Áudio&quot;</comment>
                         <event-block sid="158741350156097">
@@ -5236,10 +5639,8 @@
                 </event-block>
                 <event-block sid="292933090352529">
                     <conditions>
-                        <condition id="6" name="On object clicked" sid="839175299979972" type="Mouse">
-                            <param id="0" name="Mouse button">0</param>
-                            <param id="1" name="Click type">0</param>
-                            <param id="2" name="Object clicked">botoes</param>
+                        <condition id="17" name="On tap object" sid="346801562388073" type="Touch">
+                            <param id="0" name="Object">botoes</param>
                         </condition>
                         <condition id="-10" name="Compare opacity" sid="835439651416653" type="popup">
                             <param id="0" name="Comparison">0</param>
@@ -5312,10 +5713,6 @@
                                             <param id="0" name="Group name">&quot;Pontuacao2a&quot;</param>
                                             <param id="1" name="State">0</param>
                                         </action>
-                                        <action id="-12" name="Set group active" sid="711287365726746" type="System">
-                                            <param id="0" name="Group name">&quot;playerMove2&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
                                         <action id="-12" name="Set group active" sid="244907270704049" type="System">
                                             <param id="0" name="Group name">&quot;PopupDica2&quot;</param>
                                             <param id="1" name="State">1</param>
@@ -5332,6 +5729,30 @@
                                             <param id="0" name="Layout">Menu</param>
                                         </action>
                                     </actions>
+                                    <sub-events>
+                                        <event-block sid="181911124813139">
+                                            <conditions>
+                                                <condition id="-20" name="Is on mobile device" sid="316631065998762" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="988672113040095" type="System">
+                                                    <param id="0" name="Group name">&quot;Mobile2&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="533189239958702">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="719043775342066" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="637468883591904" type="System">
+                                                    <param id="0" name="Group name">&quot;playerMove2&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -5339,10 +5760,8 @@
                 </event-block>
                 <event-block sid="862800718013779">
                     <conditions>
-                        <condition id="6" name="On object clicked" sid="819377181745656" type="Mouse">
-                            <param id="0" name="Mouse button">0</param>
-                            <param id="1" name="Click type">0</param>
-                            <param id="2" name="Object clicked">botaoFechar</param>
+                        <condition id="17" name="On tap object" sid="122503791197152" type="Touch">
+                            <param id="0" name="Object">botaoFechar</param>
                         </condition>
                         <condition id="-10" name="Compare opacity" sid="482621905627653" type="botaoFechar">
                             <param id="0" name="Comparison">0</param>
@@ -5372,10 +5791,8 @@
                 </event-block>
                 <event-block sid="171747624604957">
                     <conditions>
-                        <condition id="6" name="On object clicked" sid="219357167595746" type="Mouse">
-                            <param id="0" name="Mouse button">0</param>
-                            <param id="1" name="Click type">0</param>
-                            <param id="2" name="Object clicked">controleAudio</param>
+                        <condition id="17" name="On tap object" sid="368327169788332" type="Touch">
+                            <param id="0" name="Object">controleAudio</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -5750,6 +6167,337 @@
                                 </action>
                                 <action id="-25" name="Go to layout (by name)" sid="818817867869823" type="System">
                                     <param id="0" name="Layout">&quot;Fase &quot; &amp; FasesJSON.GetData(&quot;fases&quot;, fasesOpcionais-1)</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="Grupo responsável por controlar os botões na versão mobile" sid="769329388276179" title="Mobile2">
+            <sub-events>
+                <comment>Definição de qual frame estará o botão de interagir</comment>
+                <event-block sid="237799096002836">
+                    <conditions>
+                        <condition id="4" name="Is touching object" sid="272325087766386" type="Touch">
+                            <param id="0" name="Object">BtnInteragir</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Set frame" sid="714777423628372" type="BtnInteragir">
+                            <param id="0" name="Frame number">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="893376540414047">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="908605126399819" type="System" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="885882393649905">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="322472020298414" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="5" name="Set frame" sid="704405344540091" type="BtnInteragir">
+                                    <param id="0" name="Frame number">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Processo de arrastar o direcional para o personagem se movimentar</comment>
+                <event-block sid="584193797417507">
+                    <conditions>
+                        <condition behavior="DragDrop" id="0" name="Is dragging" sid="918756750375947" type="HitboxDir" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <comment>Caso o jogador arrastou o direcional além da região delimitada, o círculo fica na borda desse espaço</comment>
+                        <event-block sid="855244224090292">
+                            <conditions>
+                                <condition id="9" inverted="1" name="Is overlapping at offset" sid="242806428513257" type="HitboxDir">
+                                    <param id="0" name="Object">EstruturaDir</param>
+                                    <param id="1" name="Offset X">HitboxDir.X - EstruturaDir.X</param>
+                                    <param id="2" name="Offset Y">HitboxDir.Y - EstruturaDir.Y</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <comment>Enquanto o jogador não mover seu dedo para dentro da região, o circulo continuará travado na borda, sendo calculada sua posição baseado no ângulo que o touch estiver (constante 76 é a maior distância possível que o direcional fica do centro)</comment>
+                                <event-block sid="426431537629566">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="487995918532440" type="System">
+                                            <param id="0" name="First value">HitboxDir.X</param>
+                                            <param id="1" name="Comparison">4</param>
+                                            <param id="2" name="Second value">EstruturaDir.X</param>
+                                        </condition>
+                                        <condition id="-8" name="Compare two values" sid="898523896096542" type="System">
+                                            <param id="0" name="First value">HitboxDir.Y</param>
+                                            <param id="1" name="Comparison">4</param>
+                                            <param id="2" name="Second value">EstruturaDir.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="665509863039646" type="BtnDirecional">
+                                            <param id="0" name="X">EstruturaDir.X + (76 * (distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, HitboxDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                            <param id="1" name="Y">EstruturaDir.Y + (76 * (distance (HitboxDir.X, HitboxDir.Y, HitboxDir.X, EstruturaDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="989834283567889">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="683195918843664" type="System">
+                                            <param id="0" name="First value">HitboxDir.X</param>
+                                            <param id="1" name="Comparison">2</param>
+                                            <param id="2" name="Second value">EstruturaDir.X</param>
+                                        </condition>
+                                        <condition id="-8" name="Compare two values" sid="508825233694984" type="System">
+                                            <param id="0" name="First value">HitboxDir.Y</param>
+                                            <param id="1" name="Comparison">2</param>
+                                            <param id="2" name="Second value">EstruturaDir.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="975993474436497" type="BtnDirecional">
+                                            <param id="0" name="X">EstruturaDir.X - (76 * (distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, HitboxDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                            <param id="1" name="Y">EstruturaDir.Y - (76 * (distance (HitboxDir.X, HitboxDir.Y, HitboxDir.X, EstruturaDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="217614420872478">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="929257477787895" type="System">
+                                            <param id="0" name="First value">HitboxDir.X</param>
+                                            <param id="1" name="Comparison">4</param>
+                                            <param id="2" name="Second value">EstruturaDir.X</param>
+                                        </condition>
+                                        <condition id="-8" name="Compare two values" sid="268940257774375" type="System">
+                                            <param id="0" name="First value">HitboxDir.Y</param>
+                                            <param id="1" name="Comparison">2</param>
+                                            <param id="2" name="Second value">EstruturaDir.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="256319229539107" type="BtnDirecional">
+                                            <param id="0" name="X">EstruturaDir.X + (76 * (distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, HitboxDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                            <param id="1" name="Y">EstruturaDir.Y - (76 * (distance (HitboxDir.X, HitboxDir.Y, HitboxDir.X, EstruturaDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="725714989735353">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="420759161583797" type="System">
+                                            <param id="0" name="First value">HitboxDir.X</param>
+                                            <param id="1" name="Comparison">2</param>
+                                            <param id="2" name="Second value">EstruturaDir.X</param>
+                                        </condition>
+                                        <condition id="-8" name="Compare two values" sid="861154791587452" type="System">
+                                            <param id="0" name="First value">HitboxDir.Y</param>
+                                            <param id="1" name="Comparison">4</param>
+                                            <param id="2" name="Second value">EstruturaDir.Y</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="668297701308862" type="BtnDirecional">
+                                            <param id="0" name="X">EstruturaDir.X - (76 * (distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, HitboxDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                            <param id="1" name="Y">EstruturaDir.Y + (76 * (distance (HitboxDir.X, HitboxDir.Y, HitboxDir.X, EstruturaDir.Y) / distance (HitboxDir.X, HitboxDir.Y, EstruturaDir.X, EstruturaDir.Y)))</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <comment>Não saiu de dentro da estrutura, então coloca o direcional na posição onde está seu dedo</comment>
+                        <event-block sid="697186331142922">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="278380706015525" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-4" name="Set position to another object" sid="992664994047863" type="BtnDirecional">
+                                    <param id="0" name="Object">HitboxDir</param>
+                                    <param id="1" name="Image point (optional)">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Caso o jogador solte o touch, o direcional volta para sua posição de descanso</comment>
+                <event-block sid="535816704823615">
+                    <conditions>
+                        <condition id="4" inverted="1" name="Is touching object" sid="502926949432021" type="Touch">
+                            <param id="0" name="Object">HitboxDir</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-4" name="Set position to another object" sid="892595004870736" type="HitboxDir">
+                            <param id="0" name="Object">EstruturaDir</param>
+                            <param id="1" name="Image point (optional)">0</param>
+                        </action>
+                        <action id="-4" name="Set position to another object" sid="610290037752147" type="BtnDirecional">
+                            <param id="0" name="Object">HitboxDir</param>
+                            <param id="1" name="Image point (optional)">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>A partir de uma distância de 10 entre o centro da estrutura e o direcional já é possível realizar alguma ação</comment>
+                <event-block sid="139360326700435">
+                    <conditions>
+                        <condition id="-8" name="Compare two values" sid="295353526554671" type="System">
+                            <param id="0" name="First value">distance(BtnDirecional.X, BtnDirecional.Y, EstruturaDir.X, EstruturaDir.Y)</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Second value">19</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <comment>Controle da distância que ativará a direção que o jogador está indo. Optei por 19 (1/4 de 76, a distância máxima que é possível ir com o direcional) para não deixar muito sensível</comment>
+                        <event-block sid="549504508324413">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="746964549577475" type="System">
+                                    <param id="0" name="First value">BtnDirecional.X</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Second value">EstruturaDir.X + 19</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Set mirrored" sid="613742931257008" type="playerAnim">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="225614250551571" type="player">
+                                    <param id="0" name="Control">1</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="138144927233197" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="682963046954625">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="576145151767224" type="System">
+                                    <param id="0" name="First value">BtnDirecional.X</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Second value">EstruturaDir.X - 19</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Set mirrored" sid="788386322313837" type="playerAnim">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="677103771782114" type="player">
+                                    <param id="0" name="Control">0</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="293155884036313" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="941332716880677">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="404856574951202" type="System">
+                                    <param id="0" name="First value">BtnDirecional.Y</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Second value">EstruturaDir.Y + 19</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Set mirrored" sid="370393174578734" type="playerAnim">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="561841684606058" type="player">
+                                    <param id="0" name="Control">3</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="467607627779867" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;FrenteAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="159213313694497">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="575405167174270" type="System">
+                                    <param id="0" name="First value">BtnDirecional.Y</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Second value">EstruturaDir.Y - 19</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Set mirrored" sid="699171017807046" type="playerAnim">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="552371954274640" type="player">
+                                    <param id="0" name="Control">2</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="143191987224891" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;TrasAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Parar as animações no moneto que o jogador parar seu movimento</comment>
+                <event-block sid="760098327815886">
+                    <conditions>
+                        <condition behavior="DragDrop" id="2" name="On drop" sid="645068736981669" type="HitboxDir" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="170616152881513">
+                            <conditions>
+                                <condition id="7" inverted="1" name="Is mirrored" sid="963491411144315" type="playerAnim" />
+                                <condition id="2" name="Is playing" sid="251891751155843" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="472383880458203" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;DireitaParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="717135790997494">
+                            <conditions>
+                                <condition id="7" name="Is mirrored" sid="990165257998874" type="playerAnim" />
+                                <condition id="2" name="Is playing" sid="709392255262720" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="738518945774016" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;EsquerdaParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="827866650738445">
+                            <conditions>
+                                <condition id="7" inverted="1" name="Is mirrored" sid="921199499990059" type="playerAnim" />
+                                <condition id="2" name="Is playing" sid="336524522099874" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;FrenteAndando&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="449357232229943" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;FrenteParado&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="764137835603332">
+                            <conditions>
+                                <condition id="7" inverted="1" name="Is mirrored" sid="556212964216773" type="playerAnim" />
+                                <condition id="2" name="Is playing" sid="737163475837977" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;TrasAndando&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="425751119077163" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                                    <param id="1" name="From">1</param>
                                 </action>
                             </actions>
                         </event-block>
