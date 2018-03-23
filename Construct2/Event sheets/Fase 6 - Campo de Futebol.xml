@@ -3569,6 +3569,174 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <comment>Parte de acessibilidade com controle por teclado e leitura de tela (2 blocos a seguir)</comment>
+                <event-block sid="731233641661180">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="667780177166605" type="Keyboard">
+                            <param id="0" name="Key">13</param>
+                        </condition>
+                        <condition id="0" inverted="1" name="Compare text" sid="867082115595111" type="placarResp1">
+                            <param id="0" name="Text">&quot;&quot;</param>
+                            <param id="1" name="Case">0</param>
+                        </condition>
+                        <condition id="0" name="Compare text" sid="555413684618473" type="placarResp2">
+                            <param id="0" name="Text">&quot;&quot;</param>
+                            <param id="1" name="Case">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="122406711757985" type="System">
+                            <param id="0" name="Variable">opacidadeLayer</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">100</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Play" sid="902168731967215" type="Audio">
+                            <param id="0" name="Audio file">botoes_menu</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">volSons</param>
+                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="954749352816770" type="System">
+                            <param id="0" name="Variable">perguntaFUT</param>
+                            <param id="1" name="Value">2</param>
+                        </action>
+                        <action id="6" name="Stop" sid="479817117544547" type="Audio">
+                            <param id="0" name="Tag">&quot;erro_capivara&quot;</param>
+                        </action>
+                        <action id="7" name="Stop speaking" sid="899143976801450" type="UserMedia" />
+                        <action id="-16" name="Wait" sid="346077710805472" type="System">
+                            <param id="0" name="Seconds">0.1</param>
+                        </action>
+                        <action id="6" name="Speak text" sid="311079671485437" type="UserMedia">
+                            <param id="0" name="Text">placarPergunta.Text</param>
+                            <param id="1" name="Language">&quot;pt-BR&quot;</param>
+                            <param id="2" name="Voice URI">&quot;Google português do Brasil&quot;</param>
+                            <param id="3" name="Volume">10</param>
+                            <param id="4" name="Rate">1</param>
+                            <param id="5" name="Pitch">1</param>
+                        </action>
+                        <action disabled="1" id="-9" name="Set value" sid="602322671308908" type="System">
+                            <param id="0" name="Variable">controlePlacar</param>
+                            <param id="1" name="Value">2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="571240128200818">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="774987124813049" type="Keyboard">
+                            <param id="0" name="Key">13</param>
+                        </condition>
+                        <condition id="0" inverted="1" name="Compare text" sid="464843863116018" type="placarResp1">
+                            <param id="0" name="Text">&quot;&quot;</param>
+                            <param id="1" name="Case">0</param>
+                        </condition>
+                        <condition id="0" inverted="1" name="Compare text" sid="956671054058197" type="placarResp2">
+                            <param id="0" name="Text">&quot;&quot;</param>
+                            <param id="1" name="Case">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="811639905065473" type="System">
+                            <param id="0" name="Variable">opacidadeLayer</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">100</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Stop speaking" sid="161940976820300" type="UserMedia" />
+                        <action id="6" name="Stop" sid="738452372062862" type="Audio">
+                            <param id="0" name="Tag">&quot;erro_capivara&quot;</param>
+                        </action>
+                        <action id="0" name="Play" sid="875209229669407" type="Audio">
+                            <param id="0" name="Audio file">botoes_menu</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">volSons</param>
+                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                        </action>
+                        <action disabled="1" id="-9" name="Set value" sid="556736733091355" type="System">
+                            <param id="0" name="Variable">controlePlacar</param>
+                            <param id="1" name="Value">2</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <comment>Ativa as ações de quando alguém acerta</comment>
+                        <event-block sid="239047028701950">
+                            <conditions>
+                                <condition id="0" name="Compare text" sid="203951744456907" type="placarResp1">
+                                    <param id="0" name="Text">LoadJSONFUT.GetData(&quot;desafio1&quot;,1)</param>
+                                    <param id="1" name="Case">0</param>
+                                </condition>
+                                <condition id="0" name="Compare text" sid="458935893515085" type="placarResp2">
+                                    <param id="0" name="Text">LoadJSONFUT.GetData(&quot;desafio2&quot;,1)</param>
+                                    <param id="1" name="Case">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="430978208843648" type="System">
+                                    <param id="0" name="Variable">acaoBola</param>
+                                    <param id="1" name="Value">2</param>
+                                </action>
+                                <action id="0" name="Play" sid="150027184058643" type="Audio">
+                                    <param id="0" name="Audio file">acerto</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="208376102901788" type="selecaoBola" />
+                            </actions>
+                        </event-block>
+                        <comment>Ativa as ações de quando alguém erra</comment>
+                        <event-block sid="995216434458826">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="217216068259290" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="597219193915713" type="System">
+                                    <param id="0" name="Variable">acaoBola</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="0" name="Set text" sid="560553239134950" type="placarResp1">
+                                    <param id="0" name="Text">&quot;&quot;</param>
+                                </action>
+                                <action id="0" name="Set text" sid="140385362883693" type="placarResp2">
+                                    <param id="0" name="Text">&quot;&quot;</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="105662258773761" type="System">
+                                    <param id="0" name="Variable">perguntaFUT</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="0" name="Play" sid="361345460749050" type="Audio">
+                                    <param id="0" name="Audio file">erro</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">0</param>
+                                    <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="638218026230147" type="System">
+                                    <param id="0" name="Seconds">1</param>
+                                </action>
+                                <action id="0" name="Play" sid="442704794237453" type="Audio">
+                                    <param id="0" name="Audio file">capivara_calma</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">0</param>
+                                    <param id="1" name="Tag (optional)">&quot;erro_capivara&quot;</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="454708893859722" type="System">
+                                    <param id="0" name="Seconds">6</param>
+                                </action>
+                                <action id="7" name="Stop speaking" sid="523524046185342" type="UserMedia" />
+                                <action id="-16" name="Wait" sid="808523436663321" type="System">
+                                    <param id="0" name="Seconds">0.1</param>
+                                </action>
+                                <action id="6" name="Speak text" sid="718723947253690" type="UserMedia">
+                                    <param id="0" name="Text">placarPergunta.Text</param>
+                                    <param id="1" name="Language">&quot;pt-BR&quot;</param>
+                                    <param id="2" name="Voice URI">&quot;Google português do Brasil&quot;</param>
+                                    <param id="3" name="Volume">10</param>
+                                    <param id="4" name="Rate">1</param>
+                                    <param id="5" name="Pitch">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
                 <comment>Controle do botão de fechar do placar</comment>
                 <event-block sid="435035818663797">
                     <conditions>
@@ -4956,13 +5124,13 @@
                         </action>
                     </actions>
                 </event-block>
-                <comment>Para de arremeçar objetos</comment>
+                <comment>Para de arremeçar objetos - MUDAR AQUI PARA 14 QUANDO VOLTAREM A QUANTIDADE DE OBJETOS PADRÃO (por enquanto está 2 para testes)</comment>
                 <event-block sid="724016178930594">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="137963636226292" type="System">
                             <param id="0" name="Variable">numeroObjetosAtirados</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">14</param>
+                            <param id="2" name="Value">2</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -4984,12 +5152,13 @@
         <event-group description="" sid="120858864474595" title="FisicaBola">
             <sub-events>
                 <comment>Joga a bola com efeito sonoro </comment>
+                <comment>MUDAR AQUI PARA 15 QUANDO VOLTAREM A QUANTIDADE DE OBJETOS PADRÃO (por enquanto está 3 para testes)</comment>
                 <event-block sid="722245850582271">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="465455008769872" type="System">
                             <param id="0" name="Variable">numeroObjetosAtirados</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">15</param>
+                            <param id="2" name="Value">3</param>
                         </condition>
                     </conditions>
                     <actions>
