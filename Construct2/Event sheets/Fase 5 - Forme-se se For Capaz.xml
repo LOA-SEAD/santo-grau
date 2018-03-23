@@ -962,6 +962,7 @@
                 </event-block>
             </sub-events>
         </event-group>
+        <comment>Não dá para utilizar o dt aqui pelo time scale do jogo ser zerado durante o pause, impedindo que a pontuação seja apresentada (caso isso mudar, aqui usa 150 * dt)</comment>
         <event-group description="" sid="586130633962506" title="Pontuacao6a">
             <sub-events>
                 <event-block sid="2435567400937132">
@@ -973,7 +974,7 @@
                     </conditions>
                     <actions>
                         <action id="-2" name="Set Y" sid="8843318482375879" type="pontuacao">
-                            <param id="0" name="Y">pontuacao.Y-3</param>
+                            <param id="0" name="Y">pontuacao.Y - 3</param>
                         </action>
                     </actions>
                 </event-block>
@@ -990,7 +991,7 @@
                     </conditions>
                     <actions>
                         <action id="-2" name="Set Y" sid="3748328858010294" type="pontuacao">
-                            <param id="0" name="Y">pontuacao.Y+3</param>
+                            <param id="0" name="Y">pontuacao.Y + 3</param>
                         </action>
                     </actions>
                 </event-block>
@@ -1455,6 +1456,7 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <comment>Como é um evento que lida com Opacidade, ou seja, algo cujo valor varia entre 0 e 100, então ele vai levar exatos 0.5 segundos para carregar, independente de dispositivo</comment>
                         <event-block sid="6947965155873984">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="1153563277756434" type="System" />
@@ -1465,7 +1467,7 @@
                             </conditions>
                             <actions>
                                 <action id="-16" name="Set opacity" sid="6391924252284335" type="BalaoDialogo">
-                                    <param id="0" name="Opacity">BalaoDialogo.Opacity + 2.5</param>
+                                    <param id="0" name="Opacity">BalaoDialogo.Opacity + 200 * dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1547,6 +1549,7 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <comment>Como é um evento que lida com Opacidade, ou seja, algo cujo valor varia entre 0 e 100, então ele vai levar exatos 0.5 segundos para carregar, independente de dispositivo</comment>
                         <event-block sid="3865695801829001">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="4762155467233548" type="System" />
@@ -1557,10 +1560,10 @@
                             </conditions>
                             <actions>
                                 <action id="-16" name="Set opacity" sid="6420037409351896" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity + 2.5</param>
+                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity + 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="9486876649278532" type="Dialogos">
-                                    <param id="0" name="Opacity">Dialogos.Opacity + 2.5</param>
+                                    <param id="0" name="Opacity">Dialogos.Opacity + 200 * dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1671,6 +1674,7 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <comment>Como é um evento que lida com Opacidade, ou seja, algo cujo valor varia entre 0 e 100, então ele vai levar exatos 0.5 segundos para descarregar, independente de dispositivo</comment>
                         <event-block sid="9752645512717703">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="8533615797836688" type="System" />
@@ -1681,13 +1685,13 @@
                             </conditions>
                             <actions>
                                 <action id="-16" name="Set opacity" sid="4004250315959297" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity - 2.5</param>
+                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity - 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="2982996949466901" type="Dialogos">
-                                    <param id="0" name="Opacity">Dialogos.Opacity - 2.5</param>
+                                    <param id="0" name="Opacity">Dialogos.Opacity - 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="8209586396246137" type="BalaoDialogo">
-                                    <param id="0" name="Opacity">BalaoDialogo.Opacity - 2.5</param>
+                                    <param id="0" name="Opacity">BalaoDialogo.Opacity - 200 * dt</param>
                                 </action>
                             </actions>
                             <sub-events>
@@ -2145,6 +2149,7 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <comment>Como é um evento que lida com Opacidade, ou seja, algo cujo valor varia entre 0 e 100, então ele vai levar exatos 0.5 segundos para carregar, independente de dispositivo</comment>
                         <event-block sid="7877580689674407">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="3150852197761893" type="System" />
@@ -2155,16 +2160,16 @@
                             </conditions>
                             <actions>
                                 <action id="-16" name="Set opacity" sid="2641154664611221" type="perguntas">
-                                    <param id="0" name="Opacity">perguntas.Opacity + 2.5</param>
+                                    <param id="0" name="Opacity">perguntas.Opacity + 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="8468324499048207" type="textoPerguntas">
-                                    <param id="0" name="Opacity">textoPerguntas.Opacity + 2.5</param>
+                                    <param id="0" name="Opacity">textoPerguntas.Opacity + 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="1706482227902222" type="textoRespostas">
-                                    <param id="0" name="Opacity">textoRespostas.Opacity + 2.5</param>
+                                    <param id="0" name="Opacity">textoRespostas.Opacity + 200 * dt</param>
                                 </action>
                                 <action disabled="1" id="-16" name="Set opacity" sid="330034106196075" type="BotaoE">
-                                    <param id="0" name="Opacity">BotaoE.Opacity + 2.5</param>
+                                    <param id="0" name="Opacity">BotaoE.Opacity + 200 * dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2292,6 +2297,7 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <comment>Como é um evento que lida com Opacidade, ou seja, algo cujo valor varia entre 0 e 100, então ele vai levar exatos 0.5 segundos para descarregar, independente de dispositivo</comment>
                         <event-block sid="328518378742987">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="730327481194482" type="System" />
@@ -2302,7 +2308,7 @@
                             </conditions>
                             <actions>
                                 <action id="-16" name="Set opacity" sid="513846012927621" type="BotaoE">
-                                    <param id="0" name="Opacity">BotaoE.Opacity - 2.5</param>
+                                    <param id="0" name="Opacity">BotaoE.Opacity - 200 * dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -2454,6 +2460,7 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <comment>Como é um evento que lida com Opacidade, ou seja, algo cujo valor varia entre 0 e 100, então ele vai levar exatos 0.5 segundos para descarregar, independente de dispositivo</comment>
                         <event-block sid="1398330881798207">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="1608470790348047" type="System" />
@@ -2464,16 +2471,16 @@
                             </conditions>
                             <actions>
                                 <action id="-16" name="Set opacity" sid="5004410695619337" type="perguntas">
-                                    <param id="0" name="Opacity">perguntas.Opacity - 2.5</param>
+                                    <param id="0" name="Opacity">perguntas.Opacity - 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="8378675531171638" type="AlternativasChao">
-                                    <param id="0" name="Opacity">AlternativasChao.Opacity - 2.5</param>
+                                    <param id="0" name="Opacity">AlternativasChao.Opacity - 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="3767536613095061" type="textoPerguntas">
-                                    <param id="0" name="Opacity">textoPerguntas.Opacity - 2.5</param>
+                                    <param id="0" name="Opacity">textoPerguntas.Opacity - 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="9055473113853928" type="textoRespostas">
-                                    <param id="0" name="Opacity">textoRespostas.Opacity - 2.5</param>
+                                    <param id="0" name="Opacity">textoRespostas.Opacity - 200 * dt</param>
                                 </action>
                             </actions>
                             <sub-events>
@@ -2838,6 +2845,10 @@
                         <action id="-9" name="Set value" sid="300878567146264" type="System">
                             <param id="0" name="Variable">animacaoPersonagemTexto</param>
                             <param id="1" name="Value">&quot;&quot;</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="159881054734828" type="playerAnim">
+                            <param id="0" name="Animation">replace(playerAnim.AnimationName, &quot;TochaAcesa&quot;, &quot;&quot;)</param>
+                            <param id="1" name="From">1</param>
                         </action>
                         <action id="11" name="Set collisions enabled" sid="520216336789946" type="MonstroInferior">
                             <param id="0" name="Collisions">0</param>
@@ -3535,6 +3546,10 @@
                                                         <condition behavior="Bullet" id="0" name="Compare speed" sid="885953327488708" type="Bolinha">
                                                             <param id="0" name="Comparison">4</param>
                                                             <param id="1" name="Speed">0</param>
+                                                        </condition>
+                                                        <condition id="3" inverted="1" name="Compare frame" sid="741816794904426" type="Bolinha">
+                                                            <param id="0" name="Comparison">0</param>
+                                                            <param id="1" name="Number">1</param>
                                                         </condition>
                                                     </conditions>
                                                     <actions>
