@@ -950,6 +950,504 @@
                 </event-block>
             </sub-events>
         </event-group>
+        <event-group description="" sid="919538827678768" title="Acessibilidade8">
+            <sub-events>
+                <comment>O intervalo (Xmax1, Xmax2) define o limite esquerdo superior da tela onde a personagem não pode andar. O intervalo (Xmin1, Xmin2) define o limite esquerdo inferior da tela onde a personagem não pode andar. A fórmula linear dentro dos condicionais abaixo definem a toda a região esquerda da tela onde a personagem não pode andar.</comment>
+                <variable constant="0" name="Xmax1" sid="221557317456655" static="0" type="number">38</variable>
+                <variable constant="0" name="Xmin1" sid="751027245283190" static="0" type="number">54</variable>
+                <variable constant="0" name="Xmax2" sid="267123569396125" static="0" type="number">41</variable>
+                <variable constant="0" name="Xmin2" sid="915256108934285" static="0" type="number">62</variable>
+                <comment>O intervalo (Xmax3, Xmax4) define o limite direito superior da tela onde a personagem não pode andar. O intervalo (Xmin3, Xmin4) define o limite direito inferior da tela onde a personagem não pode andar. A fórmula linear dentro dos condicionais abaixo definem a toda a região direita da tela onde a personagem não pode andar.</comment>
+                <variable constant="0" name="Xmax3" sid="512620694301646" static="0" type="number">1227</variable>
+                <variable constant="0" name="Xmin3" sid="779589683127731" static="0" type="number">1218</variable>
+                <variable constant="0" name="Xmax4" sid="467247769203031" static="0" type="number">1231</variable>
+                <variable constant="0" name="Xmin4" sid="445050053929131" static="0" type="number">1223</variable>
+                <event-block sid="333485735791892">
+                    <conditions>
+                        <condition id="-1" name="Compare X" sid="633984738852101" type="player">
+                            <param id="0" name="Comparison">5</param>
+                            <param id="1" name="X co-ordinate">(((Xmin1-Xmax1)/370)*(Player.Y-613))+Xmin1</param>
+                        </condition>
+                        <condition id="-1" name="Compare X" sid="814519649541347" type="player">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="X co-ordinate">(((Xmin2-Xmax2)/370)*(Player.Y-613))+Xmin2</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block any="1" sid="964895444341644">
+                            <conditions>
+                                <condition id="2" name="Key is down" sid="996428605893424" type="Keyboard">
+                                    <param id="0" name="Key">37</param>
+                                </condition>
+                                <condition id="2" name="Key is down" sid="915903441308264" type="Keyboard">
+                                    <param id="0" name="Key">65</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Set muted" sid="791741517091981" type="Audio">
+                                    <param id="0" name="Tag">&quot;passos&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="838474463946120" type="System">
+                                    <param id="0" name="Variable">limiteLayout</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="257387488889483">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="113635233889336" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Play" sid="177777986173860" type="Audio">
+                                            <param id="0" name="Audio file">encosta_parede</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">0</param>
+                                            <param id="1" name="Tag (optional)">&quot;parede&quot;</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="704614273089006">
+                                            <conditions>
+                                                <condition id="5" inverted="1" name="Is tag playing" sid="140751841639556" type="Audio">
+                                                    <param id="0" name="Tag">&quot;cuidado&quot;</param>
+                                                </condition>
+                                                <condition id="5" inverted="1" name="Is tag playing" sid="123184991795129" type="Audio">
+                                                    <param id="0" name="Tag">&quot;mago&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action disabled="1" id="0" name="Play" sid="342676039067690" type="Audio">
+                                                    <param id="0" name="Audio file">mago_21</param>
+                                                    <param id="2" name="Loop">0</param>
+                                                    <param id="3" name="Volume">0</param>
+                                                    <param id="1" name="Tag (optional)">&quot;cuidado&quot;</param>
+                                                </action>
+                                                <action id="25" name="Play at object" sid="310595774134302" type="Audio">
+                                                    <param id="0" name="Audio file">mago_21</param>
+                                                    <param id="1" name="Loop">0</param>
+                                                    <param id="2" name="Volume">0</param>
+                                                    <param id="3" name="Object">bibliotecarioBase</param>
+                                                    <param id="4" name="Inner angle">45</param>
+                                                    <param id="5" name="Outer angle">45</param>
+                                                    <param id="6" name="Outer gain">100</param>
+                                                    <param id="7" name="Tag (optional)">&quot;cuidado&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="919471261008344">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="209825641926424" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Set muted" sid="974862720910997" type="Audio">
+                                    <param id="0" name="Tag">&quot;passos&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="456160543076900" type="System">
+                                    <param id="0" name="Variable">limiteLayout</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="903901682274529">
+                    <conditions>
+                        <condition id="-1" name="Compare X" sid="534808010423067" type="player">
+                            <param id="0" name="Comparison">5</param>
+                            <param id="1" name="X co-ordinate">(((Xmin3-Xmax3)/157)*(Player.Y-613))+Xmin3</param>
+                        </condition>
+                        <condition id="-1" name="Compare X" sid="330029164957763" type="player">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="X co-ordinate">(((Xmin4-Xmax4)/157)*(Player.Y-613))+Xmin4</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block any="1" sid="235625609845969">
+                            <conditions>
+                                <condition id="2" name="Key is down" sid="396223211785542" type="Keyboard">
+                                    <param id="0" name="Key">39</param>
+                                </condition>
+                                <condition id="2" name="Key is down" sid="543175668640156" type="Keyboard">
+                                    <param id="0" name="Key">68</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Set muted" sid="921305911702336" type="Audio">
+                                    <param id="0" name="Tag">&quot;passos&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="236789417876260" type="System">
+                                    <param id="0" name="Variable">limiteLayout</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="536824469311437">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="821935192093926" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Play" sid="333443775952200" type="Audio">
+                                            <param id="0" name="Audio file">encosta_parede</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">0</param>
+                                            <param id="1" name="Tag (optional)">&quot;parede&quot;</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="104810471897383">
+                                            <conditions>
+                                                <condition id="5" inverted="1" name="Is tag playing" sid="466139164555088" type="Audio">
+                                                    <param id="0" name="Tag">&quot;cuidado&quot;</param>
+                                                </condition>
+                                                <condition id="5" inverted="1" name="Is tag playing" sid="260539568966300" type="Audio">
+                                                    <param id="0" name="Tag">&quot;mago&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action disabled="1" id="0" name="Play" sid="818430625232902" type="Audio">
+                                                    <param id="0" name="Audio file">mago_21</param>
+                                                    <param id="2" name="Loop">0</param>
+                                                    <param id="3" name="Volume">0</param>
+                                                    <param id="1" name="Tag (optional)">&quot;cuidado&quot;</param>
+                                                </action>
+                                                <action id="25" name="Play at object" sid="420211928041312" type="Audio">
+                                                    <param id="0" name="Audio file">mago_21</param>
+                                                    <param id="1" name="Loop">0</param>
+                                                    <param id="2" name="Volume">0</param>
+                                                    <param id="3" name="Object">bibliotecarioBase</param>
+                                                    <param id="4" name="Inner angle">45</param>
+                                                    <param id="5" name="Outer angle">45</param>
+                                                    <param id="6" name="Outer gain">100</param>
+                                                    <param id="7" name="Tag (optional)">&quot;cuidado&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="998779089261936">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="179661856802619" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Set muted" sid="596366347967202" type="Audio">
+                                    <param id="0" name="Tag">&quot;passos&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="618759857426302" type="System">
+                                    <param id="0" name="Variable">limiteLayout</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="228315025669093">
+                    <conditions>
+                        <condition disabled="1" id="-2" name="Compare Y" sid="405730963767343" type="player">
+                            <param id="0" name="Comparison">5</param>
+                            <param id="1" name="Y co-ordinate">113</param>
+                        </condition>
+                        <condition id="-2" name="Compare Y" sid="380325798502627" type="player">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Y co-ordinate">115</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block any="1" sid="478995822863187">
+                            <conditions>
+                                <condition id="2" name="Key is down" sid="507994188369585" type="Keyboard">
+                                    <param id="0" name="Key">38</param>
+                                </condition>
+                                <condition id="2" name="Key is down" sid="981187472864638" type="Keyboard">
+                                    <param id="0" name="Key">87</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Set muted" sid="589567300017421" type="Audio">
+                                    <param id="0" name="Tag">&quot;passos&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <comment>No caso da parte final da fase, o caminho para o jogador sair precisa estar aberto</comment>
+                                <event-block any="1" sid="396486133849175">
+                                    <conditions>
+                                        <condition id="0" name="On collision with another object" sid="294490646514304" type="player">
+                                            <param id="0" name="Object">saidaCampo</param>
+                                        </condition>
+                                        <condition id="-14" inverted="1" name="Compare variable" sid="490601926419107" type="System">
+                                            <param id="0" name="Variable">fraseAtualCAM</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">11</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="721284825597914" type="System">
+                                            <param id="0" name="Variable">limiteLayout</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="804938591701608">
+                                            <conditions>
+                                                <condition id="-4" name="Trigger once while true" sid="131494126616354" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Play" sid="953556720842923" type="Audio">
+                                                    <param id="0" name="Audio file">encosta_parede</param>
+                                                    <param id="2" name="Loop">0</param>
+                                                    <param id="3" name="Volume">0</param>
+                                                    <param id="1" name="Tag (optional)">&quot;parede&quot;</param>
+                                                </action>
+                                            </actions>
+                                            <sub-events>
+                                                <event-block sid="772159254282006">
+                                                    <conditions>
+                                                        <condition id="5" inverted="1" name="Is tag playing" sid="664561518802639" type="Audio">
+                                                            <param id="0" name="Tag">&quot;cuidado&quot;</param>
+                                                        </condition>
+                                                        <condition id="5" inverted="1" name="Is tag playing" sid="532926960822248" type="Audio">
+                                                            <param id="0" name="Tag">&quot;mago&quot;</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action disabled="1" id="0" name="Play" sid="140788879850208" type="Audio">
+                                                            <param id="0" name="Audio file">mago_21</param>
+                                                            <param id="2" name="Loop">0</param>
+                                                            <param id="3" name="Volume">0</param>
+                                                            <param id="1" name="Tag (optional)">&quot;cuidado&quot;</param>
+                                                        </action>
+                                                        <action id="25" name="Play at object" sid="918750889462340" type="Audio">
+                                                            <param id="0" name="Audio file">mago_21</param>
+                                                            <param id="1" name="Loop">0</param>
+                                                            <param id="2" name="Volume">0</param>
+                                                            <param id="3" name="Object">bibliotecarioBase</param>
+                                                            <param id="4" name="Inner angle">45</param>
+                                                            <param id="5" name="Outer angle">45</param>
+                                                            <param id="6" name="Outer gain">100</param>
+                                                            <param id="7" name="Tag (optional)">&quot;cuidado&quot;</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="235123606256701">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="900864521772834" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Set muted" sid="543979601713110" type="Audio">
+                                    <param id="0" name="Tag">&quot;passos&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="117303810435112" type="System">
+                                    <param id="0" name="Variable">limiteLayout</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="576141318676527">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="243893574364588" type="player">
+                            <param id="0" name="Comparison">5</param>
+                            <param id="1" name="Y co-ordinate">611</param>
+                        </condition>
+                        <condition id="-2" name="Compare Y" sid="470838169779925" type="player">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Y co-ordinate">616</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block any="1" sid="604868144617930">
+                            <conditions>
+                                <condition id="2" name="Key is down" sid="340898352699192" type="Keyboard">
+                                    <param id="0" name="Key">40</param>
+                                </condition>
+                                <condition id="2" name="Key is down" sid="867475599599372" type="Keyboard">
+                                    <param id="0" name="Key">83</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Set muted" sid="628157399747001" type="Audio">
+                                    <param id="0" name="Tag">&quot;passos&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="467231431801164" type="System">
+                                    <param id="0" name="Variable">limiteLayout</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="804196642019796">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="663378034011399" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="0" name="Play" sid="731348450183926" type="Audio">
+                                            <param id="0" name="Audio file">encosta_parede</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">0</param>
+                                            <param id="1" name="Tag (optional)">&quot;parede&quot;</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="434298727899347">
+                                            <conditions>
+                                                <condition id="5" inverted="1" name="Is tag playing" sid="109020763109173" type="Audio">
+                                                    <param id="0" name="Tag">&quot;cuidado&quot;</param>
+                                                </condition>
+                                                <condition id="5" inverted="1" name="Is tag playing" sid="344595783969096" type="Audio">
+                                                    <param id="0" name="Tag">&quot;mago&quot;</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action disabled="1" id="0" name="Play" sid="909494139078548" type="Audio">
+                                                    <param id="0" name="Audio file">mago_21</param>
+                                                    <param id="2" name="Loop">0</param>
+                                                    <param id="3" name="Volume">0</param>
+                                                    <param id="1" name="Tag (optional)">&quot;cuidado&quot;</param>
+                                                </action>
+                                                <action id="25" name="Play at object" sid="525616512081706" type="Audio">
+                                                    <param id="0" name="Audio file">mago_21</param>
+                                                    <param id="1" name="Loop">0</param>
+                                                    <param id="2" name="Volume">0</param>
+                                                    <param id="3" name="Object">bibliotecarioBase</param>
+                                                    <param id="4" name="Inner angle">45</param>
+                                                    <param id="5" name="Outer angle">45</param>
+                                                    <param id="6" name="Outer gain">100</param>
+                                                    <param id="7" name="Tag (optional)">&quot;cuidado&quot;</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="756431078457584">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="475483500543726" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Set muted" sid="290391910840372" type="Audio">
+                                    <param id="0" name="Tag">&quot;passos&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="231243634173873" type="System">
+                                    <param id="0" name="Variable">limiteLayout</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block disabled="1" sid="254615751206719">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="387553224043600" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="2" name="Set muted" sid="235183175778011" type="Audio">
+                            <param id="0" name="Tag">&quot;passos&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="6" name="Stop" sid="679951565140476" type="Audio">
+                            <param id="0" name="Tag">&quot;parede&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="254251989361862" type="System">
+                            <param id="0" name="Variable">limiteLayout</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Condição para desmutar o som dos passos</comment>
+                <event-block sid="801707257315583">
+                    <conditions>
+                        <condition id="-1" name="Compare X" sid="893987070518065" type="player">
+                            <param id="0" name="Comparison">4</param>
+                            <param id="1" name="X co-ordinate">(((Xmin2-Xmax2)/370)*(Player.Y-613))+Xmin2</param>
+                        </condition>
+                        <condition id="-1" name="Compare X" sid="598425757499952" type="player">
+                            <param id="0" name="Comparison">2</param>
+                            <param id="1" name="X co-ordinate">(((Xmin3-Xmax3)/157)*(Player.Y-613))+Xmin3</param>
+                        </condition>
+                        <condition id="-2" name="Compare Y" sid="878527877056404" type="player">
+                            <param id="0" name="Comparison">4</param>
+                            <param id="1" name="Y co-ordinate">115</param>
+                        </condition>
+                        <condition id="-2" name="Compare Y" sid="538778522205583" type="player">
+                            <param id="0" name="Comparison">2</param>
+                            <param id="1" name="Y co-ordinate">611</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="2" name="Set muted" sid="656445790374239" type="Audio">
+                            <param id="0" name="Tag">&quot;passos&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="6" name="Stop" sid="955503681957819" type="Audio">
+                            <param id="0" name="Tag">&quot;parede&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="959600014788858" type="System">
+                            <param id="0" name="Variable">limiteLayout</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Exceção das regras para que seja possível tocar o áudio dos passos enquanto o jogador caminha no túnel do estádio para avançar de fase</comment>
+                <event-block sid="871331623961288">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="107788165279006" type="System">
+                            <param id="0" name="Variable">inicioDialogoBIB</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">18</param>
+                        </condition>
+                        <condition id="-2" name="Compare Y" sid="239331104070525" type="player">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Y co-ordinate">115</param>
+                        </condition>
+                        <condition id="-1" name="Compare X" sid="559535136122419" type="player">
+                            <param id="0" name="Comparison">4</param>
+                            <param id="1" name="X co-ordinate">608</param>
+                        </condition>
+                        <condition id="-1" name="Compare X" sid="639488053882304" type="player">
+                            <param id="0" name="Comparison">2</param>
+                            <param id="1" name="X co-ordinate">699</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="2" name="Set muted" sid="238809700841017" type="Audio">
+                            <param id="0" name="Tag">&quot;passos&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="6" name="Stop" sid="986457358132979" type="Audio">
+                            <param id="0" name="Tag">&quot;parede&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="341417445686483" type="System">
+                            <param id="0" name="Variable">limiteLayout</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
         <event-group description="Grupo com ações de trigger da fase" sid="387926486040169" title="Acoes8">
             <sub-events>
                 <event-block any="1" sid="734620441709765">
@@ -2180,6 +2678,14 @@
                             <param id="0" name="Width">(1-((612-Player.Y)*0.0009263322))*122</param>
                             <param id="1" name="Height">(1-((612-Player.Y)*0.0009263322))*215</param>
                         </action>
+                        <action id="-9" name="Set value" sid="857632598628228" type="System">
+                            <param id="0" name="Variable">descarregarDialogosCAM</param>
+                            <param id="1" name="Value">(((54-38)/370)*(Player.Y-613))+54</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="897242750461813" type="System">
+                            <param id="0" name="Variable">descarregarDialogosGAL</param>
+                            <param id="1" name="Value">(((62-41)/370)*(Player.Y-613))+62</param>
+                        </action>
                         <action id="0" name="Set text" sid="135334287252895" type="pontuacaoTexto">
                             <param id="0" name="Text">pontos</param>
                         </action>
@@ -2466,141 +2972,153 @@
         </event-group>
         <event-group description="Grupo que controla a movimentação do jogador" sid="254005631517636" title="playerMove8">
             <sub-events>
-                <event-block any="1" sid="910773993544395">
+                <event-block sid="313267583575681">
                     <conditions>
-                        <condition id="2" name="Key is down" sid="198287986609152" type="Keyboard">
-                            <param id="0" name="Key">87</param>
-                        </condition>
-                        <condition id="2" name="Key is down" sid="111847775473775" type="Keyboard">
-                            <param id="0" name="Key">38</param>
+                        <condition id="-14" name="Compare variable" sid="595352063312877" type="System">
+                            <param id="0" name="Variable">limiteLayout</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="7" name="Set mirrored" sid="983852513901875" type="playerAnim">
-                            <param id="0" name="State">1</param>
-                        </action>
-                        <action behavior="8Direction" id="7" name="Simulate control" sid="358783826200231" type="player">
-                            <param id="0" name="Control">2</param>
-                        </action>
-                        <action id="4" name="Set animation" sid="574154078316353" type="playerAnim">
-                            <param id="0" name="Animation">&quot;TrasAndando&quot;</param>
-                            <param id="1" name="From">1</param>
-                        </action>
-                        <action id="6" name="Set speed" sid="632021056512073" type="playerAnim">
-                            <param id="0" name="Speed">4</param>
-                        </action>
-                        <action behavior="8Direction" id="4" name="Set max speed" sid="384595052755151" type="player">
-                            <param id="0" name="Max Speed">150</param>
-                        </action>
-                        <action behavior="8Direction" id="5" name="Set acceleration" sid="519296367345629" type="player">
-                            <param id="0" name="Acceleration">500</param>
-                        </action>
-                        <action behavior="8Direction" id="6" name="Set deceleration" sid="961379153198869" type="player">
-                            <param id="0" name="Deceleration">1100</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block any="1" sid="813301717540508">
-                    <conditions>
-                        <condition id="2" name="Key is down" sid="594560879847382" type="Keyboard">
-                            <param id="0" name="Key">65</param>
-                        </condition>
-                        <condition id="2" name="Key is down" sid="967678810054802" type="Keyboard">
-                            <param id="0" name="Key">37</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="7" name="Set mirrored" sid="736653620178337" type="playerAnim">
-                            <param id="0" name="State">0</param>
-                        </action>
-                        <action behavior="8Direction" id="7" name="Simulate control" sid="346748106609623" type="player">
-                            <param id="0" name="Control">0</param>
-                        </action>
-                        <action id="4" name="Set animation" sid="207425773439861" type="playerAnim">
-                            <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
-                            <param id="1" name="From">1</param>
-                        </action>
-                        <action id="6" name="Set speed" sid="974988250623538" type="playerAnim">
-                            <param id="0" name="Speed">5</param>
-                        </action>
-                        <action behavior="8Direction" id="4" name="Set max speed" sid="174033201548618" type="player">
-                            <param id="0" name="Max Speed">200</param>
-                        </action>
-                        <action behavior="8Direction" id="5" name="Set acceleration" sid="467229904104402" type="player">
-                            <param id="0" name="Acceleration">600</param>
-                        </action>
-                        <action behavior="8Direction" id="6" name="Set deceleration" sid="466287422516013" type="player">
-                            <param id="0" name="Deceleration">1000</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block any="1" sid="236246020193786">
-                    <conditions>
-                        <condition id="2" name="Key is down" sid="134819303984770" type="Keyboard">
-                            <param id="0" name="Key">68</param>
-                        </condition>
-                        <condition id="2" name="Key is down" sid="395876289083761" type="Keyboard">
-                            <param id="0" name="Key">39</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="7" name="Set mirrored" sid="282793087392280" type="playerAnim">
-                            <param id="0" name="State">1</param>
-                        </action>
-                        <action behavior="8Direction" id="7" name="Simulate control" sid="462460459325611" type="player">
-                            <param id="0" name="Control">1</param>
-                        </action>
-                        <action id="4" name="Set animation" sid="406423905419745" type="playerAnim">
-                            <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
-                            <param id="1" name="From">1</param>
-                        </action>
-                        <action id="6" name="Set speed" sid="219839538110965" type="playerAnim">
-                            <param id="0" name="Speed">5</param>
-                        </action>
-                        <action behavior="8Direction" id="4" name="Set max speed" sid="776126154055299" type="player">
-                            <param id="0" name="Max Speed">200</param>
-                        </action>
-                        <action behavior="8Direction" id="5" name="Set acceleration" sid="174453174123563" type="player">
-                            <param id="0" name="Acceleration">600</param>
-                        </action>
-                        <action behavior="8Direction" id="6" name="Set deceleration" sid="613717478120344" type="player">
-                            <param id="0" name="Deceleration">1000</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block any="1" sid="243879952591421">
-                    <conditions>
-                        <condition id="2" name="Key is down" sid="878690369905974" type="Keyboard">
-                            <param id="0" name="Key">83</param>
-                        </condition>
-                        <condition id="2" name="Key is down" sid="174063087516910" type="Keyboard">
-                            <param id="0" name="Key">40</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="7" name="Set mirrored" sid="856895742629670" type="playerAnim">
-                            <param id="0" name="State">1</param>
-                        </action>
-                        <action behavior="8Direction" id="7" name="Simulate control" sid="335212984414780" type="player">
-                            <param id="0" name="Control">3</param>
-                        </action>
-                        <action id="4" name="Set animation" sid="888701814652625" type="playerAnim">
-                            <param id="0" name="Animation">&quot;FrenteAndando&quot;</param>
-                            <param id="1" name="From">1</param>
-                        </action>
-                        <action id="6" name="Set speed" sid="624355325849551" type="playerAnim">
-                            <param id="0" name="Speed">4</param>
-                        </action>
-                        <action behavior="8Direction" id="4" name="Set max speed" sid="192295604580442" type="player">
-                            <param id="0" name="Max Speed">150</param>
-                        </action>
-                        <action behavior="8Direction" id="5" name="Set acceleration" sid="598137843144399" type="player">
-                            <param id="0" name="Acceleration">500</param>
-                        </action>
-                        <action behavior="8Direction" id="6" name="Set deceleration" sid="146486240445612" type="player">
-                            <param id="0" name="Deceleration">1100</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block any="1" sid="910773993544395">
+                            <conditions>
+                                <condition id="2" name="Key is down" sid="198287986609152" type="Keyboard">
+                                    <param id="0" name="Key">87</param>
+                                </condition>
+                                <condition id="2" name="Key is down" sid="111847775473775" type="Keyboard">
+                                    <param id="0" name="Key">38</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Set mirrored" sid="983852513901875" type="playerAnim">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="358783826200231" type="player">
+                                    <param id="0" name="Control">2</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="574154078316353" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;TrasAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                                <action id="6" name="Set speed" sid="632021056512073" type="playerAnim">
+                                    <param id="0" name="Speed">4</param>
+                                </action>
+                                <action behavior="8Direction" id="4" name="Set max speed" sid="384595052755151" type="player">
+                                    <param id="0" name="Max Speed">150</param>
+                                </action>
+                                <action behavior="8Direction" id="5" name="Set acceleration" sid="519296367345629" type="player">
+                                    <param id="0" name="Acceleration">500</param>
+                                </action>
+                                <action behavior="8Direction" id="6" name="Set deceleration" sid="961379153198869" type="player">
+                                    <param id="0" name="Deceleration">1100</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block any="1" sid="813301717540508">
+                            <conditions>
+                                <condition id="2" name="Key is down" sid="594560879847382" type="Keyboard">
+                                    <param id="0" name="Key">65</param>
+                                </condition>
+                                <condition id="2" name="Key is down" sid="967678810054802" type="Keyboard">
+                                    <param id="0" name="Key">37</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Set mirrored" sid="736653620178337" type="playerAnim">
+                                    <param id="0" name="State">0</param>
+                                </action>
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="346748106609623" type="player">
+                                    <param id="0" name="Control">0</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="207425773439861" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                                <action id="6" name="Set speed" sid="974988250623538" type="playerAnim">
+                                    <param id="0" name="Speed">5</param>
+                                </action>
+                                <action behavior="8Direction" id="4" name="Set max speed" sid="174033201548618" type="player">
+                                    <param id="0" name="Max Speed">200</param>
+                                </action>
+                                <action behavior="8Direction" id="5" name="Set acceleration" sid="467229904104402" type="player">
+                                    <param id="0" name="Acceleration">600</param>
+                                </action>
+                                <action behavior="8Direction" id="6" name="Set deceleration" sid="466287422516013" type="player">
+                                    <param id="0" name="Deceleration">1000</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block any="1" sid="236246020193786">
+                            <conditions>
+                                <condition id="2" name="Key is down" sid="134819303984770" type="Keyboard">
+                                    <param id="0" name="Key">68</param>
+                                </condition>
+                                <condition id="2" name="Key is down" sid="395876289083761" type="Keyboard">
+                                    <param id="0" name="Key">39</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Set mirrored" sid="282793087392280" type="playerAnim">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="462460459325611" type="player">
+                                    <param id="0" name="Control">1</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="406423905419745" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                                <action id="6" name="Set speed" sid="219839538110965" type="playerAnim">
+                                    <param id="0" name="Speed">5</param>
+                                </action>
+                                <action behavior="8Direction" id="4" name="Set max speed" sid="776126154055299" type="player">
+                                    <param id="0" name="Max Speed">200</param>
+                                </action>
+                                <action behavior="8Direction" id="5" name="Set acceleration" sid="174453174123563" type="player">
+                                    <param id="0" name="Acceleration">600</param>
+                                </action>
+                                <action behavior="8Direction" id="6" name="Set deceleration" sid="613717478120344" type="player">
+                                    <param id="0" name="Deceleration">1000</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block any="1" sid="243879952591421">
+                            <conditions>
+                                <condition id="2" name="Key is down" sid="878690369905974" type="Keyboard">
+                                    <param id="0" name="Key">83</param>
+                                </condition>
+                                <condition id="2" name="Key is down" sid="174063087516910" type="Keyboard">
+                                    <param id="0" name="Key">40</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Set mirrored" sid="856895742629670" type="playerAnim">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="335212984414780" type="player">
+                                    <param id="0" name="Control">3</param>
+                                </action>
+                                <action id="4" name="Set animation" sid="888701814652625" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;FrenteAndando&quot;</param>
+                                    <param id="1" name="From">1</param>
+                                </action>
+                                <action id="6" name="Set speed" sid="624355325849551" type="playerAnim">
+                                    <param id="0" name="Speed">4</param>
+                                </action>
+                                <action behavior="8Direction" id="4" name="Set max speed" sid="192295604580442" type="player">
+                                    <param id="0" name="Max Speed">150</param>
+                                </action>
+                                <action behavior="8Direction" id="5" name="Set acceleration" sid="598137843144399" type="player">
+                                    <param id="0" name="Acceleration">500</param>
+                                </action>
+                                <action behavior="8Direction" id="6" name="Set deceleration" sid="146486240445612" type="player">
+                                    <param id="0" name="Deceleration">1100</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="753920125240296">
                     <conditions>
