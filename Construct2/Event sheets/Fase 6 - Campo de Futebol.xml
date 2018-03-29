@@ -467,6 +467,14 @@
                             <param id="0" name="Group name">&quot;playerMove7&quot;</param>
                             <param id="1" name="State">0</param>
                         </action>
+                        <action id="-27" name="Set effect enabled" sid="530479069757435" type="bandeiras1">
+                            <param id="0" name="Mode">0</param>
+                            <param id="1" name="Effect">&quot;Water&quot;</param>
+                        </action>
+                        <action id="-27" name="Set effect enabled" sid="624060652919989" type="bandeiras2">
+                            <param id="0" name="Mode">0</param>
+                            <param id="1" name="Effect">&quot;Water&quot;</param>
+                        </action>
                     </actions>
                 </event-block>
                 <event-block sid="750154793521309">
@@ -2731,13 +2739,13 @@
                                     </conditions>
                                     <actions>
                                         <action id="-16" name="Set opacity" sid="982724829122721" type="Dialogos">
-                                            <param id="0" name="Opacity">Dialogos.Opacity-2.5</param>
+                                            <param id="0" name="Opacity">Dialogos.Opacity - 200 * dt</param>
                                         </action>
                                         <action id="-16" name="Set opacity" sid="511376737624331" type="DialogoPersonagem">
-                                            <param id="0" name="Opacity">DialogoPersonagem.Opacity-2.5</param>
+                                            <param id="0" name="Opacity">DialogoPersonagem.Opacity - 200 * dt</param>
                                         </action>
                                         <action id="-16" name="Set opacity" sid="740306781387602" type="BalaoDialogo">
-                                            <param id="0" name="Opacity">BalaoDialogo.Opacity-2.5</param>
+                                            <param id="0" name="Opacity">BalaoDialogo.Opacity - 200 * dt</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -3423,10 +3431,10 @@
                             </conditions>
                             <actions>
                                 <action id="-1" name="Set X" sid="476418811618007" type="animacaoTorcidaDir">
-                                    <param id="0" name="X">animacaoTorcidaDir.X + 3</param>
+                                    <param id="0" name="X">animacaoTorcidaDir.X + 125 * dt</param>
                                 </action>
                                 <action id="-1" name="Set X" sid="677842025306204" type="animacaoTorcidaEsq">
-                                    <param id="0" name="X">animacaoTorcidaEsq.X - 3</param>
+                                    <param id="0" name="X">animacaoTorcidaEsq.X - 125 * dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3457,6 +3465,7 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <comment>Como é um evento que lida com Opacidade, ou seja, algo cujo valor varia entre 0 e 100, então ele vai levar exatos 0.5 segundos para carregar, independente de dispositivo</comment>
                         <event-block sid="759229150034196">
                             <conditions>
                                 <condition id="-14" name="Compare variable" sid="417271696680816" type="System">
@@ -3468,11 +3477,11 @@
                             <actions>
                                 <action id="-10" name="Add to" sid="417898294037601" type="System">
                                     <param id="0" name="Variable">opacidadeLayer</param>
-                                    <param id="1" name="Value">2.5</param>
+                                    <param id="1" name="Value">200 * dt</param>
                                 </action>
                                 <action id="-18" name="Set layer opacity" sid="651038779905168" type="System">
                                     <param id="0" name="Layer">&quot;PlacarPopup&quot;</param>
-                                    <param id="1" name="Opacity">opacidadeLayer + 2.5</param>
+                                    <param id="1" name="Opacity">opacidadeLayer</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3554,6 +3563,7 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <comment>Como é um evento que lida com Opacidade, ou seja, algo cujo valor varia entre 0 e 100, então ele vai levar exatos 0.5 segundos para descarregar, independente de dispositivo</comment>
                         <event-block sid="859622202729300">
                             <conditions>
                                 <condition id="-14" name="Compare variable" sid="669802325347625" type="System">
@@ -3565,11 +3575,11 @@
                             <actions>
                                 <action id="-11" name="Subtract from" sid="525546931241481" type="System">
                                     <param id="0" name="Variable">opacidadeLayer</param>
-                                    <param id="1" name="Value">2.5</param>
+                                    <param id="1" name="Value">200 * dt</param>
                                 </action>
                                 <action id="-18" name="Set layer opacity" sid="782891359541713" type="System">
                                     <param id="0" name="Layer">&quot;PlacarPopup&quot;</param>
-                                    <param id="1" name="Opacity">opacidadeLayer - 2.5</param>
+                                    <param id="1" name="Opacity">opacidadeLayer</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -4465,6 +4475,7 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <comment>Como é um evento que lida com Opacidade, ou seja, algo cujo valor varia entre 0 e 100, então ele vai levar exatos 0.5 segundos para carregar, independente de dispositivo</comment>
                         <event-block sid="494214078386547">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="199691501509836" type="System" />
@@ -4475,7 +4486,7 @@
                             </conditions>
                             <actions>
                                 <action id="-16" name="Set opacity" sid="117031554643824" type="BalaoDialogo">
-                                    <param id="0" name="Opacity">BalaoDialogo.Opacity + 2.5</param>
+                                    <param id="0" name="Opacity">BalaoDialogo.Opacity + 200 * dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -4543,10 +4554,10 @@
                             </conditions>
                             <actions>
                                 <action id="-16" name="Set opacity" sid="545397026550679" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity + 2.5</param>
+                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity + 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="322340801110901" type="Dialogos">
-                                    <param id="0" name="Opacity">Dialogos.Opacity + 2.5</param>
+                                    <param id="0" name="Opacity">Dialogos.Opacity + 200 * dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -4669,6 +4680,7 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <comment>Como é um evento que lida com Opacidade, ou seja, algo cujo valor varia entre 0 e 100, então ele vai levar exatos 0.5 segundos para descarregar, independente de dispositivo</comment>
                         <event-block sid="818110195873001">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="163294253474084" type="System" />
@@ -4679,13 +4691,13 @@
                             </conditions>
                             <actions>
                                 <action id="-16" name="Set opacity" sid="519034204813994" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity - 2.5</param>
+                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity - 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="940211818426688" type="Dialogos">
-                                    <param id="0" name="Opacity">Dialogos.Opacity - 2.5</param>
+                                    <param id="0" name="Opacity">Dialogos.Opacity - 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="553884990200850" type="BalaoDialogo">
-                                    <param id="0" name="Opacity">BalaoDialogo.Opacity - 2.5</param>
+                                    <param id="0" name="Opacity">BalaoDialogo.Opacity - 200 * dt</param>
                                 </action>
                             </actions>
                             <sub-events>
@@ -5294,7 +5306,7 @@
                     </conditions>
                     <actions>
                         <action id="-2" name="Set Y" sid="496504639960376" type="pontuacao">
-                            <param id="0" name="Y">pontuacao.Y-3</param>
+                            <param id="0" name="Y">pontuacao.Y - 150 * pontuacao.dt</param>
                         </action>
                     </actions>
                 </event-block>
@@ -5311,7 +5323,7 @@
                     </conditions>
                     <actions>
                         <action id="-2" name="Set Y" sid="509125927429936" type="pontuacao">
-                            <param id="0" name="Y">pontuacao.Y+3</param>
+                            <param id="0" name="Y">pontuacao.Y + 150 * pontuacao.dt</param>
                         </action>
                     </actions>
                 </event-block>
@@ -5372,6 +5384,10 @@
                                 </action>
                                 <action id="-13" name="Set time scale" sid="665295556482276" type="System">
                                     <param id="0" name="Time scale">0.0</param>
+                                </action>
+                                <action id="-14" name="Set object time scale" sid="473406035872332" type="System">
+                                    <param id="0" name="Object">pontuacao</param>
+                                    <param id="1" name="Time scale">1.0</param>
                                 </action>
                             </actions>
                             <sub-events>

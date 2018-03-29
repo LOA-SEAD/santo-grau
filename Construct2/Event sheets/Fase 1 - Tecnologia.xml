@@ -117,6 +117,10 @@
                     <param id="0" name="Variable">controleDialogos2</param>
                     <param id="1" name="Value">0</param>
                 </action>
+                <action id="-9" name="Set value" sid="274537222895153" type="System">
+                    <param id="0" name="Variable">framesPorSegundoPorta</param>
+                    <param id="1" name="Value">30</param>
+                </action>
                 <action id="-9" name="Set value" sid="724546321647577" type="System">
                     <param id="0" name="Variable">pontuacaoInicio</param>
                     <param id="1" name="Value">pontos</param>
@@ -382,6 +386,23 @@
                         <action id="-12" name="Set group active" sid="253618947209073" type="System">
                             <param id="0" name="Group name">&quot;playerMove2&quot;</param>
                             <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-26" name="Move to layer" sid="842095724750697" type="BtnDirecional">
+                            <param id="0" name="Layer">&quot;Mobile&quot;</param>
+                        </action>
+                        <action id="-26" name="Move to layer" sid="445100821167042" type="HitboxDir">
+                            <param id="0" name="Layer">&quot;Mobile&quot;</param>
+                        </action>
+                        <action id="-26" name="Move to layer" sid="834990893925297" type="BtnInteragir">
+                            <param id="0" name="Layer">&quot;Mobile&quot;</param>
+                        </action>
+                        <action id="7" name="Set CSS style" sid="396785620415072" type="computadorResp">
+                            <param id="0" name="Property name">&quot;font-size&quot;</param>
+                            <param id="1" name="Value">&quot;16px&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="787060116954554" type="System">
+                            <param id="0" name="Variable">framesPorSegundoPorta</param>
+                            <param id="1" name="Value">35</param>
                         </action>
                     </actions>
                 </event-block>
@@ -718,6 +739,17 @@
                 </action>
             </actions>
             <sub-events>
+                <event-block sid="920062595340944">
+                    <conditions>
+                        <condition id="-20" name="Is on mobile device" sid="102937003368931" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Set CSS style" sid="788111357990880" type="computadorResp">
+                            <param id="0" name="Property name">&quot;font-size&quot;</param>
+                            <param id="1" name="Value">&quot;16px&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
                 <event-block sid="908588485721108">
                     <conditions>
                         <condition id="-15" inverted="1" name="Is group active" sid="793571468451874" type="System">
@@ -844,7 +876,7 @@
                             </conditions>
                             <actions>
                                 <action id="-2" name="Set Y" sid="254904611248052" type="Porta">
-                                    <param id="0" name="Y">Porta.Y+0.5</param>
+                                    <param id="0" name="Y">Porta.Y + framesPorSegundoPorta * dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -874,7 +906,7 @@
                     </conditions>
                     <actions>
                         <action id="-2" name="Set Y" sid="626073676393730" type="pontuacao">
-                            <param id="0" name="Y">pontuacao.Y-3</param>
+                            <param id="0" name="Y">pontuacao.Y - 150 * pontuacao.dt</param>
                         </action>
                     </actions>
                 </event-block>
@@ -891,7 +923,7 @@
                     </conditions>
                     <actions>
                         <action id="-2" name="Set Y" sid="312675378826398" type="pontuacao">
-                            <param id="0" name="Y">pontuacao.Y+3</param>
+                            <param id="0" name="Y">pontuacao.Y + 150 * pontuacao.dt</param>
                         </action>
                     </actions>
                 </event-block>
@@ -927,7 +959,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-2" name="Set Y" sid="215259519005917" type="dicaPopUp">
-                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                            <param id="0" name="Y">dicaPopUp.Y - 200 * dt</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -950,7 +982,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-2" name="Set Y" sid="625303102918406" type="dicaPopUp">
-                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                            <param id="0" name="Y">dicaPopUp.Y - 200 * dt</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1000,7 +1032,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-2" name="Set Y" sid="250406141574103" type="dicaPopUp">
-                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                            <param id="0" name="Y">dicaPopUp.Y - 200 * dt</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1023,7 +1055,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-2" name="Set Y" sid="578192315227181" type="dicaPopUp">
-                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                            <param id="0" name="Y">dicaPopUp.Y - 200 * dt</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1073,7 +1105,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-2" name="Set Y" sid="830947064082480" type="dicaPopUp">
-                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                            <param id="0" name="Y">dicaPopUp.Y - 200 * dt</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1096,7 +1128,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-2" name="Set Y" sid="104283775221108" type="dicaPopUp">
-                                            <param id="0" name="Y">dicaPopUp.Y-2.75</param>
+                                            <param id="0" name="Y">dicaPopUp.Y - 200 * dt</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1925,6 +1957,9 @@
                                                             <param id="0" name="Group name">&quot;Mobile2&quot;</param>
                                                             <param id="1" name="State">0</param>
                                                         </action>
+                                                        <action id="-16" name="Wait" sid="338999102417925" type="System">
+                                                            <param id="0" name="Seconds">0.5</param>
+                                                        </action>
                                                     </actions>
                                                 </event-block>
                                                 <event-block sid="270542659275807">
@@ -1984,6 +2019,9 @@
                                                             <param id="0" name="Group name">&quot;Mobile2&quot;</param>
                                                             <param id="1" name="State">0</param>
                                                         </action>
+                                                        <action id="-16" name="Wait" sid="745824066445220" type="System">
+                                                            <param id="0" name="Seconds">0.5</param>
+                                                        </action>
                                                     </actions>
                                                 </event-block>
                                                 <event-block sid="345605164496210">
@@ -2042,6 +2080,9 @@
                                                         <action id="-12" name="Set group active" sid="510138488339004" type="System">
                                                             <param id="0" name="Group name">&quot;Mobile2&quot;</param>
                                                             <param id="1" name="State">0</param>
+                                                        </action>
+                                                        <action id="-16" name="Wait" sid="900342910585311" type="System">
+                                                            <param id="0" name="Seconds">0.5</param>
                                                         </action>
                                                     </actions>
                                                 </event-block>
@@ -2423,13 +2464,13 @@
                     </conditions>
                     <actions>
                         <action id="-16" name="Set opacity" sid="4325740600314158" type="BalaoDialogo">
-                            <param id="0" name="Opacity">BalaoDialogo.Opacity+2</param>
+                            <param id="0" name="Opacity">BalaoDialogo.Opacity + 200 * dt</param>
                         </action>
                         <action id="-16" name="Set opacity" sid="4326390614315233" type="Dialogos">
-                            <param id="0" name="Opacity">Dialogos.Opacity+2</param>
+                            <param id="0" name="Opacity">Dialogos.Opacity + 200 * dt</param>
                         </action>
                         <action id="-16" name="Set opacity" sid="565680032812401" type="DialogoPersonagem">
-                            <param id="0" name="Opacity">DialogoPersonagem.Opacity+2</param>
+                            <param id="0" name="Opacity">DialogoPersonagem.Opacity + 200 * dt</param>
                         </action>
                     </actions>
                 </event-block>
@@ -2818,13 +2859,13 @@
                     </conditions>
                     <actions>
                         <action id="-16" name="Set opacity" sid="6538286945370297" type="Dialogos">
-                            <param id="0" name="Opacity">Dialogos.Opacity-2</param>
+                            <param id="0" name="Opacity">Dialogos.Opacity - 200 * dt</param>
                         </action>
                         <action id="-16" name="Set opacity" sid="9891792698765483" type="DialogoPersonagem">
-                            <param id="0" name="Opacity">DialogoPersonagem.Opacity-2</param>
+                            <param id="0" name="Opacity">DialogoPersonagem.Opacity - 200 * dt</param>
                         </action>
                         <action id="-16" name="Set opacity" sid="8213736324698117" type="BalaoDialogo">
-                            <param id="0" name="Opacity">BalaoDialogo.Opacity-2</param>
+                            <param id="0" name="Opacity">BalaoDialogo.Opacity - 200 * dt</param>
                         </action>
                     </actions>
                 </event-block>
@@ -2917,13 +2958,13 @@
                             <param id="1" name="From">1</param>
                         </action>
                         <action id="-16" name="Set opacity" sid="8022404576040462" type="Dialogos">
-                            <param id="0" name="Opacity">Dialogos.Opacity+2</param>
+                            <param id="0" name="Opacity">Dialogos.Opacity + 200 * dt</param>
                         </action>
                         <action id="-16" name="Set opacity" sid="2704420828081356" type="DialogoPersonagem">
-                            <param id="0" name="Opacity">DialogoPersonagem.Opacity+2</param>
+                            <param id="0" name="Opacity">DialogoPersonagem.Opacity + 200 * dt</param>
                         </action>
                         <action id="-16" name="Set opacity" sid="7664506317698144" type="BalaoDialogo">
-                            <param id="0" name="Opacity">BalaoDialogo.Opacity+2</param>
+                            <param id="0" name="Opacity">BalaoDialogo.Opacity + 200 * dt</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -2965,13 +3006,13 @@
                     </conditions>
                     <actions>
                         <action id="-16" name="Set opacity" sid="6391428981860928" type="Dialogos">
-                            <param id="0" name="Opacity">Dialogos.Opacity-2</param>
+                            <param id="0" name="Opacity">Dialogos.Opacity - 200 * dt</param>
                         </action>
                         <action id="-16" name="Set opacity" sid="6889842697966112" type="DialogoPersonagem">
-                            <param id="0" name="Opacity">DialogoPersonagem.Opacity-2</param>
+                            <param id="0" name="Opacity">DialogoPersonagem.Opacity - 200 * dt</param>
                         </action>
                         <action id="-16" name="Set opacity" sid="7148784673684954" type="BalaoDialogo">
-                            <param id="0" name="Opacity">BalaoDialogo.Opacity-2</param>
+                            <param id="0" name="Opacity">BalaoDialogo.Opacity - 200 * dt</param>
                         </action>
                     </actions>
                 </event-block>
@@ -3043,14 +3084,14 @@
                             <param id="0" name="Animation">&quot;TrasParado&quot;</param>
                             <param id="1" name="From">1</param>
                         </action>
-                        <action id="-16" name="Set opacity" sid="9733476301647004" type="Dialogos">
-                            <param id="0" name="Opacity">Dialogos.Opacity+2</param>
+                        <action id="-16" name="Set opacity" sid="558435992440300" type="Dialogos">
+                            <param id="0" name="Opacity">Dialogos.Opacity + 200 * dt</param>
                         </action>
-                        <action id="-16" name="Set opacity" sid="9876916525154724" type="DialogoPersonagem">
-                            <param id="0" name="Opacity">DialogoPersonagem.Opacity+2</param>
+                        <action id="-16" name="Set opacity" sid="662642342396932" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">DialogoPersonagem.Opacity + 200 * dt</param>
                         </action>
-                        <action id="-16" name="Set opacity" sid="3068574230633595" type="BalaoDialogo">
-                            <param id="0" name="Opacity">BalaoDialogo.Opacity+2</param>
+                        <action id="-16" name="Set opacity" sid="268278335604741" type="BalaoDialogo">
+                            <param id="0" name="Opacity">BalaoDialogo.Opacity + 200 * dt</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -3131,14 +3172,14 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-16" name="Set opacity" sid="5289183646353321" type="Dialogos">
-                            <param id="0" name="Opacity">Dialogos.Opacity-2</param>
+                        <action id="-16" name="Set opacity" sid="699890718252881" type="Dialogos">
+                            <param id="0" name="Opacity">Dialogos.Opacity - 200 * dt</param>
                         </action>
-                        <action id="-16" name="Set opacity" sid="8651202461823901" type="DialogoPersonagem">
-                            <param id="0" name="Opacity">DialogoPersonagem.Opacity-2</param>
+                        <action id="-16" name="Set opacity" sid="108323844751162" type="DialogoPersonagem">
+                            <param id="0" name="Opacity">DialogoPersonagem.Opacity - 200 * dt</param>
                         </action>
-                        <action id="-16" name="Set opacity" sid="5159386490796304" type="BalaoDialogo">
-                            <param id="0" name="Opacity">BalaoDialogo.Opacity-2</param>
+                        <action id="-16" name="Set opacity" sid="453428319051158" type="BalaoDialogo">
+                            <param id="0" name="Opacity">BalaoDialogo.Opacity - 200 * dt</param>
                         </action>
                     </actions>
                 </event-block>
@@ -3222,7 +3263,7 @@
                             </conditions>
                             <actions>
                                 <action id="-2" name="Set Y" sid="1424105530962051" type="computadorTela">
-                                    <param id="0" name="Y">computadorTela.Y-20</param>
+                                    <param id="0" name="Y">computadorTela.Y - 1200 * dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3249,7 +3290,7 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <comment>Incrementa um no campo correspondente das tentativas daquela palavra</comment>
+                        <comment>Incrementa um no campo correspondente das tentativas daquela palavra (Não está funcionando o uso do botão Interagir do Mobile, pois ele pega o evento de seleção do computador e acaba enviando uma resposta em branco)</comment>
                         <event-block any="1" sid="5120784875560205">
                             <conditions>
                                 <condition id="0" name="On key pressed" sid="1878366157679458" type="Keyboard">
@@ -3258,7 +3299,7 @@
                                 <condition id="17" name="On tap object" sid="293151069792852" type="Touch">
                                     <param id="0" name="Object">botaoPopup</param>
                                 </condition>
-                                <condition id="17" name="On tap object" sid="632668618205744" type="Touch">
+                                <condition disabled="1" id="17" name="On tap object" sid="632668618205744" type="Touch">
                                     <param id="0" name="Object">BtnInteragir</param>
                                 </condition>
                             </conditions>
@@ -3497,7 +3538,7 @@
                             </conditions>
                             <actions>
                                 <action id="-2" name="Set Y" sid="7139155908755505" type="computadorTela">
-                                    <param id="0" name="Y">computadorTela.Y+20</param>
+                                    <param id="0" name="Y">computadorTela.Y + 1200 * dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3583,7 +3624,7 @@
                             </conditions>
                             <actions>
                                 <action id="-2" name="Set Y" sid="1424105530962051" type="computadorTela">
-                                    <param id="0" name="Y">computadorTela.Y-20</param>
+                                    <param id="0" name="Y">computadorTela.Y - 1200 * dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3610,7 +3651,7 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <comment>Incrementa um no campo correspondente das tentativas daquela palavra</comment>
+                        <comment>Incrementa um no campo correspondente das tentativas daquela palavra (Não está funcionando o uso do botão Interagir do Mobile, pois ele pega o evento de seleção do computador e acaba enviando uma resposta em branco)</comment>
                         <event-block any="1" sid="5172694724510104">
                             <conditions>
                                 <condition id="0" name="On key pressed" sid="4826153828421658" type="Keyboard">
@@ -3619,7 +3660,7 @@
                                 <condition id="17" name="On tap object" sid="269014405540574" type="Touch">
                                     <param id="0" name="Object">botaoPopup</param>
                                 </condition>
-                                <condition id="17" name="On tap object" sid="592746726748135" type="Touch">
+                                <condition disabled="1" id="17" name="On tap object" sid="592746726748135" type="Touch">
                                     <param id="0" name="Object">BtnInteragir</param>
                                 </condition>
                             </conditions>
@@ -3858,7 +3899,7 @@
                             </conditions>
                             <actions>
                                 <action id="-2" name="Set Y" sid="7139155908755505" type="computadorTela">
-                                    <param id="0" name="Y">computadorTela.Y+20</param>
+                                    <param id="0" name="Y">computadorTela.Y + 1200 * dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3944,7 +3985,7 @@
                             </conditions>
                             <actions>
                                 <action id="-2" name="Set Y" sid="1424105530962051" type="computadorTela">
-                                    <param id="0" name="Y">computadorTela.Y-20</param>
+                                    <param id="0" name="Y">computadorTela.Y - 1200 * dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3971,7 +4012,7 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <comment>Incrementa um no campo correspondente das tentativas daquela palavra</comment>
+                        <comment>Incrementa um no campo correspondente das tentativas daquela palavra (Não está funcionando o uso do botão Interagir do Mobile, pois ele pega o evento de seleção do computador e acaba enviando uma resposta em branco)</comment>
                         <event-block any="1" sid="8812465850042216">
                             <conditions>
                                 <condition id="0" name="On key pressed" sid="5414230517091749" type="Keyboard">
@@ -3980,7 +4021,7 @@
                                 <condition id="17" name="On tap object" sid="278635229324056" type="Touch">
                                     <param id="0" name="Object">botaoPopup</param>
                                 </condition>
-                                <condition id="17" name="On tap object" sid="300029660171875" type="Touch">
+                                <condition disabled="1" id="17" name="On tap object" sid="300029660171875" type="Touch">
                                     <param id="0" name="Object">BtnInteragir</param>
                                 </condition>
                             </conditions>
@@ -4219,7 +4260,7 @@
                             </conditions>
                             <actions>
                                 <action id="-2" name="Set Y" sid="7139155908755505" type="computadorTela">
-                                    <param id="0" name="Y">computadorTela.Y+20</param>
+                                    <param id="0" name="Y">computadorTela.Y + 1200 * dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -4356,6 +4397,19 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <event-block sid="735694067350254">
+                            <conditions>
+                                <condition id="-20" name="Is on mobile device" sid="102767132601270" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-1" name="Set X" sid="527354599991822" type="popupBotaoTexto">
+                                    <param id="0" name="X">botaoPopup.X</param>
+                                </action>
+                                <action id="-2" name="Set Y" sid="519615947069035" type="popupBotaoTexto">
+                                    <param id="0" name="Y">botaoPopup.Y - 5</param>
+                                </action>
+                            </actions>
+                        </event-block>
                     </sub-events>
                 </event-block>
             </sub-events>
@@ -4454,6 +4508,14 @@
                                 </action>
                                 <action id="-13" name="Set time scale" sid="374711282332722" type="System">
                                     <param id="0" name="Time scale">0.0</param>
+                                </action>
+                                <action id="-14" name="Set object time scale" sid="297884265864637" type="System">
+                                    <param id="0" name="Object">pontuacao</param>
+                                    <param id="1" name="Time scale">1.0</param>
+                                </action>
+                                <action disabled="1" id="-14" name="Set object time scale" sid="903070299616511" type="System">
+                                    <param id="0" name="Object">Porta</param>
+                                    <param id="1" name="Time scale">1.0</param>
                                 </action>
                             </actions>
                             <sub-events>
@@ -6116,7 +6178,7 @@
                     </conditions>
                     <actions>
                         <action id="-2" name="Set Y" sid="7267804972894037" type="Porta">
-                            <param id="0" name="Y">Porta.Y-0.5</param>
+                            <param id="0" name="Y">Porta.Y - framesPorSegundoPorta * dt</param>
                         </action>
                     </actions>
                 </event-block>

@@ -65,6 +65,10 @@
                     <param id="0" name="Group name">&quot;playerMove4&quot;</param>
                     <param id="1" name="State">0</param>
                 </action>
+                <action id="-12" name="Set group active" sid="787258731626954" type="System">
+                    <param id="0" name="Group name">&quot;Mobile4&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
                 <action id="-12" name="Set group active" sid="83030780279298" type="System">
                     <param id="0" name="Group name">&quot;gerarPerguntasJsonFFCM&quot;</param>
                     <param id="1" name="State">0</param>
@@ -227,19 +231,36 @@
                 <action behavior="8Direction" id="0" name="Stop" sid="837891325923973" type="player" />
             </actions>
             <sub-events>
-                <comment>Ativa ou desativa (evento Else abaixo) os botões de mobile dependendo do dispositivo onde está sendo jogado</comment>
+                <comment>Ativa ou desativa (evento Else abaixo) os botões de mobile dependendo do dispositivo onde está sendo jogado, além de cortar pela metade a frequência do efeito de água</comment>
                 <event-block sid="298501102857130">
                     <conditions>
                         <condition id="-20" name="Is on mobile device" sid="381651668993050" type="System" />
                     </conditions>
                     <actions>
-                        <action id="-12" name="Set group active" sid="817868146735512" type="System">
+                        <action disabled="1" id="-12" name="Set group active" sid="817868146735512" type="System">
                             <param id="0" name="Group name">&quot;Mobile4&quot;</param>
                             <param id="1" name="State">1</param>
                         </action>
                         <action id="-12" name="Set group active" sid="618867600101047" type="System">
                             <param id="0" name="Group name">&quot;playerMove4&quot;</param>
                             <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-30" name="Set layer effect enabled" sid="794025023319546" type="System">
+                            <param id="0" name="Layer">&quot;Fundo_lava&quot;</param>
+                            <param id="1" name="Mode">0</param>
+                            <param id="2" name="Effect">&quot;Water&quot;</param>
+                        </action>
+                        <action disabled="1" id="-32" name="Set layer effect parameter" sid="103417068330707" type="System">
+                            <param id="0" name="Layer">&quot;Fundo_lava&quot;</param>
+                            <param id="1" name="Effect">&quot;Water&quot;</param>
+                            <param id="2" name="Parameter index">4</param>
+                            <param id="3" name="Value">5</param>
+                        </action>
+                        <action disabled="1" id="-32" name="Set layer effect parameter" sid="639749003394978" type="System">
+                            <param id="0" name="Layer">&quot;Fundo_lava&quot;</param>
+                            <param id="1" name="Effect">&quot;Water&quot;</param>
+                            <param id="2" name="Parameter index">6</param>
+                            <param id="3" name="Value">80</param>
                         </action>
                     </actions>
                 </event-block>
@@ -640,6 +661,7 @@
                 </action>
             </actions>
         </event-block>
+        <comment>Não dá para utilizar o dt aqui pelo time scale do jogo ser zerado durante o pause, impedindo que a pontuação seja apresentada (caso isso mudar, aqui usa 150 * dt)</comment>
         <event-group description="" inactive="1" sid="3505633937908079" title="Pontuacao4a">
             <sub-events>
                 <event-block sid="3544968347758162">
@@ -651,7 +673,7 @@
                     </conditions>
                     <actions>
                         <action id="-2" name="Set Y" sid="6306910430131981" type="pontuacao">
-                            <param id="0" name="Y">pontuacao.Y-3</param>
+                            <param id="0" name="Y">pontuacao.Y - 150 * pontuacao.dt</param>
                         </action>
                     </actions>
                 </event-block>
@@ -668,7 +690,7 @@
                     </conditions>
                     <actions>
                         <action id="-2" name="Set Y" sid="188183413441595" type="pontuacao">
-                            <param id="0" name="Y">pontuacao.Y+3</param>
+                            <param id="0" name="Y">pontuacao.Y + 150 * pontuacao.dt</param>
                         </action>
                     </actions>
                 </event-block>
@@ -688,6 +710,7 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <comment>Como é um evento que lida com Opacidade, ou seja, algo cujo valor varia entre 0 e 100, então ele vai levar exatos 0.5 segundos para carregar, independente de dispositivo</comment>
                         <event-block sid="5212862081759587">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="9853204310813109" type="System" />
@@ -698,13 +721,13 @@
                             </conditions>
                             <actions>
                                 <action id="-16" name="Set opacity" sid="5708691047472" type="perguntas">
-                                    <param id="0" name="Opacity">perguntas.Opacity + 2.5</param>
+                                    <param id="0" name="Opacity">perguntas.Opacity + 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="3322405508724164" type="textoPerguntas">
-                                    <param id="0" name="Opacity">textoPerguntas.Opacity + 2.5</param>
+                                    <param id="0" name="Opacity">textoPerguntas.Opacity + 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="494153030298140" type="BotaoE">
-                                    <param id="0" name="Opacity">BotaoE.Opacity + 2.5</param>
+                                    <param id="0" name="Opacity">BotaoE.Opacity + 200 * dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -752,6 +775,7 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <comment>Como é um evento que lida com Opacidade, ou seja, algo cujo valor varia entre 0 e 100, então ele vai levar exatos 0.5 segundos para descarregar, independente de dispositivo</comment>
                         <event-block sid="4706833434079363">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="852654133826633" type="System" />
@@ -762,10 +786,10 @@
                             </conditions>
                             <actions>
                                 <action id="-16" name="Set opacity" sid="5855728949744926" type="textoPerguntas">
-                                    <param id="0" name="Opacity">textoPerguntas.Opacity - 2.5</param>
+                                    <param id="0" name="Opacity">textoPerguntas.Opacity - 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="995195715736588" type="BotaoE">
-                                    <param id="0" name="Opacity">BotaoE.Opacity - 2.5</param>
+                                    <param id="0" name="Opacity">BotaoE.Opacity - 200 * dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1661,13 +1685,13 @@
                             </conditions>
                             <actions>
                                 <action id="-16" name="Set opacity" sid="8468324499048207" type="textoPerguntas">
-                                    <param id="0" name="Opacity">textoPerguntas.Opacity + 2.5</param>
+                                    <param id="0" name="Opacity">textoPerguntas.Opacity + 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="1706482227902222" type="textoRespostas">
-                                    <param id="0" name="Opacity">textoRespostas.Opacity + 2.5</param>
+                                    <param id="0" name="Opacity">textoRespostas.Opacity + 200 * dt</param>
                                 </action>
                                 <action disabled="1" id="-16" name="Set opacity" sid="806670430535738" type="BotaoE">
-                                    <param id="0" name="Opacity">BotaoE.Opacity + 2.5</param>
+                                    <param id="0" name="Opacity">BotaoE.Opacity + 200 * dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1800,7 +1824,7 @@
                             </conditions>
                             <actions>
                                 <action id="-16" name="Set opacity" sid="987807556701519" type="BotaoE">
-                                    <param id="0" name="Opacity">BotaoE.Opacity - 2.5</param>
+                                    <param id="0" name="Opacity">BotaoE.Opacity - 200 * dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1845,10 +1869,10 @@
                             </conditions>
                             <actions>
                                 <action id="-16" name="Set opacity" sid="3767536613095061" type="textoPerguntas">
-                                    <param id="0" name="Opacity">textoPerguntas.Opacity - 2.5</param>
+                                    <param id="0" name="Opacity">textoPerguntas.Opacity - 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="9055473113853928" type="textoRespostas">
-                                    <param id="0" name="Opacity">textoRespostas.Opacity - 2.5</param>
+                                    <param id="0" name="Opacity">textoRespostas.Opacity - 200 * dt</param>
                                 </action>
                             </actions>
                             <sub-events>
@@ -1890,7 +1914,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-16" name="Set opacity" sid="5728424369138617" type="perguntas">
-                                            <param id="0" name="Opacity">perguntas.Opacity - 2.5</param>
+                                            <param id="0" name="Opacity">perguntas.Opacity - 200 * dt</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -2558,6 +2582,10 @@
                                 </action>
                                 <action id="-13" name="Set time scale" sid="253497471550862" type="System">
                                     <param id="0" name="Time scale">0.0</param>
+                                </action>
+                                <action id="-14" name="Set object time scale" sid="416523693804322" type="System">
+                                    <param id="0" name="Object">pontuacao</param>
+                                    <param id="1" name="Time scale">1.0</param>
                                 </action>
                             </actions>
                             <sub-events>

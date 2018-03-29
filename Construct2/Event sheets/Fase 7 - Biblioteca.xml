@@ -183,6 +183,10 @@
                     <param id="0" name="Variable">livroAtual</param>
                     <param id="1" name="Value">1</param>
                 </action>
+                <action id="-9" name="Set value" sid="512312011194527" type="System">
+                    <param id="0" name="Variable">framesPorSegundoPorta</param>
+                    <param id="1" name="Value">45</param>
+                </action>
                 <action id="-9" name="Set value" sid="443483303299528" type="System">
                     <param id="0" name="Variable">pontuacaoInicio</param>
                     <param id="1" name="Value">pontos</param>
@@ -496,6 +500,29 @@
                         </action>
                         <action id="-26" name="Move to layer" sid="620518309511815" type="BtnInteragir">
                             <param id="0" name="Layer">&quot;Mobile&quot;</param>
+                        </action>
+                        <action disabled="1" id="-9" name="Set value" sid="887104754691053" type="System">
+                            <param id="0" name="Variable">framesPorSegundoPorta</param>
+                            <param id="1" name="Value">70</param>
+                        </action>
+                        <action disabled="1" id="-28" name="Set effect parameter" sid="148352480055348" type="GuiaVisual">
+                            <param id="0" name="Effect">&quot;Water&quot;</param>
+                            <param id="1" name="Parameter index">0</param>
+                            <param id="2" name="Value">1</param>
+                        </action>
+                        <action disabled="1" id="-28" name="Set effect parameter" sid="391016999318839" type="GuiaVisual">
+                            <param id="0" name="Effect">&quot;Water&quot;</param>
+                            <param id="1" name="Parameter index">3</param>
+                            <param id="2" name="Value">1</param>
+                        </action>
+                        <action disabled="1" id="-28" name="Set effect parameter" sid="394251699560910" type="GuiaVisual">
+                            <param id="0" name="Effect">&quot;Water&quot;</param>
+                            <param id="1" name="Parameter index">4</param>
+                            <param id="2" name="Value">1</param>
+                        </action>
+                        <action id="-27" name="Set effect enabled" sid="759618263304464" type="GuiaVisual">
+                            <param id="0" name="Mode">0</param>
+                            <param id="1" name="Effect">&quot;Water&quot;</param>
                         </action>
                     </actions>
                 </event-block>
@@ -900,7 +927,7 @@
                     </conditions>
                     <actions>
                         <action id="-2" name="Set Y" sid="724065179512831" type="pontuacao">
-                            <param id="0" name="Y">pontuacao.Y-3</param>
+                            <param id="0" name="Y">pontuacao.Y - 150 * pontuacao.dt</param>
                         </action>
                     </actions>
                 </event-block>
@@ -917,7 +944,7 @@
                     </conditions>
                     <actions>
                         <action id="-2" name="Set Y" sid="694235327525991" type="pontuacao">
-                            <param id="0" name="Y">pontuacao.Y+3</param>
+                            <param id="0" name="Y">pontuacao.Y + 150 * pontuacao.dt</param>
                         </action>
                     </actions>
                 </event-block>
@@ -2218,7 +2245,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-2" name="Set Y" sid="982073974540451" type="bibPortaFogo">
-                                            <param id="0" name="Y">bibPortaFogo.Y + 0.75</param>
+                                            <param id="0" name="Y">bibPortaFogo.Y + framesPorSegundoPorta * dt</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -2299,7 +2326,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-2" name="Set Y" sid="489869142786305" type="bibPortaFogo">
-                                            <param id="0" name="Y">bibPortaFogo.Y - 1.0</param>
+                                            <param id="0" name="Y">bibPortaFogo.Y - framesPorSegundoPorta * dt</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -2951,6 +2978,10 @@
                                 </action>
                                 <action id="-13" name="Set time scale" sid="976814249003731" type="System">
                                     <param id="0" name="Time scale">0.0</param>
+                                </action>
+                                <action id="-14" name="Set object time scale" sid="576298703092752" type="System">
+                                    <param id="0" name="Object">pontuacao</param>
+                                    <param id="1" name="Time scale">1.0</param>
                                 </action>
                             </actions>
                             <sub-events>
@@ -4636,6 +4667,7 @@
                 </event-group>
                 <event-group description="Carrega o balão caso ele não esteja ativo e libera a inserção do diálogo" inactive="1" sid="461205032921858" title="CarregaBalaoDialogo8">
                     <sub-events>
+                        <comment>Como é um evento que lida com Opacidade, ou seja, algo cujo valor varia entre 0 e 100, então ele vai levar exatos 0.5 segundos para carregar, independente de dispositivo</comment>
                         <event-block sid="288662107392023">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="867693555831188" type="System" />
@@ -4646,7 +4678,7 @@
                             </conditions>
                             <actions>
                                 <action id="-16" name="Set opacity" sid="130223802045544" type="BalaoDialogo">
-                                    <param id="0" name="Opacity">BalaoDialogo.Opacity + 2.5</param>
+                                    <param id="0" name="Opacity">BalaoDialogo.Opacity + 200 * dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -4711,10 +4743,10 @@
                             </conditions>
                             <actions>
                                 <action id="-16" name="Set opacity" sid="555658714013212" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity + 2.5</param>
+                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity + 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="868017941399051" type="Dialogos">
-                                    <param id="0" name="Opacity">Dialogos.Opacity + 2.5</param>
+                                    <param id="0" name="Opacity">Dialogos.Opacity + 200 * dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -4806,6 +4838,7 @@
                 </event-group>
                 <event-group description="Descarrega o diálogo. Aciona, também, a mecânica seguinte" inactive="1" sid="802118664878671" title="DescarregaTextoDialogo8">
                     <sub-events>
+                        <comment>Como é um evento que lida com Opacidade, ou seja, algo cujo valor varia entre 0 e 100, então ele vai levar exatos 0.5 segundos para descarregar, independente de dispositivo</comment>
                         <event-block sid="800269304327413">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="442115734895352" type="System" />
@@ -4816,13 +4849,13 @@
                             </conditions>
                             <actions>
                                 <action id="-16" name="Set opacity" sid="925407154216944" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity - 2.5</param>
+                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity - 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="811867281639828" type="Dialogos">
-                                    <param id="0" name="Opacity">Dialogos.Opacity - 2.5</param>
+                                    <param id="0" name="Opacity">Dialogos.Opacity - 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="696021134621652" type="BalaoDialogo">
-                                    <param id="0" name="Opacity">BalaoDialogo.Opacity - 2.5</param>
+                                    <param id="0" name="Opacity">BalaoDialogo.Opacity - 200 * dt</param>
                                 </action>
                             </actions>
                             <sub-events>
@@ -4989,6 +5022,7 @@
                 </event-group>
                 <event-group description="Carrega o balão caso ele não esteja ativo e libera a inserção do diálogo" inactive="1" sid="505022436138764" title="CarregaBalaoDialogoQ">
                     <sub-events>
+                        <comment>Como é um evento que lida com Opacidade, ou seja, algo cujo valor varia entre 0 e 100, então ele vai levar exatos 0.5 segundos para carregar, independente de dispositivo</comment>
                         <event-block sid="937650999353708">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="164588097020856" type="System" />
@@ -4999,7 +5033,7 @@
                             </conditions>
                             <actions>
                                 <action id="-16" name="Set opacity" sid="343942022625625" type="BalaoDialogo">
-                                    <param id="0" name="Opacity">BalaoDialogo.Opacity + 2.5</param>
+                                    <param id="0" name="Opacity">BalaoDialogo.Opacity + 200 * dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -5064,10 +5098,10 @@
                             </conditions>
                             <actions>
                                 <action id="-16" name="Set opacity" sid="292799110462155" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity + 2.5</param>
+                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity + 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="937018614524131" type="Dialogos">
-                                    <param id="0" name="Opacity">Dialogos.Opacity + 2.5</param>
+                                    <param id="0" name="Opacity">Dialogos.Opacity + 200 * dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -5160,6 +5194,7 @@
                 </event-group>
                 <event-group description="Descarrega o diálogo. Aciona, também, a mecânica seguinte" inactive="1" sid="324770993893716" title="DescarregaTextoDialogoQ">
                     <sub-events>
+                        <comment>Como é um evento que lida com Opacidade, ou seja, algo cujo valor varia entre 0 e 100, então ele vai levar exatos 0.5 segundos para descarregar, independente de dispositivo</comment>
                         <event-block sid="761442317792120">
                             <conditions>
                                 <condition id="-1" name="Every tick" sid="870600627037509" type="System" />
@@ -5170,13 +5205,13 @@
                             </conditions>
                             <actions>
                                 <action id="-16" name="Set opacity" sid="791626749372972" type="DialogoPersonagem">
-                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity - 2.5</param>
+                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity - 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="432321685002162" type="Dialogos">
-                                    <param id="0" name="Opacity">Dialogos.Opacity - 2.5</param>
+                                    <param id="0" name="Opacity">Dialogos.Opacity - 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="493448413236435" type="BalaoDialogo">
-                                    <param id="0" name="Opacity">BalaoDialogo.Opacity - 2.5</param>
+                                    <param id="0" name="Opacity">BalaoDialogo.Opacity - 200 * dt</param>
                                 </action>
                             </actions>
                             <sub-events>
