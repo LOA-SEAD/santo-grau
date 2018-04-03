@@ -1019,31 +1019,6 @@
         </event-block>
         <event-group description="" sid="268192658178575" title="Acessibilidade7">
             <sub-events>
-                <comment>MUDAR PARA O ÁUDIO QUE VAI TOCAR NA BOLA</comment>
-                <event-block sid="688517684058198">
-                    <conditions>
-                        <condition id="-2" name="Compare Y" sid="156950835886474" type="campoBola">
-                            <param id="0" name="Comparison">5</param>
-                            <param id="1" name="Y co-ordinate">630</param>
-                        </condition>
-                        <condition behavior="Bullet" id="0" name="Compare speed" sid="627320271570312" type="campoBola">
-                            <param id="0" name="Comparison">0</param>
-                            <param id="1" name="Speed">0</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="25" name="Play at object" sid="151308117993534" type="Audio">
-                            <param id="0" name="Audio file">torcida_estadio_loop</param>
-                            <param id="1" name="Loop">0</param>
-                            <param id="2" name="Volume">(-2*distance(player.X, player.Y, campoBola.X, campoBola.Y)+950)/79</param>
-                            <param id="3" name="Object">campoBola</param>
-                            <param id="4" name="Inner angle">45</param>
-                            <param id="5" name="Outer angle">45</param>
-                            <param id="6" name="Outer gain">0</param>
-                            <param id="7" name="Tag (optional)">&quot;proxBola&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
                 <comment>O intervalo (Xmax1, Xmax2) define o limite esquerdo superior da tela onde a personagem não pode andar. O intervalo (Xmin1, Xmin2) define o limite esquerdo inferior da tela onde a personagem não pode andar. A fórmula linear dentro dos condicionais abaixo definem a toda a região esquerda da tela onde a personagem não pode andar.</comment>
                 <variable constant="0" name="Xmax1" sid="195415008047007" static="0" type="number">42</variable>
                 <variable constant="0" name="Xmin1" sid="311244082427711" static="0" type="number">54</variable>
@@ -1837,7 +1812,12 @@
                             <param id="0" name="Object">colisaoDiploma</param>
                         </condition>
                     </conditions>
-                    <actions />
+                    <actions>
+                        <action id="-7" name="Set size" sid="105524532620028" type="AnimacaoDiploma">
+                            <param id="0" name="Width">AnimacaoDiploma.Width-0.853</param>
+                            <param id="1" name="Height">AnimacaoDiploma.Height-0.8</param>
+                        </action>
+                    </actions>
                     <sub-events>
                         <event-block sid="749112482529533">
                             <conditions>
@@ -1906,7 +1886,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <comment>Controla o volume da torcida conforme a aproximação da Ariel na bola - IMPLEMENTAR</comment>
+                <comment>Controla o volume da torcida conforme a aproximação da Ariel na bola</comment>
                 <event-block sid="242373548662292">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="877693446704700" type="System">
@@ -1917,15 +1897,18 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <comment>Reduz 10 unidades por segundo, deixando -20 de volume no fim</comment>
-                        <event-block sid="507784983971870">
+                        <event-block sid="932863704721328">
                             <conditions>
-                                <condition id="-1" name="Every tick" sid="970412254678133" type="System" />
+                                <condition id="-14" name="Compare variable" sid="501064089710979" type="System">
+                                    <param id="0" name="Variable">opacidadeLayer</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="-9" name="Set value" sid="362317492512495" type="System">
                                     <param id="0" name="Variable">volTorcida</param>
-                                    <param id="1" name="Value">volTorcida</param>
+                                    <param id="1" name="Value">(-2*distance(player.X, player.Y, campoBola.X, campoBola.Y)+950)/79</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3463,7 +3446,12 @@
                             <param id="2" name="Value">1</param>
                         </condition>
                     </conditions>
-                    <actions />
+                    <actions>
+                        <action id="-9" name="Set value" sid="289898818352351" type="System">
+                            <param id="0" name="Variable">volTorcida</param>
+                            <param id="1" name="Value">-20</param>
+                        </action>
+                    </actions>
                     <sub-events>
                         <comment>Como é um evento que lida com Opacidade, ou seja, algo cujo valor varia entre 0 e 100, então ele vai levar exatos 0.5 segundos para carregar, independente de dispositivo</comment>
                         <event-block sid="759229150034196">
@@ -3538,7 +3526,12 @@
                             <param id="2" name="Value">2</param>
                         </condition>
                     </conditions>
-                    <actions />
+                    <actions>
+                        <action id="-9" name="Set value" sid="525214361898779" type="System">
+                            <param id="0" name="Variable">volTorcida</param>
+                            <param id="1" name="Value">5</param>
+                        </action>
+                    </actions>
                     <sub-events>
                         <event-block sid="526335589715545">
                             <conditions>
@@ -3604,7 +3597,7 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <comment>Parte de acessibilidade com controle por teclado e leitura de tela (2 blocos a seguir)</comment>
+                <comment>Parte de acessibilidade com controle por teclado e leitura de tela (2 blocos de eventos a seguir)</comment>
                 <event-block sid="731233641661180">
                     <conditions>
                         <condition id="0" name="On key pressed" sid="667780177166605" type="Keyboard">
@@ -4788,6 +4781,16 @@
                                                 <action id="-15" name="Set visible" sid="272085346701447" type="campoItens">
                                                     <param id="0" name="Visibility">1</param>
                                                 </action>
+                                                <action id="25" name="Play at object" sid="989653702505061" type="Audio">
+                                                    <param id="0" name="Audio file">lancando_objetos3</param>
+                                                    <param id="1" name="Loop">0</param>
+                                                    <param id="2" name="Volume">volSons</param>
+                                                    <param id="3" name="Object">campoItens</param>
+                                                    <param id="4" name="Inner angle">45</param>
+                                                    <param id="5" name="Outer angle">45</param>
+                                                    <param id="6" name="Outer gain">0</param>
+                                                    <param id="7" name="Tag (optional)">&quot;sons&quot;</param>
+                                                </action>
                                                 <action id="-16" name="Wait" sid="535586295120917" type="System">
                                                     <param id="0" name="Seconds">2</param>
                                                 </action>
@@ -5061,6 +5064,16 @@
                             <param id="0" name="Width">28</param>
                             <param id="1" name="Height">29</param>
                         </action>
+                        <action id="25" name="Play at object" sid="977856850192506" type="Audio">
+                            <param id="0" name="Audio file">lancando_objetos3</param>
+                            <param id="1" name="Loop">0</param>
+                            <param id="2" name="Volume">volSons</param>
+                            <param id="3" name="Object">campoItens</param>
+                            <param id="4" name="Inner angle">45</param>
+                            <param id="5" name="Outer angle">45</param>
+                            <param id="6" name="Outer gain">0</param>
+                            <param id="7" name="Tag (optional)">&quot;sons&quot;</param>
+                        </action>
                         <action id="-16" name="Wait" sid="290515481173249" type="System">
                             <param id="0" name="Seconds">2</param>
                         </action>
@@ -5091,11 +5104,21 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Play" sid="570666540712948" type="Audio">
+                                <action disabled="1" id="0" name="Play" sid="519208700875566" type="Audio">
                                     <param id="0" name="Audio file">objeto_caindo_devagar</param>
                                     <param id="2" name="Loop">0</param>
                                     <param id="3" name="Volume">volSons</param>
                                     <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="25" name="Play at object" sid="570666540712948" type="Audio">
+                                    <param id="0" name="Audio file">objeto_caindo_devagar</param>
+                                    <param id="1" name="Loop">0</param>
+                                    <param id="2" name="Volume">volSons</param>
+                                    <param id="3" name="Object">campoItens</param>
+                                    <param id="4" name="Inner angle">45</param>
+                                    <param id="5" name="Outer angle">45</param>
+                                    <param id="6" name="Outer gain">0</param>
+                                    <param id="7" name="Tag (optional)">&quot;sons&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -5114,11 +5137,21 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Play" sid="674964032213588" type="Audio">
+                                <action disabled="1" id="0" name="Play" sid="674964032213588" type="Audio">
                                     <param id="0" name="Audio file">objeto_caindo_medio</param>
                                     <param id="2" name="Loop">0</param>
                                     <param id="3" name="Volume">volSons</param>
                                     <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="25" name="Play at object" sid="170153159349689" type="Audio">
+                                    <param id="0" name="Audio file">objeto_caindo_medio</param>
+                                    <param id="1" name="Loop">0</param>
+                                    <param id="2" name="Volume">volSons</param>
+                                    <param id="3" name="Object">campoItens</param>
+                                    <param id="4" name="Inner angle">45</param>
+                                    <param id="5" name="Outer angle">45</param>
+                                    <param id="6" name="Outer gain">0</param>
+                                    <param id="7" name="Tag (optional)">&quot;sons&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -5137,11 +5170,21 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Play" sid="270705286977250" type="Audio">
+                                <action disabled="1" id="0" name="Play" sid="270705286977250" type="Audio">
                                     <param id="0" name="Audio file">objeto_caindo_rapido</param>
                                     <param id="2" name="Loop">0</param>
                                     <param id="3" name="Volume">volSons</param>
                                     <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="25" name="Play at object" sid="264131789084617" type="Audio">
+                                    <param id="0" name="Audio file">objeto_caindo_rapido</param>
+                                    <param id="1" name="Loop">0</param>
+                                    <param id="2" name="Volume">volSons</param>
+                                    <param id="3" name="Object">campoItens</param>
+                                    <param id="4" name="Inner angle">45</param>
+                                    <param id="5" name="Outer angle">45</param>
+                                    <param id="6" name="Outer gain">0</param>
+                                    <param id="7" name="Tag (optional)">&quot;sons&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -5267,6 +5310,23 @@
                         </action>
                     </actions>
                     <sub-events>
+                        <event-block sid="371837485698927">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="239077272007618" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="25" name="Play at object" sid="149217621444351" type="Audio">
+                                    <param id="0" name="Audio file">impacto_bola</param>
+                                    <param id="1" name="Loop">0</param>
+                                    <param id="2" name="Volume">volSons</param>
+                                    <param id="3" name="Object">campoBola</param>
+                                    <param id="4" name="Inner angle">45</param>
+                                    <param id="5" name="Outer angle">45</param>
+                                    <param id="6" name="Outer gain">0</param>
+                                    <param id="7" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <event-block sid="204668520849639">
                             <conditions>
                                 <condition id="-20" name="Is on mobile device" sid="752284050416381" type="System" />
