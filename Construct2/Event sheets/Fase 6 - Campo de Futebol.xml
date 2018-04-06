@@ -40,6 +40,8 @@
         <variable constant="0" name="efeitoTorcidaBola" sid="814090081503031" static="0" type="number">0</variable>
         <comment>Variável criada para controlar em qual animação o mascote está</comment>
         <variable constant="0" name="frameCapivara" sid="176182461252024" static="0" type="number">0</variable>
+        <comment>Variável para controlar o tempo de queda da bola utilizando o dt</comment>
+        <variable constant="0" name="tempoQuedaBola" sid="485805498801323" static="0" type="number">1.4</variable>
         <event-block sid="704942424572087">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="961560001477127" type="System" />
@@ -482,6 +484,10 @@
                         <action id="7" name="Set CSS style" sid="857485374847910" type="placarResp2">
                             <param id="0" name="Property name">&quot;font-size&quot;</param>
                             <param id="1" name="Value">&quot;40px&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="256311727704884" type="System">
+                            <param id="0" name="Variable">tempoQuedaBola</param>
+                            <param id="1" name="Value">0.9</param>
                         </action>
                     </actions>
                 </event-block>
@@ -1058,6 +1064,11 @@
                                 <condition id="2" name="Key is down" sid="225916354446123" type="Keyboard">
                                     <param id="0" name="Key">65</param>
                                 </condition>
+                                <condition disabled="1" id="-8" name="Compare two values" sid="546995927724248" type="System">
+                                    <param id="0" name="First value">BtnDirecional.X</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Second value">EstruturaDir.X - 19</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="2" name="Set muted" sid="636290299016140" type="Audio">
@@ -1153,6 +1164,11 @@
                                 <condition id="2" name="Key is down" sid="827419756895946" type="Keyboard">
                                     <param id="0" name="Key">68</param>
                                 </condition>
+                                <condition disabled="1" id="-8" name="Compare two values" sid="244034577147772" type="System">
+                                    <param id="0" name="First value">BtnDirecional.X</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Second value">EstruturaDir.X + 19</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="2" name="Set muted" sid="903659008975007" type="Audio">
@@ -1247,6 +1263,11 @@
                                 </condition>
                                 <condition id="2" name="Key is down" sid="144583510958988" type="Keyboard">
                                     <param id="0" name="Key">87</param>
+                                </condition>
+                                <condition disabled="1" id="-8" name="Compare two values" sid="500386120472865" type="System">
+                                    <param id="0" name="First value">BtnDirecional.Y</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Second value">EstruturaDir.Y - 19</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1359,6 +1380,11 @@
                                 </condition>
                                 <condition id="2" name="Key is down" sid="723850678811737" type="Keyboard">
                                     <param id="0" name="Key">83</param>
+                                </condition>
+                                <condition disabled="1" id="-8" name="Compare two values" sid="439719751111929" type="System">
+                                    <param id="0" name="First value">BtnDirecional.Y</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Second value">EstruturaDir.Y + 19</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1523,7 +1549,7 @@
                 </event-block>
             </sub-events>
         </event-group>
-        <variable constant="0" name="scale" sid="909763462735326" static="0" type="number">1.01</variable>
+        <variable constant="0" name="scale" sid="909763462735326" static="0" type="number">0.6</variable>
         <event-group description="" sid="209776587683081" title="Efeitos6">
             <sub-events>
                 <event-block sid="205054220779577">
@@ -2022,8 +2048,8 @@
                     </conditions>
                     <actions>
                         <action id="-7" name="Set size" sid="716960496027655" type="campoItens">
-                            <param id="0" name="Width">campoItens.Width*scale</param>
-                            <param id="1" name="Height">campoItens.Height*scale</param>
+                            <param id="0" name="Width">campoItens.Width + (campoItens.Width * scale * dt)</param>
+                            <param id="1" name="Height">campoItens.Height + (campoItens.Height * scale * dt)</param>
                         </action>
                         <action id="-8" name="Set angle" sid="893816140700642" type="campoItens">
                             <param id="0" name="Angle">angle(campoItens.X, campoItens.Y, player.X, player.Y)</param>
@@ -2558,14 +2584,6 @@
                                         <action behavior="DragDrop" id="0" name="Set enabled" sid="678676921270328" type="HitboxDir">
                                             <param id="0" name="State">0</param>
                                         </action>
-                                        <action id="-4" name="Set position to another object" sid="556413046702840" type="HitboxDir">
-                                            <param id="0" name="Object">EstruturaDir</param>
-                                            <param id="1" name="Image point (optional)">0</param>
-                                        </action>
-                                        <action id="-4" name="Set position to another object" sid="964235377096960" type="BtnDirecional">
-                                            <param id="0" name="Object">HitboxDir</param>
-                                            <param id="1" name="Image point (optional)">0</param>
-                                        </action>
                                     </actions>
                                 </event-block>
                                 <event-block sid="517069984539537">
@@ -2693,14 +2711,6 @@
                                         <action behavior="DragDrop" id="0" name="Set enabled" sid="441021054255403" type="HitboxDir">
                                             <param id="0" name="State">0</param>
                                         </action>
-                                        <action id="-4" name="Set position to another object" sid="920419632813669" type="HitboxDir">
-                                            <param id="0" name="Object">EstruturaDir</param>
-                                            <param id="1" name="Image point (optional)">0</param>
-                                        </action>
-                                        <action id="-4" name="Set position to another object" sid="560856672717482" type="BtnDirecional">
-                                            <param id="0" name="Object">HitboxDir</param>
-                                            <param id="1" name="Image point (optional)">0</param>
-                                        </action>
                                     </actions>
                                 </event-block>
                                 <event-block sid="764109665824362">
@@ -2770,14 +2780,6 @@
                                             <actions>
                                                 <action behavior="DragDrop" id="0" name="Set enabled" sid="112133808815220" type="HitboxDir">
                                                     <param id="0" name="State">0</param>
-                                                </action>
-                                                <action id="-4" name="Set position to another object" sid="552824530286901" type="HitboxDir">
-                                                    <param id="0" name="Object">EstruturaDir</param>
-                                                    <param id="1" name="Image point (optional)">0</param>
-                                                </action>
-                                                <action id="-4" name="Set position to another object" sid="620959480711327" type="BtnDirecional">
-                                                    <param id="0" name="Object">HitboxDir</param>
-                                                    <param id="1" name="Image point (optional)">0</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -2894,14 +2896,6 @@
                                                 <action behavior="DragDrop" id="0" name="Set enabled" sid="706961838020675" type="HitboxDir">
                                                     <param id="0" name="State">0</param>
                                                 </action>
-                                                <action id="-4" name="Set position to another object" sid="794443377841602" type="HitboxDir">
-                                                    <param id="0" name="Object">EstruturaDir</param>
-                                                    <param id="1" name="Image point (optional)">0</param>
-                                                </action>
-                                                <action id="-4" name="Set position to another object" sid="530355649536489" type="BtnDirecional">
-                                                    <param id="0" name="Object">HitboxDir</param>
-                                                    <param id="1" name="Image point (optional)">0</param>
-                                                </action>
                                                 <action id="2" name="Stop" sid="821888128081186" type="playerAnim" />
                                             </actions>
                                         </event-block>
@@ -2964,14 +2958,6 @@
                                             <actions>
                                                 <action behavior="DragDrop" id="0" name="Set enabled" sid="983599905431020" type="HitboxDir">
                                                     <param id="0" name="State">0</param>
-                                                </action>
-                                                <action id="-4" name="Set position to another object" sid="376986211177675" type="HitboxDir">
-                                                    <param id="0" name="Object">EstruturaDir</param>
-                                                    <param id="1" name="Image point (optional)">0</param>
-                                                </action>
-                                                <action id="-4" name="Set position to another object" sid="428675648825404" type="BtnDirecional">
-                                                    <param id="0" name="Object">HitboxDir</param>
-                                                    <param id="1" name="Image point (optional)">0</param>
                                                 </action>
                                                 <action disabled="1" id="2" name="Stop" sid="592437487625137" type="playerAnim" />
                                             </actions>
@@ -3112,14 +3098,6 @@
                                             <actions>
                                                 <action behavior="DragDrop" id="0" name="Set enabled" sid="776140497862163" type="HitboxDir">
                                                     <param id="0" name="State">0</param>
-                                                </action>
-                                                <action id="-4" name="Set position to another object" sid="572694251415275" type="HitboxDir">
-                                                    <param id="0" name="Object">EstruturaDir</param>
-                                                    <param id="1" name="Image point (optional)">0</param>
-                                                </action>
-                                                <action id="-4" name="Set position to another object" sid="875065744627412" type="BtnDirecional">
-                                                    <param id="0" name="Object">HitboxDir</param>
-                                                    <param id="1" name="Image point (optional)">0</param>
                                                 </action>
                                                 <action id="2" name="Stop" sid="357813013265804" type="playerAnim" />
                                                 <action id="-12" name="Set group active" sid="185811414642569" type="System">
@@ -3297,14 +3275,6 @@
                                                 <action behavior="DragDrop" id="0" name="Set enabled" sid="887223933617972" type="HitboxDir">
                                                     <param id="0" name="State">0</param>
                                                 </action>
-                                                <action id="-4" name="Set position to another object" sid="444664719457175" type="HitboxDir">
-                                                    <param id="0" name="Object">EstruturaDir</param>
-                                                    <param id="1" name="Image point (optional)">0</param>
-                                                </action>
-                                                <action id="-4" name="Set position to another object" sid="253336185756587" type="BtnDirecional">
-                                                    <param id="0" name="Object">HitboxDir</param>
-                                                    <param id="1" name="Image point (optional)">0</param>
-                                                </action>
                                                 <action id="2" name="Stop" sid="826677613290401" type="playerAnim" />
                                                 <action id="-12" name="Set group active" sid="860061052591855" type="System">
                                                     <param id="0" name="Group name">&quot;DialogoCapivara&quot;</param>
@@ -3429,14 +3399,6 @@
                                     <actions>
                                         <action behavior="DragDrop" id="0" name="Set enabled" sid="706005050192494" type="HitboxDir">
                                             <param id="0" name="State">0</param>
-                                        </action>
-                                        <action id="-4" name="Set position to another object" sid="313991796255498" type="HitboxDir">
-                                            <param id="0" name="Object">EstruturaDir</param>
-                                            <param id="1" name="Image point (optional)">0</param>
-                                        </action>
-                                        <action id="-4" name="Set position to another object" sid="911058543834758" type="BtnDirecional">
-                                            <param id="0" name="Object">HitboxDir</param>
-                                            <param id="1" name="Image point (optional)">0</param>
                                         </action>
                                         <action id="2" name="Stop" sid="184815531328687" type="playerAnim" />
                                     </actions>
@@ -4950,14 +4912,6 @@
                                                 <action behavior="DragDrop" id="0" name="Set enabled" sid="803991408393015" type="HitboxDir">
                                                     <param id="0" name="State">0</param>
                                                 </action>
-                                                <action id="-4" name="Set position to another object" sid="143883293099159" type="HitboxDir">
-                                                    <param id="0" name="Object">EstruturaDir</param>
-                                                    <param id="1" name="Image point (optional)">0</param>
-                                                </action>
-                                                <action id="-4" name="Set position to another object" sid="239271966750717" type="BtnDirecional">
-                                                    <param id="0" name="Object">HitboxDir</param>
-                                                    <param id="1" name="Image point (optional)">0</param>
-                                                </action>
                                             </actions>
                                         </event-block>
                                         <event-block sid="670632368594100">
@@ -4996,14 +4950,6 @@
                                             <actions>
                                                 <action behavior="DragDrop" id="0" name="Set enabled" sid="886717315756983" type="HitboxDir">
                                                     <param id="0" name="State">0</param>
-                                                </action>
-                                                <action id="-4" name="Set position to another object" sid="789935744272225" type="HitboxDir">
-                                                    <param id="0" name="Object">EstruturaDir</param>
-                                                    <param id="1" name="Image point (optional)">0</param>
-                                                </action>
-                                                <action id="-4" name="Set position to another object" sid="162667567803605" type="BtnDirecional">
-                                                    <param id="0" name="Object">HitboxDir</param>
-                                                    <param id="1" name="Image point (optional)">0</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -5352,7 +5298,7 @@
                             </conditions>
                             <actions>
                                 <action id="-2" name="Set Y" sid="671678536029533" type="campoBola">
-                                    <param id="0" name="Y">campoBola.Y + (campoBola.Y / 70)</param>
+                                    <param id="0" name="Y">campoBola.Y + (campoBola.Y / tempoQuedaBola * dt)</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -5417,14 +5363,6 @@
                             <actions>
                                 <action behavior="DragDrop" id="0" name="Set enabled" sid="423074072929048" type="HitboxDir">
                                     <param id="0" name="State">0</param>
-                                </action>
-                                <action id="-4" name="Set position to another object" sid="778623689848431" type="HitboxDir">
-                                    <param id="0" name="Object">EstruturaDir</param>
-                                    <param id="1" name="Image point (optional)">0</param>
-                                </action>
-                                <action id="-4" name="Set position to another object" sid="609334761898765" type="BtnDirecional">
-                                    <param id="0" name="Object">HitboxDir</param>
-                                    <param id="1" name="Image point (optional)">0</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -5548,14 +5486,6 @@
                                     <actions>
                                         <action behavior="DragDrop" id="0" name="Set enabled" sid="617361851679952" type="HitboxDir">
                                             <param id="0" name="State">0</param>
-                                        </action>
-                                        <action id="-4" name="Set position to another object" sid="877569822161980" type="HitboxDir">
-                                            <param id="0" name="Object">EstruturaDir</param>
-                                            <param id="1" name="Image point (optional)">0</param>
-                                        </action>
-                                        <action id="-4" name="Set position to another object" sid="773927708851671" type="BtnDirecional">
-                                            <param id="0" name="Object">HitboxDir</param>
-                                            <param id="1" name="Image point (optional)">0</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -7448,9 +7378,10 @@
                     </sub-events>
                 </event-block>
                 <comment>Parar as animações no moneto que o jogador parar seu movimento</comment>
-                <event-block sid="911437176197010">
+                <event-block any="1" sid="911437176197010">
                     <conditions>
                         <condition behavior="DragDrop" id="2" name="On drop" sid="547320754713364" type="HitboxDir" />
+                        <condition behavior="DragDrop" id="3" inverted="1" name="Is enabled" sid="226249779847069" type="HitboxDir" />
                     </conditions>
                     <actions />
                     <sub-events>
