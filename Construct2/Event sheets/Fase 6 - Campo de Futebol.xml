@@ -1554,6 +1554,72 @@
                         </action>
                     </actions>
                 </event-block>
+                <event-block sid="975807411292755">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="212402705080674" type="System">
+                            <param id="0" name="Variable">instrucoesDialogo</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="477019339246344" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Stop speaking" sid="495415215637030" type="UserMedia" />
+                    </actions>
+                </event-block>
+                <event-block sid="474299182666864">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="323883741952853" type="System">
+                            <param id="0" name="Variable">instrucoesDialogo</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                        <condition id="-4" name="Trigger once while true" sid="991371541947563" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="6" name="Speak text" sid="685412754780824" type="UserMedia">
+                            <param id="0" name="Text">&quot;Pressione a tecla Q para repetir, ou Ê para avançar&quot;</param>
+                            <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                            <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                            <param id="3" name="Volume">10</param>
+                            <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                            <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="322766603262529" type="System">
+                            <param id="0" name="Variable">instrucoesDialogo</param>
+                            <param id="1" name="Value">2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="452807743443404">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="703899906183967" type="System">
+                            <param id="0" name="Variable">instrucoesDialogo</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">2</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="427058327659349">
+                            <conditions>
+                                <condition id="-6" name="Every X seconds" sid="431174675181404" type="System">
+                                    <param id="0" name="Interval (seconds)">10</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="6" name="Speak text" sid="717033920627142" type="UserMedia">
+                                    <param id="0" name="Text">&quot;Pressione a tecla Q para repetir, ou Ê para avançar&quot;</param>
+                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                    <param id="3" name="Volume">10</param>
+                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
             </sub-events>
         </event-group>
         <variable constant="0" name="scale" sid="909763462735326" static="0" type="number">0.6</variable>
@@ -2973,7 +3039,62 @@
                             </sub-events>
                         </event-block>
                         <comment>Ação para chutar a bola</comment>
-                        <event-block sid="750424422758128">
+                        <event-block sid="898866074144219">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="985986926190949" type="System">
+                                    <param id="0" name="Variable">fraseAtualCAM</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">8</param>
+                                </condition>
+                                <condition id="-14" name="Compare variable" sid="198534963869086" type="System">
+                                    <param id="0" name="Variable">acaoBola</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="827146164021020" type="System">
+                                    <param id="0" name="Variable">controlePlacar</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="682867008670638" type="System">
+                                    <param id="0" name="Variable">efeitoVolTorcidaBola</param>
+                                    <param id="1" name="Value">2</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="287439906895448" type="System">
+                                    <param id="0" name="Group name">&quot;PlacarControle&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="769685914094846" type="selecaoBola" />
+                            </actions>
+                            <sub-events>
+                                <event-block sid="736392596696552">
+                                    <conditions>
+                                        <condition id="-20" name="Is on mobile device" sid="650504514700424" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="DragDrop" id="0" name="Set enabled" sid="735933354536496" type="HitboxDir">
+                                            <param id="0" name="State">0</param>
+                                        </action>
+                                        <action disabled="1" id="2" name="Stop" sid="378651080546423" type="playerAnim" />
+                                    </actions>
+                                </event-block>
+                                <event-block sid="565816341232602">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="382091468422037" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="293150421595095" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action disabled="1" id="2" name="Stop" sid="507653120934119" type="playerAnim" />
+                                        <action behavior="8Direction" id="0" name="Stop" sid="496327059849250" type="player" />
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block disabled="1" sid="750424422758128">
                             <conditions>
                                 <condition id="-14" name="Compare variable" sid="390363390137536" type="System">
                                     <param id="0" name="Variable">fraseAtualCAM</param>
@@ -2988,7 +3109,7 @@
                             </conditions>
                             <actions />
                             <sub-events>
-                                <event-block any="1" sid="539354843411806">
+                                <event-block any="1" disabled="1" sid="539354843411806">
                                     <conditions>
                                         <condition id="2" name="Key is down" sid="564568563446458" type="Keyboard">
                                             <param id="0" name="Key">69</param>
@@ -3013,7 +3134,7 @@
                                         <action id="-9" name="Destroy" sid="926014108131310" type="selecaoBola" />
                                     </actions>
                                     <sub-events>
-                                        <event-block sid="422407187155193">
+                                        <event-block disabled="1" sid="422407187155193">
                                             <conditions>
                                                 <condition id="-20" name="Is on mobile device" sid="661977378495853" type="System" />
                                             </conditions>
@@ -3024,7 +3145,7 @@
                                                 <action disabled="1" id="2" name="Stop" sid="592437487625137" type="playerAnim" />
                                             </actions>
                                         </event-block>
-                                        <event-block sid="722569842847329">
+                                        <event-block disabled="1" sid="722569842847329">
                                             <conditions>
                                                 <condition id="-22" name="Else" sid="880092206587588" type="System" />
                                             </conditions>
@@ -4854,6 +4975,27 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <event-block sid="132085530212989">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="981312270388311" type="System">
+                                    <param id="0" name="Variable">instrucoesDialogo</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                                <condition id="5" inverted="1" name="Is tag playing" sid="840716595745883" type="Audio">
+                                    <param id="0" name="Tag">&quot;capivara&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Wait" sid="402431545544780" type="System">
+                                    <param id="0" name="Seconds">5</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="309273753903729" type="System">
+                                    <param id="0" name="Variable">instrucoesDialogo</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <event-block any="1" sid="886552853515950">
                             <conditions>
                                 <condition id="2" name="Key is down" sid="269293628971527" type="Keyboard">
@@ -4872,6 +5014,10 @@
                                     <param id="2" name="Loop">0</param>
                                     <param id="3" name="Volume">volSons</param>
                                     <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="364971382505549" type="System">
+                                    <param id="0" name="Variable">instrucoesDialogo</param>
+                                    <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="955417072234715" type="System">
                                     <param id="0" name="Variable">avancarDialogosCAM</param>
