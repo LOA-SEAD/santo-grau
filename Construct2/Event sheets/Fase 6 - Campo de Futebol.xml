@@ -212,6 +212,10 @@
                     <param id="0" name="Variable">opacidadeLayer</param>
                     <param id="1" name="Value">0</param>
                 </action>
+                <action id="-9" name="Set value" sid="479931507893630" type="System">
+                    <param id="0" name="Variable">instrucoesDialogo</param>
+                    <param id="1" name="Value">-1</param>
+                </action>
                 <action id="-9" name="Set value" sid="515433563235667" type="System">
                     <param id="0" name="Variable">perguntaFUT</param>
                     <param id="1" name="Value">1</param>
@@ -1554,9 +1558,82 @@
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="164262266083836">
+                <event-block sid="508267467419773">
                     <conditions>
-                        <condition id="-14" name="Compare variable" sid="363259711718651" type="System">
+                        <condition id="-10" name="Compare opacity" sid="128102626400344" type="BalaoDialogo">
+                            <param id="0" name="Comparison">2</param>
+                            <param id="1" name="Opacity">100</param>
+                        </condition>
+                        <condition disabled="1" id="-14" inverted="1" name="Compare variable" sid="166440373678011" type="System">
+                            <param id="0" name="Variable">controlePlacar</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="7" name="Stop speaking" sid="710000418718681" type="UserMedia" />
+                        <action id="-9" name="Set value" sid="945495520643259" type="System">
+                            <param id="0" name="Variable">instrucoesDialogo</param>
+                            <param id="1" name="Value">-1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="728064645769845">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="759336951762781" type="Keyboard">
+                            <param id="0" name="Key">81</param>
+                        </condition>
+                        <condition id="-10" name="Compare opacity" sid="914440084383255" type="BalaoDialogo">
+                            <param id="0" name="Comparison">0</param>
+                            <param id="1" name="Opacity">100</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="664086347886001" type="System">
+                            <param id="0" name="Variable">instrucoesDialogo</param>
+                            <param id="1" name="Value">-1</param>
+                        </action>
+                        <action id="6" name="Stop" sid="489570130028386" type="Audio">
+                            <param id="0" name="Tag">&quot;capivara&quot;</param>
+                        </action>
+                        <action id="7" name="Stop speaking" sid="228276086806985" type="UserMedia" />
+                        <action id="28" name="Play at object (by name)" sid="657298273899086" type="Audio">
+                            <param id="0" name="Folder">0</param>
+                            <param id="1" name="Audio file name">&quot;capivara_&quot; &amp; fraseAtualCAM</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">volCapivara</param>
+                            <param id="4" name="Object">capivara</param>
+                            <param id="5" name="Inner angle">45</param>
+                            <param id="6" name="Outer angle">45</param>
+                            <param id="7" name="Outer gain">100</param>
+                            <param id="8" name="Tag (optional)">&quot;capivara&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="535430419358832">
+                    <conditions>
+                        <condition id="0" name="On ended" sid="238754018178430" type="Audio">
+                            <param id="0" name="Tag">&quot;capivara&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="348802934937983" type="System">
+                            <param id="0" name="Variable">instrucoesDialogo</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="565649566814329" type="System">
+                            <param id="0" name="Seconds">5</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="451258087548848" type="System">
+                            <param id="0" name="Variable">instrucoesDialogo</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment></comment>
+                <event-block sid="450629018369449">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="855215238212737" type="System">
                             <param id="0" name="Variable">instrucoesDialogo</param>
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">1</param>
@@ -1564,14 +1641,14 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="670898677626174">
+                        <event-block sid="512888193442742">
                             <conditions>
-                                <condition id="-6" name="Every X seconds" sid="951992722213003" type="System">
-                                    <param id="0" name="Interval (seconds)">5</param>
+                                <condition id="-6" name="Every X seconds" sid="983212931493824" type="System">
+                                    <param id="0" name="Interval (seconds)">10</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="6" name="Speak text" sid="288303803250910" type="UserMedia">
+                                <action id="6" name="Speak text" sid="277630341512494" type="UserMedia">
                                     <param id="0" name="Text">&quot;Pressione a tecla Q para repetir, ou Ê para avançar&quot;</param>
                                     <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
                                     <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
@@ -4938,31 +5015,31 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="132085530212989">
+                        <event-block disabled="1" sid="132085530212989">
                             <conditions>
                                 <condition id="-14" name="Compare variable" sid="981312270388311" type="System">
                                     <param id="0" name="Variable">instrucoesDialogo</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                                <condition id="5" inverted="1" name="Is tag playing" sid="840716595745883" type="Audio">
-                                    <param id="0" name="Tag">&quot;capivara&quot;</param>
-                                </condition>
-                                <condition id="-10" name="Compare opacity" sid="681193373982113" type="BalaoDialogo">
-                                    <param id="0" name="Comparison">0</param>
-                                    <param id="1" name="Opacity">100</param>
+                                    <param id="2" name="Value">-1</param>
                                 </condition>
                             </conditions>
-                            <actions>
-                                <action id="7" name="Stop speaking" sid="969949510171423" type="UserMedia" />
-                                <action id="-16" name="Wait" sid="402431545544780" type="System">
-                                    <param id="0" name="Seconds">5</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="309273753903729" type="System">
-                                    <param id="0" name="Variable">instrucoesDialogo</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                            </actions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="231690609201142">
+                                    <conditions>
+                                        <condition id="5" inverted="1" name="Is tag playing" sid="840716595745883" type="Audio">
+                                            <param id="0" name="Tag">&quot;capivara&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="7" name="Stop speaking" sid="969949510171423" type="UserMedia" />
+                                        <action id="-9" name="Set value" sid="581432771292708" type="System">
+                                            <param id="0" name="Variable">instrucoesDialogo</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                         <event-block any="1" sid="886552853515950">
                             <conditions>
@@ -4974,18 +5051,19 @@
                                 </condition>
                             </conditions>
                             <actions>
+                                <action id="-9" name="Set value" sid="364971382505549" type="System">
+                                    <param id="0" name="Variable">instrucoesDialogo</param>
+                                    <param id="1" name="Value">-1</param>
+                                </action>
                                 <action id="6" name="Stop" sid="932692750219817" type="Audio">
                                     <param id="0" name="Tag">&quot;capivara&quot;</param>
                                 </action>
+                                <action id="7" name="Stop speaking" sid="278479241337580" type="UserMedia" />
                                 <action id="0" name="Play" sid="235534774182178" type="Audio">
                                     <param id="0" name="Audio file">passar_dialogo</param>
                                     <param id="2" name="Loop">0</param>
                                     <param id="3" name="Volume">volSons</param>
                                     <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="364971382505549" type="System">
-                                    <param id="0" name="Variable">instrucoesDialogo</param>
-                                    <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="955417072234715" type="System">
                                     <param id="0" name="Variable">avancarDialogosCAM</param>
