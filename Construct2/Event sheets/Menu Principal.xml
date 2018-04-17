@@ -3,6 +3,7 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Menu Principal</name>
     <events>
+        <variable constant="0" name="acessControle" sid="376705287843437" static="0" type="number">0</variable>
         <variable constant="0" name="instrucoesDialogo" sid="676843797134851" static="0" type="number">-1</variable>
         <variable constant="0" name="acessibilidade" sid="293664406552909" static="0" type="number">0</variable>
         <variable constant="0" name="recompensa1" sid="519006878087200" static="0" type="number">0</variable>
@@ -71,16 +72,13 @@
                 <action id="4" name="Preload" sid="372205518522212" type="Audio">
                     <param id="0" name="Audio file">TheBossH_TCC</param>
                 </action>
-                <action id="33" name="Stop all" sid="872800401247468" type="Audio" />
-                <action id="0" name="Play" sid="219713164786199" type="Audio">
-                    <param id="0" name="Audio file">OSantoGrau</param>
-                    <param id="2" name="Loop">1</param>
-                    <param id="3" name="Volume">volMusica</param>
-                    <param id="1" name="Tag (optional)">&quot;musica&quot;</param>
-                </action>
                 <action id="0" name="Load JSON" sid="450528906527504" type="FasesJSON" />
                 <action id="-9" name="Set value" sid="740211410176327" type="System">
                     <param id="0" name="Variable">layoutAtual</param>
+                    <param id="1" name="Value">0</param>
+                </action>
+                <action id="-9" name="Set value" sid="733117537342751" type="System">
+                    <param id="0" name="Variable">acessControle</param>
                     <param id="1" name="Value">0</param>
                 </action>
                 <action id="-16" name="Set opacity" sid="5326537822278728" type="fundo0">
@@ -102,6 +100,14 @@
                 <action id="-16" name="Set opacity" sid="935027858496903" type="logo">
                     <param id="0" name="Opacity">0</param>
                 </action>
+                <action id="6" name="Speak text" sid="392868195007357" type="UserMedia">
+                    <param id="0" name="Text">&quot;Bem-vindo ao Em Busca do Santo Grau! Para ativar a acessibilidade, aperte B.&quot;</param>
+                    <param id="1" name="Language">&quot;pt-BR&quot;</param>
+                    <param id="2" name="Voice URI">&quot;Google português do Brasil&quot;</param>
+                    <param id="3" name="Volume">0</param>
+                    <param id="4" name="Rate">1</param>
+                    <param id="5" name="Pitch">1</param>
+                </action>
             </actions>
             <sub-events>
                 <event-block sid="437324386767134">
@@ -117,6 +123,21 @@
                         <action id="-9" name="Set value" sid="828048368421411" type="System">
                             <param id="0" name="Variable">fatorMobile</param>
                             <param id="1" name="Value">1.5</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="913624892937355">
+                    <conditions>
+                        <condition id="5" inverted="1" name="Is tag playing" sid="522019894781610" type="Audio">
+                            <param id="0" name="Tag">&quot;musicamenu&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Play" sid="219713164786199" type="Audio">
+                            <param id="0" name="Audio file">OSantoGrau</param>
+                            <param id="2" name="Loop">1</param>
+                            <param id="3" name="Volume">volMusica</param>
+                            <param id="1" name="Tag (optional)">&quot;musicamenu&quot;</param>
                         </action>
                     </actions>
                 </event-block>
@@ -260,7 +281,7 @@
             </conditions>
             <actions>
                 <action id="3" name="Set volume" sid="591928821977102" type="Audio">
-                    <param id="0" name="Tag">&quot;musica&quot;</param>
+                    <param id="0" name="Tag">&quot;musicamenu&quot;</param>
                     <param id="1" name="dB">volMusica</param>
                 </action>
                 <action id="3" name="Set volume" sid="819152277306524" type="Audio">
@@ -501,7 +522,7 @@
                             <param id="1" name="Value">1</param>
                         </action>
                         <action id="6" name="Speak text" sid="942807265492928" type="UserMedia">
-                            <param id="0" name="Text">&quot;Acessibilidade ativada&quot;</param>
+                            <param id="0" name="Text">&quot;Acessibilidade ativada! Utilize as teclas direcionais para navegar no menu&quot;</param>
                             <param id="1" name="Language">&quot;pt-BR&quot;</param>
                             <param id="2" name="Voice URI">&quot;Google português do Brasil&quot;</param>
                             <param id="3" name="Volume">0</param>
@@ -540,7 +561,34 @@
                         <action id="-2" name="Set Y" sid="1502049426319864" type="botoesTexto">
                             <param id="0" name="Y">371</param>
                         </action>
+                        <action id="-9" name="Set value" sid="683164588882185" type="System">
+                            <param id="0" name="Variable">acessControle</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="152651871282996">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="863246811472760" type="System" />
+                                <condition id="-14" name="Compare variable" sid="659043959132462" type="System">
+                                    <param id="0" name="Variable">acessibilidade</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Stop speaking" sid="511150775476461" type="UserMedia" />
+                                <action id="6" name="Speak text" sid="915006184963254" type="UserMedia">
+                                    <param id="0" name="Text">&quot;Novo jogo&quot;</param>
+                                    <param id="1" name="Language">&quot;pt-BR&quot;</param>
+                                    <param id="2" name="Voice URI">&quot;Google português do Brasil&quot;</param>
+                                    <param id="3" name="Volume">0</param>
+                                    <param id="4" name="Rate">1</param>
+                                    <param id="5" name="Pitch">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="8120883982042705">
                     <conditions>
@@ -609,7 +657,34 @@
                         <action id="-2" name="Set Y" sid="2479873645316947" type="botoesTexto">
                             <param id="0" name="Y">459</param>
                         </action>
+                        <action id="-9" name="Set value" sid="351252752749944" type="System">
+                            <param id="0" name="Variable">acessControle</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="153726967699404">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="153071388542052" type="System" />
+                                <condition id="-14" name="Compare variable" sid="332178206473678" type="System">
+                                    <param id="0" name="Variable">acessibilidade</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Stop speaking" sid="796497581389851" type="UserMedia" />
+                                <action id="6" name="Speak text" sid="462865052068625" type="UserMedia">
+                                    <param id="0" name="Text">&quot;Continuar&quot;</param>
+                                    <param id="1" name="Language">&quot;pt-BR&quot;</param>
+                                    <param id="2" name="Voice URI">&quot;Google português do Brasil&quot;</param>
+                                    <param id="3" name="Volume">0</param>
+                                    <param id="4" name="Rate">1</param>
+                                    <param id="5" name="Pitch">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="7389848892123238">
                     <conditions>
@@ -675,7 +750,34 @@
                         <action id="-2" name="Set Y" sid="9098334925580951" type="botoesTexto">
                             <param id="0" name="Y">547</param>
                         </action>
+                        <action id="-9" name="Set value" sid="216635017508063" type="System">
+                            <param id="0" name="Variable">acessControle</param>
+                            <param id="1" name="Value">2</param>
+                        </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="205622383788709">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="216436855434371" type="System" />
+                                <condition id="-14" name="Compare variable" sid="602995710456934" type="System">
+                                    <param id="0" name="Variable">acessibilidade</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Stop speaking" sid="853880714040251" type="UserMedia" />
+                                <action id="6" name="Speak text" sid="142761435334677" type="UserMedia">
+                                    <param id="0" name="Text">&quot;Recompensas&quot;</param>
+                                    <param id="1" name="Language">&quot;pt-BR&quot;</param>
+                                    <param id="2" name="Voice URI">&quot;Google português do Brasil&quot;</param>
+                                    <param id="3" name="Volume">0</param>
+                                    <param id="4" name="Rate">1</param>
+                                    <param id="5" name="Pitch">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="110002229934152">
                     <conditions>
@@ -741,7 +843,34 @@
                         <action id="-2" name="Set Y" sid="1217605150079029" type="botoesTexto">
                             <param id="0" name="Y">635</param>
                         </action>
+                        <action id="-9" name="Set value" sid="702223172683702" type="System">
+                            <param id="0" name="Variable">acessControle</param>
+                            <param id="1" name="Value">3</param>
+                        </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="767790969415205">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="815300523959499" type="System" />
+                                <condition id="-14" name="Compare variable" sid="741943753419029" type="System">
+                                    <param id="0" name="Variable">acessibilidade</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Stop speaking" sid="769339660468859" type="UserMedia" />
+                                <action id="6" name="Speak text" sid="217054761484754" type="UserMedia">
+                                    <param id="0" name="Text">&quot;Créditos&quot;</param>
+                                    <param id="1" name="Language">&quot;pt-BR&quot;</param>
+                                    <param id="2" name="Voice URI">&quot;Google português do Brasil&quot;</param>
+                                    <param id="3" name="Volume">0</param>
+                                    <param id="4" name="Rate">1</param>
+                                    <param id="5" name="Pitch">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="835591331513657">
                     <conditions>
@@ -964,6 +1093,234 @@
             <actions>
                 <action id="0" name="Set cursor style" sid="5934153810511411" type="Mouse">
                     <param id="0" name="Cursor style">0</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="770321810340991">
+            <conditions>
+                <condition id="-14" name="Compare variable" sid="662347896949784" type="System">
+                    <param id="0" name="Variable">acessibilidade</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Value">1</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-15" name="Set visible" sid="208772778470922" type="acessBotao">
+                    <param id="0" name="Visibility">1</param>
+                </action>
+            </actions>
+            <sub-events>
+                <event-block any="1" sid="598606623400290">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="960629346562897" type="Keyboard">
+                            <param id="0" name="Key">40</param>
+                        </condition>
+                        <condition id="0" name="On key pressed" sid="920116904896175" type="Keyboard">
+                            <param id="0" name="Key">39</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="290674846017068">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="180019768265694" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="320318880417209" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="836257683423419">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="614535699311204" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="594122202511518" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Value">2</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="929378089442583">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="666871764522320" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="195921172532394" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Value">3</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="646489474401682">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="522419069139141" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">3</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="203358371306685" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block any="1" sid="305556026921517">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="193445991622468" type="Keyboard">
+                            <param id="0" name="Key">38</param>
+                        </condition>
+                        <condition id="0" name="On key pressed" sid="485263849038288" type="Keyboard">
+                            <param id="0" name="Key">37</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="723055877688720">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="322015915338032" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="878681638973265" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Value">3</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="360651631506043">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="698604636021144" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="573142693076727" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="773855331027212">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="566349251545179" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="262161293106742" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="192692219427373">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="608187303501529" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">3</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="286111885911854" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Value">2</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="850152168426131">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="698897402110469" type="System">
+                            <param id="0" name="Variable">acessControle</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="151350009800181" type="acessBotao">
+                            <param id="0" name="Y">366</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="708030515675991">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="954837189361078" type="System">
+                            <param id="0" name="Variable">acessControle</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="560832643940159" type="acessBotao">
+                            <param id="0" name="Y">454</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="368775671965844">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="604801343564148" type="System">
+                            <param id="0" name="Variable">acessControle</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">2</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="970875759771889" type="acessBotao">
+                            <param id="0" name="Y">542</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="510082029941428">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="993375225529324" type="System">
+                            <param id="0" name="Variable">acessControle</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">3</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="498675776318770" type="acessBotao">
+                            <param id="0" name="Y">630</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="457190279480683">
+            <conditions>
+                <condition id="-22" name="Else" sid="437593206393680" type="System" />
+            </conditions>
+            <actions>
+                <action id="-15" name="Set visible" sid="130494092632142" type="acessBotao">
+                    <param id="0" name="Visibility">0</param>
                 </action>
             </actions>
         </event-block>
