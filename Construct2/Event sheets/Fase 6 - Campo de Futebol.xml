@@ -1564,18 +1564,22 @@
                             <param id="0" name="Comparison">2</param>
                             <param id="1" name="Opacity">100</param>
                         </condition>
-                        <condition disabled="1" id="-14" inverted="1" name="Compare variable" sid="166440373678011" type="System">
-                            <param id="0" name="Variable">controlePlacar</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">1</param>
+                        <condition id="-17" name="Compare opacity" sid="166440373678011" type="System">
+                            <param id="0" name="Layer">&quot;PlacarPopup&quot;</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Opacity">0</param>
+                        </condition>
+                        <condition disabled="1" id="-10" name="Compare opacity" sid="829029834801863" type="BalaoDialogo">
+                            <param id="0" name="Comparison">4</param>
+                            <param id="1" name="Opacity">0</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="7" name="Stop speaking" sid="710000418718681" type="UserMedia" />
-                        <action id="-9" name="Set value" sid="945495520643259" type="System">
+                        <action id="-9" name="Set value" sid="151099135586566" type="System">
                             <param id="0" name="Variable">instrucoesDialogo</param>
-                            <param id="1" name="Value">-1</param>
+                            <param id="1" name="Value">0</param>
                         </action>
+                        <action id="7" name="Stop speaking" sid="710000418718681" type="UserMedia" />
                     </actions>
                 </event-block>
                 <event-block sid="728064645769845">
@@ -1584,15 +1588,11 @@
                             <param id="0" name="Key">81</param>
                         </condition>
                         <condition id="-10" name="Compare opacity" sid="914440084383255" type="BalaoDialogo">
-                            <param id="0" name="Comparison">0</param>
+                            <param id="0" name="Comparison">5</param>
                             <param id="1" name="Opacity">100</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-9" name="Set value" sid="664086347886001" type="System">
-                            <param id="0" name="Variable">instrucoesDialogo</param>
-                            <param id="1" name="Value">-1</param>
-                        </action>
                         <action id="6" name="Stop" sid="489570130028386" type="Audio">
                             <param id="0" name="Tag">&quot;capivara&quot;</param>
                         </action>
@@ -1610,6 +1610,7 @@
                         </action>
                     </actions>
                 </event-block>
+                <variable constant="0" name="wait" sid="449921473406329" static="0" type="number">5</variable>
                 <event-block any="1" sid="535430419358832">
                     <conditions>
                         <condition id="0" name="On ended" sid="238754018178430" type="Audio">
@@ -1622,7 +1623,7 @@
                             <param id="1" name="Value">0</param>
                         </action>
                         <action id="-16" name="Wait" sid="565649566814329" type="System">
-                            <param id="0" name="Seconds">5</param>
+                            <param id="0" name="Seconds">wait</param>
                         </action>
                         <action id="-9" name="Set value" sid="451258087548848" type="System">
                             <param id="0" name="Variable">instrucoesDialogo</param>
@@ -1638,13 +1639,21 @@
                             <param id="1" name="Comparison">0</param>
                             <param id="2" name="Value">1</param>
                         </condition>
+                        <condition id="-17" name="Compare opacity" sid="193499984031582" type="System">
+                            <param id="0" name="Layer">&quot;PlacarPopup&quot;</param>
+                            <param id="1" name="Comparison">3</param>
+                            <param id="2" name="Opacity">0</param>
+                        </condition>
                     </conditions>
                     <actions />
                     <sub-events>
                         <event-block sid="512888193442742">
                             <conditions>
                                 <condition id="-6" name="Every X seconds" sid="983212931493824" type="System">
-                                    <param id="0" name="Interval (seconds)">10</param>
+                                    <param id="0" name="Interval (seconds)">wait+5</param>
+                                </condition>
+                                <condition id="5" inverted="1" name="Is tag playing" sid="344221645000856" type="Audio">
+                                    <param id="0" name="Tag">&quot;capivara&quot;</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -5051,10 +5060,6 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-9" name="Set value" sid="364971382505549" type="System">
-                                    <param id="0" name="Variable">instrucoesDialogo</param>
-                                    <param id="1" name="Value">-1</param>
-                                </action>
                                 <action id="6" name="Stop" sid="932692750219817" type="Audio">
                                     <param id="0" name="Tag">&quot;capivara&quot;</param>
                                 </action>
