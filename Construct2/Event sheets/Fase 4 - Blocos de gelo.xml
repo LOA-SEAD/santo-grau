@@ -262,6 +262,13 @@
                     <param id="0" name="Opacity">0</param>
                 </action>
                 <action behavior="8Direction" id="0" name="Stop" sid="472369390804846" type="player" />
+                <action id="-9" name="Set value" sid="690923517185828" type="System">
+                    <param id="0" name="Variable">tempoInicialNivel</param>
+                    <param id="1" name="Value">time</param>
+                </action>
+                <action id="0" name="Execute" sid="318240804298291" type="StatsJS">
+                    <param id="0" name="Value">&quot;sendPlaytimeData(0.0,1,&apos;SantoGrau&apos;,&apos;3&apos;)&quot;</param>
+                </action>
             </actions>
             <sub-events>
                 <comment>Ativa ou desativa (evento Else abaixo) os botões de mobile dependendo do dispositivo onde está sendo jogado</comment>
@@ -657,12 +664,12 @@
                 </condition>
             </conditions>
             <actions>
-                <action id="-9" name="Set value" sid="734158866516240" type="System">
-                    <param id="0" name="Variable">tempoFinal</param>
+                <action id="-9" name="Set value" sid="314629915420980" type="System">
+                    <param id="0" name="Variable">tempoFinalNivel</param>
                     <param id="1" name="Value">time</param>
                 </action>
-                <action disabled="1" id="0" name="Execute" sid="434117442757743" type="StatsJS">
-                    <param id="0" name="Value">&quot;sendTimeData(&quot; &amp; tempoFinal - tempoInicial &amp; &quot;)&quot;</param>
+                <action id="0" name="Execute" sid="912139842991325" type="StatsJS">
+                    <param id="0" name="Value">&quot;sendPlaytimeData(&quot; &amp; tempoFinalNivel - tempoInicialNivel &amp; &quot;,1,&apos;SantoGrau&apos;,&apos;3&apos;)&quot;</param>
                 </action>
                 <action id="-2" name="Go to layout" sid="4111735116296527" type="System">
                     <param id="0" name="Layout">Cena 2</param>
@@ -2191,7 +2198,7 @@
                         </action>
                         <action id="-9" name="Set value" sid="562180002333636" type="System">
                             <param id="0" name="Variable">sendJS</param>
-                            <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;true&apos;,&apos;&quot; &amp; LoadJSONBN.GetData(&quot;quantidadeQuestoes&quot;,0) &amp; &quot;&apos;,&apos;3&apos;&quot;</param>
+                            <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;true&apos;,&apos;&quot; &amp; LoadJSONBN.GetData(&quot;quantidadeQuestoes&quot;,0) &amp; &quot;&apos;,&apos;3&apos;,&apos;Fase Blocos de Gelo&apos;&quot;</param>
                         </action>
                         <action id="0" name="Execute" sid="500511752396771" type="StatsJS">
                             <param id="0" name="Value">&quot;sendDataFinalLevel(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
@@ -2332,7 +2339,7 @@
                                 </action>
                                 <action id="-9" name="Set value" sid="765406765982486" type="System">
                                     <param id="0" name="Variable">sendJS</param>
-                                    <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;false&apos;,&apos;&quot; &amp; LoadJSONBN.GetData(&quot;quantidadeQuestoes&quot;,0) &amp; &quot;&apos;,&apos;3&apos;&quot;</param>
+                                    <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;false&apos;,&apos;&quot; &amp; LoadJSONBN.GetData(&quot;quantidadeQuestoes&quot;,0) &amp; &quot;&apos;,&apos;3&apos;,&apos;Fase Blocos de Gelo&apos;&quot;</param>
                                 </action>
                                 <action id="0" name="Execute" sid="198671940492192" type="StatsJS">
                                     <param id="0" name="Value">&quot;sendDataFinalLevel(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
@@ -4245,7 +4252,7 @@
                                     <param id="1" name="State">1</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="632422105638206" type="System">
-                                    <param id="0" name="Variable">tempoInicial</param>
+                                    <param id="0" name="Variable">tempoInicialNivel</param>
                                     <param id="1" name="Value">time</param>
                                 </action>
                                 <action id="-26" name="Restart layout" sid="631118347861630" type="System" />

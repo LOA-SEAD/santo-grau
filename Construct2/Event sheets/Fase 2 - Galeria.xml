@@ -392,6 +392,13 @@
                     <param id="0" name="Angle">270</param>
                 </action>
                 <action behavior="8Direction" id="0" name="Stop" sid="931787032620698" type="player" />
+                <action id="-9" name="Set value" sid="355599495311613" type="System">
+                    <param id="0" name="Variable">tempoInicialNivel</param>
+                    <param id="1" name="Value">time</param>
+                </action>
+                <action id="0" name="Execute" sid="865911881487751" type="StatsJS">
+                    <param id="0" name="Value">&quot;sendPlaytimeData(0.0,1,&apos;SantoGrau&apos;,&apos;1&apos;)&quot;</param>
+                </action>
             </actions>
             <sub-events>
                 <comment>Ativa ou desativa (evento Else abaixo) os botões de mobile dependendo do dispositivo onde está sendo jogado</comment>
@@ -3936,16 +3943,12 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-9" name="Set value" sid="714971628449047" type="System">
-                            <param id="0" name="Variable">tempoFinal</param>
+                        <action id="-9" name="Set value" sid="854295889680770" type="System">
+                            <param id="0" name="Variable">tempoFinalNivel</param>
                             <param id="1" name="Value">time</param>
                         </action>
-                        <action disabled="1" id="0" name="Execute" sid="121800439335280" type="StatsJS">
-                            <param id="0" name="Value">&quot;sendTimeData(&quot; &amp; tempoFinal - tempoInicial &amp; &quot;)&quot;</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="874971583665289" type="System">
-                            <param id="0" name="Variable">tempoInicial</param>
-                            <param id="1" name="Value">time</param>
+                        <action id="0" name="Execute" sid="729190799887942" type="StatsJS">
+                            <param id="0" name="Value">&quot;sendPlaytimeData(&quot; &amp; tempoFinalNivel - tempoInicialNivel &amp; &quot;,1,&apos;SantoGrau&apos;,&apos;1&apos;)&quot;</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -5964,7 +5967,7 @@
                                     <param id="1" name="State">1</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="766431515594812" type="System">
-                                    <param id="0" name="Variable">tempoInicial</param>
+                                    <param id="0" name="Variable">tempoInicialNivel</param>
                                     <param id="1" name="Value">time</param>
                                 </action>
                                 <action id="-26" name="Restart layout" sid="465865395749234" type="System" />

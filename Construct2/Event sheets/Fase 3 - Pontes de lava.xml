@@ -225,6 +225,13 @@
                     <param id="0" name="Frame number">0</param>
                 </action>
                 <action behavior="8Direction" id="0" name="Stop" sid="837891325923973" type="player" />
+                <action id="-9" name="Set value" sid="610652902898008" type="System">
+                    <param id="0" name="Variable">tempoInicialNivel</param>
+                    <param id="1" name="Value">time</param>
+                </action>
+                <action id="0" name="Execute" sid="946838743177723" type="StatsJS">
+                    <param id="0" name="Value">&quot;sendPlaytimeData(0.0,1,&apos;SantoGrau&apos;,&apos;2&apos;)&quot;</param>
+                </action>
             </actions>
             <sub-events>
                 <comment>Ativa ou desativa (evento Else abaixo) os botões de mobile dependendo do dispositivo onde está sendo jogado, além de cortar pela metade a frequência do efeito de água</comment>
@@ -523,16 +530,12 @@
                 </condition>
             </conditions>
             <actions>
-                <action id="-9" name="Set value" sid="614266688709263" type="System">
-                    <param id="0" name="Variable">tempoFinal</param>
+                <action id="-9" name="Set value" sid="242592105203072" type="System">
+                    <param id="0" name="Variable">tempoFinalNivel</param>
                     <param id="1" name="Value">time</param>
                 </action>
-                <action disabled="1" id="0" name="Execute" sid="852634183405962" type="StatsJS">
-                    <param id="0" name="Value">&quot;sendTimeData(&quot; &amp; tempoFinal - tempoInicial &amp; &quot;)&quot;</param>
-                </action>
-                <action id="-9" name="Set value" sid="531150794706224" type="System">
-                    <param id="0" name="Variable">tempoInicial</param>
-                    <param id="1" name="Value">time</param>
+                <action id="0" name="Execute" sid="594856516101413" type="StatsJS">
+                    <param id="0" name="Value">&quot;sendPlaytimeData(&quot; &amp; tempoFinalNivel - tempoInicialNivel &amp; &quot;,1,&apos;SantoGrau&apos;,&apos;2&apos;)&quot;</param>
                 </action>
                 <action id="-2" name="Go to layout" sid="9664151501169464" type="System">
                     <param id="0" name="Layout">Fase 4</param>
@@ -2016,7 +2019,7 @@
                                                 </action>
                                                 <action id="-9" name="Set value" sid="145112144513902" type="System">
                                                     <param id="0" name="Variable">sendJS</param>
-                                                    <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;true&apos;,&apos;&quot; &amp; LoadJSONCM.GetData(&quot;quantidadeQuestoes&quot;,0) &amp; &quot;&apos;,&apos;2&apos;&quot;</param>
+                                                    <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;true&apos;,&apos;&quot; &amp; LoadJSONCM.GetData(&quot;quantidadeQuestoes&quot;,0) &amp; &quot;&apos;,&apos;2&apos;,&apos;Fase Campo Minado&apos;&quot;</param>
                                                 </action>
                                                 <action id="0" name="Execute" sid="804703131094713" type="StatsJS">
                                                     <param id="0" name="Value">&quot;sendDataFinalLevel(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
@@ -2139,7 +2142,7 @@
                                                 </action>
                                                 <action id="-9" name="Set value" sid="714548881679830" type="System">
                                                     <param id="0" name="Variable">sendJS</param>
-                                                    <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;false&apos;,&apos;&quot; &amp; LoadJSONCM.GetData(&quot;quantidadeQuestoes&quot;,0) &amp; &quot;&apos;,&apos;2&apos;&quot;</param>
+                                                    <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;false&apos;,&apos;&quot; &amp; LoadJSONCM.GetData(&quot;quantidadeQuestoes&quot;,0) &amp; &quot;&apos;,&apos;2&apos;,&apos;Fase Campo Minado&apos;&quot;</param>
                                                 </action>
                                                 <action id="0" name="Execute" sid="182114884938634" type="StatsJS">
                                                     <param id="0" name="Value">&quot;sendDataFinalLevel(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
@@ -3605,7 +3608,7 @@
                                     <param id="1" name="State">1</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="535677954654113" type="System">
-                                    <param id="0" name="Variable">tempoInicial</param>
+                                    <param id="0" name="Variable">tempoInicialNivel</param>
                                     <param id="1" name="Value">time</param>
                                 </action>
                                 <action id="-26" name="Restart layout" sid="904096046790075" type="System" />

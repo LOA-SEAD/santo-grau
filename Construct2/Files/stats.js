@@ -8,14 +8,15 @@ function sendDataTechnology(palavra,correta,resposta,nroPalavra,tentativas,vence
 	}
 	$.getJSON("remar.json", function(json) {
         info.exportedResourceId = json.exportedResourceId;
-        info.gameIndex = 0;
+        info.gameLevel = 0;
         info.word = palavra;
         info.correctAnswer = correta;
         info.answer = resposta;
-        info.levelId = nroPalavra;
+        info.challengeId = nroPalavra;
         info.numberTries = tentativas;
         info.win = venceu;
         info.size = 3;
+        info.gameLevelName = 'Fase Tecnologia';
         info.gameType = 'shuffleWord';
         $.ajax({
             type: "POST",
@@ -43,12 +44,13 @@ function sendDataGallery(arrastos,seqInicial){
     }
     $.getJSON("remar.json", function(json) {
         info.exportedResourceId = json.exportedResourceId;
-        info.gameIndex = 1;
+        info.gameLevel = 1;
         info.numberDrag = arrastos;
         info.initialSequence = seqInicial;
         info.win = true;
         info.size = 1;
-        info.levelId = 0;
+        info.challengeId = 0;
+        info.gameLevelName = 'Fase Galeria';
         info.gameType = 'dragPictures';
         $.ajax({
             type: "POST",
@@ -62,7 +64,7 @@ function sendDataGallery(arrastos,seqInicial){
     console.log(seqInicial);
 }
 
-function sendDataFinalLevel(pergunta,correta,nroPergunta,respostas,escolhida,acertou,tamanho,fase){
+function sendDataFinalLevel(pergunta,correta,nroPergunta,respostas,escolhida,acertou,tamanho,fase,nomeFase){
     var info = {};
     var path;
     if(window.location.hostname == "localhost" ){   // for localhost tests
@@ -72,14 +74,15 @@ function sendDataFinalLevel(pergunta,correta,nroPergunta,respostas,escolhida,ace
     }
     $.getJSON("remar.json", function(json) {
         info.exportedResourceId = json.exportedResourceId;
-        info.gameIndex = fase;
+        info.gameLevel = fase;
         info.question = pergunta;
         info.answer = correta;
-        info.levelId = nroPergunta;
+        info.challengeId = nroPergunta;
         info.choices = respostas;
         info.choice = escolhida;
         info.win = acertou;
         info.size = tamanho;
+        info.gameLevelName = nomeFase;
         info.gameType = 'multipleChoice';
         $.ajax({
             type: "POST",
@@ -97,6 +100,7 @@ function sendDataFinalLevel(pergunta,correta,nroPergunta,respostas,escolhida,ace
     console.log(acertou);
     console.log(tamanho);
     console.log(fase);
+    console.log(nomeFase);
 }
 
 function sendPlayDataGallery(terminou,nroDanos){
@@ -169,4 +173,43 @@ function sendRankingData(pontos){
         })
     });
     console.log(pontos);
+}
+
+function sendPlaytimeData(tempo,tipo,idJogo,idNivel,idDesafio){
+    var info = {};
+    var path;
+    if(window.location.hostname == "localhost" ){   // for localhost tests
+        path = "/exported-resource/saveStats"
+    }else {                                 // for web version in production, electron and crosswalk versions
+        path = "http://remar.dc.ufscar.br/exported-resource/savePlayStats"
+    }
+    $.getJSON("remar.json", function(json) {
+        info.exportedResourceId = json.exportedResourceId;
+        info.time = tempo;
+        info.type = tipo;
+        info.gameId = idJogo;
+        if (idNivel != null){
+            info.gameLevel = idNivel;
+        }
+        if (idDesafio != null){
+            info.challengeId = idDesafio;
+        }
+        info.gameType = 'ConclusionTime';
+        $.ajax({
+            type: "POST",
+            url: path,
+            data: info,
+            success: function(data) {
+            }
+        })
+    });
+    console.log(tempo);
+    console.log(tipo);
+    console.log(idJogo);
+    if (idNivel != null){
+        console.log(idNivel);
+    }
+    if (idDesafio != null){
+        console.log(idDesafio);
+    }
 }
