@@ -1728,6 +1728,22 @@
                                     <param id="0" name="Time scale">0.0</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block sid="364786874984326">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="203218033815150" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="844474124777553" type="System">
+                                            <param id="0" name="Variable">tempoInicialDesafio</param>
+                                            <param id="1" name="Value">time</param>
+                                        </action>
+                                        <action id="0" name="Execute" sid="141927252082120" type="StatsJS">
+                                            <param id="0" name="Value">&quot;sendPlaytimeData(0.0,2,&apos;SantoGrau&apos;,&apos;3&apos;,&apos;&quot; &amp; OrdemQuestoes.At(perguntaBN-1)-1 &amp; &quot;&apos;)&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -2202,6 +2218,13 @@
                         </action>
                         <action id="0" name="Execute" sid="500511752396771" type="StatsJS">
                             <param id="0" name="Value">&quot;sendDataFinalLevel(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="515915116434802" type="System">
+                            <param id="0" name="Variable">tempoFinalDesafio</param>
+                            <param id="1" name="Value">time</param>
+                        </action>
+                        <action id="0" name="Execute" sid="808344155337125" type="StatsJS">
+                            <param id="0" name="Value">&quot;sendPlaytimeData(&quot; &amp; tempoFinalDesafio - tempoInicialDesafio &amp; &quot;,2,&apos;SantoGrau&apos;,&apos;3&apos;,&apos;&quot; &amp; OrdemQuestoes.At(perguntaBN-2)-1 &amp; &quot;&apos;)&quot;</param>
                         </action>
                         <action id="-12" name="Set group active" sid="600089514527836" type="System">
                             <param id="0" name="Group name">&quot;ScrollBlocosGelo&quot;</param>

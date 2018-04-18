@@ -392,6 +392,10 @@
                     <param id="0" name="Angle">270</param>
                 </action>
                 <action behavior="8Direction" id="0" name="Stop" sid="931787032620698" type="player" />
+                <action id="-9" name="Set value" sid="880437714029707" type="System">
+                    <param id="0" name="Variable">tempoInicialDesafio</param>
+                    <param id="1" name="Value">0</param>
+                </action>
                 <action id="-9" name="Set value" sid="355599495311613" type="System">
                     <param id="0" name="Variable">tempoInicialNivel</param>
                     <param id="1" name="Value">time</param>
@@ -1362,6 +1366,25 @@
                                                 <action id="-12" name="Set group active" sid="469199936679430" type="System">
                                                     <param id="0" name="Group name">&quot;playerMove3&quot;</param>
                                                     <param id="1" name="State">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <comment>Dispara o tempo apenas na primeira vez que o jogador abriu o mural</comment>
+                                        <event-block sid="857307229857756">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="405284303934943" type="System">
+                                                    <param id="0" name="Variable">tempoInicialDesafio</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Set value" sid="813951973871221" type="System">
+                                                    <param id="0" name="Variable">tempoInicialDesafio</param>
+                                                    <param id="1" name="Value">time</param>
+                                                </action>
+                                                <action id="0" name="Execute" sid="391897919196835" type="StatsJS">
+                                                    <param id="0" name="Value">&quot;sendPlaytimeData(0.0,2,&apos;SantoGrau&apos;,&apos;1&apos;,&apos;0&apos;)&quot;</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -2827,6 +2850,13 @@
                                             <param id="3" name="Volume">volSons</param>
                                             <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                         </action>
+                                        <action id="-9" name="Set value" sid="471623976085610" type="System">
+                                            <param id="0" name="Variable">tempoInicialDesafio</param>
+                                            <param id="1" name="Value">time</param>
+                                        </action>
+                                        <action id="0" name="Execute" sid="107175878380417" type="StatsJS">
+                                            <param id="0" name="Value">&quot;sendPlaytimeData(0.0,2,&apos;SantoGrau&apos;,&apos;1&apos;,&apos;1&apos;)&quot;</param>
+                                        </action>
                                         <action id="-9" name="Destroy" sid="4745426364815126" type="EinsteinCenario" />
                                         <action id="-9" name="Destroy" sid="8802159087815485" type="SolidoEinstein" />
                                         <action id="-16" name="Set opacity" sid="4973419202493159" type="Fantasmas">
@@ -3290,6 +3320,20 @@
                                 </action>
                             </actions>
                             <sub-events>
+                                <event-block sid="537340997946680">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="455722902716646" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="861801137394595" type="System">
+                                            <param id="0" name="Variable">tempoFinalDesafio</param>
+                                            <param id="1" name="Value">time</param>
+                                        </action>
+                                        <action id="0" name="Execute" sid="116765741862837" type="StatsJS">
+                                            <param id="0" name="Value">&quot;sendPlaytimeData(&quot; &amp; tempoFinalDesafio - tempoInicialDesafio &amp; &quot;,2,&apos;SantoGrau&apos;,&apos;1&apos;,&apos;0&apos;)&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                                 <comment>Destrói o campo de seleção do mural</comment>
                                 <event-block sid="355050235596338">
                                     <conditions>
@@ -3838,6 +3882,13 @@
                                     <param id="2" name="Loop">1</param>
                                     <param id="3" name="Volume">volMusica</param>
                                     <param id="1" name="Tag (optional)">&quot;musica&quot;</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="966548281766572" type="System">
+                                    <param id="0" name="Variable">tempoFinalDesafio</param>
+                                    <param id="1" name="Value">time</param>
+                                </action>
+                                <action id="0" name="Execute" sid="241791852412184" type="StatsJS">
+                                    <param id="0" name="Value">&quot;sendPlaytimeData(&quot; &amp; tempoFinalDesafio - tempoInicialDesafio &amp; &quot;,2,&apos;SantoGrau&apos;,&apos;1&apos;,&apos;1&apos;)&quot;</param>
                                 </action>
                                 <action id="-9" name="Destroy" sid="2433062249916656" type="Chave" />
                                 <action id="-9" name="Destroy" sid="1765500496901364" type="SelecaoChave" />
