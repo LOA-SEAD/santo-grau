@@ -295,6 +295,13 @@
                     <param id="0" name="Opacity">0</param>
                 </action>
                 <action behavior="8Direction" id="0" name="Stop" sid="816382368954103" type="player" />
+                <action id="-9" name="Set value" sid="945451839477383" type="System">
+                    <param id="0" name="Variable">tempoInicialNivel</param>
+                    <param id="1" name="Value">time</param>
+                </action>
+                <action id="0" name="Execute" sid="729551576721671" type="StatsJS">
+                    <param id="0" name="Value">&quot;sendPlaytimeData(0.0,1,&apos;SantoGrau&apos;,&apos;4&apos;)&quot;</param>
+                </action>
             </actions>
             <sub-events>
                 <comment>Ativa ou desativa (evento Else abaixo) os botões de mobile dependendo do dispositivo onde está sendo jogado</comment>
@@ -715,11 +722,18 @@
             </conditions>
             <actions>
                 <action id="-9" name="Set value" sid="843764374194415" type="System">
-                    <param id="0" name="Variable">tempoFinal</param>
+                    <param id="0" name="Variable">tempoFinalNivel</param>
                     <param id="1" name="Value">time</param>
                 </action>
-                <action disabled="1" id="0" name="Execute" sid="356476841880469" type="StatsJS">
-                    <param id="0" name="Value">&quot;sendTimeData(&quot; &amp; tempoFinal - tempoInicial &amp; &quot;)&quot;</param>
+                <action id="-9" name="Set value" sid="931384833024523" type="System">
+                    <param id="0" name="Variable">tempoFinalDesafio</param>
+                    <param id="1" name="Value">time</param>
+                </action>
+                <action id="0" name="Execute" sid="531933650660238" type="StatsJS">
+                    <param id="0" name="Value">&quot;sendPlaytimeData(&quot; &amp; tempoFinalNivel - tempoInicialNivel &amp; &quot;,1,&apos;SantoGrau&apos;,&apos;4&apos;)&quot;</param>
+                </action>
+                <action id="0" name="Execute" sid="295588643598061" type="StatsJS">
+                    <param id="0" name="Value">&quot;sendPlaytimeData(&quot; &amp; tempoFinalDesafio - tempoInicialDesafio &amp; &quot;,0,&apos;SantoGrau&apos;)&quot;</param>
                 </action>
                 <action id="0" name="Execute" sid="758168799619380" type="StatsJS">
                     <param id="0" name="Value">&quot;sendRankingData(&quot; &amp; pontos &amp; &quot;)&quot;</param>
@@ -2265,6 +2279,20 @@
                                         </action>
                                     </actions>
                                 </event-block>
+                                <event-block sid="640721159330029">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="649416469152167" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="656931246473808" type="System">
+                                            <param id="0" name="Variable">tempoInicialDesafio</param>
+                                            <param id="1" name="Value">time</param>
+                                        </action>
+                                        <action id="0" name="Execute" sid="669226731307930" type="StatsJS">
+                                            <param id="0" name="Value">&quot;sendPlaytimeData(0.0,2,&apos;SantoGrau&apos;,&apos;4&apos;,&apos;&quot; &amp; OrdemQuestoes.At(perguntaTCC-1)-1 &amp; &quot;&apos;)&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                             </sub-events>
                         </event-block>
                     </sub-events>
@@ -2621,10 +2649,17 @@
                                                                 </action>
                                                                 <action id="-9" name="Set value" sid="218482768092165" type="System">
                                                                     <param id="0" name="Variable">sendJS</param>
-                                                                    <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;true&apos;,&apos;&quot; &amp; LoadJSONTCC.GetData(&quot;quantidadeQuestoes&quot;,0) &amp; &quot;&apos;,&apos;4&apos;&quot;</param>
+                                                                    <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;true&apos;,&apos;&quot; &amp; LoadJSONTCC.GetData(&quot;quantidadeQuestoes&quot;,0) &amp; &quot;&apos;,&apos;4&apos;,&apos;Fase TCC&apos;&quot;</param>
                                                                 </action>
                                                                 <action id="0" name="Execute" sid="400349009738760" type="StatsJS">
                                                                     <param id="0" name="Value">&quot;sendDataFinalLevel(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
+                                                                </action>
+                                                                <action id="-9" name="Set value" sid="122644944876472" type="System">
+                                                                    <param id="0" name="Variable">tempoFinalDesafio</param>
+                                                                    <param id="1" name="Value">time</param>
+                                                                </action>
+                                                                <action id="0" name="Execute" sid="662929372250239" type="StatsJS">
+                                                                    <param id="0" name="Value">&quot;sendPlaytimeData(&quot; &amp; tempoFinalDesafio - tempoInicialDesafio &amp; &quot;,2,&apos;SantoGrau&apos;,&apos;4&apos;,&apos;&quot; &amp; OrdemQuestoes.At(perguntaTCC-2)-1 &amp; &quot;&apos;)&quot;</param>
                                                                 </action>
                                                                 <action id="-12" name="Set group active" sid="581252232492726" type="System">
                                                                     <param id="0" name="Group name">&quot;controleDanoMonstro&quot;</param>
@@ -2694,7 +2729,7 @@
                                                                 </action>
                                                                 <action id="-9" name="Set value" sid="486058108853380" type="System">
                                                                     <param id="0" name="Variable">sendJS</param>
-                                                                    <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;false&apos;,&apos;&quot; &amp; LoadJSONTCC.GetData(&quot;quantidadeQuestoes&quot;,0) &amp; &quot;&apos;,&apos;4&apos;&quot;</param>
+                                                                    <param id="1" name="Value">sendJS &amp; textoRespostaEscolhida &amp; &quot;&apos;false&apos;,&apos;&quot; &amp; LoadJSONTCC.GetData(&quot;quantidadeQuestoes&quot;,0) &amp; &quot;&apos;,&apos;4&apos;,&apos;Fase TCC&apos;&quot;</param>
                                                                 </action>
                                                                 <action id="0" name="Execute" sid="888637953658761" type="StatsJS">
                                                                     <param id="0" name="Value">&quot;sendDataFinalLevel(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
@@ -4944,7 +4979,7 @@
                                     <param id="1" name="State">1</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="475937606251462" type="System">
-                                    <param id="0" name="Variable">tempoInicial</param>
+                                    <param id="0" name="Variable">tempoInicialNivel</param>
                                     <param id="1" name="Value">time</param>
                                 </action>
                                 <action id="-26" name="Restart layout" sid="783848172507001" type="System" />
