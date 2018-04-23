@@ -191,6 +191,10 @@
                     <param id="0" name="Variable">pontuacaoInicio</param>
                     <param id="1" name="Value">pontos</param>
                 </action>
+                <action id="-9" name="Set value" sid="929791356752447" type="System">
+                    <param id="0" name="Variable">tempoManutencaoLuz</param>
+                    <param id="1" name="Value">1</param>
+                </action>
                 <action id="-12" name="Set group active" sid="735131410279501" type="System">
                     <param id="0" name="Group name">&quot;FecharPorta&quot;</param>
                     <param id="1" name="State">1</param>
@@ -539,6 +543,10 @@
                         <action id="-3" name="Set position" sid="402061058243719" type="menuOpcoes">
                             <param id="0" name="X">1232</param>
                             <param id="1" name="Y">48</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="858411028667188" type="System">
+                            <param id="0" name="Variable">tempoManutencaoLuz</param>
+                            <param id="1" name="Value">0.5</param>
                         </action>
                     </actions>
                 </event-block>
@@ -1842,6 +1850,10 @@
                                                     <param id="0" name="Group name">&quot;CarregaBalaoDialogo8&quot;</param>
                                                     <param id="1" name="State">1</param>
                                                 </action>
+                                                <action id="7" name="Set CSS style" sid="457068834662085" type="RespostaBIB">
+                                                    <param id="0" name="Property name">&quot;font-size&quot;</param>
+                                                    <param id="1" name="Value">&quot;20px&quot;</param>
+                                                </action>
                                             </actions>
                                         </event-block>
                                         <event-block sid="913326903435739">
@@ -2916,7 +2928,7 @@
                             </conditions>
                             <actions>
                                 <action behavior="Bullet" id="1" name="Set acceleration" sid="694637018826323" type="AndaParaCimaDiploma">
-                                    <param id="0" name="Acceleration">50</param>
+                                    <param id="0" name="Acceleration">50 * tempoManutencaoLuz</param>
                                 </action>
                                 <action id="5" name="Set frame" sid="992020576171834" type="AnimacaoDiploma">
                                     <param id="0" name="Frame number">3</param>
@@ -2933,7 +2945,7 @@
                             </conditions>
                             <actions>
                                 <action id="-19" name="Rotate counter-clockwise" sid="662934139807555" type="AndaParaCimaDiploma">
-                                    <param id="0" name="Degrees">2</param>
+                                    <param id="0" name="Degrees">2 + ((1/tempoManutencaoLuz) - 1) * 0.5</param>
                                 </action>
                                 <action id="-7" name="Set size" sid="662485685392029" type="AnimacaoDiploma">
                                     <param id="0" name="Width">AnimacaoDiploma.Width*0.998</param>
@@ -2941,13 +2953,14 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <comment>Se estiver no computador, demorará 0.7 segundos, enquanto em dispositivos mobile demorará 0.9 segundos</comment>
                         <event-block sid="509046429337549">
                             <conditions>
                                 <condition id="-22" name="Else" sid="801801523596622" type="System" />
                             </conditions>
                             <actions>
                                 <action id="-16" name="Wait" sid="634859601682017" type="System">
-                                    <param id="0" name="Seconds">0.7</param>
+                                    <param id="0" name="Seconds">0.7 + ((1/tempoManutencaoLuz) - 1) * 0.2</param>
                                 </action>
                                 <action id="-9" name="Destroy" sid="554179752846772" type="AndaParaCimaDiploma" />
                                 <action id="-9" name="Destroy" sid="803219960971440" type="AnimacaoDiploma" />
