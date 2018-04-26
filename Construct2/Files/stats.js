@@ -179,7 +179,7 @@ function sendPlaytimeData(tempo,tipo,idJogo,idNivel,idDesafio){
     var info = {};
     var path;
     if(window.location.hostname == "localhost" ){   // for localhost tests
-        path = "/exported-resource/saveStats"
+        path = "/exported-resource/savePlayStats"
     }else {                                 // for web version in production, electron and crosswalk versions
         path = "http://remar.dc.ufscar.br/exported-resource/savePlayStats"
     }
