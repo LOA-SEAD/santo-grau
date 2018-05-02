@@ -253,6 +253,9 @@
                             <param id="0" name="Group name">&quot;playerMove1&quot;</param>
                             <param id="1" name="State">0</param>
                         </action>
+                        <action id="-15" name="Set visible" sid="564137662813053" type="BtnDirecional">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
                         <action id="-7" name="Set size" sid="626589963827417" type="menuOpcoes">
                             <param id="0" name="Width">64</param>
                             <param id="1" name="Height">64</param>
@@ -360,7 +363,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="0" name="Set text" sid="436724718413050" type="dicaTexto">
-                                            <param id="0" name="Text">&quot;Arraste o botão de direcional para mover a personagem&quot;</param>
+                                            <param id="0" name="Text">&quot;Arraste seu dedo na tela para mover a personagem&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -403,7 +406,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="0" name="Set text" sid="599628432885007" type="dicaTexto">
-                                            <param id="0" name="Text">&quot;Use o botão &apos;Interagir&apos; para realizar ações com os objetos&quot;</param>
+                                            <param id="0" name="Text">&quot;Toque na tela para realizar ações com os objetos&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -796,7 +799,7 @@
                             <param id="0" name="Key">69</param>
                         </condition>
                         <condition id="17" name="On tap object" sid="445946010670434" type="Touch">
-                            <param id="0" name="Object">BtnInteragir</param>
+                            <param id="0" name="Object">HitboxDir</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -1001,7 +1004,7 @@
                             <param id="0" name="Key">69</param>
                         </condition>
                         <condition id="17" name="On tap object" sid="5240621242918209" type="Touch">
-                            <param id="0" name="Object">BtnInteragir</param>
+                            <param id="0" name="Object">HitboxDir</param>
                         </condition>
                     </conditions>
                     <actions />
@@ -1657,7 +1660,7 @@
                                     <param id="0" name="Key">69</param>
                                 </condition>
                                 <condition id="17" name="On tap object" sid="808626101035096" type="Touch">
-                                    <param id="0" name="Object">BtnInteragir</param>
+                                    <param id="0" name="Object">HitboxDir</param>
                                 </condition>
                             </conditions>
                             <actions />
@@ -5306,13 +5309,18 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <comment>Controle da distância que ativará a direção que o jogador está indo. Optei por 19 (1/4 de 76, a distância máxima que é possível ir com o direcional) para não deixar muito sensível</comment>
+                        <comment>Controle da distância que ativará a direção que o jogador está indo. Optei por 19 (1/4 de 76, a distância máxima que é possível ir com o direcional) para não deixar muito sensível&#x0D;&#x0A;Além disso, para fases onde são permitidas apenas as 4 direções, é comparado o valor absoluto do quanto o jogador moveu seu dedo na horizontal e na vertical para saber qual a direção que ele quer ir</comment>
                         <event-block sid="703938412279791">
                             <conditions>
                                 <condition id="-8" name="Compare two values" sid="424732120195499" type="System">
                                     <param id="0" name="First value">BtnDirecional.X</param>
                                     <param id="1" name="Comparison">5</param>
                                     <param id="2" name="Second value">EstruturaDir.X + 19</param>
+                                </condition>
+                                <condition id="-8" name="Compare two values" sid="321407706425201" type="System">
+                                    <param id="0" name="First value">abs(HitboxDir.X - EstruturaDir.X)</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Second value">abs(HitboxDir.Y - EstruturaDir.Y)</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -5335,6 +5343,11 @@
                                     <param id="1" name="Comparison">3</param>
                                     <param id="2" name="Second value">EstruturaDir.X - 19</param>
                                 </condition>
+                                <condition id="-8" name="Compare two values" sid="309002649459775" type="System">
+                                    <param id="0" name="First value">abs(HitboxDir.X - EstruturaDir.X)</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Second value">abs(HitboxDir.Y - EstruturaDir.Y)</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="7" name="Set mirrored" sid="665160493029820" type="playerAnim">
@@ -5356,6 +5369,11 @@
                                     <param id="1" name="Comparison">5</param>
                                     <param id="2" name="Second value">EstruturaDir.Y + 19</param>
                                 </condition>
+                                <condition id="-8" name="Compare two values" sid="885603974399545" type="System">
+                                    <param id="0" name="First value">abs(HitboxDir.Y - EstruturaDir.Y)</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Second value">abs(HitboxDir.X - EstruturaDir.X)</param>
+                                </condition>
                             </conditions>
                             <actions>
                                 <action id="7" name="Set mirrored" sid="276700308042948" type="playerAnim">
@@ -5376,6 +5394,11 @@
                                     <param id="0" name="First value">BtnDirecional.Y</param>
                                     <param id="1" name="Comparison">3</param>
                                     <param id="2" name="Second value">EstruturaDir.Y - 19</param>
+                                </condition>
+                                <condition id="-8" name="Compare two values" sid="142131520469490" type="System">
+                                    <param id="0" name="First value">abs(HitboxDir.Y - EstruturaDir.Y)</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Second value">abs(HitboxDir.X - EstruturaDir.X)</param>
                                 </condition>
                             </conditions>
                             <actions>

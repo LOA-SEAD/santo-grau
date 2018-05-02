@@ -6922,86 +6922,106 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <comment>Controle da distância que ativará a direção que o jogador está indo. Optei por 19 (1/4 de 76, a distância máxima que é possível ir com o direcional) para não deixar muito sensível</comment>
-                        <event-block sid="511441552215391">
+                        <comment>Controle da distância que ativará a direção que o jogador está indo. Optei por 19 (1/4 de 76, a distância máxima que é possível ir com o direcional) para não deixar muito sensível&#x0D;&#x0A;Além disso, para fases onde são permitidas apenas as 4 direções, é comparado o valor absoluto do quanto o jogador moveu seu dedo na horizontal e na vertical para saber qual a direção que ele quer ir</comment>
+                        <event-block sid="152767178561582">
                             <conditions>
-                                <condition id="-8" name="Compare two values" sid="468865780525909" type="System">
+                                <condition id="-8" name="Compare two values" sid="499844666063785" type="System">
                                     <param id="0" name="First value">BtnDirecional.X</param>
                                     <param id="1" name="Comparison">5</param>
                                     <param id="2" name="Second value">EstruturaDir.X + 19</param>
                                 </condition>
+                                <condition id="-8" name="Compare two values" sid="484672613628736" type="System">
+                                    <param id="0" name="First value">abs(HitboxDir.X - EstruturaDir.X)</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Second value">abs(HitboxDir.Y - EstruturaDir.Y)</param>
+                                </condition>
                             </conditions>
                             <actions>
-                                <action id="7" name="Set mirrored" sid="919150183687562" type="playerAnim">
+                                <action id="7" name="Set mirrored" sid="981103731961817" type="playerAnim">
                                     <param id="0" name="State">1</param>
                                 </action>
-                                <action behavior="8Direction" id="7" name="Simulate control" sid="722393314725874" type="player">
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="709816364648026" type="player">
                                     <param id="0" name="Control">1</param>
                                 </action>
-                                <action id="4" name="Set animation" sid="584647847185371" type="playerAnim">
+                                <action id="4" name="Set animation" sid="334792105196653" type="playerAnim">
                                     <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
                                     <param id="1" name="From">1</param>
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="745563706950432">
+                        <event-block sid="965028679986227">
                             <conditions>
-                                <condition id="-8" name="Compare two values" sid="753966478052762" type="System">
+                                <condition id="-8" name="Compare two values" sid="958242260261706" type="System">
                                     <param id="0" name="First value">BtnDirecional.X</param>
                                     <param id="1" name="Comparison">3</param>
                                     <param id="2" name="Second value">EstruturaDir.X - 19</param>
                                 </condition>
+                                <condition id="-8" name="Compare two values" sid="189470716484316" type="System">
+                                    <param id="0" name="First value">abs(HitboxDir.X - EstruturaDir.X)</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Second value">abs(HitboxDir.Y - EstruturaDir.Y)</param>
+                                </condition>
                             </conditions>
                             <actions>
-                                <action id="7" name="Set mirrored" sid="113441383566498" type="playerAnim">
+                                <action id="7" name="Set mirrored" sid="619529502445794" type="playerAnim">
                                     <param id="0" name="State">0</param>
                                 </action>
-                                <action behavior="8Direction" id="7" name="Simulate control" sid="759403673798502" type="player">
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="108733687281887" type="player">
                                     <param id="0" name="Control">0</param>
                                 </action>
-                                <action id="4" name="Set animation" sid="956226793918874" type="playerAnim">
+                                <action id="4" name="Set animation" sid="938830533272678" type="playerAnim">
                                     <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
                                     <param id="1" name="From">1</param>
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="579778009354159">
+                        <event-block sid="295200512199884">
                             <conditions>
-                                <condition id="-8" name="Compare two values" sid="255619969094884" type="System">
+                                <condition id="-8" name="Compare two values" sid="411365559592769" type="System">
                                     <param id="0" name="First value">BtnDirecional.Y</param>
                                     <param id="1" name="Comparison">5</param>
                                     <param id="2" name="Second value">EstruturaDir.Y + 19</param>
                                 </condition>
+                                <condition id="-8" name="Compare two values" sid="197215907555014" type="System">
+                                    <param id="0" name="First value">abs(HitboxDir.Y - EstruturaDir.Y)</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Second value">abs(HitboxDir.X - EstruturaDir.X)</param>
+                                </condition>
                             </conditions>
                             <actions>
-                                <action id="7" name="Set mirrored" sid="515268130194290" type="playerAnim">
+                                <action id="7" name="Set mirrored" sid="761659299192114" type="playerAnim">
                                     <param id="0" name="State">1</param>
                                 </action>
-                                <action behavior="8Direction" id="7" name="Simulate control" sid="248650946019899" type="player">
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="429384158835113" type="player">
                                     <param id="0" name="Control">3</param>
                                 </action>
-                                <action id="4" name="Set animation" sid="794241514150583" type="playerAnim">
+                                <action id="4" name="Set animation" sid="562584306455176" type="playerAnim">
                                     <param id="0" name="Animation">&quot;FrenteAndando&quot;</param>
                                     <param id="1" name="From">1</param>
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="635555267104629">
+                        <event-block sid="238507390070688">
                             <conditions>
-                                <condition id="-8" name="Compare two values" sid="767012268429300" type="System">
+                                <condition id="-8" name="Compare two values" sid="899588229244500" type="System">
                                     <param id="0" name="First value">BtnDirecional.Y</param>
                                     <param id="1" name="Comparison">3</param>
                                     <param id="2" name="Second value">EstruturaDir.Y - 19</param>
                                 </condition>
+                                <condition id="-8" name="Compare two values" sid="429803061075424" type="System">
+                                    <param id="0" name="First value">abs(HitboxDir.Y - EstruturaDir.Y)</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Second value">abs(HitboxDir.X - EstruturaDir.X)</param>
+                                </condition>
                             </conditions>
                             <actions>
-                                <action id="7" name="Set mirrored" sid="372089550878672" type="playerAnim">
+                                <action id="7" name="Set mirrored" sid="195168194182798" type="playerAnim">
                                     <param id="0" name="State">1</param>
                                 </action>
-                                <action behavior="8Direction" id="7" name="Simulate control" sid="346618318751429" type="player">
+                                <action behavior="8Direction" id="7" name="Simulate control" sid="366002705123295" type="player">
                                     <param id="0" name="Control">2</param>
                                 </action>
-                                <action id="4" name="Set animation" sid="249991234664258" type="playerAnim">
+                                <action id="4" name="Set animation" sid="134300203993514" type="playerAnim">
                                     <param id="0" name="Animation">&quot;TrasAndando&quot;</param>
                                     <param id="1" name="From">1</param>
                                 </action>
