@@ -83,6 +83,9 @@
                 <action id="4" name="Preload" sid="385113059692761" type="Audio">
                     <param id="0" name="Audio file">capivara_1</param>
                 </action>
+                <action id="4" name="Preload" sid="666522413139969" type="Audio">
+                    <param id="0" name="Audio file">capivara_1_vem_aqui</param>
+                </action>
                 <action id="4" name="Preload" sid="959871943577599" type="Audio">
                     <param id="0" name="Audio file">capivara_2</param>
                 </action>
@@ -91,6 +94,9 @@
                 </action>
                 <action id="4" name="Preload" sid="923795499258191" type="Audio">
                     <param id="0" name="Audio file">capivara_4</param>
+                </action>
+                <action id="4" name="Preload" sid="502579025211580" type="Audio">
+                    <param id="0" name="Audio file">capivara_5</param>
                 </action>
                 <action id="4" name="Preload" sid="454176887531365" type="Audio">
                     <param id="0" name="Audio file">capivara_6</param>
@@ -673,7 +679,7 @@
                     <actions>
                         <action id="28" name="Play at object (by name)" sid="230695597981503" type="Audio">
                             <param id="0" name="Folder">0</param>
-                            <param id="1" name="Audio file name">choose(&quot;capivara_12&quot;, &quot;capivara_13&quot;, &quot;capivara_14&quot;, &quot;capivara_15&quot;)</param>
+                            <param id="1" name="Audio file name">&quot;capivara_1_vem_aqui&quot;</param>
                             <param id="2" name="Loop">0</param>
                             <param id="3" name="Volume">5-(((sqrt((player.X-capivara.X)^2+(player.Y-capivara.Y)^2))-150)/29)</param>
                             <param id="4" name="Object">capivara</param>
@@ -690,19 +696,41 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <event-block sid="103692619799972">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="121240756234105" type="System">
+                                    <param id="0" name="Variable">fraseAtualCAM</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">8</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="28" name="Play at object (by name)" sid="126114044694817" type="Audio">
+                                    <param id="0" name="Folder">0</param>
+                                    <param id="1" name="Audio file name">choose(&quot;capivara_12&quot;, &quot;capivara_13&quot;, &quot;capivara_14&quot;, &quot;capivara_15&quot;)</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">5-(((sqrt((player.X-capivara.X)^2+(player.Y-capivara.Y)^2))-150)/29)</param>
+                                    <param id="4" name="Object">capivara</param>
+                                    <param id="5" name="Inner angle">45</param>
+                                    <param id="6" name="Outer angle">45</param>
+                                    <param id="7" name="Outer gain">100</param>
+                                    <param id="8" name="Tag (optional)">&quot;capivara&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <comment>Ao indicar o chute, o melhor é tocar as duas falas anteriores</comment>
-                        <event-block sid="269355392597433">
+                        <event-block disabled="1" sid="269355392597433">
                             <conditions>
                                 <condition id="-14" name="Compare variable" sid="507306553535060" type="System">
                                     <param id="0" name="Variable">fraseAtualCAM</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">9</param>
+                                    <param id="2" name="Value">8</param>
                                 </condition>
                             </conditions>
                             <actions>
                                 <action id="28" name="Play at object (by name)" sid="599126943702793" type="Audio">
                                     <param id="0" name="Folder">0</param>
-                                    <param id="1" name="Audio file name">&quot;capivara_7&quot;</param>
+                                    <param id="1" name="Audio file name">&quot;capivara_6&quot;</param>
                                     <param id="2" name="Loop">0</param>
                                     <param id="3" name="Volume">5-(((sqrt((player.X-capivara.X)^2+(player.Y-capivara.Y)^2))-150)/29)</param>
                                     <param id="4" name="Object">capivara</param>
@@ -716,7 +744,7 @@
                                 </action>
                                 <action id="28" name="Play at object (by name)" sid="232183008764986" type="Audio">
                                     <param id="0" name="Folder">0</param>
-                                    <param id="1" name="Audio file name">&quot;capivara_8&quot;</param>
+                                    <param id="1" name="Audio file name">&quot;capivara_7&quot;</param>
                                     <param id="2" name="Loop">0</param>
                                     <param id="3" name="Volume">5-(((sqrt((player.X-capivara.X)^2+(player.Y-capivara.Y)^2))-150)/29)</param>
                                     <param id="4" name="Object">capivara</param>
@@ -2126,6 +2154,59 @@
                         </action>
                     </actions>
                 </event-block>
+                <comment>Efeito da Capivara indo até a bola (NECESSÁRIO FAZER)</comment>
+                <event-block sid="799996299405706">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="519539974284552" type="System">
+                            <param id="0" name="Variable">efeitoTorcidaBola</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">3</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Wait" sid="527321735754318" type="System">
+                            <param id="0" name="Seconds">3.0</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="612841882715843" type="capivara">
+                            <param id="0" name="X">1036</param>
+                            <param id="1" name="Y">576</param>
+                        </action>
+                        <action id="7" name="Set mirrored" sid="206346337814910" type="capivara">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="886625341963367" type="System">
+                            <param id="0" name="Variable">efeitoTorcidaBola</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="337518638834916">
+                            <conditions>
+                                <condition id="-20" name="Is on mobile device" sid="573921173968333" type="System" />
+                            </conditions>
+                            <actions>
+                                <action disabled="1" id="-12" name="Set group active" sid="364025278986602" type="System">
+                                    <param id="0" name="Group name">&quot;Mobile7&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action behavior="DragDrop" id="0" name="Set enabled" sid="198788619526239" type="HitboxDir">
+                                    <param id="0" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="150169356651304">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="412938194459347" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="397338493157278" type="System">
+                                    <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
                 <comment>Executar o áudio do diploma chamando - FALTA DAR ACESSIBILIDADE</comment>
                 <event-block sid="505816371524429">
                     <conditions>
@@ -3042,7 +3123,7 @@
                                 <condition id="-14" name="Compare variable" sid="732196549639122" type="System">
                                     <param id="0" name="Variable">fraseAtualCAM</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">7</param>
+                                    <param id="2" name="Value">8</param>
                                 </condition>
                             </conditions>
                             <actions />
@@ -4682,7 +4763,7 @@
                                 <condition id="-14" name="Compare variable" sid="474643194877371" type="System">
                                     <param id="0" name="Variable">fraseAtualCAM</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">7</param>
+                                    <param id="2" name="Value">8</param>
                                 </condition>
                                 <condition id="-14" name="Compare variable" sid="134061618861084" type="System">
                                     <param id="0" name="Variable">fraseAtualCAM</param>
@@ -5126,13 +5207,13 @@
                                         </event-block>
                                     </sub-events>
                                 </event-block>
-                                <comment>Volta para a torcida normal, com o volume sendo controlado conforme a proximidade da Ariel com a bola</comment>
+                                <comment>Volta para a torcida normal e a Capivara se desloca para próximo da bola (ANTIGO, COM O EFEITOTORCIDABOLA = 1: com o volume sendo controlado conforme a proximidade da Ariel com a bola) </comment>
                                 <event-block sid="763926716411792">
                                     <conditions>
                                         <condition id="-14" name="Compare variable" sid="297471086558484" type="System">
                                             <param id="0" name="Variable">fraseAtualCAM</param>
                                             <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">7</param>
+                                            <param id="2" name="Value">8</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -5149,9 +5230,59 @@
                                             <param id="3" name="Volume">volTorcida</param>
                                             <param id="1" name="Tag (optional)">&quot;torcida&quot;</param>
                                         </action>
-                                        <action id="-9" name="Set value" sid="960356482207455" type="System">
+                                        <action disabled="1" id="-9" name="Set value" sid="960356482207455" type="System">
                                             <param id="0" name="Variable">efeitoTorcidaBola</param>
                                             <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="709970385807696" type="System">
+                                            <param id="0" name="Variable">efeitoTorcidaBola</param>
+                                            <param id="1" name="Value">3</param>
+                                        </action>
+                                    </actions>
+                                    <sub-events>
+                                        <event-block sid="536982914237225">
+                                            <conditions>
+                                                <condition id="-20" name="Is on mobile device" sid="514748132830104" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action behavior="DragDrop" id="0" name="Set enabled" sid="406016122595299" type="HitboxDir">
+                                                    <param id="0" name="State">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="777304232764897">
+                                            <conditions>
+                                                <condition id="-22" name="Else" sid="379566955076803" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="500694244363819" type="System">
+                                                    <param id="0" name="Group name">&quot;playerMove7&quot;</param>
+                                                    <param id="1" name="State">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <comment>Apenas para mudar a expressão da Capivara</comment>
+                                <event-block sid="803961597703331">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="765678827903263" type="System">
+                                            <param id="0" name="Variable">fraseAtualCAM</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">9</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="499133706701161" type="System">
+                                            <param id="0" name="Variable">volTorcida</param>
+                                            <param id="1" name="Value">-20</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="757763790916932" type="System">
+                                            <param id="0" name="Variable">frameCapivara</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                        <action id="5" name="Set frame" sid="913483564802756" type="capivara">
+                                            <param id="0" name="Frame number">frameCapivara</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -5601,7 +5732,7 @@
                         </action>
                         <action id="-9" name="Set value" sid="888225124038421" type="System">
                             <param id="0" name="Variable">tamanhoDialogoCAM</param>
-                            <param id="1" name="Value">6</param>
+                            <param id="1" name="Value">7</param>
                         </action>
                         <action id="2" name="Stop" sid="873416227072754" type="playerAnim" />
                         <action id="-12" name="Set group active" sid="138636006246571" type="System">
