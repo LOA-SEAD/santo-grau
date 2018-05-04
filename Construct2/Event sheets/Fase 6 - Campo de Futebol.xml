@@ -2166,7 +2166,11 @@
                             <param id="2" name="Value">3</param>
                         </condition>
                     </conditions>
-                    <actions />
+                    <actions>
+                        <action behavior="Bullet" id="5" name="Set enabled" sid="105635366059456" type="capivara">
+                            <param id="0" name="State">1</param>
+                        </action>
+                    </actions>
                     <sub-events>
                         <comment>Animação e, ao fim dela, toca o som de ação (evento isolado dos demais por conta da animação da capivara indo até a bola)</comment>
                         <event-block sid="493984204417623">
@@ -2174,8 +2178,21 @@
                                 <condition id="-4" name="Trigger once while true" sid="870480748618270" type="System" />
                             </conditions>
                             <actions>
+                                <action id="25" name="Play at object" sid="648648337621350" type="Audio">
+                                    <param id="0" name="Audio file">passo_grama</param>
+                                    <param id="1" name="Loop">1</param>
+                                    <param id="2" name="Volume">volPassos</param>
+                                    <param id="3" name="Object">capivara</param>
+                                    <param id="4" name="Inner angle">45</param>
+                                    <param id="5" name="Outer angle">45</param>
+                                    <param id="6" name="Outer gain">100</param>
+                                    <param id="7" name="Tag (optional)">&quot;passos&quot;</param>
+                                </action>
                                 <action id="-16" name="Wait" sid="527321735754318" type="System">
-                                    <param id="0" name="Seconds">3.0</param>
+                                    <param id="0" name="Seconds">3.25</param>
+                                </action>
+                                <action id="6" name="Stop" sid="728072191668173" type="Audio">
+                                    <param id="0" name="Tag">&quot;passos&quot;</param>
                                 </action>
                                 <action id="-3" name="Set position" sid="612841882715843" type="capivara">
                                     <param id="0" name="X">1036</param>
@@ -2224,6 +2241,16 @@
                             </sub-events>
                         </event-block>
                     </sub-events>
+                </event-block>
+                <event-block sid="890066618070519">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="195731476616279" type="System" />
+                    </conditions>
+                    <actions>
+                        <action behavior="Bullet" id="5" name="Set enabled" sid="692612743217757" type="capivara">
+                            <param id="0" name="State">0</param>
+                        </action>
+                    </actions>
                 </event-block>
                 <comment>Executar o áudio do diploma chamando - FALTA DAR ACESSIBILIDADE</comment>
                 <event-block sid="505816371524429">
