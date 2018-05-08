@@ -43,6 +43,8 @@
         <variable constant="0" name="frameCapivara" sid="176182461252024" static="0" type="number">0</variable>
         <comment>Variável para controlar o tempo de queda da bola utilizando o dt</comment>
         <variable constant="0" name="tempoQuedaBola" sid="485805498801323" static="0" type="number">1.4</variable>
+        <comment>Variável para controlar a posição em X do balão da Capivara, quando ela muda de posição</comment>
+        <variable constant="0" name="varianteX" sid="666851474757941" static="0" type="number">0</variable>
         <event-block sid="704942424572087">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="961560001477127" type="System" />
@@ -394,6 +396,9 @@
                     <param id="0" name="Frame number">0</param>
                 </action>
                 <action id="5" name="Set frame" sid="809476266758546" type="capivara">
+                    <param id="0" name="Frame number">0</param>
+                </action>
+                <action id="5" name="Set frame" sid="252764737101534" type="BalaoDialogo">
                     <param id="0" name="Frame number">0</param>
                 </action>
                 <action id="-8" name="Set angle" sid="648346069534115" type="AndaParaCimaDiploma">
@@ -2157,7 +2162,7 @@
                         </action>
                     </actions>
                 </event-block>
-                <comment>Efeito da Capivara indo até a bola (NECESSÁRIO FAZER)</comment>
+                <comment>Efeito da Capivara indo até a bola</comment>
                 <event-block sid="799996299405706">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="519539974284552" type="System">
@@ -2169,6 +2174,13 @@
                     <actions>
                         <action behavior="Bullet" id="5" name="Set enabled" sid="105635366059456" type="capivara">
                             <param id="0" name="State">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="478491952964695" type="System">
+                            <param id="0" name="Variable">varianteX</param>
+                            <param id="1" name="Value">-300</param>
+                        </action>
+                        <action id="5" name="Set frame" sid="935759812853896" type="BalaoDialogo">
+                            <param id="0" name="Frame number">1</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -4738,17 +4750,29 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-3" name="Set position" sid="654269112111549" type="BalaoDialogo">
+                                <action disabled="1" id="-3" name="Set position" sid="654269112111549" type="BalaoDialogo">
                                     <param id="0" name="X">320</param>
                                     <param id="1" name="Y">120</param>
                                 </action>
-                                <action id="-3" name="Set position" sid="482362287959513" type="DialogoPersonagem">
+                                <action disabled="1" id="-3" name="Set position" sid="482362287959513" type="DialogoPersonagem">
                                     <param id="0" name="X">167</param>
                                     <param id="1" name="Y">28</param>
                                 </action>
-                                <action id="-3" name="Set position" sid="272232162781000" type="Dialogos">
+                                <action disabled="1" id="-3" name="Set position" sid="272232162781000" type="Dialogos">
                                     <param id="0" name="X">75</param>
                                     <param id="1" name="Y">55</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="327663876701994" type="BalaoDialogo">
+                                    <param id="0" name="X">capivara.X + 179 + varianteX</param>
+                                    <param id="1" name="Y">capivara.Y - 216</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="572738900775590" type="DialogoPersonagem">
+                                    <param id="0" name="X">capivara.X + 26 + varianteX</param>
+                                    <param id="1" name="Y">capivara.Y - 308</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="107761175652835" type="Dialogos">
+                                    <param id="0" name="X">capivara.X - 66 + varianteX</param>
+                                    <param id="1" name="Y">capivara.Y - 281</param>
                                 </action>
                             </actions>
                         </event-block>
