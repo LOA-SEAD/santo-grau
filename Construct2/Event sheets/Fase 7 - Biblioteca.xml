@@ -116,14 +116,14 @@
                     <param id="0" name="Audio file">mago_21</param>
                 </action>
                 <action id="33" name="Stop all" sid="701910513711929" type="Audio" />
-                <action id="-9" name="Set value" sid="702198802774596" type="System">
+                <action disabled="1" id="-9" name="Set value" sid="702198802774596" type="System">
                     <param id="0" name="Variable">volMusica</param>
                     <param id="1" name="Value">volMusica - 20</param>
                 </action>
                 <action id="0" name="Play" sid="475133934047342" type="Audio">
                     <param id="0" name="Audio file">ambiencia_biblioteca_loop</param>
                     <param id="2" name="Loop">1</param>
-                    <param id="3" name="Volume">volMusica</param>
+                    <param id="3" name="Volume">volMusica+10</param>
                     <param id="1" name="Tag (optional)">&quot;musica&quot;</param>
                 </action>
                 <action id="0" name="Load JSON" sid="701092887753104" type="BibliotecaJSON" />
@@ -1071,7 +1071,7 @@
                                                 <action id="25" name="Play at object" sid="310595774134302" type="Audio">
                                                     <param id="0" name="Audio file">mago_21</param>
                                                     <param id="1" name="Loop">0</param>
-                                                    <param id="2" name="Volume">0</param>
+                                                    <param id="2" name="Volume">(1090-(3*distance(player.X, player.Y, bibliotecarioBase.X, bibliotecarioBase.Y)))/109</param>
                                                     <param id="3" name="Object">bibliotecarioBase</param>
                                                     <param id="4" name="Inner angle">45</param>
                                                     <param id="5" name="Outer angle">45</param>
@@ -1171,7 +1171,7 @@
                                                 <action id="25" name="Play at object" sid="420211928041312" type="Audio">
                                                     <param id="0" name="Audio file">mago_21</param>
                                                     <param id="1" name="Loop">0</param>
-                                                    <param id="2" name="Volume">0</param>
+                                                    <param id="2" name="Volume">(1090-(3*distance(player.X, player.Y, bibliotecarioBase.X, bibliotecarioBase.Y)))/109</param>
                                                     <param id="3" name="Object">bibliotecarioBase</param>
                                                     <param id="4" name="Inner angle">45</param>
                                                     <param id="5" name="Outer angle">45</param>
@@ -1286,7 +1286,7 @@
                                                         <action id="25" name="Play at object" sid="918750889462340" type="Audio">
                                                             <param id="0" name="Audio file">mago_21</param>
                                                             <param id="1" name="Loop">0</param>
-                                                            <param id="2" name="Volume">0</param>
+                                                            <param id="2" name="Volume">(1090-(3*distance(player.X, player.Y, bibliotecarioBase.X, bibliotecarioBase.Y)))/109</param>
                                                             <param id="3" name="Object">bibliotecarioBase</param>
                                                             <param id="4" name="Inner angle">45</param>
                                                             <param id="5" name="Outer angle">45</param>
@@ -1388,7 +1388,7 @@
                                                 <action id="25" name="Play at object" sid="525616512081706" type="Audio">
                                                     <param id="0" name="Audio file">mago_21</param>
                                                     <param id="1" name="Loop">0</param>
-                                                    <param id="2" name="Volume">0</param>
+                                                    <param id="2" name="Volume">(1090-(3*distance(player.X, player.Y, bibliotecarioBase.X, bibliotecarioBase.Y)))/109</param>
                                                     <param id="3" name="Object">bibliotecarioBase</param>
                                                     <param id="4" name="Inner angle">45</param>
                                                     <param id="5" name="Outer angle">45</param>
@@ -1502,6 +1502,115 @@
                         <action id="-9" name="Set value" sid="341417445686483" type="System">
                             <param id="0" name="Variable">limiteLayout</param>
                             <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="883971070810305">
+                    <conditions>
+                        <condition id="-1" name="Every tick" sid="531698886427711" type="System" />
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="852092877169988">
+                            <conditions>
+                                <condition id="5" name="Is tag playing" sid="823909484557770" type="Audio">
+                                    <param id="0" name="Tag">&quot;cuidado&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="3" name="Set volume" sid="921756713737055" type="Audio">
+                                    <param id="0" name="Tag">&quot;ronco&quot;</param>
+                                    <param id="1" name="dB">-100</param>
+                                </action>
+                                <action id="3" name="Set volume" sid="514978518696908" type="Audio">
+                                    <param id="0" name="Tag">&quot;tosse&quot;</param>
+                                    <param id="1" name="dB">-100</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="221646040291212">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="601378969260491" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="3" name="Set volume" sid="535931327606229" type="Audio">
+                                    <param id="0" name="Tag">&quot;ronco&quot;</param>
+                                    <param id="1" name="dB">(1090-(3*distance(player.X, player.Y, bibliotecarioBase.X, bibliotecarioBase.Y)))/109</param>
+                                </action>
+                                <action id="3" name="Set volume" sid="486197578729527" type="Audio">
+                                    <param id="0" name="Tag">&quot;tosse&quot;</param>
+                                    <param id="1" name="dB">(1090-(3*distance(player.X, player.Y, bibliotecarioBase.X, bibliotecarioBase.Y)))/109</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="535518053036865">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="109449751462849" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="25" name="Play at object" sid="361384927564197" type="Audio">
+                            <param id="0" name="Audio file">mago_ronco</param>
+                            <param id="1" name="Loop">1</param>
+                            <param id="2" name="Volume">volSons</param>
+                            <param id="3" name="Object">bibliotecarioBase</param>
+                            <param id="4" name="Inner angle">45</param>
+                            <param id="5" name="Outer angle">45</param>
+                            <param id="6" name="Outer gain">100</param>
+                            <param id="7" name="Tag (optional)">&quot;ronco&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="929623743868474">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="628856061768930" type="System">
+                            <param id="0" name="Variable">controleFase8</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="840101205865421" type="System">
+                            <param id="0" name="Variable">controleDialogos8</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="734734790525712">
+                            <conditions>
+                                <condition id="-6" name="Every X seconds" sid="746477652802441" type="System">
+                                    <param id="0" name="Interval (seconds)">8</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="25" name="Play at object" sid="887457760155868" type="Audio">
+                                    <param id="0" name="Audio file">mago_tosse</param>
+                                    <param id="1" name="Loop">0</param>
+                                    <param id="2" name="Volume">volSons</param>
+                                    <param id="3" name="Object">bibliotecarioBase</param>
+                                    <param id="4" name="Inner angle">45</param>
+                                    <param id="5" name="Outer angle">45</param>
+                                    <param id="6" name="Outer gain">100</param>
+                                    <param id="7" name="Tag (optional)">&quot;tosse&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="826685778896573">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="748163747195342" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="6" name="Stop" sid="285020229044162" type="Audio">
+                            <param id="0" name="Tag">&quot;passos&quot;</param>
+                        </action>
+                        <action id="6" name="Stop" sid="169013073122158" type="Audio">
+                            <param id="0" name="Tag">&quot;ronco&quot;</param>
+                        </action>
+                        <action id="6" name="Stop" sid="395558626372132" type="Audio">
+                            <param id="0" name="Tag">&quot;tosse&quot;</param>
                         </action>
                     </actions>
                 </event-block>
@@ -1641,10 +1750,10 @@
                                 <comment>Triggers para o início do diálogo</comment>
                                 <event-block any="1" sid="121666314486217">
                                     <conditions>
-                                        <condition id="0" name="On key pressed" sid="199388760663222" type="Keyboard">
+                                        <condition disabled="1" id="0" name="On key pressed" sid="199388760663222" type="Keyboard">
                                             <param id="0" name="Key">69</param>
                                         </condition>
-                                        <condition id="17" name="On tap object" sid="243533836052800" type="Touch">
+                                        <condition disabled="1" id="17" name="On tap object" sid="243533836052800" type="Touch">
                                             <param id="0" name="Object">HitboxDir</param>
                                         </condition>
                                     </conditions>
@@ -1720,6 +1829,32 @@
                                                         </action>
                                                     </actions>
                                                     <sub-events>
+                                                        <event-block sid="263490747818083">
+                                                            <conditions>
+                                                                <condition id="2" name="Is playing" sid="497920523080200" type="playerAnim">
+                                                                    <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="4" name="Set animation" sid="167646176377120" type="playerAnim">
+                                                                    <param id="0" name="Animation">&quot;DireitaParado&quot;</param>
+                                                                    <param id="1" name="From">1</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                        <event-block sid="728033769474470">
+                                                            <conditions>
+                                                                <condition id="2" name="Is playing" sid="597846288526458" type="playerAnim">
+                                                                    <param id="0" name="Animation">&quot;TrasAndando&quot;</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="4" name="Set animation" sid="524407199792565" type="playerAnim">
+                                                                    <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                                                                    <param id="1" name="From">1</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
                                                         <event-block sid="250679501887651">
                                                             <conditions>
                                                                 <condition id="-20" name="Is on mobile device" sid="889732673601493" type="System" />
