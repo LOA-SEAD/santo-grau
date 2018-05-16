@@ -506,6 +506,8 @@
                             <param id="0" name="Group name">&quot;playerMove8&quot;</param>
                             <param id="1" name="State">0</param>
                         </action>
+                        <action id="-9" name="Destroy" sid="158484282265535" type="brilhoFogo" />
+                        <action id="-9" name="Destroy" sid="655782041251283" type="fogo" />
                         <action id="-26" name="Move to layer" sid="638962287886899" type="BtnDirecional">
                             <param id="0" name="Layer">&quot;Mobile&quot;</param>
                         </action>
@@ -692,39 +694,65 @@
                         </event-block>
                     </sub-events>
                 </event-block>
-                <event-block sid="969074091239492">
+                <event-block sid="385642972859388">
                     <conditions>
-                        <condition id="-14" name="Pick by unique ID" sid="921725693627271" type="controleAudio">
+                        <condition id="-14" name="Pick by unique ID" sid="752444803607100" type="controleAudio">
                             <param id="0" name="Unique ID">735</param>
                         </condition>
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="599222862337916">
+                        <event-block sid="888913436261390">
                             <conditions>
-                                <condition id="-14" name="Compare variable" sid="207273897131659" type="System">
+                                <condition id="-14" name="Compare variable" sid="918355922076768" type="System">
                                     <param id="0" name="Variable">volSons</param>
                                     <param id="1" name="Comparison">0</param>
                                     <param id="2" name="Value">0</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="5" name="Set frame" sid="199891699625264" type="controleAudio">
+                                <action id="5" name="Set frame" sid="539480062808929" type="controleAudio">
                                     <param id="0" name="Frame number">0</param>
                                 </action>
                             </actions>
                         </event-block>
-                        <event-block sid="851660555382703">
+                        <event-block sid="902958632786990">
                             <conditions>
-                                <condition id="-22" name="Else" sid="326660831979977" type="System" />
+                                <condition id="-22" name="Else" sid="240193000710753" type="System" />
                             </conditions>
                             <actions>
-                                <action id="5" name="Set frame" sid="241284297478647" type="controleAudio">
+                                <action id="5" name="Set frame" sid="766807464434703" type="controleAudio">
                                     <param id="0" name="Frame number">1</param>
                                 </action>
                             </actions>
                         </event-block>
                     </sub-events>
+                </event-block>
+                <event-block sid="969074091239492">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="921725693627271" type="fogo">
+                            <param id="0" name="Unique ID">838</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Pin" id="0" name="Pin to object" sid="254562354894375" type="fogo">
+                            <param id="0" name="Pin to">bibPortaFogo</param>
+                            <param id="1" name="Mode">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="303245830794542">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="677208943546973" type="brilhoFogo">
+                            <param id="0" name="Unique ID">842</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Pin" id="0" name="Pin to object" sid="814058981438943" type="brilhoFogo">
+                            <param id="0" name="Pin to">bibPortaFogo</param>
+                            <param id="1" name="Mode">0</param>
+                        </action>
+                    </actions>
                 </event-block>
             </sub-events>
         </event-block>
@@ -1603,9 +1631,6 @@
                         <condition id="-22" name="Else" sid="748163747195342" type="System" />
                     </conditions>
                     <actions>
-                        <action id="6" name="Stop" sid="285020229044162" type="Audio">
-                            <param id="0" name="Tag">&quot;passos&quot;</param>
-                        </action>
                         <action id="6" name="Stop" sid="169013073122158" type="Audio">
                             <param id="0" name="Tag">&quot;ronco&quot;</param>
                         </action>
@@ -1613,6 +1638,18 @@
                             <param id="0" name="Tag">&quot;tosse&quot;</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <event-block sid="711025846962824">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="420943031124117" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="6" name="Stop" sid="285020229044162" type="Audio">
+                                    <param id="0" name="Tag">&quot;passos&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
@@ -2878,6 +2915,9 @@
                             <param id="0" name="Tag">&quot;sons&quot;</param>
                             <param id="1" name="dB">volSons</param>
                         </action>
+                        <action id="-16" name="Set opacity" sid="260757784693281" type="brilhoFogo">
+                            <param id="0" name="Opacity">random(14,17)</param>
+                        </action>
                     </actions>
                     <sub-events>
                         <event-block sid="563870837124285">
@@ -2909,6 +2949,14 @@
                             </actions>
                         </event-block>
                     </sub-events>
+                </event-block>
+                <event-block sid="938228718865719">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="953613805786964" type="System">
+                            <param id="0" name="Interval (seconds)">0.2</param>
+                        </condition>
+                    </conditions>
+                    <actions />
                 </event-block>
                 <event-group description="Controla o efeito de fechar a porta" sid="582077944464091" title="FecharPorta">
                     <sub-events>
@@ -3452,15 +3500,11 @@
                                         <action id="6" name="Stop" sid="127217985736942" type="Audio">
                                             <param id="0" name="Tag">&quot;passos&quot;</param>
                                         </action>
-                                        <action id="25" name="Play at object" sid="905212338616786" type="Audio">
+                                        <action id="0" name="Play" sid="905212338616786" type="Audio">
                                             <param id="0" name="Audio file">andando_carpete</param>
-                                            <param id="1" name="Loop">1</param>
-                                            <param id="2" name="Volume">((Player.Y*(volPassosMax - volPassosMin)/(WindowHeight) ) + volPassosMin)</param>
-                                            <param id="3" name="Object">ReceptorAudio</param>
-                                            <param id="4" name="Inner angle">45</param>
-                                            <param id="5" name="Outer angle">45</param>
-                                            <param id="6" name="Outer gain">100</param>
-                                            <param id="7" name="Tag (optional)">&quot;passos&quot;</param>
+                                            <param id="2" name="Loop">1</param>
+                                            <param id="3" name="Volume">((Player.Y*(volPassosMax - volPassosMin)/(WindowHeight) ) + volPassosMin)</param>
+                                            <param id="1" name="Tag (optional)">&quot;passos&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -3480,15 +3524,11 @@
                                         <action id="6" name="Stop" sid="751108853424265" type="Audio">
                                             <param id="0" name="Tag">&quot;passos&quot;</param>
                                         </action>
-                                        <action id="25" name="Play at object" sid="486755896639999" type="Audio">
+                                        <action id="0" name="Play" sid="628051303636132" type="Audio">
                                             <param id="0" name="Audio file">andando_sem_carpete</param>
-                                            <param id="1" name="Loop">1</param>
-                                            <param id="2" name="Volume">((Player.Y*(volPassosMax - volPassosMin)/(WindowHeight) ) + volPassosMin)</param>
-                                            <param id="3" name="Object">ReceptorAudio</param>
-                                            <param id="4" name="Inner angle">45</param>
-                                            <param id="5" name="Outer angle">45</param>
-                                            <param id="6" name="Outer gain">100</param>
-                                            <param id="7" name="Tag (optional)">&quot;passos&quot;</param>
+                                            <param id="2" name="Loop">1</param>
+                                            <param id="3" name="Volume">((Player.Y*(volPassosMax - volPassosMin)/(WindowHeight) ) + volPassosMin)</param>
+                                            <param id="1" name="Tag (optional)">&quot;passos&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -3622,6 +3662,53 @@
                             <param id="0" name="Visibility">0</param>
                         </action>
                     </actions>
+                </event-block>
+                <comment>Efeito 3D do mesa</comment>
+                <event-block sid="638668386276042">
+                    <conditions>
+                        <condition id="-14" name="Pick by unique ID" sid="953812444514718" type="bibMesa">
+                            <param id="0" name="Unique ID">711</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action behavior="Solid" id="0" name="Set enabled" sid="798346021757361" type="bibMesa">
+                            <param id="0" name="State">0</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="607663136254728">
+                            <conditions>
+                                <condition id="-2" name="Compare Y" sid="311496573642840" type="player">
+                                    <param id="0" name="Comparison">2</param>
+                                    <param id="1" name="Y co-ordinate">bibMesa.Y-40</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-26" name="Move to layer" sid="165176783570066" type="bibMesa">
+                                    <param id="0" name="Layer">&quot;Cenario2&quot;</param>
+                                </action>
+                                <action id="-26" name="Move to layer" sid="219554880008671" type="recompensa">
+                                    <param id="0" name="Layer">&quot;Cenario2&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="374344793116755">
+                            <conditions>
+                                <condition id="-2" name="Compare Y" sid="939088813487433" type="player">
+                                    <param id="0" name="Comparison">5</param>
+                                    <param id="1" name="Y co-ordinate">bibMesa.Y-40</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-26" name="Move to layer" sid="454187223788328" type="bibMesa">
+                                    <param id="0" name="Layer">&quot;Cenario1&quot;</param>
+                                </action>
+                                <action id="-26" name="Move to layer" sid="493311728546039" type="recompensa">
+                                    <param id="0" name="Layer">&quot;Cenario1&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
@@ -6067,7 +6154,7 @@
                     <sub-events>
                         <variable constant="0" name="opacidadeMax" sid="561917690284664" static="0" type="number">75</variable>
                         <variable constant="0" name="opacidadeMin" sid="214921210845871" static="0" type="number">-10</variable>
-                        <variable constant="0" name="volMax" sid="648581825251438" static="0" type="number">0</variable>
+                        <variable constant="0" name="volMax" sid="648581825251438" static="0" type="number">10</variable>
                         <variable constant="0" name="volMin" sid="197111304160079" static="0" type="number">-40</variable>
                         <event-block sid="273376100395075">
                             <conditions>
@@ -6939,6 +7026,9 @@
                                 <condition id="-4" name="Trigger once while true" sid="360933134010924" type="System" />
                             </conditions>
                             <actions>
+                                <action id="0" name="Set text" sid="583750272433797" type="RespostaBIB">
+                                    <param id="0" name="Text">&quot;&quot;</param>
+                                </action>
                                 <action id="-4" name="Set layer visible" sid="749622071359693" type="System">
                                     <param id="0" name="Layer">5</param>
                                     <param id="1" name="Visibility">0</param>
