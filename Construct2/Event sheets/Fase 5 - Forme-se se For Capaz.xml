@@ -1871,7 +1871,7 @@
                                         <condition id="-14" name="Compare variable" sid="390379597508673" type="System">
                                             <param id="0" name="Variable">tamanhoDialogoTCC</param>
                                             <param id="1" name="Comparison">1</param>
-                                            <param id="2" name="Value">14</param>
+                                            <param id="2" name="Value">15</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -2695,6 +2695,66 @@
                                                         </event-block>
                                                     </sub-events>
                                                 </event-block>
+                                                <comment>Ao acertar a primeira pergunta, edita a animação da personagem e avisa o jogador sobre o que fazer</comment>
+                                                <event-block sid="877873484229675">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="876924550024916" type="System">
+                                                            <param id="0" name="Variable">perguntaTCC</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">2</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="4" name="Set animation" sid="364736127392662" type="playerAnim">
+                                                            <param id="0" name="Animation">playerAnim.AnimationName &amp; &quot;TochaApagada&quot;</param>
+                                                            <param id="1" name="From">1</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="598401552487116" type="System">
+                                                            <param id="0" name="Group name">&quot;controleBolinhas&quot;</param>
+                                                            <param id="1" name="State">0</param>
+                                                        </action>
+                                                        <action id="11" name="Set collisions enabled" sid="630939541174585" type="player">
+                                                            <param id="0" name="Collisions">0</param>
+                                                        </action>
+                                                        <action id="2" name="Stop" sid="138970087783340" type="playerAnim" />
+                                                        <action id="-9" name="Set value" sid="693830142919618" type="System">
+                                                            <param id="0" name="Variable">tamanhoDialogoTCC</param>
+                                                            <param id="1" name="Value">7</param>
+                                                        </action>
+                                                        <action id="-9" name="Set value" sid="178185734202201" type="System">
+                                                            <param id="0" name="Variable">carregarBalaoDialogo</param>
+                                                            <param id="1" name="Value">1</param>
+                                                        </action>
+                                                        <action id="-12" name="Set group active" sid="875356377110660" type="System">
+                                                            <param id="0" name="Group name">&quot;dialogoTCC&quot;</param>
+                                                            <param id="1" name="State">1</param>
+                                                        </action>
+                                                    </actions>
+                                                    <sub-events>
+                                                        <event-block sid="779189975530220">
+                                                            <conditions>
+                                                                <condition id="-20" name="Is on mobile device" sid="510533658016206" type="System" />
+                                                            </conditions>
+                                                            <actions>
+                                                                <action behavior="DragDrop" id="0" name="Set enabled" sid="379192748464455" type="HitboxDir">
+                                                                    <param id="0" name="State">0</param>
+                                                                </action>
+                                                                <action behavior="8Direction" id="0" name="Stop" sid="808212001664356" type="player" />
+                                                            </actions>
+                                                        </event-block>
+                                                        <event-block sid="633262454638485">
+                                                            <conditions>
+                                                                <condition id="-22" name="Else" sid="154968986775783" type="System" />
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="-12" name="Set group active" sid="332318840903408" type="System">
+                                                                    <param id="0" name="Group name">&quot;playerMove6&quot;</param>
+                                                                    <param id="1" name="State">0</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
                                             </sub-events>
                                         </event-block>
                                         <comment>Errou a resposta</comment>
@@ -2999,7 +3059,7 @@
                                         <action id="2" name="Stop" sid="333804371726730" type="playerAnim" />
                                         <action id="-9" name="Set value" sid="618603758294182" type="System">
                                             <param id="0" name="Variable">tamanhoDialogoTCC</param>
-                                            <param id="1" name="Value">7</param>
+                                            <param id="1" name="Value">8</param>
                                         </action>
                                         <action id="-9" name="Set value" sid="245143600081171" type="System">
                                             <param id="0" name="Variable">carregarBalaoDialogo</param>
@@ -3194,7 +3254,7 @@
                                 </action>
                                 <action id="-9" name="Set value" sid="244789510978313" type="System">
                                     <param id="0" name="Variable">tamanhoDialogoTCC</param>
-                                    <param id="1" name="Value">14</param>
+                                    <param id="1" name="Value">15</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="670641613199686" type="System">
                                     <param id="0" name="Variable">carregarBalaoDialogo</param>
