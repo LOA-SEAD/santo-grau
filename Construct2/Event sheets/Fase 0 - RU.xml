@@ -122,6 +122,10 @@
                     <param id="0" name="Variable">fase</param>
                     <param id="1" name="Value">0</param>
                 </action>
+                <action id="-9" name="Set value" sid="916170714963470" type="System">
+                    <param id="0" name="Variable">numeroBotoesMenu</param>
+                    <param id="1" name="Value">5</param>
+                </action>
                 <action id="-9" name="Set value" sid="545569200912575" type="System">
                     <param id="0" name="Variable">pontuacaoInicio</param>
                     <param id="1" name="Value">pontos</param>
@@ -4523,6 +4527,34 @@
                                         </action>
                                     </actions>
                                 </event-block>
+                                <event-block sid="206297223505710">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="939872583609411" type="System">
+                                            <param id="0" name="Variable">acessControle</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">21</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="428378307518573" type="acessBotao">
+                                            <param id="0" name="Y">380</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="686209563959309">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="470656619525299" type="System">
+                                            <param id="0" name="Variable">acessControle</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">22</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="481370859500775" type="acessBotao">
+                                            <param id="0" name="Y">470</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                                 <event-block any="1" sid="862937645502917">
                                     <conditions>
                                         <condition id="0" name="On key pressed" sid="789034467653804" type="Keyboard">
@@ -4535,7 +4567,7 @@
                                     <actions>
                                         <action id="-9" name="Set value" sid="911201872057896" type="System">
                                             <param id="0" name="Variable">acessControle</param>
-                                            <param id="1" name="Value">(acessControle % 5) + 1</param>
+                                            <param id="1" name="Value">(acessControle % numeroBotoesMenu) + 1 + (popup.Opacity * 0.2)</param>
                                         </action>
                                     </actions>
                                     <sub-events>
@@ -4617,6 +4649,26 @@
                                             </conditions>
                                             <actions />
                                         </event-block>
+                                        <event-block sid="965719221687756">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="660163802329582" type="System">
+                                                    <param id="0" name="Variable">acessControle</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">21</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                        </event-block>
+                                        <event-block sid="289974141544778">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="794935307274243" type="System">
+                                                    <param id="0" name="Variable">acessControle</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">22</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                        </event-block>
                                     </sub-events>
                                 </event-block>
                                 <event-block any="1" sid="461898417705865">
@@ -4631,7 +4683,7 @@
                                     <actions>
                                         <action id="-9" name="Set value" sid="307345288846262" type="System">
                                             <param id="0" name="Variable">acessControle</param>
-                                            <param id="1" name="Value">((acessControle + 3) % 5) + 1</param>
+                                            <param id="1" name="Value">((acessControle + (numeroBotoesMenu - 2)) % numeroBotoesMenu) + 1 + (popup.Opacity * 0.2)</param>
                                         </action>
                                     </actions>
                                     <sub-events>
@@ -4703,20 +4755,39 @@
                                             </conditions>
                                             <actions />
                                         </event-block>
+                                        <event-block sid="440495863699762">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="394185850454315" type="System">
+                                                    <param id="0" name="Variable">acessControle</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">21</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                        </event-block>
+                                        <event-block sid="285060968534132">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="852834789323505" type="System">
+                                                    <param id="0" name="Variable">acessControle</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">22</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                        </event-block>
                                     </sub-events>
                                 </event-block>
-                                <event-block any="1" disabled="1" sid="760912735421459">
+                                <event-block sid="760912735421459">
                                     <conditions>
-                                        <condition id="0" name="On key pressed" sid="596039147134934" type="Keyboard">
-                                            <param id="0" name="Key">32</param>
-                                        </condition>
                                         <condition id="0" name="On key pressed" sid="674191253900359" type="Keyboard">
                                             <param id="0" name="Key">13</param>
                                         </condition>
+                                        <condition id="-9" name="Is visible" sid="212063304898594" type="acessBotao" />
                                     </conditions>
                                     <actions />
                                     <sub-events>
-                                        <event-block disabled="1" sid="316593067474737">
+                                        <comment>Ação do botão &quot;Continuar&quot;</comment>
+                                        <event-block sid="316593067474737">
                                             <conditions>
                                                 <condition id="-14" name="Compare variable" sid="187575182979668" type="System">
                                                     <param id="0" name="Variable">acessControle</param>
@@ -4725,21 +4796,14 @@
                                                 </condition>
                                             </conditions>
                                             <actions>
-                                                <action id="0" name="Play" sid="246151952665020" type="Audio">
-                                                    <param id="0" name="Audio file">botoes_menu</param>
-                                                    <param id="2" name="Loop">0</param>
-                                                    <param id="3" name="Volume">volSons</param>
-                                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                                </action>
-                                                <action id="-2" name="Go to layout" sid="648536981874140" type="System">
-                                                    <param id="0" name="Layout">Cena 1</param>
-                                                </action>
-                                                <action disabled="1" id="-2" name="Go to layout" sid="138013551913927" type="System">
-                                                    <param id="0" name="Layout">Fase 6</param>
+                                                <action id="-12" name="Set group active" sid="591748930475681" type="System">
+                                                    <param id="0" name="Group name">&quot;BtnContinuar1&quot;</param>
+                                                    <param id="1" name="State">1</param>
                                                 </action>
                                             </actions>
                                         </event-block>
-                                        <event-block disabled="1" sid="131406383884894">
+                                        <comment>Ação do botão &quot;Salvar&quot;</comment>
+                                        <event-block sid="131406383884894">
                                             <conditions>
                                                 <condition id="-14" name="Compare variable" sid="807969489864627" type="System">
                                                     <param id="0" name="Variable">acessControle</param>
@@ -4748,18 +4812,14 @@
                                                 </condition>
                                             </conditions>
                                             <actions>
-                                                <action id="0" name="Play" sid="716369726246242" type="Audio">
-                                                    <param id="0" name="Audio file">botoes_menu</param>
-                                                    <param id="2" name="Loop">0</param>
-                                                    <param id="3" name="Volume">volSons</param>
-                                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                                </action>
-                                                <action id="-37" name="Load" sid="759518537724564" type="System">
-                                                    <param id="0" name="Slot">&quot;save&quot;</param>
+                                                <action id="-12" name="Set group active" sid="945433806404349" type="System">
+                                                    <param id="0" name="Group name">&quot;BtnSalvar1&quot;</param>
+                                                    <param id="1" name="State">1</param>
                                                 </action>
                                             </actions>
                                         </event-block>
-                                        <event-block disabled="1" sid="401266582680809">
+                                        <comment>Ação do botão &quot;Recomeçar&quot;</comment>
+                                        <event-block sid="401266582680809">
                                             <conditions>
                                                 <condition id="-14" name="Compare variable" sid="975090891965914" type="System">
                                                     <param id="0" name="Variable">acessControle</param>
@@ -4768,18 +4828,14 @@
                                                 </condition>
                                             </conditions>
                                             <actions>
-                                                <action id="0" name="Play" sid="126490046328811" type="Audio">
-                                                    <param id="0" name="Audio file">botoes_menu</param>
-                                                    <param id="2" name="Loop">0</param>
-                                                    <param id="3" name="Volume">volSons</param>
-                                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                                </action>
-                                                <action id="-2" name="Go to layout" sid="896712166224742" type="System">
-                                                    <param id="0" name="Layout">Tela Recompensas</param>
+                                                <action id="-12" name="Set group active" sid="436327628179965" type="System">
+                                                    <param id="0" name="Group name">&quot;BtnRecomecar1&quot;</param>
+                                                    <param id="1" name="State">1</param>
                                                 </action>
                                             </actions>
                                         </event-block>
-                                        <event-block disabled="1" sid="505026993656089">
+                                        <comment>Ação do botão &quot;Áudio&quot;</comment>
+                                        <event-block sid="505026993656089">
                                             <conditions>
                                                 <condition id="-14" name="Compare variable" sid="747824285776038" type="System">
                                                     <param id="0" name="Variable">acessControle</param>
@@ -4788,14 +4844,57 @@
                                                 </condition>
                                             </conditions>
                                             <actions>
-                                                <action id="0" name="Play" sid="521360562807207" type="Audio">
-                                                    <param id="0" name="Audio file">botoes_menu</param>
-                                                    <param id="2" name="Loop">0</param>
-                                                    <param id="3" name="Volume">volSons</param>
-                                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                                <action id="-12" name="Set group active" sid="531310146196313" type="System">
+                                                    <param id="0" name="Group name">&quot;BtnAudio1&quot;</param>
+                                                    <param id="1" name="State">1</param>
                                                 </action>
-                                                <action id="-2" name="Go to layout" sid="743807233301022" type="System">
-                                                    <param id="0" name="Layout">Tela Creditos</param>
+                                            </actions>
+                                        </event-block>
+                                        <comment>Ação do botão &quot;Sair&quot;</comment>
+                                        <event-block sid="559792154795345">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="416883121937162" type="System">
+                                                    <param id="0" name="Variable">acessControle</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">5</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="474143888628592" type="System">
+                                                    <param id="0" name="Group name">&quot;BtnSair1&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <comment>Ação do botão &quot;Popup Não&quot;</comment>
+                                        <event-block sid="482312111101194">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="461758669740706" type="System">
+                                                    <param id="0" name="Variable">acessControle</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">21</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="689331514719844" type="System">
+                                                    <param id="0" name="Group name">&quot;BtnPopupNao1&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <comment>Ação do botão &quot;Popup Sim&quot;</comment>
+                                        <event-block sid="452662058342485">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="402546253384560" type="System">
+                                                    <param id="0" name="Variable">acessControle</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">22</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="378892636444198" type="System">
+                                                    <param id="0" name="Group name">&quot;BtnPopupSim1&quot;</param>
+                                                    <param id="1" name="State">1</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -4867,59 +4966,11 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Play" sid="202591614264267" type="Audio">
-                                    <param id="0" name="Audio file">botoes_menu</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-13" name="Set time scale" sid="579505741338048" type="System">
-                                    <param id="0" name="Time scale">1.0</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="610295915671195" type="System">
-                                    <param id="0" name="Variable">pause</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="786334478856972" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
-                                    <param id="1" name="State">0</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="736585245769547" type="System">
-                                    <param id="0" name="Group name">&quot;PopupDica1&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="514068001990402" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
+                                <action id="-12" name="Set group active" sid="685196482561142" type="System">
+                                    <param id="0" name="Group name">&quot;BtnContinuar1&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
                             </actions>
-                            <sub-events>
-                                <event-block sid="221991233642636">
-                                    <conditions>
-                                        <condition id="-20" name="Is on mobile device" sid="456447457616093" type="System" />
-                                    </conditions>
-                                    <actions>
-                                        <action disabled="1" id="-12" name="Set group active" sid="963621768028343" type="System">
-                                            <param id="0" name="Group name">&quot;Mobile1&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
-                                        <action behavior="DragDrop" id="0" name="Set enabled" sid="303677195825888" type="HitboxDir">
-                                            <param id="0" name="State">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="151797415458811">
-                                    <conditions>
-                                        <condition id="-22" name="Else" sid="927976612913247" type="System" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="-12" name="Set group active" sid="769068315221415" type="System">
-                                            <param id="0" name="Group name">&quot;playerMove1&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
                         </event-block>
                         <comment>Ação do botão &quot;Salvar&quot;</comment>
                         <event-block sid="114032727772020">
@@ -4929,65 +4980,11 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Play" sid="418480481919940" type="Audio">
-                                    <param id="0" name="Audio file">botoes_menu</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-13" name="Set time scale" sid="182409464994941" type="System">
-                                    <param id="0" name="Time scale">1.0</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="817964782522637" type="System">
-                                    <param id="0" name="Variable">pause</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="297532933634444" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
-                                    <param id="1" name="State">0</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="234568066383669" type="System">
-                                    <param id="0" name="Group name">&quot;PopupDica1&quot;</param>
+                                <action id="-12" name="Set group active" sid="119416806087284" type="System">
+                                    <param id="0" name="Group name">&quot;BtnSalvar1&quot;</param>
                                     <param id="1" name="State">1</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="355816584333871" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
-                                <action id="-36" name="Save" sid="7109634514434816" type="System">
-                                    <param id="0" name="Slot">&quot;save&quot;</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="448626310156155" type="System">
-                                    <param id="0" name="Seconds">0.0001</param>
                                 </action>
                             </actions>
-                            <sub-events>
-                                <event-block sid="471253719895676">
-                                    <conditions>
-                                        <condition id="-20" name="Is on mobile device" sid="802449901886805" type="System" />
-                                    </conditions>
-                                    <actions>
-                                        <action disabled="1" id="-12" name="Set group active" sid="584567801134988" type="System">
-                                            <param id="0" name="Group name">&quot;Mobile1&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
-                                        <action behavior="DragDrop" id="0" name="Set enabled" sid="273574095943687" type="HitboxDir">
-                                            <param id="0" name="State">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="754279938701177">
-                                    <conditions>
-                                        <condition id="-22" name="Else" sid="342319792098677" type="System" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="-12" name="Set group active" sid="761441795055767" type="System">
-                                            <param id="0" name="Group name">&quot;playerMove1&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
                         </event-block>
                         <comment>Ação do botão &quot;Recomeçar&quot;</comment>
                         <event-block sid="445783647298437">
@@ -4997,68 +4994,11 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Play" sid="929112665132317" type="Audio">
-                                    <param id="0" name="Audio file">botoes_menu</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="945306286481499" type="System">
-                                    <param id="0" name="Variable">pontos</param>
-                                    <param id="1" name="Value">pontuacaoInicio</param>
-                                </action>
-                                <action id="-13" name="Set time scale" sid="339853596092471" type="System">
-                                    <param id="0" name="Time scale">1.0</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="894317976690734" type="System">
-                                    <param id="0" name="Variable">pause</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="263980370673878" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
-                                    <param id="1" name="State">0</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="908945825185497" type="System">
-                                    <param id="0" name="Group name">&quot;PopupDica1&quot;</param>
+                                <action id="-12" name="Set group active" sid="877146575146260" type="System">
+                                    <param id="0" name="Group name">&quot;BtnRecomecar1&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
-                                <action id="-12" name="Set group active" sid="728787465362804" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="295816160927611" type="System">
-                                    <param id="0" name="Variable">tempoInicialNivel</param>
-                                    <param id="1" name="Value">time</param>
-                                </action>
-                                <action id="-26" name="Restart layout" sid="877503106086107" type="System" />
                             </actions>
-                            <sub-events>
-                                <event-block sid="559259318304324">
-                                    <conditions>
-                                        <condition id="-20" name="Is on mobile device" sid="718071490151116" type="System" />
-                                    </conditions>
-                                    <actions>
-                                        <action disabled="1" id="-12" name="Set group active" sid="253428473600630" type="System">
-                                            <param id="0" name="Group name">&quot;Mobile1&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
-                                        <action behavior="DragDrop" id="0" name="Set enabled" sid="442559057754568" type="HitboxDir">
-                                            <param id="0" name="State">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="728934088562691">
-                                    <conditions>
-                                        <condition id="-22" name="Else" sid="228931107063681" type="System" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="-12" name="Set group active" sid="522009753296422" type="System">
-                                            <param id="0" name="Group name">&quot;playerMove1&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
                         </event-block>
                         <comment>Ação do botão &quot;Áudio&quot;</comment>
                         <event-block sid="617146486618625">
@@ -5068,20 +5008,9 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Play" sid="595371560729352" type="Audio">
-                                    <param id="0" name="Audio file">botoes_menu</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="854098636444196" type="popup">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="297791271811379" type="popupTexto">
-                                    <param id="0" name="Opacity">0</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="896850097434904" type="audioTexto">
-                                    <param id="0" name="Opacity">100</param>
+                                <action id="-12" name="Set group active" sid="397256100590152" type="System">
+                                    <param id="0" name="Group name">&quot;BtnAudio1&quot;</param>
+                                    <param id="1" name="State">1</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -5093,20 +5022,9 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Play" sid="765781542931121" type="Audio">
-                                    <param id="0" name="Audio file">botoes_menu</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="463288684524759" type="popup">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="218537789485043" type="audioTexto">
-                                    <param id="0" name="Opacity">0</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="363657764360939" type="popupTexto">
-                                    <param id="0" name="Opacity">100</param>
+                                <action id="-12" name="Set group active" sid="595517557810097" type="System">
+                                    <param id="0" name="Group name">&quot;BtnSair1&quot;</param>
+                                    <param id="1" name="State">1</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -5141,14 +5059,9 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Play" sid="761168875492782" type="Audio">
-                                            <param id="0" name="Audio file">botoes_menu</param>
-                                            <param id="2" name="Loop">0</param>
-                                            <param id="3" name="Volume">volSons</param>
-                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                        </action>
-                                        <action id="-16" name="Set opacity" sid="116314277385678" type="popup">
-                                            <param id="0" name="Opacity">0</param>
+                                        <action id="-12" name="Set group active" sid="219380248772577" type="System">
+                                            <param id="0" name="Group name">&quot;BtnPopupNao1&quot;</param>
+                                            <param id="1" name="State">1</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -5171,66 +5084,11 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Play" sid="880909471594648" type="Audio">
-                                            <param id="0" name="Audio file">botoes_menu</param>
-                                            <param id="2" name="Loop">0</param>
-                                            <param id="3" name="Volume">volSons</param>
-                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                        </action>
-                                        <action id="-13" name="Set time scale" sid="184056352738825" type="System">
-                                            <param id="0" name="Time scale">1.0</param>
-                                        </action>
-                                        <action id="-9" name="Set value" sid="381143906565034" type="System">
-                                            <param id="0" name="Variable">pause</param>
-                                            <param id="1" name="Value">0</param>
-                                        </action>
-                                        <action id="-12" name="Set group active" sid="347636300760689" type="System">
-                                            <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
-                                            <param id="1" name="State">0</param>
-                                        </action>
-                                        <action id="-12" name="Set group active" sid="935880416520104" type="System">
-                                            <param id="0" name="Group name">&quot;PopupDica1&quot;</param>
+                                        <action id="-12" name="Set group active" sid="536925125858706" type="System">
+                                            <param id="0" name="Group name">&quot;BtnPopupSim1&quot;</param>
                                             <param id="1" name="State">1</param>
-                                        </action>
-                                        <action id="-12" name="Set group active" sid="185237819469387" type="System">
-                                            <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
-                                        <action id="-16" name="Set opacity" sid="830397500243048" type="popup">
-                                            <param id="0" name="Opacity">0</param>
-                                        </action>
-                                        <action id="33" name="Stop all" sid="887640161854671" type="Audio" />
-                                        <action id="-2" name="Go to layout" sid="793667040892582" type="System">
-                                            <param id="0" name="Layout">Menu</param>
                                         </action>
                                     </actions>
-                                    <sub-events>
-                                        <event-block sid="780877582981900">
-                                            <conditions>
-                                                <condition id="-20" name="Is on mobile device" sid="459737188387818" type="System" />
-                                            </conditions>
-                                            <actions>
-                                                <action disabled="1" id="-12" name="Set group active" sid="912960586558857" type="System">
-                                                    <param id="0" name="Group name">&quot;Mobile1&quot;</param>
-                                                    <param id="1" name="State">1</param>
-                                                </action>
-                                                <action behavior="DragDrop" id="0" name="Set enabled" sid="365077780426476" type="HitboxDir">
-                                                    <param id="0" name="State">1</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="509895247789848">
-                                            <conditions>
-                                                <condition id="-22" name="Else" sid="301161494938630" type="System" />
-                                            </conditions>
-                                            <actions>
-                                                <action id="-12" name="Set group active" sid="830491325568210" type="System">
-                                                    <param id="0" name="Group name">&quot;playerMove1&quot;</param>
-                                                    <param id="1" name="State">1</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -5490,6 +5348,472 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <event-group description="" inactive="1" sid="330153257627536" title="BtnContinuar1">
+                    <sub-events>
+                        <event-block sid="793778443749300">
+                            <conditions />
+                            <actions>
+                                <action id="0" name="Play" sid="991347243906660" type="Audio">
+                                    <param id="0" name="Audio file">botoes_menu</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-13" name="Set time scale" sid="675554755669472" type="System">
+                                    <param id="0" name="Time scale">1.0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="270452109351117" type="System">
+                                    <param id="0" name="Variable">pause</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="617313269596612" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="624372275481268" type="System">
+                                    <param id="0" name="Variable">acessibilidade</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="781760776306460" type="acessBotao">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-2" name="Set Y" sid="486213519929618" type="acessBotao">
+                                    <param id="0" name="Y">-50</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="134963583696252" type="System">
+                                    <param id="0" name="Variable">numeroBotoesMenu</param>
+                                    <param id="1" name="Value">5</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="631460358354088" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="520370305933472" type="System">
+                                    <param id="0" name="Group name">&quot;PopupDica1&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="271805581265211" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="853695101230648" type="System">
+                                    <param id="0" name="Group name">&quot;BtnContinuar1&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="367370260815838">
+                                    <conditions>
+                                        <condition id="-20" name="Is on mobile device" sid="682529449956774" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action disabled="1" id="-12" name="Set group active" sid="878903537586412" type="System">
+                                            <param id="0" name="Group name">&quot;Mobile1&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action behavior="DragDrop" id="0" name="Set enabled" sid="615134299805653" type="HitboxDir">
+                                            <param id="0" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="762828114288289">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="408538168450800" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="433166040478893" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove1&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-group>
+                <event-group description="" inactive="1" sid="441390431769895" title="BtnSalvar1">
+                    <sub-events>
+                        <event-block sid="909437354642029">
+                            <conditions />
+                            <actions>
+                                <action id="0" name="Play" sid="401839482526025" type="Audio">
+                                    <param id="0" name="Audio file">botoes_menu</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-13" name="Set time scale" sid="782622852485706" type="System">
+                                    <param id="0" name="Time scale">1.0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="792961065906767" type="System">
+                                    <param id="0" name="Variable">pause</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="868883694029150" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="481049961747453" type="System">
+                                    <param id="0" name="Variable">acessibilidade</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="672318909255390" type="acessBotao">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-2" name="Set Y" sid="485843142004964" type="acessBotao">
+                                    <param id="0" name="Y">-50</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="715366554524375" type="System">
+                                    <param id="0" name="Variable">numeroBotoesMenu</param>
+                                    <param id="1" name="Value">5</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="114261540608606" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="792518645559276" type="System">
+                                    <param id="0" name="Group name">&quot;PopupDica1&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="201852336910243" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-36" name="Save" sid="348395844679395" type="System">
+                                    <param id="0" name="Slot">&quot;save&quot;</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="823578272095640" type="System">
+                                    <param id="0" name="Seconds">0.0001</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="470209549239719" type="System">
+                                    <param id="0" name="Group name">&quot;BtnSalvar1&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="981925016807383">
+                                    <conditions>
+                                        <condition id="-20" name="Is on mobile device" sid="456266408360344" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action disabled="1" id="-12" name="Set group active" sid="344894996901546" type="System">
+                                            <param id="0" name="Group name">&quot;Mobile1&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action behavior="DragDrop" id="0" name="Set enabled" sid="149735054416073" type="HitboxDir">
+                                            <param id="0" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="615692220255645">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="217048284619383" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="592414383916047" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove1&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-group>
+                <event-group description="" inactive="1" sid="839300987005502" title="BtnRecomecar1">
+                    <sub-events>
+                        <event-block sid="134762205244942">
+                            <conditions />
+                            <actions>
+                                <action id="0" name="Play" sid="846110463416363" type="Audio">
+                                    <param id="0" name="Audio file">botoes_menu</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="491220029783084" type="System">
+                                    <param id="0" name="Variable">pontos</param>
+                                    <param id="1" name="Value">pontuacaoInicio</param>
+                                </action>
+                                <action id="-13" name="Set time scale" sid="818830776384539" type="System">
+                                    <param id="0" name="Time scale">1.0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="511227986405175" type="System">
+                                    <param id="0" name="Variable">pause</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="455039102684396" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="844236741301576" type="System">
+                                    <param id="0" name="Variable">acessibilidade</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="817935946376024" type="acessBotao">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-2" name="Set Y" sid="313625147925904" type="acessBotao">
+                                    <param id="0" name="Y">-50</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="492969933065324" type="System">
+                                    <param id="0" name="Variable">numeroBotoesMenu</param>
+                                    <param id="1" name="Value">5</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="973889116429788" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="566592622827865" type="System">
+                                    <param id="0" name="Group name">&quot;PopupDica1&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="117799806736072" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="260842874949163" type="System">
+                                    <param id="0" name="Variable">tempoInicialNivel</param>
+                                    <param id="1" name="Value">time</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="841283950154680" type="System">
+                                    <param id="0" name="Group name">&quot;BtnRecomecar1&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-26" name="Restart layout" sid="811561141517130" type="System" />
+                            </actions>
+                            <sub-events>
+                                <event-block sid="457286997878498">
+                                    <conditions>
+                                        <condition id="-20" name="Is on mobile device" sid="333667803170532" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action disabled="1" id="-12" name="Set group active" sid="445670555939200" type="System">
+                                            <param id="0" name="Group name">&quot;Mobile1&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action behavior="DragDrop" id="0" name="Set enabled" sid="367693902558965" type="HitboxDir">
+                                            <param id="0" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="998896824711976">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="259730717789247" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="738732090872990" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove1&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-group>
+                <event-group description="" inactive="1" sid="356411238044244" title="BtnAudio1">
+                    <sub-events>
+                        <event-block sid="343484058381077">
+                            <conditions />
+                            <actions>
+                                <action id="0" name="Play" sid="431334098102513" type="Audio">
+                                    <param id="0" name="Audio file">botoes_menu</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="963442333502017" type="popup">
+                                    <param id="0" name="Opacity">100</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="924418338361217" type="popupTexto">
+                                    <param id="0" name="Opacity">0</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="509523485795170" type="audioTexto">
+                                    <param id="0" name="Opacity">100</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="982466616833887" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="609145070559227" type="System">
+                                    <param id="0" name="Variable">acessibilidade</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="458504134266686" type="acessBotao">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-2" name="Set Y" sid="494120054384456" type="acessBotao">
+                                    <param id="0" name="Y">-50</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="502462940444348" type="System">
+                                    <param id="0" name="Variable">numeroBotoesMenu</param>
+                                    <param id="1" name="Value">5</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="446474539129216" type="System">
+                                    <param id="0" name="Group name">&quot;BtnAudio1&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-group>
+                <event-group description="" inactive="1" sid="826351196057887" title="BtnSair1">
+                    <sub-events>
+                        <event-block sid="165988108688904">
+                            <conditions />
+                            <actions>
+                                <action id="0" name="Play" sid="348194547982796" type="Audio">
+                                    <param id="0" name="Audio file">botoes_menu</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="442531983881459" type="popup">
+                                    <param id="0" name="Opacity">100</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="883739138781843" type="audioTexto">
+                                    <param id="0" name="Opacity">0</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="157378490795206" type="popupTexto">
+                                    <param id="0" name="Opacity">100</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="866022073391587" type="System">
+                                    <param id="0" name="Variable">numeroBotoesMenu</param>
+                                    <param id="1" name="Value">2</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="216948891805785" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Value">21</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="162294972452715" type="System">
+                                    <param id="0" name="Group name">&quot;BtnSair1&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-group>
+                <event-group description="" inactive="1" sid="467395130214281" title="BtnPopupNao1">
+                    <sub-events>
+                        <event-block sid="770259277801080">
+                            <conditions />
+                            <actions>
+                                <action id="0" name="Play" sid="680825684261293" type="Audio">
+                                    <param id="0" name="Audio file">botoes_menu</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="912184914426568" type="System">
+                                    <param id="0" name="Variable">numeroBotoesMenu</param>
+                                    <param id="1" name="Value">5</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="886663066364062" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Value">5</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="316913893497415" type="popup">
+                                    <param id="0" name="Opacity">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="833206108605891" type="System">
+                                    <param id="0" name="Group name">&quot;BtnPopupNao1&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-group>
+                <event-group description="" inactive="1" sid="173890448326693" title="BtnPopupSim1">
+                    <sub-events>
+                        <event-block sid="944581852339599">
+                            <conditions />
+                            <actions>
+                                <action id="0" name="Play" sid="973115544540413" type="Audio">
+                                    <param id="0" name="Audio file">botoes_menu</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-13" name="Set time scale" sid="558781173739588" type="System">
+                                    <param id="0" name="Time scale">1.0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="323714200978149" type="System">
+                                    <param id="0" name="Variable">pause</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="354484620582633" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="274754435068020" type="System">
+                                    <param id="0" name="Variable">acessibilidade</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="474258718154607" type="acessBotao">
+                                    <param id="0" name="Visibility">0</param>
+                                </action>
+                                <action id="-2" name="Set Y" sid="650182268443643" type="acessBotao">
+                                    <param id="0" name="Y">-50</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="503139388026153" type="System">
+                                    <param id="0" name="Variable">numeroBotoesMenu</param>
+                                    <param id="1" name="Value">5</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="339047524951738" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao1a&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="920105593377397" type="System">
+                                    <param id="0" name="Group name">&quot;PopupDica1&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="742756155623459" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao1b&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="643022463426554" type="popup">
+                                    <param id="0" name="Opacity">0</param>
+                                </action>
+                                <action id="33" name="Stop all" sid="435829045849304" type="Audio" />
+                                <action id="-12" name="Set group active" sid="426168709633202" type="System">
+                                    <param id="0" name="Group name">&quot;BtnPopupSim1&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-2" name="Go to layout" sid="899093013516173" type="System">
+                                    <param id="0" name="Layout">Menu</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="165073017768609">
+                                    <conditions>
+                                        <condition id="-20" name="Is on mobile device" sid="223187417251922" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action disabled="1" id="-12" name="Set group active" sid="538702300454786" type="System">
+                                            <param id="0" name="Group name">&quot;Mobile1&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action behavior="DragDrop" id="0" name="Set enabled" sid="437004845048998" type="HitboxDir">
+                                            <param id="0" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="424412171881301">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="161682951746907" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-12" name="Set group active" sid="727213151255008" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove1&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-group>
             </sub-events>
         </event-group>
         <event-group description="" sid="2279263373590578" title="Saida1">
