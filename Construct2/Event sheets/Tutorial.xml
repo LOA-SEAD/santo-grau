@@ -16,6 +16,10 @@
                 <action id="-16" name="Set opacity" sid="575698633878929" type="fade">
                     <param id="0" name="Opacity">100</param>
                 </action>
+                <action id="-9" name="Set value" sid="373911793272164" type="System">
+                    <param id="0" name="Variable">pontos</param>
+                    <param id="1" name="Value">1000</param>
+                </action>
                 <action id="-9" name="Set value" sid="619271127412879" type="System">
                     <param id="0" name="Variable">timelineTutorial</param>
                     <param id="1" name="Value">0</param>
@@ -39,6 +43,18 @@
                 <action id="-9" name="Set value" sid="270309448779001" type="System">
                     <param id="0" name="Variable">timelineTutorial</param>
                     <param id="1" name="Value">1</param>
+                </action>
+                <action id="-3" name="Set position" sid="624765907777020" type="pontuacao">
+                    <param id="0" name="X">640</param>
+                    <param id="1" name="Y">786</param>
+                </action>
+                <action behavior="Pin" id="0" name="Pin to object" sid="681771837711142" type="pontoTexto">
+                    <param id="0" name="Pin to">pontuacao</param>
+                    <param id="1" name="Mode">0</param>
+                </action>
+                <action behavior="Pin" id="0" name="Pin to object" sid="898003521046199" type="pontuacaoTexto">
+                    <param id="0" name="Pin to">pontuacao</param>
+                    <param id="1" name="Mode">0</param>
                 </action>
                 <action behavior="Pin" id="0" name="Pin to object" sid="123284780848849" type="botoes">
                     <param id="0" name="Pin to">fundoPause</param>
@@ -76,6 +92,14 @@
                     <param id="1" name="CSS URL">&quot;stylesheet.css&quot;</param>
                 </action>
                 <action id="5" name="Set web font" sid="658359366592296" type="botoesTexto">
+                    <param id="0" name="Family name">&quot;please_write_me_a_songmedium&quot;</param>
+                    <param id="1" name="CSS URL">&quot;stylesheet.css&quot;</param>
+                </action>
+                <action id="5" name="Set web font" sid="655022368814905" type="pontuacaoTexto">
+                    <param id="0" name="Family name">&quot;please_write_me_a_songmedium&quot;</param>
+                    <param id="1" name="CSS URL">&quot;stylesheet.css&quot;</param>
+                </action>
+                <action id="5" name="Set web font" sid="141366401709513" type="pontoTexto">
                     <param id="0" name="Family name">&quot;please_write_me_a_songmedium&quot;</param>
                     <param id="1" name="CSS URL">&quot;stylesheet.css&quot;</param>
                 </action>
@@ -126,62 +150,61 @@
                     <param id="1" name="Mode">0</param>
                 </action>
                 <action behavior="8Direction" id="0" name="Stop" sid="954926115658105" type="player" />
-                <action id="-16" name="Wait" sid="410286937430209" type="System">
-                    <param id="0" name="Seconds">0.5</param>
-                </action>
                 <action id="-12" name="Set group active" sid="961230515550005" type="System">
                     <param id="0" name="Group name">&quot;playerMove9&quot;</param>
-                    <param id="1" name="State">1</param>
+                    <param id="1" name="State">0</param>
                 </action>
             </actions>
         </event-block>
-        <event-block sid="670300590037173">
-            <conditions>
-                <condition id="-1" name="Every tick" sid="401058687610252" type="System" />
-            </conditions>
-            <actions />
+        <event-group description="" inactive="1" sid="656808632529709" title="Pontuacao9a">
             <sub-events>
-                <event-block sid="897710992104373">
+                <event-block sid="429866525636543">
                     <conditions>
-                        <condition id="-14" name="Compare variable" sid="543238406374321" type="System">
-                            <param id="0" name="Variable">timelineTutorial</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">1</param>
+                        <condition id="-2" name="Compare Y" sid="308868298884168" type="pontuacao">
+                            <param id="0" name="Comparison">5</param>
+                            <param id="1" name="Y co-ordinate">636</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-16" name="Set opacity" sid="276042974779819" type="fade">
-                            <param id="0" name="Opacity">fade.Opacity-0.5</param>
+                        <action id="-2" name="Set Y" sid="245692393008603" type="pontuacao">
+                            <param id="0" name="Y">pontuacao.Y - 150 * pontuacao.dt</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="381322313789315">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="904832515180487" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="6" name="Speak text" sid="353984701756111" type="UserMedia">
+                            <param id="0" name="Text">pontos &amp; &quot;pontos&quot;</param>
+                            <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                            <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                            <param id="3" name="Volume">10</param>
+                            <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                            <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
                         </action>
                     </actions>
                 </event-block>
             </sub-events>
-        </event-block>
-        <event-block sid="951303920251574">
-            <conditions>
-                <condition id="-10" name="Compare opacity" sid="558664024074177" type="fade">
-                    <param id="0" name="Comparison">3</param>
-                    <param id="1" name="Opacity">0</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="-9" name="Destroy" sid="816406460753587" type="fade" />
-            </actions>
-        </event-block>
-        <event-block sid="466632896073543">
-            <conditions>
-                <condition id="-19" name="On destroyed" sid="283660836359027" type="fade" />
-            </conditions>
-            <actions>
-                <action id="-16" name="Wait" sid="536304791210856" type="System">
-                    <param id="0" name="Seconds">1</param>
-                </action>
-                <action id="-9" name="Set value" sid="528810668632389" type="System">
-                    <param id="0" name="Variable">timelineTutorial</param>
-                    <param id="1" name="Value">2</param>
-                </action>
-            </actions>
-        </event-block>
+        </event-group>
+        <event-group description="" inactive="1" sid="367640832876323" title="Pontuacao9b">
+            <sub-events>
+                <event-block sid="343983100993316">
+                    <conditions>
+                        <condition id="-2" name="Compare Y" sid="243931259309419" type="pontuacao">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Y co-ordinate">786</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Set Y" sid="462068859605121" type="pontuacao">
+                            <param id="0" name="Y">pontuacao.Y + 150 * pontuacao.dt</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
         <event-group description="" sid="850786768288267" title="Efeitos9">
             <sub-events>
                 <event-block sid="923422802053510">
@@ -200,6 +223,9 @@
                         <action id="-9" name="Set value" sid="371709222781384" type="System">
                             <param id="0" name="Variable">volPassos</param>
                             <param id="1" name="Value">((Player.Y*(volPassosMax - volPassosMin)/(WindowHeight) ) + volPassosMin)</param>
+                        </action>
+                        <action id="0" name="Set text" sid="391980788869284" type="pontuacaoTexto">
+                            <param id="0" name="Text">pontos</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -231,7 +257,54 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <event-block sid="897710992104373">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="543238406374321" type="System">
+                                    <param id="0" name="Variable">timelineTutorial</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="276042974779819" type="fade">
+                                    <param id="0" name="Opacity">fade.Opacity-0.5</param>
+                                </action>
+                            </actions>
+                        </event-block>
                     </sub-events>
+                </event-block>
+                <event-block sid="951303920251574">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="558664024074177" type="fade">
+                            <param id="0" name="Comparison">3</param>
+                            <param id="1" name="Opacity">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="816406460753587" type="fade" />
+                    </actions>
+                </event-block>
+                <event-block sid="466632896073543">
+                    <conditions>
+                        <condition id="-19" name="On destroyed" sid="283660836359027" type="fade" />
+                    </conditions>
+                    <actions>
+                        <action id="-16" name="Wait" sid="536304791210856" type="System">
+                            <param id="0" name="Seconds">1</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="528810668632389" type="System">
+                            <param id="0" name="Variable">timelineTutorial</param>
+                            <param id="1" name="Value">2</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="954003486719211">
+                    <conditions>
+                        <condition id="-4" name="Is outside layout" sid="599915529323439" type="AnimacaoDiploma" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="864403086791627" type="AnimacaoDiploma" />
+                    </actions>
                 </event-block>
             </sub-events>
         </event-group>
@@ -714,6 +787,13 @@
                                     <param id="0" name="Variable">fraseAtual</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
+                                <action id="-12" name="Set group active" sid="905206306030156" type="System">
+                                    <param id="0" name="Group name">&quot;CarregaBalaoDialogo9&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-16" name="Wait" sid="830716069465729" type="System">
+                                    <param id="0" name="Seconds">0.1</param>
+                                </action>
                                 <action id="-9" name="Set value" sid="238982393504850" type="System">
                                     <param id="0" name="Variable">timelineTutorial</param>
                                     <param id="1" name="Value">3</param>
@@ -737,26 +817,411 @@
                                 <condition id="0" name="On key pressed" sid="444171703876560" type="Keyboard">
                                     <param id="0" name="Key">69</param>
                                 </condition>
+                                <condition id="-10" name="Compare opacity" sid="686936541139702" type="Dialogos">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="876301558792888">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="414573374347410" type="System">
+                                            <param id="0" name="Variable">fraseAtual</param>
+                                            <param id="1" name="Comparison">1</param>
+                                            <param id="2" name="Value">2.5</param>
+                                        </condition>
+                                        <condition id="-14" name="Compare variable" sid="252913751031601" type="System">
+                                            <param id="0" name="Variable">fraseAtual</param>
+                                            <param id="1" name="Comparison">1</param>
+                                            <param id="2" name="Value">3.5</param>
+                                        </condition>
+                                        <condition id="-14" name="Compare variable" sid="932558413938836" type="System">
+                                            <param id="0" name="Variable">fraseAtual</param>
+                                            <param id="1" name="Comparison">1</param>
+                                            <param id="2" name="Value">4.5</param>
+                                        </condition>
+                                        <condition id="-14" name="Compare variable" sid="403640958213012" type="System">
+                                            <param id="0" name="Variable">fraseAtual</param>
+                                            <param id="1" name="Comparison">1</param>
+                                            <param id="2" name="Value">6.5</param>
+                                        </condition>
+                                        <condition id="-14" name="Compare variable" sid="972247372980411" type="System">
+                                            <param id="0" name="Variable">fraseAtual</param>
+                                            <param id="1" name="Comparison">1</param>
+                                            <param id="2" name="Value">8.5</param>
+                                        </condition>
+                                        <condition id="-14" name="Compare variable" sid="213271139094237" type="System">
+                                            <param id="0" name="Variable">fraseAtual</param>
+                                            <param id="1" name="Comparison">1</param>
+                                            <param id="2" name="Value">10.5</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="7" name="Stop speaking" sid="249962617548801" type="UserMedia" />
+                                        <action id="0" name="Play" sid="741888528892287" type="Audio">
+                                            <param id="0" name="Audio file">passar_dialogo</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="-10" name="Add to" sid="472709686550421" type="System">
+                                            <param id="0" name="Variable">fraseAtual</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="739366364648404" type="System">
+                                            <param id="0" name="Group name">&quot;CarregaBalaoDialogo9&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="385186895389905">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="580402890609859" type="System">
+                                            <param id="0" name="Variable">fraseAtual</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">2.5</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="7" name="Stop speaking" sid="433209519411965" type="UserMedia" />
+                                        <action id="0" name="Play" sid="993429428753434" type="Audio">
+                                            <param id="0" name="Audio file">passar_dialogo</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="564982792345606" type="System">
+                                            <param id="0" name="Group name">&quot;DescarregaTextoDialogo9&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="413107720150544" type="System">
+                                            <param id="0" name="Seconds">1.0</param>
+                                        </action>
+                                        <action id="0" name="Play" sid="653035880059739" type="Audio">
+                                            <param id="0" name="Audio file">alarme_acao</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="555669371984339" type="System">
+                                            <param id="0" name="Seconds">1.5</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="980530806621921" type="System">
+                                            <param id="0" name="Variable">fraseAtual</param>
+                                            <param id="1" name="Value">3</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="895481108814151" type="System">
+                                            <param id="0" name="Group name">&quot;CarregaBalaoDialogo9&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="737886559947716">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="423073051877626" type="System">
+                                            <param id="0" name="Variable">fraseAtual</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">3.5</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="7" name="Stop speaking" sid="652253350782961" type="UserMedia" />
+                                        <action id="0" name="Play" sid="564380981820488" type="Audio">
+                                            <param id="0" name="Audio file">passar_dialogo</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="479594672453193" type="System">
+                                            <param id="0" name="Group name">&quot;DescarregaTextoDialogo9&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="474788401028241" type="System">
+                                            <param id="0" name="Seconds">1.0</param>
+                                        </action>
+                                        <action id="0" name="Play" sid="277316966738433" type="Audio">
+                                            <param id="0" name="Audio file">alarme_acao</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="755009491803917" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove9&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="327641931375396">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="803147608111330" type="System">
+                                            <param id="0" name="Variable">fraseAtual</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">4.5</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="7" name="Stop speaking" sid="629312432760771" type="UserMedia" />
+                                        <action id="0" name="Play" sid="674667900929228" type="Audio">
+                                            <param id="0" name="Audio file">passar_dialogo</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="174203647670581" type="System">
+                                            <param id="0" name="Group name">&quot;DescarregaTextoDialogo9&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="853466509535012" type="System">
+                                            <param id="0" name="Seconds">1.0</param>
+                                        </action>
+                                        <action behavior="Bullet" id="5" name="Set enabled" sid="860107749875576" type="AnimacaoDiploma">
+                                            <param id="0" name="State">1</param>
+                                        </action>
+                                        <action id="0" name="Play" sid="236626531117141" type="Audio">
+                                            <param id="0" name="Audio file">risada_diploma</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="946181394288725" type="System">
+                                            <param id="0" name="Seconds">1.5</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="912287566315212" type="System">
+                                            <param id="0" name="Variable">fraseAtual</param>
+                                            <param id="1" name="Value">5</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="347287355461596" type="System">
+                                            <param id="0" name="Group name">&quot;CarregaBalaoDialogo9&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="631010301919122">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="291772095689436" type="System">
+                                            <param id="0" name="Variable">fraseAtual</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">6.5</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="7" name="Stop speaking" sid="986314323962074" type="UserMedia" />
+                                        <action id="0" name="Play" sid="119670193385116" type="Audio">
+                                            <param id="0" name="Audio file">passar_dialogo</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="418524183227898" type="System">
+                                            <param id="0" name="Group name">&quot;DescarregaTextoDialogo9&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="328197981309414" type="System">
+                                            <param id="0" name="Seconds">1.0</param>
+                                        </action>
+                                        <action id="0" name="Play" sid="689740251082463" type="Audio">
+                                            <param id="0" name="Audio file">acerto</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="0" name="Set text" sid="252536773181898" type="pontoTexto">
+                                            <param id="0" name="Text">&quot;0&quot;</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="138073058637130" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao9b&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="581729546115263" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao9a&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="133899631119006" type="System">
+                                            <param id="0" name="Seconds">0.7</param>
+                                        </action>
+                                        <action disabled="1" id="6" name="Speak text" sid="217549033198789" type="UserMedia">
+                                            <param id="0" name="Text">pontos &amp; &quot;pontos&quot;</param>
+                                            <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                            <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                            <param id="3" name="Volume">10</param>
+                                            <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                            <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="428105576629505" type="System">
+                                            <param id="0" name="Seconds">3.3</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="319407962443270" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao9a&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="786574926130430" type="System">
+                                            <param id="0" name="Group name">&quot;Pontuacao9b&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="299122406111739" type="System">
+                                            <param id="0" name="Seconds">0.5</param>
+                                        </action>
+                                        <action id="-9" name="Set value" sid="994421212330056" type="System">
+                                            <param id="0" name="Variable">fraseAtual</param>
+                                            <param id="1" name="Value">7</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="612950585599660" type="System">
+                                            <param id="0" name="Group name">&quot;CarregaBalaoDialogo9&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="755182961470307">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="809229809957915" type="System">
+                                            <param id="0" name="Variable">fraseAtual</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">8.5</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="7" name="Stop speaking" sid="994337108760028" type="UserMedia" />
+                                        <action id="0" name="Play" sid="985756974922069" type="Audio">
+                                            <param id="0" name="Audio file">passar_dialogo</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="139558957501304" type="System">
+                                            <param id="0" name="Group name">&quot;DescarregaTextoDialogo9&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="-16" name="Wait" sid="285553962272174" type="System">
+                                            <param id="0" name="Seconds">1.0</param>
+                                        </action>
+                                        <action id="0" name="Play" sid="234097699768477" type="Audio">
+                                            <param id="0" name="Audio file">alarme_acao</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="495402735926614">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="759449169427018" type="System">
+                                            <param id="0" name="Variable">fraseAtual</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">10.5</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="7" name="Stop speaking" sid="188421519806458" type="UserMedia" />
+                                        <action id="0" name="Play" sid="326009731847694" type="Audio">
+                                            <param id="0" name="Audio file">passar_dialogo</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volSons</param>
+                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                        <action id="-12" name="Set group active" sid="144054735744396" type="System">
+                                            <param id="0" name="Group name">&quot;DescarregaTextoDialogo9&quot;</param>
+                                            <param id="1" name="State">1</param>
+                                        </action>
+                                        <action id="25" name="Play at object" sid="110630900219791" type="Audio">
+                                            <param id="0" name="Audio file">burburinho_conversas</param>
+                                            <param id="1" name="Loop">1</param>
+                                            <param id="2" name="Volume">volSons</param>
+                                            <param id="3" name="Object">saida</param>
+                                            <param id="4" name="Inner angle">45</param>
+                                            <param id="5" name="Outer angle">45</param>
+                                            <param id="6" name="Outer gain">100</param>
+                                            <param id="7" name="Tag (optional)">&quot;sons&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="259565631103720">
+                    <conditions>
+                        <condition id="1" name="Is overlapping another object" sid="900123475995246" type="player">
+                            <param id="0" name="Object">selecaoProfessora</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="770454585331829" type="System">
+                            <param id="0" name="Variable">fraseAtual</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">3.5</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="6" name="Stop" sid="457876503235033" type="Audio">
+                            <param id="0" name="Tag">&quot;passos&quot;</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="804831009606553" type="System">
+                            <param id="0" name="Group name">&quot;playerMove9&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="515144389371072" type="System">
+                            <param id="0" name="Variable">fraseAtual</param>
+                            <param id="1" name="Value">4</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="681579182752830" type="System">
+                            <param id="0" name="Group name">&quot;CarregaBalaoDialogo9&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="916395464015535">
+                            <conditions>
+                                <condition id="2" name="Is playing" sid="426591379424022" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;TrasAndando&quot;</param>
+                                </condition>
                             </conditions>
                             <actions>
-                                <action id="7" name="Stop speaking" sid="249962617548801" type="UserMedia" />
-                                <action id="0" name="Play" sid="741888528892287" type="Audio">
-                                    <param id="0" name="Audio file">passar_dialogo</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                <action id="4" name="Set animation" sid="642558009557813" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;TrasParado&quot;</param>
+                                    <param id="1" name="From">1</param>
                                 </action>
-                                <action id="-10" name="Add to" sid="472709686550421" type="System">
-                                    <param id="0" name="Variable">fraseAtual</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="739366364648404" type="System">
-                                    <param id="0" name="Group name">&quot;CarregaBalaoDialogo9&quot;</param>
-                                    <param id="1" name="State">1</param>
+                            </actions>
+                        </event-block>
+                        <event-block sid="533307539450636">
+                            <conditions>
+                                <condition id="2" name="Is playing" sid="118129703791203" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;LadoAndando&quot;</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="4" name="Set animation" sid="363961032843469" type="playerAnim">
+                                    <param id="0" name="Animation">&quot;DireitaParado&quot;</param>
+                                    <param id="1" name="From">1</param>
                                 </action>
                             </actions>
                         </event-block>
                     </sub-events>
+                </event-block>
+                <event-block sid="553269519279779">
+                    <conditions>
+                        <condition id="0" name="On key pressed" sid="333391222746740" type="Keyboard">
+                            <param id="0" name="Key">27</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="298936975863648" type="System">
+                            <param id="0" name="Variable">fraseAtual</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">8.5</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="597463823715287" type="System">
+                            <param id="0" name="Variable">pause</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="573538964595104" type="System">
+                            <param id="0" name="Variable">fraseAtual</param>
+                            <param id="1" name="Value">9</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="791315507951113" type="System">
+                            <param id="0" name="Group name">&quot;CarregaBalaoDialogo9&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
                 </event-block>
                 <event-group description="Carrega o balão caso ele não esteja ativo e libera a inserção do diálogo" inactive="1" sid="877981761543860" title="CarregaBalaoDialogo9">
                     <sub-events>
@@ -855,79 +1320,116 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-12" name="Set group active" sid="600586129331856" type="System">
-                                    <param id="0" name="Group name">&quot;AvancaDialogo9&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
                                 <action id="-12" name="Set group active" sid="511674232258393" type="System">
                                     <param id="0" name="Group name">&quot;CarregaTextoDialogo9&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
                             </actions>
+                            <sub-events>
+                                <event-block any="1" sid="604468092235318">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="194083397470150" type="System">
+                                            <param id="0" name="Variable">fraseAtual</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">2</param>
+                                        </condition>
+                                        <condition id="-14" name="Compare variable" sid="321232474122541" type="System">
+                                            <param id="0" name="Variable">fraseAtual</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">3</param>
+                                        </condition>
+                                        <condition id="-14" name="Compare variable" sid="109174526258361" type="System">
+                                            <param id="0" name="Variable">fraseAtual</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">4</param>
+                                        </condition>
+                                        <condition id="-14" name="Compare variable" sid="788156992361942" type="System">
+                                            <param id="0" name="Variable">fraseAtual</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">6</param>
+                                        </condition>
+                                        <condition id="-14" name="Compare variable" sid="497339498886812" type="System">
+                                            <param id="0" name="Variable">fraseAtual</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">8</param>
+                                        </condition>
+                                        <condition id="-14" name="Compare variable" sid="313051560810879" type="System">
+                                            <param id="0" name="Variable">fraseAtual</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">10</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="717236488840303">
+                                            <conditions>
+                                                <condition id="-4" name="Trigger once while true" sid="200656446215898" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-10" name="Add to" sid="402235371283748" type="System">
+                                                    <param id="0" name="Variable">fraseAtual</param>
+                                                    <param id="1" name="Value">0.5</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-group>
-                <event-group description="Avança o diálogo. Caso seja a última fala, começa a descarregar" disabled="1" inactive="1" sid="119199130934311" title="AvancaDialogo9">
+                <event-group description="Descarrega o diálogo. Aciona, também, a mecânica seguinte" inactive="1" sid="633377627958367" title="DescarregaTextoDialogo9">
                     <sub-events>
-                        <event-block any="1" sid="812272435233005">
+                        <comment>Como é um evento que lida com Opacidade, ou seja, algo cujo valor varia entre 0 e 100, então ele vai levar exatos 0.5 segundos para descarregar, independente de dispositivo</comment>
+                        <event-block sid="135961622285067">
                             <conditions>
-                                <condition id="0" name="On key pressed" sid="929662051356211" type="Keyboard">
-                                    <param id="0" name="Key">69</param>
-                                </condition>
-                                <condition id="17" name="On tap object" sid="586732310232065" type="Touch">
-                                    <param id="0" name="Object">HitboxDir</param>
+                                <condition id="-1" name="Every tick" sid="150693661197062" type="System" />
+                                <condition id="-10" name="Compare opacity" sid="721370399305433" type="Dialogos">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Opacity">0</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="7" name="Stop speaking" sid="220574129121154" type="UserMedia" />
-                                <action id="0" name="Play" sid="290679058808222" type="Audio">
-                                    <param id="0" name="Audio file">passar_dialogo</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                <action id="-16" name="Set opacity" sid="577429294834576" type="DialogoPersonagem">
+                                    <param id="0" name="Opacity">DialogoPersonagem.Opacity - 200 * dt</param>
                                 </action>
-                                <action id="-12" name="Set group active" sid="836055825924936" type="System">
-                                    <param id="0" name="Group name">&quot;AvancaDialogo9&quot;</param>
-                                    <param id="1" name="State">0</param>
+                                <action id="-16" name="Set opacity" sid="774551382636575" type="Dialogos">
+                                    <param id="0" name="Opacity">Dialogos.Opacity - 200 * dt</param>
                                 </action>
-                                <action id="-16" name="Wait" sid="860071729732150" type="System">
-                                    <param id="0" name="Seconds">0.5</param>
+                                <action id="-16" name="Set opacity" sid="597242903851025" type="BalaoDialogo">
+                                    <param id="0" name="Opacity">BalaoDialogo.Opacity - 200 * dt</param>
                                 </action>
                             </actions>
                             <sub-events>
-                                <comment>Verifica se terminou todos os diálogos reservados para aquele momento</comment>
-                                <event-block sid="778207306079455">
+                                <comment>Esta comparação é devido a um bug caso o consiga avançar o texto mais rápido do que o ele sendo limpo</comment>
+                                <event-block sid="614220559197818">
                                     <conditions>
-                                        <condition id="-8" name="Compare two values" sid="843519589375433" type="System">
-                                            <param id="0" name="First value">fraseAtualBIB</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Second value">inicioDialogoBIB + tamanhoDialogoBIB-1</param>
+                                        <condition id="-15" name="Is group active" sid="369498494354982" type="System">
+                                            <param id="0" name="Group name">&quot;CarregaTextoDialogo9&quot;</param>
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="-12" name="Set group active" sid="224149618151030" type="System">
-                                            <param id="0" name="Group name">&quot;DescarregaTextoDialogo8&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <comment>Se não terminou, repete o loop</comment>
-                                <event-block sid="658614538537645">
-                                    <conditions>
-                                        <condition id="-22" name="Else" sid="813669984775053" type="System" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="-10" name="Add to" sid="714550992108279" type="System">
-                                            <param id="0" name="Variable">fraseAtualBIB</param>
-                                            <param id="1" name="Value">1</param>
-                                        </action>
-                                        <action id="-12" name="Set group active" sid="544640491556149" type="System">
-                                            <param id="0" name="Group name">&quot;InsereFala8&quot;</param>
-                                            <param id="1" name="State">1</param>
+                                        <action id="-12" name="Set group active" sid="429417806562367" type="System">
+                                            <param id="0" name="Group name">&quot;CarregaBalaoDialogo9&quot;</param>
+                                            <param id="1" name="State">0</param>
                                         </action>
                                     </actions>
                                 </event-block>
                             </sub-events>
+                        </event-block>
+                        <event-block sid="661225415236172">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="968767337663921" type="Dialogos">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-12" name="Set group active" sid="312484791554527" type="System">
+                                    <param id="0" name="Group name">&quot;DescarregaTextoDialogo9&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
                         </event-block>
                     </sub-events>
                 </event-group>
@@ -968,6 +1470,9 @@
                                     <param id="3" name="Volume">volSons</param>
                                     <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                 </action>
+                                <action id="-16" name="Wait" sid="152241581512564" type="System">
+                                    <param id="0" name="Seconds">0.1</param>
+                                </action>
                                 <action id="-9" name="Set value" sid="529316441827625" type="System">
                                     <param id="0" name="Variable">pause</param>
                                     <param id="1" name="Value">1</param>
@@ -979,11 +1484,11 @@
                                     <param id="0" name="Color">rgb(125, 125, 125)</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="660301328180760" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao8b&quot;</param>
+                                    <param id="0" name="Group name">&quot;Pontuacao9b&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="289795395527510" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao8a&quot;</param>
+                                    <param id="0" name="Group name">&quot;Pontuacao9a&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
                                 <action id="-13" name="Set time scale" sid="781509299102482" type="System">
@@ -1011,21 +1516,8 @@
                                     </conditions>
                                     <actions>
                                         <action id="-12" name="Set group active" sid="325216296420257" type="System">
-                                            <param id="0" name="Group name">&quot;playerMove8&quot;</param>
+                                            <param id="0" name="Group name">&quot;playerMove9&quot;</param>
                                             <param id="1" name="State">0</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="565185005069235">
-                                    <conditions>
-                                        <condition id="-15" name="Is group active" sid="405214550049978" type="System">
-                                            <param id="0" name="Group name">&quot;PalavrasMagicas&quot;</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-4" name="Set layer visible" sid="754757583785582" type="System">
-                                            <param id="0" name="Layer">5</param>
-                                            <param id="1" name="Visibility">0</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1050,7 +1542,7 @@
                         <event-block any="1" sid="545946770270314">
                             <conditions>
                                 <condition id="0" name="On key pressed" sid="321968201632712" type="Keyboard">
-                                    <param id="0" name="Key">32</param>
+                                    <param id="0" name="Key">27</param>
                                 </condition>
                                 <condition id="17" name="On tap object" sid="607544586868952" type="Touch">
                                     <param id="0" name="Object">menuOpcoesX</param>
@@ -1069,16 +1561,19 @@
                                 <action id="-13" name="Set time scale" sid="472115593392161" type="System">
                                     <param id="0" name="Time scale">1.0</param>
                                 </action>
+                                <action id="-16" name="Wait" sid="992398386451060" type="System">
+                                    <param id="0" name="Seconds">0.1</param>
+                                </action>
                                 <action id="-9" name="Set value" sid="241542444651337" type="System">
                                     <param id="0" name="Variable">pause</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="174786754981835" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao8a&quot;</param>
+                                    <param id="0" name="Group name">&quot;Pontuacao9a&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="799641945475447" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao8b&quot;</param>
+                                    <param id="0" name="Group name">&quot;Pontuacao9b&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
                             </actions>
@@ -1103,21 +1598,8 @@
                                     </conditions>
                                     <actions>
                                         <action id="-12" name="Set group active" sid="198993096858970" type="System">
-                                            <param id="0" name="Group name">&quot;playerMove8&quot;</param>
+                                            <param id="0" name="Group name">&quot;playerMove9&quot;</param>
                                             <param id="1" name="State">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="802056224361897">
-                                    <conditions>
-                                        <condition id="-15" name="Is group active" sid="387350840092729" type="System">
-                                            <param id="0" name="Group name">&quot;PalavrasMagicas&quot;</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-4" name="Set layer visible" sid="114804512879264" type="System">
-                                            <param id="0" name="Layer">5</param>
-                                            <param id="1" name="Visibility">1</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1863,11 +2345,11 @@
                                     <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="387281020925030" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao8a&quot;</param>
+                                    <param id="0" name="Group name">&quot;Pontuacao9a&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="928865358758769" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao8b&quot;</param>
+                                    <param id="0" name="Group name">&quot;Pontuacao9b&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
                             </actions>
@@ -1892,77 +2374,10 @@
                                     </conditions>
                                     <actions>
                                         <action id="-12" name="Set group active" sid="735703274017947" type="System">
-                                            <param id="0" name="Group name">&quot;playerMove8&quot;</param>
+                                            <param id="0" name="Group name">&quot;playerMove9&quot;</param>
                                             <param id="1" name="State">1</param>
                                         </action>
                                     </actions>
-                                </event-block>
-                                <event-block sid="191045517983427">
-                                    <conditions>
-                                        <condition id="-15" name="Is group active" sid="631127583212982" type="System">
-                                            <param id="0" name="Group name">&quot;PalavrasMagicas&quot;</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-4" name="Set layer visible" sid="878628599529941" type="System">
-                                            <param id="0" name="Layer">5</param>
-                                            <param id="1" name="Visibility">1</param>
-                                        </action>
-                                    </actions>
-                                    <sub-events>
-                                        <event-block sid="137151965718108">
-                                            <conditions>
-                                                <condition id="-20" name="Is on mobile device" sid="224802013596530" type="System" />
-                                            </conditions>
-                                            <actions>
-                                                <action behavior="DragDrop" id="0" name="Set enabled" sid="583053505851947" type="HitboxDir">
-                                                    <param id="0" name="State">0</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="326783951705200">
-                                            <conditions>
-                                                <condition id="-22" name="Else" sid="747798229676699" type="System" />
-                                            </conditions>
-                                            <actions>
-                                                <action id="-12" name="Set group active" sid="482271927660030" type="System">
-                                                    <param id="0" name="Group name">&quot;playerMove8&quot;</param>
-                                                    <param id="1" name="State">0</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
-                                </event-block>
-                                <event-block sid="116740760554554">
-                                    <conditions>
-                                        <condition id="-15" name="Is group active" sid="766760337720099" type="System">
-                                            <param id="0" name="Group name">&quot;DialogoMago&quot;</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions />
-                                    <sub-events>
-                                        <event-block sid="321233370142578">
-                                            <conditions>
-                                                <condition id="-20" name="Is on mobile device" sid="177156283794719" type="System" />
-                                            </conditions>
-                                            <actions>
-                                                <action behavior="DragDrop" id="0" name="Set enabled" sid="599398101190774" type="HitboxDir">
-                                                    <param id="0" name="State">0</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                        <event-block sid="894649935662934">
-                                            <conditions>
-                                                <condition id="-22" name="Else" sid="291566388736347" type="System" />
-                                            </conditions>
-                                            <actions>
-                                                <action id="-12" name="Set group active" sid="835644103246594" type="System">
-                                                    <param id="0" name="Group name">&quot;playerMove8&quot;</param>
-                                                    <param id="1" name="State">0</param>
-                                                </action>
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
                                 </event-block>
                             </sub-events>
                         </event-block>
@@ -1988,11 +2403,11 @@
                                     <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="344764808389088" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao8a&quot;</param>
+                                    <param id="0" name="Group name">&quot;Pontuacao9a&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="383457559428482" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao8b&quot;</param>
+                                    <param id="0" name="Group name">&quot;Pontuacao9b&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
                                 <action id="-36" name="Save" sid="522908278886106" type="System">
@@ -2023,21 +2438,8 @@
                                     </conditions>
                                     <actions>
                                         <action id="-12" name="Set group active" sid="556337649707464" type="System">
-                                            <param id="0" name="Group name">&quot;playerMove8&quot;</param>
+                                            <param id="0" name="Group name">&quot;playerMove9&quot;</param>
                                             <param id="1" name="State">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="125407318149382">
-                                    <conditions>
-                                        <condition id="-15" name="Is group active" sid="256117848930976" type="System">
-                                            <param id="0" name="Group name">&quot;PalavrasMagicas&quot;</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-4" name="Set layer visible" sid="984880491198022" type="System">
-                                            <param id="0" name="Layer">5</param>
-                                            <param id="1" name="Visibility">1</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -2069,11 +2471,11 @@
                                     <param id="1" name="Value">0</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="823394971991484" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao8a&quot;</param>
+                                    <param id="0" name="Group name">&quot;Pontuacao9a&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="142538519280544" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao8b&quot;</param>
+                                    <param id="0" name="Group name">&quot;Pontuacao9b&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="355655623735707" type="System">
@@ -2104,7 +2506,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="-12" name="Set group active" sid="980425280112509" type="System">
-                                            <param id="0" name="Group name">&quot;playerMove8&quot;</param>
+                                            <param id="0" name="Group name">&quot;playerMove9&quot;</param>
                                             <param id="1" name="State">1</param>
                                         </action>
                                     </actions>
@@ -2236,11 +2638,11 @@
                                             <param id="1" name="Value">0</param>
                                         </action>
                                         <action id="-12" name="Set group active" sid="129213330635797" type="System">
-                                            <param id="0" name="Group name">&quot;Pontuacao8a&quot;</param>
+                                            <param id="0" name="Group name">&quot;Pontuacao9a&quot;</param>
                                             <param id="1" name="State">0</param>
                                         </action>
                                         <action id="-12" name="Set group active" sid="882688147346293" type="System">
-                                            <param id="0" name="Group name">&quot;Pontuacao8b&quot;</param>
+                                            <param id="0" name="Group name">&quot;Pontuacao9b&quot;</param>
                                             <param id="1" name="State">1</param>
                                         </action>
                                         <action id="-16" name="Set opacity" sid="255043928198286" type="popup">
@@ -2272,7 +2674,7 @@
                                             </conditions>
                                             <actions>
                                                 <action id="-12" name="Set group active" sid="750795038091230" type="System">
-                                                    <param id="0" name="Group name">&quot;playerMove8&quot;</param>
+                                                    <param id="0" name="Group name">&quot;playerMove9&quot;</param>
                                                     <param id="1" name="State">1</param>
                                                 </action>
                                             </actions>
