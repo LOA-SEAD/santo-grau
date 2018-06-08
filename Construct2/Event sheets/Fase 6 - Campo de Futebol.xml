@@ -239,6 +239,10 @@
                     <param id="0" name="Variable">numeroBotoesMenu</param>
                     <param id="1" name="Value">5</param>
                 </action>
+                <action id="-9" name="Set value" sid="367519273182392" type="System">
+                    <param id="0" name="Variable">ValueMusicaSlider</param>
+                    <param id="1" name="Value">volMusica</param>
+                </action>
                 <action id="-18" name="Set layer opacity" sid="544412279759474" type="System">
                     <param id="0" name="Layer">&quot;PlacarPopup&quot;</param>
                     <param id="1" name="Opacity">0</param>
@@ -400,11 +404,11 @@
                     <param id="0" name="Pin to">popup</param>
                     <param id="1" name="Mode">0</param>
                 </action>
-                <action behavior="Pin" id="0" name="Pin to object" sid="368138377317413" type="SliderEfeitos">
+                <action behavior="Pin" disabled="1" id="0" name="Pin to object" sid="368138377317413" type="SliderEfeitos">
                     <param id="0" name="Pin to">popup</param>
                     <param id="1" name="Mode">0</param>
                 </action>
-                <action behavior="Pin" id="0" name="Pin to object" sid="769835303780159" type="SliderMusica">
+                <action behavior="Pin" disabled="1" id="0" name="Pin to object" sid="769835303780159" type="SliderMusica">
                     <param id="0" name="Pin to">popup</param>
                     <param id="1" name="Mode">0</param>
                 </action>
@@ -1831,6 +1835,12 @@
                             <actions>
                                 <action id="-1" name="Set X" sid="220170555112246" type="fundoPause">
                                     <param id="0" name="X">1920</param>
+                                </action>
+                                <action id="-1" name="Set X" sid="115462859767222" type="SliderEfeitos">
+                                    <param id="0" name="X">SliderBaseEfeitos.X+(volSons-MinValueSlider)*(SliderBaseEfeitos.Width/(MaxValueSlider-MinValueSlider))</param>
+                                </action>
+                                <action id="-1" name="Set X" sid="281699607563384" type="SliderMusica">
+                                    <param id="0" name="X">SliderBaseMusica.X+(volMusica-MinValueSlider)*(SliderBaseMusica.Width/(MaxValueSlider-MinValueSlider))</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -6296,6 +6306,12 @@
                                 <action id="-16" name="Set opacity" sid="215252196695167" type="SliderMusica">
                                     <param id="0" name="Opacity">0</param>
                                 </action>
+                                <action id="-1" name="Set X" sid="154564657325244" type="SliderEfeitos">
+                                    <param id="0" name="X">SliderBaseEfeitos.X+(volSons-MinValueSlider)*(SliderBaseEfeitos.Width/(MaxValueSlider-MinValueSlider))</param>
+                                </action>
+                                <action id="-1" name="Set X" sid="189913075806167" type="SliderMusica">
+                                    <param id="0" name="X">SliderBaseMusica.X+(volMusica-MinValueSlider)*(SliderBaseMusica.Width/(MaxValueSlider-MinValueSlider))</param>
+                                </action>
                             </actions>
                             <sub-events>
                                 <event-block sid="901793515454978">
@@ -7064,8 +7080,13 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="-2" name="Set Y" sid="528402189651482" type="acessBotao">
-                                            <param id="0" name="Y">407</param>
+                                        <action id="-3" name="Set position" sid="528402189651482" type="acessBotao">
+                                            <param id="0" name="X">640</param>
+                                            <param id="1" name="Y">407</param>
+                                        </action>
+                                        <action id="-7" name="Set size" sid="168986112024024" type="acessBotao">
+                                            <param id="0" name="Width">264</param>
+                                            <param id="1" name="Height">85</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -7080,6 +7101,63 @@
                                     <actions>
                                         <action id="-2" name="Set Y" sid="879830520670474" type="acessBotao">
                                             <param id="0" name="Y">520</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="432158398522528">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="734821033742438" type="System">
+                                            <param id="0" name="Variable">acessControle</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">11</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-4" name="Set position to another object" sid="628596181229880" type="acessBotao">
+                                            <param id="0" name="Object">botaoFechar</param>
+                                            <param id="1" name="Image point (optional)">0</param>
+                                        </action>
+                                        <action id="-7" name="Set size" sid="216928020574462" type="acessBotao">
+                                            <param id="0" name="Width">66</param>
+                                            <param id="1" name="Height">62</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="209584145070542">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="449518407389422" type="System">
+                                            <param id="0" name="Variable">acessControle</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">12</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="960139541895839" type="acessBotao">
+                                            <param id="0" name="X">670</param>
+                                            <param id="1" name="Y">190</param>
+                                        </action>
+                                        <action id="-7" name="Set size" sid="784912811728742" type="acessBotao">
+                                            <param id="0" name="Width">208</param>
+                                            <param id="1" name="Height">52</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="168537215513130">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="213678468415592" type="System">
+                                            <param id="0" name="Variable">acessControle</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">13</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="998524824705178" type="acessBotao">
+                                            <param id="0" name="X">670</param>
+                                            <param id="1" name="Y">242</param>
+                                        </action>
+                                        <action id="-7" name="Set size" sid="475685087589867" type="acessBotao">
+                                            <param id="0" name="Width">208</param>
+                                            <param id="1" name="Height">52</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -7123,7 +7201,7 @@
                                     <actions>
                                         <action id="-9" name="Set value" sid="510884531865247" type="System">
                                             <param id="0" name="Variable">acessControle</param>
-                                            <param id="1" name="Value">(acessControle % numeroBotoesMenu) + 1 + (popup.Opacity * 0.2)</param>
+                                            <param id="1" name="Value">((acessControle % 10) % numeroBotoesMenu) + 1 + (popup.Opacity * 0.2) - (SliderEfeitos.Opacity * 0.1)</param>
                                         </action>
                                     </actions>
                                     <sub-events>
@@ -7205,6 +7283,36 @@
                                             </conditions>
                                             <actions />
                                         </event-block>
+                                        <event-block sid="528853608561973">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="223287088818747" type="System">
+                                                    <param id="0" name="Variable">acessControle</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">11</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                        </event-block>
+                                        <event-block sid="292172384929378">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="725122801860759" type="System">
+                                                    <param id="0" name="Variable">acessControle</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">12</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                        </event-block>
+                                        <event-block sid="136313473353207">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="107418061006837" type="System">
+                                                    <param id="0" name="Variable">acessControle</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">13</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                        </event-block>
                                         <event-block sid="559134843889037">
                                             <conditions>
                                                 <condition id="-14" name="Compare variable" sid="980460914055791" type="System">
@@ -7239,7 +7347,7 @@
                                     <actions>
                                         <action id="-9" name="Set value" sid="688844572123303" type="System">
                                             <param id="0" name="Variable">acessControle</param>
-                                            <param id="1" name="Value">((acessControle + (numeroBotoesMenu - 2)) % numeroBotoesMenu) + 1 + (popup.Opacity * 0.2)</param>
+                                            <param id="1" name="Value">(((acessControle % 10) + (numeroBotoesMenu - 2)) % numeroBotoesMenu) + 1 + (popup.Opacity * 0.2) - (SliderEfeitos.Opacity * 0.1)</param>
                                         </action>
                                     </actions>
                                     <sub-events>
@@ -7307,6 +7415,36 @@
                                                     <param id="0" name="Variable">acessControle</param>
                                                     <param id="1" name="Comparison">0</param>
                                                     <param id="2" name="Value">5</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                        </event-block>
+                                        <event-block sid="924245828547536">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="711013972861588" type="System">
+                                                    <param id="0" name="Variable">acessControle</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">11</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                        </event-block>
+                                        <event-block sid="857497133379549">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="314309791929400" type="System">
+                                                    <param id="0" name="Variable">acessControle</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">12</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                        </event-block>
+                                        <event-block sid="823890834507036">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="931703007794828" type="System">
+                                                    <param id="0" name="Variable">acessControle</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">13</param>
                                                 </condition>
                                             </conditions>
                                             <actions />
@@ -7418,6 +7556,22 @@
                                             <actions>
                                                 <action id="-12" name="Set group active" sid="835439819532558" type="System">
                                                     <param id="0" name="Group name">&quot;BtnSair7&quot;</param>
+                                                    <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <comment>Ação do botão &quot;Fechar Áudio&quot;</comment>
+                                        <event-block sid="651119190607175">
+                                            <conditions>
+                                                <condition id="-14" name="Compare variable" sid="344518828875035" type="System">
+                                                    <param id="0" name="Variable">acessControle</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">11</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="180742571505642" type="System">
+                                                    <param id="0" name="Group name">&quot;BtnAudioFechar7&quot;</param>
                                                     <param id="1" name="State">1</param>
                                                 </action>
                                             </actions>
@@ -7660,27 +7814,107 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="0" name="Play" sid="113956725733593" type="Audio">
-                            <param id="0" name="Audio file">botoes_menu</param>
-                            <param id="2" name="Loop">0</param>
-                            <param id="3" name="Volume">volSons</param>
-                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                        </action>
-                        <action id="-16" name="Set opacity" sid="516567659932091" type="popup">
-                            <param id="0" name="Opacity">0</param>
-                        </action>
-                        <action id="-16" name="Set opacity" sid="408461010340741" type="audioTexto">
-                            <param id="0" name="Opacity">0</param>
-                        </action>
-                        <action id="-16" name="Set opacity" sid="244033149770069" type="popupTexto">
-                            <param id="0" name="Opacity">0</param>
-                        </action>
-                        <action id="-16" name="Set opacity" sid="275561684078038" type="botaoFechar">
-                            <param id="0" name="Opacity">0</param>
+                        <action id="-12" name="Set group active" sid="852697466642832" type="System">
+                            <param id="0" name="Group name">&quot;BtnAudioFechar7&quot;</param>
+                            <param id="1" name="State">1</param>
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="325985139081386">
+                <comment>Primeiro comando é para atualizar o valor que o Slider está gerando&#x0D;&#x0A;Segundo comando serve para limitar o Slider dentro da barra&#x0D;&#x0A;Terceiro comando é realizar as transformações no valor que o Slider está retornando para o real valor dele, levando em conta o valor mínimo e o Step&#x0D;&#x0A;Quarto comando é apenas para mostrar em forma de texto qual valor está</comment>
+                <event-block sid="450982110175561">
+                    <conditions>
+                        <condition behavior="DragDrop" id="0" name="Is dragging" sid="251306517583857" type="SliderEfeitos" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="877561246094261" type="System">
+                            <param id="0" name="Variable">ValueEfeitosSlider</param>
+                            <param id="1" name="Value">clamp(round((SliderEfeitos.X-SliderBaseEfeitos.X)/(SliderBaseEfeitos.Width/((MaxValueSlider-MinValueSlider)/StepSlider))),0,(MaxValueSlider-MinValueSlider)/StepSlider)</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="340023931106915" type="SliderEfeitos">
+                            <param id="0" name="X">SliderBaseEfeitos.X + ValueEfeitosSlider * (SliderBaseEfeitos.Width/((MaxValueSlider-MinValueSlider)/StepSlider))</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="736852553567064" type="System">
+                            <param id="0" name="Variable">volSons</param>
+                            <param id="1" name="Value">(ValueEfeitosSlider*StepSlider)+MinValueSlider</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Tratamento de fuga para esquerda</comment>
+                <event-block sid="766665249400150">
+                    <conditions>
+                        <condition id="-1" name="Compare X" sid="845493148994119" type="SliderEfeitos">
+                            <param id="0" name="Comparison">2</param>
+                            <param id="1" name="X co-ordinate">SliderBaseEfeitos.X</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="623741079570353" type="SliderEfeitos">
+                            <param id="0" name="X">SliderBaseEfeitos.X</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Tratamento de fuga para direita</comment>
+                <event-block sid="226671034048477">
+                    <conditions>
+                        <condition id="-1" name="Compare X" sid="151848044260022" type="SliderEfeitos">
+                            <param id="0" name="Comparison">4</param>
+                            <param id="1" name="X co-ordinate">SliderBaseEfeitos.X + SliderBaseEfeitos.Width</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="619187879093731" type="SliderEfeitos">
+                            <param id="0" name="X">SliderBaseEfeitos.X + SliderBaseEfeitos.Width</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Primeiro comando é para atualizar o valor que o Slider está gerando&#x0D;&#x0A;Segundo comando serve para limitar o Slider dentro da barra&#x0D;&#x0A;Terceiro comando é realizar as transformações no valor que o Slider está retornando para o real valor dele, levando em conta o valor mínimo e o Step&#x0D;&#x0A;Quarto comando é apenas para mostrar em forma de texto qual valor está</comment>
+                <event-block sid="609269783595087">
+                    <conditions>
+                        <condition behavior="DragDrop" id="0" name="Is dragging" sid="160832982096588" type="SliderMusica" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="705090069740614" type="System">
+                            <param id="0" name="Variable">ValueMusicaSlider</param>
+                            <param id="1" name="Value">clamp(round((SliderMusica.X-SliderBaseMusica.X)/(SliderBaseMusica.Width/((MaxValueSlider-MinValueSlider)/StepSlider))),0,(MaxValueSlider-MinValueSlider)/StepSlider)</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="497302210448158" type="SliderMusica">
+                            <param id="0" name="X">SliderBaseMusica.X + ValueMusicaSlider * (SliderBaseMusica.Width/((MaxValueSlider-MinValueSlider)/StepSlider))</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="635880547497309" type="System">
+                            <param id="0" name="Variable">volMusica</param>
+                            <param id="1" name="Value">(ValueMusicaSlider*StepSlider)+MinValueSlider</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Tratamento de fuga para esquerda</comment>
+                <event-block sid="874553296269400">
+                    <conditions>
+                        <condition id="-1" name="Compare X" sid="768113565921851" type="SliderMusica">
+                            <param id="0" name="Comparison">2</param>
+                            <param id="1" name="X co-ordinate">SliderBaseMusica.X</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="857482455059188" type="SliderMusica">
+                            <param id="0" name="X">SliderBaseMusica.X</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Tratamento de fuga para direita</comment>
+                <event-block sid="410823392258924">
+                    <conditions>
+                        <condition id="-1" name="Compare X" sid="721596126307346" type="SliderMusica">
+                            <param id="0" name="Comparison">4</param>
+                            <param id="1" name="X co-ordinate">SliderBaseMusica.X + SliderBaseMusica.Width</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="323901385876201" type="SliderMusica">
+                            <param id="0" name="X">SliderBaseMusica.X + SliderBaseMusica.Width</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block disabled="1" sid="325985139081386">
                     <conditions>
                         <condition id="17" name="On tap object" sid="494671838916540" type="Touch">
                             <param id="0" name="Object">controleAudio</param>
@@ -7688,7 +7922,7 @@
                     </conditions>
                     <actions />
                     <sub-events>
-                        <event-block sid="988673665837846">
+                        <event-block disabled="1" sid="988673665837846">
                             <conditions>
                                 <condition id="-14" name="Pick by unique ID" sid="116286007947709" type="controleAudio">
                                     <param id="0" name="Unique ID">678</param>
@@ -7696,7 +7930,7 @@
                             </conditions>
                             <actions />
                             <sub-events>
-                                <event-block sid="211564012897642">
+                                <event-block disabled="1" sid="211564012897642">
                                     <conditions>
                                         <condition id="3" name="Compare frame" sid="581053542802798" type="controleAudio">
                                             <param id="0" name="Comparison">0</param>
@@ -7719,7 +7953,7 @@
                                         </action>
                                     </actions>
                                 </event-block>
-                                <event-block sid="730611819104725">
+                                <event-block disabled="1" sid="730611819104725">
                                     <conditions>
                                         <condition id="-22" name="Else" sid="981970247963326" type="System" />
                                     </conditions>
@@ -7741,7 +7975,7 @@
                                 </event-block>
                             </sub-events>
                         </event-block>
-                        <event-block sid="957707400474474">
+                        <event-block disabled="1" sid="957707400474474">
                             <conditions>
                                 <condition id="-14" name="Pick by unique ID" sid="974965830484114" type="controleAudio">
                                     <param id="0" name="Unique ID">679</param>
@@ -7749,7 +7983,7 @@
                             </conditions>
                             <actions />
                             <sub-events>
-                                <event-block sid="129127553928353">
+                                <event-block disabled="1" sid="129127553928353">
                                     <conditions>
                                         <condition id="3" name="Compare frame" sid="703077460104293" type="controleAudio">
                                             <param id="0" name="Comparison">0</param>
@@ -7772,7 +8006,7 @@
                                         </action>
                                     </actions>
                                 </event-block>
-                                <event-block sid="145566042836745">
+                                <event-block disabled="1" sid="145566042836745">
                                     <conditions>
                                         <condition id="-22" name="Else" sid="308891096939811" type="System" />
                                     </conditions>
@@ -8274,6 +8508,7 @@
                 </event-group>
                 <event-group description="" inactive="1" sid="438979413011050" title="BtnAudio7">
                     <sub-events>
+                        <comment>Não esquecer que os ValueSliders foram atualizados conforme seus respectivos valores no começo do Layout, além de que a posição do slider precisa ser atualizada no evento onde a posição do fundoPause é tratado</comment>
                         <event-block sid="555566207853907">
                             <conditions />
                             <actions>
@@ -8292,27 +8527,35 @@
                                 <action id="-16" name="Set opacity" sid="519288222325847" type="audioTexto">
                                     <param id="0" name="Opacity">100</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="154329212914917" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="910830259489572" type="System">
-                                    <param id="0" name="Variable">acessibilidade</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-15" name="Set visible" sid="520711226838039" type="acessBotao">
-                                    <param id="0" name="Visibility">0</param>
-                                </action>
-                                <action id="-2" name="Set Y" sid="827381611173986" type="acessBotao">
-                                    <param id="0" name="Y">-50</param>
-                                </action>
                                 <action id="-9" name="Set value" sid="972228663093739" type="System">
                                     <param id="0" name="Variable">numeroBotoesMenu</param>
-                                    <param id="1" name="Value">5</param>
+                                    <param id="1" name="Value">3</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="154329212914917" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Value">12</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="542679160483582" type="System">
                                     <param id="0" name="Group name">&quot;BtnAudio7&quot;</param>
                                     <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="316408324448297" type="SliderBaseEfeitos">
+                                    <param id="0" name="Opacity">100</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="287975547324565" type="SliderBaseMusica">
+                                    <param id="0" name="Opacity">100</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="383832996581832" type="SliderEfeitos">
+                                    <param id="0" name="Opacity">100</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="548765332289636" type="SliderMusica">
+                                    <param id="0" name="Opacity">100</param>
+                                </action>
+                                <action id="-1" name="Set X" sid="710716246493719" type="SliderEfeitos">
+                                    <param id="0" name="X">SliderBaseEfeitos.X+(volSons-MinValueSlider)*(SliderBaseEfeitos.Width/(MaxValueSlider-MinValueSlider))</param>
+                                </action>
+                                <action id="-1" name="Set X" sid="321759299442845" type="SliderMusica">
+                                    <param id="0" name="X">SliderBaseMusica.X+(volMusica-MinValueSlider)*(SliderBaseMusica.Width/(MaxValueSlider-MinValueSlider))</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -8348,6 +8591,57 @@
                                 </action>
                                 <action id="-12" name="Set group active" sid="421633361518816" type="System">
                                     <param id="0" name="Group name">&quot;BtnSair7&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-group>
+                <event-group description="" inactive="1" sid="411339164035988" title="BtnAudioFechar7">
+                    <sub-events>
+                        <event-block sid="985035507876684">
+                            <conditions />
+                            <actions>
+                                <action id="0" name="Play" sid="113956725733593" type="Audio">
+                                    <param id="0" name="Audio file">botoes_menu</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="516567659932091" type="popup">
+                                    <param id="0" name="Opacity">0</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="408461010340741" type="audioTexto">
+                                    <param id="0" name="Opacity">0</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="244033149770069" type="popupTexto">
+                                    <param id="0" name="Opacity">0</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="275561684078038" type="botaoFechar">
+                                    <param id="0" name="Opacity">0</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="122755823732075" type="SliderBaseEfeitos">
+                                    <param id="0" name="Opacity">0</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="143229654597625" type="SliderBaseMusica">
+                                    <param id="0" name="Opacity">0</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="820140220865428" type="SliderEfeitos">
+                                    <param id="0" name="Opacity">0</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="581073696762683" type="SliderMusica">
+                                    <param id="0" name="Opacity">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="890571576914151" type="System">
+                                    <param id="0" name="Variable">acessControle</param>
+                                    <param id="1" name="Value">4</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="944117315914679" type="System">
+                                    <param id="0" name="Variable">numeroBotoesMenu</param>
+                                    <param id="1" name="Value">5</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="319433270974416" type="System">
+                                    <param id="0" name="Group name">&quot;BtnAudioFechar7&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
                             </actions>
