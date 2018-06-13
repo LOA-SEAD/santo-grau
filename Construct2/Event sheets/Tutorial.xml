@@ -33,6 +33,14 @@
                     <param id="0" name="Variable">instrucoesDialogo</param>
                     <param id="1" name="Value">0</param>
                 </action>
+                <action id="-9" name="Set value" sid="470599748042632" type="System">
+                    <param id="0" name="Variable">ValueEfeitosSlider</param>
+                    <param id="1" name="Value">volSons - MinValueSlider + MaxValueSlider</param>
+                </action>
+                <action id="-9" name="Set value" sid="935528597391977" type="System">
+                    <param id="0" name="Variable">ValueMusicaSlider</param>
+                    <param id="1" name="Value">volMusica - MinValueSlider + MaxValueSlider</param>
+                </action>
                 <action id="-16" name="Wait" sid="258510272904470" type="System">
                     <param id="0" name="Seconds">2</param>
                 </action>
@@ -3297,20 +3305,9 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="0" name="Play" sid="293256931402742" type="Audio">
-                                    <param id="0" name="Audio file">botoes_menu</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="484179512499512" type="popup">
-                                    <param id="0" name="Opacity">100</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="792785454557616" type="audioTexto">
-                                    <param id="0" name="Opacity">0</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="999203892493203" type="popupTexto">
-                                    <param id="0" name="Opacity">100</param>
+                                <action id="-12" name="Set group active" sid="432525990908567" type="System">
+                                    <param id="0" name="Group name">&quot;BtnSair9&quot;</param>
+                                    <param id="1" name="State">1</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -3345,14 +3342,9 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="0" name="Play" sid="858245499697294" type="Audio">
-                                            <param id="0" name="Audio file">botoes_menu</param>
-                                            <param id="2" name="Loop">0</param>
-                                            <param id="3" name="Volume">volSons</param>
-                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                        </action>
-                                        <action id="-16" name="Set opacity" sid="935431832721375" type="popup">
-                                            <param id="0" name="Opacity">0</param>
+                                        <action id="-12" name="Set group active" sid="384136492293574" type="System">
+                                            <param id="0" name="Group name">&quot;BtnPopupNao9&quot;</param>
+                                            <param id="1" name="State">0</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -3447,23 +3439,57 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="0" name="Play" sid="225286756378050" type="Audio">
-                            <param id="0" name="Audio file">botoes_menu</param>
-                            <param id="2" name="Loop">0</param>
-                            <param id="3" name="Volume">volSons</param>
-                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                        <action id="-12" name="Set group active" sid="582477614865005" type="System">
+                            <param id="0" name="Group name">&quot;BtnAudioFechar9&quot;</param>
+                            <param id="1" name="State">1</param>
                         </action>
-                        <action id="-16" name="Set opacity" sid="246729924173178" type="popup">
-                            <param id="0" name="Opacity">0</param>
+                    </actions>
+                </event-block>
+                <event-block sid="668389349267339">
+                    <conditions>
+                        <condition behavior="DragDrop" id="0" name="Is dragging" sid="678391060936577" type="SliderEfeitos" />
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="741351557602113" type="System">
+                            <param id="0" name="Group name">&quot;BtnSliderEfeitos9&quot;</param>
+                            <param id="1" name="State">1</param>
                         </action>
-                        <action id="-16" name="Set opacity" sid="820391749370347" type="audioTexto">
-                            <param id="0" name="Opacity">0</param>
+                        <action id="-12" name="Set group active" sid="825002063790841" type="System">
+                            <param id="0" name="Group name">&quot;BtnSliderMusica9&quot;</param>
+                            <param id="1" name="State">0</param>
                         </action>
-                        <action id="-16" name="Set opacity" sid="863640661477935" type="popupTexto">
-                            <param id="0" name="Opacity">0</param>
+                    </actions>
+                </event-block>
+                <event-block sid="498533282539866">
+                    <conditions>
+                        <condition behavior="DragDrop" id="0" name="Is dragging" sid="924561464554379" type="SliderMusica" />
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="436816055240646" type="System">
+                            <param id="0" name="Group name">&quot;BtnSliderEfeitos9&quot;</param>
+                            <param id="1" name="State">0</param>
                         </action>
-                        <action id="-16" name="Set opacity" sid="897803531380275" type="botaoFechar">
-                            <param id="0" name="Opacity">0</param>
+                        <action id="-12" name="Set group active" sid="985066799178234" type="System">
+                            <param id="0" name="Group name">&quot;BtnSliderMusica9&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="417344151760593">
+                    <conditions>
+                        <condition id="-10" name="Compare opacity" sid="441820538072094" type="SliderEfeitos">
+                            <param id="0" name="Comparison">2</param>
+                            <param id="1" name="Opacity">50</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="710483667534317" type="System">
+                            <param id="0" name="Group name">&quot;BtnSliderEfeitos9&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="649781874221463" type="System">
+                            <param id="0" name="Group name">&quot;BtnSliderMusica9&quot;</param>
+                            <param id="1" name="State">0</param>
                         </action>
                     </actions>
                 </event-block>
@@ -3988,7 +4014,7 @@
                 </event-group>
                 <event-group description="" inactive="1" sid="496767203111240" title="BtnAudio9">
                     <sub-events>
-                        <comment>Não esquecer que os ValueSliders foram atualizados conforme seus respectivos valores no começo do Layout, além de que a posição do slider precisa ser atualizada no evento onde a posição do fundoPause é tratado</comment>
+                        <comment>Não esquecer que os ValueSliders foram atualizados conforme seus respectivos valores no começo do Layout, além de que a posição do slider precisa ser atualizada no evento onde a posição do fundoPause é tratado e os valores dos slides devem ser atualizados no início do layout</comment>
                         <event-block sid="717403986687867">
                             <conditions />
                             <actions>
@@ -4070,7 +4096,7 @@
                                     <param id="1" name="Value">21</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="369339970421617" type="System">
-                                    <param id="0" name="Group name">&quot;BtnSair8&quot;</param>
+                                    <param id="0" name="Group name">&quot;BtnSair9&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
                             </actions>
@@ -4100,7 +4126,7 @@
                                     <param id="0" name="Opacity">0</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="489030573628313" type="System">
-                                    <param id="0" name="Group name">&quot;BtnPopupNao8&quot;</param>
+                                    <param id="0" name="Group name">&quot;BtnPopupNao9&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
                             </actions>
@@ -4109,19 +4135,19 @@
                 </event-group>
                 <event-group description="" inactive="1" sid="281729588536982" title="BtnPopupSim9">
                     <sub-events>
-                        <event-block sid="529932349916861">
+                        <event-block sid="856666769316219">
                             <conditions />
                             <actions>
-                                <action id="0" name="Play" sid="566198712076250" type="Audio">
+                                <action id="0" name="Play" sid="414460367811510" type="Audio">
                                     <param id="0" name="Audio file">botoes_menu</param>
                                     <param id="2" name="Loop">0</param>
                                     <param id="3" name="Volume">volSons</param>
                                     <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                 </action>
-                                <action id="-13" name="Set time scale" sid="426969442061156" type="System">
+                                <action id="-13" name="Set time scale" sid="399782472976223" type="System">
                                     <param id="0" name="Time scale">1.0</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="114655734351426" type="System">
+                                <action id="-9" name="Set value" sid="531879266582448" type="System">
                                     <param id="0" name="Variable">pause</param>
                                     <param id="1" name="Value">0</param>
                                 </action>
@@ -4143,48 +4169,48 @@
                                     <param id="0" name="Variable">numeroBotoesMenu</param>
                                     <param id="1" name="Value">5</param>
                                 </action>
-                                <action id="-12" name="Set group active" sid="316585089857888" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao8a&quot;</param>
+                                <action id="-12" name="Set group active" sid="136883052566438" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao9a&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
-                                <action id="-12" name="Set group active" sid="126685436704250" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao8b&quot;</param>
+                                <action id="-12" name="Set group active" sid="496085284833267" type="System">
+                                    <param id="0" name="Group name">&quot;Pontuacao9b&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
-                                <action id="-16" name="Set opacity" sid="378660907307640" type="popup">
+                                <action id="-16" name="Set opacity" sid="763710538114271" type="popup">
                                     <param id="0" name="Opacity">0</param>
                                 </action>
-                                <action id="33" name="Stop all" sid="886166830946427" type="Audio" />
+                                <action id="33" name="Stop all" sid="257782941237297" type="Audio" />
                                 <action id="-12" name="Set group active" sid="887227745333920" type="System">
-                                    <param id="0" name="Group name">&quot;BtnPopupSim8&quot;</param>
+                                    <param id="0" name="Group name">&quot;BtnPopupSim9&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
-                                <action id="-2" name="Go to layout" sid="352412310403471" type="System">
+                                <action id="-2" name="Go to layout" sid="232257193778218" type="System">
                                     <param id="0" name="Layout">Menu</param>
                                 </action>
                             </actions>
                             <sub-events>
-                                <event-block sid="508219147843771">
+                                <event-block sid="655324030387746">
                                     <conditions>
-                                        <condition id="-20" name="Is on mobile device" sid="468448833991207" type="System" />
+                                        <condition id="-20" name="Is on mobile device" sid="918875623521300" type="System" />
                                     </conditions>
                                     <actions>
-                                        <action disabled="1" id="-12" name="Set group active" sid="389072684746815" type="System">
+                                        <action disabled="1" id="-12" name="Set group active" sid="445496358063572" type="System">
                                             <param id="0" name="Group name">&quot;Mobile8&quot;</param>
                                             <param id="1" name="State">1</param>
                                         </action>
-                                        <action behavior="DragDrop" id="0" name="Set enabled" sid="331654457762388" type="HitboxDir">
+                                        <action behavior="DragDrop" id="0" name="Set enabled" sid="255147480669304" type="HitboxDir">
                                             <param id="0" name="State">1</param>
                                         </action>
                                     </actions>
                                 </event-block>
-                                <event-block sid="228538267246040">
+                                <event-block sid="744070502515315">
                                     <conditions>
-                                        <condition id="-22" name="Else" sid="571426102549894" type="System" />
+                                        <condition id="-22" name="Else" sid="175623623433235" type="System" />
                                     </conditions>
                                     <actions>
-                                        <action id="-12" name="Set group active" sid="448447603316910" type="System">
-                                            <param id="0" name="Group name">&quot;playerMove8&quot;</param>
+                                        <action id="-12" name="Set group active" sid="737485786251275" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove9&quot;</param>
                                             <param id="1" name="State">1</param>
                                         </action>
                                     </actions>
@@ -4237,7 +4263,7 @@
                                     <param id="1" name="Value">5</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="667184094976079" type="System">
-                                    <param id="0" name="Group name">&quot;BtnAudioFechar8&quot;</param>
+                                    <param id="0" name="Group name">&quot;BtnAudioFechar9&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
                             </actions>
@@ -4257,11 +4283,11 @@
                                             <param id="1" name="Value">1</param>
                                         </action>
                                         <action id="-12" name="Set group active" sid="280255459007789" type="System">
-                                            <param id="0" name="Group name">&quot;BtnSliderEfeitos8&quot;</param>
+                                            <param id="0" name="Group name">&quot;BtnSliderEfeitos9&quot;</param>
                                             <param id="1" name="State">0</param>
                                         </action>
                                         <action id="-12" name="Set group active" sid="270127983856422" type="System">
-                                            <param id="0" name="Group name">&quot;BtnSliderMusica8&quot;</param>
+                                            <param id="0" name="Group name">&quot;BtnSliderMusica9&quot;</param>
                                             <param id="1" name="State">0</param>
                                         </action>
                                     </actions>
@@ -4286,7 +4312,7 @@
                             </conditions>
                             <actions>
                                 <action id="-12" name="Set group active" sid="943423148722926" type="System">
-                                    <param id="0" name="Group name">&quot;BtnSliderEfeitos8&quot;</param>
+                                    <param id="0" name="Group name">&quot;BtnSliderEfeitos9&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="176702833108372" type="System">
@@ -4304,7 +4330,7 @@
                                     <param id="2" name="Value">1</param>
                                 </condition>
                                 <condition id="-15" name="Is group active" sid="693438606240462" type="System">
-                                    <param id="0" name="Group name">&quot;BtnSliderEfeitos8&quot;</param>
+                                    <param id="0" name="Group name">&quot;BtnSliderEfeitos9&quot;</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -4444,7 +4470,7 @@
                             </conditions>
                             <actions>
                                 <action id="-12" name="Set group active" sid="978040366037183" type="System">
-                                    <param id="0" name="Group name">&quot;BtnSliderMusica8&quot;</param>
+                                    <param id="0" name="Group name">&quot;BtnSliderMusica9&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
                                 <action id="-9" name="Set value" sid="991541690744700" type="System">
@@ -4462,7 +4488,7 @@
                                     <param id="2" name="Value">1</param>
                                 </condition>
                                 <condition id="-15" name="Is group active" sid="337596405433238" type="System">
-                                    <param id="0" name="Group name">&quot;BtnSliderMusica8&quot;</param>
+                                    <param id="0" name="Group name">&quot;BtnSliderMusica9&quot;</param>
                                 </condition>
                             </conditions>
                             <actions>
