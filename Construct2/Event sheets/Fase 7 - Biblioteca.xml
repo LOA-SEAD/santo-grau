@@ -123,9 +123,10 @@
                 <action id="0" name="Play" sid="475133934047342" type="Audio">
                     <param id="0" name="Audio file">ambiencia_biblioteca_loop</param>
                     <param id="2" name="Loop">1</param>
-                    <param id="3" name="Volume">volMusica+10</param>
+                    <param id="3" name="Volume">volMusica</param>
                     <param id="1" name="Tag (optional)">&quot;musica&quot;</param>
                 </action>
+                <action id="0" name="Load JSON" sid="479824150233619" type="AcessibilidadeJSON" />
                 <action id="0" name="Load JSON" sid="701092887753104" type="BibliotecaJSON" />
                 <action id="0" name="Load JSON" sid="374127343614687" type="DialogosJSON" />
                 <action id="0" name="Load JSON" sid="183160895817089" type="FasesJSON" />
@@ -1007,8 +1008,11 @@
                     </conditions>
                     <actions>
                         <action id="33" name="Stop all" sid="230327664483663" type="Audio" />
-                        <action id="-2" name="Go to layout" sid="555738526848740" type="System">
+                        <action disabled="1" id="-2" name="Go to layout" sid="555738526848740" type="System">
                             <param id="0" name="Layout">Fase 3</param>
+                        </action>
+                        <action id="-2" name="Go to layout" sid="460276828247384" type="System">
+                            <param id="0" name="Layout">Menu</param>
                         </action>
                     </actions>
                 </event-block>
@@ -1023,8 +1027,11 @@
                             <param id="1" name="Value">1</param>
                         </action>
                         <action id="33" name="Stop all" sid="216180635523401" type="Audio" />
-                        <action id="-25" name="Go to layout (by name)" sid="515000308436936" type="System">
+                        <action disabled="1" id="-25" name="Go to layout (by name)" sid="515000308436936" type="System">
                             <param id="0" name="Layout">&quot;Fase &quot; &amp; FasesJSON.GetData(&quot;fases&quot;, fasesOpcionais-1)</param>
+                        </action>
+                        <action id="-2" name="Go to layout" sid="388225731435915" type="System">
+                            <param id="0" name="Layout">Menu</param>
                         </action>
                     </actions>
                 </event-block>
@@ -1131,13 +1138,79 @@
                             <actions>
                                 <action id="3" name="Set volume" sid="535931327606229" type="Audio">
                                     <param id="0" name="Tag">&quot;ronco&quot;</param>
-                                    <param id="1" name="dB">(1090-(3*distance(player.X, player.Y, bibliotecarioBase.X, bibliotecarioBase.Y)))/109</param>
+                                    <param id="1" name="dB">(2180-(4*distance(player.X, player.Y, bibliotecarioBase.X, bibliotecarioBase.Y)))/109</param>
                                 </action>
                                 <action id="3" name="Set volume" sid="486197578729527" type="Audio">
                                     <param id="0" name="Tag">&quot;tosse&quot;</param>
-                                    <param id="1" name="dB">(1090-(3*distance(player.X, player.Y, bibliotecarioBase.X, bibliotecarioBase.Y)))/109</param>
+                                    <param id="1" name="dB">(2180-(4*distance(player.X, player.Y, bibliotecarioBase.X, bibliotecarioBase.Y)))/109</param>
                                 </action>
                             </actions>
+                        </event-block>
+                        <event-block sid="764074998091639">
+                            <conditions>
+                                <condition id="-9" name="Layer is visible" sid="706130397698131" type="System">
+                                    <param id="0" name="Layer">5</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="137671404233256">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="416187085253340" type="System">
+                                            <param id="0" name="Variable">acessControle</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">0</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="753268135071712" type="acessBotao">
+                                            <param id="0" name="Y">-70</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="328205406098792">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="150779817610898" type="System">
+                                            <param id="0" name="Variable">acessControle</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">1</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="530662166924597" type="acessBotao">
+                                            <param id="0" name="Y">214</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="842912651158828">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="270708214184715" type="System">
+                                            <param id="0" name="Variable">acessControle</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">2</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="993174360174519" type="acessBotao">
+                                            <param id="0" name="Y">330</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="135025016146301">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="506627385972989" type="System">
+                                            <param id="0" name="Variable">acessControle</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Value">3</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="676273811279426" type="acessBotao">
+                                            <param id="0" name="Y">447</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -2983,7 +3056,7 @@
                                                 <action id="25" name="Play at object" sid="997114155976048" type="Audio">
                                                     <param id="0" name="Audio file">mago_21</param>
                                                     <param id="1" name="Loop">0</param>
-                                                    <param id="2" name="Volume">(1090-(3*distance(player.X, player.Y, bibliotecarioBase.X, bibliotecarioBase.Y)))/109</param>
+                                                    <param id="2" name="Volume">(2180-(4*distance(player.X, player.Y, bibliotecarioBase.X, bibliotecarioBase.Y)))/109</param>
                                                     <param id="3" name="Object">bibliotecarioBase</param>
                                                     <param id="4" name="Inner angle">45</param>
                                                     <param id="5" name="Outer angle">45</param>
@@ -3120,7 +3193,7 @@
                                                 <action id="25" name="Play at object" sid="903750117595100" type="Audio">
                                                     <param id="0" name="Audio file">mago_21</param>
                                                     <param id="1" name="Loop">0</param>
-                                                    <param id="2" name="Volume">(1090-(3*distance(player.X, player.Y, bibliotecarioBase.X, bibliotecarioBase.Y)))/109</param>
+                                                    <param id="2" name="Volume">(2180-(4*distance(player.X, player.Y, bibliotecarioBase.X, bibliotecarioBase.Y)))/109</param>
                                                     <param id="3" name="Object">bibliotecarioBase</param>
                                                     <param id="4" name="Inner angle">45</param>
                                                     <param id="5" name="Outer angle">45</param>
@@ -3257,7 +3330,7 @@
                                                 <action id="25" name="Play at object" sid="520497633531272" type="Audio">
                                                     <param id="0" name="Audio file">mago_21</param>
                                                     <param id="1" name="Loop">0</param>
-                                                    <param id="2" name="Volume">(1090-(3*distance(player.X, player.Y, bibliotecarioBase.X, bibliotecarioBase.Y)))/109</param>
+                                                    <param id="2" name="Volume">(2180-(4*distance(player.X, player.Y, bibliotecarioBase.X, bibliotecarioBase.Y)))/109</param>
                                                     <param id="3" name="Object">bibliotecarioBase</param>
                                                     <param id="4" name="Inner angle">45</param>
                                                     <param id="5" name="Outer angle">45</param>
@@ -3397,7 +3470,7 @@
                                                 <action id="25" name="Play at object" sid="119760187283676" type="Audio">
                                                     <param id="0" name="Audio file">mago_21</param>
                                                     <param id="1" name="Loop">0</param>
-                                                    <param id="2" name="Volume">(1090-(3*distance(player.X, player.Y, bibliotecarioBase.X, bibliotecarioBase.Y)))/109</param>
+                                                    <param id="2" name="Volume">(2180-(4*distance(player.X, player.Y, bibliotecarioBase.X, bibliotecarioBase.Y)))/109</param>
                                                     <param id="3" name="Object">bibliotecarioBase</param>
                                                     <param id="4" name="Inner angle">45</param>
                                                     <param id="5" name="Outer angle">45</param>
@@ -7745,6 +7818,10 @@
                         <condition id="-4" name="Trigger once while true" sid="515534430883823" type="System" />
                     </conditions>
                     <actions>
+                        <action id="-9" name="Set value" sid="734426847857426" type="System">
+                            <param id="0" name="Variable">acessControle</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
                         <action id="-4" name="Set layer visible" sid="388830370042003" type="System">
                             <param id="0" name="Layer">5</param>
                             <param id="1" name="Visibility">1</param>
@@ -7791,6 +7868,32 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <event-block sid="661455696804016">
+                    <conditions>
+                        <condition id="-9" name="Layer is visible" sid="591239932249081" type="System">
+                            <param id="0" name="Layer">5</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="275924144920612">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="997774327293622" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Stop speaking" sid="351595853861175" type="UserMedia" />
+                                <action id="6" name="Speak text" sid="632091727480759" type="UserMedia">
+                                    <param id="0" name="Text">&quot;Neste livro, há 3 pistas para descobrir a palavra mágica. Navegue pelas pistas com as teclas direcionais, aperte Q para ouvir ou desbloquear as pistas e aperte E quando estiver pronto para responder.&quot;</param>
+                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                    <param id="3" name="Volume">10</param>
+                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
                 <event-group description="Controla a funcionalidade dos botões da UI das palavra mágicas" sid="464408669515198" title="ControleUIPalavrasMagicas">
                     <sub-events>
                         <event-group description="" sid="206552450001758" title="ControleTeclas">
@@ -7816,6 +7919,628 @@
                                                 <action id="-12" name="Set group active" sid="685229466543130" type="System">
                                                     <param id="0" name="Group name">&quot;VerificarResposta&quot;</param>
                                                     <param id="1" name="State">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="512554004015531">
+                                            <conditions>
+                                                <condition id="0" name="On key pressed" sid="591056953746028" type="Keyboard">
+                                                    <param id="0" name="Key">40</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Play" sid="960210578324980" type="Audio">
+                                                    <param id="0" name="Audio file">sobre_botao</param>
+                                                    <param id="2" name="Loop">0</param>
+                                                    <param id="3" name="Volume">volSons</param>
+                                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                                </action>
+                                            </actions>
+                                            <sub-events>
+                                                <event-block sid="858558695190008">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="930074443781120" type="System">
+                                                            <param id="0" name="Variable">acessControle</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">0</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-16" name="Wait" sid="240924876157443" type="System">
+                                                            <param id="0" name="Seconds">0.1</param>
+                                                        </action>
+                                                        <action id="-9" name="Set value" sid="627739797983781" type="System">
+                                                            <param id="0" name="Variable">acessControle</param>
+                                                            <param id="1" name="Value">1</param>
+                                                        </action>
+                                                    </actions>
+                                                    <sub-events>
+                                                        <event-block sid="143139698915598">
+                                                            <conditions>
+                                                                <condition id="-14" name="Pick by unique ID" sid="404007493995334" type="Dica">
+                                                                    <param id="0" name="Unique ID">567</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="7" name="Stop speaking" sid="551658402530415" type="UserMedia" />
+                                                                <action id="6" name="Speak text" sid="231624147677410" type="UserMedia">
+                                                                    <param id="0" name="Text">Dica.Text</param>
+                                                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                                                    <param id="3" name="Volume">10</param>
+                                                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
+                                                <event-block sid="818701074602558">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="217878833083033" type="System">
+                                                            <param id="0" name="Variable">acessControle</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">1</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-16" name="Wait" sid="909787939304099" type="System">
+                                                            <param id="0" name="Seconds">0.1</param>
+                                                        </action>
+                                                        <action id="-9" name="Set value" sid="947612624813127" type="System">
+                                                            <param id="0" name="Variable">acessControle</param>
+                                                            <param id="1" name="Value">2</param>
+                                                        </action>
+                                                    </actions>
+                                                    <sub-events>
+                                                        <event-block sid="345853552527463">
+                                                            <conditions>
+                                                                <condition id="-14" name="Pick by unique ID" sid="661371532435835" type="Dica">
+                                                                    <param id="0" name="Unique ID">714</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="7" name="Stop speaking" sid="517666980208899" type="UserMedia" />
+                                                                <action id="6" name="Speak text" sid="540303929439438" type="UserMedia">
+                                                                    <param id="0" name="Text">Dica.Text</param>
+                                                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                                                    <param id="3" name="Volume">10</param>
+                                                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
+                                                <event-block sid="954332092114656">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="270917043958159" type="System">
+                                                            <param id="0" name="Variable">acessControle</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">2</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-16" name="Wait" sid="554186262729129" type="System">
+                                                            <param id="0" name="Seconds">0.1</param>
+                                                        </action>
+                                                        <action id="-9" name="Set value" sid="480290832025068" type="System">
+                                                            <param id="0" name="Variable">acessControle</param>
+                                                            <param id="1" name="Value">3</param>
+                                                        </action>
+                                                    </actions>
+                                                    <sub-events>
+                                                        <event-block sid="521359368757978">
+                                                            <conditions>
+                                                                <condition id="-14" name="Pick by unique ID" sid="466966414019965" type="Dica">
+                                                                    <param id="0" name="Unique ID">788</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="7" name="Stop speaking" sid="179190102629406" type="UserMedia" />
+                                                                <action id="6" name="Speak text" sid="865060094734179" type="UserMedia">
+                                                                    <param id="0" name="Text">Dica.Text</param>
+                                                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                                                    <param id="3" name="Volume">10</param>
+                                                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
+                                                <event-block sid="470309422441736">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="799256874009942" type="System">
+                                                            <param id="0" name="Variable">acessControle</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">3</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-16" name="Wait" sid="516916826185977" type="System">
+                                                            <param id="0" name="Seconds">0.1</param>
+                                                        </action>
+                                                        <action id="-9" name="Set value" sid="461153125497479" type="System">
+                                                            <param id="0" name="Variable">acessControle</param>
+                                                            <param id="1" name="Value">1</param>
+                                                        </action>
+                                                    </actions>
+                                                    <sub-events>
+                                                        <event-block sid="239133900491090">
+                                                            <conditions>
+                                                                <condition id="-14" name="Pick by unique ID" sid="905127876835592" type="Dica">
+                                                                    <param id="0" name="Unique ID">567</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="7" name="Stop speaking" sid="840492324372856" type="UserMedia" />
+                                                                <action id="6" name="Speak text" sid="762846066546963" type="UserMedia">
+                                                                    <param id="0" name="Text">Dica.Text</param>
+                                                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                                                    <param id="3" name="Volume">10</param>
+                                                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                        <event-block sid="135614461001471">
+                                            <conditions>
+                                                <condition id="0" name="On key pressed" sid="197710290546348" type="Keyboard">
+                                                    <param id="0" name="Key">38</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="0" name="Play" sid="329406728013640" type="Audio">
+                                                    <param id="0" name="Audio file">sobre_botao</param>
+                                                    <param id="2" name="Loop">0</param>
+                                                    <param id="3" name="Volume">volSons</param>
+                                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                                </action>
+                                            </actions>
+                                            <sub-events>
+                                                <event-block sid="916411726164884">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="521458165084507" type="System">
+                                                            <param id="0" name="Variable">acessControle</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">0</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-16" name="Wait" sid="952004042155303" type="System">
+                                                            <param id="0" name="Seconds">0.1</param>
+                                                        </action>
+                                                        <action id="-9" name="Set value" sid="238222521602076" type="System">
+                                                            <param id="0" name="Variable">acessControle</param>
+                                                            <param id="1" name="Value">3</param>
+                                                        </action>
+                                                    </actions>
+                                                    <sub-events>
+                                                        <event-block sid="940999910543726">
+                                                            <conditions>
+                                                                <condition id="-14" name="Pick by unique ID" sid="620919091251210" type="Dica">
+                                                                    <param id="0" name="Unique ID">788</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="7" name="Stop speaking" sid="773216511474227" type="UserMedia" />
+                                                                <action id="6" name="Speak text" sid="996433387886879" type="UserMedia">
+                                                                    <param id="0" name="Text">Dica.Text</param>
+                                                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                                                    <param id="3" name="Volume">10</param>
+                                                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
+                                                <event-block sid="563011808284373">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="952840309975227" type="System">
+                                                            <param id="0" name="Variable">acessControle</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">3</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-16" name="Wait" sid="651896463819227" type="System">
+                                                            <param id="0" name="Seconds">0.1</param>
+                                                        </action>
+                                                        <action id="-9" name="Set value" sid="851487607480713" type="System">
+                                                            <param id="0" name="Variable">acessControle</param>
+                                                            <param id="1" name="Value">2</param>
+                                                        </action>
+                                                    </actions>
+                                                    <sub-events>
+                                                        <event-block sid="247981720142340">
+                                                            <conditions>
+                                                                <condition id="-14" name="Pick by unique ID" sid="201783513229903" type="Dica">
+                                                                    <param id="0" name="Unique ID">714</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="7" name="Stop speaking" sid="481875423926673" type="UserMedia" />
+                                                                <action id="6" name="Speak text" sid="775690741384662" type="UserMedia">
+                                                                    <param id="0" name="Text">Dica.Text</param>
+                                                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                                                    <param id="3" name="Volume">10</param>
+                                                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
+                                                <event-block sid="700286092024167">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="121685934529783" type="System">
+                                                            <param id="0" name="Variable">acessControle</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">2</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-16" name="Wait" sid="127995499221081" type="System">
+                                                            <param id="0" name="Seconds">0.1</param>
+                                                        </action>
+                                                        <action id="-9" name="Set value" sid="616980637681651" type="System">
+                                                            <param id="0" name="Variable">acessControle</param>
+                                                            <param id="1" name="Value">1</param>
+                                                        </action>
+                                                    </actions>
+                                                    <sub-events>
+                                                        <event-block sid="815182584646783">
+                                                            <conditions>
+                                                                <condition id="-14" name="Pick by unique ID" sid="424417767696088" type="Dica">
+                                                                    <param id="0" name="Unique ID">567</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="7" name="Stop speaking" sid="740602138213063" type="UserMedia" />
+                                                                <action id="6" name="Speak text" sid="608553123521055" type="UserMedia">
+                                                                    <param id="0" name="Text">Dica.Text</param>
+                                                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                                                    <param id="3" name="Volume">10</param>
+                                                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
+                                                <event-block sid="680843316700645">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="792383874278387" type="System">
+                                                            <param id="0" name="Variable">acessControle</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">1</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="-16" name="Wait" sid="381317356728264" type="System">
+                                                            <param id="0" name="Seconds">0.1</param>
+                                                        </action>
+                                                        <action id="-9" name="Set value" sid="308328803536963" type="System">
+                                                            <param id="0" name="Variable">acessControle</param>
+                                                            <param id="1" name="Value">3</param>
+                                                        </action>
+                                                    </actions>
+                                                    <sub-events>
+                                                        <event-block sid="184064298051902">
+                                                            <conditions>
+                                                                <condition id="-14" name="Pick by unique ID" sid="918571400950834" type="Dica">
+                                                                    <param id="0" name="Unique ID">788</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="7" name="Stop speaking" sid="225819900450017" type="UserMedia" />
+                                                                <action id="6" name="Speak text" sid="210447038312609" type="UserMedia">
+                                                                    <param id="0" name="Text">Dica.Text</param>
+                                                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                                                    <param id="3" name="Volume">10</param>
+                                                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                        <event-block sid="704922146801845">
+                                            <conditions>
+                                                <condition id="0" name="On key pressed" sid="397537231642014" type="Keyboard">
+                                                    <param id="0" name="Key">81</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions />
+                                            <sub-events>
+                                                <event-block sid="157587386261294">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="601488728348157" type="System">
+                                                            <param id="0" name="Variable">acessControle</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">1</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions />
+                                                    <sub-events>
+                                                        <event-block sid="192008583769802">
+                                                            <conditions>
+                                                                <condition id="-14" name="Pick by unique ID" sid="315793612491529" type="Dica">
+                                                                    <param id="0" name="Unique ID">567</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="7" name="Stop speaking" sid="233607579778522" type="UserMedia" />
+                                                                <action id="6" name="Speak text" sid="581827273441164" type="UserMedia">
+                                                                    <param id="0" name="Text">Dica.Text</param>
+                                                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                                                    <param id="3" name="Volume">10</param>
+                                                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
+                                                <event-block sid="254858673022079">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="637064812153086" type="System">
+                                                            <param id="0" name="Variable">acessControle</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">2</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions />
+                                                    <sub-events>
+                                                        <event-block sid="711892364675858">
+                                                            <conditions>
+                                                                <condition id="-14" name="Pick by unique ID" sid="491143856845168" type="botaoDica">
+                                                                    <param id="0" name="Unique ID">783</param>
+                                                                </condition>
+                                                                <condition id="-14" name="Pick by unique ID" sid="380057669752010" type="Dica">
+                                                                    <param id="0" name="Unique ID">714</param>
+                                                                </condition>
+                                                                <condition id="-14" name="Pick by unique ID" sid="206888493368207" type="compraDica">
+                                                                    <param id="0" name="Unique ID">760</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions />
+                                                            <sub-events>
+                                                                <event-block sid="492135692133025">
+                                                                    <conditions>
+                                                                        <condition id="-14" name="Compare variable" sid="889739974303944" type="System">
+                                                                            <param id="0" name="Variable">revelado1</param>
+                                                                            <param id="1" name="Comparison">0</param>
+                                                                            <param id="2" name="Value">0</param>
+                                                                        </condition>
+                                                                    </conditions>
+                                                                    <actions>
+                                                                        <action id="5" name="Set frame" sid="672852014878943" type="botaoDica">
+                                                                            <param id="0" name="Frame number">0</param>
+                                                                        </action>
+                                                                        <action id="-9" name="Set value" sid="700259301436218" type="System">
+                                                                            <param id="0" name="Variable">revelado1</param>
+                                                                            <param id="1" name="Value">1</param>
+                                                                        </action>
+                                                                        <action id="-10" name="Add to" sid="962425894038464" type="System">
+                                                                            <param id="0" name="Variable">contadorDicas</param>
+                                                                            <param id="1" name="Value">1</param>
+                                                                        </action>
+                                                                        <action id="-15" name="Set visible" sid="691779387242376" type="compraDica">
+                                                                            <param id="0" name="Visibility">0</param>
+                                                                        </action>
+                                                                        <action id="-15" name="Set visible" sid="331834947696159" type="Dica">
+                                                                            <param id="0" name="Visibility">1</param>
+                                                                        </action>
+                                                                        <action id="0" name="Set text" sid="165219146399934" type="Dica">
+                                                                            <param id="0" name="Text">BibliotecaJSON.GetData(&quot;livro&quot; &amp; livroAtual, contadorDicas)</param>
+                                                                        </action>
+                                                                        <action id="-11" name="Subtract from" sid="722746533567131" type="System">
+                                                                            <param id="0" name="Variable">pontos</param>
+                                                                            <param id="1" name="Value">25</param>
+                                                                        </action>
+                                                                        <action id="0" name="Set text" sid="619756289955888" type="pontoTexto">
+                                                                            <param id="0" name="Text">&quot;-25&quot;</param>
+                                                                        </action>
+                                                                        <action id="4" name="Set font color" sid="359192116002838" type="pontoTexto">
+                                                                            <param id="0" name="Color">rgb(235, 17, 53)</param>
+                                                                        </action>
+                                                                        <action id="-12" name="Set group active" sid="874938818907593" type="System">
+                                                                            <param id="0" name="Group name">&quot;Pontuacao8b&quot;</param>
+                                                                            <param id="1" name="State">0</param>
+                                                                        </action>
+                                                                        <action id="-12" name="Set group active" sid="698849770215225" type="System">
+                                                                            <param id="0" name="Group name">&quot;Pontuacao8a&quot;</param>
+                                                                            <param id="1" name="State">1</param>
+                                                                        </action>
+                                                                        <action id="7" name="Stop speaking" sid="837679547522019" type="UserMedia" />
+                                                                        <action id="6" name="Speak text" sid="803935925981159" type="UserMedia">
+                                                                            <param id="0" name="Text">Dica.Text</param>
+                                                                            <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                                                            <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                                                            <param id="3" name="Volume">10</param>
+                                                                            <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                                                            <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                                                        </action>
+                                                                        <action id="-16" name="Wait" sid="512985736496922" type="System">
+                                                                            <param id="0" name="Seconds">3</param>
+                                                                        </action>
+                                                                        <action id="-12" name="Set group active" sid="898354915946349" type="System">
+                                                                            <param id="0" name="Group name">&quot;Pontuacao8a&quot;</param>
+                                                                            <param id="1" name="State">0</param>
+                                                                        </action>
+                                                                        <action id="-12" name="Set group active" sid="947298246386076" type="System">
+                                                                            <param id="0" name="Group name">&quot;Pontuacao8b&quot;</param>
+                                                                            <param id="1" name="State">1</param>
+                                                                        </action>
+                                                                    </actions>
+                                                                </event-block>
+                                                                <event-block sid="263264164767714">
+                                                                    <conditions>
+                                                                        <condition id="-22" name="Else" sid="913191222188169" type="System" />
+                                                                    </conditions>
+                                                                    <actions>
+                                                                        <action id="7" name="Stop speaking" sid="705899916231897" type="UserMedia" />
+                                                                        <action id="6" name="Speak text" sid="797912706633542" type="UserMedia">
+                                                                            <param id="0" name="Text">Dica.Text</param>
+                                                                            <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                                                            <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                                                            <param id="3" name="Volume">10</param>
+                                                                            <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                                                            <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                                                        </action>
+                                                                    </actions>
+                                                                </event-block>
+                                                            </sub-events>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
+                                                <event-block sid="857003143235025">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="721715933150282" type="System">
+                                                            <param id="0" name="Variable">acessControle</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">3</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions />
+                                                    <sub-events>
+                                                        <event-block sid="752921343632873">
+                                                            <conditions>
+                                                                <condition id="-14" name="Pick by unique ID" sid="244411638284441" type="botaoDica">
+                                                                    <param id="0" name="Unique ID">784</param>
+                                                                </condition>
+                                                                <condition id="-14" name="Pick by unique ID" sid="887903059002407" type="Dica">
+                                                                    <param id="0" name="Unique ID">788</param>
+                                                                </condition>
+                                                                <condition id="-14" name="Pick by unique ID" sid="752656425142684" type="compraDica">
+                                                                    <param id="0" name="Unique ID">765</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions />
+                                                            <sub-events>
+                                                                <event-block sid="124190103949439">
+                                                                    <conditions>
+                                                                        <condition id="-14" name="Compare variable" sid="467283128189943" type="System">
+                                                                            <param id="0" name="Variable">revelado2</param>
+                                                                            <param id="1" name="Comparison">0</param>
+                                                                            <param id="2" name="Value">0</param>
+                                                                        </condition>
+                                                                    </conditions>
+                                                                    <actions>
+                                                                        <action id="5" name="Set frame" sid="635408326558361" type="botaoDica">
+                                                                            <param id="0" name="Frame number">0</param>
+                                                                        </action>
+                                                                        <action id="-9" name="Set value" sid="374390731671594" type="System">
+                                                                            <param id="0" name="Variable">revelado2</param>
+                                                                            <param id="1" name="Value">1</param>
+                                                                        </action>
+                                                                        <action id="-10" name="Add to" sid="416024618228480" type="System">
+                                                                            <param id="0" name="Variable">contadorDicas</param>
+                                                                            <param id="1" name="Value">1</param>
+                                                                        </action>
+                                                                        <action id="-15" name="Set visible" sid="967487863283492" type="compraDica">
+                                                                            <param id="0" name="Visibility">0</param>
+                                                                        </action>
+                                                                        <action id="-15" name="Set visible" sid="461521215926105" type="Dica">
+                                                                            <param id="0" name="Visibility">1</param>
+                                                                        </action>
+                                                                        <action id="0" name="Set text" sid="950992137314025" type="Dica">
+                                                                            <param id="0" name="Text">BibliotecaJSON.GetData(&quot;livro&quot; &amp; livroAtual, contadorDicas)</param>
+                                                                        </action>
+                                                                        <action id="-11" name="Subtract from" sid="253739001932377" type="System">
+                                                                            <param id="0" name="Variable">pontos</param>
+                                                                            <param id="1" name="Value">25</param>
+                                                                        </action>
+                                                                        <action id="0" name="Set text" sid="874900095781933" type="pontoTexto">
+                                                                            <param id="0" name="Text">&quot;-25&quot;</param>
+                                                                        </action>
+                                                                        <action id="4" name="Set font color" sid="235928030809666" type="pontoTexto">
+                                                                            <param id="0" name="Color">rgb(235, 17, 53)</param>
+                                                                        </action>
+                                                                        <action id="-12" name="Set group active" sid="919863171323129" type="System">
+                                                                            <param id="0" name="Group name">&quot;Pontuacao8b&quot;</param>
+                                                                            <param id="1" name="State">0</param>
+                                                                        </action>
+                                                                        <action id="-12" name="Set group active" sid="248088894272210" type="System">
+                                                                            <param id="0" name="Group name">&quot;Pontuacao8a&quot;</param>
+                                                                            <param id="1" name="State">1</param>
+                                                                        </action>
+                                                                        <action id="7" name="Stop speaking" sid="467410364318344" type="UserMedia" />
+                                                                        <action id="6" name="Speak text" sid="407670309537357" type="UserMedia">
+                                                                            <param id="0" name="Text">Dica.Text</param>
+                                                                            <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                                                            <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                                                            <param id="3" name="Volume">10</param>
+                                                                            <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                                                            <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                                                        </action>
+                                                                        <action id="-16" name="Wait" sid="921488594998340" type="System">
+                                                                            <param id="0" name="Seconds">3</param>
+                                                                        </action>
+                                                                        <action id="-12" name="Set group active" sid="989650612219848" type="System">
+                                                                            <param id="0" name="Group name">&quot;Pontuacao8a&quot;</param>
+                                                                            <param id="1" name="State">0</param>
+                                                                        </action>
+                                                                        <action id="-12" name="Set group active" sid="829937667198870" type="System">
+                                                                            <param id="0" name="Group name">&quot;Pontuacao8b&quot;</param>
+                                                                            <param id="1" name="State">1</param>
+                                                                        </action>
+                                                                    </actions>
+                                                                </event-block>
+                                                                <event-block sid="533798061784218">
+                                                                    <conditions>
+                                                                        <condition id="-22" name="Else" sid="866513531675012" type="System" />
+                                                                    </conditions>
+                                                                    <actions>
+                                                                        <action id="7" name="Stop speaking" sid="150743263435161" type="UserMedia" />
+                                                                        <action id="6" name="Speak text" sid="350019147514020" type="UserMedia">
+                                                                            <param id="0" name="Text">Dica.Text</param>
+                                                                            <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                                                            <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                                                            <param id="3" name="Volume">10</param>
+                                                                            <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                                                            <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                                                        </action>
+                                                                    </actions>
+                                                                </event-block>
+                                                            </sub-events>
+                                                        </event-block>
+                                                    </sub-events>
+                                                </event-block>
+                                            </sub-events>
+                                        </event-block>
+                                        <event-block sid="489001331388402">
+                                            <conditions>
+                                                <condition id="0" name="On key pressed" sid="320938488082667" type="Keyboard">
+                                                    <param id="0" name="Key">69</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="6" name="Set focused" sid="396215401813628" type="RespostaBIB" />
+                                                <action id="6" name="Speak text" sid="597513256341329" type="UserMedia">
+                                                    <param id="0" name="Text">&quot;Agora digite sua resposta e aperte Enter.&quot;</param>
+                                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                                    <param id="3" name="Volume">10</param>
+                                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
                                                 </action>
                                             </actions>
                                         </event-block>
