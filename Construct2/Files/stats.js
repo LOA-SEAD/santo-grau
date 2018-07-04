@@ -8,7 +8,7 @@ function sendDataTechnology(palavra,correta,resposta,nroPalavra,tentativas,vence
 	}
 	$.getJSON("remar.json", function(json) {
         info.exportedResourceId = json.exportedResourceId;
-        info.gameLevel = 0;
+        info.gameLevelId = 0;
         info.word = palavra;
         info.correctAnswer = correta;
         info.answer = resposta;
@@ -44,7 +44,7 @@ function sendDataGallery(arrastos,seqInicial){
     }
     $.getJSON("remar.json", function(json) {
         info.exportedResourceId = json.exportedResourceId;
-        info.gameLevel = 1;
+        info.gameLevelId = 1;
         info.numberDrag = arrastos;
         info.initialSequence = seqInicial;
         info.win = true;
@@ -74,12 +74,12 @@ function sendDataFinalLevel(pergunta,correta,nroPergunta,respostas,escolhida,ace
     }
     $.getJSON("remar.json", function(json) {
         info.exportedResourceId = json.exportedResourceId;
-        info.gameLevel = fase;
+        info.gameLevelId = fase;
         info.question = pergunta;
-        info.answer = correta;
+        info.correctAnswer = correta;
         info.challengeId = nroPergunta;
         info.choices = respostas;
-        info.choice = escolhida;
+        info.answer = escolhida;
         info.win = acertou;
         info.size = tamanho;
         info.gameLevelName = nomeFase;

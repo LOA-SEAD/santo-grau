@@ -93,6 +93,22 @@
                     <param id="0" name="Variable">acessControle</param>
                     <param id="1" name="Value">0</param>
                 </action>
+                <action id="-9" name="Set value" sid="340718050611593" type="System">
+                    <param id="0" name="Variable">ValueEfeitosSlider</param>
+                    <param id="1" name="Value">volSons - MinValueSlider + MaxValueSlider</param>
+                </action>
+                <action id="-9" name="Set value" sid="386763323884610" type="System">
+                    <param id="0" name="Variable">ValueMusicaSlider</param>
+                    <param id="1" name="Value">volMusica - MinValueSlider + MaxValueSlider</param>
+                </action>
+                <action id="-12" name="Set group active" sid="638954787475551" type="System">
+                    <param id="0" name="Group name">&quot;BtnSliderEfeitosMenu&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
+                <action id="-12" name="Set group active" sid="442439397803338" type="System">
+                    <param id="0" name="Group name">&quot;BtnSliderMusicaMenu&quot;</param>
+                    <param id="1" name="State">0</param>
+                </action>
                 <action id="-16" name="Set opacity" sid="5326537822278728" type="fundo0">
                     <param id="0" name="Opacity">0</param>
                 </action>
@@ -192,7 +208,7 @@
                 <event-block sid="913624892937355">
                     <conditions>
                         <condition id="5" inverted="1" name="Is tag playing" sid="522019894781610" type="Audio">
-                            <param id="0" name="Tag">&quot;musicamenu&quot;</param>
+                            <param id="0" name="Tag">&quot;musica&quot;</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -200,13 +216,13 @@
                             <param id="0" name="Audio file">OSantoGrau</param>
                             <param id="2" name="Loop">1</param>
                             <param id="3" name="Volume">volMusica</param>
-                            <param id="1" name="Tag (optional)">&quot;musicamenu&quot;</param>
+                            <param id="1" name="Tag (optional)">&quot;musica&quot;</param>
                         </action>
                     </actions>
                 </event-block>
             </sub-events>
         </event-block>
-        <event-block sid="272483894008538">
+        <event-block disabled="1" sid="272483894008538">
             <conditions>
                 <condition id="-14" name="Compare variable" sid="534009694346902" type="System">
                     <param id="0" name="Variable">volMusica</param>
@@ -216,7 +232,7 @@
             </conditions>
             <actions />
             <sub-events>
-                <event-block sid="996487390546440">
+                <event-block disabled="1" sid="996487390546440">
                     <conditions>
                         <condition id="-14" name="Pick by unique ID" sid="599288805693134" type="botoesAudio">
                             <param id="0" name="Unique ID">555</param>
@@ -230,13 +246,13 @@
                 </event-block>
             </sub-events>
         </event-block>
-        <event-block sid="237563651468648">
+        <event-block disabled="1" sid="237563651468648">
             <conditions>
                 <condition id="-22" name="Else" sid="498751707144401" type="System" />
             </conditions>
             <actions />
             <sub-events>
-                <event-block sid="232145386667838">
+                <event-block disabled="1" sid="232145386667838">
                     <conditions>
                         <condition id="-14" name="Pick by unique ID" sid="755591997362405" type="botoesAudio">
                             <param id="0" name="Unique ID">555</param>
@@ -250,7 +266,7 @@
                 </event-block>
             </sub-events>
         </event-block>
-        <event-block sid="683668212800660">
+        <event-block disabled="1" sid="683668212800660">
             <conditions>
                 <condition id="-14" name="Compare variable" sid="534207452570929" type="System">
                     <param id="0" name="Variable">volSons</param>
@@ -260,7 +276,7 @@
             </conditions>
             <actions />
             <sub-events>
-                <event-block sid="521905615022571">
+                <event-block disabled="1" sid="521905615022571">
                     <conditions>
                         <condition id="-14" name="Pick by unique ID" sid="264362284597851" type="botoesAudio">
                             <param id="0" name="Unique ID">556</param>
@@ -274,13 +290,13 @@
                 </event-block>
             </sub-events>
         </event-block>
-        <event-block sid="539832830689942">
+        <event-block disabled="1" sid="539832830689942">
             <conditions>
                 <condition id="-22" name="Else" sid="126109534652308" type="System" />
             </conditions>
             <actions />
             <sub-events>
-                <event-block sid="451115783105253">
+                <event-block disabled="1" sid="451115783105253">
                     <conditions>
                         <condition id="-14" name="Pick by unique ID" sid="911626701072941" type="botoesAudio">
                             <param id="0" name="Unique ID">556</param>
@@ -344,7 +360,7 @@
             </conditions>
             <actions>
                 <action id="3" name="Set volume" sid="591928821977102" type="Audio">
-                    <param id="0" name="Tag">&quot;musicamenu&quot;</param>
+                    <param id="0" name="Tag">&quot;musica&quot;</param>
                     <param id="1" name="dB">volMusica</param>
                 </action>
                 <action id="3" name="Set volume" sid="819152277306524" type="Audio">
@@ -385,6 +401,7 @@
             </conditions>
             <actions />
             <sub-events>
+                <comment>Ativação, por meio do teclado, do slider que controla a música</comment>
                 <event-block sid="390839696679335">
                     <conditions>
                         <condition id="3" name="Compare frame" sid="696310410724173" type="botoesAudio">
@@ -393,9 +410,21 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-9" name="Set value" sid="348992744952661" type="System">
+                        <action disabled="1" id="-9" name="Set value" sid="348992744952661" type="System">
                             <param id="0" name="Variable">volMusica</param>
                             <param id="1" name="Value">-100</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="791414524740727" type="System">
+                            <param id="0" name="Group name">&quot;BtnSliderMusicaMenu&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="585087056996585" type="SliderMusica">
+                            <param id="0" name="X">SliderBaseMusica.X+(volMusica-MinValueSlider)*(SliderBaseMusica.Width/(MaxValueSlider-MinValueSlider))</param>
+                            <param id="1" name="Y">99</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="125588415688138" type="SliderBaseMusica">
+                            <param id="0" name="X">1079</param>
+                            <param id="1" name="Y">99</param>
                         </action>
                     </actions>
                 </event-block>
@@ -423,6 +452,7 @@
             </conditions>
             <actions />
             <sub-events>
+                <comment>Ativação, por meio do teclado, do slider que controla os efeitos sonoros</comment>
                 <event-block sid="924660571810583">
                     <conditions>
                         <condition id="3" name="Compare frame" sid="632320308860206" type="botoesAudio">
@@ -431,9 +461,21 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-9" name="Set value" sid="417013636337578" type="System">
+                        <action disabled="1" id="-9" name="Set value" sid="417013636337578" type="System">
                             <param id="0" name="Variable">volSons</param>
                             <param id="1" name="Value">-100</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="205053304351704" type="System">
+                            <param id="0" name="Group name">&quot;BtnSliderEfeitosMenu&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="840365584461892" type="SliderEfeitos">
+                            <param id="0" name="X">SliderBaseEfeitos.X+(volSons-MinValueSlider)*(SliderBaseEfeitos.Width/(MaxValueSlider-MinValueSlider))</param>
+                            <param id="1" name="Y">99</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="767168787356010" type="SliderBaseEfeitos">
+                            <param id="0" name="X">1079</param>
+                            <param id="1" name="Y">99</param>
                         </action>
                     </actions>
                 </event-block>
@@ -904,6 +946,7 @@
             </conditions>
             <actions />
             <sub-events>
+                <comment>Ativação, por meio do mouse, do slider que controla a música</comment>
                 <event-block sid="849361893375780">
                     <conditions>
                         <condition id="3" name="Compare frame" sid="915709265217051" type="botoesAudio">
@@ -912,7 +955,7 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-9" name="Set value" sid="712422384460230" type="System">
+                        <action disabled="1" id="-9" name="Set value" sid="712422384460230" type="System">
                             <param id="0" name="Variable">volMusica</param>
                             <param id="1" name="Value">-100</param>
                         </action>
@@ -921,6 +964,18 @@
                             <param id="2" name="Loop">0</param>
                             <param id="3" name="Volume">volSons</param>
                             <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="297672318622947" type="System">
+                            <param id="0" name="Group name">&quot;BtnSliderMusicaMenu&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="542665768137027" type="SliderMusica">
+                            <param id="0" name="X">SliderBaseMusica.X+(volMusica-MinValueSlider)*(SliderBaseMusica.Width/(MaxValueSlider-MinValueSlider))</param>
+                            <param id="1" name="Y">99</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="867625605377855" type="SliderBaseMusica">
+                            <param id="0" name="X">1079</param>
+                            <param id="1" name="Y">99</param>
                         </action>
                     </actions>
                 </event-block>
@@ -944,6 +999,7 @@
                         </action>
                     </actions>
                 </event-block>
+                <comment>Ativação, por meio do mouse, do slider que controla os efeitos sonoros</comment>
                 <event-block sid="592993143218524">
                     <conditions>
                         <condition id="3" name="Compare frame" sid="231420765046044" type="botoesAudio">
@@ -952,7 +1008,7 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-9" name="Set value" sid="178421358617123" type="System">
+                        <action disabled="1" id="-9" name="Set value" sid="178421358617123" type="System">
                             <param id="0" name="Variable">volSons</param>
                             <param id="1" name="Value">-100</param>
                         </action>
@@ -961,6 +1017,18 @@
                             <param id="2" name="Loop">0</param>
                             <param id="3" name="Volume">volSons</param>
                             <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="631004149702899" type="System">
+                            <param id="0" name="Group name">&quot;BtnSliderEfeitosMenu&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="392253256351978" type="SliderEfeitos">
+                            <param id="0" name="X">SliderBaseEfeitos.X+(volSons-MinValueSlider)*(SliderBaseEfeitos.Width/(MaxValueSlider-MinValueSlider))</param>
+                            <param id="1" name="Y">99</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="141751388657109" type="SliderBaseEfeitos">
+                            <param id="0" name="X">1079</param>
+                            <param id="1" name="Y">99</param>
                         </action>
                     </actions>
                 </event-block>
@@ -1090,6 +1158,12 @@
                     <param id="0" name="Variable">acessibilidade</param>
                     <param id="1" name="Comparison">0</param>
                     <param id="2" name="Value">1</param>
+                </condition>
+                <condition id="-15" inverted="1" name="Is group active" sid="557429979359473" type="System">
+                    <param id="0" name="Group name">&quot;BtnSliderEfeitosMenu&quot;</param>
+                </condition>
+                <condition id="-15" inverted="1" name="Is group active" sid="551490555796124" type="System">
+                    <param id="0" name="Group name">&quot;BtnSliderMusicaMenu&quot;</param>
                 </condition>
             </conditions>
             <actions>
@@ -1558,5 +1632,377 @@
                 </action>
             </actions>
         </event-block>
+        <event-group description="" inactive="1" sid="712897752972242" title="BtnSliderEfeitosMenu">
+            <sub-events>
+                <variable constant="0" name="controleSliderEfeitos" sid="944044981702360" static="0" type="number">0</variable>
+                <comment>Fecha o grupo</comment>
+                <event-block sid="675189680728486">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="882434499853281" type="System">
+                            <param id="0" name="Variable">controleSliderEfeitos</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block any="1" sid="296463828384213">
+                            <conditions>
+                                <condition id="0" name="On key pressed" sid="305660057633845" type="Keyboard">
+                                    <param id="0" name="Key">77</param>
+                                </condition>
+                                <condition id="0" name="On key pressed" sid="451117639983471" type="Keyboard">
+                                    <param id="0" name="Key">78</param>
+                                </condition>
+                                <condition id="17" name="On tap object" sid="486162971001987" type="Touch">
+                                    <param id="0" name="Object">botoesAudio</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="857631623243222" type="System">
+                                    <param id="0" name="Variable">controleSliderEfeitos</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="0" name="Play" sid="224716464287394" type="Audio">
+                                    <param id="0" name="Audio file">botoes_menu</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="228770564193058" type="System">
+                                    <param id="0" name="Group name">&quot;BtnSliderEfeitosMenu&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="713716485394671" type="SliderEfeitos">
+                                    <param id="0" name="X">SliderBaseEfeitos.X+(volSons-MinValueSlider)*(SliderBaseEfeitos.Width/(MaxValueSlider-MinValueSlider))</param>
+                                    <param id="1" name="Y">-116</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="388896856478754" type="SliderBaseEfeitos">
+                                    <param id="0" name="X">1079</param>
+                                    <param id="1" name="Y">-116</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Entra ao abrir o grupo, impedindo que o jogador navegue pelo menu, e não entra na hora de sair, pois o grupo não está mais ativo</comment>
+                <event-block sid="855038655223880">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="584149925091013" type="System">
+                            <param id="0" name="Variable">controleSliderEfeitos</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-15" name="Is group active" sid="344088493944198" type="System">
+                            <param id="0" name="Group name">&quot;BtnSliderEfeitosMenu&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="971969693882061" type="System">
+                            <param id="0" name="Variable">controleSliderEfeitos</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Primeiro comando é para atualizar o valor que o Slider está gerando&#x0D;&#x0A;Segundo comando serve para limitar o Slider dentro da barra&#x0D;&#x0A;Terceiro comando é realizar as transformações no valor que o Slider está retornando para o real valor dele, levando em conta o valor mínimo e o Step&#x0D;&#x0A;Quarto comando é apenas para mostrar em forma de texto qual valor está</comment>
+                <event-block sid="828877502105017">
+                    <conditions>
+                        <condition behavior="DragDrop" id="0" name="Is dragging" sid="113886733120275" type="SliderEfeitos" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="226912580797333" type="System">
+                            <param id="0" name="Variable">ValueEfeitosSlider</param>
+                            <param id="1" name="Value">clamp(round((SliderEfeitos.X-SliderBaseEfeitos.X)/(SliderBaseEfeitos.Width/((MaxValueSlider-MinValueSlider)/StepSlider))),0,(MaxValueSlider-MinValueSlider)/StepSlider)</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="859413435412743" type="SliderEfeitos">
+                            <param id="0" name="X">SliderBaseEfeitos.X + ValueEfeitosSlider * (SliderBaseEfeitos.Width/((MaxValueSlider-MinValueSlider)/StepSlider))</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="720148806147592" type="System">
+                            <param id="0" name="Variable">volSons</param>
+                            <param id="1" name="Value">(ValueEfeitosSlider*StepSlider)+MinValueSlider</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Tratamento dos sliders usando as setas direcionais</comment>
+                <event-block any="1" sid="552493695029138">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="897651054722996" type="Keyboard">
+                            <param id="0" name="Key">40</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="683536707401872" type="Keyboard">
+                            <param id="0" name="Key">37</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="646486617094713" type="System">
+                            <param id="0" name="Variable">ValueEfeitosSlider</param>
+                            <param id="1" name="Value">ValueEfeitosSlider - StepSlider</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="921024219446827" type="SliderEfeitos">
+                            <param id="0" name="X">SliderBaseEfeitos.X + ValueEfeitosSlider * (SliderBaseEfeitos.Width/((MaxValueSlider-MinValueSlider)/StepSlider))</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="257527638297059" type="System">
+                            <param id="0" name="Variable">volSons</param>
+                            <param id="1" name="Value">(ValueEfeitosSlider*StepSlider)+MinValueSlider</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="229357787659999">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="658614053124900" type="Keyboard">
+                            <param id="0" name="Key">38</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="254192413984904" type="Keyboard">
+                            <param id="0" name="Key">39</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="719040264613610" type="System">
+                            <param id="0" name="Variable">ValueEfeitosSlider</param>
+                            <param id="1" name="Value">ValueEfeitosSlider + StepSlider</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="801242578781744" type="SliderEfeitos">
+                            <param id="0" name="X">SliderBaseEfeitos.X + ValueEfeitosSlider * (SliderBaseEfeitos.Width/((MaxValueSlider-MinValueSlider)/StepSlider))</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="525141208518910" type="System">
+                            <param id="0" name="Variable">volSons</param>
+                            <param id="1" name="Value">(ValueEfeitosSlider*StepSlider)+MinValueSlider</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Tratamento de fuga para esquerda</comment>
+                <event-block sid="285184350042030">
+                    <conditions>
+                        <condition id="-1" name="Compare X" sid="203957653008861" type="SliderEfeitos">
+                            <param id="0" name="Comparison">2</param>
+                            <param id="1" name="X co-ordinate">SliderBaseEfeitos.X</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="711118014899979" type="System">
+                            <param id="0" name="Variable">ValueEfeitosSlider</param>
+                            <param id="1" name="Comparison">2</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="963395317121872" type="SliderEfeitos">
+                            <param id="0" name="X">SliderBaseEfeitos.X</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="368966662379391" type="System">
+                            <param id="0" name="Variable">ValueEfeitosSlider</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Tratamento de fuga para direita</comment>
+                <event-block sid="545574310722174">
+                    <conditions>
+                        <condition id="-1" name="Compare X" sid="863359522276969" type="SliderEfeitos">
+                            <param id="0" name="Comparison">4</param>
+                            <param id="1" name="X co-ordinate">SliderBaseEfeitos.X + SliderBaseEfeitos.Width</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="248140747643216" type="System">
+                            <param id="0" name="Variable">ValueEfeitosSlider</param>
+                            <param id="1" name="Comparison">4</param>
+                            <param id="2" name="Value">0 + MaxValueSlider - MinValueSlider</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="933696010252420" type="SliderEfeitos">
+                            <param id="0" name="X">SliderBaseEfeitos.X + SliderBaseEfeitos.Width</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="502239556758733" type="System">
+                            <param id="0" name="Variable">ValueEfeitosSlider</param>
+                            <param id="1" name="Value">0 + MaxValueSlider - MinValueSlider</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" inactive="1" sid="821765806868411" title="BtnSliderMusicaMenu">
+            <sub-events>
+                <variable constant="0" name="controleSliderMusica" sid="127682786056719" static="0" type="number">0</variable>
+                <comment>Fecha o grupo</comment>
+                <event-block sid="799378430539195">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="347599094853796" type="System">
+                            <param id="0" name="Variable">controleSliderMusica</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block any="1" sid="444765960917244">
+                            <conditions>
+                                <condition id="0" name="On key pressed" sid="589545060635037" type="Keyboard">
+                                    <param id="0" name="Key">77</param>
+                                </condition>
+                                <condition id="0" name="On key pressed" sid="473679460314028" type="Keyboard">
+                                    <param id="0" name="Key">78</param>
+                                </condition>
+                                <condition id="17" name="On tap object" sid="673089714311946" type="Touch">
+                                    <param id="0" name="Object">botoesAudio</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="684495676514519" type="System">
+                                    <param id="0" name="Variable">controleSliderMusica</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="0" name="Play" sid="273055423025927" type="Audio">
+                                    <param id="0" name="Audio file">botoes_menu</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volSons</param>
+                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="682179375978289" type="System">
+                                    <param id="0" name="Group name">&quot;BtnSliderMusicaMenu&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="425646993798277" type="SliderMusica">
+                                    <param id="0" name="X">SliderBaseMusica.X+(volMusica-MinValueSlider)*(SliderBaseMusica.Width/(MaxValueSlider-MinValueSlider))</param>
+                                    <param id="1" name="Y">-64</param>
+                                </action>
+                                <action id="-3" name="Set position" sid="354606555181318" type="SliderBaseMusica">
+                                    <param id="0" name="X">1079</param>
+                                    <param id="1" name="Y">-64</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Entra ao abrir o grupo, impedindo que o jogador navegue pelo menu, e não entra na hora de sair, pois o grupo não está mais ativo</comment>
+                <event-block sid="438823051730943">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="285777736872676" type="System">
+                            <param id="0" name="Variable">controleSliderMusica</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                        <condition id="-15" name="Is group active" sid="347654877461800" type="System">
+                            <param id="0" name="Group name">&quot;BtnSliderMusicaMenu&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="144122508017226" type="System">
+                            <param id="0" name="Variable">controleSliderMusica</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Primeiro comando é para atualizar o valor que o Slider está gerando&#x0D;&#x0A;Segundo comando serve para limitar o Slider dentro da barra&#x0D;&#x0A;Terceiro comando é realizar as transformações no valor que o Slider está retornando para o real valor dele, levando em conta o valor mínimo e o Step&#x0D;&#x0A;Quarto comando é apenas para mostrar em forma de texto qual valor está</comment>
+                <event-block sid="892788218997084">
+                    <conditions>
+                        <condition behavior="DragDrop" id="0" name="Is dragging" sid="790067970382175" type="SliderMusica" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="788422225815569" type="System">
+                            <param id="0" name="Variable">ValueMusicaSlider</param>
+                            <param id="1" name="Value">clamp(round((SliderMusica.X-SliderBaseMusica.X)/(SliderBaseMusica.Width/((MaxValueSlider-MinValueSlider)/StepSlider))),0,(MaxValueSlider-MinValueSlider)/StepSlider)</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="650591025182014" type="SliderMusica">
+                            <param id="0" name="X">SliderBaseMusica.X + ValueMusicaSlider * (SliderBaseMusica.Width/((MaxValueSlider-MinValueSlider)/StepSlider))</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="516073009737928" type="System">
+                            <param id="0" name="Variable">volMusica</param>
+                            <param id="1" name="Value">(ValueMusicaSlider*StepSlider)+MinValueSlider</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Tratamento dos sliders usando as setas direcionais</comment>
+                <event-block any="1" sid="212249887959659">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="330741046598705" type="Keyboard">
+                            <param id="0" name="Key">40</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="451929132269633" type="Keyboard">
+                            <param id="0" name="Key">37</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="842901667190373" type="System">
+                            <param id="0" name="Variable">ValueMusicaSlider</param>
+                            <param id="1" name="Value">ValueMusicaSlider - StepSlider</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="633396097217976" type="SliderMusica">
+                            <param id="0" name="X">SliderBaseMusica.X + ValueMusicaSlider * (SliderBaseMusica.Width/((MaxValueSlider-MinValueSlider)/StepSlider))</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="548951160080371" type="System">
+                            <param id="0" name="Variable">volMusica</param>
+                            <param id="1" name="Value">(ValueMusicaSlider*StepSlider)+MinValueSlider</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block any="1" sid="482313872859735">
+                    <conditions>
+                        <condition id="2" name="Key is down" sid="901426781454597" type="Keyboard">
+                            <param id="0" name="Key">38</param>
+                        </condition>
+                        <condition id="2" name="Key is down" sid="230540060241928" type="Keyboard">
+                            <param id="0" name="Key">39</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="339246027219825" type="System">
+                            <param id="0" name="Variable">ValueMusicaSlider</param>
+                            <param id="1" name="Value">ValueMusicaSlider + StepSlider</param>
+                        </action>
+                        <action id="-1" name="Set X" sid="873453264978145" type="SliderMusica">
+                            <param id="0" name="X">SliderBaseMusica.X + ValueMusicaSlider * (SliderBaseMusica.Width/((MaxValueSlider-MinValueSlider)/StepSlider))</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="806162329839803" type="System">
+                            <param id="0" name="Variable">volMusica</param>
+                            <param id="1" name="Value">(ValueMusicaSlider*StepSlider)+MinValueSlider</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Tratamento de fuga para esquerda</comment>
+                <event-block sid="711499461481663">
+                    <conditions>
+                        <condition id="-1" name="Compare X" sid="769977979135954" type="SliderMusica">
+                            <param id="0" name="Comparison">2</param>
+                            <param id="1" name="X co-ordinate">SliderBaseMusica.X</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="104574684902643" type="System">
+                            <param id="0" name="Variable">ValueMusicaSlider</param>
+                            <param id="1" name="Comparison">2</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="684771475492839" type="SliderMusica">
+                            <param id="0" name="X">SliderBaseMusica.X</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="683869834846152" type="System">
+                            <param id="0" name="Variable">ValueMusicaSlider</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>Tratamento de fuga para direita</comment>
+                <event-block sid="169843674810800">
+                    <conditions>
+                        <condition id="-1" name="Compare X" sid="800868139515728" type="SliderMusica">
+                            <param id="0" name="Comparison">4</param>
+                            <param id="1" name="X co-ordinate">SliderBaseMusica.X + SliderBaseMusica.Width</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="902702166337145" type="System">
+                            <param id="0" name="Variable">ValueMusicaSlider</param>
+                            <param id="1" name="Comparison">4</param>
+                            <param id="2" name="Value">0 + MaxValueSlider - MinValueSlider</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-1" name="Set X" sid="469531859821000" type="SliderMusica">
+                            <param id="0" name="X">SliderBaseMusica.X + SliderBaseMusica.Width</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="651625567087569" type="System">
+                            <param id="0" name="Variable">ValueMusicaSlider</param>
+                            <param id="1" name="Value">0 + MaxValueSlider - MinValueSlider</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
     </events>
 </c2eventsheet>
