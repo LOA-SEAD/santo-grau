@@ -420,11 +420,11 @@
                         </action>
                         <action id="-3" name="Set position" sid="585087056996585" type="SliderMusica">
                             <param id="0" name="X">SliderBaseMusica.X+(volMusica-MinValueSlider)*(SliderBaseMusica.Width/(MaxValueSlider-MinValueSlider))</param>
-                            <param id="1" name="Y">99</param>
+                            <param id="1" name="Y">botoesAudio.Y + 72</param>
                         </action>
                         <action id="-3" name="Set position" sid="125588415688138" type="SliderBaseMusica">
                             <param id="0" name="X">1079</param>
-                            <param id="1" name="Y">99</param>
+                            <param id="1" name="Y">botoesAudio.Y + 72</param>
                         </action>
                     </actions>
                 </event-block>
@@ -471,11 +471,11 @@
                         </action>
                         <action id="-3" name="Set position" sid="840365584461892" type="SliderEfeitos">
                             <param id="0" name="X">SliderBaseEfeitos.X+(volSons-MinValueSlider)*(SliderBaseEfeitos.Width/(MaxValueSlider-MinValueSlider))</param>
-                            <param id="1" name="Y">99</param>
+                            <param id="1" name="Y">botoesAudio.Y + 72</param>
                         </action>
                         <action id="-3" name="Set position" sid="767168787356010" type="SliderBaseEfeitos">
                             <param id="0" name="X">1079</param>
-                            <param id="1" name="Y">99</param>
+                            <param id="1" name="Y">botoesAudio.Y + 72</param>
                         </action>
                     </actions>
                 </event-block>
@@ -652,10 +652,33 @@
                         <action disabled="1" id="-2" name="Go to layout" sid="1941434790205836" type="System">
                             <param id="0" name="Layout">Cena 1</param>
                         </action>
-                        <action id="-2" name="Go to layout" sid="711936369273162" type="System">
+                        <action disabled="1" id="-2" name="Go to layout" sid="711936369273162" type="System">
                             <param id="0" name="Layout">Tutorial</param>
                         </action>
                     </actions>
+                    <sub-events>
+                        <comment>Enquanto o Tutorial não for utilizado na versão mobile, o melhor a se fazer é separar para qual fase irá</comment>
+                        <event-block sid="881904688827217">
+                            <conditions>
+                                <condition id="-20" name="Is on mobile device" sid="819515954779209" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Go to layout" sid="931532269036106" type="System">
+                                    <param id="0" name="Layout">Cena 1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="396138995046622">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="194727158059187" type="System" />
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Go to layout" sid="663222794442010" type="System">
+                                    <param id="0" name="Layout">Tutorial</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-block>
@@ -971,11 +994,11 @@
                         </action>
                         <action id="-3" name="Set position" sid="542665768137027" type="SliderMusica">
                             <param id="0" name="X">SliderBaseMusica.X+(volMusica-MinValueSlider)*(SliderBaseMusica.Width/(MaxValueSlider-MinValueSlider))</param>
-                            <param id="1" name="Y">99</param>
+                            <param id="1" name="Y">botoesAudio.Y + 72</param>
                         </action>
                         <action id="-3" name="Set position" sid="867625605377855" type="SliderBaseMusica">
                             <param id="0" name="X">1079</param>
-                            <param id="1" name="Y">99</param>
+                            <param id="1" name="Y">botoesAudio.Y + 72</param>
                         </action>
                     </actions>
                 </event-block>
@@ -1024,11 +1047,11 @@
                         </action>
                         <action id="-3" name="Set position" sid="392253256351978" type="SliderEfeitos">
                             <param id="0" name="X">SliderBaseEfeitos.X+(volSons-MinValueSlider)*(SliderBaseEfeitos.Width/(MaxValueSlider-MinValueSlider))</param>
-                            <param id="1" name="Y">99</param>
+                            <param id="1" name="Y">botoesAudio.Y + 72</param>
                         </action>
                         <action id="-3" name="Set position" sid="141751388657109" type="SliderBaseEfeitos">
                             <param id="0" name="X">1079</param>
-                            <param id="1" name="Y">99</param>
+                            <param id="1" name="Y">botoesAudio.Y + 72</param>
                         </action>
                     </actions>
                 </event-block>
@@ -1714,8 +1737,8 @@
                             <param id="1" name="Value">1</param>
                         </action>
                         <action id="-7" name="Set size" sid="207134307861895" type="acessBotao">
-                            <param id="0" name="Width">50</param>
-                            <param id="1" name="Height">50</param>
+                            <param id="0" name="Width">botoesAudio.Width + 10</param>
+                            <param id="1" name="Height">botoesAudio.Height + 10</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -1812,11 +1835,6 @@
                             <param id="0" name="Comparison">2</param>
                             <param id="1" name="X co-ordinate">SliderBaseEfeitos.X</param>
                         </condition>
-                        <condition id="-14" name="Compare variable" sid="711118014899979" type="System">
-                            <param id="0" name="Variable">ValueEfeitosSlider</param>
-                            <param id="1" name="Comparison">2</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
                     </conditions>
                     <actions>
                         <action id="-1" name="Set X" sid="963395317121872" type="SliderEfeitos">
@@ -1834,11 +1852,6 @@
                         <condition id="-1" name="Compare X" sid="863359522276969" type="SliderEfeitos">
                             <param id="0" name="Comparison">4</param>
                             <param id="1" name="X co-ordinate">SliderBaseEfeitos.X + SliderBaseEfeitos.Width</param>
-                        </condition>
-                        <condition id="-14" name="Compare variable" sid="248140747643216" type="System">
-                            <param id="0" name="Variable">ValueEfeitosSlider</param>
-                            <param id="1" name="Comparison">4</param>
-                            <param id="2" name="Value">0 + MaxValueSlider - MinValueSlider</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -1935,8 +1948,8 @@
                             <param id="1" name="Value">1</param>
                         </action>
                         <action id="-7" name="Set size" sid="365190876932462" type="acessBotao">
-                            <param id="0" name="Width">50</param>
-                            <param id="1" name="Height">50</param>
+                            <param id="0" name="Width">botoesAudio.Width + 10</param>
+                            <param id="1" name="Height">botoesAudio.Height + 10</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -2033,11 +2046,6 @@
                             <param id="0" name="Comparison">2</param>
                             <param id="1" name="X co-ordinate">SliderBaseMusica.X</param>
                         </condition>
-                        <condition id="-14" name="Compare variable" sid="104574684902643" type="System">
-                            <param id="0" name="Variable">ValueMusicaSlider</param>
-                            <param id="1" name="Comparison">2</param>
-                            <param id="2" name="Value">0</param>
-                        </condition>
                     </conditions>
                     <actions>
                         <action id="-1" name="Set X" sid="684771475492839" type="SliderMusica">
@@ -2055,11 +2063,6 @@
                         <condition id="-1" name="Compare X" sid="800868139515728" type="SliderMusica">
                             <param id="0" name="Comparison">4</param>
                             <param id="1" name="X co-ordinate">SliderBaseMusica.X + SliderBaseMusica.Width</param>
-                        </condition>
-                        <condition id="-14" name="Compare variable" sid="902702166337145" type="System">
-                            <param id="0" name="Variable">ValueMusicaSlider</param>
-                            <param id="1" name="Comparison">4</param>
-                            <param id="2" name="Value">0 + MaxValueSlider - MinValueSlider</param>
                         </condition>
                     </conditions>
                     <actions>
