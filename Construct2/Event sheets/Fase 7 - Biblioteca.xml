@@ -4,6 +4,7 @@
     <name>Fase 7 - Biblioteca</name>
     <events>
         <variable constant="0" name="confirma" sid="703235734551552" static="0" type="number">0</variable>
+        <variable constant="0" name="resposta" sid="837592404016011" static="0" type="text"></variable>
         <variable constant="0" name="dialogos8" sid="365007556410423" static="0" type="number">0</variable>
         <variable constant="0" name="controleDialogos8" sid="729389120990500" static="0" type="number">0</variable>
         <variable constant="0" name="controleFase8" sid="583436959185553" static="0" type="number">0</variable>
@@ -1065,7 +1066,6 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="7" name="Stop speaking" sid="735120770252454" type="UserMedia" />
                         <action id="6" name="Speak text" sid="198726035804901" type="UserMedia">
                             <param id="0" name="Text">pontoTexto.Text &amp; &quot; pontos&quot;</param>
                             <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
@@ -8277,6 +8277,10 @@
                                                             <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
                                                             <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
                                                         </action>
+                                                        <action id="-9" name="Set value" sid="483692865226036" type="System">
+                                                            <param id="0" name="Variable">resposta</param>
+                                                            <param id="1" name="Value">RespostaBIB.Text</param>
+                                                        </action>
                                                         <action id="-16" name="Wait" sid="722618720373003" type="System">
                                                             <param id="0" name="Seconds">0.1</param>
                                                         </action>
@@ -8298,29 +8302,65 @@
                                             </conditions>
                                             <actions />
                                             <sub-events>
-                                                <event-block any="1" sid="339612750486159">
+                                                <event-block sid="339612750486159">
                                                     <conditions>
                                                         <condition id="0" name="On key pressed" sid="923016192389770" type="Keyboard">
                                                             <param id="0" name="Key">13</param>
                                                         </condition>
-                                                        <condition disabled="1" id="17" name="On tap object" sid="776254362748355" type="Touch">
-                                                            <param id="0" name="Object">HitboxDir</param>
-                                                        </condition>
                                                     </conditions>
-                                                    <actions>
-                                                        <action id="-12" name="Set group active" sid="275748095628795" type="System">
-                                                            <param id="0" name="Group name">&quot;VerificarResposta&quot;</param>
-                                                            <param id="1" name="State">1</param>
-                                                        </action>
-                                                        <action id="7" name="Stop speaking" sid="580153998088818" type="UserMedia" />
-                                                        <action id="-16" name="Wait" sid="279555071770041" type="System">
-                                                            <param id="0" name="Seconds">0.1</param>
-                                                        </action>
-                                                        <action id="-9" name="Set value" sid="680431427126037" type="System">
-                                                            <param id="0" name="Variable">confirma</param>
-                                                            <param id="1" name="Value">0</param>
-                                                        </action>
-                                                    </actions>
+                                                    <actions />
+                                                    <sub-events>
+                                                        <event-block sid="614524384901933">
+                                                            <conditions>
+                                                                <condition id="-8" name="Compare two values" sid="724387951408544" type="System">
+                                                                    <param id="0" name="First value">resposta</param>
+                                                                    <param id="1" name="Comparison">0</param>
+                                                                    <param id="2" name="Second value">RespostaBIB.Text</param>
+                                                                </condition>
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="-12" name="Set group active" sid="275748095628795" type="System">
+                                                                    <param id="0" name="Group name">&quot;VerificarResposta&quot;</param>
+                                                                    <param id="1" name="State">1</param>
+                                                                </action>
+                                                                <action id="7" name="Stop speaking" sid="580153998088818" type="UserMedia" />
+                                                                <action id="-16" name="Wait" sid="279555071770041" type="System">
+                                                                    <param id="0" name="Seconds">0.1</param>
+                                                                </action>
+                                                                <action id="-9" name="Set value" sid="680431427126037" type="System">
+                                                                    <param id="0" name="Variable">confirma</param>
+                                                                    <param id="1" name="Value">0</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                        <event-block sid="336745518054435">
+                                                            <conditions>
+                                                                <condition id="-22" name="Else" sid="421334261456966" type="System" />
+                                                            </conditions>
+                                                            <actions>
+                                                                <action id="7" name="Stop speaking" sid="366076689514515" type="UserMedia" />
+                                                                <action id="6" name="Speak text" sid="747916251357022" type="UserMedia">
+                                                                    <param id="0" name="Text">&quot;Você digitou a palavra &quot; &amp; RespostaBIB.Text &amp; &quot;. Aperte Enter para confirmar.&quot;</param>
+                                                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                                                    <param id="3" name="Volume">10</param>
+                                                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                                                </action>
+                                                                <action id="-9" name="Set value" sid="467772450597263" type="System">
+                                                                    <param id="0" name="Variable">resposta</param>
+                                                                    <param id="1" name="Value">RespostaBIB.Text</param>
+                                                                </action>
+                                                                <action id="-16" name="Wait" sid="142847560747987" type="System">
+                                                                    <param id="0" name="Seconds">0.1</param>
+                                                                </action>
+                                                                <action id="-9" name="Set value" sid="523799477065374" type="System">
+                                                                    <param id="0" name="Variable">confirma</param>
+                                                                    <param id="1" name="Value">1</param>
+                                                                </action>
+                                                            </actions>
+                                                        </event-block>
+                                                    </sub-events>
                                                 </event-block>
                                             </sub-events>
                                         </event-block>
