@@ -3,6 +3,7 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Tutorial</name>
     <events>
+        <variable constant="0" name="volProf" sid="540620902525293" static="0" type="number">0</variable>
         <variable constant="0" name="volSaida" sid="750013141364828" static="0" type="number">0</variable>
         <variable constant="0" name="timelineTutorial" sid="676392173155480" static="0" type="number">0</variable>
         <variable constant="0" name="fraseAtual" sid="327175074148474" static="0" type="number">0</variable>
@@ -267,15 +268,15 @@
                         </action>
                         <action id="3" name="Set volume" sid="363225637318064" type="Audio">
                             <param id="0" name="Tag">&quot;passos&quot;</param>
-                            <param id="1" name="dB">((Player.Y*(volPassosMax - volPassosMin)/(WindowHeight) ) + volPassosMin)</param>
+                            <param id="1" name="dB">((Player.Y*(volPassosMax - (2*volPassosMin/3))/(WindowHeight) ) + (2*volPassosMin/3))</param>
                         </action>
                         <action id="-9" name="Set value" sid="501213493004310" type="System">
-                            <param id="0" name="Variable">volCapivara</param>
-                            <param id="1" name="Value">(576-distance(Player.X, Player.Y, professora.X, professora.Y))/36.6</param>
+                            <param id="0" name="Variable">volProf</param>
+                            <param id="1" name="Value">(13000-30*distance(Player.X, Player.Y, professora.X, professora.Y))/889</param>
                         </action>
                         <action id="-9" name="Set value" sid="509192563628324" type="System">
-                            <param id="0" name="Variable">volSaida</param>
-                            <param id="1" name="Value">(220-distance(Player.X, Player.Y, saida.X, saida.Y))/22</param>
+                            <param id="0" name="Variable">volSons</param>
+                            <param id="1" name="Value">(1230-3*distance(Player.X, Player.Y, saida.X, saida.Y))/111</param>
                         </action>
                         <action id="3" name="Set volume" sid="137745283379984" type="Audio">
                             <param id="0" name="Tag">&quot;musica&quot;</param>
@@ -1587,7 +1588,7 @@
                                             <param id="0" name="Folder">0</param>
                                             <param id="1" name="Audio file name">&quot;capivara_&quot; &amp; choose(12, 13, 14, 15)</param>
                                             <param id="2" name="Loop">0</param>
-                                            <param id="3" name="Volume">volCapivara</param>
+                                            <param id="3" name="Volume">volProf</param>
                                             <param id="4" name="Object">professora</param>
                                             <param id="5" name="Inner angle">45</param>
                                             <param id="6" name="Outer angle">45</param>
