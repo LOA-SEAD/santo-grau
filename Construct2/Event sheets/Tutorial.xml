@@ -1386,6 +1386,10 @@
                                             <param id="0" name="Group name">&quot;CarregaBalaoDialogo9&quot;</param>
                                             <param id="1" name="State">1</param>
                                         </action>
+                                        <action id="-12" name="Set group active" sid="691094412811398" type="System">
+                                            <param id="0" name="Group name">&quot;playerMove9&quot;</param>
+                                            <param id="1" name="State">0</param>
+                                        </action>
                                     </actions>
                                 </event-block>
                                 <comment>Trigger 4: som de acerto e pontuação mostrada na tela</comment>
@@ -1821,20 +1825,45 @@
                 </event-block>
                 <event-block sid="101676107418775">
                     <conditions>
-                        <condition id="1" name="Is overlapping another object" sid="160585423343180" type="player">
-                            <param id="0" name="Object">saida</param>
-                        </condition>
                         <condition id="-14" name="Compare variable" sid="131475049042233" type="System">
                             <param id="0" name="Variable">fraseAtual</param>
                             <param id="1" name="Comparison">5</param>
                             <param id="2" name="Value">10.5</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="-2" name="Go to layout" sid="843352219925285" type="System">
-                            <param id="0" name="Layout">Fase 6</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="278365553006197">
+                            <conditions>
+                                <condition id="1" name="Is overlapping another object" sid="160585423343180" type="player">
+                                    <param id="0" name="Object">saida</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-2" name="Go to layout" sid="843352219925285" type="System">
+                                    <param id="0" name="Layout">Fase 6</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="448526611636935">
+                            <conditions>
+                                <condition id="0" name="On key pressed" sid="923467963522426" type="Keyboard">
+                                    <param id="0" name="Key">81</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Stop speaking" sid="897127681089831" type="UserMedia" />
+                                <action id="6" name="Speak text" sid="232739932735182" type="UserMedia">
+                                    <param id="0" name="Text">&quot;Siga o barulho do corredor de alunos para achar a saída. Vá logo!&quot;</param>
+                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                    <param id="3" name="Volume">10</param>
+                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-group description="Carrega o balão caso ele não esteja ativo e libera a inserção do diálogo" inactive="1" sid="877981761543860" title="CarregaBalaoDialogo9">
                     <sub-events>
