@@ -1394,7 +1394,7 @@
                                 <condition id="-14" name="Compare variable" sid="206769667316332" type="System">
                                     <param id="0" name="Variable">numeroObjetosAtirados</param>
                                     <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">15</param>
+                                    <param id="2" name="Value">5</param>
                                 </condition>
                             </conditions>
                             <actions />
@@ -2009,7 +2009,7 @@
                             <param id="0" name="Width">campoItens.Width + (campoItens.Width * scale * dt)</param>
                             <param id="1" name="Height">campoItens.Height + (campoItens.Height * scale * dt)</param>
                         </action>
-                        <action id="-8" name="Set angle" sid="893816140700642" type="campoItens">
+                        <action disabled="1" id="-8" name="Set angle" sid="893816140700642" type="campoItens">
                             <param id="0" name="Angle">angle(campoItens.X, campoItens.Y, player.X, player.Y)</param>
                         </action>
                     </actions>
@@ -3915,6 +3915,10 @@
                                 <action id="-1" name="Set X" sid="677842025306204" type="animacaoTorcidaEsq">
                                     <param id="0" name="X">animacaoTorcidaEsq.X - 125 * dt</param>
                                 </action>
+                                <action id="-9" name="Set value" sid="434982005661407" type="System">
+                                    <param id="0" name="Variable">volTorcida</param>
+                                    <param id="1" name="Value">volTorcida-0.05</param>
+                                </action>
                             </actions>
                         </event-block>
                         <comment>Destroi elas, pois não é mais necessário</comment>
@@ -3925,6 +3929,9 @@
                             <actions>
                                 <action id="-9" name="Destroy" sid="360829612854758" type="animacaoTorcidaDir" />
                                 <action id="-9" name="Destroy" sid="664160541312071" type="animacaoTorcidaEsq" />
+                                <action id="6" name="Stop" sid="655600785398686" type="Audio">
+                                    <param id="0" name="Tag">&quot;torcida&quot;</param>
+                                </action>
                             </actions>
                         </event-block>
                         <event-block sid="748322282053174">
@@ -5533,10 +5540,25 @@
                                     </conditions>
                                     <actions />
                                     <sub-events>
+                                        <event-block sid="540160276721969">
+                                            <conditions>
+                                                <condition id="-4" name="Trigger once while true" sid="754932441008306" type="System" />
+                                            </conditions>
+                                            <actions>
+                                                <action id="-16" name="Set opacity" sid="112886454166269" type="blackout">
+                                                    <param id="0" name="Opacity">100</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
                                         <event-block sid="632484966235304">
                                             <conditions>
                                                 <condition id="-14" name="Pick by unique ID" sid="986398153577597" type="campoItens">
                                                     <param id="0" name="Unique ID">685</param>
+                                                </condition>
+                                                <condition id="-15" name="Pick nearest/furthest" sid="179379054200539" type="objetosSpawn">
+                                                    <param id="0" name="Which">0</param>
+                                                    <param id="1" name="X">player.X</param>
+                                                    <param id="2" name="Y">player.Y</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
@@ -5545,6 +5567,10 @@
                                                 </action>
                                                 <action id="-15" name="Set visible" sid="272085346701447" type="campoItens">
                                                     <param id="0" name="Visibility">1</param>
+                                                </action>
+                                                <action id="-3" name="Set position" sid="331863460376524" type="campoItens">
+                                                    <param id="0" name="X">objetosSpawn.X</param>
+                                                    <param id="1" name="Y">objetosSpawn.Y</param>
                                                 </action>
                                                 <action id="25" name="Play at object" sid="989653702505061" type="Audio">
                                                     <param id="0" name="Audio file">lancando_objetos3</param>
@@ -5565,7 +5591,7 @@
                                                 <action behavior="Bullet" id="5" name="Set enabled" sid="413339404627233" type="campoItens">
                                                     <param id="0" name="State">1</param>
                                                 </action>
-                                                <action behavior="Bullet" id="3" name="Set angle of motion" sid="781858171024914" type="campoItens">
+                                                <action behavior="Bullet" disabled="1" id="3" name="Set angle of motion" sid="781858171024914" type="campoItens">
                                                     <param id="0" name="Angle">angle(campoItens.X, campoItens.Y, player.X, player.Y)</param>
                                                 </action>
                                                 <action id="25" name="Play at object" sid="673648878765731" type="Audio">
@@ -5834,43 +5860,51 @@
                         </action>
                     </actions>
                 </event-block>
-                <event-block disabled="1" sid="189606180940610">
+                <event-block sid="189606180940610">
                     <conditions />
-                    <actions>
-                        <action id="-8" name="Set angle" sid="565116707858472" type="campoItens">
-                            <param id="0" name="Angle">angle(campoItens.X, campoItens.Y, player.X, player.Y)</param>
-                        </action>
-                    </actions>
+                    <actions />
                 </event-block>
                 <comment>Criar um objeto</comment>
-                <event-block sid="996942480875308">
+                <event-block sid="709200222395787">
                     <conditions>
-                        <condition id="-6" name="Every X seconds" sid="323871159826829" type="System">
-                            <param id="0" name="Interval (seconds)">5.0 - floor((numeroObjetosAtirados + 1)/5)</param>
+                        <condition id="-15" name="Pick nearest/furthest" sid="788406718399039" type="objetosSpawn">
+                            <param id="0" name="Which">0</param>
+                            <param id="1" name="X">player.X</param>
+                            <param id="2" name="Y">player.Y</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="-3" name="Create object" sid="301012595190932" type="System">
-                            <param id="0" name="Object to create">campoItens</param>
-                            <param id="1" name="Layer">&quot;Cenario2&quot;</param>
-                            <param id="2" name="X">objetosSpawn.X</param>
-                            <param id="3" name="Y">objetosSpawn.Y</param>
-                        </action>
-                        <action id="5" name="Set frame" sid="974221503882596" type="campoItens">
-                            <param id="0" name="Frame number">round(random(0,4))</param>
-                        </action>
-                        <action id="-7" name="Set size" sid="691904008634618" type="campoItens">
-                            <param id="0" name="Width">28</param>
-                            <param id="1" name="Height">29</param>
-                        </action>
-                        <action id="-15" name="Set visible" sid="471233574798529" type="campoItens">
-                            <param id="0" name="Visibility">1</param>
-                        </action>
-                        <action id="-10" name="Add to" sid="658861097501870" type="System">
-                            <param id="0" name="Variable">numeroObjetosAtirados</param>
-                            <param id="1" name="Value">1</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="996942480875308">
+                            <conditions>
+                                <condition id="-6" name="Every X seconds" sid="323871159826829" type="System">
+                                    <param id="0" name="Interval (seconds)">5.0 - floor((numeroObjetosAtirados + 1)/5)</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-3" name="Create object" sid="301012595190932" type="System">
+                                    <param id="0" name="Object to create">campoItens</param>
+                                    <param id="1" name="Layer">&quot;Cenario2&quot;</param>
+                                    <param id="2" name="X">objetosSpawn.X</param>
+                                    <param id="3" name="Y">objetosSpawn.Y</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="974221503882596" type="campoItens">
+                                    <param id="0" name="Frame number">round(random(0,4))</param>
+                                </action>
+                                <action id="-7" name="Set size" sid="691904008634618" type="campoItens">
+                                    <param id="0" name="Width">28</param>
+                                    <param id="1" name="Height">29</param>
+                                </action>
+                                <action id="-15" name="Set visible" sid="471233574798529" type="campoItens">
+                                    <param id="0" name="Visibility">1</param>
+                                </action>
+                                <action id="-10" name="Add to" sid="658861097501870" type="System">
+                                    <param id="0" name="Variable">numeroObjetosAtirados</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
                 </event-block>
                 <event-block sid="590893513950173">
                     <conditions>
@@ -5903,11 +5937,11 @@
                         <action behavior="Bullet" disabled="1" id="3" name="Set angle of motion" sid="760592488180884" type="campoItens">
                             <param id="0" name="Angle">270 + round(random(0,80)) - 40</param>
                         </action>
-                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="375283016239004" type="campoItens">
+                        <action behavior="Bullet" disabled="1" id="3" name="Set angle of motion" sid="375283016239004" type="campoItens">
                             <param id="0" name="Angle">angle(campoItens.X, campoItens.Y, player.X, player.Y)</param>
                         </action>
-                        <action behavior="Bullet" disabled="1" id="2" name="Set gravity" sid="587659384072584" type="campoItens">
-                            <param id="0" name="Gravity">55 + 4^floor((numeroObjetosAtirados + 1)/5) * 59</param>
+                        <action behavior="Bullet" id="2" name="Set gravity" sid="587659384072584" type="campoItens">
+                            <param id="0" name="Gravity">100 + floor(numeroObjetosAtirados/2)*100</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -5917,7 +5951,7 @@
                                 <condition id="-14" name="Compare variable" sid="778779871000486" type="System">
                                     <param id="0" name="Variable">numeroObjetosAtirados</param>
                                     <param id="1" name="Comparison">2</param>
-                                    <param id="2" name="Value">5</param>
+                                    <param id="2" name="Value">2</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -5945,12 +5979,12 @@
                                 <condition id="-14" name="Compare variable" sid="740284478974216" type="System">
                                     <param id="0" name="Variable">numeroObjetosAtirados</param>
                                     <param id="1" name="Comparison">5</param>
-                                    <param id="2" name="Value">5</param>
+                                    <param id="2" name="Value">2</param>
                                 </condition>
                                 <condition id="-14" name="Compare variable" sid="650069682919923" type="System">
                                     <param id="0" name="Variable">numeroObjetosAtirados</param>
                                     <param id="1" name="Comparison">3</param>
-                                    <param id="2" name="Value">9</param>
+                                    <param id="2" name="Value">3</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -5978,12 +6012,12 @@
                                 <condition id="-14" name="Compare variable" sid="370025557224915" type="System">
                                     <param id="0" name="Variable">numeroObjetosAtirados</param>
                                     <param id="1" name="Comparison">4</param>
-                                    <param id="2" name="Value">9</param>
+                                    <param id="2" name="Value">3</param>
                                 </condition>
                                 <condition id="-14" name="Compare variable" sid="872660078039752" type="System">
                                     <param id="0" name="Variable">numeroObjetosAtirados</param>
                                     <param id="1" name="Comparison">3</param>
-                                    <param id="2" name="Value">14</param>
+                                    <param id="2" name="Value">4</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -6021,13 +6055,13 @@
                         </action>
                     </actions>
                 </event-block>
-                <comment>Para de arremeçar objetos - MUDAR AQUI PARA 14 QUANDO VOLTAREM A QUANTIDADE DE OBJETOS PADRÃO (por enquanto está 2 para testes)</comment>
+                <comment>Para de arremeçar objetos</comment>
                 <event-block sid="724016178930594">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="137963636226292" type="System">
                             <param id="0" name="Variable">numeroObjetosAtirados</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">1</param>
+                            <param id="2" name="Value">4</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -6049,19 +6083,19 @@
         <event-group description="" sid="120858864474595" title="FisicaBola">
             <sub-events>
                 <comment>Joga a bola com efeito sonoro </comment>
-                <comment>MUDAR AQUI PARA 15 QUANDO VOLTAREM A QUANTIDADE DE OBJETOS PADRÃO (por enquanto está 3 para testes)</comment>
                 <event-block sid="722245850582271">
                     <conditions>
                         <condition id="-14" name="Compare variable" sid="465455008769872" type="System">
                             <param id="0" name="Variable">numeroObjetosAtirados</param>
                             <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">2</param>
+                            <param id="2" name="Value">5</param>
                         </condition>
                     </conditions>
                     <actions>
                         <action id="-15" name="Set visible" sid="808249829196657" type="campoBola">
                             <param id="0" name="Visibility">1</param>
                         </action>
+                        <action id="-9" name="Destroy" sid="265962778157990" type="blackout" />
                     </actions>
                     <sub-events>
                         <event-block sid="823321504090372">
