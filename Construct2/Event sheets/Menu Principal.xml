@@ -16,7 +16,7 @@
         <variable constant="0" name="recompensa6" sid="879970507374865" static="0" type="number">0</variable>
         <variable constant="0" name="recompensa7" sid="257122987159299" static="0" type="number">0</variable>
         <variable constant="0" name="recompensa8" sid="362824981983989" static="0" type="number">0</variable>
-        <variable constant="0" name="volMusica" sid="492045108347691" static="0" type="number">-20</variable>
+        <variable constant="0" name="volMusica" sid="492045108347691" static="0" type="number">-10</variable>
         <variable constant="0" name="volSons" sid="367203655051924" static="0" type="number">0</variable>
         <variable constant="0" name="layoutAtual" sid="616360525572722" static="0" type="number">0</variable>
         <comment>Variável criada para armazenar a fase que o jogador está. Não é utilizada layoutAtual por causa da possibilidade do jogo ser customizado com a fase da galeria primeiro e a da tecnologia depois</comment>
@@ -55,7 +55,7 @@
         <comment>Variáveis utilizadas no controle do Slider responsável pela mudança de volume das músicas e efeitos sonoros</comment>
         <variable constant="0" name="ValueMusicaSlider" sid="816673801609554" static="0" type="number">-15</variable>
         <variable constant="0" name="ValueEfeitosSlider" sid="625153845576811" static="0" type="number">0</variable>
-        <variable constant="0" name="MinValueSlider" sid="915393322614061" static="0" type="number">-50</variable>
+        <variable constant="0" name="MinValueSlider" sid="915393322614061" static="0" type="number">-80</variable>
         <variable constant="0" name="MaxValueSlider" sid="874397321548892" static="0" type="number">0</variable>
         <variable constant="0" name="StepSlider" sid="949377629046197" static="0" type="number">1</variable>
         <comment>Para que o jogador consiga verificar qual resposta foi digitada nas fases acessíveis</comment>
@@ -166,21 +166,11 @@
                 <action id="-16" name="Set opacity" sid="935027858496903" type="logo">
                     <param id="0" name="Opacity">0</param>
                 </action>
-                <action id="6" name="Speak text" sid="392868195007357" type="UserMedia">
-                    <param id="0" name="Text">&quot;Bem-vindo ao Em Busca do Santo Grau!&quot;</param>
-                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                <action id="0" name="Play" sid="918174678931985" type="Audio">
+                    <param id="0" name="Audio file">menu01</param>
+                    <param id="2" name="Loop">0</param>
                     <param id="3" name="Volume">10</param>
-                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
-                </action>
-                <action id="6" name="Speak text" sid="202688011632920" type="UserMedia">
-                    <param id="0" name="Text">&quot;Utilize as teclas direcionais para navegar no Menu, Enter para selecionar e Esc para voltar.&quot;</param>
-                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                    <param id="3" name="Volume">10</param>
-                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                 </action>
             </actions>
             <sub-events>
@@ -197,10 +187,6 @@
                         <action id="-9" name="Set value" sid="828048368421411" type="System">
                             <param id="0" name="Variable">fatorMobile</param>
                             <param id="1" name="Value">2</param>
-                        </action>
-                        <action id="-7" name="Set size" sid="709856808658500" type="botoesAudio">
-                            <param id="0" name="Width">64</param>
-                            <param id="1" name="Height">64</param>
                         </action>
                     </actions>
                 </event-block>
@@ -260,127 +246,7 @@
                 </event-block>
             </sub-events>
         </event-block>
-        <event-block any="1" disabled="1" sid="101063789206541">
-            <conditions>
-                <condition id="0" name="On key pressed" sid="754152805925538" type="Keyboard">
-                    <param id="0" name="Key">77</param>
-                </condition>
-                <condition id="17" name="On tap object" sid="969948799683457" type="Touch">
-                    <param id="0" name="Object">botoesAudio</param>
-                </condition>
-            </conditions>
-            <actions />
-            <sub-events>
-                <comment>Ativação, por meio do teclado, do slider que controla a música</comment>
-                <event-block disabled="1" sid="390839696679335">
-                    <conditions>
-                        <condition id="3" name="Compare frame" sid="696310410724173" type="botoesAudio">
-                            <param id="0" name="Comparison">0</param>
-                            <param id="1" name="Number">0</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action disabled="1" id="-9" name="Set value" sid="348992744952661" type="System">
-                            <param id="0" name="Variable">volMusica</param>
-                            <param id="1" name="Value">-100</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="791414524740727" type="System">
-                            <param id="0" name="Group name">&quot;BtnSliderMusicaMenu&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                        <action id="0" name="Play" sid="422213734532051" type="Audio">
-                            <param id="0" name="Audio file">botoes_menu</param>
-                            <param id="2" name="Loop">0</param>
-                            <param id="3" name="Volume">volSons</param>
-                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                        </action>
-                        <action id="-3" name="Set position" sid="585087056996585" type="SliderMusica">
-                            <param id="0" name="X">SliderBaseMusica.X+(volMusica-MinValueSlider)*(SliderBaseMusica.Width/(MaxValueSlider-MinValueSlider))</param>
-                            <param id="1" name="Y">botoesAudio.Y + 72</param>
-                        </action>
-                        <action id="-3" name="Set position" sid="125588415688138" type="SliderBaseMusica">
-                            <param id="0" name="X">1079</param>
-                            <param id="1" name="Y">botoesAudio.Y + 72</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block disabled="1" sid="323725788692419">
-                    <conditions>
-                        <condition id="3" name="Compare frame" sid="850815751806728" type="botoesAudio">
-                            <param id="0" name="Comparison">0</param>
-                            <param id="1" name="Number">1</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-9" name="Set value" sid="494777466141069" type="System">
-                            <param id="0" name="Variable">volMusica</param>
-                            <param id="1" name="Value">-20</param>
-                        </action>
-                    </actions>
-                </event-block>
-            </sub-events>
-        </event-block>
-        <event-block any="1" disabled="1" sid="544714583885724">
-            <conditions>
-                <condition id="0" name="On key pressed" sid="689537231616211" type="Keyboard">
-                    <param id="0" name="Key">78</param>
-                </condition>
-                <condition id="17" name="On tap object" sid="313437633330636" type="Touch">
-                    <param id="0" name="Object">botoesAudio</param>
-                </condition>
-            </conditions>
-            <actions />
-            <sub-events>
-                <comment>Ativação, por meio do teclado, do slider que controla os efeitos sonoros</comment>
-                <event-block disabled="1" sid="924660571810583">
-                    <conditions>
-                        <condition id="3" name="Compare frame" sid="632320308860206" type="botoesAudio">
-                            <param id="0" name="Comparison">0</param>
-                            <param id="1" name="Number">2</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action disabled="1" id="-9" name="Set value" sid="417013636337578" type="System">
-                            <param id="0" name="Variable">volSons</param>
-                            <param id="1" name="Value">-100</param>
-                        </action>
-                        <action id="-12" name="Set group active" sid="205053304351704" type="System">
-                            <param id="0" name="Group name">&quot;BtnSliderEfeitosMenu&quot;</param>
-                            <param id="1" name="State">1</param>
-                        </action>
-                        <action id="0" name="Play" sid="812908957688029" type="Audio">
-                            <param id="0" name="Audio file">botoes_menu</param>
-                            <param id="2" name="Loop">0</param>
-                            <param id="3" name="Volume">volSons</param>
-                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                        </action>
-                        <action id="-3" name="Set position" sid="840365584461892" type="SliderEfeitos">
-                            <param id="0" name="X">SliderBaseEfeitos.X+(volSons-MinValueSlider)*(SliderBaseEfeitos.Width/(MaxValueSlider-MinValueSlider))</param>
-                            <param id="1" name="Y">botoesAudio.Y + 72</param>
-                        </action>
-                        <action id="-3" name="Set position" sid="767168787356010" type="SliderBaseEfeitos">
-                            <param id="0" name="X">1079</param>
-                            <param id="1" name="Y">botoesAudio.Y + 72</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block disabled="1" sid="812136766745353">
-                    <conditions>
-                        <condition id="3" name="Compare frame" sid="649418839715826" type="botoesAudio">
-                            <param id="0" name="Comparison">0</param>
-                            <param id="1" name="Number">3</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-9" name="Set value" sid="197927925452741" type="System">
-                            <param id="0" name="Variable">volSons</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
-                    </actions>
-                </event-block>
-            </sub-events>
-        </event-block>
-        <comment>Botão de Jogar</comment>
+        <comment>Botão de Novo Jogo</comment>
         <event-block sid="896802403185169">
             <conditions>
                 <condition id="-14" name="Pick by unique ID" sid="9509336992319902" type="botoes">
@@ -424,14 +290,14 @@
                                 <condition id="-4" name="Trigger once while true" sid="863246811472760" type="System" />
                             </conditions>
                             <actions>
-                                <action id="7" name="Stop speaking" sid="511150775476461" type="UserMedia" />
-                                <action id="6" name="Speak text" sid="434639647248902" type="UserMedia">
-                                    <param id="0" name="Text">botoesTexto.Text</param>
-                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                                    <param id="3" name="Volume">10</param>
-                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                <action id="6" name="Stop" sid="245960448770256" type="Audio">
+                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                </action>
+                                <action id="0" name="Play" sid="371757757412599" type="Audio">
+                                    <param id="0" name="Audio file">menu2</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volProf</param>
+                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -499,7 +365,7 @@
                 </event-block>
             </sub-events>
         </event-block>
-        <comment>Botão de Carregar</comment>
+        <comment>Botão de Continuar</comment>
         <event-block sid="7337884987870493">
             <conditions>
                 <condition id="-14" name="Pick by unique ID" sid="6407050807317459" type="botoes">
@@ -543,14 +409,14 @@
                                 <condition id="-4" name="Trigger once while true" sid="153071388542052" type="System" />
                             </conditions>
                             <actions>
-                                <action id="7" name="Stop speaking" sid="796497581389851" type="UserMedia" />
-                                <action id="6" name="Speak text" sid="267983800704064" type="UserMedia">
-                                    <param id="0" name="Text">botoesTexto.Text</param>
-                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                                    <param id="3" name="Volume">10</param>
-                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                <action id="6" name="Stop" sid="378308647752133" type="Audio">
+                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                </action>
+                                <action id="0" name="Play" sid="709915625990546" type="Audio">
+                                    <param id="0" name="Audio file">menu3</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volProf</param>
+                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -636,14 +502,14 @@
                                 <condition id="-4" name="Trigger once while true" sid="532471055907711" type="System" />
                             </conditions>
                             <actions>
-                                <action id="7" name="Stop speaking" sid="891611710286794" type="UserMedia" />
-                                <action id="6" name="Speak text" sid="249415813664170" type="UserMedia">
-                                    <param id="0" name="Text">botoesTexto.Text</param>
-                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                                    <param id="3" name="Volume">10</param>
-                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                <action id="6" name="Stop" sid="120114453091943" type="Audio">
+                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                </action>
+                                <action id="0" name="Play" sid="785262066958768" type="Audio">
+                                    <param id="0" name="Audio file">menu4</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volProf</param>
+                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -665,7 +531,6 @@
                         </action>
                     </actions>
                 </event-block>
-                <comment>COLOCAR AQUI O TRIGGER DO ÁUDIO</comment>
                 <event-block any="1" sid="239928234864760">
                     <conditions>
                         <condition id="17" name="On tap object" sid="811507838836395" type="Touch">
@@ -731,14 +596,14 @@
                                 <condition id="-4" name="Trigger once while true" sid="216436855434371" type="System" />
                             </conditions>
                             <actions>
-                                <action id="7" name="Stop speaking" sid="853880714040251" type="UserMedia" />
-                                <action id="6" name="Speak text" sid="508539763923125" type="UserMedia">
-                                    <param id="0" name="Text">botoesTexto.Text</param>
-                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                                    <param id="3" name="Volume">10</param>
-                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                <action id="6" name="Stop" sid="576485170379278" type="Audio">
+                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                </action>
+                                <action id="0" name="Play" sid="819246028742400" type="Audio">
+                                    <param id="0" name="Audio file">menu11</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volProf</param>
+                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -824,14 +689,14 @@
                                 <condition id="-4" name="Trigger once while true" sid="815300523959499" type="System" />
                             </conditions>
                             <actions>
-                                <action id="7" name="Stop speaking" sid="769339660468859" type="UserMedia" />
-                                <action id="6" name="Speak text" sid="658737287640466" type="UserMedia">
-                                    <param id="0" name="Text">botoesTexto.Text</param>
-                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                                    <param id="3" name="Volume">10</param>
-                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                <action id="6" name="Stop" sid="641751869852201" type="Audio">
+                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                </action>
+                                <action id="0" name="Play" sid="574912094607089" type="Audio">
+                                    <param id="0" name="Audio file">menu12</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volProf</param>
+                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -877,9 +742,6 @@
             <conditions>
                 <condition id="7" name="Cursor is over object" sid="7532436455860241" type="Mouse">
                     <param id="0" name="Object">botoes</param>
-                </condition>
-                <condition id="7" name="Cursor is over object" sid="342153983051548" type="Mouse">
-                    <param id="0" name="Object">botoesAudio</param>
                 </condition>
             </conditions>
             <actions>
@@ -1025,14 +887,14 @@
                                     <param id="0" name="Variable">acessControle</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
-                                <action id="7" name="Stop speaking" sid="404869817090895" type="UserMedia" />
-                                <action id="6" name="Speak text" sid="279219778258551" type="UserMedia">
-                                    <param id="0" name="Text">&quot;Novo Jogo&quot;</param>
-                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                                    <param id="3" name="Volume">10</param>
-                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                <action id="6" name="Stop" sid="493102798900309" type="Audio">
+                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                </action>
+                                <action id="0" name="Play" sid="911417803675851" type="Audio">
+                                    <param id="0" name="Audio file">menu2</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volProf</param>
+                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1052,14 +914,14 @@
                                     <param id="0" name="Variable">acessControle</param>
                                     <param id="1" name="Value">2</param>
                                 </action>
-                                <action id="7" name="Stop speaking" sid="282012828925828" type="UserMedia" />
-                                <action id="6" name="Speak text" sid="188096438968023" type="UserMedia">
-                                    <param id="0" name="Text">&quot;Continuar&quot;</param>
-                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                                    <param id="3" name="Volume">10</param>
-                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                <action id="6" name="Stop" sid="382985884963755" type="Audio">
+                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                </action>
+                                <action id="0" name="Play" sid="467695495218779" type="Audio">
+                                    <param id="0" name="Audio file">menu3</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volProf</param>
+                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1079,14 +941,14 @@
                                     <param id="0" name="Variable">acessControle</param>
                                     <param id="1" name="Value">3</param>
                                 </action>
-                                <action id="7" name="Stop speaking" sid="177059572672671" type="UserMedia" />
-                                <action id="6" name="Speak text" sid="506434955478206" type="UserMedia">
-                                    <param id="0" name="Text">&quot;Áudio&quot;</param>
-                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                                    <param id="3" name="Volume">10</param>
-                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                <action id="6" name="Stop" sid="293739608173241" type="Audio">
+                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                </action>
+                                <action id="0" name="Play" sid="898040375889297" type="Audio">
+                                    <param id="0" name="Audio file">menu4</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volProf</param>
+                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1106,14 +968,14 @@
                                     <param id="0" name="Variable">acessControle</param>
                                     <param id="1" name="Value">4</param>
                                 </action>
-                                <action id="7" name="Stop speaking" sid="947563876452146" type="UserMedia" />
-                                <action id="6" name="Speak text" sid="861837712222428" type="UserMedia">
-                                    <param id="0" name="Text">&quot;Recompensas&quot;</param>
-                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                                    <param id="3" name="Volume">10</param>
-                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                <action id="6" name="Stop" sid="101337464225505" type="Audio">
+                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                </action>
+                                <action id="0" name="Play" sid="277794269381673" type="Audio">
+                                    <param id="0" name="Audio file">menu11</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volProf</param>
+                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1133,14 +995,14 @@
                                     <param id="0" name="Variable">acessControle</param>
                                     <param id="1" name="Value">5</param>
                                 </action>
-                                <action id="7" name="Stop speaking" sid="556724094652283" type="UserMedia" />
-                                <action id="6" name="Speak text" sid="379696530718340" type="UserMedia">
-                                    <param id="0" name="Text">&quot;Créditos&quot;</param>
-                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                                    <param id="3" name="Volume">10</param>
-                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                <action id="6" name="Stop" sid="442558906519198" type="Audio">
+                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                </action>
+                                <action id="0" name="Play" sid="425705767733098" type="Audio">
+                                    <param id="0" name="Audio file">menu12</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volProf</param>
+                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1160,14 +1022,14 @@
                                     <param id="0" name="Variable">acessControle</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
-                                <action id="7" name="Stop speaking" sid="915494057311580" type="UserMedia" />
-                                <action id="6" name="Speak text" sid="409695767220102" type="UserMedia">
-                                    <param id="0" name="Text">&quot;Novo Jogo&quot;</param>
-                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                                    <param id="3" name="Volume">10</param>
-                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                <action id="6" name="Stop" sid="134697576677791" type="Audio">
+                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                </action>
+                                <action id="0" name="Play" sid="590445529945518" type="Audio">
+                                    <param id="0" name="Audio file">menu2</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volProf</param>
+                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1200,14 +1062,14 @@
                                     <param id="0" name="Variable">acessControle</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
-                                <action id="7" name="Stop speaking" sid="498321980637585" type="UserMedia" />
-                                <action id="6" name="Speak text" sid="754131069247521" type="UserMedia">
-                                    <param id="0" name="Text">&quot;Novo Jogo&quot;</param>
-                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                                    <param id="3" name="Volume">10</param>
-                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                <action id="6" name="Stop" sid="220718592377446" type="Audio">
+                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                </action>
+                                <action id="0" name="Play" sid="657002854648096" type="Audio">
+                                    <param id="0" name="Audio file">menu2</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volProf</param>
+                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1227,14 +1089,14 @@
                                     <param id="0" name="Variable">acessControle</param>
                                     <param id="1" name="Value">5</param>
                                 </action>
-                                <action id="7" name="Stop speaking" sid="869626378893834" type="UserMedia" />
-                                <action id="6" name="Speak text" sid="559371977062640" type="UserMedia">
-                                    <param id="0" name="Text">&quot;Créditos&quot;</param>
-                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                                    <param id="3" name="Volume">10</param>
-                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                <action id="6" name="Stop" sid="504189149568840" type="Audio">
+                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                </action>
+                                <action id="0" name="Play" sid="594331854891855" type="Audio">
+                                    <param id="0" name="Audio file">menu12</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volProf</param>
+                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1254,14 +1116,14 @@
                                     <param id="0" name="Variable">acessControle</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
-                                <action id="7" name="Stop speaking" sid="368704250904209" type="UserMedia" />
-                                <action id="6" name="Speak text" sid="266891129570289" type="UserMedia">
-                                    <param id="0" name="Text">&quot;Novo Jogo&quot;</param>
-                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                                    <param id="3" name="Volume">10</param>
-                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                <action id="6" name="Stop" sid="843872324720936" type="Audio">
+                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                </action>
+                                <action id="0" name="Play" sid="187317632336550" type="Audio">
+                                    <param id="0" name="Audio file">menu2</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volProf</param>
+                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1281,14 +1143,14 @@
                                     <param id="0" name="Variable">acessControle</param>
                                     <param id="1" name="Value">2</param>
                                 </action>
-                                <action id="7" name="Stop speaking" sid="978482427322270" type="UserMedia" />
-                                <action id="6" name="Speak text" sid="117447608293238" type="UserMedia">
-                                    <param id="0" name="Text">&quot;Continuar&quot;</param>
-                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                                    <param id="3" name="Volume">10</param>
-                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                <action id="6" name="Stop" sid="460115627646762" type="Audio">
+                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                </action>
+                                <action id="0" name="Play" sid="885070575754756" type="Audio">
+                                    <param id="0" name="Audio file">menu3</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volProf</param>
+                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1308,14 +1170,14 @@
                                     <param id="0" name="Variable">acessControle</param>
                                     <param id="1" name="Value">3</param>
                                 </action>
-                                <action id="7" name="Stop speaking" sid="212757806209831" type="UserMedia" />
-                                <action id="6" name="Speak text" sid="286250141015713" type="UserMedia">
-                                    <param id="0" name="Text">&quot;Áudio&quot;</param>
-                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                                    <param id="3" name="Volume">10</param>
-                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                <action id="6" name="Stop" sid="563907424864615" type="Audio">
+                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                </action>
+                                <action id="0" name="Play" sid="457746025027170" type="Audio">
+                                    <param id="0" name="Audio file">menu4</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volProf</param>
+                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1335,14 +1197,14 @@
                                     <param id="0" name="Variable">acessControle</param>
                                     <param id="1" name="Value">4</param>
                                 </action>
-                                <action id="7" name="Stop speaking" sid="509109845820917" type="UserMedia" />
-                                <action id="6" name="Speak text" sid="980527020871427" type="UserMedia">
-                                    <param id="0" name="Text">&quot;Recompensas&quot;</param>
-                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                                    <param id="3" name="Volume">10</param>
-                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                <action id="6" name="Stop" sid="600825248518506" type="Audio">
+                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                </action>
+                                <action id="0" name="Play" sid="177686315475644" type="Audio">
+                                    <param id="0" name="Audio file">menu11</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volProf</param>
+                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1509,14 +1371,14 @@
                                 <action id="-16" name="Wait" sid="930829532079587" type="System">
                                     <param id="0" name="Seconds">0.01</param>
                                 </action>
-                                <action id="7" name="Stop speaking" sid="542881167384046" type="UserMedia" />
-                                <action id="6" name="Speak text" sid="293704248615145" type="UserMedia">
-                                    <param id="0" name="Text">&quot;Menu de áudio. Aperte Enter uma vez para controlar o volume de música de fundo, e outra vez para sair do controle de volume.&quot;</param>
-                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                                    <param id="3" name="Volume">10</param>
-                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                <action id="6" name="Stop" sid="675068491496152" type="Audio">
+                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                </action>
+                                <action id="0" name="Play" sid="765287746434530" type="Audio">
+                                    <param id="0" name="Audio file">menu589</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volProf</param>
+                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                 </action>
                                 <action id="-1" name="Set X" sid="969558550911807" type="SliderEfeitos">
                                     <param id="0" name="X">SliderBaseEfeitos.X+(volSons-MinValueSlider)*(SliderBaseEfeitos.Width/(MaxValueSlider-MinValueSlider))</param>
@@ -1677,14 +1539,14 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="7" name="Stop speaking" sid="261725615145244" type="UserMedia" />
-                                        <action id="6" name="Speak text" sid="684885505118422" type="UserMedia">
-                                            <param id="0" name="Text">&quot;Voltar ao Menu principal&quot;</param>
-                                            <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                                            <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                                            <param id="3" name="Volume">10</param>
-                                            <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                                            <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                        <action id="6" name="Stop" sid="253715598882359" type="Audio">
+                                            <param id="0" name="Tag">&quot;menu&quot;</param>
+                                        </action>
+                                        <action id="0" name="Play" sid="311248363848619" type="Audio">
+                                            <param id="0" name="Audio file">menu10</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volProf</param>
+                                            <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1697,14 +1559,14 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="7" name="Stop speaking" sid="942721496403861" type="UserMedia" />
-                                        <action id="6" name="Speak text" sid="326847232161171" type="UserMedia">
-                                            <param id="0" name="Text">&quot;Música. Aperte Enter uma vez para controlar o volume, e outra vez para sair do controle de volume de música.&quot;</param>
-                                            <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                                            <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                                            <param id="3" name="Volume">10</param>
-                                            <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                                            <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                        <action id="6" name="Stop" sid="375464515196459" type="Audio">
+                                            <param id="0" name="Tag">&quot;menu&quot;</param>
+                                        </action>
+                                        <action id="0" name="Play" sid="441977168341314" type="Audio">
+                                            <param id="0" name="Audio file">menu689</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volProf</param>
+                                            <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1717,14 +1579,14 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="7" name="Stop speaking" sid="689282104697987" type="UserMedia" />
-                                        <action id="6" name="Speak text" sid="392639133937082" type="UserMedia">
-                                            <param id="0" name="Text">&quot;Efeitos. Aperte Enter uma vez para controlar o volume, e outra vez para sair do controle de volume de efeitos.&quot;</param>
-                                            <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                                            <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                                            <param id="3" name="Volume">10</param>
-                                            <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                                            <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                        <action id="6" name="Stop" sid="193162780760241" type="Audio">
+                                            <param id="0" name="Tag">&quot;menu&quot;</param>
+                                        </action>
+                                        <action id="0" name="Play" sid="201110881068004" type="Audio">
+                                            <param id="0" name="Audio file">menu789</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volProf</param>
+                                            <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -2087,14 +1949,14 @@
                                         <condition id="-4" name="Trigger once while true" sid="267681776878361" type="System" />
                                     </conditions>
                                     <actions>
-                                        <action id="7" name="Stop speaking" sid="690362522989357" type="UserMedia" />
-                                        <action id="6" name="Speak text" sid="876325380119352" type="UserMedia">
-                                            <param id="0" name="Text">&quot;Menu inicial. Áudio.&quot;</param>
-                                            <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                                            <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                                            <param id="3" name="Volume">10</param>
-                                            <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                                            <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                        <action id="6" name="Stop" sid="504041616180960" type="Audio">
+                                            <param id="0" name="Tag">&quot;menu&quot;</param>
+                                        </action>
+                                        <action id="0" name="Play" sid="487104676343024" type="Audio">
+                                            <param id="0" name="Audio file">menu1014</param>
+                                            <param id="2" name="Loop">0</param>
+                                            <param id="3" name="Volume">volProf</param>
+                                            <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -2110,7 +1972,9 @@
                                 <condition id="-4" name="Trigger once while true" sid="725957507758879" type="System" />
                             </conditions>
                             <actions>
-                                <action id="7" name="Stop speaking" sid="732480885590215" type="UserMedia" />
+                                <action id="6" name="Stop" sid="207079053839248" type="Audio">
+                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                </action>
                                 <action id="0" name="Play" sid="310456656417351" type="Audio">
                                     <param id="0" name="Audio file">controle_audio</param>
                                     <param id="2" name="Loop">0</param>
@@ -2279,7 +2143,9 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="7" name="Stop speaking" sid="591733037737680" type="UserMedia" />
+                                <action id="6" name="Stop" sid="859102858724376" type="Audio">
+                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                </action>
                                 <action id="0" name="Play" sid="746167754066911" type="Audio">
                                     <param id="0" name="Audio file">controle_audio</param>
                                     <param id="2" name="Loop">0</param>
@@ -2298,7 +2164,9 @@
                                 <condition id="-4" name="Trigger once while true" sid="243410357119958" type="System" />
                             </conditions>
                             <actions>
-                                <action id="7" name="Stop speaking" sid="739215524613270" type="UserMedia" />
+                                <action id="6" name="Stop" sid="936256578694067" type="Audio">
+                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                </action>
                                 <action id="0" name="Play" sid="853641455955937" type="Audio">
                                     <param id="0" name="Audio file">controle_audio</param>
                                     <param id="2" name="Loop">0</param>
@@ -2467,7 +2335,9 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="7" name="Stop speaking" sid="544228943930956" type="UserMedia" />
+                                <action id="6" name="Stop" sid="499220066189873" type="Audio">
+                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                </action>
                                 <action id="0" name="Play" sid="797665056869306" type="Audio">
                                     <param id="0" name="Audio file">controle_audio</param>
                                     <param id="2" name="Loop">0</param>
