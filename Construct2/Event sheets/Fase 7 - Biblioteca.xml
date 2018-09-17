@@ -1054,38 +1054,68 @@
         </event-block>
         <event-group description="" inactive="1" sid="742223392847084" title="Pontuacao8a">
             <sub-events>
-                <event-block sid="332971556299704">
+                <event-block sid="472540549863419">
                     <conditions>
-                        <condition id="-2" name="Compare Y" sid="173027478381015" type="pontuacao">
+                        <condition id="-2" name="Compare Y" sid="102472881695282" type="pontuacao">
                             <param id="0" name="Comparison">5</param>
                             <param id="1" name="Y co-ordinate">636</param>
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-2" name="Set Y" sid="724065179512831" type="pontuacao">
+                        <action id="-2" name="Set Y" sid="342878824391048" type="pontuacao">
                             <param id="0" name="Y">pontuacao.Y - 150 * pontuacao.dt</param>
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="766349649871926">
+                <event-block sid="964778417884859">
                     <conditions>
-                        <condition id="-4" name="Trigger once while true" sid="246816513336206" type="System" />
-                        <condition id="-8" name="Compare two values" sid="821541825247567" type="System">
-                            <param id="0" name="First value">pontoTexto.Text</param>
-                            <param id="1" name="Comparison">1</param>
-                            <param id="2" name="Second value">&quot;0&quot;</param>
-                        </condition>
+                        <condition id="-22" name="Else" sid="669041696548402" type="System" />
                     </conditions>
-                    <actions>
-                        <action id="6" name="Speak text" sid="198726035804901" type="UserMedia">
-                            <param id="0" name="Text">pontoTexto.Text &amp; &quot; pontos&quot;</param>
-                            <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                            <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                            <param id="3" name="Volume">10</param>
-                            <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                            <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
-                        </action>
-                    </actions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="628414267048957">
+                            <conditions>
+                                <condition id="-4" name="Trigger once while true" sid="190677493355397" type="System" />
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="104495461380367">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="235941728982636" type="System">
+                                            <param id="0" name="First value">pontoTexto.Text</param>
+                                            <param id="1" name="Comparison">1</param>
+                                            <param id="2" name="Second value">&quot;0&quot;</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="6" name="Speak text" sid="885968476412439" type="UserMedia">
+                                            <param id="0" name="Text">pontoTexto.Text &amp; &quot;pontos&quot;</param>
+                                            <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                            <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                            <param id="3" name="Volume">10</param>
+                                            <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                            <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="862342172887913">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="220195629696667" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="6" name="Speak text" sid="861540046976480" type="UserMedia">
+                                            <param id="0" name="Text">&quot;Você tem &quot; &amp; pontuacaoTexto.Text &amp; &quot; pontos.&quot;</param>
+                                            <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                            <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                            <param id="3" name="Volume">10</param>
+                                            <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                            <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
                 </event-block>
             </sub-events>
         </event-group>
@@ -4060,15 +4090,6 @@
                                 <action id="-16" name="Wait" sid="877813317746214" type="System">
                                     <param id="0" name="Seconds">0.1</param>
                                 </action>
-                                <action id="7" name="Stop speaking" sid="567721367803347" type="UserMedia" />
-                                <action id="6" name="Speak text" sid="878654585709255" type="UserMedia">
-                                    <param id="0" name="Text">&quot;Jogo pausado. Navegue com as teclas direcionais. Você tem &quot; &amp; pontuacaoTexto.Text &amp; &quot;pontos.&quot;</param>
-                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
-                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
-                                    <param id="3" name="Volume">10</param>
-                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
-                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
-                                </action>
                                 <action id="-9" name="Set value" sid="746211943584035" type="System">
                                     <param id="0" name="Variable">pause</param>
                                     <param id="1" name="Value">1</param>
@@ -4087,12 +4108,22 @@
                                     <param id="0" name="Group name">&quot;Pontuacao8a&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
+                                <action id="7" name="Stop speaking" sid="567721367803347" type="UserMedia" />
+                                <action id="6" name="Stop" sid="822608505746952" type="Audio">
+                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                </action>
                                 <action id="-13" name="Set time scale" sid="976814249003731" type="System">
                                     <param id="0" name="Time scale">0.0</param>
                                 </action>
                                 <action id="-14" name="Set object time scale" sid="576298703092752" type="System">
                                     <param id="0" name="Object">pontuacao</param>
                                     <param id="1" name="Time scale">1.0</param>
+                                </action>
+                                <action id="0" name="Play" sid="424871623473209" type="Audio">
+                                    <param id="0" name="Audio file">menu1314</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volProf</param>
+                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                 </action>
                                 <action id="-2" name="Set Y" sid="701908089185435" type="acessBotao">
                                     <param id="0" name="Y">-70</param>
