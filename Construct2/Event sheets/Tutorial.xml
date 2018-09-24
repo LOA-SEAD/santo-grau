@@ -65,9 +65,6 @@
                     <param id="3" name="Volume">0</param>
                     <param id="1" name="Tag (optional)">&quot;porta&quot;</param>
                 </action>
-                <action id="-16" name="Wait" sid="996619832834927" type="System">
-                    <param id="0" name="Seconds">2</param>
-                </action>
                 <action id="-9" name="Set value" sid="270309448779001" type="System">
                     <param id="0" name="Variable">timelineTutorial</param>
                     <param id="1" name="Value">1</param>
@@ -274,12 +271,12 @@
                     </conditions>
                     <actions>
                         <action id="-7" name="Set size" sid="748435978136400" type="player">
-                            <param id="0" name="Width">(40080+85*player.Y)/457</param>
-                            <param id="1" name="Height">(70045+151*Player.Y)/457</param>
+                            <param id="0" name="Width">(player.Y + 720)/8</param>
+                            <param id="1" name="Height">(7/32)*player.Y + 159.5</param>
                         </action>
                         <action id="-7" name="Set size" sid="379806130360403" type="playerAnim">
-                            <param id="0" name="Width">(40080+85*player.Y)/457</param>
-                            <param id="1" name="Height">(70045+151*Player.Y)/457</param>
+                            <param id="0" name="Width">(player.Y + 720)/8</param>
+                            <param id="1" name="Height">(7/32)*player.Y + 159.5</param>
                         </action>
                         <action disabled="1" id="-9" name="Set value" sid="371709222781384" type="System">
                             <param id="0" name="Variable">volPassos</param>
@@ -319,7 +316,7 @@
                             <param id="0" name="Opacity">100</param>
                         </action>
                         <action disabled="1" id="0" name="Set text" sid="228688814913980" type="DialogoPersonagem">
-                            <param id="0" name="Text">(1110-1.5*distance(Player.X, Player.Y, professora.X, professora.Y))/84</param>
+                            <param id="0" name="Text">player.Y</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -367,7 +364,7 @@
                             </conditions>
                             <actions>
                                 <action id="-16" name="Set opacity" sid="276042974779819" type="fade">
-                                    <param id="0" name="Opacity">fade.Opacity-0.5</param>
+                                    <param id="0" name="Opacity">fade.Opacity-0.75</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -389,9 +386,6 @@
                         <condition id="-19" name="On destroyed" sid="283660836359027" type="fade" />
                     </conditions>
                     <actions>
-                        <action id="-16" name="Wait" sid="536304791210856" type="System">
-                            <param id="0" name="Seconds">1</param>
-                        </action>
                         <action id="-9" name="Set value" sid="528810668632389" type="System">
                             <param id="0" name="Variable">timelineTutorial</param>
                             <param id="1" name="Value">2</param>
@@ -1449,11 +1443,15 @@
                                         <action behavior="Bullet" id="5" name="Set enabled" sid="860107749875576" type="AnimacaoDiploma">
                                             <param id="0" name="State">1</param>
                                         </action>
-                                        <action id="0" name="Play" sid="236626531117141" type="Audio">
+                                        <action id="25" name="Play at object" sid="236626531117141" type="Audio">
                                             <param id="0" name="Audio file">risada_diploma</param>
-                                            <param id="2" name="Loop">0</param>
-                                            <param id="3" name="Volume">volSons</param>
-                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                                            <param id="1" name="Loop">0</param>
+                                            <param id="2" name="Volume">volSons+10</param>
+                                            <param id="3" name="Object">AnimacaoDiploma</param>
+                                            <param id="4" name="Inner angle">45</param>
+                                            <param id="5" name="Outer angle">45</param>
+                                            <param id="6" name="Outer gain">100</param>
+                                            <param id="7" name="Tag (optional)">&quot;diploma&quot;</param>
                                         </action>
                                         <action id="-16" name="Wait" sid="946181394288725" type="System">
                                             <param id="0" name="Seconds">1.5</param>
@@ -1656,7 +1654,7 @@
                                 <action id="6" name="Stop" sid="199456354204565" type="Audio">
                                     <param id="0" name="Tag">&quot;professora&quot;</param>
                                 </action>
-                                <action id="28" name="Play at object (by name)" sid="713659921086040" type="Audio">
+                                <action disabled="1" id="28" name="Play at object (by name)" sid="713659921086040" type="Audio">
                                     <param id="0" name="Folder">0</param>
                                     <param id="1" name="Audio file name">&quot;tutorial&quot; &amp; floor(fraseAtual)</param>
                                     <param id="2" name="Loop">0</param>
@@ -1666,6 +1664,13 @@
                                     <param id="6" name="Outer angle">45</param>
                                     <param id="7" name="Outer gain">100</param>
                                     <param id="8" name="Tag (optional)">&quot;professora&quot;</param>
+                                </action>
+                                <action id="7" name="Play (by name)" sid="466464111261834" type="Audio">
+                                    <param id="0" name="Folder">0</param>
+                                    <param id="1" name="Audio file name">&quot;tutorial&quot; &amp; floor(fraseAtual)</param>
+                                    <param id="3" name="Loop">0</param>
+                                    <param id="4" name="Volume">volProf</param>
+                                    <param id="2" name="Tag (optional)">&quot;professora&quot;</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1717,7 +1722,7 @@
                                         <action id="6" name="Stop" sid="752592113426244" type="Audio">
                                             <param id="0" name="Tag">&quot;professora&quot;</param>
                                         </action>
-                                        <action id="28" name="Play at object (by name)" sid="223854818681702" type="Audio">
+                                        <action disabled="1" id="28" name="Play at object (by name)" sid="223854818681702" type="Audio">
                                             <param id="0" name="Folder">0</param>
                                             <param id="1" name="Audio file name">&quot;tutorial&quot; &amp; floor(fraseAtual)</param>
                                             <param id="2" name="Loop">0</param>
@@ -1727,6 +1732,13 @@
                                             <param id="6" name="Outer angle">45</param>
                                             <param id="7" name="Outer gain">100</param>
                                             <param id="8" name="Tag (optional)">&quot;professora&quot;</param>
+                                        </action>
+                                        <action id="7" name="Play (by name)" sid="669135680305502" type="Audio">
+                                            <param id="0" name="Folder">0</param>
+                                            <param id="1" name="Audio file name">&quot;tutorial&quot; &amp; floor(fraseAtual)</param>
+                                            <param id="3" name="Loop">0</param>
+                                            <param id="4" name="Volume">volProf</param>
+                                            <param id="2" name="Tag (optional)">&quot;professora&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
