@@ -41,10 +41,6 @@
                     <param id="0" name="Variable">fraseAtual</param>
                     <param id="1" name="Value">0</param>
                 </action>
-                <action id="-9" name="Set value" sid="576299446393354" type="System">
-                    <param id="0" name="Variable">instrucoesDialogo</param>
-                    <param id="1" name="Value">0</param>
-                </action>
                 <action id="-9" name="Set value" sid="470599748042632" type="System">
                     <param id="0" name="Variable">ValueEfeitosSlider</param>
                     <param id="1" name="Value">volSons - MinValueSlider + MaxValueSlider</param>
@@ -1215,9 +1211,13 @@
                             </conditions>
                             <actions>
                                 <action id="7" name="Stop speaking" sid="251128846431740" type="UserMedia" />
-                                <action id="-9" name="Set value" sid="431493093744359" type="System">
-                                    <param id="0" name="Variable">instrucoesDialogo</param>
-                                    <param id="1" name="Value">0</param>
+                                <action id="-12" name="Set group active" sid="562019392799562" type="System">
+                                    <param id="0" name="Group name">&quot;InstrucoesProfessora&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="2" name="Set muted" sid="512602829072527" type="Audio">
+                                    <param id="0" name="Tag">&quot;instrucoes&quot;</param>
+                                    <param id="1" name="State">0</param>
                                 </action>
                                 <action id="6" name="Stop" sid="607713447864839" type="Audio">
                                     <param id="0" name="Tag">&quot;professora&quot;</param>
@@ -1268,9 +1268,13 @@
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-9" name="Set value" sid="976606343505211" type="System">
-                                    <param id="0" name="Variable">instrucoesDialogo</param>
-                                    <param id="1" name="Value">0</param>
+                                <action id="-12" name="Set group active" sid="530976186241417" type="System">
+                                    <param id="0" name="Group name">&quot;InstrucoesProfessora&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="2" name="Set muted" sid="945233793703503" type="Audio">
+                                    <param id="0" name="Tag">&quot;instrucoes&quot;</param>
+                                    <param id="1" name="State">0</param>
                                 </action>
                             </actions>
                             <sub-events>
@@ -1637,9 +1641,13 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-9" name="Set value" sid="157839737789572" type="System">
-                            <param id="0" name="Variable">instrucoesDialogo</param>
-                            <param id="1" name="Value">0</param>
+                        <action id="-12" name="Set group active" sid="595237989721054" type="System">
+                            <param id="0" name="Group name">&quot;InstrucoesProfessora&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="2" name="Set muted" sid="775543879297208" type="Audio">
+                            <param id="0" name="Tag">&quot;instrucoes&quot;</param>
+                            <param id="1" name="State">0</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -1746,6 +1754,40 @@
                         </event-block>
                     </sub-events>
                 </event-block>
+                <event-group description="" inactive="1" sid="145013039876859" title="InstrucoesProfessora">
+                    <sub-events>
+                        <event-block sid="309596745191912">
+                            <conditions />
+                            <actions>
+                                <action id="2" name="Set muted" sid="457845991369573" type="Audio">
+                                    <param id="0" name="Tag">&quot;instrucoes&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="795598359691764">
+                            <conditions>
+                                <condition id="-6" name="Every X seconds" sid="841524879539942" type="System">
+                                    <param id="0" name="Interval (seconds)">10</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="7" name="Stop speaking" sid="814847574941491" type="UserMedia" />
+                                <action id="28" name="Play at object (by name)" sid="754718180954933" type="Audio">
+                                    <param id="0" name="Folder">0</param>
+                                    <param id="1" name="Audio file name">&quot;tutorial13&quot;</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">volProf</param>
+                                    <param id="4" name="Object">professora</param>
+                                    <param id="5" name="Inner angle">45</param>
+                                    <param id="6" name="Outer angle">45</param>
+                                    <param id="7" name="Outer gain">100</param>
+                                    <param id="8" name="Tag (optional)">&quot;instrucoes&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-group>
                 <event-block sid="856049035562091">
                     <conditions>
                         <condition id="-10" name="Compare opacity" sid="393205080967987" type="BalaoDialogo">
@@ -1756,23 +1798,23 @@
                             <param id="0" name="Tag">&quot;professora&quot;</param>
                         </condition>
                     </conditions>
-                    <actions />
+                    <actions>
+                        <action id="-16" name="Wait" sid="866571806655371" type="System">
+                            <param id="0" name="Seconds">0.1</param>
+                        </action>
+                    </actions>
                     <sub-events>
                         <event-block sid="479109097700966">
                             <conditions>
                                 <condition id="-4" name="Trigger once while true" sid="637207592487931" type="System" />
                             </conditions>
                             <actions>
-                                <action id="-9" name="Set value" sid="900239368756131" type="System">
-                                    <param id="0" name="Variable">instrucoesDialogo</param>
-                                    <param id="1" name="Value">0</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="356677266261604" type="System">
+                                <action id="-16" name="Wait" sid="589981202049478" type="System">
                                     <param id="0" name="Seconds">5</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="997788015469413" type="System">
-                                    <param id="0" name="Variable">instrucoesDialogo</param>
-                                    <param id="1" name="Value">1</param>
+                                <action id="-12" name="Set group active" sid="997788015469413" type="System">
+                                    <param id="0" name="Group name">&quot;InstrucoesProfessora&quot;</param>
+                                    <param id="1" name="State">1</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1783,51 +1825,15 @@
                         <condition id="-22" name="Else" sid="750867728976660" type="System" />
                     </conditions>
                     <actions>
-                        <action id="-9" name="Set value" sid="649780986991722" type="System">
-                            <param id="0" name="Variable">instrucoesDialogo</param>
-                            <param id="1" name="Value">0</param>
+                        <action id="-12" name="Set group active" sid="861821720712364" type="System">
+                            <param id="0" name="Group name">&quot;InstrucoesProfessora&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="2" name="Set muted" sid="819196031905612" type="Audio">
+                            <param id="0" name="Tag">&quot;instrucoes&quot;</param>
+                            <param id="1" name="State">0</param>
                         </action>
                     </actions>
-                </event-block>
-                <event-block sid="697001988240049">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="708506569411295" type="System">
-                            <param id="0" name="Variable">instrucoesDialogo</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">1</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-16" name="Wait" sid="872572910634025" type="System">
-                            <param id="0" name="Seconds">0.1</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="795598359691764">
-                            <conditions>
-                                <condition id="-6" name="Every X seconds" sid="841524879539942" type="System">
-                                    <param id="0" name="Interval (seconds)">10</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="7" name="Stop speaking" sid="814847574941491" type="UserMedia" />
-                                <action id="6" name="Stop" sid="616780412660137" type="Audio">
-                                    <param id="0" name="Tag">&quot;professora&quot;</param>
-                                </action>
-                                <action id="28" name="Play at object (by name)" sid="754718180954933" type="Audio">
-                                    <param id="0" name="Folder">0</param>
-                                    <param id="1" name="Audio file name">&quot;tutorial13&quot;</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volProf</param>
-                                    <param id="4" name="Object">professora</param>
-                                    <param id="5" name="Inner angle">45</param>
-                                    <param id="6" name="Outer angle">45</param>
-                                    <param id="7" name="Outer gain">100</param>
-                                    <param id="8" name="Tag (optional)">&quot;professora&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
                 <event-block sid="259565631103720">
                     <conditions>
@@ -1979,9 +1985,13 @@
                             </conditions>
                             <actions>
                                 <action id="7" name="Stop speaking" sid="897127681089831" type="UserMedia" />
-                                <action id="-9" name="Set value" sid="246082134433532" type="System">
-                                    <param id="0" name="Variable">instrucoesDialogo</param>
-                                    <param id="1" name="Value">0</param>
+                                <action id="-12" name="Set group active" sid="190539911293671" type="System">
+                                    <param id="0" name="Group name">&quot;InstrucoesProfessora&quot;</param>
+                                    <param id="1" name="State">0</param>
+                                </action>
+                                <action id="2" name="Set muted" sid="690005273864097" type="Audio">
+                                    <param id="0" name="Tag">&quot;instrucoes&quot;</param>
+                                    <param id="1" name="State">0</param>
                                 </action>
                                 <action id="6" name="Stop" sid="407226562800523" type="Audio">
                                     <param id="0" name="Tag">&quot;professora&quot;</param>
