@@ -3,8 +3,6 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Menu Principal</name>
     <events>
-        <variable constant="0" name="acessControle" sid="376705287843437" static="0" type="number">0</variable>
-        <variable constant="0" name="acessibilidade" sid="293664406552909" static="0" type="number">0</variable>
         <comment>Variável utilizada no menu de pause para otimizar o controle dos botões utilizando as setas direcionais</comment>
         <variable constant="0" name="numeroBotoesMenu" sid="281093225355767" static="0" type="number">5</variable>
         <variable constant="0" name="recompensa1" sid="519006878087200" static="0" type="number">0</variable>
@@ -57,9 +55,7 @@
         <variable constant="0" name="MinValueSlider" sid="915393322614061" static="0" type="number">-80</variable>
         <variable constant="0" name="MaxValueSlider" sid="874397321548892" static="0" type="number">0</variable>
         <variable constant="0" name="StepSlider" sid="949377629046197" static="0" type="number">1</variable>
-        <comment>Para que o jogador consiga verificar qual resposta foi digitada nas fases acessíveis</comment>
         <variable constant="0" name="confirmaResposta" sid="402016591232670" static="0" type="number">0</variable>
-        <variable constant="0" name="respostaFasesAcessiveis" sid="822149121287650" static="0" type="text"></variable>
         <event-block sid="2501215411825428">
             <conditions>
                 <condition id="-2" name="On start of layout" sid="8787843259045866" type="System" />
@@ -87,13 +83,8 @@
                     <param id="0" name="Audio file">TheBossH_TCC</param>
                 </action>
                 <action id="0" name="Load JSON" sid="450528906527504" type="FasesJSON" />
-                <action id="0" name="Load JSON" sid="107231793943693" type="AcessibilidadeJSON" />
                 <action id="-9" name="Set value" sid="740211410176327" type="System">
                     <param id="0" name="Variable">layoutAtual</param>
-                    <param id="1" name="Value">0</param>
-                </action>
-                <action id="-9" name="Set value" sid="733117537342751" type="System">
-                    <param id="0" name="Variable">acessControle</param>
                     <param id="1" name="Value">0</param>
                 </action>
                 <action id="-9" name="Set value" sid="340718050611593" type="System">
@@ -165,12 +156,6 @@
                 <action id="-16" name="Set opacity" sid="935027858496903" type="logo">
                     <param id="0" name="Opacity">0</param>
                 </action>
-                <action id="0" name="Play" sid="918174678931985" type="Audio">
-                    <param id="0" name="Audio file">menu01</param>
-                    <param id="2" name="Loop">0</param>
-                    <param id="3" name="Volume">10</param>
-                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
-                </action>
             </actions>
             <sub-events>
                 <event-block sid="437324386767134">
@@ -178,11 +163,6 @@
                         <condition id="-20" name="Is on mobile device" sid="617395333529912" type="System" />
                     </conditions>
                     <actions>
-                        <action id="-30" name="Set layer effect enabled" sid="780967017868082" type="System">
-                            <param id="0" name="Layer">&quot;Fundo&quot;</param>
-                            <param id="1" name="Mode">0</param>
-                            <param id="2" name="Effect">&quot;Water&quot;</param>
-                        </action>
                         <action id="-9" name="Set value" sid="828048368421411" type="System">
                             <param id="0" name="Variable">fatorMobile</param>
                             <param id="1" name="Value">2</param>
@@ -254,11 +234,6 @@
                 <condition id="-14" name="Pick by unique ID" sid="5562989130537217" type="botoesTexto">
                     <param id="0" name="Unique ID">263</param>
                 </condition>
-                <condition id="-14" name="Compare variable" sid="854327107301262" type="System">
-                    <param id="0" name="Variable">acessControle</param>
-                    <param id="1" name="Comparison">2</param>
-                    <param id="2" name="Value">10</param>
-                </condition>
             </conditions>
             <actions />
             <sub-events>
@@ -276,31 +251,9 @@
                             <param id="0" name="X">1023</param>
                         </action>
                         <action id="-2" name="Set Y" sid="1502049426319864" type="botoesTexto">
-                            <param id="0" name="Y">158</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="683164588882185" type="System">
-                            <param id="0" name="Variable">acessControle</param>
-                            <param id="1" name="Value">1</param>
+                            <param id="0" name="Y">115</param>
                         </action>
                     </actions>
-                    <sub-events>
-                        <event-block sid="152651871282996">
-                            <conditions>
-                                <condition id="-4" name="Trigger once while true" sid="863246811472760" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="6" name="Stop" sid="245960448770256" type="Audio">
-                                    <param id="0" name="Tag">&quot;menu&quot;</param>
-                                </action>
-                                <action id="0" name="Play" sid="371757757412599" type="Audio">
-                                    <param id="0" name="Audio file">menu2</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volProf</param>
-                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
                 <event-block sid="8120883982042705">
                     <conditions>
@@ -314,7 +267,7 @@
                             <param id="0" name="X">1020</param>
                         </action>
                         <action id="-2" name="Set Y" sid="2568460338232646" type="botoesTexto">
-                            <param id="0" name="Y">148</param>
+                            <param id="0" name="Y">105</param>
                         </action>
                     </actions>
                 </event-block>
@@ -331,11 +284,8 @@
                             <param id="3" name="Volume">volSons</param>
                             <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                         </action>
-                        <action disabled="1" id="-2" name="Go to layout" sid="1941434790205836" type="System">
+                        <action id="-2" name="Go to layout" sid="1941434790205836" type="System">
                             <param id="0" name="Layout">Cena 1</param>
-                        </action>
-                        <action disabled="1" id="-2" name="Go to layout" sid="711936369273162" type="System">
-                            <param id="0" name="Layout">Tutorial</param>
                         </action>
                     </actions>
                     <sub-events>
@@ -354,11 +304,7 @@
                             <conditions>
                                 <condition id="-22" name="Else" sid="194727158059187" type="System" />
                             </conditions>
-                            <actions>
-                                <action id="-2" name="Go to layout" sid="663222794442010" type="System">
-                                    <param id="0" name="Layout">Tutorial</param>
-                                </action>
-                            </actions>
+                            <actions />
                         </event-block>
                     </sub-events>
                 </event-block>
@@ -372,11 +318,6 @@
                 </condition>
                 <condition id="-14" name="Pick by unique ID" sid="3291881085314508" type="botoesTexto">
                     <param id="0" name="Unique ID">265</param>
-                </condition>
-                <condition id="-14" name="Compare variable" sid="555543024992781" type="System">
-                    <param id="0" name="Variable">acessControle</param>
-                    <param id="1" name="Comparison">2</param>
-                    <param id="2" name="Value">10</param>
                 </condition>
             </conditions>
             <actions />
@@ -395,31 +336,9 @@
                             <param id="0" name="X">1023</param>
                         </action>
                         <action id="-2" name="Set Y" sid="2479873645316947" type="botoesTexto">
-                            <param id="0" name="Y">305</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="351252752749944" type="System">
-                            <param id="0" name="Variable">acessControle</param>
-                            <param id="1" name="Value">2</param>
+                            <param id="0" name="Y">245</param>
                         </action>
                     </actions>
-                    <sub-events>
-                        <event-block sid="153726967699404">
-                            <conditions>
-                                <condition id="-4" name="Trigger once while true" sid="153071388542052" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="6" name="Stop" sid="378308647752133" type="Audio">
-                                    <param id="0" name="Tag">&quot;menu&quot;</param>
-                                </action>
-                                <action id="0" name="Play" sid="709915625990546" type="Audio">
-                                    <param id="0" name="Audio file">menu3</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volProf</param>
-                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
                 <event-block sid="7389848892123238">
                     <conditions>
@@ -433,7 +352,7 @@
                             <param id="0" name="X">1020</param>
                         </action>
                         <action id="-2" name="Set Y" sid="827018505328665" type="botoesTexto">
-                            <param id="0" name="Y">295</param>
+                            <param id="0" name="Y">235</param>
                         </action>
                     </actions>
                 </event-block>
@@ -466,11 +385,6 @@
                 <condition id="-14" name="Pick by unique ID" sid="880364277615168" type="botoesTexto">
                     <param id="0" name="Unique ID">931</param>
                 </condition>
-                <condition id="-14" name="Compare variable" sid="552595999782937" type="System">
-                    <param id="0" name="Variable">acessControle</param>
-                    <param id="1" name="Comparison">2</param>
-                    <param id="2" name="Value">10</param>
-                </condition>
             </conditions>
             <actions />
             <sub-events>
@@ -488,31 +402,9 @@
                             <param id="0" name="X">1023</param>
                         </action>
                         <action id="-2" name="Set Y" sid="444855063518551" type="botoesTexto">
-                            <param id="0" name="Y">452</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="455130943816194" type="System">
-                            <param id="0" name="Variable">acessControle</param>
-                            <param id="1" name="Value">3</param>
+                            <param id="0" name="Y">375</param>
                         </action>
                     </actions>
-                    <sub-events>
-                        <event-block sid="877647793021250">
-                            <conditions>
-                                <condition id="-4" name="Trigger once while true" sid="532471055907711" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="6" name="Stop" sid="120114453091943" type="Audio">
-                                    <param id="0" name="Tag">&quot;menu&quot;</param>
-                                </action>
-                                <action id="0" name="Play" sid="785262066958768" type="Audio">
-                                    <param id="0" name="Audio file">menu4</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volProf</param>
-                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
                 <event-block sid="392233002437504">
                     <conditions>
@@ -526,7 +418,7 @@
                             <param id="0" name="X">1020</param>
                         </action>
                         <action id="-2" name="Set Y" sid="941566318609166" type="botoesTexto">
-                            <param id="0" name="Y">442</param>
+                            <param id="0" name="Y">365</param>
                         </action>
                     </actions>
                 </event-block>
@@ -551,8 +443,8 @@
                 </event-block>
             </sub-events>
         </event-block>
-        <comment>Botão de Galeria</comment>
-        <event-block disabled="1" sid="2311365846041724">
+        <comment>Botão de Recompensas</comment>
+        <event-block sid="2311365846041724">
             <conditions>
                 <condition id="-14" name="Pick by unique ID" sid="7395588214869966" type="botoes">
                     <param id="0" name="Unique ID">244</param>
@@ -560,15 +452,10 @@
                 <condition id="-14" name="Pick by unique ID" sid="5110391948380429" type="botoesTexto">
                     <param id="0" name="Unique ID">266</param>
                 </condition>
-                <condition id="-14" name="Compare variable" sid="573408553717571" type="System">
-                    <param id="0" name="Variable">acessControle</param>
-                    <param id="1" name="Comparison">2</param>
-                    <param id="2" name="Value">10</param>
-                </condition>
             </conditions>
             <actions />
             <sub-events>
-                <event-block disabled="1" sid="374192133566576">
+                <event-block sid="374192133566576">
                     <conditions>
                         <condition id="7" name="Cursor is over object" sid="3927584472491502" type="Mouse">
                             <param id="0" name="Object">botoes</param>
@@ -582,33 +469,11 @@
                             <param id="0" name="X">1023</param>
                         </action>
                         <action id="-2" name="Set Y" sid="9098334925580951" type="botoesTexto">
-                            <param id="0" name="Y">488</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="216635017508063" type="System">
-                            <param id="0" name="Variable">acessControle</param>
-                            <param id="1" name="Value">4</param>
+                            <param id="0" name="Y">505</param>
                         </action>
                     </actions>
-                    <sub-events>
-                        <event-block disabled="1" sid="205622383788709">
-                            <conditions>
-                                <condition id="-4" name="Trigger once while true" sid="216436855434371" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="6" name="Stop" sid="576485170379278" type="Audio">
-                                    <param id="0" name="Tag">&quot;menu&quot;</param>
-                                </action>
-                                <action id="0" name="Play" sid="819246028742400" type="Audio">
-                                    <param id="0" name="Audio file">menu11</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volProf</param>
-                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
-                <event-block disabled="1" sid="110002229934152">
+                <event-block sid="110002229934152">
                     <conditions>
                         <condition id="-22" name="Else" sid="4984193188429894" type="System" />
                     </conditions>
@@ -620,11 +485,11 @@
                             <param id="0" name="X">1020</param>
                         </action>
                         <action id="-2" name="Set Y" sid="911407680945145" type="botoesTexto">
-                            <param id="0" name="Y">478</param>
+                            <param id="0" name="Y">495</param>
                         </action>
                     </actions>
                 </event-block>
-                <event-block any="1" disabled="1" sid="7574130865633587">
+                <event-block any="1" sid="7574130865633587">
                     <conditions>
                         <condition id="17" name="On tap object" sid="282199166445157" type="Touch">
                             <param id="0" name="Object">botoes</param>
@@ -653,11 +518,6 @@
                 <condition id="-14" name="Pick by unique ID" sid="8485530653657175" type="botoesTexto">
                     <param id="0" name="Unique ID">267</param>
                 </condition>
-                <condition id="-14" name="Compare variable" sid="786826661793749" type="System">
-                    <param id="0" name="Variable">acessControle</param>
-                    <param id="1" name="Comparison">2</param>
-                    <param id="2" name="Value">10</param>
-                </condition>
             </conditions>
             <actions />
             <sub-events>
@@ -675,31 +535,9 @@
                             <param id="0" name="X">1023</param>
                         </action>
                         <action id="-2" name="Set Y" sid="1217605150079029" type="botoesTexto">
-                            <param id="0" name="Y">599</param>
-                        </action>
-                        <action id="-9" name="Set value" sid="702223172683702" type="System">
-                            <param id="0" name="Variable">acessControle</param>
-                            <param id="1" name="Value">4</param>
+                            <param id="0" name="Y">635</param>
                         </action>
                     </actions>
-                    <sub-events>
-                        <event-block sid="767790969415205">
-                            <conditions>
-                                <condition id="-4" name="Trigger once while true" sid="815300523959499" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="6" name="Stop" sid="641751869852201" type="Audio">
-                                    <param id="0" name="Tag">&quot;menu&quot;</param>
-                                </action>
-                                <action id="0" name="Play" sid="574912094607089" type="Audio">
-                                    <param id="0" name="Audio file">menu12</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volProf</param>
-                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
                 <event-block sid="835591331513657">
                     <conditions>
@@ -713,7 +551,7 @@
                             <param id="0" name="X">1020</param>
                         </action>
                         <action id="-2" name="Set Y" sid="3343888701993787" type="botoesTexto">
-                            <param id="0" name="Y">589</param>
+                            <param id="0" name="Y">625</param>
                         </action>
                     </actions>
                 </event-block>
@@ -774,597 +612,10 @@
                 </action>
             </actions>
         </event-block>
-        <event-block sid="770321810340991">
-            <conditions>
-                <condition id="-15" inverted="1" name="Is group active" sid="557429979359473" type="System">
-                    <param id="0" name="Group name">&quot;BtnSliderEfeitosMenu&quot;</param>
-                </condition>
-                <condition id="-15" inverted="1" name="Is group active" sid="551490555796124" type="System">
-                    <param id="0" name="Group name">&quot;BtnSliderMusicaMenu&quot;</param>
-                </condition>
-            </conditions>
-            <actions>
-                <action id="-15" name="Set visible" sid="208772778470922" type="acessBotao">
-                    <param id="0" name="Visibility">1</param>
-                </action>
-            </actions>
-            <sub-events>
-                <event-block sid="996813183076934">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="654009891894675" type="System">
-                            <param id="0" name="Variable">acessControle</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">1</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-2" name="Set Y" sid="877772591271339" type="acessBotao">
-                            <param id="0" name="Y">158</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="159389585604397">
-                            <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="854512461343409" type="botoes">
-                                    <param id="0" name="Unique ID">242</param>
-                                </condition>
-                                <condition id="-14" name="Pick by unique ID" sid="234798010525159" type="botoesTexto">
-                                    <param id="0" name="Unique ID">263</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="5" name="Set frame" sid="414209152686903" type="botoes">
-                                    <param id="0" name="Frame number">1</param>
-                                </action>
-                                <action id="-1" name="Set X" sid="186235791164497" type="botoesTexto">
-                                    <param id="0" name="X">1023</param>
-                                </action>
-                                <action id="-2" name="Set Y" sid="469103898313581" type="botoesTexto">
-                                    <param id="0" name="Y">158</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="815240460051692">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="460883638229860" type="System">
-                            <param id="0" name="Variable">acessControle</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">2</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-2" name="Set Y" sid="515309034195652" type="acessBotao">
-                            <param id="0" name="Y">305</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="702202025525511">
-                            <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="649746447308819" type="botoes">
-                                    <param id="0" name="Unique ID">243</param>
-                                </condition>
-                                <condition id="-14" name="Pick by unique ID" sid="317617956731304" type="botoesTexto">
-                                    <param id="0" name="Unique ID">265</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="5" name="Set frame" sid="195705871706204" type="botoes">
-                                    <param id="0" name="Frame number">1</param>
-                                </action>
-                                <action id="-1" name="Set X" sid="429302687826605" type="botoesTexto">
-                                    <param id="0" name="X">1023</param>
-                                </action>
-                                <action id="-2" name="Set Y" sid="626411133567614" type="botoesTexto">
-                                    <param id="0" name="Y">305</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="563574043117868">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="681365990102435" type="System">
-                            <param id="0" name="Variable">acessControle</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">3</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-2" name="Set Y" sid="644971568625206" type="acessBotao">
-                            <param id="0" name="Y">452</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="501087672570946">
-                            <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="622255994376001" type="botoes">
-                                    <param id="0" name="Unique ID">695</param>
-                                </condition>
-                                <condition id="-14" name="Pick by unique ID" sid="693142065506328" type="botoesTexto">
-                                    <param id="0" name="Unique ID">931</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="5" name="Set frame" sid="796135303330594" type="botoes">
-                                    <param id="0" name="Frame number">1</param>
-                                </action>
-                                <action id="-1" name="Set X" sid="693371588789093" type="botoesTexto">
-                                    <param id="0" name="X">1023</param>
-                                </action>
-                                <action id="-2" name="Set Y" sid="709089117956591" type="botoesTexto">
-                                    <param id="0" name="Y">452</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="673783033076255">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="496453125492923" type="System">
-                            <param id="0" name="Variable">acessControle</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">4</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-2" name="Set Y" sid="904993187799391" type="acessBotao">
-                            <param id="0" name="Y">599</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="998047413406533">
-                            <conditions>
-                                <condition id="-14" name="Pick by unique ID" sid="617449668521145" type="botoes">
-                                    <param id="0" name="Unique ID">264</param>
-                                </condition>
-                                <condition id="-14" name="Pick by unique ID" sid="476758032194763" type="botoesTexto">
-                                    <param id="0" name="Unique ID">267</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="5" name="Set frame" sid="286466751598745" type="botoes">
-                                    <param id="0" name="Frame number">1</param>
-                                </action>
-                                <action id="-1" name="Set X" sid="231062093328454" type="botoesTexto">
-                                    <param id="0" name="X">1023</param>
-                                </action>
-                                <action id="-2" name="Set Y" sid="734992340904487" type="botoesTexto">
-                                    <param id="0" name="Y">599</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block any="1" sid="598606623400290">
-                    <conditions>
-                        <condition id="0" name="On key pressed" sid="960629346562897" type="Keyboard">
-                            <param id="0" name="Key">40</param>
-                        </condition>
-                        <condition id="0" name="On key pressed" sid="920116904896175" type="Keyboard">
-                            <param id="0" name="Key">39</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Play" sid="836476932326776" type="Audio">
-                            <param id="0" name="Audio file">sobre_botao</param>
-                            <param id="2" name="Loop">0</param>
-                            <param id="3" name="Volume">volSons</param>
-                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="290674846017068">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="180019768265694" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-16" name="Wait" sid="429719307361657" type="System">
-                                    <param id="0" name="Seconds">0.01</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="320318880417209" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                                <action id="6" name="Stop" sid="493102798900309" type="Audio">
-                                    <param id="0" name="Tag">&quot;menu&quot;</param>
-                                </action>
-                                <action id="0" name="Play" sid="911417803675851" type="Audio">
-                                    <param id="0" name="Audio file">menu2</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volProf</param>
-                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="836257683423419">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="614535699311204" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">1</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-16" name="Wait" sid="709513702543484" type="System">
-                                    <param id="0" name="Seconds">0.01</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="594122202511518" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Value">2</param>
-                                </action>
-                                <action id="6" name="Stop" sid="382985884963755" type="Audio">
-                                    <param id="0" name="Tag">&quot;menu&quot;</param>
-                                </action>
-                                <action id="0" name="Play" sid="467695495218779" type="Audio">
-                                    <param id="0" name="Audio file">menu3</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volProf</param>
-                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="929378089442583">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="666871764522320" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">2</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-16" name="Wait" sid="132483180999607" type="System">
-                                    <param id="0" name="Seconds">0.01</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="195921172532394" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Value">3</param>
-                                </action>
-                                <action id="6" name="Stop" sid="293739608173241" type="Audio">
-                                    <param id="0" name="Tag">&quot;menu&quot;</param>
-                                </action>
-                                <action id="0" name="Play" sid="898040375889297" type="Audio">
-                                    <param id="0" name="Audio file">menu4</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volProf</param>
-                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="646489474401682">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="522419069139141" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">3</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-16" name="Wait" sid="219022362529611" type="System">
-                                    <param id="0" name="Seconds">0.01</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="203358371306685" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Value">4</param>
-                                </action>
-                                <action id="6" name="Stop" sid="101337464225505" type="Audio">
-                                    <param id="0" name="Tag">&quot;menu&quot;</param>
-                                </action>
-                                <action id="0" name="Play" sid="277794269381673" type="Audio">
-                                    <param id="0" name="Audio file">menu12</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volProf</param>
-                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="835697821900389">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="288197450855042" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">4</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-16" name="Wait" sid="609411707350322" type="System">
-                                    <param id="0" name="Seconds">0.01</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="845688948125493" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                                <action id="6" name="Stop" sid="442558906519198" type="Audio">
-                                    <param id="0" name="Tag">&quot;menu&quot;</param>
-                                </action>
-                                <action id="0" name="Play" sid="425705767733098" type="Audio">
-                                    <param id="0" name="Audio file">menu2</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volProf</param>
-                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block any="1" sid="305556026921517">
-                    <conditions>
-                        <condition id="0" name="On key pressed" sid="193445991622468" type="Keyboard">
-                            <param id="0" name="Key">38</param>
-                        </condition>
-                        <condition id="0" name="On key pressed" sid="485263849038288" type="Keyboard">
-                            <param id="0" name="Key">37</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Play" sid="785487680292012" type="Audio">
-                            <param id="0" name="Audio file">sobre_botao</param>
-                            <param id="2" name="Loop">0</param>
-                            <param id="3" name="Volume">volSons</param>
-                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="723055877688720">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="322015915338032" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-16" name="Wait" sid="822367502372440" type="System">
-                                    <param id="0" name="Seconds">0.01</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="878681638973265" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                                <action id="6" name="Stop" sid="220718592377446" type="Audio">
-                                    <param id="0" name="Tag">&quot;menu&quot;</param>
-                                </action>
-                                <action id="0" name="Play" sid="657002854648096" type="Audio">
-                                    <param id="0" name="Audio file">menu2</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volProf</param>
-                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="360651631506043">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="698604636021144" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">1</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-16" name="Wait" sid="327183119328554" type="System">
-                                    <param id="0" name="Seconds">0.01</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="573142693076727" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Value">4</param>
-                                </action>
-                                <action id="6" name="Stop" sid="504189149568840" type="Audio">
-                                    <param id="0" name="Tag">&quot;menu&quot;</param>
-                                </action>
-                                <action id="0" name="Play" sid="594331854891855" type="Audio">
-                                    <param id="0" name="Audio file">menu12</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volProf</param>
-                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="773855331027212">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="566349251545179" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">2</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-16" name="Wait" sid="901219620968254" type="System">
-                                    <param id="0" name="Seconds">0.01</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="262161293106742" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Value">1</param>
-                                </action>
-                                <action id="6" name="Stop" sid="843872324720936" type="Audio">
-                                    <param id="0" name="Tag">&quot;menu&quot;</param>
-                                </action>
-                                <action id="0" name="Play" sid="187317632336550" type="Audio">
-                                    <param id="0" name="Audio file">menu2</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volProf</param>
-                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="192692219427373">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="608187303501529" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">3</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-16" name="Wait" sid="526934194712548" type="System">
-                                    <param id="0" name="Seconds">0.01</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="286111885911854" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Value">2</param>
-                                </action>
-                                <action id="6" name="Stop" sid="460115627646762" type="Audio">
-                                    <param id="0" name="Tag">&quot;menu&quot;</param>
-                                </action>
-                                <action id="0" name="Play" sid="885070575754756" type="Audio">
-                                    <param id="0" name="Audio file">menu3</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volProf</param>
-                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="452441656022909">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="879973073445420" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">4</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-16" name="Wait" sid="683787808715464" type="System">
-                                    <param id="0" name="Seconds">0.01</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="144570564586817" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Value">3</param>
-                                </action>
-                                <action id="6" name="Stop" sid="563907424864615" type="Audio">
-                                    <param id="0" name="Tag">&quot;menu&quot;</param>
-                                </action>
-                                <action id="0" name="Play" sid="457746025027170" type="Audio">
-                                    <param id="0" name="Audio file">menu4</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volProf</param>
-                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block any="1" sid="568365291018435">
-                    <conditions>
-                        <condition disabled="1" id="0" name="On key pressed" sid="835590160814773" type="Keyboard">
-                            <param id="0" name="Key">32</param>
-                        </condition>
-                        <condition id="0" name="On key pressed" sid="975391989236000" type="Keyboard">
-                            <param id="0" name="Key">13</param>
-                        </condition>
-                    </conditions>
-                    <actions />
-                    <sub-events>
-                        <event-block sid="864258106787273">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="534038205682274" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">1</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Play" sid="707022000638420" type="Audio">
-                                    <param id="0" name="Audio file">botoes_menu</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action disabled="1" id="-2" name="Go to layout" sid="397713086879027" type="System">
-                                    <param id="0" name="Layout">Cena 1</param>
-                                </action>
-                                <action id="-2" name="Go to layout" sid="620978489934729" type="System">
-                                    <param id="0" name="Layout">Tutorial</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="608799236439191">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="775625230297266" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">2</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Play" sid="156808922197940" type="Audio">
-                                    <param id="0" name="Audio file">botoes_menu</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-37" name="Load" sid="220484909648641" type="System">
-                                    <param id="0" name="Slot">&quot;save&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="564133513453349">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="906342002222252" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">3</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Play" sid="928529586193203" type="Audio">
-                                    <param id="0" name="Audio file">botoes_menu</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="421618414915047" type="System">
-                                    <param id="0" name="Group name">&quot;AudioMenuPrincipal&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="943549724166400">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="909507082127987" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">4</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Play" sid="276923066143715" type="Audio">
-                                    <param id="0" name="Audio file">botoes_menu</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volSons</param>
-                                    <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action id="-2" name="Go to layout" sid="720582170216803" type="System">
-                                    <param id="0" name="Layout">Tela Creditos</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-            </sub-events>
-        </event-block>
-        <event-block sid="628566672515748">
-            <conditions>
-                <condition id="-22" name="Else" sid="411601725122050" type="System" />
-            </conditions>
-            <actions>
-                <action disabled="1" id="-15" name="Set visible" sid="969007700814243" type="acessBotao">
-                    <param id="0" name="Visibility">0</param>
-                </action>
-            </actions>
-        </event-block>
         <event-group description="" inactive="1" sid="176222840536997" title="AudioMenuPrincipal">
             <sub-events>
                 <event-block sid="216432333397832">
                     <conditions>
-                        <condition id="-14" name="Compare variable" sid="457057401265914" type="System">
-                            <param id="0" name="Variable">acessControle</param>
-                            <param id="1" name="Comparison">2</param>
-                            <param id="2" name="Value">10</param>
-                        </condition>
                         <condition id="-15" name="Is group active" sid="962563798017889" type="System">
                             <param id="0" name="Group name">&quot;AudioMenuPrincipal&quot;</param>
                         </condition>
@@ -1388,24 +639,11 @@
                                 <action id="-16" name="Wait" sid="930829532079587" type="System">
                                     <param id="0" name="Seconds">0.01</param>
                                 </action>
-                                <action id="6" name="Stop" sid="675068491496152" type="Audio">
-                                    <param id="0" name="Tag">&quot;menu&quot;</param>
-                                </action>
-                                <action id="0" name="Play" sid="765287746434530" type="Audio">
-                                    <param id="0" name="Audio file">menu589</param>
-                                    <param id="2" name="Loop">0</param>
-                                    <param id="3" name="Volume">volProf</param>
-                                    <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
-                                </action>
                                 <action id="-1" name="Set X" sid="969558550911807" type="SliderEfeitos">
                                     <param id="0" name="X">SliderBaseEfeitos.X+(volSons-MinValueSlider)*(SliderBaseEfeitos.Width/(MaxValueSlider-MinValueSlider))</param>
                                 </action>
                                 <action id="-1" name="Set X" sid="928702135422064" type="SliderMusica">
                                     <param id="0" name="X">SliderBaseMusica.X+(volMusica-MinValueSlider)*(SliderBaseMusica.Width/(MaxValueSlider-MinValueSlider))</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="552138455751327" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Value">12</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1427,63 +665,6 @@
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="923354678128202">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="922381929720496" type="System">
-                            <param id="0" name="Variable">acessControle</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">11</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-4" name="Set position to another object" sid="459252194289144" type="acessBotao">
-                            <param id="0" name="Object">botaoFechar</param>
-                            <param id="1" name="Image point (optional)">0</param>
-                        </action>
-                        <action id="-7" name="Set size" sid="206843092108739" type="acessBotao">
-                            <param id="0" name="Width">66</param>
-                            <param id="1" name="Height">62</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="485412531083354">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="127933374870316" type="System">
-                            <param id="0" name="Variable">acessControle</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">12</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-3" name="Set position" sid="401019826169199" type="acessBotao">
-                            <param id="0" name="X">SliderBaseMusica.X + 80</param>
-                            <param id="1" name="Y">SliderBaseMusica.Y</param>
-                        </action>
-                        <action id="-7" name="Set size" sid="809262268654186" type="acessBotao">
-                            <param id="0" name="Width">208</param>
-                            <param id="1" name="Height">52</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="837132902456589">
-                    <conditions>
-                        <condition id="-14" name="Compare variable" sid="216540406454113" type="System">
-                            <param id="0" name="Variable">acessControle</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">13</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="-3" name="Set position" sid="405466265315730" type="acessBotao">
-                            <param id="0" name="X">SliderBaseEfeitos.X + 80</param>
-                            <param id="1" name="Y">SliderBaseEfeitos.Y</param>
-                        </action>
-                        <action id="-7" name="Set size" sid="615777936929804" type="acessBotao">
-                            <param id="0" name="Width">208</param>
-                            <param id="1" name="Height">52</param>
-                        </action>
-                    </actions>
-                </event-block>
                 <event-block sid="637503739614445">
                     <conditions>
                         <condition id="-15" inverted="1" name="Is group active" sid="298516999133192" type="System">
@@ -1494,181 +675,6 @@
                         </condition>
                     </conditions>
                     <actions />
-                    <sub-events>
-                        <comment>Controle da variável que indica a posição do jogador no menu</comment>
-                        <event-block any="1" sid="179412745703002">
-                            <conditions>
-                                <condition id="0" name="On key pressed" sid="348854161517578" type="Keyboard">
-                                    <param id="0" name="Key">40</param>
-                                </condition>
-                                <condition id="0" name="On key pressed" sid="373617511888920" type="Keyboard">
-                                    <param id="0" name="Key">39</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="425549425356489" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Value">((acessControle % 10) % 3) + 11</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block any="1" sid="525846173633958">
-                            <conditions>
-                                <condition id="0" name="On key pressed" sid="132708385760217" type="Keyboard">
-                                    <param id="0" name="Key">38</param>
-                                </condition>
-                                <condition id="0" name="On key pressed" sid="789357656885907" type="Keyboard">
-                                    <param id="0" name="Key">37</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="390672065886632" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Value">(((acessControle % 10) + 1) % 3) + 11</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block any="1" sid="832361819141924">
-                            <conditions>
-                                <condition id="3" name="On key released" sid="159114441706882" type="Keyboard">
-                                    <param id="0" name="Key">38</param>
-                                </condition>
-                                <condition id="3" name="On key released" sid="821345570129776" type="Keyboard">
-                                    <param id="0" name="Key">39</param>
-                                </condition>
-                                <condition id="3" name="On key released" sid="666416247749101" type="Keyboard">
-                                    <param id="0" name="Key">37</param>
-                                </condition>
-                                <condition id="3" name="On key released" sid="221321315750613" type="Keyboard">
-                                    <param id="0" name="Key">40</param>
-                                </condition>
-                            </conditions>
-                            <actions />
-                            <sub-events>
-                                <comment>Faz a leitura dos botões no menu de pausa e no de sair</comment>
-                                <comment>Menu de áudio não possui locais onde se possa obter dinâmicamente o texto a ser lido...</comment>
-                                <event-block sid="187265538553691">
-                                    <conditions>
-                                        <condition id="-14" name="Compare variable" sid="135460157932618" type="System">
-                                            <param id="0" name="Variable">acessControle</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">11</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="6" name="Stop" sid="253715598882359" type="Audio">
-                                            <param id="0" name="Tag">&quot;menu&quot;</param>
-                                        </action>
-                                        <action id="0" name="Play" sid="311248363848619" type="Audio">
-                                            <param id="0" name="Audio file">menu10</param>
-                                            <param id="2" name="Loop">0</param>
-                                            <param id="3" name="Volume">volProf</param>
-                                            <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="944617277063152">
-                                    <conditions>
-                                        <condition id="-14" name="Compare variable" sid="119149122381585" type="System">
-                                            <param id="0" name="Variable">acessControle</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">12</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="6" name="Stop" sid="375464515196459" type="Audio">
-                                            <param id="0" name="Tag">&quot;menu&quot;</param>
-                                        </action>
-                                        <action id="0" name="Play" sid="441977168341314" type="Audio">
-                                            <param id="0" name="Audio file">menu689</param>
-                                            <param id="2" name="Loop">0</param>
-                                            <param id="3" name="Volume">volProf</param>
-                                            <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="164181827242945">
-                                    <conditions>
-                                        <condition id="-14" name="Compare variable" sid="216495964763890" type="System">
-                                            <param id="0" name="Variable">acessControle</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">13</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="6" name="Stop" sid="193162780760241" type="Audio">
-                                            <param id="0" name="Tag">&quot;menu&quot;</param>
-                                        </action>
-                                        <action id="0" name="Play" sid="201110881068004" type="Audio">
-                                            <param id="0" name="Audio file">menu789</param>
-                                            <param id="2" name="Loop">0</param>
-                                            <param id="3" name="Volume">volProf</param>
-                                            <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <event-block sid="176104075412988">
-                    <conditions>
-                        <condition id="0" name="On key pressed" sid="596447779075332" type="Keyboard">
-                            <param id="0" name="Key">13</param>
-                        </condition>
-                        <condition id="-9" name="Is visible" sid="378129294379528" type="acessBotao" />
-                    </conditions>
-                    <actions />
-                    <sub-events>
-                        <comment>Ação do botão &quot;Fechar Áudio&quot;</comment>
-                        <event-block sid="306050814708931">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="613182482614722" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">11</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-12" name="Set group active" sid="407018368135924" type="System">
-                                    <param id="0" name="Group name">&quot;BtnAudioFecharMenu&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <comment>Ação do Slider de música</comment>
-                        <event-block sid="248625091509531">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="544672118385253" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">12</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-12" name="Set group active" sid="181916858281118" type="System">
-                                    <param id="0" name="Group name">&quot;BtnSliderMusicaMenu&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <comment>Ação do Slider de efeitos</comment>
-                        <event-block sid="383826880829210">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="401945291503556" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">13</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-12" name="Set group active" sid="619611959181233" type="System">
-                                    <param id="0" name="Group name">&quot;BtnSliderEfeitosMenu&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
                 <comment>Necessário acrescentar a condição &quot;pause = 1&quot; por conta do botão que verifica a dica inserida</comment>
                 <event-block sid="240640600027091">
@@ -1729,9 +735,8 @@
                                 <action id="0" name="Set cursor style" sid="924373274244823" type="Mouse">
                                     <param id="0" name="Cursor style">1</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="679905267738283" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Value">11</param>
+                                <action id="5" name="Set frame" sid="722906600570162" type="botaoFechar">
+                                    <param id="0" name="Frame number">1</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1739,7 +744,11 @@
                             <conditions>
                                 <condition id="-22" name="Else" sid="339236164977421" type="System" />
                             </conditions>
-                            <actions />
+                            <actions>
+                                <action id="5" name="Set frame" sid="821521280747996" type="botaoFechar">
+                                    <param id="0" name="Frame number">0</param>
+                                </action>
+                            </actions>
                             <sub-events>
                                 <event-block sid="865195358632447">
                                     <conditions>
@@ -1754,10 +763,6 @@
                                     <actions>
                                         <action id="0" name="Set cursor style" sid="590187519554666" type="Mouse">
                                             <param id="0" name="Cursor style">1</param>
-                                        </action>
-                                        <action id="-9" name="Set value" sid="698504540500862" type="System">
-                                            <param id="0" name="Variable">acessControle</param>
-                                            <param id="1" name="Value">12</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -1780,10 +785,6 @@
                                             <actions>
                                                 <action id="0" name="Set cursor style" sid="656298304347359" type="Mouse">
                                                     <param id="0" name="Cursor style">1</param>
-                                                </action>
-                                                <action id="-9" name="Set value" sid="502282427478752" type="System">
-                                                    <param id="0" name="Variable">acessControle</param>
-                                                    <param id="1" name="Value">13</param>
                                                 </action>
                                             </actions>
                                         </event-block>
@@ -1815,11 +816,7 @@
                             <param id="0" name="Object">SliderBaseEfeitos</param>
                         </condition>
                     </conditions>
-                    <actions>
-                        <action id="5" name="Set frame" sid="130341081329224" type="botaoFechar">
-                            <param id="0" name="Frame number">1</param>
-                        </action>
-                    </actions>
+                    <actions />
                     <sub-events>
                         <event-block sid="542250514422362">
                             <conditions>
@@ -1883,31 +880,6 @@
                         </action>
                     </actions>
                 </event-block>
-                <event-block sid="977989025849095">
-                    <conditions>
-                        <condition id="-22" name="Else" sid="115667566029203" type="System" />
-                        <condition id="-14" name="Compare variable" sid="923711975471260" type="System">
-                            <param id="0" name="Variable">acessControle</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">11</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="5" name="Set frame" sid="330347952583265" type="botaoFechar">
-                            <param id="0" name="Frame number">1</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="720448266066924">
-                    <conditions>
-                        <condition id="-22" name="Else" sid="787993823335939" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="5" name="Set frame" sid="728154797037033" type="botaoFechar">
-                            <param id="0" name="Frame number">0</param>
-                        </action>
-                    </actions>
-                </event-block>
                 <event-group description="" inactive="1" sid="903049723335638" title="BtnAudioFecharMenu">
                     <sub-events>
                         <event-block sid="156008640821052">
@@ -1925,10 +897,6 @@
                                 <action id="-16" name="Wait" sid="567256883906555" type="System">
                                     <param id="0" name="Seconds">0.01</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="507677720150088" type="System">
-                                    <param id="0" name="Variable">acessControle</param>
-                                    <param id="1" name="Value">3</param>
-                                </action>
                                 <action id="-12" name="Set group active" sid="925785951633734" type="System">
                                     <param id="0" name="Group name">&quot;BtnAudioFecharMenu&quot;</param>
                                     <param id="1" name="State">0</param>
@@ -1945,14 +913,6 @@
                                     <param id="0" name="Group name">&quot;AudioMenuPrincipal&quot;</param>
                                     <param id="1" name="State">0</param>
                                 </action>
-                                <action id="-3" name="Set position" sid="284796084783507" type="acessBotao">
-                                    <param id="0" name="X">1020</param>
-                                    <param id="1" name="Y">373</param>
-                                </action>
-                                <action id="-7" name="Set size" sid="652865305419437" type="acessBotao">
-                                    <param id="0" name="Width">264</param>
-                                    <param id="1" name="Height">85</param>
-                                </action>
                                 <action id="-1" name="Set X" sid="278872300919693" type="SliderEfeitos">
                                     <param id="0" name="X">SliderBaseEfeitos.X+(volSons-MinValueSlider)*(SliderBaseEfeitos.Width/(MaxValueSlider-MinValueSlider))</param>
                                 </action>
@@ -1968,12 +928,6 @@
                                     <actions>
                                         <action id="6" name="Stop" sid="504041616180960" type="Audio">
                                             <param id="0" name="Tag">&quot;menu&quot;</param>
-                                        </action>
-                                        <action id="0" name="Play" sid="487104676343024" type="Audio">
-                                            <param id="0" name="Audio file">menu1014</param>
-                                            <param id="2" name="Loop">0</param>
-                                            <param id="3" name="Volume">volProf</param>
-                                            <param id="1" name="Tag (optional)">&quot;menu&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
