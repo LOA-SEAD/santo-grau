@@ -743,11 +743,18 @@
                     <param id="0" name="Variable">tempoFinalDesafio</param>
                     <param id="1" name="Value">time</param>
                 </action>
+                <action id="-10" name="Add to" sid="864826237604147" type="System">
+                    <param id="0" name="Variable">tempoTotal</param>
+                    <param id="1" name="Value">time - tempoInicialNivel</param>
+                </action>
                 <action id="0" name="Execute" sid="531933650660238" type="StatsJS">
                     <param id="0" name="Value">&quot;sendPlaytimeData(&quot; &amp; tempoFinalNivel - tempoInicialNivel &amp; &quot;,1,&apos;SantoGrau&apos;,&apos;5&apos;)&quot;</param>
                 </action>
                 <action id="0" name="Execute" sid="295588643598061" type="StatsJS">
                     <param id="0" name="Value">&quot;sendPlaytimeData(&quot; &amp; tempoFinalDesafio - tempoInicialDesafio &amp; &quot;,0,&apos;SantoGrau&apos;)&quot;</param>
+                </action>
+                <action id="0" name="Execute" sid="759298202959196" type="StatsJS">
+                    <param id="0" name="Value">&quot;sendPlaytimeData(&quot; &amp; tempoTotal &amp; &quot;,0,&apos;SantoGrau&apos;)&quot;</param>
                 </action>
                 <action id="0" name="Execute" sid="758168799619380" type="StatsJS">
                     <param id="0" name="Value">&quot;sendRankingData(&quot; &amp; pontos &amp; &quot;)&quot;</param>
@@ -757,6 +764,25 @@
                     <param id="0" name="Layout">Cena 3</param>
                 </action>
             </actions>
+            <sub-events>
+                <event-block sid="480748230019861">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="898230973243182" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Add to" sid="851870299317851" type="System">
+                            <param id="0" name="Variable">tempoTotal</param>
+                            <param id="1" name="Value">time - tempoInicialNivel</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="685693365129306">
+                    <conditions>
+                        <condition id="-4" name="Trigger once while true" sid="857051644323759" type="System" />
+                    </conditions>
+                    <actions />
+                </event-block>
+            </sub-events>
         </event-block>
         <comment>Evento para dar gameover no jogo</comment>
         <event-block sid="201268114904388">
