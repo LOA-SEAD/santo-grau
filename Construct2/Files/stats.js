@@ -175,7 +175,7 @@ function sendRankingData(pontos){
     console.log(pontos);
 }
 
-function sendPlaytimeData(tempo,tipo,idJogo,idNivel,idDesafio){
+function sendPlaytimeData(tempo,tipo,idJogo,idNivel,idDesafio,nomeFase){
     var info = {};
     var path;
     if(window.location.hostname == "localhost" ){   // for localhost tests
@@ -195,6 +195,7 @@ function sendPlaytimeData(tempo,tipo,idJogo,idNivel,idDesafio){
             info.challengeId = idDesafio;
         }
         info.gameType = 'ConclusionTime';
+        info.gameLevelName = nomeFase;
         $.ajax({
             type: "POST",
             url: path,
@@ -212,4 +213,5 @@ function sendPlaytimeData(tempo,tipo,idJogo,idNivel,idDesafio){
     if (idDesafio != null){
         console.log(idDesafio);
     }
+    console.log(nomeFase);
 }

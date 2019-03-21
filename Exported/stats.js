@@ -8,7 +8,7 @@ function sendDataTechnology(palavra,correta,resposta,nroPalavra,tentativas,vence
 	}
 	$.getJSON("remar.json", function(json) {
         info.exportedResourceId = json.exportedResourceId;
-        info.gameLevelId = 0;
+        info.gameLevelId = 1;
         info.word = palavra;
         info.correctAnswer = correta;
         info.answer = resposta;
@@ -16,7 +16,7 @@ function sendDataTechnology(palavra,correta,resposta,nroPalavra,tentativas,vence
         info.numberTries = tentativas;
         info.win = venceu;
         info.size = 3;
-        info.gameLevelName = 'Fase Tecnologia';
+        info.gameLevelName = 'Tecnologia';
         info.gameType = 'shuffleWord';
         $.ajax({
             type: "POST",
@@ -44,13 +44,13 @@ function sendDataGallery(arrastos,seqInicial){
     }
     $.getJSON("remar.json", function(json) {
         info.exportedResourceId = json.exportedResourceId;
-        info.gameLevelId = 1;
+        info.gameLevelId = 2;
         info.numberDrag = arrastos;
         info.initialSequence = seqInicial;
         info.win = true;
         info.size = 1;
         info.challengeId = 0;
-        info.gameLevelName = 'Fase Galeria';
+        info.gameLevelName = 'Galeria';
         info.gameType = 'dragPictures';
         $.ajax({
             type: "POST",
@@ -157,8 +157,7 @@ function sendRankingData(pontos){
     var info = {};
     var path;
     if(window.location.hostname == "localhost" ){   // for localhost tests
-        //path = "/exported-resource/saveScore"
-        path = "http://alfa.remar.online/stats/salveValerio"
+        path = "/exported-resource/saveScore"
     }else {                                 // for web version in production, electron and crosswalk versions
         path = "http://remar.dc.ufscar.br/exported-resource/saveScore"
     }
@@ -176,7 +175,7 @@ function sendRankingData(pontos){
     console.log(pontos);
 }
 
-function sendPlaytimeData(tempo,tipo,idJogo,idNivel,idDesafio){
+function sendPlaytimeData(tempo,tipo,idJogo,idNivel,idDesafio,nomeFase){
     var info = {};
     var path;
     if(window.location.hostname == "localhost" ){   // for localhost tests
@@ -196,6 +195,7 @@ function sendPlaytimeData(tempo,tipo,idJogo,idNivel,idDesafio){
             info.challengeId = idDesafio;
         }
         info.gameType = 'ConclusionTime';
+        info.gameLevelName = nomeFase;
         $.ajax({
             type: "POST",
             url: path,
@@ -213,4 +213,5 @@ function sendPlaytimeData(tempo,tipo,idJogo,idNivel,idDesafio){
     if (idDesafio != null){
         console.log(idDesafio);
     }
+    console.log(nomeFase);
 }
