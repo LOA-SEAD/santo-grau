@@ -142,9 +142,6 @@
                 <action id="-16" name="Set opacity" sid="7682274721188121" type="MuralQuadros">
                     <param id="0" name="Opacity">0</param>
                 </action>
-                <action id="-16" name="Set opacity" sid="181859741307448" type="botaoSubmeter">
-                    <param id="0" name="Opacity">0</param>
-                </action>
                 <action id="-16" name="Set opacity" sid="1926515396501819" type="BalaoDialogo">
                     <param id="0" name="Opacity">0</param>
                 </action>
@@ -350,10 +347,6 @@
                 </action>
                 <action behavior="Pin" id="0" name="Pin to object" sid="782034285605263" type="controleAudio">
                     <param id="0" name="Pin to">popup</param>
-                    <param id="1" name="Mode">0</param>
-                </action>
-                <action behavior="Pin" id="0" name="Pin to object" sid="760089486153639" type="botaoSubmeter">
-                    <param id="0" name="Pin to">MuralQuadros</param>
                     <param id="1" name="Mode">0</param>
                 </action>
                 <action id="0" name="Set text" sid="658472054651360" type="audioTexto">
@@ -1849,59 +1842,13 @@
                         <condition id="-22" name="Else" sid="372723619136613" type="System" />
                     </conditions>
                     <actions>
+                        <action id="0" name="Set cursor style" sid="769154012816527" type="Mouse">
+                            <param id="0" name="Cursor style">0</param>
+                        </action>
                         <action id="5" name="Set frame" sid="150503416518425" type="popupFechar">
                             <param id="0" name="Frame number">0</param>
                         </action>
                     </actions>
-                    <sub-events>
-                        <event-block sid="138499966484132">
-                            <conditions>
-                                <condition id="7" name="Cursor is over object" sid="951959921256841" type="Mouse">
-                                    <param id="0" name="Object">botaoSubmeter</param>
-                                </condition>
-                                <condition id="-10" name="Compare opacity" sid="935091305264061" type="popupFechar">
-                                    <param id="0" name="Comparison">0</param>
-                                    <param id="1" name="Opacity">100</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Set cursor style" sid="272140244889170" type="Mouse">
-                                    <param id="0" name="Cursor style">1</param>
-                                </action>
-                                <action id="5" name="Set frame" sid="832382267515875" type="botaoSubmeter">
-                                    <param id="0" name="Frame number">1</param>
-                                </action>
-                            </actions>
-                            <sub-events>
-                                <event-block sid="393172862781298">
-                                    <conditions>
-                                        <condition id="-4" name="Trigger once while true" sid="536486670976799" type="System" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="0" name="Play" sid="687197661432166" type="Audio">
-                                            <param id="0" name="Audio file">sobre_botao</param>
-                                            <param id="2" name="Loop">0</param>
-                                            <param id="3" name="Volume">volSons</param>
-                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <event-block sid="481410150565771">
-                            <conditions>
-                                <condition id="-22" name="Else" sid="610816144411797" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Set cursor style" sid="988110700706270" type="Mouse">
-                                    <param id="0" name="Cursor style">0</param>
-                                </action>
-                                <action id="5" name="Set frame" sid="967024191421846" type="botaoSubmeter">
-                                    <param id="0" name="Frame number">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
                 </event-block>
                 <event-block sid="3988945501635567">
                     <conditions>
@@ -1925,9 +1872,6 @@
                             <actions>
                                 <action id="-16" name="Set opacity" sid="2076384807695057" type="MuralQuadros">
                                     <param id="0" name="Opacity">MuralQuadros.Opacity + 200 * dt</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="825566030440028" type="botaoSubmeter">
-                                    <param id="0" name="Opacity">botaoSubmeter.Opacity + 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="227286412602217" type="perguntas">
                                     <param id="0" name="Opacity">perguntas.Opacity + 200 * dt</param>
@@ -2006,9 +1950,6 @@
                             <actions>
                                 <action id="-16" name="Set opacity" sid="3897813820729303" type="MuralQuadros">
                                     <param id="0" name="Opacity">MuralQuadros.Opacity - 200 * dt</param>
-                                </action>
-                                <action id="-16" name="Set opacity" sid="641569684269496" type="botaoSubmeter">
-                                    <param id="0" name="Opacity">botaoSubmeter.Opacity - 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="140319735093179" type="perguntas">
                                     <param id="0" name="Opacity">perguntas.Opacity - 200 * dt</param>
@@ -2310,10 +2251,10 @@
                 <event-block sid="8510538776884853">
                     <conditions>
                         <condition behavior="DragDrop" id="0" name="Is dragging" sid="6326581813458748" type="Quadros" />
-                        <condition disabled="1" id="-14" name="Compare variable" sid="8028017958561686" type="System">
+                        <condition id="-14" name="Compare variable" sid="8028017958561686" type="System">
                             <param id="0" name="Variable">respostaCerta</param>
-                            <param id="1" name="Comparison">0</param>
-                            <param id="2" name="Value">0</param>
+                            <param id="1" name="Comparison">1</param>
+                            <param id="2" name="Value">1</param>
                         </condition>
                     </conditions>
                     <actions>
@@ -3358,6 +3299,13 @@
                                             <param id="0" name="Variable">respostaCerta</param>
                                             <param id="1" name="Value">1</param>
                                         </action>
+                                        <action id="-9" name="Set value" sid="583498195429940" type="System">
+                                            <param id="0" name="Variable">sendJS</param>
+                                            <param id="1" name="Value">&quot;&apos;&quot; &amp; numeroArrastos &amp; &quot;&apos;,&quot; &amp; sendJS &amp; &quot;&apos;&quot;</param>
+                                        </action>
+                                        <action id="0" name="Execute" sid="736897574805233" type="StatsJS">
+                                            <param id="0" name="Value">&quot;sendDataGallery(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
+                                        </action>
                                     </actions>
                                 </event-block>
                                 <event-block sid="9407613655833625">
@@ -3376,9 +3324,6 @@
                         <comment>Impede que o jogador continue arrastando os quadros</comment>
                         <event-block sid="8097234656603702">
                             <conditions>
-                                <condition id="17" name="On tap object" sid="927580694422391" type="Touch">
-                                    <param id="0" name="Object">botaoSubmeter</param>
-                                </condition>
                                 <condition id="-14" name="Compare variable" sid="1444986344672336" type="System">
                                     <param id="0" name="Variable">respostaCerta</param>
                                     <param id="1" name="Comparison">0</param>
@@ -3401,26 +3346,22 @@
                                 <action behavior="ScrollTo" id="1" name="Set enabled" sid="5464480026384696" type="Quadros">
                                     <param id="0" name="State">0</param>
                                 </action>
-                                <action id="-9" name="Set value" sid="239447057793739" type="System">
-                                    <param id="0" name="Variable">sendJS</param>
-                                    <param id="1" name="Value">&quot;&apos;&quot; &amp; numeroArrastos &amp; &quot;&apos;,&quot; &amp; sendJS &amp; &quot;&apos;&quot;</param>
-                                </action>
-                                <action id="0" name="Execute" sid="581138368403658" type="StatsJS">
-                                    <param id="0" name="Value">&quot;sendDataGallery(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="861801137394595" type="System">
-                                    <param id="0" name="Variable">tempoFinalDesafio</param>
-                                    <param id="1" name="Value">time</param>
-                                </action>
-                                <action id="0" name="Execute" sid="116765741862837" type="StatsJS">
-                                    <param id="0" name="Value">&quot;sendPlaytimeData(&quot; &amp; tempoFinalDesafio - tempoInicialDesafio &amp; &quot;,2,&apos;SantoGrau&apos;,&apos;2&apos;,&apos;0&apos;,&apos;Galeria&apos;)&quot;</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="576416581946421" type="System">
-                                    <param id="0" name="Variable">respostaCerta</param>
-                                    <param id="1" name="Value">2</param>
-                                </action>
                             </actions>
                             <sub-events>
+                                <event-block sid="537340997946680">
+                                    <conditions>
+                                        <condition id="-4" name="Trigger once while true" sid="455722902716646" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="861801137394595" type="System">
+                                            <param id="0" name="Variable">tempoFinalDesafio</param>
+                                            <param id="1" name="Value">time</param>
+                                        </action>
+                                        <action id="0" name="Execute" sid="116765741862837" type="StatsJS">
+                                            <param id="0" name="Value">&quot;sendPlaytimeData(&quot; &amp; tempoFinalDesafio - tempoInicialDesafio &amp; &quot;,2,&apos;SantoGrau&apos;,&apos;2&apos;,&apos;0&apos;,&apos;Galeria&apos;)&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
                                 <comment>Destrói o campo de seleção do mural</comment>
                                 <event-block sid="355050235596338">
                                     <conditions>
@@ -3433,19 +3374,7 @@
                                     </actions>
                                 </event-block>
                                 <comment>Como é um evento que lida com Opacidade, ou seja, algo cujo valor varia entre 0 e 100, então ele vai levar exatos 0.5 segundos para descarregar, independente de dispositivo</comment>
-                            </sub-events>
-                        </event-block>
-                        <event-block sid="6085935778562451">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="819552112581389" type="System">
-                                    <param id="0" name="Variable">respostaCerta</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">2</param>
-                                </condition>
-                            </conditions>
-                            <actions />
-                            <sub-events>
-                                <event-block sid="766484320580118">
+                                <event-block sid="6085935778562451">
                                     <conditions>
                                         <condition id="-1" name="Every tick" sid="8311248685635901" type="System" />
                                         <condition id="-10" name="Compare opacity" sid="8871323319716001" type="MuralQuadros">
@@ -3456,9 +3385,6 @@
                                     <actions>
                                         <action id="-16" name="Set opacity" sid="4208535028306787" type="MuralQuadros">
                                             <param id="0" name="Opacity">MuralQuadros.Opacity - 200 * dt</param>
-                                        </action>
-                                        <action id="-16" name="Set opacity" sid="533209205238715" type="botaoSubmeter">
-                                            <param id="0" name="Opacity">botaoSubmeter.Opacity - 200 * dt</param>
                                         </action>
                                         <action id="-16" name="Set opacity" sid="869134549153177" type="perguntas">
                                             <param id="0" name="Opacity">perguntas.Opacity - 200 * dt</param>
@@ -3473,7 +3399,6 @@
                                 </event-block>
                                 <event-block sid="750325561758365">
                                     <conditions>
-                                        <condition id="-4" name="Trigger once while true" sid="259181578352538" type="System" />
                                         <condition id="-10" name="Compare opacity" sid="7381590799526875" type="MuralQuadros">
                                             <param id="0" name="Comparison">0</param>
                                             <param id="1" name="Opacity">0</param>
@@ -3508,71 +3433,12 @@
                         </event-block>
                         <event-block sid="2007500730422509">
                             <conditions>
-                                <condition id="-14" name="Compare variable" sid="330381533510721" type="System">
-                                    <param id="0" name="Variable">respostaCerta</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
+                                <condition id="-22" name="Else" sid="8636901681304806" type="System" />
                             </conditions>
                             <actions>
                                 <action id="-9" name="Set value" sid="5646937744429254" type="System">
                                     <param id="0" name="Variable">quadro</param>
                                     <param id="1" name="Value">1</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="695185330648159">
-                            <conditions>
-                                <condition id="17" name="On tap object" sid="499021278684193" type="Touch">
-                                    <param id="0" name="Object">botaoSubmeter</param>
-                                </condition>
-                                <condition id="-14" name="Compare variable" sid="382664520615177" type="System">
-                                    <param id="0" name="Variable">respostaCerta</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="7" name="Play (by name)" sid="650824797645969" type="Audio">
-                                    <param id="0" name="Folder">0</param>
-                                    <param id="1" name="Audio file name">choose(&quot;dano1&quot;, &quot;dano2&quot;, &quot;dano3&quot;)</param>
-                                    <param id="3" name="Loop">0</param>
-                                    <param id="4" name="Volume">volSons</param>
-                                    <param id="2" name="Tag (optional)">&quot;sons&quot;</param>
-                                </action>
-                                <action behavior="Flash" id="0" name="Flash" sid="336828122314562" type="playerAnim">
-                                    <param id="0" name="&apos;On&apos; time">0.1</param>
-                                    <param id="1" name="&apos;Off&apos; time">0.1</param>
-                                    <param id="2" name="Duration">1.2</param>
-                                </action>
-                                <action id="-10" name="Add to" sid="844759897920984" type="System">
-                                    <param id="0" name="Variable">pontos</param>
-                                    <param id="1" name="Value">-50</param>
-                                </action>
-                                <action id="0" name="Set text" sid="961323921601064" type="pontoTexto">
-                                    <param id="0" name="Text">&quot;-50&quot;</param>
-                                </action>
-                                <action id="4" name="Set font color" sid="725165302265027" type="pontoTexto">
-                                    <param id="0" name="Color">rgb(235, 17, 53)</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="730214103821026" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao3b&quot;</param>
-                                    <param id="1" name="State">0</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="332209043039203" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao3a&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="142348232589055" type="System">
-                                    <param id="0" name="Seconds">4</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="357238627695929" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao3a&quot;</param>
-                                    <param id="1" name="State">0</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="127558964967259" type="System">
-                                    <param id="0" name="Group name">&quot;Pontuacao3b&quot;</param>
-                                    <param id="1" name="State">1</param>
                                 </action>
                             </actions>
                         </event-block>
