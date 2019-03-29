@@ -3,6 +3,7 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase 2 - Galeria</name>
     <events>
+        <variable constant="0" name="submeteu" sid="352012375884103" static="0" type="number">0</variable>
         <comment>Utilizada para controlar a animação de desaparecer o zoom nos quadros</comment>
         <variable constant="0" name="finalizarAnimacao" sid="4166087937899186" static="0" type="number">0</variable>
         <comment>Utilizada para controlar a animação de aparecer o zoom nos quadros</comment>
@@ -135,11 +136,18 @@
                     <param id="0" name="Pin to">player</param>
                     <param id="1" name="Mode">0</param>
                 </action>
+                <action behavior="Pin" id="0" name="Pin to object" sid="618040002271456" type="botaoSubmeter">
+                    <param id="0" name="Pin to">MuralQuadros</param>
+                    <param id="1" name="Mode">0</param>
+                </action>
                 <action id="4" name="Set animation" sid="9872902098286598" type="playerAnim">
                     <param id="0" name="Animation">&quot;Default&quot;</param>
                     <param id="1" name="From">1</param>
                 </action>
                 <action id="-16" name="Set opacity" sid="7682274721188121" type="MuralQuadros">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="112517872269345" type="botaoSubmeter">
                     <param id="0" name="Opacity">0</param>
                 </action>
                 <action id="-16" name="Set opacity" sid="1926515396501819" type="BalaoDialogo">
@@ -1873,6 +1881,9 @@
                                 <action id="-16" name="Set opacity" sid="2076384807695057" type="MuralQuadros">
                                     <param id="0" name="Opacity">MuralQuadros.Opacity + 200 * dt</param>
                                 </action>
+                                <action id="-16" name="Set opacity" sid="617899092519154" type="botaoSubmeter">
+                                    <param id="0" name="Opacity">botaoSubmeter.Opacity + 200 * dt</param>
+                                </action>
                                 <action id="-16" name="Set opacity" sid="227286412602217" type="perguntas">
                                     <param id="0" name="Opacity">perguntas.Opacity + 200 * dt</param>
                                 </action>
@@ -1950,6 +1961,9 @@
                             <actions>
                                 <action id="-16" name="Set opacity" sid="3897813820729303" type="MuralQuadros">
                                     <param id="0" name="Opacity">MuralQuadros.Opacity - 200 * dt</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="851366667671791" type="botaoSubmeter">
+                                    <param id="0" name="Opacity">botaoSubmeter.Opacity - 200 * dt</param>
                                 </action>
                                 <action id="-16" name="Set opacity" sid="140319735093179" type="perguntas">
                                     <param id="0" name="Opacity">perguntas.Opacity - 200 * dt</param>
@@ -3279,6 +3293,10 @@
                                         </condition>
                                     </conditions>
                                     <actions>
+                                        <action id="-9" name="Set value" sid="890083890727671" type="System">
+                                            <param id="0" name="Variable">submeteu</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
                                         <action id="-9" name="Set value" sid="6582238518056433" type="System">
                                             <param id="0" name="Variable">quadro</param>
                                             <param id="1" name="Value">numeroQuadros + 1</param>
@@ -3295,10 +3313,6 @@
                                         </condition>
                                     </conditions>
                                     <actions>
-                                        <action id="-9" name="Set value" sid="6444455004539269" type="System">
-                                            <param id="0" name="Variable">respostaCerta</param>
-                                            <param id="1" name="Value">1</param>
-                                        </action>
                                         <action id="-9" name="Set value" sid="583498195429940" type="System">
                                             <param id="0" name="Variable">sendJS</param>
                                             <param id="1" name="Value">&quot;&apos;&quot; &amp; numeroArrastos &amp; &quot;&apos;,&quot; &amp; sendJS &amp; &quot;&apos;&quot;</param>
@@ -3306,53 +3320,18 @@
                                         <action id="0" name="Execute" sid="736897574805233" type="StatsJS">
                                             <param id="0" name="Value">&quot;sendDataGallery(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
                                         </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="9407613655833625">
-                                    <conditions>
-                                        <condition id="-1" name="Every tick" sid="253745312315403" type="System" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="-10" name="Add to" sid="738160342329337" type="System">
-                                            <param id="0" name="Variable">quadro</param>
-                                            <param id="1" name="Value">1</param>
+                                        <action id="-15" name="Set visible" sid="9030443069814387" type="Quadros">
+                                            <param id="0" name="Visibility">0</param>
                                         </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <comment>Impede que o jogador continue arrastando os quadros</comment>
-                        <event-block sid="8097234656603702">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="1444986344672336" type="System">
-                                    <param id="0" name="Variable">respostaCerta</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">1</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action disabled="1" id="-16" name="Wait" sid="9399743302151576" type="System">
-                                    <param id="0" name="Seconds">1.0</param>
-                                </action>
-                                <action id="-15" name="Set visible" sid="9030443069814387" type="Quadros">
-                                    <param id="0" name="Visibility">0</param>
-                                </action>
-                                <action id="-15" name="Set visible" sid="686873311651177" type="SelecaoQuadros">
-                                    <param id="0" name="Visibility">0</param>
-                                </action>
-                                <action behavior="DragDrop" id="0" name="Set enabled" sid="8745449081188446" type="Quadros">
-                                    <param id="0" name="State">0</param>
-                                </action>
-                                <action behavior="ScrollTo" id="1" name="Set enabled" sid="5464480026384696" type="Quadros">
-                                    <param id="0" name="State">0</param>
-                                </action>
-                            </actions>
-                            <sub-events>
-                                <event-block sid="537340997946680">
-                                    <conditions>
-                                        <condition id="-4" name="Trigger once while true" sid="455722902716646" type="System" />
-                                    </conditions>
-                                    <actions>
+                                        <action id="-15" name="Set visible" sid="686873311651177" type="SelecaoQuadros">
+                                            <param id="0" name="Visibility">0</param>
+                                        </action>
+                                        <action behavior="DragDrop" id="0" name="Set enabled" sid="8745449081188446" type="Quadros">
+                                            <param id="0" name="State">0</param>
+                                        </action>
+                                        <action behavior="ScrollTo" id="1" name="Set enabled" sid="5464480026384696" type="Quadros">
+                                            <param id="0" name="State">0</param>
+                                        </action>
                                         <action id="-9" name="Set value" sid="861801137394595" type="System">
                                             <param id="0" name="Variable">tempoFinalDesafio</param>
                                             <param id="1" name="Value">time</param>
@@ -3360,51 +3339,21 @@
                                         <action id="0" name="Execute" sid="116765741862837" type="StatsJS">
                                             <param id="0" name="Value">&quot;sendPlaytimeData(&quot; &amp; tempoFinalDesafio - tempoInicialDesafio &amp; &quot;,2,&apos;SantoGrau&apos;,&apos;2&apos;,&apos;0&apos;,&apos;Galeria&apos;)&quot;</param>
                                         </action>
-                                    </actions>
-                                </event-block>
-                                <comment>Destrói o campo de seleção do mural</comment>
-                                <event-block sid="355050235596338">
-                                    <conditions>
-                                        <condition id="-14" name="Pick by unique ID" sid="157159095708650" type="selecaoComida">
-                                            <param id="0" name="Unique ID">167</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Destroy" sid="175270503838058" type="selecaoComida" />
-                                    </actions>
-                                </event-block>
-                                <comment>Como é um evento que lida com Opacidade, ou seja, algo cujo valor varia entre 0 e 100, então ele vai levar exatos 0.5 segundos para descarregar, independente de dispositivo</comment>
-                                <event-block sid="6085935778562451">
-                                    <conditions>
-                                        <condition id="-1" name="Every tick" sid="8311248685635901" type="System" />
-                                        <condition id="-10" name="Compare opacity" sid="8871323319716001" type="MuralQuadros">
-                                            <param id="0" name="Comparison">4</param>
-                                            <param id="1" name="Opacity">0</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-16" name="Set opacity" sid="4208535028306787" type="MuralQuadros">
-                                            <param id="0" name="Opacity">MuralQuadros.Opacity - 200 * dt</param>
+                                        <action id="-16" name="Set opacity" sid="426575904656901" type="MuralQuadros">
+                                            <param id="0" name="Opacity">0</param>
                                         </action>
-                                        <action id="-16" name="Set opacity" sid="869134549153177" type="perguntas">
-                                            <param id="0" name="Opacity">perguntas.Opacity - 200 * dt</param>
+                                        <action id="-16" name="Set opacity" sid="204394502846197" type="botaoSubmeter">
+                                            <param id="0" name="Opacity">0</param>
                                         </action>
-                                        <action id="-16" name="Set opacity" sid="484634863688627" type="textoPerguntas">
-                                            <param id="0" name="Opacity">textoPerguntas.Opacity - 200 * dt</param>
+                                        <action id="-16" name="Set opacity" sid="196666936446205" type="perguntas">
+                                            <param id="0" name="Opacity">0</param>
                                         </action>
-                                        <action id="-16" name="Set opacity" sid="310908527988341" type="popupFechar">
-                                            <param id="0" name="Opacity">popupFechar.Opacity - 200 * dt</param>
+                                        <action id="-16" name="Set opacity" sid="178010036478417" type="textoPerguntas">
+                                            <param id="0" name="Opacity">0</param>
                                         </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="750325561758365">
-                                    <conditions>
-                                        <condition id="-10" name="Compare opacity" sid="7381590799526875" type="MuralQuadros">
-                                            <param id="0" name="Comparison">0</param>
-                                            <param id="1" name="Opacity">0</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
+                                        <action id="-16" name="Set opacity" sid="321173669950508" type="popupFechar">
+                                            <param id="0" name="Opacity">0</param>
+                                        </action>
                                         <action id="0" name="Play" sid="895318167615292" type="Audio">
                                             <param id="0" name="Audio file">acerto</param>
                                             <param id="2" name="Loop">0</param>
@@ -3428,18 +3377,109 @@
                                             <param id="1" name="State">1</param>
                                         </action>
                                     </actions>
+                                    <sub-events>
+                                        <event-block sid="355050235596338">
+                                            <conditions>
+                                                <condition id="-14" name="Pick by unique ID" sid="157159095708650" type="selecaoComida">
+                                                    <param id="0" name="Unique ID">167</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-9" name="Destroy" sid="175270503838058" type="selecaoComida" />
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
+                                </event-block>
+                                <event-block sid="9407613655833625">
+                                    <conditions>
+                                        <condition id="-1" name="Every tick" sid="253745312315403" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-10" name="Add to" sid="738160342329337" type="System">
+                                            <param id="0" name="Variable">quadro</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
                                 </event-block>
                             </sub-events>
                         </event-block>
-                        <event-block sid="2007500730422509">
+                        <comment>Impede que o jogador continue arrastando os quadros</comment>
+                        <event-block sid="8097234656603702">
                             <conditions>
-                                <condition id="-22" name="Else" sid="8636901681304806" type="System" />
+                                <condition id="6" name="On object clicked" sid="528347541295535" type="Mouse">
+                                    <param id="0" name="Mouse button">0</param>
+                                    <param id="1" name="Click type">0</param>
+                                    <param id="2" name="Object clicked">botaoSubmeter</param>
+                                </condition>
+                                <condition id="-10" name="Compare opacity" sid="139491828873104" type="botaoSubmeter">
+                                    <param id="0" name="Comparison">5</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                                <condition id="-14" name="Compare variable" sid="253424734817688" type="System">
+                                    <param id="0" name="Variable">submeteu</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
                             </conditions>
                             <actions>
-                                <action id="-9" name="Set value" sid="5646937744429254" type="System">
-                                    <param id="0" name="Variable">quadro</param>
+                                <action id="-16" name="Wait" sid="928650750702088" type="System">
+                                    <param id="0" name="Seconds">0.1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="430688729213106" type="System">
+                                    <param id="0" name="Variable">submeteu</param>
                                     <param id="1" name="Value">1</param>
                                 </action>
+                            </actions>
+                        </event-block>
+                        <variable constant="0" name="i" sid="399306741304352" static="0" type="number">0</variable>
+                        <event-block sid="708714221366130">
+                            <conditions>
+                                <condition id="-10" name="For" sid="440158534809480" type="System">
+                                    <param id="0" name="Name">i</param>
+                                    <param id="1" name="Start index">1</param>
+                                    <param id="2" name="End index">numeroQuadros</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="162300340467922">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="472123734341472" type="System">
+                                            <param id="0" name="First value">OrdemAtual.At(i-1)</param>
+                                            <param id="1" name="Comparison">1</param>
+                                            <param id="2" name="Second value">Resposta.At(i-1)</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="998376489220364" type="System">
+                                            <param id="0" name="Variable">submeteu</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="988752827665620">
+                                    <conditions>
+                                        <condition id="-22" name="Else" sid="282226992473126" type="System" />
+                                    </conditions>
+                                    <actions>
+                                        <action id="-9" name="Set value" sid="536249837135295" type="System">
+                                            <param id="0" name="Variable">submeteu</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="368399940441392">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="425164871518571" type="System">
+                                    <param id="0" name="Variable">submeteu</param>
+                                    <param id="1" name="Comparison">4</param>
+                                    <param id="2" name="Value">numeroQuadros</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Destroy" sid="755685230984690" type="MuralQuadros" />
                             </actions>
                         </event-block>
                     </sub-events>
