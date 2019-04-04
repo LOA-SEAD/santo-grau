@@ -34,7 +34,7 @@ function sendDataTechnology(palavra,correta,resposta,nroPalavra,tentativas,vence
     console.log(venceu);
 }
 
-function sendDataGallery(arrastos,seqInicial){
+function sendDataGallery(arrastos,seqInicial,win){
     var info = {};
     var path;
     if(window.location.hostname == "localhost" ){   // for localhost tests
@@ -47,7 +47,7 @@ function sendDataGallery(arrastos,seqInicial){
         info.gameLevelId = 2;
         info.numberDrag = arrastos;
         info.initialSequence = seqInicial;
-        info.win = true;
+        info.win = win;
         info.size = 1;
         info.challengeId = 0;
         info.gameLevelName = 'Galeria';
@@ -62,6 +62,7 @@ function sendDataGallery(arrastos,seqInicial){
     });
     console.log(arrastos);
     console.log(seqInicial);
+    console.log(win);
 }
 
 function sendDataFinalLevel(pergunta,correta,nroPergunta,respostas,escolhida,acertou,tamanho,fase,nomeFase){
