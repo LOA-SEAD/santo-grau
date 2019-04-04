@@ -3,7 +3,8 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase 2 - Galeria</name>
     <events>
-        <variable constant="0" name="submeteu" sid="352012375884103" static="0" type="number">0</variable>
+        <comment>Variável usada pra percorrer o vetor de quadros</comment>
+        <variable constant="0" name="controleQuadros" sid="399306741304352" static="0" type="number">1</variable>
         <comment>Utilizada para controlar a animação de desaparecer o zoom nos quadros</comment>
         <variable constant="0" name="finalizarAnimacao" sid="4166087937899186" static="0" type="number">0</variable>
         <comment>Utilizada para controlar a animação de aparecer o zoom nos quadros</comment>
@@ -3273,137 +3274,6 @@
                             </actions>
                         </event-block>
                         <comment>O restante dos blocos deste grupo servem para verificar se o jogador já colocou os quadros na ordem correta</comment>
-                        <event-block sid="9481058079539814">
-                            <conditions>
-                                <condition id="-23" name="While" sid="1495455817386922" type="System" />
-                                <condition id="-14" name="Compare variable" sid="6428938269478798" type="System">
-                                    <param id="0" name="Variable">quadro</param>
-                                    <param id="1" name="Comparison">3</param>
-                                    <param id="2" name="Value">numeroQuadros</param>
-                                </condition>
-                            </conditions>
-                            <actions />
-                            <sub-events>
-                                <event-block sid="7935180037940814">
-                                    <conditions>
-                                        <condition id="-8" name="Compare two values" sid="7171724563426901" type="System">
-                                            <param id="0" name="First value">OrdemAtual.At(Quadro-1)</param>
-                                            <param id="1" name="Comparison">1</param>
-                                            <param id="2" name="Second value">Resposta.At(Quadro-1)</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="890083890727671" type="System">
-                                            <param id="0" name="Variable">submeteu</param>
-                                            <param id="1" name="Value">0</param>
-                                        </action>
-                                        <action id="-9" name="Set value" sid="6582238518056433" type="System">
-                                            <param id="0" name="Variable">quadro</param>
-                                            <param id="1" name="Value">numeroQuadros + 1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <comment>Ativa a variável que funciona como um trigger para iniciar a sequência para desativar o mural, adiciona no sendDataJS a quantidade de vezes que o jogador arrastou os quadros e executa o javascript, enviando os dados de como o jogador se saiu na ordenação</comment>
-                                <event-block sid="3525393247056539">
-                                    <conditions>
-                                        <condition id="-14" name="Compare variable" sid="7895563149112456" type="System">
-                                            <param id="0" name="Variable">quadro</param>
-                                            <param id="1" name="Comparison">0</param>
-                                            <param id="2" name="Value">numeroQuadros</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="583498195429940" type="System">
-                                            <param id="0" name="Variable">sendJS</param>
-                                            <param id="1" name="Value">&quot;&apos;&quot; &amp; numeroArrastos &amp; &quot;&apos;,&quot; &amp; sendJS &amp; &quot;&apos;&quot;</param>
-                                        </action>
-                                        <action id="0" name="Execute" sid="736897574805233" type="StatsJS">
-                                            <param id="0" name="Value">&quot;sendDataGallery(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
-                                        </action>
-                                        <action id="-15" name="Set visible" sid="9030443069814387" type="Quadros">
-                                            <param id="0" name="Visibility">0</param>
-                                        </action>
-                                        <action id="-15" name="Set visible" sid="686873311651177" type="SelecaoQuadros">
-                                            <param id="0" name="Visibility">0</param>
-                                        </action>
-                                        <action behavior="DragDrop" id="0" name="Set enabled" sid="8745449081188446" type="Quadros">
-                                            <param id="0" name="State">0</param>
-                                        </action>
-                                        <action behavior="ScrollTo" id="1" name="Set enabled" sid="5464480026384696" type="Quadros">
-                                            <param id="0" name="State">0</param>
-                                        </action>
-                                        <action id="-9" name="Set value" sid="861801137394595" type="System">
-                                            <param id="0" name="Variable">tempoFinalDesafio</param>
-                                            <param id="1" name="Value">time</param>
-                                        </action>
-                                        <action id="0" name="Execute" sid="116765741862837" type="StatsJS">
-                                            <param id="0" name="Value">&quot;sendPlaytimeData(&quot; &amp; tempoFinalDesafio - tempoInicialDesafio &amp; &quot;,2,&apos;SantoGrau&apos;,&apos;2&apos;,&apos;0&apos;,&apos;Galeria&apos;)&quot;</param>
-                                        </action>
-                                        <action id="-16" name="Set opacity" sid="426575904656901" type="MuralQuadros">
-                                            <param id="0" name="Opacity">0</param>
-                                        </action>
-                                        <action id="-16" name="Set opacity" sid="204394502846197" type="botaoSubmeter">
-                                            <param id="0" name="Opacity">0</param>
-                                        </action>
-                                        <action id="-16" name="Set opacity" sid="196666936446205" type="perguntas">
-                                            <param id="0" name="Opacity">0</param>
-                                        </action>
-                                        <action id="-16" name="Set opacity" sid="178010036478417" type="textoPerguntas">
-                                            <param id="0" name="Opacity">0</param>
-                                        </action>
-                                        <action id="-16" name="Set opacity" sid="321173669950508" type="popupFechar">
-                                            <param id="0" name="Opacity">0</param>
-                                        </action>
-                                        <action id="0" name="Play" sid="895318167615292" type="Audio">
-                                            <param id="0" name="Audio file">acerto</param>
-                                            <param id="2" name="Loop">0</param>
-                                            <param id="3" name="Volume">volSons</param>
-                                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
-                                        </action>
-                                        <action id="-9" name="Set value" sid="1405052962396852" type="System">
-                                            <param id="0" name="Variable">tamanhoDialogoGAL</param>
-                                            <param id="1" name="Value">6</param>
-                                        </action>
-                                        <action id="-9" name="Set value" sid="9923358796331521" type="System">
-                                            <param id="0" name="Variable">carregarDialogoChave</param>
-                                            <param id="1" name="Value">1</param>
-                                        </action>
-                                        <action id="-12" name="Set group active" sid="7534728744589873" type="System">
-                                            <param id="0" name="Group name">&quot;operacoesQuadros&quot;</param>
-                                            <param id="1" name="State">0</param>
-                                        </action>
-                                        <action id="-12" name="Set group active" sid="3702966218392608" type="System">
-                                            <param id="0" name="Group name">&quot;dialogoGaleria&quot;</param>
-                                            <param id="1" name="State">1</param>
-                                        </action>
-                                    </actions>
-                                    <sub-events>
-                                        <event-block sid="355050235596338">
-                                            <conditions>
-                                                <condition id="-14" name="Pick by unique ID" sid="157159095708650" type="selecaoComida">
-                                                    <param id="0" name="Unique ID">167</param>
-                                                </condition>
-                                            </conditions>
-                                            <actions>
-                                                <action id="-9" name="Destroy" sid="175270503838058" type="selecaoComida" />
-                                            </actions>
-                                        </event-block>
-                                    </sub-events>
-                                </event-block>
-                                <event-block sid="9407613655833625">
-                                    <conditions>
-                                        <condition id="-1" name="Every tick" sid="253745312315403" type="System" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="-10" name="Add to" sid="738160342329337" type="System">
-                                            <param id="0" name="Variable">quadro</param>
-                                            <param id="1" name="Value">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <comment>Impede que o jogador continue arrastando os quadros</comment>
                         <event-block sid="8097234656603702">
                             <conditions>
                                 <condition id="6" name="On object clicked" sid="528347541295535" type="Mouse">
@@ -3415,71 +3285,184 @@
                                     <param id="0" name="Comparison">5</param>
                                     <param id="1" name="Opacity">100</param>
                                 </condition>
-                                <condition id="-14" name="Compare variable" sid="253424734817688" type="System">
-                                    <param id="0" name="Variable">submeteu</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">0</param>
-                                </condition>
                             </conditions>
                             <actions>
-                                <action id="-16" name="Wait" sid="928650750702088" type="System">
-                                    <param id="0" name="Seconds">0.1</param>
-                                </action>
-                                <action id="-9" name="Set value" sid="430688729213106" type="System">
-                                    <param id="0" name="Variable">submeteu</param>
-                                    <param id="1" name="Value">1</param>
+                                <action id="-12" name="Set group active" sid="376088411864271" type="System">
+                                    <param id="0" name="Group name">&quot;verificaQuadros&quot;</param>
+                                    <param id="1" name="State">1</param>
                                 </action>
                             </actions>
                         </event-block>
-                        <variable constant="0" name="i" sid="399306741304352" static="0" type="number">0</variable>
-                        <event-block sid="708714221366130">
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <comment>Grupo acionado ao submeter a ordem da quadros para verificação da ordem</comment>
+        <event-group description="" inactive="1" sid="208910676753509" title="verificaQuadros">
+            <sub-events>
+                <event-block sid="162300340467922">
+                    <conditions>
+                        <condition id="-8" name="Compare two values" sid="472123734341472" type="System">
+                            <param id="0" name="First value">OrdemAtual.At(controleQuadros-1)</param>
+                            <param id="1" name="Comparison">1</param>
+                            <param id="2" name="Second value">Resposta.At(controleQuadros-1)</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-12" name="Set group active" sid="362489969330872" type="System">
+                            <param id="0" name="Group name">&quot;verificaQuadros&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="7" name="Play (by name)" sid="327029089086812" type="Audio">
+                            <param id="0" name="Folder">0</param>
+                            <param id="1" name="Audio file name">choose(&quot;dano1&quot;, &quot;dano2&quot;, &quot;dano3&quot;)</param>
+                            <param id="3" name="Loop">0</param>
+                            <param id="4" name="Volume">volSons</param>
+                            <param id="2" name="Tag (optional)">&quot;sons&quot;</param>
+                        </action>
+                        <action behavior="Flash" id="0" name="Flash" sid="724975823122498" type="playerAnim">
+                            <param id="0" name="&apos;On&apos; time">0.1</param>
+                            <param id="1" name="&apos;Off&apos; time">0.1</param>
+                            <param id="2" name="Duration">1.2</param>
+                        </action>
+                        <action id="-10" name="Add to" sid="823319598244312" type="System">
+                            <param id="0" name="Variable">numeroDanosJS</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-10" name="Add to" sid="432213162317082" type="System">
+                            <param id="0" name="Variable">pontos</param>
+                            <param id="1" name="Value">-50</param>
+                        </action>
+                        <action id="0" name="Set text" sid="851574650455986" type="pontoTexto">
+                            <param id="0" name="Text">&quot;-50&quot;</param>
+                        </action>
+                        <action id="4" name="Set font color" sid="710610794068868" type="pontoTexto">
+                            <param id="0" name="Color">rgb(235, 17, 53)</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="821364937453381" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao3b&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="597903398413087" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao3a&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="169255757942788" type="System">
+                            <param id="0" name="Seconds">4</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="111857715282289" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao3a&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="244095741649726" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao3b&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="548880676214236">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="441361576938177" type="System" />
+                        <condition id="-14" name="Compare variable" sid="425164871518571" type="System">
+                            <param id="0" name="Variable">controleQuadros</param>
+                            <param id="1" name="Comparison">2</param>
+                            <param id="2" name="Value">numeroQuadros</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-10" name="Add to" sid="756874313846517" type="System">
+                            <param id="0" name="Variable">controleQuadros</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="368399940441392">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="364394508117339" type="System" />
+                        <condition id="-14" name="Compare variable" sid="665407902379709" type="System">
+                            <param id="0" name="Variable">controleQuadros</param>
+                            <param id="1" name="Comparison">5</param>
+                            <param id="2" name="Value">numeroQuadros</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="209462097212247" type="System">
+                            <param id="0" name="Variable">sendJS</param>
+                            <param id="1" name="Value">&quot;&apos;&quot; &amp; numeroArrastos &amp; &quot;&apos;,&quot; &amp; sendJS &amp; &quot;&apos;&quot;</param>
+                        </action>
+                        <action id="0" name="Execute" sid="813684165104008" type="StatsJS">
+                            <param id="0" name="Value">&quot;sendDataGallery(&quot; &amp; sendJS &amp; &quot;)&quot;</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="789391360190462" type="Quadros">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action id="-15" name="Set visible" sid="272909726498195" type="SelecaoQuadros">
+                            <param id="0" name="Visibility">0</param>
+                        </action>
+                        <action behavior="DragDrop" id="0" name="Set enabled" sid="835819364802046" type="Quadros">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action behavior="ScrollTo" id="1" name="Set enabled" sid="469387960415937" type="Quadros">
+                            <param id="0" name="State">0</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="417389521004191" type="System">
+                            <param id="0" name="Variable">tempoFinalDesafio</param>
+                            <param id="1" name="Value">time</param>
+                        </action>
+                        <action id="0" name="Execute" sid="737009175008438" type="StatsJS">
+                            <param id="0" name="Value">&quot;sendPlaytimeData(&quot; &amp; tempoFinalDesafio - tempoInicialDesafio &amp; &quot;,2,&apos;SantoGrau&apos;,&apos;2&apos;,&apos;0&apos;,&apos;Galeria&apos;)&quot;</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="962744874973619" type="MuralQuadros">
+                            <param id="0" name="Opacity">0</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="883906911542391" type="botaoSubmeter">
+                            <param id="0" name="Opacity">0</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="720336600440640" type="perguntas">
+                            <param id="0" name="Opacity">0</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="642630609205499" type="textoPerguntas">
+                            <param id="0" name="Opacity">0</param>
+                        </action>
+                        <action id="-16" name="Set opacity" sid="719708901307587" type="popupFechar">
+                            <param id="0" name="Opacity">0</param>
+                        </action>
+                        <action id="0" name="Play" sid="494051665415693" type="Audio">
+                            <param id="0" name="Audio file">acerto</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">volSons</param>
+                            <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="420807987088767" type="System">
+                            <param id="0" name="Variable">tamanhoDialogoGAL</param>
+                            <param id="1" name="Value">6</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="852086562292661" type="System">
+                            <param id="0" name="Variable">carregarDialogoChave</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="634588760190452" type="System">
+                            <param id="0" name="Group name">&quot;operacoesQuadros&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="206477189447254" type="System">
+                            <param id="0" name="Group name">&quot;dialogoGaleria&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="266918504453502" type="System">
+                            <param id="0" name="Group name">&quot;verificaQuadros&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block disabled="1" sid="355050235596338">
                             <conditions>
-                                <condition id="-10" name="For" sid="440158534809480" type="System">
-                                    <param id="0" name="Name">i</param>
-                                    <param id="1" name="Start index">1</param>
-                                    <param id="2" name="End index">numeroQuadros</param>
-                                </condition>
-                            </conditions>
-                            <actions />
-                            <sub-events>
-                                <event-block sid="162300340467922">
-                                    <conditions>
-                                        <condition id="-8" name="Compare two values" sid="472123734341472" type="System">
-                                            <param id="0" name="First value">OrdemAtual.At(i-1)</param>
-                                            <param id="1" name="Comparison">1</param>
-                                            <param id="2" name="Second value">Resposta.At(i-1)</param>
-                                        </condition>
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="998376489220364" type="System">
-                                            <param id="0" name="Variable">submeteu</param>
-                                            <param id="1" name="Value">0</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                                <event-block sid="988752827665620">
-                                    <conditions>
-                                        <condition id="-22" name="Else" sid="282226992473126" type="System" />
-                                    </conditions>
-                                    <actions>
-                                        <action id="-9" name="Set value" sid="536249837135295" type="System">
-                                            <param id="0" name="Variable">submeteu</param>
-                                            <param id="1" name="Value">1</param>
-                                        </action>
-                                    </actions>
-                                </event-block>
-                            </sub-events>
-                        </event-block>
-                        <event-block sid="368399940441392">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="425164871518571" type="System">
-                                    <param id="0" name="Variable">submeteu</param>
-                                    <param id="1" name="Comparison">4</param>
-                                    <param id="2" name="Value">numeroQuadros</param>
+                                <condition id="-14" name="Pick by unique ID" sid="157159095708650" type="selecaoComida">
+                                    <param id="0" name="Unique ID">167</param>
                                 </condition>
                             </conditions>
                             <actions>
-                                <action id="-9" name="Destroy" sid="755685230984690" type="MuralQuadros" />
+                                <action id="-9" name="Destroy" sid="175270503838058" type="selecaoComida" />
                             </actions>
                         </event-block>
                     </sub-events>
