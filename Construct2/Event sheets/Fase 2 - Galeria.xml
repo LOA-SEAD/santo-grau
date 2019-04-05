@@ -3,6 +3,10 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Fase 2 - Galeria</name>
     <events>
+        <comment>Variável usada pra armazenar a ordem atual das cartas no momento da submissão</comment>
+        <variable constant="0" name="ordemAtual" sid="241312173649304" static="0" type="text"></variable>
+        <comment>Variável usada pra armazenar a ordem certa das cartas (que sempre será sequencial: 1, 2, 3... mas é preenchida dinamicamente dependente da quantidade de quadros que houver na customização)</comment>
+        <variable constant="0" name="ordemCorreta" sid="263239554207722" static="0" type="text"></variable>
         <comment>Variável usada pra percorrer o vetor de quadros</comment>
         <variable constant="0" name="controleQuadros" sid="399306741304352" static="0" type="number">1</variable>
         <comment>Utilizada para controlar a animação de desaparecer o zoom nos quadros</comment>
@@ -13,8 +17,6 @@
         <variable constant="0" name="numeroQuadros" sid="6183659102926416" static="0" type="number">5</variable>
         <comment>Utilizado para controlar os quadros</comment>
         <variable constant="0" name="quadro" sid="9484829510491368" static="0" type="number">1</variable>
-        <comment>Serve para verificar quando o jogador colocou todos os quadros na ordem correta</comment>
-        <variable constant="0" name="respostaCerta" sid="4963452372930093" static="0" type="number">0</variable>
         <comment>Serve para marcar o tamanho do diálogo que irá ocorrer naquele momento para saber quantas vezes será lido falas no arquivo .json</comment>
         <variable constant="0" name="tamanhoDialogoGAL" sid="3074215324388088" static="0" type="number">0</variable>
         <comment>Marca qual é a frase que está sendo mostrada para o jogador</comment>
@@ -71,10 +73,6 @@
                 <action id="-9" name="Set value" sid="951722881459781" type="System">
                     <param id="0" name="Variable">quadro</param>
                     <param id="1" name="Value">1</param>
-                </action>
-                <action id="-9" name="Set value" sid="334184878969285" type="System">
-                    <param id="0" name="Variable">respostaCerta</param>
-                    <param id="1" name="Value">0</param>
                 </action>
                 <action id="-9" name="Set value" sid="594571861236202" type="System">
                     <param id="0" name="Variable">quadrosRandomizados</param>
@@ -1809,6 +1807,14 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <event-block sid="495150425154690">
+                            <conditions />
+                            <actions>
+                                <action id="-18" name="Rotate clockwise" sid="177471983147402" type="personagens">
+                                    <param id="0" name="Degrees">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
                     </sub-events>
                 </event-group>
                 <comment>Controle do botão de fechar do mural</comment>
@@ -2266,11 +2272,6 @@
                 <event-block sid="8510538776884853">
                     <conditions>
                         <condition behavior="DragDrop" id="0" name="Is dragging" sid="6326581813458748" type="Quadros" />
-                        <condition id="-14" name="Compare variable" sid="8028017958561686" type="System">
-                            <param id="0" name="Variable">respostaCerta</param>
-                            <param id="1" name="Comparison">1</param>
-                            <param id="2" name="Value">1</param>
-                        </condition>
                     </conditions>
                     <actions>
                         <action id="-12" name="Set group active" sid="4108876777246292" type="System">
@@ -3015,10 +3016,6 @@
                             <param id="0" name="Variable">quadro</param>
                             <param id="1" name="Value">1</param>
                         </action>
-                        <action id="-9" name="Set value" sid="9292419625035629" type="System">
-                            <param id="0" name="Variable">respostaCerta</param>
-                            <param id="1" name="Value">0</param>
-                        </action>
                         <action id="-12" name="Set group active" sid="1866284735582084" type="System">
                             <param id="0" name="Group name">&quot;operacoesQuadros&quot;</param>
                             <param id="1" name="State">1</param>
@@ -3273,6 +3270,24 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <variable constant="0" name="i" sid="267485042489690" static="0" type="number">1</variable>
+                        <event-block sid="698207009522593">
+                            <conditions>
+                                <condition id="-12" name="Repeat" sid="372084245804338" type="System">
+                                    <param id="0" name="Count">numeroQuadros-1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="127198940974042" type="System">
+                                    <param id="0" name="Variable">ordemAtual</param>
+                                    <param id="1" name="Value">ordemAtual &amp; &quot;,&quot; &amp; i</param>
+                                </action>
+                                <action id="-10" name="Add to" sid="526093382502296" type="System">
+                                    <param id="0" name="Variable">i</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <comment>O restante dos blocos deste grupo servem para verificar se o jogador já colocou os quadros na ordem correta</comment>
                         <event-block sid="8097234656603702">
                             <conditions>
@@ -3309,12 +3324,8 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-9" name="Set value" sid="356552740218479" type="System">
-                            <param id="0" name="Variable">sendJS</param>
-                            <param id="1" name="Value">&quot;&apos;&quot; &amp; numeroArrastos &amp; &quot;&apos;,&quot; &amp; sendJS &amp; &quot;&apos;&quot;</param>
-                        </action>
-                        <action id="0" name="Execute" sid="865922440369417" type="StatsJS">
-                            <param id="0" name="Value">&quot;sendDataGallery(&quot; &amp; sendJS &amp; &quot;,true)&quot;</param>
+                        <action id="0" name="Execute" sid="399464234653454" type="StatsJS">
+                            <param id="0" name="Value">&quot;sendDataGallery(&quot;&amp; numeroArrastos &amp; &quot;,&quot; &amp; sendJS &amp; &quot;,&quot; &amp; ordemAtual &amp; &quot;,&quot; &amp; &quot;,false)&quot;</param>
                         </action>
                         <action id="-12" name="Set group active" sid="362489969330872" type="System">
                             <param id="0" name="Group name">&quot;verificaQuadros&quot;</param>
@@ -3393,12 +3404,8 @@
                         </condition>
                     </conditions>
                     <actions>
-                        <action id="-9" name="Set value" sid="209462097212247" type="System">
-                            <param id="0" name="Variable">sendJS</param>
-                            <param id="1" name="Value">&quot;&apos;&quot; &amp; numeroArrastos &amp; &quot;&apos;,&quot; &amp; sendJS &amp; &quot;&apos;&quot;</param>
-                        </action>
-                        <action id="0" name="Execute" sid="813684165104008" type="StatsJS">
-                            <param id="0" name="Value">&quot;sendDataGallery(&quot; &amp; sendJS &amp; &quot;,false)&quot;</param>
+                        <action id="0" name="Execute" sid="468057311307433" type="StatsJS">
+                            <param id="0" name="Value">&quot;sendDataGallery(&quot;&amp; numeroArrastos &amp; &quot;,&quot; &amp; sendJS &amp; &quot;,&quot; &amp; ordemAtual &amp; &quot;,&quot; &amp; &quot;,true)&quot;</param>
                         </action>
                         <action id="-15" name="Set visible" sid="789391360190462" type="Quadros">
                             <param id="0" name="Visibility">0</param>
@@ -3459,6 +3466,35 @@
                         <action id="-12" name="Set group active" sid="266918504453502" type="System">
                             <param id="0" name="Group name">&quot;verificaQuadros&quot;</param>
                             <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-10" name="Add to" sid="865526012536268" type="System">
+                            <param id="0" name="Variable">pontos</param>
+                            <param id="1" name="Value">100</param>
+                        </action>
+                        <action id="0" name="Set text" sid="330473632295685" type="pontoTexto">
+                            <param id="0" name="Text">&quot;+100&quot;</param>
+                        </action>
+                        <action id="4" name="Set font color" sid="662291315714525" type="pontoTexto">
+                            <param id="0" name="Color">rgb(41, 90, 165)</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="108723174686977" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao3b&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="683712280217231" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao3a&quot;</param>
+                            <param id="1" name="State">1</param>
+                        </action>
+                        <action id="-16" name="Wait" sid="463440990623652" type="System">
+                            <param id="0" name="Seconds">4</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="454116361801028" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao3a&quot;</param>
+                            <param id="1" name="State">0</param>
+                        </action>
+                        <action id="-12" name="Set group active" sid="919943944002961" type="System">
+                            <param id="0" name="Group name">&quot;Pontuacao3b&quot;</param>
+                            <param id="1" name="State">1</param>
                         </action>
                     </actions>
                     <sub-events>
