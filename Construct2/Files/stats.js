@@ -13,7 +13,7 @@ function sendDataTechnology(palavra,correta,resposta,nroPalavra,tentativas,vence
     info.gameLevelName = 'Tecnologia';
     info.gameType = 'shuffleWord';
     
-    console.log("sendDataTechnology")
+    console.log("sendDataTechnology");
     console.log("palavra: " + palavra);
 	console.log("correta: " + correta);
     console.log("resposta: " + resposta);
@@ -22,23 +22,27 @@ function sendDataTechnology(palavra,correta,resposta,nroPalavra,tentativas,vence
     console.log("venceu: " + venceu);
 }
 
-function sendDataGallery(arrastos,seqInicial,win){
+function sendDataGallery(arrastos,seqInicial,seqSubmetida,seqCorreta,win){
     var info = {};
     var path = "/exported-resource/saveStats";
 
     
     info.gameLevelId = 2;
     info.numberDrag = arrastos;
-    info.initialSequence = seqInicial;
+    info.word = seqInicial;
+    info.answer = seqSubmetida;
+    info.correctAnswer = seqCorreta;
     info.win = win;
     info.size = 1;
     info.challengeId = 0;
     info.gameLevelName = 'Galeria';
     info.gameType = 'dragPictures';
 
-    console.log("sendDataGallery")
+    console.log("sendDataGallery");
     console.log("arrastos: " + arrastos);
     console.log("seqInicial: " + seqInicial);
+    console.log("seqSubmetida: " + seqSubmetida);
+    console.log("seqCorreta: " + seqCorreta);
     console.log("win: " + win);
 }
 
@@ -58,7 +62,7 @@ function sendDataFinalLevel(pergunta,correta,nroPergunta,respostas,escolhida,ace
     info.gameLevelName = nomeFase;
     info.gameType = 'multipleChoice';
 
-    console.log("sendDataFinalLevel")
+    console.log("sendDataFinalLevel");
     console.log("pergunta: " + pergunta);
     console.log("correta: " + correta);
     console.log("nroPergunta: " + nroPergunta);
@@ -79,7 +83,7 @@ function sendPlayDataGallery(terminou,nroDanos){
     info.numberDamages = nroDanos;
     info.gameType = 'SantoGrauGallery';
 
-    console.log("sendPlayDataGallery")
+    console.log("sendPlayDataGallery");
     console.log("terminou: " + terminou);
     console.log("nroDanos: " + nroDanos);
 }
@@ -93,7 +97,7 @@ function sendPlayDataFinalLevel(nroDanos,nivel){
     info.level = nivel;
     info.gameType = 'SantoGrauFinalLevel';
 
-    console.log("sendPlayDataFinalLevel")
+    console.log("sendPlayDataFinalLevel");
     console.log("nroDanos: " + nroDanos);
     console.log("nivel: " + nivel);
 }
@@ -105,7 +109,7 @@ function sendRankingData(pontos){
     
     info.score = pontos;
 
-    console.log("sendRankingData")
+    console.log("sendRankingData");
     console.log("pontos: " + pontos);
 }
 
@@ -126,7 +130,7 @@ function sendPlaytimeData(tempo,tipo,idJogo,idNivel,idDesafio,nomeFase){
     info.gameType = 'ConclusionTime';
     info.gameLevelName = nomeFase;
 
-    console.log("sendPlaytimeData")
+    console.log("sendPlaytimeData");
     console.log("tempo: " + tempo);
     console.log("tipo: " + tipo);
     console.log("idJogo: " + idJogo);
