@@ -45,15 +45,15 @@ function sendDataGallery(arrastos,seqInicial,seqSubmetida,seqCorreta,win){
     $.getJSON("remar.json", function(json) {
         info.exportedResourceId = json.exportedResourceId;
         info.gameLevelId = 2;
-        info.numberDrag = arrastos;
-        info.word = seqInicial;
-        info.answer = seqSubmetida;
-        ingo.correctAnswer = seqCorreta;
-        info.win = win;
-        info.size = 1;
-        info.challengeId = 0;
-        info.gameLevelName = 'Galeria';
-        info.gameType = 'dragPictures';
+	    info.numberDrag = arrastos;
+	    info.word = seqInicial;
+	    info.answer = seqSubmetida;
+	    info.correctAnswer = seqCorreta;
+	    info.win = win;
+	    info.size = 1;
+	    info.challengeId = 0;
+	    info.gameLevelName = 'Galeria';
+	    info.gameType = 'dragPictures';
         $.ajax({
             type: "POST",
             url: path,
