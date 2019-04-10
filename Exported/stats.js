@@ -34,7 +34,7 @@ function sendDataTechnology(palavra,correta,resposta,nroPalavra,tentativas,vence
     console.log(venceu);
 }
 
-function sendDataGallery(arrastos,seqInicial){
+function sendDataGallery(arrastos,seqInicial,seqSubmetida,seqCorreta,win){
     var info = {};
     var path;
     if(window.location.hostname == "localhost" ){   // for localhost tests
@@ -45,13 +45,15 @@ function sendDataGallery(arrastos,seqInicial){
     $.getJSON("remar.json", function(json) {
         info.exportedResourceId = json.exportedResourceId;
         info.gameLevelId = 2;
-        info.numberDrag = arrastos;
-        info.initialSequence = seqInicial;
-        info.win = true;
-        info.size = 1;
-        info.challengeId = 0;
-        info.gameLevelName = 'Galeria';
-        info.gameType = 'dragPictures';
+	    info.numberDrag = arrastos;
+	    info.word = seqInicial;
+	    info.answer = seqSubmetida;
+	    info.correctAnswer = seqCorreta;
+	    info.win = win;
+	    info.size = 1;
+	    info.challengeId = 0;
+	    info.gameLevelName = 'Galeria';
+	    info.gameType = 'dragPictures';
         $.ajax({
             type: "POST",
             url: path,
@@ -62,6 +64,9 @@ function sendDataGallery(arrastos,seqInicial){
     });
     console.log(arrastos);
     console.log(seqInicial);
+    console.log(seqSubmetida);
+    console.log(seqCorreta);
+    console.log(win);
 }
 
 function sendDataFinalLevel(pergunta,correta,nroPergunta,respostas,escolhida,acertou,tamanho,fase,nomeFase){

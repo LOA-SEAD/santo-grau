@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1553192051,
+	"version": 1554929757,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -132,6 +132,7 @@
 		"images/solidoeinstein-sheet0.png",
 		"images/posicionadorquadros-sheet0.png",
 		"images/abrearmario-sheet0.png",
+		"images/botaosubmeter-sheet0.png",
 		"images/fundo2.png",
 		"images/porta-sheet0.png",
 		"images/telao-sheet0.png",
