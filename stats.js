@@ -16,7 +16,7 @@ function sendDataTechnology(palavra,correta,resposta,nroPalavra,tentativas,vence
         info.numberTries = tentativas;
         info.win = venceu;
         info.size = 3;
-        info.gameLevelName = 'Tecnologia';
+        info.levelName = 'Tecnologia';
         info.gameType = 'shuffleWord';
         $.ajax({
             type: "POST",
@@ -52,7 +52,7 @@ function sendDataGallery(arrastos,seqInicial,seqSubmetida,seqCorreta,win){
 	    info.win = win;
 	    info.size = 1;
 	    info.challengeId = 0;
-	    info.gameLevelName = 'Galeria';
+	    info.levelName = 'Galeria';
 	    info.gameType = 'dragPictures';
         $.ajax({
             type: "POST",
@@ -87,7 +87,7 @@ function sendDataFinalLevel(pergunta,correta,nroPergunta,respostas,escolhida,ace
         info.answer = escolhida;
         info.win = acertou;
         info.size = tamanho;
-        info.gameLevelName = nomeFase;
+        info.levelName = nomeFase;
         info.gameType = 'multipleChoice';
         $.ajax({
             type: "POST",
@@ -200,7 +200,7 @@ function sendPlaytimeData(tempo,tipo,idJogo,idNivel,idDesafio,nomeFase){
             info.challengeId = idDesafio;
         }
         info.gameType = 'ConclusionTime';
-        info.gameLevelName = nomeFase;
+        info.levelName = nomeFase;
         $.ajax({
             type: "POST",
             url: path,
