@@ -15,7 +15,7 @@ function sendDataTechnology(palavra,correta,resposta,nroPalavra,tentativas,vence
         info.challengeId = nroPalavra;
         info.numberTries = tentativas;
         info.win = venceu;
-        info.size = 3;
+        info.levelSize = 3;
         info.levelName = 'Tecnologia';
         info.gameType = 'shuffleWord';
         $.ajax({
@@ -50,7 +50,7 @@ function sendDataGallery(arrastos,seqInicial,seqSubmetida,seqCorreta,win){
 	    info.answer = seqSubmetida;
 	    info.correctAnswer = seqCorreta;
 	    info.win = win;
-	    info.size = 1;
+	    info.levelSize = 1;
 	    info.challengeId = 0;
 	    info.levelName = 'Galeria';
 	    info.gameType = 'dragPictures';
@@ -86,7 +86,7 @@ function sendDataFinalLevel(pergunta,correta,nroPergunta,respostas,escolhida,ace
         info.choices = respostas;
         info.answer = escolhida;
         info.win = acertou;
-        info.size = tamanho;
+        info.levelSize = tamanho;
         info.levelName = nomeFase;
         info.gameType = 'multipleChoice';
         $.ajax({
