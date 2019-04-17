@@ -192,7 +192,7 @@ function sendPlaytimeData(tempo,tipo,idJogo,idNivel,idDesafio,nomeFase){
         info.exportedResourceId = json.exportedResourceId;
         info.time = tempo;
         info.timeType = tipo;
-        info.gameId = idJogo;
+        info.gameName = idJogo;
         if (idNivel != null){
             info.gameLevel = idNivel;
         }
