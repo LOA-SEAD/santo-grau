@@ -120,6 +120,43 @@
 		}, false);
 	}
 	
+	function createWorker(url, callback)
+	{
+		// Create normally as a same-origin worker
+		try {
+			var worker = new Worker(url);
+			callback(worker);
+		}
+		catch (err)
+		{
+			// WKWebView throws because it treats this as cross-origin. We also can't fetch the script
+			// as a blob either for the same reason. So fall back to the Cordova file API.
+			var errorFunc = function (err) {
+				console.error("Error creating worker: ", err);
+			};
+			
+			var path = window["cordova"]["file"]["applicationDirectory"] + "www/" + url;
+			
+			window["resolveLocalFileSystemURL"](path, function (entry)
+			{
+				entry["file"](function (file)
+				{
+					var reader = new FileReader();
+					reader.onerror = errorFunc;
+					reader.onload = function (e)
+					{
+						var arrayBuffer = e.target.result;
+						var blob = new Blob([arrayBuffer], { type: "application/javascript" });
+						var worker = new Worker(URL.createObjectURL(blob));
+						callback(worker);
+					};
+					reader.readAsArrayBuffer(file);
+					
+				}, errorFunc);
+			}, errorFunc);
+		}
+	}
+		
 	function pathfinder()
 	{
 		this.hcells = 0;
@@ -142,41 +179,65 @@
 		this.workerQueue = [];		// jobs awaiting completion from worker in order of requests made
 		this.workerRecycle = [];
 		
+		this.sendMessageQueue = [];	// messages queued while worker still creating
+		
 		var self = this;
 		var i, len;
 		
 		if (workersSupported && !isInWebWorker)
 		{
 			// Create worker and receive results of pathfind jobs from it
-			this.worker = new Worker("pathfind.js");
-			
-			this.worker.addEventListener("message", function (e) {
-			
-				if (!e || !e.data)
-					return;
+			createWorker("pathfind.js", function (worker)
+			{
+				self.worker = worker;
 				
-				if (e.data.cmd === "result")
-				{
-					if (e.data.pathList)
+				self.worker.addEventListener("message", function (e) {
+				
+					if (!e || !e.data)
+						return;
+					
+					if (e.data.cmd === "result")
 					{
-						for (i = 0, len = self.pathList.length; i < len; i++)
-							freeResultNode(self.pathList[i]);
-						
-						self.pathList = e.data.pathList;
-						self.workerQueue[0].success();
+						if (e.data.pathList)
+						{
+							for (i = 0, len = self.pathList.length; i < len; i++)
+								freeResultNode(self.pathList[i]);
+							
+							self.pathList = e.data.pathList;
+							self.workerQueue[0].success();
+						}
+						else
+							self.workerQueue[0].fail();
+							
+						self.workerRecycle.push(self.workerQueue.shift());
 					}
-					else
-						self.workerQueue[0].fail();
-						
-					self.workerRecycle.push(self.workerQueue.shift());
-				}
-			}, false);
-			
-			this.worker.addEventListener("error", function (e) {
-				console.error(e);
-			}, false);
-			
-			this.worker.postMessage(null);
+				}, false);
+				
+				self.worker.addEventListener("error", function (e) {
+					console.error(e);
+				}, false);
+				
+				self.worker.postMessage(null);
+				
+				// Send any messages that were queued while the worker was creating
+				for (var i = 0, len = self.sendMessageQueue.length; i < len; ++i)
+					self.worker.postMessage(self.sendMessageQueue[i]);
+				
+				self.sendMessageQueue.length = 0;
+			});
+		}
+	};
+	
+	pathfinder.prototype.postToWorker = function (data)
+	{
+		if (this.worker)
+		{
+			this.worker.postMessage(data);
+		}
+		else
+		{
+			// If worker still creating, queue messages to be sent when it's ready
+			this.sendMessageQueue.push(data);
 		}
 	};
 	
@@ -189,7 +250,7 @@
 		
 		if (workersSupported && !isInWebWorker)
 		{
-			this.worker.postMessage({
+			this.postToWorker({
 				cmd: "init",
 				hcells: hcells_,
 				vcells: vcells_,
@@ -205,7 +266,7 @@
 		
 		if (workersSupported && !isInWebWorker)
 		{
-			this.worker.postMessage({
+			this.postToWorker({
 				cmd: "region",
 				offx: cx1_,
 				offy: cy1_,
@@ -249,7 +310,7 @@
 		
 		if (workersSupported && !isInWebWorker)
 		{
-			this.worker.postMessage({
+			this.postToWorker({
 				cmd: "setdiag",
 				diagonals: d,
 			});
@@ -350,7 +411,7 @@
 			// dispatch the heavy lifting to the worker thread
 			this.workerQueue.push(h);
 
-			this.worker.postMessage({
+			this.postToWorker({
 				cmd: "find",
 				startX: startX,
 				startY: startY,
