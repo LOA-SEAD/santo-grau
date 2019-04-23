@@ -296,6 +296,12 @@
                 <action id="5" name="Set frame" sid="797991382729204" type="AnimacaoDiploma">
                     <param id="0" name="Frame number">0</param>
                 </action>
+                <action id="-16" name="Set opacity" sid="745658127883599" type="dicaFade">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="172696534083205" type="dicaTexto">
+                    <param id="0" name="Opacity">0</param>
+                </action>
                 <action id="-16" name="Set opacity" sid="287024012264974" type="feedback">
                     <param id="0" name="Opacity">0</param>
                 </action>
@@ -987,8 +993,28 @@
                             <param id="2" name="Value">1</param>
                         </condition>
                     </conditions>
-                    <actions />
+                    <actions>
+                        <action id="0" name="Set text" sid="841385221459020" type="dicaTexto">
+                            <param id="0" name="Text">&quot;Clique sobre o conteúdo interativo do telão para controlá-lo.&quot;</param>
+                        </action>
+                    </actions>
                     <sub-events>
+                        <event-block sid="514031589686490">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="444907177552168" type="dicaFade">
+                                    <param id="0" name="Comparison">3</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="968818105202266" type="dicaFade">
+                                    <param id="0" name="Opacity">dicaFade.Opacity+200*dt</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="859182208135989" type="dicaTexto">
+                                    <param id="0" name="Opacity">dicaTexto.Opacity+200*dt</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <event-block sid="443326666759402">
                             <conditions>
                                 <condition id="-14" name="Pick by unique ID" sid="743182216925533" type="dicaPopUp">
@@ -1062,6 +1088,19 @@
                     </conditions>
                     <actions />
                     <sub-events>
+                        <event-block sid="394663244278104">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="520903456472699" type="dicaTexto">
+                                    <param id="0" name="Comparison">3</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="143029624057978" type="dicaTexto">
+                                    <param id="0" name="Opacity">dicaTexto.Opacity-200*dt</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <event-block sid="678332093570791">
                             <conditions>
                                 <condition id="-14" name="Pick by unique ID" sid="390972229048696" type="dicaPopUp">
@@ -1133,8 +1172,25 @@
                             <param id="2" name="Value">3</param>
                         </condition>
                     </conditions>
-                    <actions />
+                    <actions>
+                        <action id="0" name="Set text" sid="990923143405388" type="dicaTexto">
+                            <param id="0" name="Text">&quot;Clique fora do conteúdo interativo do telão para voltar a jogar.&quot;</param>
+                        </action>
+                    </actions>
                     <sub-events>
+                        <event-block sid="873569707100478">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="883306973621119" type="dicaTexto">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="976650220869190" type="dicaTexto">
+                                    <param id="0" name="Opacity">dicaTexto.Opacity+200*dt</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <event-block sid="474467309161501">
                             <conditions>
                                 <condition id="-14" name="Pick by unique ID" sid="845548414963641" type="dicaPopUp">
@@ -1175,6 +1231,80 @@
                                     </conditions>
                                     <actions>
                                         <action id="-2" name="Set Y" sid="104283775221108" type="dicaPopUp">
+                                            <param id="0" name="Y">dicaPopUp.Y - 200 * dt</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="676902512879744">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="146733074476944" type="System">
+                            <param id="0" name="Variable">controleDica</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">4</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <event-block sid="803621713119666">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="521752430173130" type="dicaFade">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="778542313179728" type="dicaFade">
+                                    <param id="0" name="Opacity">dicaFade.Opacity-200*dt</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="137603838491868" type="dicaTexto">
+                                    <param id="0" name="Opacity">dicaTexto.Opacity-200*dt</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="546878660414763">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="856188446867493" type="dicaPopUp">
+                                    <param id="0" name="Unique ID">236</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="153182465861635">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="931394248071689" type="dicaPopUp">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">400</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="807007853941845" type="dicaPopUp">
+                                            <param id="0" name="Y">dicaPopUp.Y - 200 * dt</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="827165039343661">
+                            <conditions>
+                                <condition id="-14" name="Pick by unique ID" sid="287626886892219" type="dicaPopUp">
+                                    <param id="0" name="Unique ID">435</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="938409960665706">
+                                    <conditions>
+                                        <condition id="-2" name="Compare Y" sid="602505865423748" type="dicaPopUp">
+                                            <param id="0" name="Comparison">4</param>
+                                            <param id="1" name="Y co-ordinate">528</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-2" name="Set Y" sid="258142818112719" type="dicaPopUp">
                                             <param id="0" name="Y">dicaPopUp.Y - 200 * dt</param>
                                         </action>
                                     </actions>
@@ -1539,9 +1669,6 @@
                         </action>
                         <action id="-16" name="Set opacity" sid="433202641889529" type="dicaPopUp">
                             <param id="0" name="Opacity">0.8*(dicaPopUp.Y-528)</param>
-                        </action>
-                        <action id="-16" name="Set opacity" sid="203202138722263" type="dicaTexto">
-                            <param id="0" name="Opacity">0.78125*(dicaTexto.Y-528)</param>
                         </action>
                         <action id="3" name="Set volume" sid="434257862864570" type="Audio">
                             <param id="0" name="Tag">&quot;musica&quot;</param>
@@ -1935,6 +2062,7 @@
                                     <param id="3" name="Volume">volSons</param>
                                     <param id="1" name="Tag (optional)">&quot;sons&quot;</param>
                                 </action>
+                                <action id="-9" name="Destroy" sid="535551906260988" type="botaoE" />
                             </actions>
                         </event-block>
                     </sub-events>
