@@ -176,6 +176,9 @@
                 <action id="-16" name="Set opacity" sid="856516834530921" type="popupFechar">
                     <param id="0" name="Opacity">0</param>
                 </action>
+                <action id="-16" name="Set opacity" sid="299319547748370" type="dicaFade">
+                    <param id="0" name="Opacity">0</param>
+                </action>
                 <action id="-9" name="Set value" sid="200290013643812" type="System">
                     <param id="0" name="Variable">layoutAtual</param>
                     <param id="1" name="Value">layoutAtual+1 - ocorreuGameOver</param>
@@ -267,10 +270,6 @@
                 <action id="11" name="Set collisions enabled" sid="9567306319963657" type="Fantasmas">
                     <param id="0" name="Collisions">0</param>
                 </action>
-                <action behavior="Pin" id="0" name="Pin to object" sid="1213631626711965" type="dicaTexto">
-                    <param id="0" name="Pin to">dicaPopUp</param>
-                    <param id="1" name="Mode">0</param>
-                </action>
                 <action id="0" name="Set text" sid="9426213284247127" type="dicaTexto">
                     <param id="0" name="Text">&quot;Pressione E para conversar com Einstein&quot;</param>
                 </action>
@@ -297,6 +296,9 @@
                     <param id="1" name="CSS URL">&quot;stylesheet.css&quot;</param>
                 </action>
                 <action id="-16" name="Set opacity" sid="202147807020244" type="feedback">
+                    <param id="0" name="Opacity">0</param>
+                </action>
+                <action id="-16" name="Set opacity" sid="937695846476724" type="dicaTexto">
                     <param id="0" name="Opacity">0</param>
                 </action>
                 <action id="-16" name="Set opacity" sid="474867091904209" type="popup">
@@ -840,10 +842,6 @@
                     <param id="0" name="Width">(1-((720-playerAnim.Y)*0.000555))*82</param>
                     <param id="1" name="Height">(1-((720-playerAnim.Y)*0.000555))*144</param>
                 </action>
-                <action id="-7" name="Set size" sid="3406820763346543" type="EinsteinCenario">
-                    <param id="0" name="Width">(1-((720-EinsteinCenario.Y)*0.000555))*145</param>
-                    <param id="1" name="Height">(1-((720-EinsteinCenario.Y)*0.000555))*180</param>
-                </action>
                 <action id="0" name="Set text" sid="9945197871284769" type="pontuacaoTexto">
                     <param id="0" name="Text">pontos</param>
                 </action>
@@ -1159,6 +1157,22 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <event-block sid="983220315670097">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="568046039561364" type="dicaFade">
+                                    <param id="0" name="Comparison">3</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="632067902433122" type="dicaFade">
+                                    <param id="0" name="Opacity">dicaFade.Opacity+200*dt</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="318659720699683" type="dicaTexto">
+                                    <param id="0" name="Opacity">dicaTexto.Opacity+200*dt</param>
+                                </action>
+                            </actions>
+                        </event-block>
                     </sub-events>
                 </event-block>
                 <comment>Desce dica para conversar com Einstein</comment>
@@ -1183,6 +1197,22 @@
                             <actions>
                                 <action id="-2" name="Set Y" sid="1110080840340901" type="dicaPopUp">
                                     <param id="0" name="Y">dicaPopUp.Y + 200 * dt</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="338587111043845">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="699152032665917" type="dicaFade">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="560607394116821" type="dicaFade">
+                                    <param id="0" name="Opacity">dicaFade.Opacity-200*dt</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="478971825614299" type="dicaTexto">
+                                    <param id="0" name="Opacity">dicaTexto.Opacity-200*dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1230,6 +1260,7 @@
                                     <param id="1" name="State">1</param>
                                 </action>
                                 <action id="-9" name="Destroy" sid="5328791875943443" type="SelecaoEinstein" />
+                                <action id="-9" name="Destroy" sid="277644422302359" type="botaoE" />
                             </actions>
                             <sub-events>
                                 <event-block sid="975118245491755">
@@ -1293,6 +1324,22 @@
                                 </action>
                             </actions>
                         </event-block>
+                        <event-block sid="846449901549502">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="727208530459794" type="dicaFade">
+                                    <param id="0" name="Comparison">3</param>
+                                    <param id="1" name="Opacity">100</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="421037863544445" type="dicaFade">
+                                    <param id="0" name="Opacity">dicaFade.Opacity+200*dt</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="125948481218512" type="dicaTexto">
+                                    <param id="0" name="Opacity">dicaTexto.Opacity+200*dt</param>
+                                </action>
+                            </actions>
+                        </event-block>
                         <comment>Texto improvisado para a versão mobile</comment>
                         <event-block sid="674192799485721">
                             <conditions>
@@ -1328,6 +1375,22 @@
                             <actions>
                                 <action id="-2" name="Set Y" sid="8221384092365327" type="dicaPopUp">
                                     <param id="0" name="Y">dicaPopUp.Y + 200 * dt</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="129039515413012">
+                            <conditions>
+                                <condition id="-10" name="Compare opacity" sid="676435483629262" type="dicaFade">
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Opacity">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-16" name="Set opacity" sid="234242048755526" type="dicaFade">
+                                    <param id="0" name="Opacity">dicaFade.Opacity-200*dt</param>
+                                </action>
+                                <action id="-16" name="Set opacity" sid="534493316698045" type="dicaTexto">
+                                    <param id="0" name="Opacity">dicaTexto.Opacity-200*dt</param>
                                 </action>
                             </actions>
                         </event-block>
@@ -1919,6 +1982,7 @@
                                     <param id="1" name="State">1</param>
                                 </action>
                                 <action id="-9" name="Destroy" sid="1169394142089471" type="dicaPopUp" />
+                                <action id="-9" name="Destroy" sid="768115281572033" type="dicaFade" />
                                 <action id="-9" name="Destroy" sid="5613323581113454" type="dicaTexto" />
                             </actions>
                         </event-block>
