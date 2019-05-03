@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1554929757,
+	"version": 1556914453,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -95,7 +95,6 @@
 		"images/perguntas-sheet0.png",
 		"images/placateste.png",
 		"images/fimfase-sheet0.png",
-		"images/botaoe-sheet0.png",
 		"images/mural-sheet0.png",
 		"images/muralquadros.png",
 		"images/quadros.png",
@@ -245,6 +244,9 @@
 		"images/fundo6.png",
 		"images/slidermusica-sheet0.png",
 		"images/sliderbasemusica.png",
+		"images/botaoe-sheet0.png",
+		"images/botaoe-sheet1.png",
+		"images/dicafade-sheet0.png",
 		"media/dano1.ogg",
 		"media/dano2.ogg",
 		"media/dano3.ogg",

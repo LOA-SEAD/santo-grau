@@ -15,7 +15,7 @@ function sendDataTechnology(palavra,correta,resposta,nroPalavra,tentativas,vence
         info.challengeId = nroPalavra;
         info.numberTries = tentativas;
         info.win = venceu;
-        info.levelSize = 3;
+        info.size = 3;
         info.levelName = 'Tecnologia';
         info.gameType = 'shuffleWord';
         $.ajax({
@@ -50,7 +50,7 @@ function sendDataGallery(arrastos,seqInicial,seqSubmetida,seqCorreta,win){
 	    info.answer = seqSubmetida;
 	    info.correctAnswer = seqCorreta;
 	    info.win = win;
-	    info.levelSize = 1;
+	    info.size = 1;
 	    info.challengeId = 0;
 	    info.levelName = 'Galeria';
 	    info.gameType = 'dragPictures';
@@ -86,7 +86,7 @@ function sendDataFinalLevel(pergunta,correta,nroPergunta,respostas,escolhida,ace
         info.choices = respostas;
         info.answer = escolhida;
         info.win = acertou;
-        info.levelSize = tamanho;
+        info.size = tamanho;
         info.levelName = nomeFase;
         info.gameType = 'multipleChoice';
         $.ajax({
@@ -180,7 +180,7 @@ function sendRankingData(pontos){
     console.log(pontos);
 }
 
-function sendPlaytimeData(tempo,tipo,idJogo,idNivel,idDesafio,nomeFase){
+function sendPlaytimeData(tempo,tipo,idJogo,idNivel,nomeFase,idDesafio){
     var info = {};
     var path;
     if(window.location.hostname == "localhost" ){   // for localhost tests
@@ -192,15 +192,15 @@ function sendPlaytimeData(tempo,tipo,idJogo,idNivel,idDesafio,nomeFase){
         info.exportedResourceId = json.exportedResourceId;
         info.time = tempo;
         info.timeType = tipo;
-        info.gameName = idJogo;
-        if (idNivel != null){
+        info.gameId = idJogo;
+        if (idNivel !== null){
             info.gameLevel = idNivel;
+            info.levelName = nomeFase;
         }
-        if (idDesafio != null){
+        if (idDesafio !== null){
             info.challengeId = idDesafio;
         }
-        info.gameType = 'ConclusionTime';
-        info.levelName = nomeFase;
+        //info.gameType = 'ConclusionTime';
         $.ajax({
             type: "POST",
             url: path,
@@ -214,9 +214,9 @@ function sendPlaytimeData(tempo,tipo,idJogo,idNivel,idDesafio,nomeFase){
     console.log(idJogo);
     if (idNivel != null){
         console.log(idNivel);
+        console.log(nomeFase);
     }
     if (idDesafio != null){
         console.log(idDesafio);
-    }
-    console.log(nomeFase);
+    } 
 }
