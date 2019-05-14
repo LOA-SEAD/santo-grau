@@ -53,7 +53,7 @@ function sendDataGallery(arrastos,seqInicial,seqSubmetida,seqCorreta,win){
 	    info.correctAnswer = seqCorreta;
 	    info.win = win;
 	    info.size = 1;
-	    info.challengeId = 0;
+	    info.challengeId = 1;
 	    info.levelName = 'Galeria';
 	    info.gameType = 'dragPictures';
         $.ajax({
