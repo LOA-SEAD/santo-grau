@@ -69,7 +69,7 @@ function sendDataGallery(arrastos,seqInicial,seqSubmetida,seqCorreta,win){
         })
     });
 
-    console.log("sendDataTechnology");
+    console.log("sendDataGallery");
     console.log("Número de arrastos: " + arrastos);
     console.log("Ordem mostrada: " + seqInicial);
     console.log("Ordem correta: " + seqCorreta);
