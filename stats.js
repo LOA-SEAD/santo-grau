@@ -29,13 +29,15 @@ function sendDataTechnology(palavra,correta,resposta,nroPalavra,tentativas,vence
         })
     });
 
-    console.log("Enviando a " + path)
-    console.log(palavra);
-    console.log(correta);
-    console.log(resposta);
-    console.log(nroPalavra);
-    console.log(tentativas);
-    console.log(venceu);
+    console.log("sendDataTechnology");
+    console.log("Palavra mostrada: " + palavra);
+    console.log("Palavra correta: " + correta);
+    console.log("Resposta digitada: " + resposta);
+    console.log("Palavra de número: " + nroPalavra);
+    console.log("Tentativas: " + tentativas);
+    console.log("Acertou? " + venceu);
+    console.log("Fase da Tecnologia");
+
 }
 
 function sendDataGallery(arrastos,seqInicial,seqSubmetida,seqCorreta,win){
@@ -49,15 +51,15 @@ function sendDataGallery(arrastos,seqInicial,seqSubmetida,seqCorreta,win){
     $.getJSON("remar.json", function(json) {
         info.exportedResourceId = json.exportedResourceId;
         info.levelId = 2;
-    info.numberMoves = arrastos;
-    info.initialSequence = seqInicial;
-    info.answer = seqSubmetida;
-    info.correctAnswer = seqCorreta;
-    info.win = win;
-    info.levelSize = 1;
-    info.challengeId = 1;
-    info.levelName = 'Galeria';
-    info.challengeType = 'dragPictures';
+        info.numberMoves = arrastos;
+        info.initialSequence = seqInicial;
+        info.answer = seqSubmetida;
+        info.correctAnswer = seqCorreta;
+        info.win = win;
+        info.levelSize = 1;
+        info.challengeId = 1;
+        info.levelName = 'Galeria';
+        info.challengeType = 'dragPictures';
         $.ajax({
             type: "POST",
             url: path,
@@ -67,12 +69,14 @@ function sendDataGallery(arrastos,seqInicial,seqSubmetida,seqCorreta,win){
         })
     });
 
-    console.log("Enviando a " + path)
-    console.log(arrastos);
-    console.log(seqInicial);
-    console.log(seqSubmetida);
-    console.log(seqCorreta);
-    console.log(win);
+    console.log("sendDataTechnology");
+    console.log("Número de arrastos: " + arrastos);
+    console.log("Ordem mostrada: " + seqInicial);
+    console.log("Ordem correta: " + seqCorreta);
+    console.log("Resposta submetida: " + seqSubmetida);
+    console.log("Acertou? " + win);
+    console.log("Fase da Galeria");
+
 }
 
 function sendDataFinalLevel(pergunta,correta,nroPergunta,respostas,escolhida,acertou,tamanho,fase,nomeFase){
@@ -104,16 +108,15 @@ function sendDataFinalLevel(pergunta,correta,nroPergunta,respostas,escolhida,ace
         })
     });
 
-    console.log("Enviando a " + path)
-    console.log(pergunta);
-    console.log(correta);
-    console.log(nroPergunta);
-    console.log(respostas);
-    console.log(escolhida);
-    console.log(acertou);
-    console.log(tamanho);
-    console.log(fase);
-    console.log(nomeFase);
+    console.log("sendDataFinalLevel");
+    console.log("Pergunta " + nroPergunta + ": " + pergunta);
+    console.log("Resposta correta: " + correta);
+    console.log("Alternativas: " + respostas);
+    console.log("Resposta submetida: " + escolhida);
+    console.log("Acertou? " + acertou);
+    console.log("Tamanho: " + tamanho);
+    console.log("Fase " + fase + " - " + nomeFase);
+
 }
 
 function sendPlayDataGallery(terminou,nroDanos){
@@ -137,9 +140,12 @@ function sendPlayDataGallery(terminou,nroDanos){
             }
         })
     });
-    console.log("Enviando a " + path)
-    console.log(terminou);
-    console.log(nroDanos);
+
+    console.log("sendPlayDataGallery");
+    console.log("Terminou? " + terminou);
+    console.log("Quantidade de dano: " + nroDanos);
+    console.log("Fase da Galeria");
+
 }
 
 function sendPlayDataFinalLevel(nroDanos,nivel){
@@ -163,9 +169,11 @@ function sendPlayDataFinalLevel(nroDanos,nivel){
             }
         })
     });
-    console.log("Enviando a " + path)
-    console.log(nroDanos);
-    console.log(nivel);
+
+    console.log("sendPlayDataFinalLevel");
+    console.log("Quantidade de dano: " + nroDanos);
+    console.log("Fase Final de número: " + nivel);
+
 }
 
 function sendRankingData(pontos){
@@ -187,11 +195,13 @@ function sendRankingData(pontos){
             }
         })
     });
-    console.log("Enviando a " + path)
-    console.log(pontos);
+
+    console.log("sendRankingData");
+    console.log("Pontuação: " + pontos);
+
 }
 
-function sendPlaytimeData(tempo,tipo,idJogo,idNivel,idDesafio,nomeFase){
+function sendPlaytimeData(tempo,tipo,idJogo,idNivel,nomeFase,idDesafio){
     var info = {};
     var path;
     if(window.location.hostname === "localhost" ) { // for localhost tests
@@ -219,15 +229,15 @@ function sendPlaytimeData(tempo,tipo,idJogo,idNivel,idDesafio,nomeFase){
             }
         })
     });
-    console.log("Enviando a " + path)
-    console.log(tempo);
-    console.log(tipo);
-    console.log(idJogo);
+
+    console.log("sendPlaytimeData");
+    console.log("Tempo: " + tempo + "s");
+    console.log("Tipo: " + tipo);
+    console.log("Nome do jogo: " + idJogo);
     if (idNivel != null){
-        console.log(idNivel);
+        console.log("Fase " + idNivel + " - " + nomeFase);
     }
     if (idDesafio != null){
-        console.log(idDesafio);
+        console.log("Desafio: " + idDesafio);
     }
-    console.log(nomeFase);
 }
