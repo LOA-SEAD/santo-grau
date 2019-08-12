@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1558538591,
+	"version": 1565640768,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -29,8 +29,11 @@
 		"images/paredepersonagem-sheet0.png",
 		"images/efeitogelo-sheet0.png",
 		"images/cubo1-sheet0.png",
+		"images/cubo1-sheet1.png",
 		"images/cubo2-sheet0.png",
+		"images/cubo2-sheet1.png",
 		"images/cubo3-sheet0.png",
+		"images/cubo3-sheet1.png",
 		"images/selalternativa1-sheet0.png",
 		"images/selalternativa2-sheet0.png",
 		"images/backgroundffbn.png",
