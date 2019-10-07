@@ -8714,8 +8714,16 @@
                                 <action id="6" name="Stop" sid="926532419253394" type="Audio">
                                     <param id="0" name="Tag">&quot;menu&quot;</param>
                                 </action>
-                                <action id="6" name="Speak text" sid="632091727480759" type="UserMedia">
-                                    <param id="0" name="Text">&quot;Neste livro, há 3 pistas para descobrir a palavra mágica... Navegue pelas pistas com as teclas direcionais, aperte Q para ouvir ou desbloquear as pistas e aperte Ê quando estiver pronto para responder.&quot;</param>
+                                <action id="6" name="Speak text" sid="490761937746195" type="UserMedia">
+                                    <param id="0" name="Text">&quot;Neste livro, há 3 pistas para descobrir a palavra mágica... Navegue pelas pistas com as teclas direcionais, aperte W para ouvir ou desbloquear as pistas e aperte Ê quando estiver pronto para responder.&quot;</param>
+                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                    <param id="3" name="Volume">10</param>
+                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                </action>
+                                <action id="6" name="Speak text" sid="398001751172256" type="UserMedia">
+                                    <param id="0" name="Text">&quot;Não esqueça de acentuar sua resposta corretamente. Para ouvir novamente, pressione Q&quot;</param>
                                     <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
                                     <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
                                     <param id="3" name="Volume">10</param>
@@ -8769,7 +8777,7 @@
                                                             <actions>
                                                                 <action id="7" name="Stop speaking" sid="313676420866625" type="UserMedia" />
                                                                 <action id="6" name="Speak text" sid="985355878748684" type="UserMedia">
-                                                                    <param id="0" name="Text">&quot;Agora digite sua resposta e aperte Enter.&quot;</param>
+                                                                    <param id="0" name="Text">&quot;Agora digite sua resposta e aperte Enter. Não esqueça de acentuar corretamente.&quot;</param>
                                                                     <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
                                                                     <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
                                                                     <param id="3" name="Volume">10</param>
@@ -8903,7 +8911,7 @@
                                                             <actions>
                                                                 <action id="7" name="Stop speaking" sid="720011283228032" type="UserMedia" />
                                                                 <action id="6" name="Speak text" sid="901299083979144" type="UserMedia">
-                                                                    <param id="0" name="Text">&quot;Agora digite sua resposta e aperte Enter.&quot;</param>
+                                                                    <param id="0" name="Text">&quot;Agora digite sua resposta e aperte Enter. Não esqueça de acentuar corretamente.&quot;</param>
                                                                     <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
                                                                     <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
                                                                     <param id="3" name="Volume">10</param>
@@ -9262,10 +9270,57 @@
                                                 </event-block>
                                             </sub-events>
                                         </event-block>
+                                        <event-block sid="550041393491763">
+                                            <conditions>
+                                                <condition id="0" name="On key pressed" sid="191684304113919" type="Keyboard">
+                                                    <param id="0" name="Key">81</param>
+                                                </condition>
+                                                <condition id="-8" name="Compare two values" sid="560077347335033" type="System">
+                                                    <param id="0" name="First value">pause</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Second value">0</param>
+                                                </condition>
+                                                <condition id="-14" name="Compare variable" sid="874164780431873" type="System">
+                                                    <param id="0" name="Variable">acessDicasControle</param>
+                                                    <param id="1" name="Comparison">0</param>
+                                                    <param id="2" name="Value">0</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-12" name="Set group active" sid="619963201403671" type="System">
+                                                    <param id="0" name="Group name">&quot;InstrucoesProfessora3&quot;</param>
+                                                    <param id="1" name="State">0</param>
+                                                </action>
+                                                <action id="2" name="Set muted" sid="120420245706750" type="Audio">
+                                                    <param id="0" name="Tag">&quot;professora&quot;</param>
+                                                    <param id="1" name="State">0</param>
+                                                </action>
+                                                <action id="7" name="Stop speaking" sid="981700480013256" type="UserMedia" />
+                                                <action id="6" name="Stop" sid="797493015864767" type="Audio">
+                                                    <param id="0" name="Tag">&quot;menu&quot;</param>
+                                                </action>
+                                                <action id="6" name="Speak text" sid="853877145663277" type="UserMedia">
+                                                    <param id="0" name="Text">&quot;Neste livro, há 3 pistas para descobrir a palavra mágica... Navegue pelas pistas com as teclas direcionais, aperte W para ouvir ou desbloquear as pistas e aperte Ê quando estiver pronto para responder.&quot;</param>
+                                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                                    <param id="3" name="Volume">10</param>
+                                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                                </action>
+                                                <action id="6" name="Speak text" sid="116584379906269" type="UserMedia">
+                                                    <param id="0" name="Text">&quot;Não esqueça de acentuar sua resposta corretamente. Para ouvir novamente, pressione Q&quot;</param>
+                                                    <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
+                                                    <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
+                                                    <param id="3" name="Volume">10</param>
+                                                    <param id="4" name="Rate">float(AcessibilidadeJSON.GetData(&quot;velocidade&quot;, 0))</param>
+                                                    <param id="5" name="Pitch">float(AcessibilidadeJSON.GetData(&quot;entonacao&quot;, 0))</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
                                         <event-block sid="704922146801845">
                                             <conditions>
                                                 <condition id="0" name="On key pressed" sid="397537231642014" type="Keyboard">
-                                                    <param id="0" name="Key">81</param>
+                                                    <param id="0" name="Key">87</param>
                                                 </condition>
                                                 <condition id="-8" name="Compare two values" sid="733433539929541" type="System">
                                                     <param id="0" name="First value">pause</param>
@@ -9560,7 +9615,7 @@
                                                 </action>
                                                 <action id="6" name="Set focused" sid="396215401813628" type="RespostaBIB" />
                                                 <action id="6" name="Speak text" sid="597513256341329" type="UserMedia">
-                                                    <param id="0" name="Text">&quot;Agora digite sua resposta e aperte Enter.&quot;</param>
+                                                    <param id="0" name="Text">&quot;Agora digite sua resposta e aperte Enter. Não esqueça de acentuar corretamente.&quot;</param>
                                                     <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
                                                     <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
                                                     <param id="3" name="Volume">10</param>
@@ -9768,7 +9823,7 @@
                                                     <actions>
                                                         <action id="7" name="Stop speaking" sid="452667444214322" type="UserMedia" />
                                                         <action id="6" name="Speak text" sid="314022633376249" type="UserMedia">
-                                                            <param id="0" name="Text">&quot;Agora digite sua resposta e aperte Enter.&quot;</param>
+                                                            <param id="0" name="Text">&quot;Agora digite sua resposta e aperte Enter. Não esqueça de acentuar corretamente.&quot;</param>
                                                             <param id="1" name="Language">AcessibilidadeJSON.GetData(&quot;idioma&quot;, 0)</param>
                                                             <param id="2" name="Voice URI">AcessibilidadeJSON.GetData(&quot;voz&quot;, 0)</param>
                                                             <param id="3" name="Volume">10</param>
@@ -10097,15 +10152,8 @@
                                     <param id="0" name="Group name">&quot;FecharUIPalavrasMagicas&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
-                                <action id="-12" name="Set group active" sid="116178823045476" type="System">
-                                    <param id="0" name="Group name">&quot;DialogoPalavraMagica&quot;&amp;livroAtual</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
                                 <action id="-16" name="Wait" sid="663285346177257" type="System">
-                                    <param id="0" name="Seconds">3</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="678308850950618" type="System">
-                                    <param id="0" name="Seconds">1</param>
+                                    <param id="0" name="Seconds">4</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="509315155716868" type="System">
                                     <param id="0" name="Group name">&quot;Pontuacao8a&quot;</param>
@@ -10113,6 +10161,10 @@
                                 </action>
                                 <action id="-12" name="Set group active" sid="703300036191121" type="System">
                                     <param id="0" name="Group name">&quot;Pontuacao8b&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="116178823045476" type="System">
+                                    <param id="0" name="Group name">&quot;DialogoPalavraMagica&quot;&amp;livroAtual</param>
                                     <param id="1" name="State">1</param>
                                 </action>
                                 <action id="-10" name="Add to" sid="462747463337727" type="System">
@@ -10129,7 +10181,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="0" name="Set text" sid="130479384042738" type="Dica">
-                                            <param id="0" name="Text">&quot;Aperte Q para desbloquear esta pista por 25 pontos. Ou aperte Ê para digitar sua resposta.&quot;</param>
+                                            <param id="0" name="Text">&quot;Aperte W para desbloquear esta pista por 25 pontos. Ou aperte Ê para digitar sua resposta.&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -10141,7 +10193,7 @@
                                     </conditions>
                                     <actions>
                                         <action id="0" name="Set text" sid="350012965537609" type="Dica">
-                                            <param id="0" name="Text">&quot;Aperte Q para desbloquear esta pista por 25 pontos. Ou aperte Ê para digitar sua resposta.&quot;</param>
+                                            <param id="0" name="Text">&quot;Aperte W para desbloquear esta pista por 25 pontos. Ou aperte Ê para digitar sua resposta.&quot;</param>
                                         </action>
                                     </actions>
                                 </event-block>
@@ -10187,15 +10239,8 @@
                                     <param id="0" name="Group name">&quot;FecharUIPalavrasMagicas&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
-                                <action id="-12" name="Set group active" sid="637968928577418" type="System">
-                                    <param id="0" name="Group name">&quot;DialogoRespostaErrada&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
                                 <action id="-16" name="Wait" sid="696028001173668" type="System">
-                                    <param id="0" name="Seconds">3</param>
-                                </action>
-                                <action id="-16" name="Wait" sid="810693461394905" type="System">
-                                    <param id="0" name="Seconds">1</param>
+                                    <param id="0" name="Seconds">4</param>
                                 </action>
                                 <action id="-12" name="Set group active" sid="536215893090465" type="System">
                                     <param id="0" name="Group name">&quot;Pontuacao8a&quot;</param>
@@ -10203,6 +10248,10 @@
                                 </action>
                                 <action id="-12" name="Set group active" sid="663737114067269" type="System">
                                     <param id="0" name="Group name">&quot;Pontuacao8b&quot;</param>
+                                    <param id="1" name="State">1</param>
+                                </action>
+                                <action id="-12" name="Set group active" sid="637968928577418" type="System">
+                                    <param id="0" name="Group name">&quot;DialogoRespostaErrada&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
                             </actions>
