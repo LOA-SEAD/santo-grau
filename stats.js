@@ -157,8 +157,7 @@ function sendRankingData(pontos){
     var info = {};
     var path;
     if(window.location.hostname == "localhost" ){   // for localhost tests
-        //path = "/exported-resource/saveScore"
-        path = "http://alfa.remar.online/stats/salveValerio"
+        path = "/exported-resource/saveScore"
     }else {                                 // for web version in production, electron and crosswalk versions
         path = "http://remar.dc.ufscar.br/exported-resource/saveScore"
     }
