@@ -1,9 +1,9 @@
 ﻿{
-	"version": 1570479933,
+	"version": 1576792308,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
-		"jquery-2.1.1.min.js",
+		"jquery-3.4.1.min.js",
 		"offlineClient.js",
 		"images/logo-sheet0.png",
 		"images/galeriatitulo-sheet0.png",
